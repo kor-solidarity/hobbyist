@@ -71,6 +71,9 @@
         #jihoSearch:focus {
             outline:none;
         }
+        #artistTd {
+        	cursor:pointer;
+        }
     </style>
     <link href="https://fonts.googleapis.com/css?family=Do+Hyeon|ZCOOL+QingKe+HuangYou&display=swap" rel="stylesheet">
 </head>
@@ -82,16 +85,21 @@
                 <td rowspan="2"><label id="headerLab">hobbyist</label></td>
                 <td style="width:500px" rowspan="2"><div id="searchArea"><input type="text" id="jihoSearch" placeholder="듣고싶은 수업을 검색해주세요"><img id="jihoImg1" src="<%=request.getContextPath() %>/images/search.png"></div></td>
                 <td style="width:40px"><img src="<%=request.getContextPath() %>/images/bell.png" style="height:25px"></td>
-                <td>아티스트등록</td>
+                <td id="artistTd" onclick="goArtist();" >아티스트신청</td>
                 <td>마이페이지</td>
                 <td>로그인</td>
             </tr>
             <tr>
                 <td colspan="2"><div id="suggestArea">수업건의 게시판</div></td>
-                <td colspan="2"><div id="registerArea">수업등록</div></td>
+                <td colspan="2"><div id="registerArea">수업개설</div></td>
             </tr>
         </table>
         
     </div>
+    <script>
+    	function goArtist() {
+    		location.href = "<%=request.getContextPath()%>/views/artist/artistMain.jsp";
+    	}
+    </script>
 </body>
 </html>
