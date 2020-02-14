@@ -56,6 +56,7 @@
 	text-align: center;
 	margin: auto;
 	border-spacing: 15px;
+	border-collapse: separate;
 }
 
 #bottomInfo #first {
@@ -608,5 +609,7 @@
 			});
 		});
 	</script>
+	<div style="height:30px;"></div>
+	<%@ include file="../common/footer.jsp"%>
 </body>
 </html>
