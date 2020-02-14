@@ -87,7 +87,7 @@
                 <td style="width:40px"><img src="<%=request.getContextPath() %>/images/bell.png" style="height:25px"></td>
                 <td id="artistTd" onclick="goArtist();" >아티스트신청</td>
                 <td>마이페이지</td>
-                <td>로그인</td>
+                <td onclick="login();">로그인</td>
             </tr>
             <tr>
                 <td colspan="2"><div id="suggestArea">수업건의 게시판</div></td>
@@ -99,6 +99,10 @@
     <script>
     	function goArtist() {
     		location.href = "<%=request.getContextPath()%>/views/artist/artistMain.jsp";
+    	}
+    	
+    	function login() {
+    		location.href = "<%= request.getContextPath()%>/views/member/loginForm.jsp";
     	}
     </script>
 </body>
