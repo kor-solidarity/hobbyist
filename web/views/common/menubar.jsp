@@ -83,8 +83,10 @@
             
             <tr>
                 <td rowspan="2"><label id="headerLab">hobbyist</label></td>
-                <td style="width:500px" rowspan="2"><div id="searchArea"><input type="text" id="jihoSearch" placeholder="듣고싶은 수업을 검색해주세요"><img id="jihoImg1" src="<%=request.getContextPath() %>/images/search.png"></div></td>
-                <td style="width:40px"><img src="<%=request.getContextPath() %>/images/bell.png" style="height:25px"></td>
+                <td style="width:500px" rowspan="2"><div id="searchArea">
+                    <input type="text" id="jihoSearch" placeholder="듣고싶은 수업을 검색해주세요">
+                    <img id="jihoImg1" src="<%=request.getContextPath() %>/static/images/search.png"></div></td>
+                <td style="width:40px"><img src="<%=request.getContextPath() %>/static/images/bell.png" style="height:25px"></td>
                 <td id="artistTd" onclick="goArtist();" >아티스트신청</td>
                 <td>마이페이지</td>
                 <td>로그인</td>
