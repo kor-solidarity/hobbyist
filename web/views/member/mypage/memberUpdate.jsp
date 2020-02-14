@@ -64,18 +64,25 @@
 }
 
 .dvtop2 {
+	
+	
+	
+}
+.tbtop4{
 	margin-left: auto;
-	margin-right: auto; width : 1024px;
+	margin-right: auto; 
+	width : 1024px;
 	backgorund-color: black;
-	border-bottom: 5px solid black;
+	border-bottom: 1px solid black;
 	height: 70px;
 	width: 1024px;
+	
 }
 
 .dvtop3 {
 	margin-left: auto;
 	margin-right: auto; height : 50px;
-	border-bottom: 5px solid black;
+	border-bottom: 1px solid black;
 	width: 1024px;
 	height: 50px;
 }
@@ -86,13 +93,86 @@
 }
 
 
+.Center_button1{
+	border: 0;
+	outline: 0;
+	background-color: #ffffff;
+	
+	font-family: Do Hyeon;
+	font-size: 25px;
+	background: #black;
+	
+	 
+}
+.Center_button2{
+	border: 0;
+	outline: 0;
+	background-color: #ffffff; 
+	
+	font-family: Do Hyeon;
+	font-size: 25px;
+	background: #black;
+	
+	
+}
+.Center_button3{
+	border: 0;
+	outline: 0;
+	background-color: #ffffff; 
+	
+	font-family: Do Hyeon;
+	font-size: 25px;
+	background: #black;
+	
+	
+}
+.Center_button4{
+	border: 0;
+	outline: 0;
+	background-color: #ffffff; 
+	
+	font-family: Do Hyeon;
+	font-size: 25px;
+	background: #black;
+	
+	
+}
+.Center_button5{
+	border: 0;
+	outline: 0;
+	background-color: #ffffff; 
+	
+	font-family: Do Hyeon;
+	font-size: 25px;
+	background: #black;
+	
+	
+	
+}
+.Center_button6{
+	border: 0;
+	outline: 0;
+	background-color: #ffffff; 
+	
+	font-family: Do Hyeon;
+	font-size: 25px;
+	background: #black;
+	
+	
+}
+
+
+
+
+
+
 </style>
 <link
 	href="https://fonts.googleapis.com/css?family=Do+Hyeon|ZCOOL+QingKe+HuangYou&display=swap"
 	rel="stylesheet">
 </head>
 <body>
-	
+	<%@ include file="/views/common/menubar.jsp" %>
 	<div class="dvtop">
 		<table class="tbtop">
 			<tr>
@@ -106,7 +186,7 @@
 
 	<div class="dvtop1">
 		<table class="tbtop1">
-			<!-- <label style="width: 100px; height: 100:px"> <img src=</label> -->
+<td style="width: 100px; height: 100px;"><img id="config" src="<%request.getContextPath()%>/images/main_mypage" style="height:25px"</label></td> 
 
 		</table>
 		<table class="tbtop2">
@@ -128,12 +208,12 @@
 	<div class="dvtop2">
 		<table align="border" class="tbtop4">
 			<tr>
-				<td><button>나의 수업</button></td>
-				<td><button>나의 정산</button></td>
-				<td><button>나의 결제</button></td>
-				<td><button>나의 댓글</button></td>
-				<td><button>나의 문의/신고</button></td>
-				<td><button>설정</button></td>
+				<td><button class="Center_button1">나의 수업</button></td>
+				<td><button class="Center_button2">나의 정산</button></td>
+				<td><button class="Center_button3">나의 결제</button></td>
+				<td><button class="Center_button4">나의 댓글</button></td>
+				<td><button class="Center_button5">나의 문의/신고</button></td>
+				<td><button class="Center_button6">설정</button></td>
 			</tr>
 		</table>
 
@@ -141,7 +221,10 @@
 
 	<div class="dvtop3">
 		<table class="tbtop3">
-
+			
+			
+			
+			
 		</table>
 
 	</div>
