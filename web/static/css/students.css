@@ -1,0 +1,91 @@
+/* 작성자: 은석 */
+
+.top-bottom-line {
+    /* 위아래 줄긋기 */
+    border-top: 3px solid darkolivegreen;
+    border-bottom: 3px solid darkolivegreen;
+}
+
+.standard-width {
+    /* 메뉴바 크기 반영 */
+    width: 1024px;
+}
+
+.do-hyun-font {
+    font-family: 'Do Hyeon', sans-serif;
+}
+
+.do-hyun-font td {
+    text-align: center;
+}
+
+.selected {
+    color: darkolivegreen;
+    text-align: center;
+}
+
+.float-left {
+    text-align: left;
+    float: left;
+}
+
+/* 방 목록 카드식으로 보이게끔 지원 */
+.room-card {
+    border: 2px solid green;
+    width: 250px;
+    height: 300px;
+    margin: 30px 40px;
+    float: left;
+}
+
+/* 방카드 제목(장소이름) */
+.room-card-title {
+    font-weight: bolder;
+    font-size: 24px;
+}
+
+/* 방카드 내용 */
+.room-card-content {
+    font-weight: bold;
+    font-size: 20px;
+}
+
+/* 방카드 태그 */
+.room-card-tag {
+    border: darkolivegreen solid 1px;
+    border-radius: 5px;
+    float: left;
+    padding: 1px 5px;
+    margin-right: 10px;
+    color: white;
+    background-color: darkolivegreen;
+}
+
+/* 스터디룸 정보  */
+.room-info-summary th{
+    text-align: right;
+}
+.room-info-summary td{
+    text-align: left;
+}
+
+.pagination {
+    display: inline-block;
+}
+
+.pagination > a {
+    margin: auto;
+}
+
+.pagination a {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    transition: background-color .3s;
+}
+
+.pagination a.active {
+    background-color: #4CAF50;
+    color: white;
+}
