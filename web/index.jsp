@@ -14,7 +14,7 @@
         	/* margin:auto;
         	 width:1024px; */ 
     		margin-top:-40px;
-        	background-image:url("images/resize_main.jpg");
+        	background-image:url("static/images/resize_main.jpg");
         	background-size:100% 100%;
         	background-repeat: no-repeat;
         }
@@ -59,8 +59,9 @@
        
        #section {
        		width:1024px;
-       		height:900px;
+       		height:700px;
        		margin:auto;
+       		margin-top:40px;
        }
        
        #aside {
@@ -69,24 +70,26 @@
        		border-right:1px solid darkolivegreen;
        		height:300px;
        }
-      
+      	.lesson-list {
+      		display:inline-block;
+      		width:250px;
+       		height:300px;
+       		margin:auto;
+       		margin-right: 65px;
+       		margin-bottom:30px;
+       		margin-left:20px;
+      	}
        
-       #lesson1 {
-       		margin-top:-180px;
-       		 margin-left:200px; 
+       #lessonTable {
+       		font-family: 'Nanum Gothic', sans-serif;
        		font-size:12px;
-       		width:210px;
-       		height:270px;
        		border:1px solid darkolivegreen;
        }
        
-       #lesson1 table img {
-       		border-radius:100px 100px 100px 100px;
-       		width:50px;
-       		height:50px;
-       }
-       #lesson1 table td:nth-of-type(2n) {
+       
+       #lessonTable td:nth-of-type(2n) {
        		float:right;	
+       		margin-right:20px;
        }
        #lLabel {
        		margin-top:500px;
@@ -96,6 +99,16 @@
        		font-size:25px;
        		color:darkolivegreen;
        		align:center;
+       }
+       
+       #lessonImg {
+       		width:250px;
+       		height:130px;
+       }
+       #artistImg {
+       		width:60px;
+       		height:60px;
+       		border-radius:50px 50px 50px 50px;
        }
      
 </style>
@@ -108,16 +121,16 @@
     	취미는 <label style="color:darkolivegreen; font-family: 'ZCOOL QingKe HuangYou', cursive; font-weight:900">hobbyist  </label> 에서!</p>
     </div>
    <div id="nav">
-	<table align="center">
+	<table align="center" onclick="category();">
    	<tr>
-   		<td><img src="images/music.png" class="icon"></td>
-   		<td><img src="images/dance.png" class="icon"></td>
-   		<td><img src="images/video.png" class="icon"></td>
-   		<td><img src="images/life.png" class="icon"></td>
-   		<td><img src="images/beauty.png" class="icon"></td>
-   		<td><img src="images/design.png" class="icon"></td>
-   		<td><img src="images/sports.png" class="icon"></td>
-   		<td><img src="images/space.png" class="icon"></td>
+   		<td><img src="static/images/music.png" class="icon"></td>
+   		<td><img src="static/images/dance.png" class="icon"></td>
+   		<td><img src="static/images/video.png" class="icon"></td>
+   		<td><img src="static/images/life.png" class="icon"></td>
+   		<td><img src="static/images/beauty.png" class="icon"></td>
+   		<td><img src="static/images/design.png" class="icon"></td>
+   		<td><img src="static/images/sports.png" class="icon"></td>
+   		<td><img src="static/images/space.png" class="icon"></td>
    	</tr>
    	<tr>
    		<td class="nLabel">음악</td>
@@ -134,23 +147,135 @@
    
    <div id="line"></div>
    <div id="section">
-   <label id="lLabel">인기수업</label>
+  <!--  <label id="lLabel">인기수업</label>
    	<div id="aside">
    		<ul style="list-style:none; line-height:300%; font-family: 'Do Hyeon', sans-serif; font-size:18px; color:darkolivegreen; padding-top:20px;">
    			<li>관심수업</li>
    			<li>인기수업</li>
    			<li>신규아티스트수업</li>
    		</ul>
-   	</div>
-    <div class="lesson-list" id="lesson1">
-   <img src="images/coffee.jpg" width="210px" height="150px">
-   <table >
+   	</div> -->
+    <div class="lesson-list">
+   <table id="lessonTable">
+   <tr>
+   		<td colspan="2"><img src="static/images/coffee.jpg" id="lessonImg"></td>
+   </tr>
    	<tr>
    		<td colspan="2">[카페,커피] 2시간이면 나도 바리스타!</td>
    	</tr>
    	<tr>
    		<td></td>
-   		<td><img src="images/jae.png"></td>
+   		<td><img src="static/images/jae.png" id="artistImg"></td>
+   	</tr>
+   	<tr>
+   		<td>(15)</td>
+   		<td>재현쌤</td>
+   	</tr>
+   	<tr>
+   		<td>평택</td>
+   		<td>재현</td>
+   	</tr>
+   </table>    
+   </div> 
+    <div class="lesson-list">
+   <table id="lessonTable">
+   <tr>
+   		<td colspan="2"><img src="static/images/coffee.jpg" id="lessonImg"></td>
+   </tr>
+   	<tr>
+   		<td colspan="2">[카페,커피] 2시간이면 나도 바리스타!</td>
+   	</tr>
+   	<tr>
+   		<td></td>
+   		<td><img src="static/images/jae.png" id="artistImg"></td>
+   	</tr>
+   	<tr>
+   		<td>(15)</td>
+   		<td>재현쌤</td>
+   	</tr>
+   	<tr>
+   		<td>평택</td>
+   		<td>재현</td>
+   	</tr>
+   </table>    
+   </div> 
+    <div class="lesson-list">
+   <table id="lessonTable">
+   <tr>
+   		<td colspan="2"><img src="static/images/coffee.jpg" id="lessonImg"></td>
+   </tr>
+   	<tr>
+   		<td colspan="2">[카페,커피] 2시간이면 나도 바리스타!</td>
+   	</tr>
+   	<tr>
+   		<td></td>
+   		<td><img src="static/images/jae.png" id="artistImg"></td>
+   	</tr>
+   	<tr>
+   		<td>(15)</td>
+   		<td>재현쌤</td>
+   	</tr>
+   	<tr>
+   		<td>평택</td>
+   		<td>재현</td>
+   	</tr>
+   </table>    
+   </div> 
+    <div class="lesson-list">
+   <table id="lessonTable">
+   <tr>
+   		<td colspan="2"><img src="static/images/coffee.jpg" id="lessonImg"></td>
+   </tr>
+   	<tr>
+   		<td colspan="2">[카페,커피] 2시간이면 나도 바리스타!</td>
+   	</tr>
+   	<tr>
+   		<td></td>
+   		<td><img src="static/images/jae.png" id="artistImg"></td>
+   	</tr>
+   	<tr>
+   		<td>(15)</td>
+   		<td>재현쌤</td>
+   	</tr>
+   	<tr>
+   		<td>평택</td>
+   		<td>재현</td>
+   	</tr>
+   </table>    
+   </div> 
+    <div class="lesson-list">
+   <table id="lessonTable">
+   <tr>
+   		<td colspan="2"><img src="static/images/coffee.jpg" id="lessonImg"></td>
+   </tr>
+   	<tr>
+   		<td colspan="2">[카페,커피] 2시간이면 나도 바리스타!</td>
+   	</tr>
+   	<tr>
+   		<td></td>
+   		<td><img src="static/images/jae.png" id="artistImg"></td>
+   	</tr>
+   	<tr>
+   		<td>(15)</td>
+   		<td>재현쌤</td>
+   	</tr>
+   	<tr>
+   		<td>평택</td>
+   		<td>재현</td>
+   	</tr>
+   </table>    
+   </div> 
+    <div class="lesson-list">
+   <table id="lessonTable">
+   <tr>
+   		<td colspan="2"><img src="static/images/coffee.jpg" id="lessonImg"></td>
+   </tr>
+   	<tr>
+   		<td colspan="2">[카페,커피] 2시간이면 나도 바리스타!</td>
+   	</tr>
+   	<tr>
+   		<td></td>
+   		<td><img src="static/images/jae.png" id="artistImg"></td>
    	</tr>
    	<tr>
    		<td>(15)</td>
@@ -168,5 +293,12 @@
    </div>
   
 	<%@ include file="views/common/footer.jsp" %>
+	
+	<script>
+		function category() {
+			location.href = "<%=request.getContextPath()%>/views/lesson/categoryMenu.jsp";
+			
+		}
+	</script>
 </body>
 </html>
