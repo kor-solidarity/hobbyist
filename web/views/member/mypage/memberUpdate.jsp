@@ -8,7 +8,7 @@
 <style>
 
 
-.dvtop {
+.divtop1 {
 	top: 30px;
 	margin-top: 50px;
 	margin-left: auto;
@@ -16,11 +16,11 @@
 	width: 1024px;
 }
 
-.tbtop {
+.tabletop1 {
 	
 }
 
-#show1 {
+#font1 {
 	font-family: Do Hyeon;
 	font-style: normal;
 	font-weight: normal;
@@ -30,7 +30,7 @@
 	text-align: center;
 }
 
-.dvtop1 {
+.divtop2 {
 	margin-top: 50px;
 	margin-left: auto;
 	margin-right: auto;
@@ -41,34 +41,30 @@
 	border: 5px solid #EDEDED;
 }
 
-.tbtop1 {
+.tabletop2 {
 	float: left;
 }
 
-.tbtop2 {
+.tabletop3 {
 	margin: auto;
 	float: left;
 }
 
-.tbtop3 {
+.tabletop4 {
 	margin: auto;
 	float: right;
 }
 
-.tbtop4 {
-	
-}
-
-.dvtopblock1 {
+.divtopblock1 {
 	height: 70px;
 }
 
-.dvtop2 {
+.divcenter1 {
 	
 	
 	
 }
-.tbtop4{
+.tablecenter1{
 	margin-left: auto;
 	margin-right: auto; 
 	width : 1024px;
@@ -79,7 +75,7 @@
 	
 }
 
-.dvtop3 {
+.divcenter2 {
 	margin-left: auto;
 	margin-right: auto; height : 50px;
 	border-bottom: 1px solid black;
@@ -87,7 +83,7 @@
 	height: 50px;
 }
 
-.dvtop4{
+.tablecenter2{
 
 
 }
@@ -165,7 +161,6 @@
 
 
 
-
 </style>
 <link
 	href="https://fonts.googleapis.com/css?family=Do+Hyeon|ZCOOL+QingKe+HuangYou&display=swap"
@@ -173,10 +168,10 @@
 </head>
 <body>
 	<%@ include file="/views/common/menubar.jsp" %>
-	<div class="dvtop">
-		<table class="tbtop">
+	<div class="divtop1">
+		<table class="tabletop1">
 			<tr>
-				<td span=2><label id="show1">마이페이지</label></td>
+				<td span=2><label id="font1">마이페이지</label></td>
 			</tr>
 
 		</table>
@@ -184,17 +179,17 @@
 
 
 
-	<div class="dvtop1">
-		<table class="tbtop1">
-<td style="width: 100px; height: 100px;"><img id="config" src="<%request.getContextPath()%>/images/main_mypage" style="height:25px"</label></td> 
+	<div class="divtop2">
+		<table class="tabletop2">
+<td style="width: 100px, height: 100px;"><img id="memberUpdate1" src="<%=request.getContextPath() %>/images/memberUpdate1"></td> 
 
 		</table>
-		<table class="tbtop2">
+		<table class="tabletop3">
 			<tr>
 				<td rowspan="2"><label id="show2">Jae</label></td>
 			</tr>
 		</table>
-		<table class="tbtop3">
+		<table class="tabletop4">
 			<tr>
 				<td rowspan="2"><label id="show3">Sun</label></td>
 			</tr>
@@ -202,11 +197,11 @@
 	</div>
 
 
-	<div class="dvtopblock1"></div>
+	<div class="divtopblock1"></div>
 
 
-	<div class="dvtop2">
-		<table align="border" class="tbtop4">
+	<div class="divcenter1">
+		<table align="border" class="tablecenter1">
 			<tr>
 				<td><button class="Center_button1">나의 수업</button></td>
 				<td><button class="Center_button2">나의 정산</button></td>
@@ -219,8 +214,8 @@
 
 	</div>
 
-	<div class="dvtop3">
-		<table class="tbtop3">
+	<div class="divcenter2">
+		<table class="tablecenter2">
 			
 			
 			
