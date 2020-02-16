@@ -266,7 +266,7 @@
 	border-collapse: separate;
 }
 
-#LessonTable10 td {
+#LessonTable10 > table td {
 	width: 20%;
 	font-family: 'Do Hyeon', sans-serif;
 	font-size: 17px;
@@ -540,11 +540,35 @@
 									<td>05. 일정등록</td>
 								</tr>
 							</table>
-							<table id="LessonTable10" style="width:40%;">
-								<tr>
-									<td>지역</td>
-									<td>상세지역</td>
-								</tr>
+							<table id="LessonTable10" style="width:40%; height:100%;">
+								<table style="width:67%">
+									<tr>
+										<td>지역</td>
+										<td>상세지역</td>
+										<td>시작시간</td>
+										<td>종료시간</td>
+									</tr>
+									<tr>
+										
+									</tr>
+									<tr>
+										<td colspan="2">상세주소</td>
+										<td colspan="2">1회차 일정 / 총 4회차</td>
+									</tr>
+									<tr>
+									</tr>
+									<tr>
+										<td colspan="2">강남구 테헤란로 14길 남도빌딩 5F</td>
+										<td colspan="2"></td>
+									</tr>
+								</table>
+								<table style="width:33%; height:100%;">
+									<tr>
+										<td>
+											
+										</td>
+									</tr>
+								</table>
 							</table>
 						</div>
 					</form>
