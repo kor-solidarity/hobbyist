@@ -11,6 +11,6 @@
     <title>Title</title>
 </head>
 <body>
-<%@include file="../main_mypage.jsp"%>
+<%@include file="../memberUpdate.jsp"%>
 </body>
 </html>
