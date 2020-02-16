@@ -51,6 +51,10 @@
     font-family: 'Do Hyeon', sans-serif;
 }
 
+.zCool {
+    font-family: 'ZCOOL QingKe HuangYou', cursive;
+}
+
 .do-hyun-font td {
     text-align: center;
 }
@@ -97,24 +101,33 @@
     background-color: darkolivegreen;
 }
 
-/* 문의사항 modal 내 제목 */
-.report-modal-title {
-    font-size: 20px;
-    text-align: center;
-    color: olive;
-    padding: 15px 0;
+.report-modal-category {
+    text-align: right;
+    /*font-size: 20px;*/
+    /*font-weight: bold;*/
+    padding: 10px 0;
 }
 
-.report-modal-end {
-    font-size: 20px;
-    text-align: center;
-    color: olive;
-    padding: 15px 0;
+.report-modal-date {
+    text-align: right;
+    padding-bottom: 10px;
 }
 
 .report-modal-content {
     border: 1px solid darkolivegreen;
-    height: 100px;
+    min-height: 100px !important;
+}
+
+.report-modal-end {
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    color: olive;
+    padding: 15px 0;
+}
+
+.report-modal-footer {
+    border-top: none !important;
 }
 
 /* 글 간 경계선 */
@@ -125,6 +138,15 @@
     clear: both;
 }
 
+/* 문의사항 modal 내 제목 */
+.report-modal-title {
+    font-weight: bold;
+    font-size: 23px;
+    /*text-align: center;*/
+    color: olive;
+    /*padding: 10px 0;*/
+}
+
 /* 스터디룸 정보  */
 .room-info-summary th {
     text-align: right;
@@ -132,6 +154,19 @@
 
 .room-info-summary td {
     text-align: left;
+}
+
+
+.divcenter2 {
+    margin-left: auto;
+    margin-right: auto;
+    height: 50px;
+    border-bottom: 1px solid black;
+    width: 1024px;
+    height: 50px;
+}
+
+.tablecenter2 {
 }
 
 
