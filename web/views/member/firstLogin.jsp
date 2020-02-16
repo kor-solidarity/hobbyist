@@ -23,35 +23,22 @@
 		
 	}
 	#content {
-		color:lightgray;
+		color:gray;
 		padding-left:30px;
 		margin-top:-20px;
 		padding-bottom:100px;
 	}
 	#category {
 		padding-bottom:200px;
+		font-family: 'Do Hyeon', sans-serif;
+		color:darkolivegreen;
+		font-size:22px;
+		border-collapse:seperate;
+		border-spacing:70px;
 	}
 	
 
-	#category1 {
-		
-		font-family: 'Do Hyeon', sans-serif;
-		color:darkolivegreen;
-		font-size:22px;
-
-	}
 	
-	#category2 {
-		font-family: 'Do Hyeon', sans-serif;
-		color:darkolivegreen;
-		font-size:22px;
-	}
-	
-	#category3 {
-		font-family: 'Do Hyeon', sans-serif;
-		color:darkolivegreen;
-		font-size:22px;
-	}
 	
 </style>
 </head>

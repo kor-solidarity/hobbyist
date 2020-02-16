@@ -31,7 +31,7 @@
         #contents {
             border: 1.2px solid darkolivegreen;
             width: 600px;
-            height: 400px;
+            height: 470px;
             margin: auto;
         }
         #setPwd1 {
@@ -52,7 +52,10 @@
         .btns {
             width:115px;
             height: 40px;
-            margin-top: 100px;
+            margin-top: 80px;
+            font-family: 'Nanum Gothic', sans-serif; 
+            font-size:14px;
+            
             
         }
         #pwdBtn {
@@ -73,23 +76,23 @@
         	 /* font-family: 'Roboto', sans-serif; */
         	 font-family: 'Nanum Gothic', sans-serif; 
         	 
-        	font-size:16px;
+        	font-size:15.5px;
         }
 
     </style>
 </head>
 <body id="main">
 	 <div id="header">
-        <h1 id="title" align="center">hobbyist</h1>
+        <h1 id="title" align="center" onclick="goHome();">hobbyist</h1>
     </div>
     <div id="contents" align="center">
             <h2>아이디 찾기</h2>
             <br><br>
             <p>회원님의 정보와 일치하는 아이디는 <br>
-            	다음과 같습니다.</p><br><br>
-            <p>hyeon*****</p>
+            	다음과 같습니다.</p><br>
+            <p style="font-weight:900; font-size:16.5px;">hyeon****</p>
            
-           	<button onclick="goFindPwd();" class="btns" id="pwdBtn">비밀번호 찾기</button>
+           	<button onclick="goFindPwd();" class="btns" id="pwdBtn">비밀번호 찾기</button>&nbsp;&nbsp;&nbsp;&nbsp;
             <button onclick="goLogin();" class="btns" id="loginBtn">로그인</button>
     </div>
     
@@ -100,6 +103,9 @@
     	
     	function goFindPwd() {
     		location.href = "<%= request.getContextPath()%>/views/member/findPwd.jsp";
+    	}
+    	function goHome() {
+    		location.href = "<%= request.getContextPath()%>/index.jsp";
     	}
     	
     </script>

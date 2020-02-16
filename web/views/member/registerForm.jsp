@@ -73,17 +73,17 @@
 </head>
 <body id="main">
 	 <div id="header">
-        <h1 id="title" align="center">hobbyist</h1>
+        <h1 id="title" align="center" onclick="goHome();">hobbyist</h1>
     </div>
     <div id="contents" align="center">
-        <form action="" method="">
+        <form action="<%=request.getContextPath()%>/register.me" method="post">
             <table id="joinForm" align="center">
                 <tr>
                     <td colspan="5"><h2>회원가입</h2></td>
                 </tr>
                 <tr>
                     <td>아이디</td>&nbsp;
-                    <td><input type="text" id="userId" name="userId" maxlength="16" placeholder="ID" size="29"></td>&nbsp;
+                    <td><input type="text" id="memberId" name="memberId" maxlength="16" placeholder="ID" size="29"></td>&nbsp;
                     <td><button class="btns" id="idBtn">중복체크</button></td>
                 </tr>
                 <tr>
@@ -91,21 +91,21 @@
                 </tr>
                 <tr>
                     <td>비밀번호</td>&nbsp;
-                    <td><input type="password" id="userPwd" name="userPwd" maxlength="18" placeholder="PASSWORD" size="29"></td>&nbsp;
+                    <td><input type="password" id="memberPwd" name="memberPwd" maxlength="18" placeholder="PASSWORD" size="29"></td>&nbsp;
                 </tr>
                 <tr>
                     <td><br></td>
                 </tr>
                 <tr>
                     <td>비밀번호 확인</td>
-                    <td><input type="password" id="userPwd2" name="userPwd2" maxlength="18" placeholder="PASSWORD" size="29"></td>
+                    <td><input type="password" id="memberPwd2" name="memberPwd2" maxlength="18" placeholder="PASSWORD" size="29"></td>
                 </tr>
                 <tr>
                     <td><br></td>
                 </tr>
                 <tr>
                     <td>이름</td>
-                    <td><input type="text" id="userName" name="userName" placeholder="NAME" size="29"></td>
+                    <td><input type="text" id="memberName" name="memberName" placeholder="NAME" size="29"></td>
                 </tr>
                 <tr>
                     <td><br></td>
@@ -140,6 +140,12 @@
             <button onclick="" class="btnz" id="reset">가입취소</button>&nbsp;&nbsp;
             <button onclick="" class="btnz" id="submit">가입하기</button>
         </form>
+        
+        <script>
+	        function goHome() {
+	    		location.href = "<%= request.getContextPath()%>/index.jsp";
+	    	}
+        </script>
 
 </body>
 </html>

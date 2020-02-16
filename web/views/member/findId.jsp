@@ -49,9 +49,11 @@
             margin-top: 20px;
         }
         .btns {
-            width:90px;
+            width:95px;
             height: 40px;
             margin-top: 55px;
+            font-family: 'Nanum Gothic', sans-serif; 
+            font-size:14px;
         }
         
         #submit {
@@ -67,10 +69,10 @@
 </head>
 <body id="main">
 	 <div id="header">
-        <h1 id="title" align="center">hobbyist</h1>
+        <h1 id="title" align="center" onclick="goHome();">hobbyist</h1>
     </div>
     <div id="contents" align="center">
-        <form action="" method="post">
+        <form action="<%=request.getContextPath()%>/views/member/findId2.jsp" method="post">
             <h2>아이디 찾기</h2>
             <br><br>
             <label id="nameLabel">이름</label>&nbsp; <input type="text" id="findName" maxlength="10" size="22">
@@ -81,5 +83,10 @@
             <button onclick="" class="btns" id="submit">아이디 확인</button>
         </form>
     </div>
+    <script>
+	    function goHome() {
+			location.href = "<%= request.getContextPath()%>/index.jsp";
+		}
+    </script>
 </body>
 </html>
