@@ -88,12 +88,12 @@
                     <img id="jihoImg1" src="<%=request.getContextPath() %>/static/images/search.png"></div></td>
                 <td style="width:40px"><img src="<%=request.getContextPath() %>/static/images/bell.png" style="height:25px"></td>
                 <td id="artistTd" onclick="goArtist();" >아티스트신청</td>
-                <td>마이페이지</td>
-                <td onclick="login();">로그인</td>
+                <td onclick="goMyPage();">마이페이지</td>
+                <td onclick="goLogin();">로그인</td>
             </tr>
             <tr>
                 <td colspan="2"><div id="suggestArea" onclick="goSuggest();">수업건의 게시판</div></td>
-                <td colspan="2"><div id="registerArea">수업개설</div></td>
+                <td colspan="2"><div id="registerArea" onclick="goClass();">수업개설</div></td>
             </tr>
         </table>
         
@@ -103,7 +103,7 @@
     		location.href = "<%=request.getContextPath()%>/views/artist/artistMain.jsp";
     	}
     	
-    	function login() {
+    	function goLogin() {
     		location.href = "<%= request.getContextPath()%>/views/member/loginForm.jsp";
     	}
     	
@@ -113,6 +113,13 @@
     	
     	function goSuggest() {
     		location.href = "<%= request.getContextPath()%>/views/suggest/suggestList.jsp";
+    	}
+    	
+    	function goClass() {
+    		location.href = "<%= request.getContextPath()%>/views/lesson/openLessonMain.jsp";
+    	}
+    	function goMyPage() {
+    		location.href = "<%= request.getContextPath()%>/views/member/mypage/memberUpdate.jsp";
     	}
     </script>
 </body>
