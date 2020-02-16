@@ -412,6 +412,13 @@
 				$("#design").hide();
 				$("#sports").hide();
 				$("#nav3").css({'margin-top':'-150px'});
+				$(this).css({'color':'darkolivegreen'});
+				$("#cDance").css({'color':'black'});
+				$("#cVideo").css({'color':'black'});
+				$("#cLife").css({'color':'black'});
+				$("#cBeauty").css({'color':'black'});
+				$("#cDesign").css({'color':'black'});
+				$("#cSports").css({'color':'black'});
 			}).click(function() {
 				$("#music").show();
 				$("#dance").hide();
@@ -421,6 +428,13 @@
 				$("#design").hide();
 				$("#sports").hide();
 				$("#nav3").css({'margin-top':'-150px'});
+				$(this).css({'color':'darkolivegreen'});
+				$("#cDance").css({'color':'black'});
+				$("#cVideo").css({'color':'black'});
+				$("#cLife").css({'color':'black'});
+				$("#cBeauty").css({'color':'black'});
+				$("#cDesign").css({'color':'black'});
+				$("#cSports").css({'color':'black'});
 			});
 			
 			$("#cDance").mouseenter(function() {
@@ -432,6 +446,13 @@
 				$("#design").hide();
 				$("#sports").hide();
 				$("#nav3").css({'margin-top':'-120px'});
+				$(this).css({'color':'darkolivegreen'});
+				$("#cMusic").css({'color':'black'});
+				$("#cVideo").css({'color':'black'});
+				$("#cLife").css({'color':'black'});
+				$("#cBeauty").css({'color':'black'});
+				$("#cDesign").css({'color':'black'});
+				$("#cSports").css({'color':'black'});
 			}).click(function() {
 				$("#music").hide();
 				$("#dance").show();
@@ -441,6 +462,13 @@
 				$("#design").hide();
 				$("#sports").hide();
 				$("#nav3").css({'margin-top':'-120px'});
+				$(this).css({'color':'darkolivegreen'});
+				$("#cMusic").css({'color':'black'});
+				$("#cVideo").css({'color':'black'});
+				$("#cLife").css({'color':'black'});
+				$("#cBeauty").css({'color':'black'});
+				$("#cDesign").css({'color':'black'});
+				$("#cSports").css({'color':'black'});
 				
 			});
 			
@@ -453,6 +481,13 @@
 				$("#design").hide();
 				$("#sports").hide();
 				$("#nav3").css({'margin-top':'-90px'});
+				$(this).css({'color':'darkolivegreen'});
+				$("#cMusic").css({'color':'black'});
+				$("#cDance").css({'color':'black'});
+				$("#cLife").css({'color':'black'});
+				$("#cBeauty").css({'color':'black'});
+				$("#cDesign").css({'color':'black'});
+				$("#cSports").css({'color':'black'});
 			}).click(function() {
 				$("#music").hide();
 				$("#dance").hide();
@@ -462,6 +497,13 @@
 				$("#design").hide();
 				$("#sports").hide();
 				$("#nav3").css({'margin-top':'-90px'});
+				$(this).css({'color':'darkolivegreen'});
+				$("#cMusic").css({'color':'black'});
+				$("#cDance").css({'color':'black'});
+				$("#cLife").css({'color':'black'});
+				$("#cBeauty").css({'color':'black'});
+				$("#cDesign").css({'color':'black'});
+				$("#cSports").css({'color':'black'});
 			});
 			
 			$("#cLife").mouseenter(function() {
@@ -473,6 +515,13 @@
 				$("#design").hide();
 				$("#sports").hide();
 				$("#nav3").css({'margin-top':'-60px'});
+				$(this).css({'color':'darkolivegreen'});
+				$("#cMusic").css({'color':'black'});
+				$("#cDance").css({'color':'black'});
+				$("#cVideo").css({'color':'black'});
+				$("#cBeauty").css({'color':'black'});
+				$("#cDesign").css({'color':'black'});
+				$("#cSports").css({'color':'black'});
 			}).click(function() {
 				$("#music").hide();
 				$("#dance").hide();
@@ -482,6 +531,13 @@
 				$("#design").hide();
 				$("#sports").hide();
 				$("#nav3").css({'margin-top':'-60px'});
+				$(this).css({'color':'darkolivegreen'});
+				$("#cMusic").css({'color':'black'});
+				$("#cDance").css({'color':'black'});
+				$("#cVideo").css({'color':'black'});
+				$("#cBeauty").css({'color':'black'});
+				$("#cDesign").css({'color':'black'});
+				$("#cSports").css({'color':'black'});
 			});
 			
 			$("#cBeauty").mouseenter(function() {
@@ -493,6 +549,13 @@
 				$("#design").hide();
 				$("#sports").hide();
 				$("#nav3").css({'margin-top':'-30px'});
+				$(this).css({'color':'darkolivegreen'});
+				$("#cMusic").css({'color':'black'});
+				$("#cDance").css({'color':'black'});
+				$("#cVideo").css({'color':'black'});
+				$("#cLife").css({'color':'black'});
+				$("#cDesign").css({'color':'black'});
+				$("#cSports").css({'color':'black'});
 			}).click(function() {
 				$("#music").hide();
 				$("#dance").hide();
@@ -502,6 +565,13 @@
 				$("#design").hide();
 				$("#sports").hide();
 				$("#nav3").css({'margin-top':'-30px'});
+				$(this).css({'color':'darkolivegreen'});
+				$("#cMusic").css({'color':'black'});
+				$("#cDance").css({'color':'black'});
+				$("#cVideo").css({'color':'black'});
+				$("#cLife").css({'color':'black'});
+				$("#cDesign").css({'color':'black'});
+				$("#cSports").css({'color':'black'});
 			});
 			$("#cDesign").mouseenter(function() {
 				$("#music").hide();
@@ -512,6 +582,13 @@
 				$("#design").show();
 				$("#sports").hide();
 				$("#nav3").css({'margin-top':'0px'});
+				$(this).css({'color':'darkolivegreen'});
+				$("#cMusic").css({'color':'black'});
+				$("#cDance").css({'color':'black'});
+				$("#cVideo").css({'color':'black'});
+				$("#cLife").css({'color':'black'});
+				$("#cBeauty").css({'color':'black'});
+				$("#cSports").css({'color':'black'});
 			}).click(function() {
 				$("#music").hide();
 				$("#dance").hide();
@@ -521,6 +598,13 @@
 				$("#design").show();
 				$("#sports").hide();
 				$("#nav3").css({'margin-top':'0px'});
+				$(this).css({'color':'darkolivegreen'});
+				$("#cMusic").css({'color':'black'});
+				$("#cDance").css({'color':'black'});
+				$("#cVideo").css({'color':'black'});
+				$("#cLife").css({'color':'black'});
+				$("#cBeauty").css({'color':'black'});
+				$("#cSports").css({'color':'black'});
 			});
 			
 			$("#cSports").mouseenter(function() {
@@ -532,6 +616,13 @@
 				$("#design").hide();
 				$("#sports").show();
 				$("#nav3").css({'margin-top':'30px'});
+				$(this).css({'color':'darkolivegreen'});
+				$("#cMusic").css({'color':'black'});
+				$("#cDance").css({'color':'black'});
+				$("#cVideo").css({'color':'black'});
+				$("#cLife").css({'color':'black'});
+				$("#cBeauty").css({'color':'black'});
+				$("#cDesign").css({'color':'black'});
 			}).click(function() {
 				$("#music").hide();
 				$("#dance").hide();
@@ -541,7 +632,138 @@
 				$("#design").hide();
 				$("#sports").show();
 				$("#nav3").css({'margin-top':'30px'});
+				$(this).css({'color':'darkolivegreen'});
+				$("#cMusic").css({'color':'black'});
+				$("#cDance").css({'color':'black'});
+				$("#cVideo").css({'color':'black'});
+				$("#cLife").css({'color':'black'});
+				$("#cBeauty").css({'color':'black'});
+				$("#cDesign").css({'color':'black'});
 			});
+			
+			 	$("#music tr:eq(0) td:eq(0)").mouseenter(function() {
+			 		$(this).css({'background':'darkolivegreen', 'color':'white'});
+					$("#music tr:eq(0) td:eq(1)").css({'background':'lightgray', 'color':'black'});
+					$("#music tr:eq(0) td:eq(2)").css({'background':'lightgray', 'color':'black'});
+					$("#music tr:eq(0) td:eq(3)").css({'background':'lightgray', 'color':'black'});
+					$("#music tr:eq(0) td:eq(4)").css({'background':'lightgray', 'color':'black'});
+					$("#music tr:eq(0) td:eq(5)").css({'background':'lightgray', 'color':'black'});
+					$("#music tr:eq(0) td:eq(6)").css({'background':'lightgray', 'color':'black'});
+			 	}).click(function(){
+					$(this).css({'background':'darkolivegreen', 'color':'white'});
+					$("#music tr:eq(0) td:eq(1)").css({'background':'lightgray', 'color':'black'});
+					$("#music tr:eq(0) td:eq(2)").css({'background':'lightgray', 'color':'black'});
+					$("#music tr:eq(0) td:eq(3)").css({'background':'lightgray', 'color':'black'});
+					$("#music tr:eq(0) td:eq(4)").css({'background':'lightgray', 'color':'black'});
+					$("#music tr:eq(0) td:eq(5)").css({'background':'lightgray', 'color':'black'});
+					$("#music tr:eq(0) td:eq(6)").css({'background':'lightgray', 'color':'black'});
+			}); 
+			 	$("#music tr:eq(0) td:eq(1)").mouseenter(function() {
+			 		$(this).css({'background':'darkolivegreen', 'color':'white'});
+					$("#music tr:eq(0) td:eq(0)").css({'background':'lightgray', 'color':'black'});
+					$("#music tr:eq(0) td:eq(2)").css({'background':'lightgray', 'color':'black'});
+					$("#music tr:eq(0) td:eq(3)").css({'background':'lightgray', 'color':'black'});
+					$("#music tr:eq(0) td:eq(4)").css({'background':'lightgray', 'color':'black'});
+					$("#music tr:eq(0) td:eq(5)").css({'background':'lightgray', 'color':'black'});
+					$("#music tr:eq(0) td:eq(6)").css({'background':'lightgray', 'color':'black'});
+			 	}).click(function(){
+					$(this).css({'background':'darkolivegreen', 'color':'white'});
+					$("#music tr:eq(0) td:eq(0)").css({'background':'lightgray', 'color':'black'});
+					$("#music tr:eq(0) td:eq(2)").css({'background':'lightgray', 'color':'black'});
+					$("#music tr:eq(0) td:eq(3)").css({'background':'lightgray', 'color':'black'});
+					$("#music tr:eq(0) td:eq(4)").css({'background':'lightgray', 'color':'black'});
+					$("#music tr:eq(0) td:eq(5)").css({'background':'lightgray', 'color':'black'});
+					$("#music tr:eq(0) td:eq(6)").css({'background':'lightgray', 'color':'black'});
+			});
+			 	$("#music tr:eq(0) td:eq(2)").mouseenter(function() {
+			 		$(this).css({'background':'darkolivegreen', 'color':'white'});
+					$("#music tr:eq(0) td:eq(0)").css({'background':'lightgray', 'color':'black'});
+					$("#music tr:eq(0) td:eq(1)").css({'background':'lightgray', 'color':'black'});
+					$("#music tr:eq(0) td:eq(3)").css({'background':'lightgray', 'color':'black'});
+					$("#music tr:eq(0) td:eq(4)").css({'background':'lightgray', 'color':'black'});
+					$("#music tr:eq(0) td:eq(5)").css({'background':'lightgray', 'color':'black'});
+					$("#music tr:eq(0) td:eq(6)").css({'background':'lightgray', 'color':'black'});
+			 	}).click(function(){
+					$(this).css({'background':'darkolivegreen', 'color':'white'});
+					$("#music tr:eq(0) td:eq(0)").css({'background':'lightgray', 'color':'black'});
+					$("#music tr:eq(0) td:eq(1)").css({'background':'lightgray', 'color':'black'});
+					$("#music tr:eq(0) td:eq(3)").css({'background':'lightgray', 'color':'black'});
+					$("#music tr:eq(0) td:eq(4)").css({'background':'lightgray', 'color':'black'});
+					$("#music tr:eq(0) td:eq(5)").css({'background':'lightgray', 'color':'black'});
+					$("#music tr:eq(0) td:eq(6)").css({'background':'lightgray', 'color':'black'});
+			}); 
+			 	$("#music tr:eq(0) td:eq(3)").mouseenter(function() {
+			 		$(this).css({'background':'darkolivegreen', 'color':'white'});
+					$("#music tr:eq(0) td:eq(0)").css({'background':'lightgray', 'color':'black'});
+					$("#music tr:eq(0) td:eq(1)").css({'background':'lightgray', 'color':'black'});
+					$("#music tr:eq(0) td:eq(2)").css({'background':'lightgray', 'color':'black'});
+					$("#music tr:eq(0) td:eq(4)").css({'background':'lightgray', 'color':'black'});
+					$("#music tr:eq(0) td:eq(5)").css({'background':'lightgray', 'color':'black'});
+					$("#music tr:eq(0) td:eq(6)").css({'background':'lightgray', 'color':'black'});
+			 	}).click(function(){
+					$(this).css({'background':'darkolivegreen', 'color':'white'});
+					$("#music tr:eq(0) td:eq(0)").css({'background':'lightgray', 'color':'black'});
+					$("#music tr:eq(0) td:eq(1)").css({'background':'lightgray', 'color':'black'});
+					$("#music tr:eq(0) td:eq(2)").css({'background':'lightgray', 'color':'black'});
+					$("#music tr:eq(0) td:eq(4)").css({'background':'lightgray', 'color':'black'});
+					$("#music tr:eq(0) td:eq(5)").css({'background':'lightgray', 'color':'black'});
+					$("#music tr:eq(0) td:eq(6)").css({'background':'lightgray', 'color':'black'});
+			}); 
+			 	$("#music tr:eq(0) td:eq(4)").mouseenter(function() {
+			 		$(this).css({'background':'darkolivegreen', 'color':'white'});
+					$("#music tr:eq(0) td:eq(0)").css({'background':'lightgray', 'color':'black'});
+					$("#music tr:eq(0) td:eq(1)").css({'background':'lightgray', 'color':'black'});
+					$("#music tr:eq(0) td:eq(2)").css({'background':'lightgray', 'color':'black'});
+					$("#music tr:eq(0) td:eq(3)").css({'background':'lightgray', 'color':'black'});
+					$("#music tr:eq(0) td:eq(5)").css({'background':'lightgray', 'color':'black'});
+					$("#music tr:eq(0) td:eq(6)").css({'background':'lightgray', 'color':'black'});
+			 	}).click(function(){
+					$(this).css({'background':'darkolivegreen', 'color':'white'});
+					$("#music tr:eq(0) td:eq(0)").css({'background':'lightgray', 'color':'black'});
+					$("#music tr:eq(0) td:eq(1)").css({'background':'lightgray', 'color':'black'});
+					$("#music tr:eq(0) td:eq(2)").css({'background':'lightgray', 'color':'black'});
+					$("#music tr:eq(0) td:eq(3)").css({'background':'lightgray', 'color':'black'});
+					$("#music tr:eq(0) td:eq(5)").css({'background':'lightgray', 'color':'black'});
+					$("#music tr:eq(0) td:eq(6)").css({'background':'lightgray', 'color':'black'});
+			}); 
+			 	$("#music tr:eq(0) td:eq(5)").mouseenter(function() {
+			 		$(this).css({'background':'darkolivegreen', 'color':'white'});
+					$("#music tr:eq(0) td:eq(0)").css({'background':'lightgray', 'color':'black'});
+					$("#music tr:eq(0) td:eq(1)").css({'background':'lightgray', 'color':'black'});
+					$("#music tr:eq(0) td:eq(2)").css({'background':'lightgray', 'color':'black'});
+					$("#music tr:eq(0) td:eq(3)").css({'background':'lightgray', 'color':'black'});
+					$("#music tr:eq(0) td:eq(4)").css({'background':'lightgray', 'color':'black'});
+					$("#music tr:eq(0) td:eq(6)").css({'background':'lightgray', 'color':'black'});
+			 	}).click(function(){
+					$(this).css({'background':'darkolivegreen', 'color':'white'});
+					$("#music tr:eq(0) td:eq(0)").css({'background':'lightgray', 'color':'black'});
+					$("#music tr:eq(0) td:eq(1)").css({'background':'lightgray', 'color':'black'});
+					$("#music tr:eq(0) td:eq(2)").css({'background':'lightgray', 'color':'black'});
+					$("#music tr:eq(0) td:eq(3)").css({'background':'lightgray', 'color':'black'});
+					$("#music tr:eq(0) td:eq(4)").css({'background':'lightgray', 'color':'black'});
+					$("#music tr:eq(0) td:eq(6)").css({'background':'lightgray', 'color':'black'});
+			}); 
+			 	$("#music tr:eq(0) td:eq(6)").mouseenter(function() {
+			 		$(this).css({'background':'darkolivegreen', 'color':'white'});
+					$("#music tr:eq(0) td:eq(0)").css({'background':'lightgray', 'color':'black'});
+					$("#music tr:eq(0) td:eq(1)").css({'background':'lightgray', 'color':'black'});
+					$("#music tr:eq(0) td:eq(2)").css({'background':'lightgray', 'color':'black'});
+					$("#music tr:eq(0) td:eq(3)").css({'background':'lightgray', 'color':'black'});
+					$("#music tr:eq(0) td:eq(4)").css({'background':'lightgray', 'color':'black'});
+					$("#music tr:eq(0) td:eq(5)").css({'background':'lightgray', 'color':'black'});
+			 	}).click(function(){
+					$(this).css({'background':'darkolivegreen', 'color':'white'});
+					$("#music tr:eq(0) td:eq(0)").css({'background':'lightgray', 'color':'black'});
+					$("#music tr:eq(0) td:eq(1)").css({'background':'lightgray', 'color':'black'});
+					$("#music tr:eq(0) td:eq(2)").css({'background':'lightgray', 'color':'black'});
+					$("#music tr:eq(0) td:eq(3)").css({'background':'lightgray', 'color':'black'});
+					$("#music tr:eq(0) td:eq(4)").css({'background':'lightgray', 'color':'black'});
+					$("#music tr:eq(0) td:eq(5)").css({'background':'lightgray', 'color':'black'});
+			}); 
+			
+			 	
+			
+			
 		});
 	</script>
 	<%@ include file="/views/common/footer.jsp" %>
