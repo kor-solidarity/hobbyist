@@ -87,7 +87,7 @@
             <br><br>
             <p>회원님의 정보와 일치하는 아이디는 <br>
             	다음과 같습니다.</p><br><br>
-            <p>hyeon****</p>
+            <p>hyeon*****</p>
            
            	<button onclick="goFindPwd();" class="btns" id="pwdBtn">비밀번호 찾기</button>
             <button onclick="goLogin();" class="btns" id="loginBtn">로그인</button>
