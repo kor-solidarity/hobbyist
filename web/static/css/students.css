@@ -11,6 +11,42 @@
     width: 1024px;
 }
 
+/* 컨텐츠 가운데정렬 */
+.centralise {
+    margin: 0 auto;
+}
+
+/* 문의/신고 내역 목록 테이블용 */
+.report-table {
+    text-align: center;
+    /*border: 2px solid darkolivegreen;*/
+    border-collapse: collapse;
+}
+
+.report-table td {
+    border-bottom: 2px solid darkolivegreen;
+    border-top: 2px solid darkolivegreen;
+    padding: 10px 0;
+    font-size: 20px;
+}
+
+.report-table th {
+    font-family: 'Do Hyeon', sans-serif;
+    font-size: 25px;
+}
+
+.report-table tr {
+    border-right: 2px solid darkolivegreen;
+    border-left: 2px solid darkolivegreen;
+}
+
+.report-table tr:first-of-type td, .report-table tr:nth-of-type(1), .report-table tr:nth-of-type(2) {
+    border-top: none;
+    border-bottom: none;
+    border-right: none;
+    border-left: none;
+}
+
 .do-hyun-font {
     font-family: 'Do Hyeon', sans-serif;
 }
@@ -61,23 +97,54 @@
     background-color: darkolivegreen;
 }
 
+/* 문의사항 modal 내 제목 */
+.report-modal-title {
+    font-size: 20px;
+    text-align: center;
+    color: olive;
+    padding: 15px 0;
+}
+
+.report-modal-end {
+    font-size: 20px;
+    text-align: center;
+    color: olive;
+    padding: 15px 0;
+}
+
+.report-modal-content {
+    border: 1px solid darkolivegreen;
+    height: 100px;
+}
+
+/* 글 간 경계선 */
+.report-modal-line {
+    border-top: 1px solid darkolivegreen;
+    margin-top: 10px;
+    height: 20px;
+    clear: both;
+}
+
 /* 스터디룸 정보  */
-.room-info-summary th{
+.room-info-summary th {
     text-align: right;
 }
-.room-info-summary td{
+
+.room-info-summary td {
     text-align: left;
 }
 
-.pagination {
+
+/* w3school 에 페이징 참고 */
+.paging {
     display: inline-block;
 }
 
-.pagination > a {
+.paging > a {
     margin: auto;
 }
 
-.pagination a {
+.paging a {
     color: black;
     float: left;
     padding: 8px 16px;
@@ -85,7 +152,7 @@
     transition: background-color .3s;
 }
 
-.pagination a.active {
+.paging a.active {
     background-color: #4CAF50;
     color: white;
 }

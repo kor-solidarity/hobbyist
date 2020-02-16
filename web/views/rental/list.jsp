@@ -14,7 +14,7 @@
 </head>
 <body>
 <%@include file="/views/common/menubar.jsp" %>
-<%@include file="rental_category.jsp"%>
+<%@include file="category.jsp"%>
 <div>
     <table border="0" class="do-hyun-font standard-width" style=" margin: 0 auto">
         <tr>

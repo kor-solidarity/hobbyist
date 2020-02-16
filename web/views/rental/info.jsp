@@ -13,10 +13,10 @@
 </head>
 <body>
 <%@include file="/views/common/menubar.jsp" %>
-<%@include file="rental_category.jsp" %>
+<%@include file="category.jsp" %>
 <br clear="both">
 <div>
-    <table class="standard-width ">
+    <table class="standard-width " style="margin: 0 auto">
         <%--  --%>
         <tr>
             <td colspan="3">
