@@ -61,6 +61,7 @@
 		font-size: 30px;
 		font-family: 'Do Hyeon', sans-serif;
 		padding: 0px;
+		border: #DED842;
 	}
 	
 </style>
