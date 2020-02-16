@@ -11,7 +11,7 @@
 <html>
 <head>
     <title>Title</title>
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/static/css/students.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/static/css/eun-css.css">
     <%@include file="/views/common/boot4-script.jsp" %>
     <%@include file="/views/common/boot4.jsp" %>
 </head>
@@ -40,21 +40,21 @@
             <td>문의</td>
             <td>미확인</td>
             <td style="text-align: left">구매후기는 언제 작성할 수 있나요</td>
-            <td>02/01/28</td>
+            <td>20/01/28</td>
         </tr>
         <tr>
             <td>2</td>
             <td>문의</td>
             <td>미확인</td>
             <td style="text-align: left">구매후기는 언제 작성할 수 있나요</td>
-            <td>02/01/28</td>
+            <td>20/01/28</td>
         </tr>
         <tr>
             <td>3</td>
             <td>문의</td>
             <td>미확인</td>
             <td style="text-align: left">구매후기는 언제 작성할 수 있나요</td>
-            <td>02/01/28</td>
+            <td>20/01/28</td>
         </tr>
     </table>
 </div>
@@ -86,27 +86,31 @@
                  style="background-color: darkolivegreen; color: white; border-bottom: 2px solid black; padding: 0 10px">
                 <h5 class="modal-title text-right" id="exampleModalLabel"
                     style="margin: 0 0 0 auto; width: 100%; ">
-                    <span class="do-hyun-font " style="">hobbyist</span>
+                    <span class="zCool" style="">hobbyist</span>
                 </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true" style="color: white">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <div class="report-modal-title">구매후기는 언제 작성할 수 있나요</div>
-                <div class="col-12">
+                <%--                <div class="col-12 report-modal-category">--%>
+                <%--                    카테고리: 문의--%>
+                <%--                </div>--%>
+                <div class="report-modal-title ">구매후기는 언제 작성할 수 있나요</div>
+                <div class="col-12 report-modal-category">
                     카테고리: 문의
+                    <br>
+                    20/01/28
                 </div>
                 <div class="col-12 report-modal-content">
                     구매후기는 언제 작성할 수 있나요? 궁금해서 문의합니다.
                 </div>
             </div>
+            <%--중간에 줄그으려고..--%>
             <div class="col-12">
-                <div class="col-12 report-modal-line">
-                    &nbsp;
-                </div>
+                <div class="col-12 report-modal-line"></div>
             </div>
-            <div class="modal-footer" style="justify-content: center;">
+            <div class="modal-footer report-modal-footer" style="justify-content: center;">
                 <%--                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>--%>
                 <%--                <button type="button" class="btn btn-primary">Save changes</button>--%>
                 <%-- 답변이 나오면 또 다르게 떠야함 --%>

@@ -10,7 +10,7 @@
 <html>
 <head>
     <title>StudyRoomList</title>
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/static/css/students.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/static/css/eun-css.css">
 </head>
 <body>
 <%@include file="/views/common/menubar.jsp" %>
