@@ -42,7 +42,7 @@
 }
 
 .tabletop2 {
-	float: left;
+	marign : auto;
 }
 
 .tabletop3 {
@@ -60,10 +60,15 @@
 }
 
 .divcenter1 {
-	
-	
-	
+		
 }
+
+
+
+
+
+
+
 .tablecenter1{
 	margin-left: auto;
 	margin-right: auto; 
@@ -153,11 +158,23 @@
 	font-family: Do Hyeon;
 	font-size: 25px;
 	background: #black;
+	}
 	
-	
+#memberUpdate1{
+
+height: 100px;
+width: 100px;
+magin: auto;
+
 }
 
+#memberUpdate2{
 
+height: 100px;
+width: 100px;
+magin: auto;
+
+}
 
 
 
@@ -180,19 +197,22 @@
 
 
 	<div class="divtop2">
-		<table class="tabletop2">
-<td style="width: 100px, height: 100px;"><img id="memberUpdate1" src="<%=request.getContextPath() %>/images/memberUpdate1"></td> 
-
-		</table>
-		<table class="tabletop3">
-			<tr>
-				<td rowspan="2"><label id="show2">Jae</label></td>
-			</tr>
-		</table>
-		<table class="tabletop4">
-			<tr>
-				<td rowspan="2"><label id="show3">Sun</label></td>
-			</tr>
+		<table border="1" class = tabletop2>
+		<tr>
+		<td rowspan="4"><img id="memberUpdate1" src="<%=request.getContextPath() %>/static/images/memberUpdate1.png"></td>
+		<td colspan="4"></td>
+		<td colspan="4"><img id="memberUpdate2" src="<%=request.getContextPath() %>/static/images/memberUpdate2.png">회원정보수정</td></tr>
+		</tr>
+		<tr>	
+		<td colspan="4">학생</td>
+		<td colspan="4"></td>
+		</tr>
+		<tr>
+		<td colspan="4">김설현님</td>
+		<td colspan="4"></td>
+		</tr>
+		<tr><td colspan="4">아티스트 심사 대기중입니다.<td>
+		<td colspan="4">보유 포인트: 2500p</td></tr>
 		</table>
 	</div>
 
