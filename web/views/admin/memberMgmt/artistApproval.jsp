@@ -14,57 +14,7 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
  <style>
-    body {
-       margin: 0px;
-       width: 1440px;
-       height: 1000px;
-       margin: 0 auto;
-       background: lightgray;
-    }
-    
-    header {
-       background: #DED842;
-       width: 100%;
-       height: 9%;
-    }
-    
-    #topAreaT {
-       width: 70%;
-       height: 100%;
-       margin: 0 auto;
-       float: left;
-       margin-left: 20px;
-    }
-    
-    #topAreaT tr > td {
-       color: #4E4E4E;
-       font-size: 20px;
-       font-weight: bold;
-       
-    }
-    
-    #topAreaT tr > td:nth-child(1) {
-       font-size: 45px;
-       font-family: 'ZCOOL QingKe HuangYou', cursive;
-    }
-    
-    #logoutT {
-       margin: 0 auto;
-       padding-top: 20px;
-       width: 340px;
-       height: 100%;
-    }
-    
-    #logout {
-       border-style: solid;
-       color: white;
-        border-top-left-radius:50px;
-        border-bottom-left-radius: 50px;
-        border-top-right-radius: 50px;
-        border-bottom-right-radius: 50px; 
-        font-size: 17px;
-    }
-    
+
     section {
        width: 100%;
        height: 91%;
@@ -145,11 +95,13 @@
         overflow-y: auto;
     }
     
-    #approvalTab {
+    #approvalTab{
     	width:100%;
     	text-align:center;
     }
-    
+    #approvalTab th {
+    	text-align:center;
+    }
     #approvalTab td {
     	border:1px solid black;
     }
@@ -175,29 +127,22 @@
 	    border: 1px solid red;
 	    height:30px;
     }
+    #aaModalTab {
+    	margin:auto;
+    }
+    #checkModalBtn {
+       color: white;
+       background-color: #4E4E4E;
+       padding: 5px;
+	   border: 1px solid #4E4E4E;
+	   width:60px;
+	   height:40px;  
+    }
 </style>
 </head>
 
 <body>
-   <header>
-      <table id="topAreaT">
-         <tr style="text-align: right;">
-            <td style="text-align: left;">hobbyist</td>
-            <td>회원관리</td>
-            <td>게시판관리</td>
-            <td>수업관리</td>
-            <td>신고/문의</td>
-            <td>결제/환불</td>
-            <td style="width: 90px;">통계</td>
-         </tr>
-      </table>
-      <table id="logoutT">
-         <tr>
-            <td style="text-align: right;"><label id="logout">로그아웃</label></td>
-         </tr>
-      </table>
-   </header>
-   
+   <%@ include file="/views/common/adminMenubar.jsp" %>
    <section>
       <!-- 왼쪽 사이드바 메뉴  -->
       <article id="sideMenuBar">
@@ -416,21 +361,37 @@
                
             </table>
          </div>
-			<div class="modal fade" id="myModal" role="dialog">
+			<div class="modal fade" id="myModal1" role="dialog">
 				<div class="modal-dialog">
 
 					<!-- Modal content-->
 					<div class="modal-content">
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal">×</button>
-							<h4 class="modal-title">Modal Header</h4>
+						<div class="modal-header" style="background-color:#4E4E4E; height:42px;">
+							<label style="font-size:18px; color:white;">hobbyist</label>
+							<button type="button" class="close" data-dismiss="modal" style="color:white">×</button>
+							<h4 class="modal-title"></h4>
 						</div>
 						<div class="modal-body">
-							<p>Some text in the modal.</p>
+							<br>
+							<table id="aaModalTab">
+								<tr>
+									<td style="font-size:18px;">
+										거절 사유를 입력해주세요.
+									</td>
+								</tr>
+								<tr style="height:20px;">
+								</tr>
+								<tr>
+									<td>
+										<textarea rows="5" cols="40" style="resize:none; width:500px; height:300px;" placeholder="입력하신 거절 사유가 회원의 알림으로 보내지게 됩니다."></textarea>
+									</td>
+								</tr>
+							</table>
+							
+							
 						</div>
 						<div class="modal-footer">
-							<button type="button" class="btn btn-default"
-								data-dismiss="modal">Close</button>
+							<button type="button" class="btn btn-primary" id="checkModalBtn">확인</button>
 						</div>
 					</div>
 
@@ -439,7 +400,7 @@
 			<script>
 				$(document).ready(function() {
 					$("#refuseBtn").click(function() {
-						$("#myModal").modal();
+						$("#myModal1").modal();
 					});
 				});
 			</script>
