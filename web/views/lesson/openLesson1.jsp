@@ -225,10 +225,10 @@ input[type='text'] {
                         </tr>
                         <tr>
                             <td colspan="3">
-								<img src="<%= request.getContextPath() %>/images/iphoneCamera.png" width="80px" height="80px">
-								<img src="<%= request.getContextPath() %>/images/iphoneCamera.png" width="80px" height="80px">
-								<img src="<%= request.getContextPath() %>/images/iphoneCamera.png" width="80px" height="80px">
-								<img src="<%= request.getContextPath() %>/images/iphoneCamera.png" width="80px" height="80px">
+								<img src="<%= request.getContextPath() %>/static/images/iphoneCamera.png" width="80px" height="80px">
+								<img src="<%= request.getContextPath() %>/static/images/iphoneCamera.png" width="80px" height="80px">
+								<img src="<%= request.getContextPath() %>/static/images/iphoneCamera.png" width="80px" height="80px">
+								<img src="<%= request.getContextPath() %>/static/images/iphoneCamera.png" width="80px" height="80px">
                             </td>
                         </tr>
                     </table>
