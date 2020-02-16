@@ -257,23 +257,22 @@
 			<tr>
 				<td style="height: 400px;">
 					<button type="button" class="btn btn-primary btn-lg"
-						id="openModalBtn">아티스트 신청하기</button>
+						id="openModalBtn" style="margin-left:15px;">아티스트 신청하기</button>
 				</td>
 			</tr>
 		</table>
-
 	</div>
 	<div id="bottom">
 		<!-- 4행 3열-->
 		<table id="bottomInfo">
 			<tr>
 				<td id="first" colspan="3">아티스트 어떻게
-					신청하나요?&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+					신청하나요?</td>
 			</tr>
 			<tr>
-				<td id="second">STEP.01</td>
-				<td id="second">STEP.02</td>
-				<td id="second">STEP.03</td>
+				<td id="second" width="33%">STEP.01</td>
+				<td id="second" width="33%">STEP.02</td>
+				<td id="second" width="33%">STEP.03</td>
 			</tr>
 			<tr>
 				<td id="third">아티스트신청 및 심사</td>
@@ -341,7 +340,7 @@
 										<div id="div2div" style="width: 400px;">
 											<p>자기소개</p>
 											<textarea name="introduce" rows="5" cols="40" placeholder="자기소개 부분을 채워주세요."
-												style="width: 380px; height: 200px; text-align: left; color: rgb(49, 49, 49);"></textarea>
+												style="width: 380px; height: 200px; text-align: left; color: rgb(49, 49, 49); resize:none;"></textarea>
 											<p style="text-align: right;">0/255</p>
 										</div>
 									</td>
