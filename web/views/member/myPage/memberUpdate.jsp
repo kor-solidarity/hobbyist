@@ -42,17 +42,21 @@
 }
 
 .tabletop2 {
-	marign : auto;
+	width: 1024px;
+	height:160px;
+	
 }
 
 .tabletop3 {
 	margin: auto;
 	float: left;
+	
 }
 
 .tabletop4 {
 	margin: auto;
 	float: right;
+	text-align: right;
 }
 
 .divtopblock1 {
@@ -80,13 +84,6 @@
 	
 }
 
-.divcenter2 {
-	margin-left: auto;
-	margin-right: auto; height : 50px;
-	border-bottom: 1px solid black;
-	width: 1024px;
-	height: 50px;
-}
 
 .tablecenter2{
 
@@ -162,21 +159,89 @@
 	
 #memberUpdate1{
 
-height: 100px;
-width: 100px;
+height: 150px;
+width: 150px;
 magin: auto;
 
 }
 
 #memberUpdate2{
 
-height: 100px;
-width: 100px;
+height: 50px;
+width: 50px;
 magin: auto;
 
 }
 
+.td0{
 
+text-align: center;
+}
+
+.td2{
+text-align: right;
+}
+
+.td3{
+
+text-align: center;
+}
+
+
+.td4{
+font-family: Do Hyeon;
+font-style: normal;
+font-weight: normal;
+font-size: 22px;
+line-height: 27px;
+
+}
+
+
+.td8{
+font-family: Do Hyeon;
+font-style: normal;
+font-weight: normal;
+font-size: 25px;
+line-height: 31px;
+
+color: #556B2F;
+
+}
+
+.td3{
+font-family: Do Hyeon;
+font-style: normal;
+font-weight: normal;
+font-size: 25px;
+line-height: 31px;
+
+
+}
+
+.td9{
+font-family: Do Hyeon;
+font-style: normal;
+font-weight: normal;
+font-size: 25px;
+line-height: 31px;
+}
+
+.td6{
+font-family: Do Hyeon;
+font-style: normal;
+font-weight: normal;
+font-size: 30px;
+line-height: 37px;
+}
+
+
+
+
+.td9{
+text-align: center;
+ color: #6F6C6C;
+}
 
 </style>
 <link
@@ -197,22 +262,25 @@ magin: auto;
 
 
 	<div class="divtop2">
-		<table border="1" class = tabletop2>
+		<table class = tabletop2>
 		<tr>
-		<td rowspan="4"><img id="memberUpdate1" src="<%=request.getContextPath() %>/static/images/memberUpdate1.png"></td>
-		<td colspan="4"></td>
-		<td colspan="4"><img id="memberUpdate2" src="<%=request.getContextPath() %>/static/images/memberUpdate2.png">회원정보수정</td></tr>
+		<td rowspan="4" class="td0" ><img id="memberUpdate1" src="<%=request.getContextPath() %>/static/images/memberUpdate1.png"></td>
+		<td colspan="4" class="td1"></td>
+		<td colspan="3" class="td2"><img id="memberUpdate2" src="<%=request.getContextPath() %>/static/images/memberUpdate2.png"></td>
+		<td colspan="1" class="td3">회원정보 수정</td>
+		</tr>
 		</tr>
 		<tr>	
-		<td colspan="4">학생</td>
-		<td colspan="4"></td>
+		<td colspan="4" class="td4">학생</td>
+		<td colspan="4" class="td5"></td>
 		</tr>
 		<tr>
-		<td colspan="4">김설현님</td>
-		<td colspan="4"></td>
+		<td colspan="4" class="td6">김설현님</td>
+		<td colspan="4" class="td7"></td>
 		</tr>
-		<tr><td colspan="4">아티스트 심사 대기중입니다.<td>
-		<td colspan="4">보유 포인트: 2500p</td></tr>
+		<tr><td colspan="4" class="td8">아티스트 심사 대기중입니다.</td>
+		<td colspan="4" class="td9">보유 포인트: 2500p</td>
+		</tr>
 		</table>
 	</div>
 
