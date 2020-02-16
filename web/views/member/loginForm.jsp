@@ -63,18 +63,18 @@
 </head>
 <body id="main">
 	<div id="header">
-        <h1 id="title" align="center">hobbyist</h1>
+        <h1 id="title" align="center" onclick="goHome();">hobbyist</h1>
         
     </div>
     <div id="contents" align="center">
-        <form action="<%=request.getContextPath()%>/views/member/firstLogin.jsp">
+        <form action="<%=request.getContextPath()%>/login.me">
             <label id="idLabel">아이디</label>
             <br>
-            <input type="text" name="userId" id="userId">
+            <input type="text" name="memberId" id="memberId">
             <br><br>
             <label id="pwdLabel">비밀번호</label>
             <br>
-            <input type="password" name="userPwd" id="userPwd">
+            <input type="password" name="memberPwd" id="memberPwd">
             <br><br>
             <button type="submit" id="loginBtn">로그인</button>
             <br>
@@ -98,6 +98,9 @@
 			location.href = "<%=request.getContextPath()%>/views/member/findPwd.jsp";
 		}
 		
+		function goHome() {
+    		location.href = "<%= request.getContextPath()%>/index.jsp";
+    	}
 		
 	</script>
 </body>

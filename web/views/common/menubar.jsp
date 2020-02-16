@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="com.dh.hobbyist.member.model.vo.Member"%>
+<%
+	Member loginMember = (Member) session.getAttribute("loginMember"); %>
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -89,7 +92,11 @@
                 <td style="width:40px"><img src="<%=request.getContextPath() %>/static/images/bell.png" style="height:25px"></td>
                 <td id="artistTd" onclick="goArtist();" >아티스트신청</td>
                 <td onclick="goMyPage();">마이페이지</td>
+                <%if(loginMember == null) { %>
                 <td onclick="goLogin();">로그인</td>
+                <% }else { %>
+                <td><%=loginMember.getMemberName() %>님</td>
+                <% } %>
             </tr>
             <tr>
                 <td colspan="2"><div id="suggestArea" onclick="goSuggest();">수업건의 게시판</div></td>
@@ -119,7 +126,7 @@
     		location.href = "<%= request.getContextPath()%>/views/lesson/openLessonMain.jsp";
     	}
     	function goMyPage() {
-    		location.href = "<%= request.getContextPath()%>/views/member/mypage/memberUpdate.jsp";
+    		location.href = "<%= request.getContextPath()%>/views/member/myPage/memberUpdate.jsp";
     	}
     </script>
 </body>

@@ -50,9 +50,11 @@
         }
         
         .btns {
-            width:115px;
+            width:125px;
             height: 40px;
             margin-top: 55px;
+            font-family: 'Nanum Gothic', sans-serif; 
+            font-size:14px;
             
         }
         
@@ -69,7 +71,7 @@
 </head>
 <body id="main">
 	 <div id="header">
-        <h1 id="title" align="center">hobbyist</h1>
+        <h1 id="title" align="center" onclick="goHome();">hobbyist</h1>
     </div>
     <div id="contents" align="center">
            <h2>비밀번호 재설정</h2>
@@ -84,6 +86,10 @@
     <script>
     	function complete(){
     		location.href = "<%= request.getContextPath()%>/views/member/setPwdComplete.jsp";
+    	}
+    	
+    	function goHome() {
+    		location.href = "<%= request.getContextPath()%>/index.jsp";
     	}
     </script>
 </body>
