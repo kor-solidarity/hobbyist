@@ -75,14 +75,14 @@
         	cursor:pointer;
         }
     </style>
-    <link href="https://fonts.googleapis.com/css?family=Do+Hyeon|ZCOOL+QingKe+HuangYou&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Do+Hyeon|Nanum+Gothic|ZCOOL+QingKe+HuangYou&display=swap" rel="stylesheet">
 </head>
 <body>
  	<div id="header">
         <table id="headerInfo">
             
             <tr>
-                <td rowspan="2"><label id="headerLab">hobbyist</label></td>
+                <td rowspan="2"><label id="headerLab" onclick="goHome();">hobbyist</label></td>
                 <td style="width:500px" rowspan="2"><div id="searchArea">
                     <input type="text" id="jihoSearch" placeholder="듣고싶은 수업을 검색해주세요">
                     <img id="jihoImg1" src="<%=request.getContextPath() %>/static/images/search.png"></div></td>
@@ -92,7 +92,7 @@
                 <td onclick="login();">로그인</td>
             </tr>
             <tr>
-                <td colspan="2"><div id="suggestArea">수업건의 게시판</div></td>
+                <td colspan="2"><div id="suggestArea" onclick="goSuggest();">수업건의 게시판</div></td>
                 <td colspan="2"><div id="registerArea">수업개설</div></td>
             </tr>
         </table>
@@ -105,6 +105,14 @@
     	
     	function login() {
     		location.href = "<%= request.getContextPath()%>/views/member/loginForm.jsp";
+    	}
+    	
+    	function goHome() {
+    		location.href = "<%= request.getContextPath()%>/index.jsp";
+    	}
+    	
+    	function goSuggest() {
+    		location.href = "<%= request.getContextPath()%>/views/suggest/suggestList.jsp";
     	}
     </script>
 </body>

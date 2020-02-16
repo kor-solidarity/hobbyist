@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
- <link href="https://fonts.googleapis.com/css?family=Do+Hyeon|Roboto|ZCOOL+QingKe+HuangYou&display=swap" rel="stylesheet">
+ <link href="https://fonts.googleapis.com/css?family=Do+Hyeon|Roboto|Nanum+Gothic|ZCOOL+QingKe+HuangYou&display=swap" rel="stylesheet">
 <title>Insert title here</title>
 <style>
 			
@@ -26,13 +26,15 @@
 	       		font-size:15px;
 	       		padding-top:10px;
 	       		padding-bottom:15px;
-	       		font-family: 'Roboto', sans-serif;
+	       		/* font-family: 'Roboto', sans-serif; */
+	       		font-family: 'Nanum Gothic', sans-serif;
 	       }
 	      	.fTable td {
 	       		padding-left:15px;
 	       		padding-right: 35px;
 	       		font-size:13px;
-	       		font-family: 'Roboto', sans-serif;
+	       		/* font-family: 'Roboto', sans-serif; */
+	       		font-family: 'Nanum Gothic', sans-serif;
 	       }
 </style>
 </head>
