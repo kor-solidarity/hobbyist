@@ -28,13 +28,24 @@
 		margin-top:-20px;
 		padding-bottom:100px;
 	}
-	#category {
-		padding-bottom:200px;
+	
+	.category-list {
+		margin-left:100px;
+		display:inline-block;
+	}
+	#cTitle {
 		font-family: 'Do Hyeon', sans-serif;
 		color:darkolivegreen;
 		font-size:22px;
+	}
+	#category {
+		width:120px;
+		height:30px;
+		font-family: 'Nanum Gothic', sans-serif;
+		font-size:16px;
 		border-collapse:seperate;
-		border-spacing:70px;
+		border-spacing:120px;
+		text-align:center;
 	}
 	
 
@@ -47,18 +58,21 @@
 	<div id="main">
 	<h2 id="title">관심 카테고리 등록</h2>
 	<h3 id="content">관심카테고리를 설정하면 관심수업을 추천해드립니다!</h3>
-	<table id="category">
-		<tr>
-			<td id="category1">카테고리</td>
-			<td id="category3">내가 선택한 카테고리</td>
-		</tr>
-		<tr>
-			<td id="category2">상세 카테고리</td>
-			<td></td>
-		</tr>
-	</table>
 	
-	
+	<div class="category-list">
+		<p id="cTitle">카테고리</p>
+		<select id="category">
+		<option>음악</option>
+		<option>댄스</option>
+		<option>영상/사진</option>
+		<option>라이프스타일</option>
+		<option>뷰티</option>
+		<option>디자인</option>
+		<option>스포츠</option>
+		
+		</select>
+	</div>
+
 
 
 	

@@ -67,7 +67,7 @@
         
     </div>
     <div id="contents" align="center">
-        <form action="<%=request.getContextPath()%>/login.me">
+        <form action="<%=request.getContextPath()%>/login.me" method="post">
             <label id="idLabel">아이디</label>
             <br>
             <input type="text" name="memberId" id="memberId">
