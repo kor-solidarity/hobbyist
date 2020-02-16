@@ -41,11 +41,15 @@ public class LoginServlet extends HttpServlet {
 		if(loginMember != null) {
 			HttpSession session = request.getSession();
 			session.setAttribute("loginMember", loginMember);
-			
-			response.sendRedirect("index.jsp");
+			if(loginMember.getFirstLogin() == 0) {
+				response.sendRedirect("index.jsp");
+			}else {
+				response.sendRedirect("views/member/firstLogin.jsp");
+			}
+		
 		}else {
 			request.setAttribute("msg", "로그인에 실패하셨습니다.");
-			request.getRequestDispatcher("views/common/errorPage.jsp");
+			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
 		}
 		
 	}

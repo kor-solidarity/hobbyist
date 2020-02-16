@@ -2,12 +2,13 @@
     pageEncoding="UTF-8" import="com.dh.hobbyist.member.model.vo.Member"%>
 <%
 	Member loginMember = (Member) session.getAttribute("loginMember"); %>
-%>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <style>
         #header {
            height:75px;
@@ -77,6 +78,10 @@
         #artistTd {
         	cursor:pointer;
         }
+        
+        #selectList {
+        	border:1px solid white;
+        }
     </style>
     <link href="https://fonts.googleapis.com/css?family=Do+Hyeon|Nanum+Gothic|ZCOOL+QingKe+HuangYou&display=swap" rel="stylesheet">
 </head>
@@ -95,7 +100,7 @@
                 <%if(loginMember == null) { %>
                 <td onclick="goLogin();">로그인</td>
                 <% }else { %>
-                <td><%=loginMember.getMemberName() %>님</td>
+                <td><%=loginMember.getMemberName() %>님  <img src="static/images/logoutIcon.png" id="logoutBtn" style="width:9px; height:9px;" onclick="goLogout();"></td>
                 <% } %>
             </tr>
             <tr>
@@ -114,6 +119,10 @@
     		location.href = "<%= request.getContextPath()%>/views/member/loginForm.jsp";
     	}
     	
+    	function goLogout() {
+    		location.href = "<%= request.getContextPath()%>/logout.me";
+    	}
+    	
     	function goHome() {
     		location.href = "<%= request.getContextPath()%>/index.jsp";
     	}
@@ -128,6 +137,7 @@
     	function goMyPage() {
     		location.href = "<%= request.getContextPath()%>/views/member/myPage/memberUpdate.jsp";
     	}
+    	
     </script>
 </body>
 </html>
