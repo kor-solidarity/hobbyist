@@ -4,12 +4,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>hobbyist</title>
 <style>
 #middle {
 	height: 520px;
 	top: 80px;
-	background-image: url("/hobbyist/images/thiago.PNG");
+	background-image: url("/hobbyist/static/images/thiago.PNG");
 	background-size: 100% 100%;
 	background-repeat: no-repeat;
 }
@@ -38,6 +38,7 @@
 	height: 60px;
 	text-align: center;
 	width: 200px;
+	line-height:60px;
 }
 
 #middleInfo button {
@@ -316,7 +317,7 @@
 							</table>
 							<table id="ArtistTable2">
 								<tr>
-									<td><img src="/hobbyist/images/user1.PNG"
+									<td><img src="/hobbyist/static/images/user1.PNG"
 										style="height: 100px"></td>
 									<td>
 										<p>아티스트 닉네임</p> <input type="text" name="nickName"
@@ -339,8 +340,8 @@
 									<td colspan="3">
 										<div id="div2div" style="width: 400px;">
 											<p>자기소개</p>
-											<textarea name="introduce" rows="5" cols="40"
-												style="width: 380px; height: 200px; text-align: left; color: rgb(49, 49, 49);">자기소개 부분을 채워주세요.</textarea>
+											<textarea name="introduce" rows="5" cols="40" placeholder="자기소개 부분을 채워주세요."
+												style="width: 380px; height: 200px; text-align: left; color: rgb(49, 49, 49);"></textarea>
 											<p style="text-align: right;">0/255</p>
 										</div>
 									</td>
@@ -563,7 +564,7 @@
 					<button type="button" class="btn btn-default" id="closeModalBtn">이전</button>
 					<button type="button" class="btn btn-primary" id="nextModalBtn">다음</button>
 					<button type="button" class="btn btn-primary" id="saveModalBtn"
-						style="display: none;">저장</button>
+						style="display: none; background-color:darkolivegreen;">저장</button>
 				</div>
 			</div>
 		</div>
