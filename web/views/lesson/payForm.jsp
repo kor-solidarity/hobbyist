@@ -319,12 +319,12 @@
         			</tr>
         		</table>
         		
-        		<div id="resultButton" style="text-align: center;">
+        		<div id="resultButton" style="text-align: center; margin-bottom: 100px;">
         			<input type="reset" value="이전" style="background-color: white;"> &nbsp;
         			<input type="submit" value="다음" style="background-color: darkolivegreen; color: white;">
         		</div>
         	</form>
     </section>
-    <footer></footer>
+    <%@ include file="../common/footer.jsp" %>
 </body>
 </html>
