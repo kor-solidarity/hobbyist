@@ -18,7 +18,7 @@
 #middle {
 	height: 520px;
 	top: 80px;
-	background-image: url("/hobbyist/static/images/musicLesson.jpg");
+	background-image: url("/hobbyist/static/images/piano.png");
 	background-size: 100% 100%;
 	background-repeat: no-repeat;
 }
@@ -40,7 +40,7 @@
 
 #middleComment {
 	color: white;
-	text-shadow:1px 1px dimgrey;
+	text-shadow:1px 1px black;
 }
 
 #middleInfo td div {
@@ -100,23 +100,23 @@
 	font-size: 15px;
 }
 
-#ArtistTable1 {
+#LessonTable1 {
 	font-size: 20px;
 	font-family: 'Do Hyeon', sans-serif;
 	border-spacing: 20px;
 	width: 100%;
 }
 
-#ArtistTable1  td {
+#LessonTable1  td {
 	width: 20%;
 	color: #A7A1A1;
 }
 
-#ArtistTable1  td:first-child {
+#LessonTable1  td:first-child {
 	color: darkolivegreen;
 }
 
-#ArtistTable2 {
+#LessonTable2 {
 	color: darkolivegreen;
 	font-family: 'Do Hyeon', sans-serif;
 	font-size: 17px;
@@ -126,12 +126,12 @@
 	height: 400px;
 }
 
-#ArtistTable2 td {
+#LessonTable2 td {
 	display: table-cell;
 	vertical-align: top;
 }
 
-#ArtistTable2 button {
+#LessonTable2 button {
 	background: darkolivegreen;
 	color: white;
 	padding: 5px;
@@ -144,13 +144,13 @@
 	font-size: 20px;
 }
 
-#ArtistDiv3 {
+#LessonDiv3 {
 	font-size: 30px;
 	font-family: 'Do Hyeon', sans-serif;
 	color: darkolivegreen;
 }
 
-#ArtistTable3 {
+#LessonTable3 {
 	font-size: 20px;
 	font-family: 'Do Hyeon', sans-serif;
 	border-spacing: 20px;
@@ -162,17 +162,17 @@
 	font-size : 12px;
 }
 
-#ArtistTable3 td {
+#LessonTable3 td {
 	width: 130px;
 	color: #A7A1A1;
 	width: 20%;
 }
 
-#ArtistTable3 td:nth-child(2) {
+#LessonTable3 td:nth-child(2) {
 	color: darkolivegreen;
 }
 
-#ArtistTable4 {
+#LessonTable4 {
 	color: darkolivegreen;
 	font-family: 'Do Hyeon', sans-serif;
 	font-size: 20px;
@@ -188,88 +188,89 @@
     font-size: 15px;
 }
 
-#ArtistTable5 {
+#LessonTable5 {
 	font-size: 20px;
 	font-family: 'Do Hyeon', sans-serif;
 	border-spacing: 20px;
 	width: 100%;
 }
 
-#ArtistTable5  td {
+#LessonTable5  td {
 	width: 130px;
 	color: #A7A1A1;
 	width: 20%;
 }
 
-#ArtistTable5  td:nth-child(3) {
+#LessonTable5  td:nth-child(3) {
 	color: darkolivegreen;
 }
 
-#ArtistTable6 {
+#LessonTable6 {
 	border-spacing: 15px;
 	border-collapse: separate;
 }
 
-#ArtistTable6 td {
+#LessonTable6 td {
 	width: 30px;
 	font-family: 'Do Hyeon', sans-serif;
 	font-size: 20px;
 }
 
-#ArtistTable7 {
+#LessonTable7 {
 	font-size: 20px;
 	font-family: 'Do Hyeon', sans-serif;
 	border-spacing: 20px;
 	width: 100%;
 }
 
-#ArtistTable7  td {
+#LessonTable7  td {
 	width: 130px;
 	color: #A7A1A1;
 	width: 20%;
 }
 
-#ArtistTable7  td:nth-child(4) {
+#LessonTable7  td:nth-child(4) {
 	color: darkolivegreen;
 }
 
-#ArtistTable8 {
+#LessonTable8 {
 	/* border: 1px solid black; */
 	border-spacing: 15px;
 	border-collapse: separate;
 }
 
-#ArtistTable8 td {
+#LessonTable8 td {
 	width: 30px;
 	font-family: 'Do Hyeon', sans-serif;
 	font-size: 20px;
 }
 
-#ArtistTable9 {
+#LessonTable9 {
 	font-size: 20px;
 	font-family: 'Do Hyeon', sans-serif;
 	border-spacing: 20px;
+	width: 100%;
 }
 
-#ArtistTable9  td {
-	width: 130px;
+#LessonTable9  td {
+	width: 20%;
 	color: #A7A1A1;
 }
 
-#ArtistTable9  td:nth-child(5) {
+#LessonTable9  td:nth-child(5) {
 	color: darkolivegreen;
 }
 
-#ArtistTable10 {
-	/* border: 1px solid black; */
+#LessonTable10 {
 	border-spacing: 15px;
 	border-collapse: separate;
 }
 
-#ArtistTable10 td {
-	width: 30px;
-	/* font-family: 'Do Hyeon', sans-serif; */
-	/* border:1px solid black; */
+#LessonTable10 td {
+	width: 20%;
+	font-family: 'Do Hyeon', sans-serif;
+	font-size: 17px;
+	border:1px solid black;
 }
 </style>
 </head>
@@ -289,7 +290,7 @@
 			<tr>
 				<td id="middleBtnArea" style="height: 400px;">
 					<button type="button" class="btn btn-primary btn-lg"
-						id="openModalBtn" style="margin-left:15px;">수업 개설하기</button>
+						id="openModalBtn" style="margin-left:15px; border: 1px solid white;">수업 개설하기</button>
 				</td>
 			</tr>
 		</table>
@@ -332,10 +333,10 @@
 					<h4 class="modal-title" id="myModalLabel">수업개설하기</h4>
 				</div>
 				<div class="modal-body">
-					<form id="artistForm"
+					<form id="LessonForm"
 						action="<%= request.getContextPath() %>/insert.ar" method="post">
 						<div id="show1">
-							<table id="ArtistTable1">
+							<table id="LessonTable1">
 								<tr>
 									<td>01. 기본정보</td>
 									<td>02. 자격/경력</td>
@@ -344,7 +345,7 @@
 									<td>05. 일정등록</td>
 								</tr>
 							</table>
-							<table id="ArtistTable2">
+							<table id="LessonTable2">
 								<tr>
 									<td style="width: 33%">
 										<div>카데고리</div>
@@ -406,7 +407,8 @@
 								<tr>
 									<td style="vertical-align: bottom;">이미지 업로드</td>
 									<td>
-										<div>총 회차</div> <select name="subCategory" style="color:black;">
+										<div>총 회차</div> 
+										<select name="subCategory" style="color:black;">
 											<option value="music">음악</option>
 											<option>댄스</option>
 											<option>영상/사진</option>
@@ -414,10 +416,11 @@
 											<option>뷰티</option>
 											<option>디자인</option>
 											<option>스포츠</option>
-									</select>
+										</select>
 									</td>
 									<td>
-										<div>회차당 비용</div> <select name="subCategory" style="color:black;">
+										<div>회차당 비용</div> 
+										<select name="subCategory" style="color:black;">
 											<option value="music">음악</option>
 											<option>댄스</option>
 											<option>영상/사진</option>
@@ -425,7 +428,7 @@
 											<option>뷰티</option>
 											<option>디자인</option>
 											<option>스포츠</option>
-									</select>
+										</select>
 									</td>
 								</tr>
 								<tr>
@@ -439,7 +442,7 @@
 							</table>
 						</div>
 						<div id="show2" style="display: none;">
-							<table id="ArtistTable3">
+							<table id="LessonTable3">
 								<tr>
 									<td>01. 기본정보</td>
 									<td>02. 자격/경력</td>
@@ -448,7 +451,7 @@
 									<td>05. 일정등록</td>
 								</tr>
 							</table>
-							<table id="ArtistTable4">
+							<table id="LessonTable4">
 		                        <tr height="20px">
 		                            <td colspan="2" style="width:90%">
 		                                <span style="color:black">보유한 기술</span>&nbsp;&nbsp;<span style="color:#A7A1A1">(해당 수업정보에 노출시킬 기술을 선택하세요)</span>
@@ -478,7 +481,7 @@
 		                    </table>
 						</div>
 						<div id="show3" style="display: none;">
-							<table id="ArtistTable5">
+							<table id="LessonTable5">
 								<tr>
 									<td>01. 기본정보</td>
 									<td>02. 자격/경력</td>
@@ -487,7 +490,7 @@
 									<td>05. 일정등록</td>
 								</tr>
 							</table>
-							<table id="ArtistTable6">
+							<table id="LessonTable6">
 								<tr>
 		                            <td>
 		                                <span style="color:black">아티스트소개</span>&nbsp;&nbsp;<span style="color:#A7A1A1">수정이 필요하면 수정해주세요</span>
@@ -496,14 +499,14 @@
 								<tr>
 									<td>
 										<textarea name="introduce" rows="5" cols="40"
-												style="width: 380px; height: 200px; text-align: left; color: rgb(49, 49, 49);"></textarea>
+												style="width: 600px; height: 300px; text-align: left; color: rgb(49, 49, 49); resize:none;"></textarea>
 										<div>0/400</div>
 									</td>
 								</tr>
 							</table>
 						</div>
 						<div id="show4" style="display: none;">
-							<table id="ArtistTable7">
+							<table id="LessonTable7">
 								<tr>
 									<td>01. 기본정보</td>
 									<td>02. 자격/경력</td>
@@ -512,7 +515,7 @@
 									<td>05. 일정등록</td>
 								</tr>
 							</table>
-							<table id="ArtistTable8">
+							<table id="LessonTable8">
 								<tr>
 		                            <td style="width:100%;">
 		                                <span style="color:black">수업소개</span>&nbsp;&nbsp;<span style="color:#A7A1A1">수업에 대한 소개와 커리큘럼을 적어주세요</span>
@@ -521,58 +524,26 @@
 								<tr>
 									<td>
 										<textarea name="introduce" rows="5" cols="40"
-												style="width: 380px; height: 200px; text-align: left; color: rgb(49, 49, 49);"></textarea>
+												style="width: 600px; height: 300px; text-align: left; color: rgb(49, 49, 49); resize:none;"></textarea>
 										<div>0/400</div>
 									</td>
 								</tr>
 							</table>
 						</div>
 						<div id="show5" style="display: none;">
-							<table id="ArtistTable9">
+							<table id="LessonTable9">
 								<tr>
-									<td>01. 자기소개</td>
-									<td>02. 전문분야</td>
-									<td>03. 보유 자격증</td>
-									<td>04. 학력/전공</td>
-									<td>05. 경력</td>
+									<td>01. 기본정보</td>
+									<td>02. 자격/경력</td>
+									<td>03. 아티스트소개</td>
+									<td>04. 수업소개</td>
+									<td>05. 일정등록</td>
 								</tr>
 							</table>
-							<table id="ArtistTable10">
+							<table id="LessonTable10" style="width:40%;">
 								<tr>
-									<td colspan="2" style="font-family: 'Do Hyeon', sans-serif;">경력사항을
-										작성해주세요.&nbsp;&nbsp; <label
-										style="color: darkolivegreen; font-size: 13px;">선택 사항</label>
-									</td>
-								</tr>
-								<tr>
-									<td><input type="text" placeholder="기관명"
-										style="width: 170px; height: 30px;"></td>
-									<td><input type="text" placeholder="직위"
-										style="width: 170px; height: 30px;"></td>
-								</tr>
-								<tr>
-									<td colspan="2"><input type="text"
-										placeholder="전공(ex. 컴퓨터공학과)"
-										style="width: 352px; height: 30px;"></td>
-
-								</tr>
-								<tr>
-									<td colspan="2" style="font-family: 'Do Hyeon', sans-serif;">근무기간</td>
-								</tr>
-								<tr>
-									<td><select style="width: 170px; height: 30px;">
-											<option>년도</option>
-									</select></td>
-									<td><select style="width: 170px; height: 30px;">
-											<option>월</option>
-									</select></td>
-								</tr>
-								<tr>
-									<td></td>
-								</tr>
-								<tr>
-									<td colspan="2"><button
-											style="width: 352px; border-color: darkolivegreen; color: darkolivegreen; font-family: 'Do Hyeon', sans-serif;">확인</button></td>
+									<td>지역</td>
+									<td>상세지역</td>
 								</tr>
 							</table>
 						</div>
@@ -624,7 +595,7 @@
 	
 			});
 			$('#saveModalBtn').on('click', function() {
-				$("#artistForm").submit();
+				$("#LessonForm").submit();
 			});
 		});
 	</script>
