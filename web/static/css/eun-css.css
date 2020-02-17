@@ -47,6 +47,63 @@
     border-left: none;
 }
 
+/* 마이페이지 카테고리 세부항목 */
+.my-page-subcategory {
+    font-family: 'Do Hyeon', sans-serif;
+    font-size: 22px;
+    /*font-weight: bold;*/
+}
+
+.my-page-subcategory td {
+    padding-right: 20px;
+}
+
+/* 마이페이지 카테고리 세부항목 선택표시 */
+.green {
+    color: darkolivegreen;
+}
+
+/*리뷰 작성·조회시 강의목록에 적용 */
+.review-list {
+}
+
+.review-list-main {
+    background-color: lightgray;
+    width: 800px;
+    height: 160px;
+}
+.review-list td:first-of-type {
+    background-color: unset;
+    width: 50px;
+}
+
+.review-list-contents{
+    margin: 20px;
+}
+.review-list-contents td:first-of-type{
+    width: 200px;
+    padding-right: 20px;
+}
+.review-list-contents td:nth-of-type(2){
+    /*width: 200px;*/
+}
+.review-list-contents td:nth-of-type(3){
+    width: 100px;
+    padding-left: 20px;
+}
+
+.write-review-btn {
+    border: mediumpurple solid 1px;
+    border-radius: 5px;
+    float: contour;
+    margin: 1px 10px;
+    width: 100px;
+    height: 30px;
+    color: white;
+    background-color: mediumpurple;
+}
+
+
 .do-hyun-font {
     font-family: 'Do Hyeon', sans-serif;
 }
@@ -157,14 +214,14 @@
 }
 
 
-.divcenter2 {
-    margin-left: auto;
-    margin-right: auto;
-    height: 50px;
-    border-bottom: 1px solid black;
-    width: 1024px;
-    height: 50px;
-}
+/*.divcenter2 {*/
+/*    margin-left: auto;*/
+/*    margin-right: auto;*/
+/*    height: 50px;*/
+/*    border-bottom: 1px solid black;*/
+/*    width: 1024px;*/
+/*    height: 50px;*/
+/*}*/
 
 .tablecenter2 {
 }
