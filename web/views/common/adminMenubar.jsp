@@ -5,6 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link href="https://fonts.googleapis.com/css?family=ZCOOL+QingKe+HuangYou&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Do+Hyeon&display=swap" rel="stylesheet">
 <style>
 		body {
  		margin: 0px;
@@ -49,7 +51,9 @@
  	
  	#logout {
  		border-style: solid;
- 		color: white;
+ 		color: #4E4E4E;
+ 		padding-left: 10px;
+ 		padding-right: 10px;
         border-top-left-radius:50px;
         border-bottom-left-radius: 50px;
         border-top-right-radius: 50px;
@@ -73,7 +77,7 @@
 		</table>
 		<table id="logoutT">
 			<tr>
-				<td style="text-align: right;"><label id="logout">로그아웃</label></td>
+				<td style="text-align: right; width: 30px;"><label id="logout">로그아웃</label></td>
 			</tr>
 		</table>
 	</header>
