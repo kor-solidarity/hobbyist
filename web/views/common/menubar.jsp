@@ -100,8 +100,9 @@
                 <%if(loginMember == null) { %>
                 <td onclick="goLogin();">로그인</td>
                 <% }else { %>
-                <td><%=loginMember.getMemberName() %>님  <img src="static/images/logoutIcon.png" id="logoutBtn" style="width:9px; height:9px;" onclick="goLogout();"></td>
+                <td style="padding-bottom:5px;"><%=loginMember.getMemberName() %>님  <img src="static/images/logoutIcon3.png" id="logoutBtn" style="width:16px; height:16px; vertical-align:middle;" onclick="goLogout();"> </td>
                 <% } %>
+                
             </tr>
             <tr>
                 <td colspan="2"><div id="suggestArea" onclick="goSuggest();">수업건의 게시판</div></td>
