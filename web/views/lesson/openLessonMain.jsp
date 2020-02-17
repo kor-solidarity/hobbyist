@@ -66,10 +66,6 @@
 	background-color: darkolivegreen;
 }
 
-#middleBtnArea {
-	
-}
-
 #bottomInfo {
 	width: 1024px;
 	text-align: center;
@@ -157,7 +153,7 @@
 	width: 100%;
 }
 
-#btn-all {
+.btnAll {
 	font-family: 'Helvetica Neue', Hevetica, Arial, sans-serif;
 	font-size : 12px;
 }
@@ -266,11 +262,37 @@
 	border-collapse: separate;
 }
 
-#LessonTable10 > table td {
-	width: 20%;
-	font-family: 'Do Hyeon', sans-serif;
+#LessonTable10 td {
+ 	font-family: 'Do Hyeon', sans-serif;
 	font-size: 17px;
-	border:1px solid black;
+	padding: 5px;
+}
+
+#LessonTable11 {
+	font-size: 20px;
+	font-family: 'Do Hyeon', sans-serif;
+	border-spacing: 20px;
+	width: 100%;
+}
+
+#LessonTable11  td {
+	width: 20%;
+	color: #A7A1A1;
+}
+
+#LessonTable11  td:nth-child(5) {
+	color: darkolivegreen;
+}
+
+#LessonTable12 {
+	border-spacing: 15px;
+	border-collapse: separate;
+}
+
+#LessonTable12 td {
+ 	font-family: 'Do Hyeon', sans-serif;
+	font-size: 17px;
+	padding: 5px;
 }
 </style>
 </head>
@@ -457,7 +479,7 @@
 		                                <span style="color:black">보유한 기술</span>&nbsp;&nbsp;<span style="color:#A7A1A1">(해당 수업정보에 노출시킬 기술을 선택하세요)</span>
 		                            </td>
 		                            <td style="width:10%">
-		                                <button type="button" id="btn-all" class="btn btn-primary">전체선택</button>
+		                                <button type="button" class="btn btn-primary btnAll">전체선택</button>
 		                            </td>
 		                        </tr>
 		                        <tr>
@@ -470,7 +492,7 @@
 		                                <span style="color:black">등록한 경력</span>&nbsp;&nbsp;<span style="color:#A7A1A1">(해당 수업정보에 노출시킬 기술을 선택하세요)</span>
 		                            </td>
 		                            <td>
-		                                <button type="button" id="btn-all" class="btn btn-primary">전체선택</button>
+		                                <button type="button" class="btn btn-primary btnAll">전체선택</button>
 		                            </td>
 		                        </tr>
 		                        <tr>
@@ -540,35 +562,110 @@
 									<td>05. 일정등록</td>
 								</tr>
 							</table>
-							<table id="LessonTable10" style="width:40%; height:100%;">
-								<table style="width:67%">
-									<tr>
-										<td>지역</td>
-										<td>상세지역</td>
-										<td>시작시간</td>
-										<td>종료시간</td>
-									</tr>
-									<tr>
-										
-									</tr>
-									<tr>
-										<td colspan="2">상세주소</td>
-										<td colspan="2">1회차 일정 / 총 4회차</td>
-									</tr>
-									<tr>
-									</tr>
-									<tr>
-										<td colspan="2">강남구 테헤란로 14길 남도빌딩 5F</td>
-										<td colspan="2"></td>
-									</tr>
-								</table>
-								<table style="width:33%; height:100%;">
-									<tr>
-										<td>
-											
-										</td>
-									</tr>
-								</table>
+							<table id="LessonTable10" style="width:100%; height:450px;">
+								<tr>
+									<td style="width:67%">
+										<table style="height:100%">
+											<tr>
+												<td style="width:25%;">지역</td>
+												<td style="width:25%;">상세지역</td>
+												<td style="width:25%;">시작시간</td>
+												<td style="width:25%;">종료시간</td>
+											</tr>
+											<tr>
+												<td>
+													<select name="subCategory" style="color:black;">
+														<option value="music">서울</option>
+														<option>댄스</option>
+														<option>영상/사진</option>
+														<option>라이프스타일</option>
+														<option>뷰티</option>
+														<option>디자인</option>
+														<option>스포츠</option>
+													</select>
+												</td>
+												<td>
+													<select name="subCategory" style="color:black;">
+														<option value="music">강남</option>
+														<option>댄스</option>
+														<option>영상/사진</option>
+														<option>라이프스타일</option>
+														<option>뷰티</option>
+														<option>디자인</option>
+														<option>스포츠</option>
+													</select>
+												</td>
+												<td>
+													<select name="subCategory" style="color:black;">
+														<option value="music">15:00</option>
+														<option>댄스</option>
+														<option>영상/사진</option>
+														<option>라이프스타일</option>
+														<option>뷰티</option>
+														<option>디자인</option>
+														<option>스포츠</option>
+													</select>
+												</td>
+												<td>
+													<select name="subCategory" style="color:black;">
+														<option value="music">20:00</option>
+														<option>댄스</option>
+														<option>영상/사진</option>
+														<option>라이프스타일</option>
+														<option>뷰티</option>
+														<option>디자인</option>
+														<option>스포츠</option>
+													</select>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="2">상세주소</td>
+												<td colspan="2">1회차 일정 / 총 4회차</td>
+											</tr>
+											<tr style="height:65%;">
+												<td colspan="2" style="border:1px solid black;"></td>
+												<td colspan="2" style="border:1px solid black;"></td>
+											</tr>
+											<tr style="height:15%;">
+												<td colspan="2" style="border:1px solid black;">강남구 테헤란로 14길 남도빌딩 5F</td>
+												<td colspan="2"></td>
+											</tr>
+										</table>
+									</td>
+									<td style="width:33%;">
+										<table style="height:100%; width:100%;">
+											<tr style="height: 25%;"></tr>
+											<tr style="border:1px solid black;">
+												<td style="width: 100%;">
+													
+												</td>
+											</tr>
+										</table>
+									</td>
+								</tr>
+							</table>
+						</div>
+						<!-- 등록된 수업일정 목록 화면 -->
+						<div id="show6" style="display: none;">
+							<table id="LessonTable11">
+								<tr>
+									<td>01. 기본정보</td>
+									<td>02. 자격/경력</td>
+									<td>03. 아티스트소개</td>
+									<td>04. 수업소개</td>
+									<td>05. 일정등록</td>
+								</tr>
+							</table>
+							<table id="LessonTable12">
+								<tr>
+		                            <td style="width:100%;">
+		                            </td>
+								</tr>
+								<tr>
+									<td>
+										<span class="item">강남 | 1회차 | 02.03(월)19:00-21:00</span>
+									</td>
+								</tr>
 							</table>
 						</div>
 					</form>
@@ -600,11 +697,12 @@
 					console.log(num);
 					
 				}
-				if(num < 5) {
+				if(num < 6) {
 					$("#nextModalBtn").show();
 					$("#saveModalBtn").hide();
 				}
 			});
+			// 모달 안의 다음 버튼에 이벤트를 건다.
 			$('#nextModalBtn').on('click', function() {
 
 				$("#show"+ num).hide();
@@ -612,12 +710,13 @@
 				num++;
 				$("#show"+ num).show();
 				console.log(num);
-				if(num == 5){
+				if(num == 6){
 					$("#nextModalBtn").hide();
 					$("#saveModalBtn").show();
 				} 
 	
 			});
+			// 모달 안의 저장 버튼에 전송 기능을 건다.
 			$('#saveModalBtn').on('click', function() {
 				$("#LessonForm").submit();
 			});
