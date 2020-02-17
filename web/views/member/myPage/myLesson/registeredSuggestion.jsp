@@ -360,7 +360,7 @@
 		</div>
 		<br><br>
 		<div class="regSugPagingArea" align="center">
-		◀이전 1/2/3/4/5/6/7/8/9/10  ▶다음
+		◀이전 1/2/3/4/5/6/7/8/9/10  다음▶
 		</div>
 		
 	</div>

@@ -350,7 +350,7 @@
 		</div>	
 	</div>
 	<div class="SuggestPagingArea" align="center">
-		◀이전 1/2/3/4/5/6/7/8/9/10  ▶다음
+		◀이전 1/2/3/4/5/6/7/8/9/10  다음▶
 	</div>
 	<br><br><br><br>
 	<%@ include file="../common/footer.jsp"%>
