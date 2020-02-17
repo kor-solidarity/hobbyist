@@ -109,8 +109,8 @@
 			
 			<!-- 큰 메뉴안의 상세 메뉴 여러개 -->
 			<div id="smallMenu">
-				<label style="color: #DED842;">내역 조회</label><br>
-				<label>환불 신청</label><br>
+				<label>내역 조회</label><br>
+				<label style="color: #DED842;">환불 신청</label><br>
 				<label>금액 정산</label>
 			</div>
 		</article>
@@ -125,8 +125,8 @@
 				<table id="searchT">
 					<tr>
 						<td style="text-align: left; vertical-align: bottom;">
-							<label style="font-weight: bold; color: gray">결제 내역</label> &nbsp; &nbsp; 
-							<label style="font-weight: bold;">환불 내역</label>
+							<label style="font-weight: bold;">환불신청 내역</label> &nbsp; &nbsp; 
+							<label style="font-weight: bold; color: gray;"></label>
 						</td>
 						<td style="padding-right: 20px;">
 							<input style="text" id="searchMember"><button id="searchBtn">검색</button>
@@ -151,8 +151,8 @@
 						<th style="width: 13%;">전화번호</th>
 						<th style="width: 11%;">담당 아티스트</th>
 						<th style="width: 11%;">환불 금액</th>
-						<th style="width: 14%;">환불일</th>
 						<th style="width: 17%;">환불계좌</th>
+						<th style="width: 14%;">상세보기</th>
 					</tr>
 				</table>
 			</div>

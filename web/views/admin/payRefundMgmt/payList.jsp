@@ -79,7 +79,6 @@
  		margin-left: 60px;
  		width: 1100px;
  		height: 500px;
- 		border: 1px solid #4E4E4E;
  		overflow-x: hidden;
         overflow-y: auto;
  	}
@@ -87,6 +86,11 @@
  	th {
  		background: #4E4E4E;
  		color: white;
+ 		height: 30px;
+ 	}
+ 	
+ 	#infoArea td {
+ 		border: 1px solid black;
  	}
 </style>
 </head>
@@ -99,15 +103,15 @@
 		
 			<!-- 큰 영역의 메뉴 -->
 			<div id="bigMenu">
-				<label style="font-weight: bold; font-size: 25px;">회원관리</label>
+				<label style="font-weight: bold; font-size: 25px;">결제/환불</label>
 				<hr style="width: 80%; color: #DED842; height: 1px; background: #DED842; margin-top: 17px;">
 			</div>
 			
 			<!-- 큰 메뉴안의 상세 메뉴 여러개 -->
 			<div id="smallMenu">
-				<label>회원 리스트</label><br>
-				<label>아티스트 승인</label><br>
-				<label>알림 보내기</label>
+				<label style="color: #DED842;">내역 조회</label><br>
+				<label>환불 신청</label><br>
+				<label>금액 정산</label>
 			</div>
 		</article>
 		
@@ -120,7 +124,10 @@
 				<!-- 상세페이지, 정렬, 검색 테이블 -->
 				<table id="searchT">
 					<tr>
-						<td style="text-align: left; vertical-align: bottom;"><label style="font-weight: bold;">회원정보 조회</label> &nbsp; &nbsp; <label style="font-weight: bold;">아티스트 조회</label></td>
+						<td style="text-align: left; vertical-align: bottom;">
+							<label style="font-weight: bold;" onclick="goPayList();">결제 내역</label> &nbsp; &nbsp; 
+							<label style="font-weight: bold; color: gray;">환불 내역</label>
+						</td>
 						<td style="padding-right: 20px;">
 							<input style="text" id="searchMember"><button id="searchBtn">검색</button>
 						</td>
@@ -137,14 +144,14 @@
 				<table style="width: 100%;">
 					<!-- 테이블 첫번째 줄은 아이디, 비밀번호 등 조회할 내용 제목이다. background(#4E4E4E), font-color(white) 색 다르게 지정 -->
 					<tr>
-						<th style="width: 8%;">회원코드</th>
-						<th style="width: 15%;">아이디</th>
+						<th style="width: 8%;">결제코드</th>
+						<th style="width: 13%;">수업일정 코드</th>
+						<th style="width: 12%;">아이디</th>
 						<th style="width: 10%;">이름</th>
 						<th style="width: 15%;">전화번호</th>
-						<th style="width: 20%;">이메일</th>
-						<th style="width: 8%;">아티스트 </th>
-						<th style="width: 7%;">경고</th>
-						<th style="width: 17%;">가입일</th>
+						<th style="width: 12%;">담당 아티스트</th>
+						<th style="width: 12%;">결제 금액</th>
+						<th style="width: 15%;">결제일</th>
 					</tr>
 				</table>
 			</div>

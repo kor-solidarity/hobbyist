@@ -79,7 +79,6 @@
  		margin-left: 60px;
  		width: 1100px;
  		height: 500px;
- 		border: 1px solid #4E4E4E;
  		overflow-x: hidden;
         overflow-y: auto;
  	}
@@ -87,6 +86,11 @@
  	th {
  		background: #4E4E4E;
  		color: white;
+ 		height: 30px;
+ 	}
+ 	
+ 	#infoArea td {
+ 		border: 1px solid black;
  	}
 </style>
 </head>
@@ -105,7 +109,7 @@
 			
 			<!-- 큰 메뉴안의 상세 메뉴 여러개 -->
 			<div id="smallMenu">
-				<label>회원 리스트</label><br>
+				<label style="color: #DED842;">회원 리스트</label><br>
 				<label>아티스트 승인</label><br>
 				<label>알림 보내기</label>
 			</div>
@@ -120,7 +124,10 @@
 				<!-- 상세페이지, 정렬, 검색 테이블 -->
 				<table id="searchT">
 					<tr>
-						<td style="text-align: left; vertical-align: bottom;"><label style="font-weight: bold;">회원정보 조회</label> &nbsp; &nbsp; <label style="font-weight: bold;">아티스트 조회</label></td>
+						<td style="text-align: left; vertical-align: bottom;">
+							<label style="font-weight: bold; color: gray;">회원정보 조회</label> &nbsp; &nbsp; 
+							<label style="font-weight: bold;">아티스트 조회</label>
+						</td>
 						<td style="padding-right: 20px;">
 							<input style="text" id="searchMember"><button id="searchBtn">검색</button>
 						</td>
