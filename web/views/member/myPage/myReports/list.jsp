@@ -16,7 +16,7 @@
     <%@include file="/views/common/boot4.jsp" %>
 </head>
 <body>
-<%@include file="../memberUpdate.jsp" %>
+<%@include file="/views/common/myPage.jsp"%>
 <br clear="both">
 <div class="">
     <table id="rep-list" class="centralise standard-width report-table">
