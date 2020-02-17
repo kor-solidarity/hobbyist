@@ -79,7 +79,7 @@
 			</tr>
 			<tr>
 				<td colspan="2">
-					<textarea name="content" rows="5" cols="40" style="width:598px; height:450px;" placeholder="내용을 입력해주세요 (200자 이상)"></textarea>
+					<textarea name="content" rows="5" cols="40" style="width:598px; height:450px; resize:none;" placeholder="내용을 입력해주세요 (200자 이상)"></textarea>
 				</td>
 			</tr>
 		</table>
