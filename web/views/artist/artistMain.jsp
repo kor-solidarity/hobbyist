@@ -316,8 +316,15 @@
 							</table>
 							<table id="ArtistTable2">
 								<tr>
-									<td><img src="/hobbyist/static/images/user1.PNG"
-										style="height: 100px"></td>
+									<td>
+										<div id="userIcon" style="float:left; position:relative;">
+											<img src="/hobbyist/static/images/user.png"
+											style="height: 90px">
+										</div>
+										<div id="modifyIcon" style="float:left; position:absolute; top:123px; left:90px;">
+											<img src="/hobbyist/static/images/modifyIcon.png" style="height:30px;">
+										</div>
+									</td>
 									<td>
 										<p>아티스트 닉네임</p> <input type="text" name="nickName"
 										style="height: 25px">
@@ -422,7 +429,7 @@
 									<!-- <td>
 										<div
 											style="border: 1px solid darkolivegreen; width: 300px; height: 400px;"></div>
-									</td> -->
+									</td>  -->
 								</tr>
 
 							</table>
@@ -442,6 +449,10 @@
 									<td colspan="2" style="font-family: 'Do Hyeon', sans-serif;">보유한
 										자격증을 작성해주세요.&nbsp;&nbsp; <label
 										style="color: darkolivegreen; font-size: 13px;">선택 사항</label>
+									</td>
+									<td rowspan="6">
+										<div
+											style="border: 1px solid darkolivegreen; width: 250px; height: 300px;"></div>
 									</td>
 								</tr>
 								<tr>
@@ -487,6 +498,10 @@
 										전공을 작성해주세요.&nbsp;&nbsp; <label
 										style="color: darkolivegreen; font-size: 13px;">선택 사항</label>
 									</td>
+									<td rowspan="4">
+										<div
+											style="border: 1px solid darkolivegreen; width: 250px; height: 200px;"></div>
+									</td>
 								</tr>
 								<tr>
 									<td colspan="2"><input type="text"
@@ -523,6 +538,10 @@
 									<td colspan="2" style="font-family: 'Do Hyeon', sans-serif;">경력사항을
 										작성해주세요.&nbsp;&nbsp; <label
 										style="color: darkolivegreen; font-size: 13px;">선택 사항</label>
+									</td>
+									<td rowspan="7">
+										<div
+											style="border: 1px solid darkolivegreen; width: 250px; height: 250px;"></div>
 									</td>
 								</tr>
 								<tr>
