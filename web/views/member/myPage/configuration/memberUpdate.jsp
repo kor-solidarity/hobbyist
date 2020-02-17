@@ -325,12 +325,27 @@ center_td0 {
 margin:auto;
 width: 1024px;
 text-align: center;
+
 }
 
 
 .tablecenter4{
 text-align: center;
+margin:auto;
 }
+
+.certification1{
+
+}
+
+.certification2{
+
+}
+
+
+
+
+
 </style>
 <link
 	href="https://fonts.googleapis.com/css?family=Do+Hyeon|ZCOOL+QingKe+HuangYou&display=swap"
@@ -419,41 +434,52 @@ text-align: center;
 	<div class="divcenter4">
 		<form>
 			<table align="border" class="tablecenter4">
+				
+				
 				<tr>
 					<td><label>아이디</label></td>
-					<td><input type="text" name="text" max-length=15
+					<td class="id"><input type="text" name="text" max-length=15
 						placeholder="아이디를 입력하세요" autofocus></td>
+						<td></td>
 				</tr>
-
+				
+				
 				<tr>
 					<td><label>비밀번호</label></td>
-					<td><input type="password" name="pass" max-length=15
+					<td class="pw"><input type="password" name="pass" max-length=15
 						placeholder="비밀번호를 입력하세요"></td>
+					<td></td>
 				</tr>
 				
 				<tr>
 					<td><label>이름</label></td>
-					<td><input type="text" name="text" max-length=5></td>
+					<td class="nm"><input type="name" name="name" max-length=5></td>
+					<td></td>
 				</tr>
 				
 				<tr>
 					<td><label>이메일</label></td>
-					<td><input type="email" name="email"
-						placeholder="휴대폰번호를 입력하세요."></td>
+					<td class="em"><input type="email" name="email"
+						placeholder="이메일을 입력하세요."></td>
+					<td></td>				
 				</tr>
 				
 				<tr>
 					<td><label>전화번호</label></td>
-					<td><input type="tel" name="tel" placeholder="휴대폰번호를 입력하세요"></td>
+					<td class="te"><input type="tel" name="tel1">
+					<input type="tel" name="tel2" >
+					<input type="tel" name="tel3" ></td>
+					<td><button type="certification1">인증하기</button>
 				</tr>
 				
 				<tr>
 					<td><label>계좌번호</label></td>
-					<td><input type="text" name="text"></td>
+					<td class="acc"><input type="text" name="text"></td>
+					<td><button type="certification2">인증하기</button>
 				</tr>
-				
 			</table>
-
+			<br><br>
+		<button>수정하기</button>
 		</form>
 
 
