@@ -108,8 +108,8 @@
 					<td rowspan="2" style="text-align:right;"><img src="/hobbyist/static/images/sports.png" style="width:50px; height:50px;"></td>
 				</tr>
 				<tr>
-					<td>♥(10)</td>
-					<td>ㅁ(8)</td>
+					<td><img src="/hobbyist/static/images/heart.png" style="width:20px; height:20px;"> (10)</td>
+					<td><img src="/hobbyist/static/images/dialogicon.png" style="width:20px; height:20px"> (8)</td>
 				</tr>
 				<tr>
 					<td colspan="2">당산|저녁반|2~4명</td>
@@ -129,8 +129,8 @@
 					<td rowspan="2" style="text-align:right;"><img src="/hobbyist/static/images/sports.png" style="width:50px; height:50px;"></td>
 				</tr>
 				<tr>
-					<td>♥(10)</td>
-					<td>ㅁ(8)</td>
+					<td><img src="/hobbyist/static/images/heart.png" style="width:20px; height:20px;"> (10)</td>
+					<td><img src="/hobbyist/static/images/dialogicon.png" style="width:20px; height:20px"> (8)</td>
 				</tr>
 				<tr>
 					<td colspan="2">당산|저녁반|2~4명</td>
@@ -150,8 +150,8 @@
 					<td rowspan="2" style="text-align:right;"><img src="/hobbyist/static/images/sports.png" style="width:50px; height:50px;"></td>
 				</tr>
 				<tr>
-					<td>♥(10)</td>
-					<td>ㅁ(8)</td>
+					<td><img src="/hobbyist/static/images/heart.png" style="width:20px; height:20px;"> (10)</td>
+					<td><img src="/hobbyist/static/images/dialogicon.png" style="width:20px; height:20px"> (8)</td>
 				</tr>
 				<tr>
 					<td colspan="2">당산|저녁반|2~4명</td>
@@ -171,8 +171,8 @@
 					<td rowspan="2" style="text-align:right;"><img src="/hobbyist/static/images/sports.png" style="width:50px; height:50px;"></td>
 				</tr>
 				<tr>
-					<td>♥(10)</td>
-					<td>ㅁ(8)</td>
+					<td><img src="/hobbyist/static/images/heart.png" style="width:20px; height:20px;"> (10)</td>
+					<td><img src="/hobbyist/static/images/dialogicon.png" style="width:20px; height:20px"> (8)</td>
 				</tr>
 				<tr>
 					<td colspan="2">당산|저녁반|2~4명</td>
@@ -192,8 +192,8 @@
 					<td rowspan="2" style="text-align:right;"><img src="/hobbyist/static/images/sports.png" style="width:50px; height:50px;"></td>
 				</tr>
 				<tr>
-					<td>♥(10)</td>
-					<td>ㅁ(8)</td>
+					<td><img src="/hobbyist/static/images/heart.png" style="width:20px; height:20px;"> (10)</td>
+					<td><img src="/hobbyist/static/images/dialogicon.png" style="width:20px; height:20px"> (8)</td>
 				</tr>
 				<tr>
 					<td colspan="2">당산|저녁반|2~4명</td>
@@ -213,8 +213,8 @@
 					<td rowspan="2" style="text-align:right;"><img src="/hobbyist/static/images/sports.png" style="width:50px; height:50px;"></td>
 				</tr>
 				<tr>
-					<td>♥(10)</td>
-					<td>ㅁ(8)</td>
+					<td><img src="/hobbyist/static/images/heart.png" style="width:20px; height:20px;"> (10)</td>
+					<td><img src="/hobbyist/static/images/dialogicon.png" style="width:20px; height:20px"> (8)</td>
 				</tr>
 				<tr>
 					<td colspan="2">당산|저녁반|2~4명</td>
@@ -234,8 +234,8 @@
 					<td rowspan="2" style="text-align:right;"><img src="/hobbyist/static/images/sports.png" style="width:50px; height:50px;"></td>
 				</tr>
 				<tr>
-					<td>♥(10)</td>
-					<td>ㅁ(8)</td>
+					<td><img src="/hobbyist/static/images/heart.png" style="width:20px; height:20px;"> (10)</td>
+					<td><img src="/hobbyist/static/images/dialogicon.png" style="width:20px; height:20px"> (8)</td>
 				</tr>
 				<tr>
 					<td colspan="2">당산|저녁반|2~4명</td>
@@ -255,8 +255,8 @@
 					<td rowspan="2" style="text-align:right;"><img src="/hobbyist/static/images/sports.png" style="width:50px; height:50px;"></td>
 				</tr>
 				<tr>
-					<td>♥(10)</td>
-					<td>ㅁ(8)</td>
+					<td><img src="/hobbyist/static/images/heart.png" style="width:20px; height:20px;"> (10)</td>
+					<td><img src="/hobbyist/static/images/dialogicon.png" style="width:20px; height:20px"> (8)</td>
 				</tr>
 				<tr>
 					<td colspan="2">당산|저녁반|2~4명</td>
@@ -276,8 +276,8 @@
 					<td rowspan="2" style="text-align:right;"><img src="/hobbyist/static/images/sports.png" style="width:50px; height:50px;"></td>
 				</tr>
 				<tr>
-					<td>♥(10)</td>
-					<td>ㅁ(8)</td>
+					<td><img src="/hobbyist/static/images/heart.png" style="width:20px; height:20px;"> (10)</td>
+					<td><img src="/hobbyist/static/images/dialogicon.png" style="width:20px; height:20px"> (8)</td>
 				</tr>
 				<tr>
 					<td colspan="2">당산|저녁반|2~4명</td>
@@ -297,8 +297,8 @@
 					<td rowspan="2" style="text-align:right;"><img src="/hobbyist/static/images/sports.png" style="width:50px; height:50px;"></td>
 				</tr>
 				<tr>
-					<td>♥(10)</td>
-					<td>ㅁ(8)</td>
+					<td><img src="/hobbyist/static/images/heart.png" style="width:20px; height:20px;"> (10)</td>
+					<td><img src="/hobbyist/static/images/dialogicon.png" style="width:20px; height:20px"> (8)</td>
 				</tr>
 				<tr>
 					<td colspan="2">당산|저녁반|2~4명</td>
@@ -318,8 +318,8 @@
 					<td rowspan="2" style="text-align:right;"><img src="/hobbyist/static/images/sports.png" style="width:50px; height:50px;"></td>
 				</tr>
 				<tr>
-					<td>♥(10)</td>
-					<td>ㅁ(8)</td>
+					<td><img src="/hobbyist/static/images/heart.png" style="width:20px; height:20px;"> (10)</td>
+					<td><img src="/hobbyist/static/images/dialogicon.png" style="width:20px; height:20px"> (8)</td>
 				</tr>
 				<tr>
 					<td colspan="2">당산|저녁반|2~4명</td>
@@ -339,15 +339,15 @@
 					<td rowspan="2" style="text-align:right;"><img src="/hobbyist/static/images/sports.png" style="width:50px; height:50px;"></td>
 				</tr>
 				<tr>
-					<td>♥(10)</td>
-					<td>ㅁ(8)</td>
+					<td><img src="/hobbyist/static/images/heart.png" style="width:20px; height:20px;"> (10)</td>
+					<td><img src="/hobbyist/static/images/dialogicon.png" style="width:20px; height:20px"> (8)</td>
 				</tr>
 				<tr>
 					<td colspan="2">당산|저녁반|2~4명</td>
 					<td style="text-align:right; color:darkolivegreen; font-weight:bold;">이지호</td>
 				</tr>
 			</table>
-		</div>		
+		</div>	
 	</div>
 	<div class="SuggestPagingArea" align="center">
 		◀이전 1/2/3/4/5/6/7/8/9/10  ▶다음
