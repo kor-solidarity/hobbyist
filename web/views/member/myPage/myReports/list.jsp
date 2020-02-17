@@ -78,6 +78,7 @@
 <%--</button>--%>
 
 <!-- Modal -->
+<%-- 부트스트랩 모달. 목록 클릭시 팝업되게끔 한다. --%>
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
      aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -93,9 +94,6 @@
                 </button>
             </div>
             <div class="modal-body">
-                <%--                <div class="col-12 report-modal-category">--%>
-                <%--                    카테고리: 문의--%>
-                <%--                </div>--%>
                 <div class="report-modal-title ">구매후기는 언제 작성할 수 있나요</div>
                 <div class="col-12 report-modal-category">
                     카테고리: 문의

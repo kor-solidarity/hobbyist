@@ -64,32 +64,89 @@
 }
 
 /*리뷰 작성·조회시 강의목록에 적용 */
-.review-list {
+.write-list {
 }
 
-.review-list-main {
+.write-list-main {
     background-color: lightgray;
     width: 800px;
     height: 160px;
 }
-.review-list td:first-of-type {
+
+.write-list td:first-of-type {
     background-color: unset;
     width: 50px;
 }
 
-.review-list-contents{
+.write-list-contents {
     margin: 20px;
 }
-.review-list-contents td:first-of-type{
+
+.write-list-contents td:first-of-type {
     width: 200px;
     padding-right: 20px;
 }
-.review-list-contents td:nth-of-type(2){
-    /*width: 200px;*/
-}
-.review-list-contents td:nth-of-type(3){
-    width: 100px;
+
+
+.write-list-contents td:nth-of-type(3) {
+    width: 120px;
     padding-left: 20px;
+}
+
+.review-list-contents {
+    margin: 20px;
+
+}
+
+.review-list-contents td:first-of-type {
+    width: 200px;
+    padding-right: 20px;
+}
+
+.review-list-contents tr:first-of-type td:nth-of-type(2) {
+    width: 500px;
+    padding-bottom: 20px;
+}
+
+.review-star {
+    text-align: center;
+    vertical-align: top;
+    font-size: 30px;
+    color: gray;
+}
+
+.starred {
+    color: orange;
+}
+
+.review-modal-stars {
+    text-align: center;
+    font-size: 60px;
+    color: gray;
+}
+
+/*별점을 매겨주세요*/
+.review-modal-star-text {
+    text-align: center;
+}
+
+.review-modal-content {
+    border-top: 1px solid darkolivegreen;
+    border-bottom: 1px solid darkolivegreen;
+    min-height: 100px !important;
+}
+
+/*신고페이지 상세정보 모달 내용*/
+.report-table {
+    padding: 10px;
+}
+
+.report-table td:first-of-type {
+    width: 20%;
+}
+
+.report-table td:nth-of-type(2) {
+    width: 80%;
 }
 
 .write-review-btn {
@@ -97,7 +154,7 @@
     border-radius: 5px;
     float: contour;
     margin: 1px 10px;
-    width: 100px;
+    width: 140px;
     height: 30px;
     color: white;
     background-color: mediumpurple;
@@ -175,6 +232,11 @@
     min-height: 100px !important;
 }
 
+/* 신고항목 안에 카테고리 항목 */
+.report-modal-content-category tr > td:first-child {
+    font-weight: bold;
+}
+
 .report-modal-end {
     font-size: 20px;
     font-weight: bold;
@@ -213,19 +275,22 @@
     text-align: left;
 }
 
+.admin-table {
+    border-collapse: collapse;
 
-/*.divcenter2 {*/
-/*    margin-left: auto;*/
-/*    margin-right: auto;*/
-/*    height: 50px;*/
-/*    border-bottom: 1px solid black;*/
-/*    width: 1024px;*/
-/*    height: 50px;*/
-/*}*/
+}
+
+.admin-table td {
+    border: 1px solid black;
+}
 
 .tablecenter2 {
 }
 
+/*신고문의 게시판에 조회버튼*/
+.inquery-btn {
+
+}
 
 /* w3school 에 페이징 참고 */
 .paging {
