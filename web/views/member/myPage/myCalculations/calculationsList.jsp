@@ -27,6 +27,7 @@
 		font-family: Do Hyeon;
 		font-size:20px;
 		font-weight:lighter;
+		text-align:center;
 	}
 	#calTab td {
 		border-bottom: 2px solid darkolivegreen;
@@ -113,7 +114,7 @@
 				<td>5</td>
 				<td>100000</td>
 				<td>10%</td>
-				<td>우리1102834795530</td>
+				<td>우리 김설현 1102834795530</td>
 				<td>90000</td>
 				<td>확인대기중</td>
 			</tr>
@@ -125,7 +126,7 @@
 				<td>5</td>
 				<td>100000</td>
 				<td>10%</td>
-				<td>우리1102834795530</td>
+				<td>우리 김설현 1102834795530</td>
 				<td>90000</td>
 				<td>확인대기중</td>
 			</tr>
@@ -137,7 +138,7 @@
 				<td>5</td>
 				<td>100000</td>
 				<td>10%</td>
-				<td>우리1102834795530</td>
+				<td>우리 김설현 1102834795530</td>
 				<td>90000</td>
 				<td>확인대기중</td>
 			</tr>
@@ -170,10 +171,10 @@
 						<tr>
 							<td>수수료 : 10%</td>
 							<td></td>
-							<td>계좌번호 : 우리 1002834795530</td>
+							<td>계좌번호 : 우리 김설현 1002834795530</td>
 						</tr>
 						<tr>
-							<td>총 지급액 : 90000원</td>
+							<td style="font-size:17px; font-weight:bold;">총 지급액 : 90000원</td>
 							<td></td>
 							<td></td>
 						</tr>

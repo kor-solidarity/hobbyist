@@ -12,8 +12,11 @@
 	#regSugTab1 {
 		width:100%;
 		font-family: Do Hyeon;
-		font-size: 25px;
+		font-size: 22px;
 		margin-top:5px;
+	}
+	#regSubTab1 td {
+		width:130px;
 	}
 	.Center_button1 {
 		color:darkolivegreen;
@@ -39,14 +42,15 @@
 	<div id="regSugDiv1">
 		<table id="regSugTab1">
 			<tr>
-				<td><label class="regSugLab">수강한 수업</label></td>
-				<td><label class="regSugLab">찜한 수업</label></td>
-				<td onclick="goRegSug();" style="color:darkolivegreen;"><label class="regSugLab">등록한 건의</label></td>
-				<td onclick="goLikedSug();"><label class="regSugLab">찜한 건의</label></td>
-				<td><label class="regSugLab">등록한 수업</label></td>
+				<td style="text-align: center;"><label class="regSugLab">수강한 수업</label></td>
+				<td style="text-align: center;"><label class="regSugLab">찜한 수업</label></td>
+				<td style="text-align: center; color:darkolivegreen;" onclick="goRegSug();"><label class="regSugLab">등록한 건의</label></td>
+				<td style="text-align: center;" onclick="goLikedSug();"><label class="regSugLab">찜한 건의</label></td>
+				<td style="text-align: center;"><label class="regSugLab">등록한 수업</label></td>
+				<td style="width:374px;"></td>
 			</tr>
 			<tr>
-				<td colspan="5"><hr></td>
+				<td colspan="6"><hr></td>
 			</tr>
 		</table>
 		<script>
