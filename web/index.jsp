@@ -115,6 +115,8 @@
        		font-family: 'Nanum Gothic', sans-serif;
        		font-size:13px;
        		border:1px solid darkolivegreen;
+       		border-collapse:seperate;
+			border-spacing: 5px;
        		
        }
        
