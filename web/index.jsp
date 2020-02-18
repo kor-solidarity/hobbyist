@@ -33,6 +33,7 @@
        		width:1024px;
        		margin:auto;
        		margin-top:-55px;
+       		cursor:pointer;
        		
        }
        .icon {
@@ -60,16 +61,45 @@
        
        #section {
        		width:1024px;
-       		height:700px;
+       		height:800px;
        		margin:auto;
        		margin-top:40px;
        }
        
-       #aside {
+       /* #aside {
        		margin-top:-52px;
        		width:170px;
        		border-right:1px solid darkolivegreen;
        		height:300px;
+       } */
+       #aside {
+       	 height:70px;
+       	 margin-top:-10px;
+       	 margin-right:55px;
+       	 margin-bottom:20px;
+       	 
+       }
+       
+       
+       .aside {
+       		display:inline;
+			font-family: 'Nanum Gothic', sans-serif;
+       		font-size:16px;
+       		font-weight:900;
+       		color:darkolivegreen;
+       		float:right;
+       		margin-right:15px;
+
+       }
+
+       #lTitle {
+       		/* font-family: 'Do Hyeon', sans-serif; */
+       		font-family: 'Nanum Gothic', sans-serif;
+       		color:darkolivegreen;
+       		font-size:25px;
+       		text-align:center;
+       		font-weight:900;
+       		
        }
       	.lesson-list {
       		display:inline-block;
@@ -83,15 +113,28 @@
        
        #lessonTable {
        		font-family: 'Nanum Gothic', sans-serif;
-       		font-size:12px;
+       		font-size:13px;
        		border:1px solid darkolivegreen;
+       		
        }
        
        
        #lessonTable td:nth-of-type(2n) {
        		float:right;	
-       		margin-right:20px;
+       		margin-right:10px;
        }
+       
+       #artistNick {
+       		font-size: 15px;
+       		color:darkolivegreen;
+       		font-weight:900;
+       		padding-right:11px;
+       }
+       
+       #artistName {
+       		padding-right:20px;
+       }
+       
        #lLabel {
        		margin-top:500px;
        		margin-left:550px;
@@ -156,6 +199,19 @@
    			<li>신규아티스트수업</li>
    		</ul>
    	</div> -->
+   	
+  
+	<div id="aside">
+	<div id="lTitle">인기수업</div>
+   	<div class="aside" id="liked">추천수업</div>
+   	<div class="aside"> | </div>
+   	<div class="aside" id="popular">인기수업</div>
+   	<div class="aside"> | </div>
+   	<div class="aside" id="recommended">관심수업</div>
+	</div>
+	
+	
+   
     <div class="lesson-list">
    <table id="lessonTable">
    <tr>
@@ -170,11 +226,11 @@
    	</tr>
    	<tr>
    		<td>(15)</td>
-   		<td>재현쌤</td>
+   		<td id="artistNick">재현쌤</td>
    	</tr>
    	<tr>
    		<td>평택</td>
-   		<td>재현</td>
+   		<td id="artistName">재현</td>
    	</tr>
    </table>    
    </div> 
@@ -192,11 +248,11 @@
    	</tr>
    	<tr>
    		<td>(15)</td>
-   		<td>재현쌤</td>
+   		<td id="artistNick">재현쌤</td>
    	</tr>
    	<tr>
    		<td>평택</td>
-   		<td>재현</td>
+   		<td id="artistName">재현</td>
    	</tr>
    </table>    
    </div> 
@@ -214,11 +270,11 @@
    	</tr>
    	<tr>
    		<td>(15)</td>
-   		<td>재현쌤</td>
+   		<td id="artistNick">재현쌤</td>
    	</tr>
    	<tr>
    		<td>평택</td>
-   		<td>재현</td>
+   		<td id="artistName">재현</td>
    	</tr>
    </table>    
    </div> 
@@ -236,11 +292,11 @@
    	</tr>
    	<tr>
    		<td>(15)</td>
-   		<td>재현쌤</td>
+   		<td id="artistNick">재현쌤</td>
    	</tr>
    	<tr>
    		<td>평택</td>
-   		<td>재현</td>
+   		<td id="artistName">재현</td>
    	</tr>
    </table>    
    </div> 
@@ -258,11 +314,11 @@
    	</tr>
    	<tr>
    		<td>(15)</td>
-   		<td>재현쌤</td>
+   		<td id="artistNick">재현쌤</td>
    	</tr>
    	<tr>
    		<td>평택</td>
-   		<td>재현</td>
+   		<td id="artistName">재현</td>
    	</tr>
    </table>    
    </div> 
@@ -280,11 +336,11 @@
    	</tr>
    	<tr>
    		<td>(15)</td>
-   		<td>재현쌤</td>
+   		<td id="artistNick">재현쌤</td>
    	</tr>
    	<tr>
    		<td>평택</td>
-   		<td>재현</td>
+   		<td id="artistName">재현</td>
    	</tr>
    </table>    
    </div> 

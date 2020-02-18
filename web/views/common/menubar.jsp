@@ -24,12 +24,14 @@
             font-family: 'Do Hyeon', sans-serif;
             color: darkolivegreen;
             text-align: center;
+            cursor:pointer;
         }
         #headerLab {
             font-family: 'ZCOOL QingKe HuangYou', cursive;
             font-size: 50px;
             font-weight: bold;
             color: darkolivegreen;
+            cursor:pointer;
         }
        
         #searchArea {
@@ -50,6 +52,7 @@
             border-bottom-left-radius: 50px;
             border-top-right-radius: 50px;
             border-bottom-right-radius: 50px; 
+            cursor:pointer;
         }
         #suggestArea {
         	height:23px; 
@@ -100,7 +103,7 @@
                 <%if(loginMember == null) { %>
                 <td onclick="goLogin();">로그인</td>
                 <% }else { %>
-                <td style="padding-bottom:5px;"><%=loginMember.getMemberName() %>님  <img src="static/images/logoutIcon3.png" id="logoutBtn" style="width:16px; height:16px; vertical-align:middle;" onclick="goLogout();"> </td>
+                <td style="padding-bottom:5px;"><%=loginMember.getMemberName() %>님  <img src="/hobbyist/static/images/logoutIcon3.png" id="logoutBtn" style="width:16px; height:16px; vertical-align:middle;" onclick="goLogout();"> </td>
                 <% } %>
                 
             </tr>
@@ -136,7 +139,7 @@
     		location.href = "<%= request.getContextPath()%>/views/lesson/openLessonMain.jsp";
     	}
     	function goMyPage() {
-    		location.href = "<%= request.getContextPath()%>/views/member/myPage/memberUpdate.jsp";
+    		location.href = "<%= request.getContextPath()%>/views/member/myPage/myLesson/registeredLesson.jsp";
     	}
     	
     </script>
