@@ -237,7 +237,7 @@
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
@@ -346,10 +346,27 @@
 									<td colspan="3">
 										<div id="div2div" style="width: 400px;">
 											<p>자기소개</p>
-											<textarea name="introduce" rows="5" cols="40" placeholder="자기소개 부분을 채워주세요."
+											<textarea id="introduce" name="introduce" rows="5" cols="40" placeholder="자기소개 부분을 채워주세요."
 												style="width: 380px; height: 200px; text-align: left; color: rgb(49, 49, 49); resize:none;"></textarea>
-											<p style="text-align: right;">0/255</p>
+											<p style="text-align: right;"><label id="counter" >0</label>/255</p>
 										</div>
+										<script>
+											$(function() {
+												$("#introduce").keydown(function() {
+													var inputLength = $(this).val().length;
+													var remain = 255 - inputLength;
+													
+													if(inputLength > 255){
+														$(this).css("readonly", "readonly");
+													} else {
+														
+														$("#counter").html(inputLength);
+													}
+													
+													/* console.log(inputLength); */
+												});
+											});
+										</script>
 									</td>
 								</tr>
 							</table>
@@ -552,7 +569,7 @@
 								</tr>
 								<tr>
 									<td colspan="2"><input type="text"
-										placeholder="전공(ex. 컴퓨터공학과)"
+										placeholder="근무내용"
 										style="width: 352px; height: 30px;"></td>
 
 								</tr>
@@ -561,14 +578,14 @@
 								</tr>
 								<tr>
 									<td><select style="width: 170px; height: 30px;">
-											<option>년도</option>
+											<option>년</option>
 									</select></td>
 									<td><select style="width: 170px; height: 30px;">
 											<option>월</option>
 									</select></td>
 								</tr>
 								<tr>
-									<td></td>
+									<td colspan="2">프리랜서인 경우, 기관명, 직위에 '없음'이라고 적어주세요. </td>
 								</tr>
 								<tr>
 									<td colspan="2"><button

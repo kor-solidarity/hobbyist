@@ -90,7 +90,6 @@
        margin-left: 60px;
        width: 1100px;
        height: 500px;
-       border: 1px solid #4E4E4E;
        overflow-x: hidden;
         overflow-y: auto;
     }
@@ -101,42 +100,67 @@
     }
     #approvalTab th {
     	text-align:center;
+    	height:35px;
     }
     #approvalTab td {
     	border:1px solid black;
+    	height:45px;
     }
     #approvalTab tr:first-child {
     	background-color:#4E4E4E;
     	color:white;
     }
     #approvalBtn {
-    	background-color:blue;
+    	background-color:#3D74CD;
     	color:white;
     	padding: 5px;
     	font-size:15px;
     	border-radius:5%;
     	height:30px;
-	    border: 1px solid blue;
+	    border: 1px solid #3D74CD;
     }
     #refuseBtn {
-    	background-color:red;
+    	background-color:#C72222;
     	font-size:15px;
     	color:white;
     	padding: 5px;
     	border-radius:5%;
-	    border: 1px solid red;
+	    border: 1px solid #C72222;
 	    height:30px;
     }
     #aaModalTab {
     	margin:auto;
     }
-    #checkModalBtn {
+    #checkModalBtn, #checkArtistBtn {
        color: white;
        background-color: #4E4E4E;
        padding: 5px;
 	   border: 1px solid #4E4E4E;
 	   width:60px;
 	   height:40px;  
+    }
+    #artistDiv {
+    	width:500px;
+    }
+    #artistTab {
+    	border-collapse:separate;
+    	border-spacing:0 10px;
+    }
+    .box {
+    	width: 80px;
+    	height: 80px;
+    	border-radius: 70%;
+    	overflow: hidden;
+    }
+    .profile {
+    	width: 100%;
+    	height: 100%;
+    	object-fit : cover;
+    }
+    .emp {
+    	font-family: Do Hyeon;
+    	color:darkolivegreen;
+    	font-size:18px;
     }
 </style>
 </head>
@@ -197,7 +221,7 @@
                <tr>
                    <td>3</td>
                    <td>hyeon0705</td>
-                   <td style="text-decoration: underline;">hyeon0705님의 등록글</td>
+                   <td id="registerText" style="text-decoration: underline;">hyeon0705님의 등록글</td>
                    <td>2020-01-26<br>18:14:20</td>
                    <td>
                    	<button id="approvalBtn">승인</button> &nbsp;
@@ -360,6 +384,11 @@
                </tr>
                
             </table>
+            <script>
+            	$("#approvalBtn").click(function() {
+					alert("아티스트 승인하시겠습니까?");
+				});
+            </script>
          </div>
 			<div class="modal fade" id="myModal1" role="dialog">
 				<div class="modal-dialog">
@@ -403,6 +432,119 @@
 						$("#myModal1").modal();
 					});
 				});
+			</script>
+			
+			<div class="modal fade" id="myModal2" role="dialog">
+				<div class="modal-dialog">
+
+					<!-- Modal content-->
+					<div class="modal-content">
+						<div class="modal-header" style="background-color:#4E4E4E; height:42px;">
+							<label style="font-size:18px; color:white;">hobbyist</label>
+							<button type="button" class="close" data-dismiss="modal" style="color:white">×</button>
+							<h4 class="modal-title"></h4>
+						</div>
+						<div class="modal-body">
+							<br>
+							<div id="artistDiv">
+								<table id="artistTab">
+									<tr>
+										<td colspan="2" class="emp">아티스트 소개</td>
+									</tr>
+									<tr>
+										<td>
+											<div class="box" style="background: #BDBDBD;">
+												<img class="profile" src="/hobbyist/static/images/seolhyun.png">
+											</div>
+										</td>
+										<td>hyeon</td>
+									</tr>
+									<tr>
+										<td colspan="2">안녕하세요 현직 바리스타 hyeon입니다~!! :D 사실 저는 처음부터
+											바리스타는 아니었습니다. 주말에 친척 카페에 일손을 도와 드리러 몇 번 간 것이 회사에서는 느껴보지 못했던
+											에너지와 활력이 들정도로 매력적이었습니다. 그렇게 시작했고 남들보다 늦었다는 생각에 초반에는 실무를 배우면서도
+											따로 공부를 많이 했습니다. 기회가 된다면 이런 것들을 더 많은 분들과 나누고 싶다는 생각에 등록하게
+											되었습니다~</td>
+									</tr>
+									<tr>
+										<td>계좌번호</td>
+										<td>신한 김설현 11041259260</td>
+									</tr>
+									<tr>
+										<td colspan="2"><hr></td>
+									</tr>
+									<tr>
+										<td colspan="2" class="emp">전문분야 및 상세분야</td>
+									</tr>
+									<tr>
+										<td>라이프 스타일</td>
+										<td>커피/차</td>
+									</tr>
+									<tr>
+										<td>라이프 스타일</td>
+										<td>요리/베이킹</td>
+									</tr>
+									<tr>
+										<td>음악</td>
+										<td>기타연주</td>
+									</tr>
+									<tr>
+										<td colspan="2"><hr></td>
+									</tr>
+									<tr>
+										<td colspan="2" class="emp">보유 자격증</td>
+									</tr>
+									<tr>
+										<td colspan="2">커피 바리스타 자격증 1급<br>(2019.01.20, 커피협회)
+										</td>
+									</tr>
+									<tr>
+										<td colspan="2">베이킹 자격증<br>(2019.07.06, 베이킹협회)
+										</td>
+									</tr>
+									<tr>
+										<td>첨부파일</td>
+										<td><a href="#">[다운로드]</a></td>
+									</tr>
+									<tr>
+										<td colspan="2"><hr></td>
+									</tr>
+									<tr>
+										<td colspan="2" class="emp">학력/전공</td>
+									</tr>
+									<tr>
+										<td colspan="2">경민대학교 호텔조리학과 졸업</td>
+									</tr>
+									<tr>
+										<td colspan="2"><hr></td>
+									</tr>
+									<tr>
+										<td colspan="2" class="emp">경력</td>
+									</tr>
+									<tr>
+										<td colspan="2">스타벅스 매니저 / 관리 및 음료 제조 / 3년 2개월</td>
+									</tr>
+									<tr>
+										<td colspan="2">개인카페 사장 / 가게 운영 및 음료 제조 / 8개월</td>
+									</tr>
+								</table>
+							</div>
+
+						</div>
+						<div class="modal-footer">
+							<button type="button" data-dismiss="modal"class="btn btn-primary" id="checkArtistBtn">확인</button>
+						</div>
+					</div>
+
+				</div>
+			</div>
+			<script>
+			$(document).ready(function() {
+				$("#registerText").click(function() {
+					$("#myModal2").modal();
+				});
+			});
+			
 			</script>
       </article>
    </section>
