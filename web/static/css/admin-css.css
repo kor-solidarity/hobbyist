@@ -1,0 +1,118 @@
+
+section {
+    width: 100%;
+    height: 91%;
+}
+
+#sideMenuBar {
+    background-color: #4E4E4E;
+    width: 15%;
+    height: 100%;
+    float: left;
+    margin: 0px;
+    text-align: center;
+}
+
+#bigMenu {
+    margin-top: 20px;
+    color: #DED842;
+}
+
+#smallMenu {
+    margin-top: 20px;
+    padding-left: 25px;
+    color: white;
+    text-align: left;
+    font-weight: bold;
+    font-size: 19px;
+    line-height: 45px;
+}
+
+#contents {
+    background-color: white;
+    width: 85%;
+    height: 100%;
+    margin: 0px;
+    float: left;
+}
+
+#searchMember {
+    margin-top: 80px;
+    text-align: right;
+}
+
+#searchDetailArea {
+    width: 100%;
+    text-align: right;
+}
+
+#searchT {
+    width: 90%;
+    height: 110px;
+    margin-left: 10%;
+}
+
+#searchBtn {
+    color: white;
+    background-color: #4E4E4E;
+}
+
+#firstLine {
+    width: 90%;
+    height: 1px;
+    background: black;
+    margin: 0px;
+    margin-left: 115px;
+    margin-top: 10px;
+    align: right;
+}
+
+#infoArea {
+    margin-top: 50px;
+    margin-left: 60px;
+    width: 1100px;
+    height: 500px;
+    /*border: 1px solid #4E4E4E;*/
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+th {
+    background: #4E4E4E;
+    color: white;
+    height: 30px;
+}
+
+#infoArea td {
+    border: 1px solid black;
+}
+
+.place-checkbox {
+    width: 20px;
+    height: 20px;
+}
+
+.place-edit-table {
+    border-collapse: collapse;
+
+}
+
+.place-edit-table td {
+    border: 1px solid black;
+    padding-bottom: 15px;
+}
+
+.place-edit-table tr > td:first-of-type {
+    font-weight: bold;
+
+    width: 12%;
+}
+
+.place-edit-table tr > td:nth-of-type(2) {
+    width: 85%;
+}
+.place-edit-table tr > td:nth-of-type(2) > input {
+    width: 500px;
+}
+
+
