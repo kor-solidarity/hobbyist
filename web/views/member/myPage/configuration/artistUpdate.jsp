@@ -155,7 +155,7 @@
 	magin: auto;
 }
 
-#memberUpdate2 {
+#gearwheel {
 	height: 50px;
 	width: 50px;
 	magin: auto;
@@ -367,8 +367,8 @@ center_td0 {
 				<td rowspan="4" class="td0"><img id="memberUpdate1"
 					src="<%=request.getContextPath()%>/static/images/memberUpdate1.png"></td>
 				<td colspan="4" class="td1"></td>
-				<td colspan="3" class="td2"><img id="memberUpdate2"
-					src="<%=request.getContextPath()%>/static/images/memberUpdate2.png"></td>
+				<td colspan="3" class="td2"><img id="gearwheel"
+					src="<%=request.getContextPath()%>/static/images/gearwheel.png"></td>
 				<td colspan="1" class="td3">회원정보 수정</td>
 			</tr>
 			</tr>
