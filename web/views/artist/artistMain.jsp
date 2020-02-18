@@ -241,7 +241,7 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
-<body>
+<body style="font-size: 16px;">
 	<%@ include file="../common/menubar.jsp"%>
 	<div id="middle">
 		<table id="middleInfo">
@@ -357,7 +357,7 @@
 													var remain = 255 - inputLength;
 													
 													if(inputLength > 255){
-														$(this).css("readonly", "readonly");
+														$(this).val($(this).val().substring(0, 255));
 													} else {
 														
 														$("#counter").html(inputLength);
