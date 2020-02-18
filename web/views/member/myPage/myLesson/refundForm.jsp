@@ -99,7 +99,9 @@
  			<td>
  				<select>
  					<option value="me">개인 사유</option>
- 					<option value="artist">아티스트 불량</option>
+ 					<option value="artist">신청 실수</option>
+ 					<option value="artist">수업 불만족</option>
+ 					<option value="artist">수업 폐강</option>
  				</select>
  			</td>
  		</tr>

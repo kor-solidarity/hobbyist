@@ -5,8 +5,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<%@ include file="/views/common/boot4-script.jsp" %>
+<%@ include file="/views/common/boot4.jsp" %>
  <style>
- 
  	section {
  		width: 100%;
  		height: 91%;
@@ -86,11 +87,36 @@
  	th {
  		background: #4E4E4E;
  		color: white;
- 		height: 30px;
+ 		height: 35px;
  	}
  	
  	#infoArea td {
  		border: 1px solid black;
+ 		height: 45px;
+ 	}
+ 	
+ 	#modalT {
+  		width: 465px;
+ 		
+ 	}
+ 	#modalT tr td:nth-child(1){
+ 		font-size: 20px;
+ 		font-weight: bold;
+ 		line-height: 40px;
+ 	}
+ 	
+ 	#modalReason {
+ 		height: 80px;
+ 		border: 1px solid lightgray;
+ 		overflow-x: hidden;
+        overflow-y: auto;
+ 	}
+ 	
+ 	#refuseReason {
+ 		height: 80px;
+ 		border: 1px solid lightgray;
+ 		overflow-x: hidden;
+        overflow-y: auto;
  	}
 </style>
 </head>
@@ -109,8 +135,8 @@
 			
 			<!-- 큰 메뉴안의 상세 메뉴 여러개 -->
 			<div id="smallMenu">
-				<label>내역 조회</label><br>
-				<label style="color: #DED842;">환불 신청</label><br>
+				<label style="color: #DED842;">내역 조회</label><br>
+				<label>환불 신청</label><br>
 				<label>금액 정산</label>
 			</div>
 		</article>
@@ -125,8 +151,9 @@
 				<table id="searchT">
 					<tr>
 						<td style="text-align: left; vertical-align: bottom;">
-							<label style="font-weight: bold;">환불신청 내역</label> &nbsp; &nbsp; 
-							<label style="font-weight: bold; color: gray;"></label>
+							<label style="font-weight: bold; color: gray">결제 내역</label> &nbsp; &nbsp; 
+							<label style="font-weight: bold; color: gray;">환불 내역</label> &nbsp; &nbsp; 
+							<label style="font-weight: bold;">반려 내역</label>
 						</td>
 						<td style="padding-right: 20px;">
 							<input style="text" id="searchMember"><button id="searchBtn">검색</button>
@@ -141,7 +168,7 @@
 			
 			<!-- 정보 추가되는 본문 테이블 -->
 			<div id="infoArea">
-				<table style="width: 100%;">
+				<table style="width: 100%; border-collapse: collapse; text-align: center;">
 					<!-- 테이블 첫번째 줄은 아이디, 비밀번호 등 조회할 내용 제목이다. background(#4E4E4E), font-color(white) 색 다르게 지정 -->
 					<tr>
 						<th style="width: 8%;">결제코드</th>
@@ -151,12 +178,95 @@
 						<th style="width: 13%;">전화번호</th>
 						<th style="width: 11%;">담당 아티스트</th>
 						<th style="width: 11%;">환불 금액</th>
+						<th style="width: 14%;">환불일</th>
 						<th style="width: 17%;">환불계좌</th>
-						<th style="width: 14%;">상세보기</th>
+					</tr>
+					<tr>
+						<td style="width: 8%;">결제코드</td>
+						<td style="width: 11%;">수업일정 코드</td>
+						<td style="width: 11%;">아이디</td>
+						<td style="width: 7%;">이름</td>
+						<td style="width: 13%;">전화번호</td>
+						<td style="width: 11%;">담당 아티스트</td>
+						<td style="width: 11%;">환불 금액</td>
+						<td style="width: 14%;">환불일</td>
+						<td><button id="Btn">조회</button></td>
 					</tr>
 				</table>
 			</div>
 		</article>
 	</section>
+	
+  	 <div class="modal fade" id="myModal" role="dialog">
+   	 <div class="modal-dialog">
+    
+   	   <!-- Modal content-->
+   	   <div class="modal-content">
+   	     <div class="modal-header"  style="background: #4E4E4E ; color: white;">
+   	       <h4 class="modal-title">신청내역 조회</h4>
+   	       <button type="button" class="close" data-dismiss="modal" style="color: white;">×</button>
+   	     </div>
+   	     <div class="modal-body">
+   	       <table id="modalT">
+   	       		<tr>
+   	       			<td>수업이름</td>
+   	       			<td></td>
+   	       		</tr>
+   	       		<tr>
+   	       			<td>가격</td>
+   	       			<td></td>
+   	       		</tr>
+   	       		<tr>
+   	       			<td>수업회차</td>
+   	       			<td></td>
+   	       		</tr>
+   	       		<tr>
+   	       			<td>진행회차</td>
+   	       			<td>dgd</td>
+   	       		</tr>
+   	       		<tr>
+   	       			<td>잔여회차</td>
+   	       			<td></td>
+   	       		</tr>
+   	       		<tr>
+   	       			<td>환불사유</td>
+   	       			<td></td>
+   	       		</tr>
+   	       		<tr>
+   	       			<td colspan="2">
+   	       				<div id="modalReason">
+   	       				</div>
+   	       			</td>
+   	       		</tr>
+   	       		<tr>
+   	       			<td>반려사유</td>
+   	       			<td></td>
+   	       		</tr>
+   	       		<tr>
+   	       			<td colspan="2">
+   	       				<div id="refuseReason">
+   	       				</div>
+   	       			</td>
+   	       		</tr>
+   	       </table>
+   	     </div>
+   	     <div class="modal-footer">
+   	       <button type="button" class="btn btn-default" data-dismiss="modal">확인</button>
+   	     </div>
+     		</div>
+   	   
+   		 </div>
+  		</div>
+  		
+	<script>
+		$(document).ready(function(){
+		    $("#Btn").click(function(){
+	   	    	 $("#myModal").modal();
+		    });
+		});
+		
+	</script>
 </body>
+
+
 </html>

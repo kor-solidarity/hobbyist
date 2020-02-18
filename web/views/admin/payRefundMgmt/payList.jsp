@@ -126,7 +126,8 @@
 					<tr>
 						<td style="text-align: left; vertical-align: bottom;">
 							<label style="font-weight: bold;" onclick="goPayList();">결제 내역</label> &nbsp; &nbsp; 
-							<label style="font-weight: bold; color: gray;">환불 내역</label>
+							<label style="font-weight: bold; color: gray;">환불 내역</label>&nbsp; &nbsp; 
+							<label style="font-weight: bold; color: gray;">반려 내역</label>
 						</td>
 						<td style="padding-right: 20px;">
 							<input style="text" id="searchMember"><button id="searchBtn">검색</button>
