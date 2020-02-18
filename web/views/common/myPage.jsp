@@ -133,6 +133,7 @@
 	height: 130px;
 	width: 130px;
 	magin: auto;
+	border-radius: 50px;
 }
 
 #gearwheel {

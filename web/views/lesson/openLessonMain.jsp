@@ -15,6 +15,11 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <title>Insert title here</title>
 <style>
+body {
+	/* menubar와 "수업건의 게시판", "수업 개설" 글씨 크기 맞추기 */
+	font-size: 16px;
+}
+
 #middle {
 	height: 520px;
 	top: 80px;
