@@ -11,94 +11,7 @@
 <html>
 <head>
     <title>Title</title>
-    <style>
-
-        section {
-            width: 100%;
-            height: 91%;
-        }
-
-        #sideMenuBar {
-            background-color: #4E4E4E;
-            width: 15%;
-            height: 100%;
-            float: left;
-            margin: 0px;
-            text-align: center;
-        }
-
-        #bigMenu {
-            margin-top: 20px;
-            color: #DED842;
-        }
-
-        #smallMenu {
-            margin-top: 20px;
-            padding-left: 25px;
-            color: white;
-            text-align: left;
-            font-weight: bold;
-            font-size: 19px;
-            line-height: 45px;
-        }
-
-        #contents {
-            background-color: white;
-            width: 85%;
-            height: 100%;
-            margin: 0px;
-            float: left;
-        }
-
-        #searchMember {
-            margin-top: 80px;
-            text-align: right;
-        }
-
-        #searchDetailArea {
-            width: 100%;
-            text-align: right;
-        }
-
-        #searchT {
-            width: 90%;
-            height: 110px;
-            margin-left: 10%;
-        }
-
-        #searchBtn {
-            color: white;
-            background-color: #4E4E4E;
-        }
-
-        #firstLine {
-            width: 90%;
-            height: 1px;
-            background: black;
-            margin: 0px;
-            margin-left: 115px;
-            margin-top: 10px;
-            align: right;
-        }
-
-        #infoArea {
-            margin-top: 50px;
-            margin-left: 60px;
-            width: 1100px;
-            height: 500px;
-            border: 1px solid #4E4E4E;
-            overflow-x: hidden;
-            overflow-y: auto;
-        }
-
-        th {
-            background: #4E4E4E;
-            color: white;
-        }
-
-    </style>
-    <link href="https://fonts.googleapis.com/css?family=ZCOOL+QingKe+HuangYou&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Do+Hyeon&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/static/css/admin-css.css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/static/css/eun-css.css">
     <%@include file="/views/common/boot4-script.jsp" %>
     <%@include file="/views/common/boot4.jsp" %>
@@ -229,10 +142,12 @@
                                 <table style="margin: 10px; background: lightgrey">
                                     <tr>
                                         <td width="70%" style="color: darkolivegreen">김남준</td>
-                                        <td width="30%">2020-01-24  19:12</td>
+                                        <td width="30%">2020-01-24 19:12</td>
                                     </tr>
                                     <tr>
-                                        <td colspan="2" style="font-weight: normal">낄낄낄길낄긹ㄹ아렁ㅁ라므ㅏ르나ㅡㄹ나ㅡ나ㅜㄹ너나ㅣㅓㅏ라누란ㅇㅁ룸!!!!!!!!!!!!!!!@@</td>
+                                        <td colspan="2" style="font-weight: normal">
+                                            낄낄낄길낄긹ㄹ아렁ㅁ라므ㅏ르나ㅡㄹ나ㅡ나ㅜㄹ너나ㅣㅓㅏ라누란ㅇㅁ룸!!!!!!!!!!!!!!!@@
+                                        </td>
                                     </tr>
                                 </table>
                             </td>
@@ -245,9 +160,10 @@
                 <div class="col-12 report-modal-line"></div>
             </div>
             <div class="modal-footer report-modal-footer" style="justify-content: center;">
-                <button type="button" class="btn btn-success" data-dismiss="modal" onclick="give_warning()">경고하기</button>&nbsp;&nbsp;
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">삭제</button>&nbsp;&nbsp;
-                <button type="button" class="btn btn-danger">블랙리스트 등록</button>
+                <button type="button" class="btn btn-success" onclick="give_warning()">경고하기
+                </button>&nbsp;&nbsp;
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">기각</button>&nbsp;&nbsp;
+                <button type="button" class="btn btn-danger" onclick="blacklist()">블랙리스트 등록</button>
             </div>
         </div>
     </div>
@@ -259,6 +175,15 @@
         // bool
         var conf = confirm($("#guyInQuestion").text() + '에게 경고를 부과하겠습니까?')
         alert(conf)
+        if (conf) {
+            alert('경고가 부과됐습니다.')
+        }
+    }
+
+    function blacklist () {
+        var reason = prompt($("#guyInQuestion").text() + " 블랙리스트 등록사유:")
+        var conf = confirm('블랙리스트 등록을 하시겠습니까? ')
+        alert('블랙리스트 등록 완료됐습니다.')
 
     }
 </script>
