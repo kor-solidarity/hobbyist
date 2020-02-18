@@ -312,7 +312,7 @@
 			<tr>
 				<td id="middleBtnArea" style="height: 400px;">
 					<button type="button" class="btn btn-primary btn-lg"
-						id="openModalBtn" style="margin-left:15px; border: 1px solid white;">수업 개설하기</button>
+						id="openModalBtn" style="margin-left:15px; /* border: 1px solid white; */">수업 개설하기</button>
 				</td>
 			</tr>
 		</table>
