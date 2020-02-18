@@ -7,7 +7,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <title>Insert title here</title>
 <style>
-	 #nav {
+	 /* #nav {
 		margin-top: 20px;
 		width:100%;
 		height:60px;
@@ -81,7 +81,7 @@
 	#sports {
 		margin-left:670px;
 		margin-top:-180px;
-	} 
+	}  */
 	#nav3 {
 		width:1024px;
 		height:50px;
@@ -97,7 +97,7 @@
 	
 	#section{
 		width:1024px;
-		height:700px;
+		height:750px;
 		margin:auto;
 		margin-top:30px;
 	}
@@ -115,10 +115,13 @@
 		border:1px solid darkolivegreen;
 		font-family: 'Nanum Gothic', sans-serif;
 		font-size:13px;
+		border-collapse:seperate;
+		border-spacing: 5px;
+		
 	}
 	#lessonLabel {
 		font-family: 'Nanum Gothic', sans-serif;
-		font-size:12px;
+		font-size:13px;
 		color:darkolivegreen;
 		font-weight:900;
 		margin-bottom:20px;
@@ -154,9 +157,9 @@
 </head>
 <body>
 	<%@ include file="/views/common/menubar.jsp" %>
-	
+	<%@ include file="/views/common/categorybar.jsp" %>
 
-	 <div id="nav">
+	<!--  <div id="nav">
 		<table id="category" align="center">
 			<tr>
 				<td id="cMusic">음악</td>
@@ -249,7 +252,7 @@
 				<td>기타</td>
 			</tr>
 		</table>
-	</div> 
+	</div>  -->
 
 	<div id="nav3">
 		<select class="selection" id="area">
@@ -415,7 +418,7 @@
 		</div>
 	</div>
 	
-		<script>
+		<!-- <script>
 		 $(function() {
 			$(".category2").hide();
 			$("#cMusic").mouseenter(function() {
@@ -1262,7 +1265,7 @@
 			 	
 			
 		});
-	</script>
+	</script> -->
 	<%@ include file="/views/common/footer.jsp" %>
 </body>
 </html>

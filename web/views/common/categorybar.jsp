@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+ <link href="https://fonts.googleapis.com/css?family=Do+Hyeon|Nanum+Gothic|ZCOOL+QingKe+HuangYou&display=swap" rel="stylesheet">
 <title>Insert title here</title>
 <style>
 	#nav {
@@ -1023,6 +1024,7 @@
 				$("#sports tr:eq(0) td:eq(3)").css({'background':'lightgray', 'color':'black'});
 				$("#sports tr:eq(0) td:eq(4)").css({'background':'lightgray', 'color':'black'});
 		}); 
+	}); 
 	</script>
 </body>
 </html>
