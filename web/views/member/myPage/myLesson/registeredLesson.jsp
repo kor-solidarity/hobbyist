@@ -76,19 +76,44 @@
 	}
 	.profile {
 		width: 50px;
+		padding: 0;
+	}
+	.profileTable {
+		height: 30%;
+	}
+	/* .profileTable tr:first-of-type {
+		width: 100%;
+		height: 70%;
+	} */
+	.profileTable tr:nth-of-type(1) {
+		width: 100%;
+		height: 15%;
+	}
+	.profileTable tr:nth-of-type(2) {
+		width: 100%;
+		height: 15%;
+	}
+	.profileTable td {
+		padding: 0;
 	}
 	.profileImgArea {
 		height: 50px;
 	}
 	.profileImg {
-		width: 50px;
-		height: 50px;
+		width: 80px;
+		height: 80px;
+		border-radius: 50px;
+		align: center;
 	}
 	.nickName {
-	
+		font-size: 20px;
+		font-weight: bold;
+		color:darkolivegreen;
+		text-align: center;
 	}
-	.name {
-	
+	.realName {
+		font-size: 14px;
+		text-align: center;
 	}
 </style>
 </head>
@@ -115,17 +140,27 @@
 						<table class="eachLesson" style="width:100%; height:100%;">
 							<tr style="height:100%">
 								<td style="width:27%;"><img class="lessonImg" src="<%= request.getContextPath() %>/static/upload/lesson/beauty/beauty02.jpg"></td>
-								<td class="lessonText" style="width:63%;">
+								<td class="lessonText" style="width:58%;">
 												<p>[1:1_청담샵 경력] #선.착.순.이.벤.트 #자존감이 두배 올라가는 메이크업 배우기!</p>
 												<p>수업시작일 : 2020-02-03 19:00 / 당산</p>
 												<p>결제일 : 2020-01-30 12:11:31</p> 
 												<img class="refundImg" src="<%=request.getContextPath() %>/static/images/refund.png">
 												<span class="refundMsg">환불신청</span>
 								</td>
-								<td class="profile" style="width:10%;">
-									<div class="profileImgArea"><img class="profileImg" src="<%= request.getContextPath() %>/static/images/iu.jpg"></div>
-									<div class="nickName">피치핑크</div>
-									<div class="realName">아이유</div>									
+								<td class="profile" style="width:15%; padding:0;">
+									<div align="center"><img class="profileImg" src="<%= request.getContextPath() %>/static/images/iu.jpg"></div>
+									<table class="profileTable">
+										<tr>
+											<td>
+												<div class="nickName">피치핑크</div>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<div class="realName">아이유</div>
+											</td>
+										</tr>
+									</table>							
 								</td>
 							</tr>
 						</table>
@@ -133,10 +168,70 @@
 				</td>
 			</tr>
 			<tr>
-				<td><div></div></td>
+				<td>
+					<div class="eachWrap">
+						<table class="eachLesson" style="width:100%; height:100%;">
+							<tr style="height:100%">
+								<td style="width:27%;"><img class="lessonImg" src="<%= request.getContextPath() %>/static/upload/lesson/beauty/beauty02.jpg"></td>
+								<td class="lessonText" style="width:58%;">
+												<p>[1:1_청담샵 경력] #선.착.순.이.벤.트 #자존감이 두배 올라가는 메이크업 배우기!</p>
+												<p>수업시작일 : 2020-02-03 19:00 / 당산</p>
+												<p>결제일 : 2020-01-30 12:11:31</p> 
+												<img class="refundImg" src="<%=request.getContextPath() %>/static/images/refund.png">
+												<span class="refundMsg">환불신청</span>
+								</td>
+								<td class="profile" style="width:15%; padding:0;">
+									<div align="center"><img class="profileImg" src="<%= request.getContextPath() %>/static/images/iu.jpg"></div>
+									<table class="profileTable">
+										<tr>
+											<td>
+												<div class="nickName">피치핑크</div>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<div class="realName">아이유</div>
+											</td>
+										</tr>
+									</table>							
+								</td>
+							</tr>
+						</table>
+					</div>
+				</td>
 			</tr>
 			<tr>
-				<td><div></div></td>
+				<td>
+					<div class="eachWrap">
+						<table class="eachLesson" style="width:100%; height:100%;">
+							<tr style="height:100%">
+								<td style="width:27%;"><img class="lessonImg" src="<%= request.getContextPath() %>/static/upload/lesson/beauty/beauty02.jpg"></td>
+								<td class="lessonText" style="width:58%;">
+												<p>[1:1_청담샵 경력] #선.착.순.이.벤.트 #자존감이 두배 올라가는 메이크업 배우기!</p>
+												<p>수업시작일 : 2020-02-03 19:00 / 당산</p>
+												<p>결제일 : 2020-01-30 12:11:31</p> 
+												<img class="refundImg" src="<%=request.getContextPath() %>/static/images/refund.png">
+												<span class="refundMsg">환불신청</span>
+								</td>
+								<td class="profile" style="width:15%; padding:0;">
+									<div align="center"><img class="profileImg" src="<%= request.getContextPath() %>/static/images/iu.jpg"></div>
+									<table class="profileTable">
+										<tr>
+											<td>
+												<div class="nickName">피치핑크</div>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<div class="realName">아이유</div>
+											</td>
+										</tr>
+									</table>							
+								</td>
+							</tr>
+						</table>
+					</div>
+				</td>
 			</tr>
 		</table>
 		<!-- 페이징 처리 -->
