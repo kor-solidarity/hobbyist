@@ -7,7 +7,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <title>Insert title here</title>
 <style>
-	#nav {
+	 #nav {
 		margin-top: 20px;
 		width:100%;
 		height:60px;
@@ -20,6 +20,7 @@
         font-size:22px;
         border-collapse:seperate;
         border-spacing:60px 0px;
+        cursor:pointer;
        	
 	}
 	#category td:hover{
@@ -32,6 +33,7 @@
 		width:1024px;
 		margin:auto;
 		height:30px;
+		clear:both;
 	}
 	
 	.category2 {
@@ -79,7 +81,7 @@
 	#sports {
 		margin-left:670px;
 		margin-top:-180px;
-	}
+	} 
 	#nav3 {
 		width:1024px;
 		height:50px;
@@ -112,7 +114,7 @@
 	#lessonTable {
 		border:1px solid darkolivegreen;
 		font-family: 'Nanum Gothic', sans-serif;
-		font-size:12px;
+		font-size:13px;
 	}
 	#lessonLabel {
 		font-family: 'Nanum Gothic', sans-serif;
@@ -135,13 +137,26 @@
 	}
 	#lessonTable td:nth-of-type(2n) {
 		float:right;
-		margin-right:20px;
+		margin-right:10px;
 	}
+	
+	 #artistNick {
+       		font-size: 15px;
+       		color:darkolivegreen;
+       		font-weight:900;
+       		padding-right:11px;
+       }
+       
+       #artistName {
+       		padding-right:14px;
+       }
 </style>
 </head>
 <body>
 	<%@ include file="/views/common/menubar.jsp" %>
-	<div id="nav">
+	
+
+	 <div id="nav">
 		<table id="category" align="center">
 			<tr>
 				<td id="cMusic">음악</td>
@@ -151,7 +166,7 @@
 				<td id="cBeauty">뷰티</td>
 				<td id="cDesign">디자인</td>
 				<td id="cSports">스포츠</td>
-				<td>공간대여</td>		
+				<td id="cSpace">공간대여</td>		
 			</tr>
 		</table>
 	</div>
@@ -234,7 +249,7 @@
 				<td>기타</td>
 			</tr>
 		</table>
-	</div>
+	</div> 
 
 	<div id="nav3">
 		<select class="selection" id="area">
@@ -280,11 +295,11 @@
 				</tr>
 				<tr>
 					<td>별(15)</td>
-					<td>우니쌤</td>
+					<td id="artistNick">우니쌤</td>
 				</tr>
 				<tr>
 					<td>당산</td>
-					<td>신고운</td>
+					<td id="artistName">신고운</td>
 				</tr>
 			</table>
 		</div>
@@ -302,11 +317,11 @@
 				</tr>
 				<tr>
 					<td>별(15)</td>
-					<td>우니쌤</td>
+					<td id="artistNick">우니쌤</td>
 				</tr>
 				<tr>
 					<td>당산</td>
-					<td>신고운</td>
+					<td id="artistName">신고운</td>
 				</tr>
 			</table>
 		</div>
@@ -324,11 +339,11 @@
 				</tr>
 				<tr>
 					<td>별(15)</td>
-					<td>우니쌤</td>
+					<td id="artistNick">우니쌤</td>
 				</tr>
 				<tr>
 					<td>당산</td>
-					<td>신고운</td>
+					<td id="artistName">신고운</td>
 				</tr>
 			</table>
 		</div>
@@ -346,11 +361,11 @@
 				</tr>
 				<tr>
 					<td>별(15)</td>
-					<td>우니쌤</td>
+					<td id="artistNick">우니쌤</td>
 				</tr>
 				<tr>
 					<td>당산</td>
-					<td>신고운</td>
+					<td id="artistName">신고운</td>
 				</tr>
 			</table>
 		</div>
@@ -368,11 +383,11 @@
 				</tr>
 				<tr>
 					<td>별(15)</td>
-					<td>우니쌤</td>
+					<td id="artistNick">우니쌤</td>
 				</tr>
 				<tr>
 					<td>당산</td>
-					<td>신고운</td>
+					<td id="artistName">신고운</td>
 				</tr>
 			</table>
 		</div>
@@ -390,18 +405,18 @@
 				</tr>
 				<tr>
 					<td>별(15)</td>
-					<td>우니쌤</td>
+					<td id="artistNick">우니쌤</td>
 				</tr>
 				<tr>
 					<td>당산</td>
-					<td>신고운</td>
+					<td id="artistName">신고운</td>
 				</tr>
 			</table>
 		</div>
 	</div>
 	
 		<script>
-		$(function() {
+		 $(function() {
 			$(".category2").hide();
 			$("#cMusic").mouseenter(function() {
 				$("#music").show();
@@ -419,6 +434,7 @@
 				$("#cBeauty").css({'color':'black'});
 				$("#cDesign").css({'color':'black'});
 				$("#cSports").css({'color':'black'});
+				$("#cSpace").css({'color':'black'});
 			}).click(function() {
 				$("#music").show();
 				$("#dance").hide();
@@ -435,6 +451,7 @@
 				$("#cBeauty").css({'color':'black'});
 				$("#cDesign").css({'color':'black'});
 				$("#cSports").css({'color':'black'});
+				$("#cSpace").css({'color':'black'});
 			});
 			
 			$("#cDance").mouseenter(function() {
@@ -453,6 +470,7 @@
 				$("#cBeauty").css({'color':'black'});
 				$("#cDesign").css({'color':'black'});
 				$("#cSports").css({'color':'black'});
+				$("#cSpace").css({'color':'black'});
 			}).click(function() {
 				$("#music").hide();
 				$("#dance").show();
@@ -469,6 +487,7 @@
 				$("#cBeauty").css({'color':'black'});
 				$("#cDesign").css({'color':'black'});
 				$("#cSports").css({'color':'black'});
+				$("#cSpace").css({'color':'black'});
 				
 			});
 			
@@ -488,6 +507,7 @@
 				$("#cBeauty").css({'color':'black'});
 				$("#cDesign").css({'color':'black'});
 				$("#cSports").css({'color':'black'});
+				$("#cSpace").css({'color':'black'});
 			}).click(function() {
 				$("#music").hide();
 				$("#dance").hide();
@@ -504,6 +524,7 @@
 				$("#cBeauty").css({'color':'black'});
 				$("#cDesign").css({'color':'black'});
 				$("#cSports").css({'color':'black'});
+				$("#cSpace").css({'color':'black'});
 			});
 			
 			$("#cLife").mouseenter(function() {
@@ -522,6 +543,7 @@
 				$("#cBeauty").css({'color':'black'});
 				$("#cDesign").css({'color':'black'});
 				$("#cSports").css({'color':'black'});
+				$("#cSpace").css({'color':'black'});
 			}).click(function() {
 				$("#music").hide();
 				$("#dance").hide();
@@ -538,6 +560,7 @@
 				$("#cBeauty").css({'color':'black'});
 				$("#cDesign").css({'color':'black'});
 				$("#cSports").css({'color':'black'});
+				$("#cSpace").css({'color':'black'});
 			});
 			
 			$("#cBeauty").mouseenter(function() {
@@ -556,6 +579,7 @@
 				$("#cLife").css({'color':'black'});
 				$("#cDesign").css({'color':'black'});
 				$("#cSports").css({'color':'black'});
+				$("#cSpace").css({'color':'black'});
 			}).click(function() {
 				$("#music").hide();
 				$("#dance").hide();
@@ -572,6 +596,7 @@
 				$("#cLife").css({'color':'black'});
 				$("#cDesign").css({'color':'black'});
 				$("#cSports").css({'color':'black'});
+				$("#cSpace").css({'color':'black'});
 			});
 			$("#cDesign").mouseenter(function() {
 				$("#music").hide();
@@ -589,6 +614,7 @@
 				$("#cLife").css({'color':'black'});
 				$("#cBeauty").css({'color':'black'});
 				$("#cSports").css({'color':'black'});
+				$("#cSpace").css({'color':'black'});
 			}).click(function() {
 				$("#music").hide();
 				$("#dance").hide();
@@ -605,6 +631,7 @@
 				$("#cLife").css({'color':'black'});
 				$("#cBeauty").css({'color':'black'});
 				$("#cSports").css({'color':'black'});
+				$("#cSpace").css({'color':'black'});
 			});
 			
 			$("#cSports").mouseenter(function() {
@@ -623,6 +650,7 @@
 				$("#cLife").css({'color':'black'});
 				$("#cBeauty").css({'color':'black'});
 				$("#cDesign").css({'color':'black'});
+				$("#cSpace").css({'color':'black'});
 			}).click(function() {
 				$("#music").hide();
 				$("#dance").hide();
@@ -639,6 +667,43 @@
 				$("#cLife").css({'color':'black'});
 				$("#cBeauty").css({'color':'black'});
 				$("#cDesign").css({'color':'black'});
+				$("#cSpace").css({'color':'black'});
+			});
+			
+			$("#cSpace").mouseenter(function() {
+				$("#music").hide();
+				$("#dance").hide();
+				$("#video").hide();
+				$("#life").hide();
+				$("#beauty").hide();
+				$("#design").hide();
+				$("#sports").hide();
+				$("#nav3").css({'margin-top':'-150px'});
+				$(this).css({'color':'darkolivegreen'});
+				$("#cMusic").css({'color':'black'});
+				$("#cDance").css({'color':'black'});
+				$("#cVideo").css({'color':'black'});
+				$("#cLife").css({'color':'black'});
+				$("#cBeauty").css({'color':'black'});
+				$("#cDesign").css({'color':'black'});
+				$("#cSports").css({'color':'black'});
+			}).click(function() {
+				$("#music").hide();
+				$("#dance").hide();
+				$("#video").hide();
+				$("#life").hide();
+				$("#beauty").hide();
+				$("#design").hide();
+				$("#sports").hide();
+				$("#nav3").css({'margin-top':'-150px'});
+				$(this).css({'color':'darkolivegreen'});
+				$("#cMusic").css({'color':'black'});
+				$("#cDance").css({'color':'black'});
+				$("#cVideo").css({'color':'black'});
+				$("#cLife").css({'color':'black'});
+				$("#cBeauty").css({'color':'black'});
+				$("#cDesign").css({'color':'black'});
+				$("#cSports").css({'color':'black'});
 			});
 			
 			 	$("#music tr:eq(0) td:eq(0)").mouseenter(function() {
@@ -761,8 +826,440 @@
 					$("#music tr:eq(0) td:eq(5)").css({'background':'lightgray', 'color':'black'});
 			}); 
 			
+			 
 			 	
+			 	$("#dance tr:eq(0) td:eq(0)").mouseenter(function() {
+			 		$(this).css({'background':'darkolivegreen', 'color':'white'});
+					$("#dance tr:eq(0) td:eq(1)").css({'background':'lightgray', 'color':'black'});
+					$("#dance tr:eq(0) td:eq(2)").css({'background':'lightgray', 'color':'black'});
+					$("#dance tr:eq(0) td:eq(3)").css({'background':'lightgray', 'color':'black'});
+					$("#dance tr:eq(0) td:eq(4)").css({'background':'lightgray', 'color':'black'});
+			 	}).click(function(){
+					$(this).css({'background':'darkolivegreen', 'color':'white'});
+					$("#dance tr:eq(0) td:eq(1)").css({'background':'lightgray', 'color':'black'});
+					$("#dance tr:eq(0) td:eq(2)").css({'background':'lightgray', 'color':'black'});
+					$("#dance tr:eq(0) td:eq(3)").css({'background':'lightgray', 'color':'black'});
+					$("#dance tr:eq(0) td:eq(4)").css({'background':'lightgray', 'color':'black'});
+			});
+			 	$("#dance tr:eq(0) td:eq(1)").mouseenter(function() {
+			 		$(this).css({'background':'darkolivegreen', 'color':'white'});
+					$("#dance tr:eq(0) td:eq(0)").css({'background':'lightgray', 'color':'black'});
+					$("#dance tr:eq(0) td:eq(2)").css({'background':'lightgray', 'color':'black'});
+					$("#dance tr:eq(0) td:eq(3)").css({'background':'lightgray', 'color':'black'});
+					$("#dance tr:eq(0) td:eq(4)").css({'background':'lightgray', 'color':'black'});
+					
+			 	}).click(function(){
+					$(this).css({'background':'darkolivegreen', 'color':'white'});
+					$("#dance tr:eq(0) td:eq(0)").css({'background':'lightgray', 'color':'black'});
+					$("#dance tr:eq(0) td:eq(2)").css({'background':'lightgray', 'color':'black'});
+					$("#dance tr:eq(0) td:eq(3)").css({'background':'lightgray', 'color':'black'});
+					$("#dance tr:eq(0) td:eq(4)").css({'background':'lightgray', 'color':'black'});
+			});
+			 	$("#dance tr:eq(0) td:eq(2)").mouseenter(function() {
+			 		$(this).css({'background':'darkolivegreen', 'color':'white'});
+					$("#dance tr:eq(0) td:eq(0)").css({'background':'lightgray', 'color':'black'});
+					$("#dance tr:eq(0) td:eq(1)").css({'background':'lightgray', 'color':'black'});
+					$("#dance tr:eq(0) td:eq(3)").css({'background':'lightgray', 'color':'black'});
+					$("#dance tr:eq(0) td:eq(4)").css({'background':'lightgray', 'color':'black'});
+			 	}).click(function(){
+					$(this).css({'background':'darkolivegreen', 'color':'white'});
+					$("#dance tr:eq(0) td:eq(0)").css({'background':'lightgray', 'color':'black'});
+					$("#dance tr:eq(0) td:eq(1)").css({'background':'lightgray', 'color':'black'});
+					$("#dance tr:eq(0) td:eq(3)").css({'background':'lightgray', 'color':'black'});
+					$("#dance tr:eq(0) td:eq(4)").css({'background':'lightgray', 'color':'black'});
+
+			}); 
+			 	$("#dance tr:eq(0) td:eq(3)").mouseenter(function() {
+			 		$(this).css({'background':'darkolivegreen', 'color':'white'});
+					$("#dance tr:eq(0) td:eq(0)").css({'background':'lightgray', 'color':'black'});
+					$("#dance tr:eq(0) td:eq(1)").css({'background':'lightgray', 'color':'black'});
+					$("#dance tr:eq(0) td:eq(2)").css({'background':'lightgray', 'color':'black'});
+					$("#dance tr:eq(0) td:eq(4)").css({'background':'lightgray', 'color':'black'});
+
+			 	}).click(function(){
+					$(this).css({'background':'darkolivegreen', 'color':'white'});
+					$("#dance tr:eq(0) td:eq(0)").css({'background':'lightgray', 'color':'black'});
+					$("#dance tr:eq(0) td:eq(1)").css({'background':'lightgray', 'color':'black'});
+					$("#dance tr:eq(0) td:eq(2)").css({'background':'lightgray', 'color':'black'});
+					$("#dance tr:eq(0) td:eq(4)").css({'background':'lightgray', 'color':'black'});
+
+			}); 
+			 	$("#dance tr:eq(0) td:eq(4)").mouseenter(function() {
+			 		$(this).css({'background':'darkolivegreen', 'color':'white'});
+					$("#dance tr:eq(0) td:eq(0)").css({'background':'lightgray', 'color':'black'});
+					$("#dance tr:eq(0) td:eq(1)").css({'background':'lightgray', 'color':'black'});
+					$("#dance tr:eq(0) td:eq(2)").css({'background':'lightgray', 'color':'black'});
+					$("#dance tr:eq(0) td:eq(3)").css({'background':'lightgray', 'color':'black'});
+			 	}).click(function(){
+					$(this).css({'background':'darkolivegreen', 'color':'white'});
+					$("#dance tr:eq(0) td:eq(0)").css({'background':'lightgray', 'color':'black'});
+					$("#dance tr:eq(0) td:eq(1)").css({'background':'lightgray', 'color':'black'});
+					$("#dance tr:eq(0) td:eq(2)").css({'background':'lightgray', 'color':'black'});
+					$("#dance tr:eq(0) td:eq(3)").css({'background':'lightgray', 'color':'black'});
+			}); 
 			
+			 	
+		
+			 	$("#video tr:eq(0) td:eq(0)").mouseenter(function() {
+			 		$(this).css({'background':'darkolivegreen', 'color':'white'});
+					$("#video tr:eq(0) td:eq(1)").css({'background':'lightgray', 'color':'black'});
+					$("#video tr:eq(0) td:eq(2)").css({'background':'lightgray', 'color':'black'});
+					$("#video tr:eq(0) td:eq(3)").css({'background':'lightgray', 'color':'black'});
+					
+			 	}).click(function(){
+					$(this).css({'background':'darkolivegreen', 'color':'white'});
+					$("#video tr:eq(0) td:eq(1)").css({'background':'lightgray', 'color':'black'});
+					$("#video tr:eq(0) td:eq(2)").css({'background':'lightgray', 'color':'black'});
+					$("#video tr:eq(0) td:eq(3)").css({'background':'lightgray', 'color':'black'});
+
+			});
+			 	$("#video tr:eq(0) td:eq(1)").mouseenter(function() {
+			 		$(this).css({'background':'darkolivegreen', 'color':'white'});
+					$("#video tr:eq(0) td:eq(0)").css({'background':'lightgray', 'color':'black'});
+					$("#video tr:eq(0) td:eq(2)").css({'background':'lightgray', 'color':'black'});
+					$("#video tr:eq(0) td:eq(3)").css({'background':'lightgray', 'color':'black'});
+					
+			 	}).click(function(){
+					$(this).css({'background':'darkolivegreen', 'color':'white'});
+					$("#video tr:eq(0) td:eq(0)").css({'background':'lightgray', 'color':'black'});
+					$("#video tr:eq(0) td:eq(2)").css({'background':'lightgray', 'color':'black'});
+					$("#video tr:eq(0) td:eq(3)").css({'background':'lightgray', 'color':'black'});
+			});
+			 	$("#video tr:eq(0) td:eq(2)").mouseenter(function() {
+			 		$(this).css({'background':'darkolivegreen', 'color':'white'});
+					$("#video tr:eq(0) td:eq(0)").css({'background':'lightgray', 'color':'black'});
+					$("#video tr:eq(0) td:eq(1)").css({'background':'lightgray', 'color':'black'});
+					$("#video tr:eq(0) td:eq(3)").css({'background':'lightgray', 'color':'black'});
+			 	}).click(function(){
+					$(this).css({'background':'darkolivegreen', 'color':'white'});
+					$("#video tr:eq(0) td:eq(0)").css({'background':'lightgray', 'color':'black'});
+					$("#video tr:eq(0) td:eq(1)").css({'background':'lightgray', 'color':'black'});
+					$("#video tr:eq(0) td:eq(3)").css({'background':'lightgray', 'color':'black'});
+
+			}); 
+			 	$("#video tr:eq(0) td:eq(3)").mouseenter(function() {
+			 		$(this).css({'background':'darkolivegreen', 'color':'white'});
+					$("#video tr:eq(0) td:eq(0)").css({'background':'lightgray', 'color':'black'});
+					$("#video tr:eq(0) td:eq(1)").css({'background':'lightgray', 'color':'black'});
+					$("#video tr:eq(0) td:eq(2)").css({'background':'lightgray', 'color':'black'});
+
+			 	}).click(function(){
+					$(this).css({'background':'darkolivegreen', 'color':'white'});
+					$("#video tr:eq(0) td:eq(0)").css({'background':'lightgray', 'color':'black'});
+					$("#video tr:eq(0) td:eq(1)").css({'background':'lightgray', 'color':'black'});
+					$("#video tr:eq(0) td:eq(2)").css({'background':'lightgray', 'color':'black'});
+
+			}); 
+			 	
+			 	
+			 	
+			 	$("#life tr:eq(0) td:eq(0)").mouseenter(function() {
+			 		$(this).css({'background':'darkolivegreen', 'color':'white'});
+					$("#life tr:eq(0) td:eq(1)").css({'background':'lightgray', 'color':'black'});
+					$("#life tr:eq(0) td:eq(2)").css({'background':'lightgray', 'color':'black'});
+					$("#life tr:eq(0) td:eq(3)").css({'background':'lightgray', 'color':'black'});
+					
+			 	}).click(function(){
+					$(this).css({'background':'darkolivegreen', 'color':'white'});
+					$("#life tr:eq(0) td:eq(1)").css({'background':'lightgray', 'color':'black'});
+					$("#life tr:eq(0) td:eq(2)").css({'background':'lightgray', 'color':'black'});
+					$("#life tr:eq(0) td:eq(3)").css({'background':'lightgray', 'color':'black'});
+
+			});
+			 	$("#life tr:eq(0) td:eq(1)").mouseenter(function() {
+			 		$(this).css({'background':'darkolivegreen', 'color':'white'});
+					$("#life tr:eq(0) td:eq(0)").css({'background':'lightgray', 'color':'black'});
+					$("#life tr:eq(0) td:eq(2)").css({'background':'lightgray', 'color':'black'});
+					$("#life tr:eq(0) td:eq(3)").css({'background':'lightgray', 'color':'black'});
+					
+			 	}).click(function(){
+					$(this).css({'background':'darkolivegreen', 'color':'white'});
+					$("#life tr:eq(0) td:eq(0)").css({'background':'lightgray', 'color':'black'});
+					$("#life tr:eq(0) td:eq(2)").css({'background':'lightgray', 'color':'black'});
+					$("#life tr:eq(0) td:eq(3)").css({'background':'lightgray', 'color':'black'});
+			});
+			 	$("#life tr:eq(0) td:eq(2)").mouseenter(function() {
+			 		$(this).css({'background':'darkolivegreen', 'color':'white'});
+					$("#life tr:eq(0) td:eq(0)").css({'background':'lightgray', 'color':'black'});
+					$("#life tr:eq(0) td:eq(1)").css({'background':'lightgray', 'color':'black'});
+					$("#life tr:eq(0) td:eq(3)").css({'background':'lightgray', 'color':'black'});
+			 	}).click(function(){
+					$(this).css({'background':'darkolivegreen', 'color':'white'});
+					$("#life tr:eq(0) td:eq(0)").css({'background':'lightgray', 'color':'black'});
+					$("#life tr:eq(0) td:eq(1)").css({'background':'lightgray', 'color':'black'});
+					$("#life tr:eq(0) td:eq(3)").css({'background':'lightgray', 'color':'black'});
+
+			}); 
+			 	$("#life tr:eq(0) td:eq(3)").mouseenter(function() {
+			 		$(this).css({'background':'darkolivegreen', 'color':'white'});
+					$("#life tr:eq(0) td:eq(0)").css({'background':'lightgray', 'color':'black'});
+					$("#life tr:eq(0) td:eq(1)").css({'background':'lightgray', 'color':'black'});
+					$("#life tr:eq(0) td:eq(2)").css({'background':'lightgray', 'color':'black'});
+
+			 	}).click(function(){
+					$(this).css({'background':'darkolivegreen', 'color':'white'});
+					$("#life tr:eq(0) td:eq(0)").css({'background':'lightgray', 'color':'black'});
+					$("#life tr:eq(0) td:eq(1)").css({'background':'lightgray', 'color':'black'});
+					$("#life tr:eq(0) td:eq(2)").css({'background':'lightgray', 'color':'black'});
+
+			}); 
+			 	
+			 	
+			 	
+			 	
+			 	$("#beauty tr:eq(0) td:eq(0)").mouseenter(function() {
+			 		$(this).css({'background':'darkolivegreen', 'color':'white'});
+					$("#beauty tr:eq(0) td:eq(1)").css({'background':'lightgray', 'color':'black'});
+					$("#beauty tr:eq(0) td:eq(2)").css({'background':'lightgray', 'color':'black'});
+					$("#beauty tr:eq(0) td:eq(3)").css({'background':'lightgray', 'color':'black'});
+					$("#beauty tr:eq(0) td:eq(4)").css({'background':'lightgray', 'color':'black'});
+					$("#beauty tr:eq(0) td:eq(5)").css({'background':'lightgray', 'color':'black'});
+					$("#beauty tr:eq(0) td:eq(6)").css({'background':'lightgray', 'color':'black'});
+			 	}).click(function(){
+					$(this).css({'background':'darkolivegreen', 'color':'white'});
+					$("#beauty tr:eq(0) td:eq(1)").css({'background':'lightgray', 'color':'black'});
+					$("#beauty tr:eq(0) td:eq(2)").css({'background':'lightgray', 'color':'black'});
+					$("#beauty tr:eq(0) td:eq(3)").css({'background':'lightgray', 'color':'black'});
+					$("#beauty tr:eq(0) td:eq(4)").css({'background':'lightgray', 'color':'black'});
+					$("#beauty tr:eq(0) td:eq(5)").css({'background':'lightgray', 'color':'black'});
+					$("#beauty tr:eq(0) td:eq(6)").css({'background':'lightgray', 'color':'black'});
+			}); 
+			 	$("#beauty tr:eq(0) td:eq(1)").mouseenter(function() {
+			 		$(this).css({'background':'darkolivegreen', 'color':'white'});
+					$("#beauty tr:eq(0) td:eq(0)").css({'background':'lightgray', 'color':'black'});
+					$("#beauty tr:eq(0) td:eq(2)").css({'background':'lightgray', 'color':'black'});
+					$("#beauty tr:eq(0) td:eq(3)").css({'background':'lightgray', 'color':'black'});
+					$("#beauty tr:eq(0) td:eq(4)").css({'background':'lightgray', 'color':'black'});
+					$("#beauty tr:eq(0) td:eq(5)").css({'background':'lightgray', 'color':'black'});
+					$("#beauty tr:eq(0) td:eq(6)").css({'background':'lightgray', 'color':'black'});
+			 	}).click(function(){
+					$(this).css({'background':'darkolivegreen', 'color':'white'});
+					$("#beauty tr:eq(0) td:eq(0)").css({'background':'lightgray', 'color':'black'});
+					$("#beauty tr:eq(0) td:eq(2)").css({'background':'lightgray', 'color':'black'});
+					$("#beauty tr:eq(0) td:eq(3)").css({'background':'lightgray', 'color':'black'});
+					$("#beauty tr:eq(0) td:eq(4)").css({'background':'lightgray', 'color':'black'});
+					$("#beauty tr:eq(0) td:eq(5)").css({'background':'lightgray', 'color':'black'});
+					$("#beauty tr:eq(0) td:eq(6)").css({'background':'lightgray', 'color':'black'});
+			});
+			 	$("#beauty tr:eq(0) td:eq(2)").mouseenter(function() {
+			 		$(this).css({'background':'darkolivegreen', 'color':'white'});
+					$("#beauty tr:eq(0) td:eq(0)").css({'background':'lightgray', 'color':'black'});
+					$("#beauty tr:eq(0) td:eq(1)").css({'background':'lightgray', 'color':'black'});
+					$("#beauty tr:eq(0) td:eq(3)").css({'background':'lightgray', 'color':'black'});
+					$("#beauty tr:eq(0) td:eq(4)").css({'background':'lightgray', 'color':'black'});
+					$("#beauty tr:eq(0) td:eq(5)").css({'background':'lightgray', 'color':'black'});
+					$("#beauty tr:eq(0) td:eq(6)").css({'background':'lightgray', 'color':'black'});
+			 	}).click(function(){
+					$(this).css({'background':'darkolivegreen', 'color':'white'});
+					$("#beauty tr:eq(0) td:eq(0)").css({'background':'lightgray', 'color':'black'});
+					$("#beauty tr:eq(0) td:eq(1)").css({'background':'lightgray', 'color':'black'});
+					$("#beauty tr:eq(0) td:eq(3)").css({'background':'lightgray', 'color':'black'});
+					$("#beauty tr:eq(0) td:eq(4)").css({'background':'lightgray', 'color':'black'});
+					$("#beauty tr:eq(0) td:eq(5)").css({'background':'lightgray', 'color':'black'});
+					$("#beauty tr:eq(0) td:eq(6)").css({'background':'lightgray', 'color':'black'});
+			}); 
+			 	$("#beauty tr:eq(0) td:eq(3)").mouseenter(function() {
+			 		$(this).css({'background':'darkolivegreen', 'color':'white'});
+					$("#beauty tr:eq(0) td:eq(0)").css({'background':'lightgray', 'color':'black'});
+					$("#beauty tr:eq(0) td:eq(1)").css({'background':'lightgray', 'color':'black'});
+					$("#beauty tr:eq(0) td:eq(2)").css({'background':'lightgray', 'color':'black'});
+					$("#beauty tr:eq(0) td:eq(4)").css({'background':'lightgray', 'color':'black'});
+					$("#beauty tr:eq(0) td:eq(5)").css({'background':'lightgray', 'color':'black'});
+					$("#beauty tr:eq(0) td:eq(6)").css({'background':'lightgray', 'color':'black'});
+			 	}).click(function(){
+					$(this).css({'background':'darkolivegreen', 'color':'white'});
+					$("#beauty tr:eq(0) td:eq(0)").css({'background':'lightgray', 'color':'black'});
+					$("#beauty tr:eq(0) td:eq(1)").css({'background':'lightgray', 'color':'black'});
+					$("#beauty tr:eq(0) td:eq(2)").css({'background':'lightgray', 'color':'black'});
+					$("#beauty tr:eq(0) td:eq(4)").css({'background':'lightgray', 'color':'black'});
+					$("#beauty tr:eq(0) td:eq(5)").css({'background':'lightgray', 'color':'black'});
+					$("#beauty tr:eq(0) td:eq(6)").css({'background':'lightgray', 'color':'black'});
+			}); 
+			 	$("#beauty tr:eq(0) td:eq(4)").mouseenter(function() {
+			 		$(this).css({'background':'darkolivegreen', 'color':'white'});
+					$("#beauty tr:eq(0) td:eq(0)").css({'background':'lightgray', 'color':'black'});
+					$("#beauty tr:eq(0) td:eq(1)").css({'background':'lightgray', 'color':'black'});
+					$("#beauty tr:eq(0) td:eq(2)").css({'background':'lightgray', 'color':'black'});
+					$("#beauty tr:eq(0) td:eq(3)").css({'background':'lightgray', 'color':'black'});
+					$("#beauty tr:eq(0) td:eq(5)").css({'background':'lightgray', 'color':'black'});
+					$("#beauty tr:eq(0) td:eq(6)").css({'background':'lightgray', 'color':'black'});
+			 	}).click(function(){
+					$(this).css({'background':'darkolivegreen', 'color':'white'});
+					$("#beauty tr:eq(0) td:eq(0)").css({'background':'lightgray', 'color':'black'});
+					$("#beauty tr:eq(0) td:eq(1)").css({'background':'lightgray', 'color':'black'});
+					$("#beauty tr:eq(0) td:eq(2)").css({'background':'lightgray', 'color':'black'});
+					$("#beauty tr:eq(0) td:eq(3)").css({'background':'lightgray', 'color':'black'});
+					$("#beauty tr:eq(0) td:eq(5)").css({'background':'lightgray', 'color':'black'});
+					$("#beauty tr:eq(0) td:eq(6)").css({'background':'lightgray', 'color':'black'});
+			}); 
+			 	$("#beauty tr:eq(0) td:eq(5)").mouseenter(function() {
+			 		$(this).css({'background':'darkolivegreen', 'color':'white'});
+					$("#beauty tr:eq(0) td:eq(0)").css({'background':'lightgray', 'color':'black'});
+					$("#beauty tr:eq(0) td:eq(1)").css({'background':'lightgray', 'color':'black'});
+					$("#beauty tr:eq(0) td:eq(2)").css({'background':'lightgray', 'color':'black'});
+					$("#beauty tr:eq(0) td:eq(3)").css({'background':'lightgray', 'color':'black'});
+					$("#beauty tr:eq(0) td:eq(4)").css({'background':'lightgray', 'color':'black'});
+					$("#beauty tr:eq(0) td:eq(6)").css({'background':'lightgray', 'color':'black'});
+			 	}).click(function(){
+					$(this).css({'background':'darkolivegreen', 'color':'white'});
+					$("#beauty tr:eq(0) td:eq(0)").css({'background':'lightgray', 'color':'black'});
+					$("#beauty tr:eq(0) td:eq(1)").css({'background':'lightgray', 'color':'black'});
+					$("#beauty tr:eq(0) td:eq(2)").css({'background':'lightgray', 'color':'black'});
+					$("#beauty tr:eq(0) td:eq(3)").css({'background':'lightgray', 'color':'black'});
+					$("#beauty tr:eq(0) td:eq(4)").css({'background':'lightgray', 'color':'black'});
+					$("#beauty tr:eq(0) td:eq(6)").css({'background':'lightgray', 'color':'black'});
+			}); 
+			 	$("#beauty tr:eq(0) td:eq(6)").mouseenter(function() {
+			 		$(this).css({'background':'darkolivegreen', 'color':'white'});
+					$("#beauty tr:eq(0) td:eq(0)").css({'background':'lightgray', 'color':'black'});
+					$("#beauty tr:eq(0) td:eq(1)").css({'background':'lightgray', 'color':'black'});
+					$("#beauty tr:eq(0) td:eq(2)").css({'background':'lightgray', 'color':'black'});
+					$("#beauty tr:eq(0) td:eq(3)").css({'background':'lightgray', 'color':'black'});
+					$("#beauty tr:eq(0) td:eq(4)").css({'background':'lightgray', 'color':'black'});
+					$("#beauty tr:eq(0) td:eq(5)").css({'background':'lightgray', 'color':'black'});
+			 	}).click(function(){
+					$(this).css({'background':'darkolivegreen', 'color':'white'});
+					$("#beauty tr:eq(0) td:eq(0)").css({'background':'lightgray', 'color':'black'});
+					$("beauty tr:eq(0) td:eq(1)").css({'background':'lightgray', 'color':'black'});
+					$("#beauty tr:eq(0) td:eq(2)").css({'background':'lightgray', 'color':'black'});
+					$("#beauty tr:eq(0) td:eq(3)").css({'background':'lightgray', 'color':'black'});
+					$("#beauty tr:eq(0) td:eq(4)").css({'background':'lightgray', 'color':'black'});
+					$("#beauty tr:eq(0) td:eq(5)").css({'background':'lightgray', 'color':'black'});
+			}); 
+			
+			 	
+			 	
+			 	
+			 	$("#design tr:eq(0) td:eq(0)").mouseenter(function() {
+			 		$(this).css({'background':'darkolivegreen', 'color':'white'});
+					$("#design tr:eq(0) td:eq(1)").css({'background':'lightgray', 'color':'black'});
+					$("#design tr:eq(0) td:eq(2)").css({'background':'lightgray', 'color':'black'});
+					$("#design tr:eq(0) td:eq(3)").css({'background':'lightgray', 'color':'black'});
+					
+			 	}).click(function(){
+					$(this).css({'background':'darkolivegreen', 'color':'white'});
+					$("#design tr:eq(0) td:eq(1)").css({'background':'lightgray', 'color':'black'});
+					$("#design tr:eq(0) td:eq(2)").css({'background':'lightgray', 'color':'black'});
+					$("#design tr:eq(0) td:eq(3)").css({'background':'lightgray', 'color':'black'});
+
+			});
+			 	$("#design tr:eq(0) td:eq(1)").mouseenter(function() {
+			 		$(this).css({'background':'darkolivegreen', 'color':'white'});
+					$("#design tr:eq(0) td:eq(0)").css({'background':'lightgray', 'color':'black'});
+					$("#design tr:eq(0) td:eq(2)").css({'background':'lightgray', 'color':'black'});
+					$("#design tr:eq(0) td:eq(3)").css({'background':'lightgray', 'color':'black'});
+					
+			 	}).click(function(){
+					$(this).css({'background':'darkolivegreen', 'color':'white'});
+					$("#design tr:eq(0) td:eq(0)").css({'background':'lightgray', 'color':'black'});
+					$("#design tr:eq(0) td:eq(2)").css({'background':'lightgray', 'color':'black'});
+					$("#design tr:eq(0) td:eq(3)").css({'background':'lightgray', 'color':'black'});
+			});
+			 	$("#design tr:eq(0) td:eq(2)").mouseenter(function() {
+			 		$(this).css({'background':'darkolivegreen', 'color':'white'});
+					$("#design tr:eq(0) td:eq(0)").css({'background':'lightgray', 'color':'black'});
+					$("#design tr:eq(0) td:eq(1)").css({'background':'lightgray', 'color':'black'});
+					$("#design tr:eq(0) td:eq(3)").css({'background':'lightgray', 'color':'black'});
+			 	}).click(function(){
+					$(this).css({'background':'darkolivegreen', 'color':'white'});
+					$("#design tr:eq(0) td:eq(0)").css({'background':'lightgray', 'color':'black'});
+					$("#design tr:eq(0) td:eq(1)").css({'background':'lightgray', 'color':'black'});
+					$("#design tr:eq(0) td:eq(3)").css({'background':'lightgray', 'color':'black'});
+
+			}); 
+			 	
+			 	
+			 	$("#sports tr:eq(0) td:eq(0)").mouseenter(function() {
+			 		$(this).css({'background':'darkolivegreen', 'color':'white'});
+					$("#sports tr:eq(0) td:eq(1)").css({'background':'lightgray', 'color':'black'});
+					$("#sports tr:eq(0) td:eq(2)").css({'background':'lightgray', 'color':'black'});
+					$("#sports tr:eq(0) td:eq(3)").css({'background':'lightgray', 'color':'black'});
+					$("#sports tr:eq(0) td:eq(4)").css({'background':'lightgray', 'color':'black'});
+					$("#sports tr:eq(0) td:eq(5)").css({'background':'lightgray', 'color':'black'});
+			 	}).click(function(){
+					$(this).css({'background':'darkolivegreen', 'color':'white'});
+					$("#sports tr:eq(0) td:eq(1)").css({'background':'lightgray', 'color':'black'});
+					$("#sports tr:eq(0) td:eq(2)").css({'background':'lightgray', 'color':'black'});
+					$("#sports tr:eq(0) td:eq(3)").css({'background':'lightgray', 'color':'black'});
+					$("#sports tr:eq(0) td:eq(4)").css({'background':'lightgray', 'color':'black'});
+					$("#sports tr:eq(0) td:eq(5)").css({'background':'lightgray', 'color':'black'});
+			}); 
+			 	$("#sports tr:eq(0) td:eq(1)").mouseenter(function() {
+			 		$(this).css({'background':'darkolivegreen', 'color':'white'});
+					$("#sports tr:eq(0) td:eq(0)").css({'background':'lightgray', 'color':'black'});
+					$("#sports tr:eq(0) td:eq(2)").css({'background':'lightgray', 'color':'black'});
+					$("#sports tr:eq(0) td:eq(3)").css({'background':'lightgray', 'color':'black'});
+					$("#sports tr:eq(0) td:eq(4)").css({'background':'lightgray', 'color':'black'});
+					$("#sports tr:eq(0) td:eq(5)").css({'background':'lightgray', 'color':'black'});
+			 	}).click(function(){
+					$(this).css({'background':'darkolivegreen', 'color':'white'});
+					$("#sports tr:eq(0) td:eq(0)").css({'background':'lightgray', 'color':'black'});
+					$("#sports tr:eq(0) td:eq(2)").css({'background':'lightgray', 'color':'black'});
+					$("#sports tr:eq(0) td:eq(3)").css({'background':'lightgray', 'color':'black'});
+					$("#sports tr:eq(0) td:eq(4)").css({'background':'lightgray', 'color':'black'});
+					$("#sports tr:eq(0) td:eq(5)").css({'background':'lightgray', 'color':'black'});
+			});
+			 	$("#sports tr:eq(0) td:eq(2)").mouseenter(function() {
+			 		$(this).css({'background':'darkolivegreen', 'color':'white'});
+					$("#sports tr:eq(0) td:eq(0)").css({'background':'lightgray', 'color':'black'});
+					$("#sports tr:eq(0) td:eq(1)").css({'background':'lightgray', 'color':'black'});
+					$("#sports tr:eq(0) td:eq(3)").css({'background':'lightgray', 'color':'black'});
+					$("#sports tr:eq(0) td:eq(4)").css({'background':'lightgray', 'color':'black'});
+					$("#sports tr:eq(0) td:eq(5)").css({'background':'lightgray', 'color':'black'});
+			 	}).click(function(){
+					$(this).css({'background':'darkolivegreen', 'color':'white'});
+					$("#sports tr:eq(0) td:eq(0)").css({'background':'lightgray', 'color':'black'});
+					$("#sports tr:eq(0) td:eq(1)").css({'background':'lightgray', 'color':'black'});
+					$("#sports tr:eq(0) td:eq(3)").css({'background':'lightgray', 'color':'black'});
+					$("#sports tr:eq(0) td:eq(4)").css({'background':'lightgray', 'color':'black'});
+					$("#sports tr:eq(0) td:eq(5)").css({'background':'lightgray', 'color':'black'});
+			}); 
+			 	$("#sports tr:eq(0) td:eq(3)").mouseenter(function() {
+			 		$(this).css({'background':'darkolivegreen', 'color':'white'});
+					$("#sports tr:eq(0) td:eq(0)").css({'background':'lightgray', 'color':'black'});
+					$("#sports tr:eq(0) td:eq(1)").css({'background':'lightgray', 'color':'black'});
+					$("#sports tr:eq(0) td:eq(2)").css({'background':'lightgray', 'color':'black'});
+					$("#sports tr:eq(0) td:eq(4)").css({'background':'lightgray', 'color':'black'});
+					$("#sports tr:eq(0) td:eq(5)").css({'background':'lightgray', 'color':'black'});
+			 	}).click(function(){
+					$(this).css({'background':'darkolivegreen', 'color':'white'});
+					$("#sports tr:eq(0) td:eq(0)").css({'background':'lightgray', 'color':'black'});
+					$("#sports tr:eq(0) td:eq(1)").css({'background':'lightgray', 'color':'black'});
+					$("#sports tr:eq(0) td:eq(2)").css({'background':'lightgray', 'color':'black'});
+					$("#sports tr:eq(0) td:eq(4)").css({'background':'lightgray', 'color':'black'});
+					$("#sports tr:eq(0) td:eq(5)").css({'background':'lightgray', 'color':'black'});
+			}); 
+			 	$("#sports tr:eq(0) td:eq(4)").mouseenter(function() {
+			 		$(this).css({'background':'darkolivegreen', 'color':'white'});
+					$("#sports tr:eq(0) td:eq(0)").css({'background':'lightgray', 'color':'black'});
+					$("#sports tr:eq(0) td:eq(1)").css({'background':'lightgray', 'color':'black'});
+					$("#sports tr:eq(0) td:eq(2)").css({'background':'lightgray', 'color':'black'});
+					$("#sports tr:eq(0) td:eq(3)").css({'background':'lightgray', 'color':'black'});
+					$("#sports tr:eq(0) td:eq(5)").css({'background':'lightgray', 'color':'black'});
+			 	}).click(function(){
+					$(this).css({'background':'darkolivegreen', 'color':'white'});
+					$("#sports tr:eq(0) td:eq(0)").css({'background':'lightgray', 'color':'black'});
+					$("#sports tr:eq(0) td:eq(1)").css({'background':'lightgray', 'color':'black'});
+					$("#sports tr:eq(0) td:eq(2)").css({'background':'lightgray', 'color':'black'});
+					$("#sports tr:eq(0) td:eq(3)").css({'background':'lightgray', 'color':'black'});
+					$("#sports tr:eq(0) td:eq(5)").css({'background':'lightgray', 'color':'black'});
+			}); 
+			 	$("#sports tr:eq(0) td:eq(5)").mouseenter(function() {
+			 		$(this).css({'background':'darkolivegreen', 'color':'white'});
+					$("#sports tr:eq(0) td:eq(0)").css({'background':'lightgray', 'color':'black'});
+					$("#sports tr:eq(0) td:eq(1)").css({'background':'lightgray', 'color':'black'});
+					$("#sports tr:eq(0) td:eq(2)").css({'background':'lightgray', 'color':'black'});
+					$("#sports tr:eq(0) td:eq(3)").css({'background':'lightgray', 'color':'black'});
+					$("#sports tr:eq(0) td:eq(4)").css({'background':'lightgray', 'color':'black'});
+			 	}).click(function(){
+					$(this).css({'background':'darkolivegreen', 'color':'white'});
+					$("#sports tr:eq(0) td:eq(0)").css({'background':'lightgray', 'color':'black'});
+					$("#sports tr:eq(0) td:eq(1)").css({'background':'lightgray', 'color':'black'});
+					$("#sports tr:eq(0) td:eq(2)").css({'background':'lightgray', 'color':'black'});
+					$("#sports tr:eq(0) td:eq(3)").css({'background':'lightgray', 'color':'black'});
+					$("#sports tr:eq(0) td:eq(4)").css({'background':'lightgray', 'color':'black'});
+			});  
+			 	
 			
 		});
 	</script>
