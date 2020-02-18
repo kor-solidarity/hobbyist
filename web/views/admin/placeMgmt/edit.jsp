@@ -55,7 +55,7 @@
             </table>
         </div>
         <hr id="firstLine">
-        <div id="infoArea">
+        <div id="infoArea" class="place-edit-div">
             <table style="width : 95%; float : right" class="place-edit-table">
                 <!-- 테이블 첫번째 줄은 아이디, 비밀번호 등 조회할 내용 제목이다. background(#4E4E4E), font-color(white) 색 다르게 지정 -->
                 <tr>
@@ -103,8 +103,24 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>전화번호</td>
-                    <td>Gamblerz studio</td>
+                    <td>사진등록</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <%-- 사진등록창 5개 띄워야함.  --%>
+                    <td style="width: 100%" colspan="2">
+
+                    </td>
+                </tr>
+            </table>
+            <table style="width : 95%; float : right" class="place-edit-table">
+                <tr>
+                    <td style="width: 40%">
+                        <bold>등록일:</bold>
+                        <input type="date" name="registerDate" id="startDate"></td>
+                    <td>
+                        <bold>종료일:</bold>
+                        <input type="date" name="EndDate" id=""></td>
                 </tr>
             </table>
         </div>
@@ -115,5 +131,21 @@
         </div>
     </article>
 </section>
+<script>
+    $(function () {
+        var date = new Date();
+        var month = date.getMonth() + 1
+        var day = date.getDate();
+        if (day < 10) {
+            day = '0' + day.toString()
+        }
+        if (month < 10) {
+            month = '0' + month.toString();
+        }
+        // 시작날자 초기화
+        $("#startDate").val(date.getFullYear() + '-' + month + '-' + day);
+
+    })
+</script>
 </body>
 </html>
