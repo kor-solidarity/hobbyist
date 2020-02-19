@@ -36,10 +36,11 @@
 		
 	}
 	
-	#nav2 {
+	.nav2 {
 		width:1024px;
 		margin:auto;
 		height:30px;
+		
 	}
 	
 	.category2 {
@@ -48,6 +49,7 @@
 		font-weight:900;
 		border-collapse :seperate;
 		border-spacing: 10px; 
+		display:none;
 	}
 	
 	.category2 td {
@@ -62,30 +64,36 @@
 		color:white;
 	}
 	
-	#dance {
+	/* div position이 relative라 겹쳐져 margin-top을 -30px로 통일 */ 
+	#danceWrap {
 		margin-left:70px;
 		margin-top:-30px;
 	}
 	
-	#video {
+	#videoWrap {
 		margin-left:200px;
-		margin-top:-60px;
+		margin-top:-30px;
+		/* margin-top:-60px; */
 	}
-	#life {
+	#lifeWrap {
 		margin-left:340px;
-		margin-top:-90px;
+		margin-top:-30px;
+		/* margin-top:-90px; */
 	}
-	#beauty {
+	#beautyWrap {
 		margin-left:400px;
-		margin-top:-120px;
+		margin-top:-30px;
+		/* margin-top:-120px; */
 	}
-	#design {
+	#designWrap {
 		margin-left:580px;
-		margin-top:-150px;
+		margin-top:-30px;
+		/* margin-top:-150px; */
 	}
-	#sports {
+	#sportsWrap {
 		margin-left:670px;
-		margin-top:-180px;
+		margin-top:-30px;
+		/* margin-top:-180px; */
 	}
 </style>
 </head>
@@ -105,7 +113,9 @@
 		</table>
 	</div>
 	
-	<div id="nav2">
+	<!-- div가 차곡차곡 세로로 나열되어 있어 hide()로 숨겨도 공간이 벌어짐 -->
+	<!-- div에 position:relative 속성을 주어 겹쳐주고, table이 아닌 div에 margine을 적용 -->
+	<div id="musicWrap" class="nav2" style="position: relative;">
 		<table class="category2" id="music">
 			<tr>
 				<td>보컬</td>
@@ -118,7 +128,7 @@
 			</tr>
 		</table>
 	</div>
-	<div id="nav2">
+	<div id="danceWrap" class="nav2" style="position: relative;">
 		<table class="category2" id="dance" >
 			<tr>
 				<td>방송댄스</td>
@@ -130,7 +140,7 @@
 		</table>
 	</div>
 	
-	<div id="nav2">
+	<div id="videoWrap" class="nav2" style="position: relative;">
 		<table class="category2" id="video">
 			<tr>
 				<td>영상편집</td>
@@ -140,7 +150,7 @@
 			</tr>
 		</table>
 	</div>
-	<div id="nav2">
+	<div id="lifeWrap" class="nav2" style="position: relative;">
 		<table class="category2" id="life">
 			<tr>
 				<td>핸드메이드</td>
@@ -150,7 +160,7 @@
 			</tr>
 		</table>
 	</div>
-		<div id="nav2">
+	<div id="beautyWrap" class="nav2" style="position: relative;">
 		<table class="category2" id="beauty">
 			<tr>
 				<td>메이크업</td>
@@ -163,7 +173,7 @@
 			</tr>
 		</table>
 	</div>
-	<div id="nav2">
+	<div id="designWrap" class="nav2" style="position: relative;">
 		<table class="category2" id="design">
 			<tr>
 				<td>포토샵/일러스트레이터</td>
@@ -172,7 +182,7 @@
 			</tr>
 		</table>
 	</div>
-		<div id="nav2">
+	<div id="sportsWrap" class="nav2" style="position: relative;">
 		<table class="category2" id="sports">
 			<tr>
 				<td>축구</td>
@@ -188,8 +198,18 @@
 	
 	<script>
 	$(function() {
-		$(".category2").hide();
+		// hide로 할 경우 처음 창이 열릴 때 나타났다 사라짐.
+		// css <style>에서 display:none을 적용해야 함.
+		// $(".category2").hide();
 		$("#cMusic").mouseenter(function() {
+			/* z-index로 겹쳐져 있는 객체가 보여지는 순서를 지정할 수 있음. 숫자가 높을 수록 위에 위치. */
+			$("#musicWrap").css({'z-index':'2'});
+			$("#danceWrap").css({'z-index':'1'});
+			$("#videoWrap").css({'z-index':'1'});
+			$("#lifeWrap").css({'z-index':'1'});
+			$("#beautyWrap").css({'z-index':'1'});
+			$("#designWrap").css({'z-index':'1'});
+			$("#sportsWrap").css({'z-index':'1'});
 			$("#music").show();
 			$("#dance").hide();
 			$("#video").hide();
@@ -226,6 +246,13 @@
 		});
 		
 		$("#cDance").mouseenter(function() {
+			$("#musicWrap").css({'z-index':'1'});
+			$("#danceWrap").css({'z-index':'2'});
+			$("#videoWrap").css({'z-index':'1'});
+			$("#lifeWrap").css({'z-index':'1'});
+			$("#beautyWrap").css({'z-index':'1'});
+			$("#designWrap").css({'z-index':'1'});
+			$("#sportsWrap").css({'z-index':'1'});
 			$("#music").hide();
 			$("#dance").show();
 			$("#video").hide();
@@ -263,6 +290,13 @@
 		});
 		
 		$("#cVideo").mouseenter(function() {
+			$("#musicWrap").css({'z-index':'1'});
+			$("#danceWrap").css({'z-index':'1'});
+			$("#videoWrap").css({'z-index':'2'});
+			$("#lifeWrap").css({'z-index':'1'});
+			$("#beautyWrap").css({'z-index':'1'});
+			$("#designWrap").css({'z-index':'1'});
+			$("#sportsWrap").css({'z-index':'1'});
 			$("#music").hide();
 			$("#dance").hide();
 			$("#video").show();
@@ -299,6 +333,13 @@
 		});
 		
 		$("#cLife").mouseenter(function() {
+			$("#musicWrap").css({'z-index':'1'});
+			$("#danceWrap").css({'z-index':'1'});
+			$("#videoWrap").css({'z-index':'1'});
+			$("#lifeWrap").css({'z-index':'2'});
+			$("#beautyWrap").css({'z-index':'1'});
+			$("#designWrap").css({'z-index':'1'});
+			$("#sportsWrap").css({'z-index':'1'});
 			$("#music").hide();
 			$("#dance").hide();
 			$("#video").hide();
@@ -335,6 +376,13 @@
 		});
 		
 		$("#cBeauty").mouseenter(function() {
+			$("#musicWrap").css({'z-index':'1'});
+			$("#danceWrap").css({'z-index':'1'});
+			$("#videoWrap").css({'z-index':'1'});
+			$("#lifeWrap").css({'z-index':'1'});
+			$("#beautyWrap").css({'z-index':'2'});
+			$("#designWrap").css({'z-index':'1'});
+			$("#sportsWrap").css({'z-index':'1'});
 			$("#music").hide();
 			$("#dance").hide();
 			$("#video").hide();
@@ -370,6 +418,13 @@
 			$("#cSpace").css({'color':'black'});
 		});
 		$("#cDesign").mouseenter(function() {
+			$("#musicWrap").css({'z-index':'1'});
+			$("#danceWrap").css({'z-index':'1'});
+			$("#videoWrap").css({'z-index':'1'});
+			$("#lifeWrap").css({'z-index':'1'});
+			$("#beautyWrap").css({'z-index':'1'});
+			$("#designWrap").css({'z-index':'2'});
+			$("#sportsWrap").css({'z-index':'1'});
 			$("#music").hide();
 			$("#dance").hide();
 			$("#video").hide();
@@ -406,6 +461,13 @@
 		});
 		
 		$("#cSports").mouseenter(function() {
+			$("#musicWrap").css({'z-index':'1'});
+			$("#danceWrap").css({'z-index':'1'});
+			$("#videoWrap").css({'z-index':'1'});
+			$("#lifeWrap").css({'z-index':'1'});
+			$("#beautyWrap").css({'z-index':'1'});
+			$("#designWrap").css({'z-index':'1'});
+			$("#sportsWrap").css({'z-index':'2'});
 			$("#music").hide();
 			$("#dance").hide();
 			$("#video").hide();

@@ -406,9 +406,24 @@ body {
 									<td colspan="2">
 										<div>수업제목</div>
 										<div>
-											<input type="text" style="width:400px;">
+											<!-- <input id="titleText" type="text" style="width:400px;"> -->
+											<textarea id="lessonTitle" name="lessonTitle" rows="2" cols="45" placeholder="수업제목을 입력하세요" style="resize:none;"></textarea>
 										</div>
-										<div>0/50</div>
+										<div align="right" style="margin-right:50px;"><span id="counter">0</span><span>/55</span></div>
+										<script>
+											$(function(){
+												$("#lessonTitle").keydown(function(){
+													var inputLength = $(this).val().length;
+													
+													if(inputLength > 55) {
+														$(this).val($(this).val().substring(0, 55));
+													} else {														
+														$("#counter").html(inputLength);
+													}
+													
+												})
+											});
+										</script>
 									</td>
 								</tr>
 								<tr>
@@ -746,3 +761,16 @@ body {
 	<%@ include file="../common/footer.jsp"%>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
