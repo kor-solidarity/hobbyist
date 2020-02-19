@@ -17,7 +17,7 @@
 			
 			switch(successCode) {
 				case "insertMember" :
-					alertMessage = "회원 가입이 완료되셨습니다.";
+					alertMessage = "회원 가입이 완료되었습니다.";
 					movePath = "/hobbyist/views/member/loginForm.jsp";
 					break;
 			}
