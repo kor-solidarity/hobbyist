@@ -75,6 +75,7 @@ public class MemberDao {
 				loginMember.setPhone(rset.getString("MEMBER_PHONE"));
 				loginMember.setEmail(rset.getString("MEMBER_EMAIL"));
 				loginMember.setBankName(rset.getString("MEMBER_BANK_NAME"));
+				loginMember.setBankOwner(rset.getString("MEMBER_BANK_OWNER"));
 				loginMember.setBankNum(rset.getString("MEMBER_BANK_NUM"));
 				loginMember.setDel(rset.getInt("MEMBER_DEL"));
 				loginMember.setPoints(rset.getInt("MEMBER_POINTS"));
@@ -83,6 +84,7 @@ public class MemberDao {
 				loginMember.setWarnings(rset.getInt("WARNINGS"));
 				loginMember.setIsArtist(rset.getInt("IS_ARTIST"));
 				loginMember.setArtistAccepted(rset.getDate("ARTIST_ACCEPTED"));
+				loginMember.setArtistNick(rset.getString("ARTIST_NICK"));
 				
 			}
 			
