@@ -18,7 +18,7 @@
 </style>
 </head>
 <body>
-
+<%@ include file="../common/categorybar.jsp" %>
 
 <!-- carousel 영역 -->
 <div class="container">
