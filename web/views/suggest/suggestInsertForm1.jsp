@@ -37,7 +37,7 @@
 	#suggestInsertTab1 select {
 	height:25px;
 	}
-	#category, #detailCategory, #minNum, #maxNum, #classPay, #classTimes {
+	#categoryName, #detailCategory, #minNum, #maxNum, #classPay, #classTimes {
 	width:250px;
 	}
 	#area, #detailArea {
@@ -88,8 +88,15 @@
 			</tr>
 			<tr>
 				<td>
-					<select id="category">
-						<option>댄스</option>
+					<select id="categoryName">
+						<option value="">선택</option>
+						<option value="music">음악</option>
+						<option value="dance">댄스</option>
+						<option value="picture">영상/사진</option>
+						<option value="life">라이프스타일</option>
+						<option value="beauty">뷰티</option>
+						<option value="design">디자인</option>
+						<option value="sports">스포츠</option>
 					</select>
 				</td>
 				<td>
@@ -206,6 +213,22 @@
 		$(function() {
 			$("#suggestBtns").click(function(){
 				location.href = "<%=request.getContextPath()%>/views/suggest/suggestInsertForm2.jsp";
+			});
+			
+			$("#categoryName").change(function(){
+				var categoryName = $("#categoryName").val();
+				
+				$.ajax({
+					url: "/hobbyist/category.su",
+					type: "post",
+					data: {categoryName	: categoryName},
+					success: function(data) {
+						console.log("서버 전송 성공!");
+					},
+					error: function(error) {
+						console.log(error);
+					}
+				});
 			});
 		});
 	</script>
