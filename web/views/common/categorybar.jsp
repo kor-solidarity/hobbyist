@@ -19,15 +19,22 @@
 	#category {
 		font-family: 'Do Hyeon', sans-serif;
         font-size:22px;
-        border-collapse:seperate;
+/*      border-collapse:seperate;
         border-spacing:60px 0px;
+        border-style: solid;
+        border-color: black; */
        	
 	}
+	
+	#category td {
+		padding-left: 30px;
+		padding-right: 30px;
+	}
+	
 	#category td:hover{
 		color:darkolivegreen;
 		
 	}
-
 	
 	#nav2 {
 		width:1024px;
@@ -41,14 +48,13 @@
 		font-weight:900;
 		border-collapse :seperate;
 		border-spacing: 10px; 
-		
 	}
 	
 	.category2 td {
 		background:lightgray;
 		border-radius:10px;
 		padding:5px;
-		
+		marign-left:5px;
 	}
 	
 	.category2 td:hover {

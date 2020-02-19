@@ -299,10 +299,25 @@ body {
 	font-size: 17px;
 	padding: 5px;
 }
+
 </style>
 </head>
 <body>
-	<%@ include file="../common/menubar.jsp"%>
+<%@ include file="../common/menubar.jsp"%>
+	<table style="border:1px solid black;">
+		<tr>
+			<td colspan="2" rowspan="4">
+			
+			</td>
+			<td>
+			</td>
+			<td>
+			</td>
+		</tr>
+		<tr>
+			
+		</tr>	
+	</table>
 	<div id="middle">
 		<table id="middleInfo">
 			<tr>
