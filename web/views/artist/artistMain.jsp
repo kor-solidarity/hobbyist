@@ -241,7 +241,7 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
-<body style="font-size: 16px;">
+<body>
 	<%@ include file="../common/menubar.jsp"%>
 	<div id="middle">
 		<table id="middleInfo">
@@ -327,8 +327,8 @@
 									</td>
 									<td>
 										<p>아티스트 닉네임</p> <input type="text" name="nickName"
-										style="height: 25px">
-										<button style="height: 30px">중복확인</button>
+										style="height: 30px">
+										<button style="height: 30px;">중복확인</button>
 									</td>
 									<td colspan="2">
 										<p>계좌번호</p> <select style="height: 32px">
@@ -336,8 +336,7 @@
 											<option>신한은행</option>
 											<option>국민은행</option>
 											<option>농협은행</option>
-											<option>카카오뱅크</option>
-									</select> <input type="text" name="bankNum" style="height: 25px">
+									</select> <input type="text" name="bankNum" style="height: 30px">
 										<button style="height: 30px">계좌인증</button>
 									</td>
 								</tr>
@@ -352,9 +351,9 @@
 										</div>
 										<script>
 											$(function() {
+												//자기소개 부분 textarea에서 255자가 넘지 못하게
 												$("#introduce").keydown(function() {
 													var inputLength = $(this).val().length;
-													var remain = 255 - inputLength;
 													
 													if(inputLength > 255){
 														$(this).val($(this).val().substring(0, 255));
@@ -362,8 +361,6 @@
 														
 														$("#counter").html(inputLength);
 													}
-													
-													/* console.log(inputLength); */
 												});
 											});
 										</script>
