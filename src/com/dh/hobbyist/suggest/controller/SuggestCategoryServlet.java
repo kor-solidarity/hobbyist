@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.dh.hobbyist.suggest.model.service.CategoryService;
 import com.dh.hobbyist.suggest.model.vo.Category;
+import com.google.gson.Gson;
 
 /**
  * Servlet implementation class SuggestCategoryServlet
@@ -32,9 +33,28 @@ public class SuggestCategoryServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String categoryName = request.getParameter("categoryName");
+		int categoryCode = 0;
 		
-		String[] list = new CategoryService().selectDetailCategory(categoryName);
-		System.out.println("category : " + categoryName);
+		//카테고리명을 통해서 DB에서 쓰이는 대분류의 categoryCode 설정
+		switch(categoryName) {
+		case "music": categoryCode = 1; break;
+		case "dance": categoryCode = 9; break;
+		case "picture" : categoryCode = 15; break;
+		case "life" : categoryCode = 20; break;
+		case "beauty" : categoryCode = 25; break;
+		case "design" : categoryCode = 33; break;
+		case "sports" : categoryCode = 37; break;
+		default : break;
+		}
+		
+		ArrayList<String> list = new CategoryService().selectDetailCategory(categoryCode);
+		//System.out.println("category : " + categoryCode);
+		//System.out.println("list : " + list);
+		
+		response.setContentType("application/json");
+		response.setCharacterEncoding("UTF-8");
+		
+		new Gson().toJson(list, response.getWriter());
 	}
 
 	/**
