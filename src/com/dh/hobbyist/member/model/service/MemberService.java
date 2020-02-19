@@ -1,6 +1,7 @@
 package com.dh.hobbyist.member.model.service;
 
 import java.sql.Connection;
+import java.util.List;
 
 import com.dh.hobbyist.member.model.dao.MemberDao;
 import com.dh.hobbyist.member.model.vo.Member;
@@ -45,6 +46,24 @@ public class MemberService {
 		close(con);
 		
 		return result;
+	}
+
+	//관리자에서 회원정보 조회용 메소드 (찬영)
+	public List<Member> selectList() {
+		
+		Connection con = getConnection();
+		
+		List<Member> memberList = new MemberDao().selectList(con);
+		
+		if(memberList != null) {
+			commit(con);
+		}else {
+			rollback(con);
+		}
+		
+		close(con);
+		
+		return memberList;
 	}
 
 }

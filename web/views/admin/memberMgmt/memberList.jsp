@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
  <style>
  
  	section {
@@ -86,11 +87,12 @@
  	th {
  		background: #4E4E4E;
  		color: white;
- 		height: 30px;
+ 		height: 35px;
  	}
  	
  	#infoArea td {
  		border: 1px solid black;
+ 		height: 45px;
  	}
 </style>
 </head>
@@ -125,8 +127,8 @@
 				<table id="searchT">
 					<tr>
 						<td style="text-align: left; vertical-align: bottom;">
-							<label style="font-weight: bold;">회원정보 조회</label> &nbsp; &nbsp;
-							<label style="font-weight: bold; color: gray;">아티스트 조회</label>
+							<label id="memberListL" style="font-weight: bold;">회원정보 조회</label> &nbsp; &nbsp;
+							<label id="artistListL" style="font-weight: bold; color: gray;">아티스트 조회</label>
 						</td>
 						<td style="padding-right: 20px;">
 							<input style="text" id="searchMember"><button id="searchBtn">검색</button>
@@ -141,7 +143,7 @@
 			
 			<!-- 정보 추가되는 본문 테이블 -->
 			<div id="infoArea">
-				<table style="width: 100%;">
+				<table id="infoT" style="width: 100%; border-collapse: collapse; text-align: center;">
 					<!-- 테이블 첫번째 줄은 아이디, 비밀번호 등 조회할 내용 제목이다. background(#4E4E4E), font-color(white) 색 다르게 지정 -->
 					<tr>
 						<th style="width: 8%;">회원코드</th>
@@ -157,5 +159,53 @@
 			</div>
 		</article>
 	</section>
+	
+	<script>
+		$(function() {
+			$("#memberListL").click(function() {
+				$.ajax({
+					url: "/hobbyist/selectList.me",
+					type: 'get',
+					success: function(data) {
+						console.log(data);
+						$table = $("#infoT");
+						$table.html('');
+						
+						var $tr = $("<tr>");
+						
+						$tr.append('<th style="width: 8%;">회원코드</th><th style="width: 15%;">아이디</th><th style="width: 10%;">이름</th><th style="width: 15%;">전화번호</th><th style="width: 20%;">이메일</th><th style="width: 8%;">아티스트 </th><th style="width: 7%;">경고</th><th style="width: 17%;">가입일</th>');  
+						
+						$table.append($tr);
+						
+						$.each(data, function(index, value) {
+							
+							$tr = $("<tr>");
+							var $mcode = $("<td>").text(value.memberCode);
+							var $mId = $("<td>").text(decodeURIComponent(value.memberId));
+							var $mName = $("<td>").text(decodeURIComponent(value.memberName));
+							var $phone = $("<td>").text(decodeURIComponent(value.phone));
+							var $email = $("<td>").text(decodeURIComponent(value.email));
+							var $isArtist = $("<td>").text(value.isArtist);
+							var $warning = $("<td>").text(value.warning);
+							var $regDate = $("<td>").text(value.regDate);
+							
+							$tr.append($mcode);
+							$tr.append($mId);
+							$tr.append($mName);
+							$tr.append($phone);
+							$tr.append($email);
+							$tr.append($isArtist);
+							$tr.append($warning);
+							$tr.append($regDate);
+							$table.append($tr);
+						});
+					},
+					error: function(status) {
+						console.log(status);
+					}
+				});
+			});
+		});
+	</script>
 </body>
 </html>
