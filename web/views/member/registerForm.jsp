@@ -152,8 +152,8 @@
                 </tr>
             </table>
             <br><br>
-            <button onclick="" class="btnz" id="reset">가입취소</button>&nbsp;&nbsp;
-            <button onclick="" class="btnz" id="submit">가입하기</button>
+            <input type="reset" value="가입취소" class="btnz" id="reset" onclick="goLogin();">&nbsp;&nbsp;
+            <input type="submit" value="가입하기" class="btnz" id="submit">
         </form>
         
         <script>
@@ -161,20 +161,31 @@
 	    		location.href = "<%= request.getContextPath()%>/index.jsp";
 	    	}
 	        
+	        function goLogin() {
+	        	location.href = "<%= request.getContextPath()%>/views/member/loginForm.jsp";
+	        }
+	        
 	        $(function() {
 	        	$("#idBtn").click(function() {
 	        		var memberId = $("#memberId").val();
-	        		
+	        		var idRegExp = /^[a-zA-z0-9]{4,12}$/;
+
 	        		$.ajax({
 	        			url: "/hobbyist/idCheck.me",
 	        			type: "post",
 	        			data: {memberId: memberId},
 	        			success: function(data) {
-	        				if(data == "fail") {
-	        					alert("이미 존재하는 아이디입니다.");
+	        				if(!idRegExp.test(memberId)) {
+	        					alert("영문, 숫자만으로 4~12자 이내로 입력하세요.");
 	        				}else {
-	        					alert("사용 가능한 아이디입니다.");
+	        					if(data == "fail") {
+		        					alert("이미 존재하는 아이디입니다.");
+		        				}else {
+		        					alert("사용 가능한 아이디입니다.");
+		        				}
 	        				}
+	        				
+	        				
 	        			},
 	        			error: function(error) {
 	        				console.log(error);

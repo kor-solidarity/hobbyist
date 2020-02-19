@@ -115,13 +115,13 @@
 	<div class="category-list" id="category-list1">
 		<p class="cTitle">카테고리</p>
 		<select id="pCategory">
-		<option>음악</option>
-		<option>댄스</option>
-		<option>영상/사진</option>
-		<option>라이프스타일</option>
-		<option>뷰티</option>
-		<option>디자인</option>
-		<option>스포츠</option>
+		<option value="music">음악</option>
+		<option value="dance">댄스</option>
+		<option value="video">영상/사진</option>
+		<option value="lifeStyle">라이프스타일</option>
+		<option value="beauty">뷰티</option>
+		<option value="design">디자인</option>
+		<option value="sports">스포츠</option>
 		</select>
 	</div>
 	
@@ -135,7 +135,7 @@
 	<div class="category-list" id="category-list3">
 		<p class="cTitle">상세 카테고리</p>
 		<select id="cCategory">
-		<option>보컬</option>
+		<option >보컬</option>
 		<option>랩</option>
 		<option>국악</option>
 		<option>작사/작곡</option>
