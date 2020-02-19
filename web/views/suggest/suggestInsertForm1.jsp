@@ -101,7 +101,7 @@
 				</td>
 				<td>
 					<select id="detailCategory">
-						<option>방송댄스</option>
+						<option>선택</option>
 					</select>
 				</td>
 			</tr>
@@ -158,10 +158,22 @@
 				<td>
 					<select id="year">
 						<option>2020</option>
+						<option>2021</option>
 					</select>
 					년 &nbsp;
 					<select id="month">
+						<option>1</option>
 						<option>2</option>
+						<option>3</option>
+						<option>4</option>
+						<option>5</option>
+						<option>6</option>
+						<option>7</option>
+						<option>8</option>
+						<option>9</option>
+						<option>10</option>
+						<option>11</option>
+						<option>12</option>
 					</select>
 					월 &nbsp;
 					<select id="day">
@@ -223,7 +235,18 @@
 					type: "post",
 					data: {categoryName	: categoryName},
 					success: function(data) {
-						console.log("서버 전송 성공!");
+						//console.log("서버 전송 성공!");
+						
+						//console.log(data);
+						
+						$select = $("#detailCategory");
+						$select.find("option").remove();
+						
+						for(var key in data) {
+							var $option = $("<option>");
+							$option.text(data[key]);
+							$select.append($option);
+							}
 					},
 					error: function(error) {
 						console.log(error);

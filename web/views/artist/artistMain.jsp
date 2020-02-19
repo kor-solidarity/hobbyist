@@ -303,7 +303,7 @@
 				</div>
 				<div class="modal-body">
 					<form id="artistForm"
-						action="<%= request.getContextPath() %>/insert.ar" method="post">
+						action="<%= request.getContextPath() %>/insert.ar" method="post" onsubmit="return check()">
 						<div id="show1">
 							<table id="ArtistTable1">
 								<tr>
@@ -326,9 +326,9 @@
 										</div>
 									</td>
 									<td>
-										<p>아티스트 닉네임</p> <input type="text" name="nickName"
+										<p>아티스트 닉네임</p> <input type="text" name="nickName" id="nickName"
 										style="height: 30px">
-										<button style="height: 30px;">중복확인</button>
+										<button type="button" id="checkNick" style="height: 30px;">중복확인</button>
 									</td>
 									<td colspan="2">
 										<p>계좌번호</p> <select style="height: 32px">
@@ -362,6 +362,24 @@
 														$("#counter").html(inputLength);
 													}
 												});
+												
+												
+												$("#checkNick").click(function() {
+													var nick =  $("#nickName").val();
+													//console.log(nick);
+													
+													$.ajax({
+														url: "/hobbyist/checkNick.ar",
+														type:"post",
+														data:{nick : nick},
+														success: function(data) {
+															console.log("서버 전송 성공");
+														},
+														error: function(error) {
+															console.log(error);
+														}
+													});
+												});
 											});
 										</script>
 									</td>
@@ -382,8 +400,8 @@
 								<tr>
 									<td style="vertical-align: top; color: black;">전문분야 및
 										상세분야를 선택해주세요.<label style="color: darkolivegreen;">(복수
-											선택)</label><br> <br> <select name="category1">
-											<option disabled>선택</option>
+											선택)</label><br> <br> <select id="categoryName">
+											<option value="">선택</option>
 											<option value="music">음악</option>
 											<option value="dance">댄스</option>
 											<option value="picture">영상/사진</option>
@@ -391,7 +409,19 @@
 											<option value="beauty">뷰티</option>
 											<option value="design">디자인</option>
 											<option value="sports">스포츠</option>
-									</select> <br> <select>
+									</select> <br> <select id="detailCategory">
+											<option>선택</option>
+											
+									</select> <br> <br> <select id="categoryName2">
+											<option value="">선택</option>
+											<option value="music">음악</option>
+											<option value="dance">댄스</option>
+											<option value="picture">영상/사진</option>
+											<option value="life">라이프스타일</option>
+											<option value="beauty">뷰티</option>
+											<option value="design">디자인</option>
+											<option value="sports">스포츠</option>
+									</select> <br> <select id="detailCategory2">
 											<option>선택</option>
 											<option>음악</option>
 											<option>댄스</option>
@@ -400,34 +430,16 @@
 											<option>뷰티</option>
 											<option>디자인</option>
 											<option>스포츠</option>
-									</select> <br> <br> <select>
-											<option>선택</option>
-											<option>음악</option>
-											<option>댄스</option>
-											<option>영상/사진</option>
-											<option>라이프스타일</option>
-											<option>뷰티</option>
-											<option>디자인</option>
-											<option>스포츠</option>
-									</select> <br> <select>
-											<option>선택</option>
-											<option>음악</option>
-											<option>댄스</option>
-											<option>영상/사진</option>
-											<option>라이프스타일</option>
-											<option>뷰티</option>
-											<option>디자인</option>
-											<option>스포츠</option>
-									</select> <br> <br> <select>
-											<option>선택</option>
-											<option>음악</option>
-											<option>댄스</option>
-											<option>영상/사진</option>
-											<option>라이프스타일</option>
-											<option>뷰티</option>
-											<option>디자인</option>
-											<option>스포츠</option>
-									</select> <br> <select>
+									</select> <br> <br> <select id="categoryName3">
+											<option value="">선택</option>
+											<option value="music">음악</option>
+											<option value="dance">댄스</option>
+											<option value="picture">영상/사진</option>
+											<option value="life">라이프스타일</option>
+											<option value="beauty">뷰티</option>
+											<option value="design">디자인</option>
+											<option value="sports">스포츠</option>
+									</select>  <br> <select id="detailCategory3">
 											<option>선택</option>
 											<option>음악</option>
 											<option>댄스</option>
@@ -447,6 +459,79 @@
 								</tr>
 
 							</table>
+							<script>
+								/*카테고리 1에서 전문분야와 상세분야 선택 스크립트 */
+								$("#categoryName").change(function(){
+									var categoryName = $("#categoryName").val();
+									
+									$.ajax({
+										url: "/hobbyist/category.su",
+										type: "post",
+										data: {categoryName:categoryName},
+										success:function(data) {
+											$select = $("#detailCategory");
+											$select.find("option").remove();
+											
+											for(var key in data) {
+												var $option = $("<option>");
+												$option.text(data[key]);
+												$select.append($option);
+											}
+										},
+										error:function(error) {
+											console.log(error);
+										}
+									});
+								});
+								
+								/*카테고리 2에서 전문분야와 상세분야 선택 스크립트 */
+								$("#categoryName2").change(function(){
+									var categoryName = $("#categoryName2").val();
+									
+									$.ajax({
+										url: "/hobbyist/category.su",
+										type: "post",
+										data: {categoryName:categoryName},
+										success:function(data) {
+											$select = $("#detailCategory2");
+											$select.find("option").remove();
+											
+											for(var key in data) {
+												var $option = $("<option>");
+												$option.text(data[key]);
+												$select.append($option);
+											}
+										},
+										error:function(error) {
+											console.log(error);
+										}
+									});
+								});
+								
+								/*카테고리 3에서 전문분야와 상세분야 선택 스크립트 */
+								$("#categoryName3").change(function(){
+									var categoryName = $("#categoryName3").val();
+									
+									$.ajax({
+										url: "/hobbyist/category.su",
+										type: "post",
+										data: {categoryName:categoryName},
+										success:function(data) {
+											$select = $("#detailCategory3");
+											$select.find("option").remove();
+											
+											for(var key in data) {
+												var $option = $("<option>");
+												$option.text(data[key]);
+												$select.append($option);
+											}
+										},
+										error:function(error) {
+											console.log(error);
+										}
+									});
+								});
+							</script>
 						</div>
 						<div id="show3" style="display: none;">
 							<table id="ArtistTable5">
@@ -591,6 +676,11 @@
 							</table>
 						</div>
 					</form>
+					<script>
+						function check() {
+							false;
+						}
+					</script>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" id="closeModalBtn">이전</button>
