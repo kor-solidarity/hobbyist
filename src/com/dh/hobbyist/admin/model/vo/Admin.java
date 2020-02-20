@@ -1,19 +1,28 @@
 package com.dh.hobbyist.admin.model.vo;
 
 public class Admin {
+	private int adminCode;
 	private String adminId;
 	private String adminPwd;
 	private String adminName;
 	
 	public Admin() {}
 
-	public Admin(String adminId, String adminPwd, String adminName) {
+	public Admin(int adminCode, String adminId, String adminPwd, String adminName) {
 		super();
+		this.adminCode = adminCode;
 		this.adminId = adminId;
 		this.adminPwd = adminPwd;
 		this.adminName = adminName;
 	}
+	
+	public int getAdminCode() {
+		return adminCode;
+	}
 
+	public void setAdminCode(int adminCode) {
+		this.adminCode = adminCode;
+	}
 	public String getAdminId() {
 		return adminId;
 	}
@@ -40,7 +49,8 @@ public class Admin {
 
 	@Override
 	public String toString() {
-		return "Admin [adminId=" + adminId + ", adminPwd=" + adminPwd + ", adminName=" + adminName + "]";
+		return "Admin [adminCode=" + adminCode + ", adminId=" + adminId + ", adminPwd=" + adminPwd + ", adminName="
+				+ adminName + "]";
 	}
 	
 }
