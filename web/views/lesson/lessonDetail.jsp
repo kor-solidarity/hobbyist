@@ -9,6 +9,12 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <style>
+	wrapTable {
+		width: 1024px;
+		height: 500px;
+		border: 1px solid black;
+	}
+
 /* carousel 관련 CSS */
 	.carousel-inner > .item > img,
 	.carousel-inner > .item > a > img {
@@ -19,6 +25,22 @@
 </head>
 <body>
 <%@ include file="../common/categorybar.jsp" %>
+
+<table id="wrapTable">
+	<tr>
+		<td colspan="2" rowspan="4"></td>
+		<td></td>
+		<td></td>
+	</tr>
+		<td colspan="2"></td>
+	<tr>
+	</tr>
+	<tr>
+	</tr>
+	<tr>
+	</tr>
+</table>
+
 
 <!-- carousel 영역 -->
 <div class="container">
