@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Properties;
 
 public class ArtistDao {
@@ -25,9 +26,23 @@ public class ArtistDao {
 		ResultSet rset = null;
 		int result = 0;
 		
+		String query = prop.getProperty("nickCheck");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, nick);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				result = rset.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		
 		
-		return 0;
+		return result;
 	}
 
 }

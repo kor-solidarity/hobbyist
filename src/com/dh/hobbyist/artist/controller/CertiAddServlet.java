@@ -1,50 +1,45 @@
 package com.dh.hobbyist.artist.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.dh.hobbyist.artist.model.service.ArtistService;
+import com.google.gson.Gson;
 
 /**
- * Servlet implementation class NickCheckServlet
+ * Servlet implementation class CertiAddServlet
  */
-@WebServlet("/checkNick.ar")
-public class NickCheckServlet extends HttpServlet {
+@WebServlet("/certiAdd.ar")
+public class CertiAddServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public NickCheckServlet() {
+    public CertiAddServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String nick = request.getParameter("nick");
+		String certiName = request.getParameter("certiName");
+		String certiDay = request.getParameter("certiDay");
+		String certiSpace = request.getParameter("certiSpace");
 		
-		int result = new ArtistService().nickCheck(nick);
+		/*System.out.println("certiName : " + certiName);
+		System.out.println("certiDay : " + certiDay);
+		System.out.println("certiSpace : " + certiSpace);*/
 		
-		String text = "";
-		if(result > 0) {
-			text = "fail";
-		} else {
-			text = "success";
-		}
+		String certiStr = certiName + "/" + certiDay + "/" + certiSpace;
 		
-		PrintWriter out = response.getWriter();
-		out.print(text);
-		out.flush();
-		out.close();
+		
+		response.setContentType("application/json");
+		response.setCharacterEncoding("UTF-8");
+		
+		new Gson().toJson(certiStr, response.getWriter());
 	}
 
 	/**
