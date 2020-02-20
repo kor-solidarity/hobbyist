@@ -329,7 +329,7 @@
 			</tr>
 		</table>
 	</div>
-
+	
 	<!-- modalBox 시작 부분 -->
 	<div id="modalBox" class="modal fade" id="myModal" tabindex="-1"
 		role="dialog" aria-labelledby="myModalLabel">
@@ -950,5 +950,6 @@
 	</script>
 	<div style="height: 30px;"></div>
 	<%@ include file="../common/footer.jsp"%>
+	
 </body>
 </html>
