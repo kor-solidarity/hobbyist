@@ -1,8 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	
 <!DOCTYPE html>
 <html>
 <head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> 
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
@@ -17,6 +19,7 @@
 }
 
 .tablecenter2 {
+	height:55px;
 	width: 1024px;
 }
 
@@ -179,20 +182,30 @@ center_td0 {
 	</div>
 
 	<div class="divbottom3">
-		<label class="label_bottom3">비밀번호:&nbsp; </label><input type="text" class="password" id="pw" value>
+		<label class="label_bottom3">비밀번호:&nbsp; </label><input type="text" class="password" id="pw">
 		<button onclick="passwdConfirm();" class="passclick" >확인</button>
 	</div>
-	
+	<div id="divtest"> </div>
 	<script>
 	
-		function passwdConfirm() {
-			location.href = "<%=request.getContextPath()%>/views/member/myPage/configuration/memberUpdate.jsp";
-			}	
-	
+		$(function passwdConfirm() {
+			
+			var txtValue = $("#pw").val();
+			var pwdValue = $("#pwd").val();
+			var chkvalue = $("#chk").val();
+			
+			if(txtValue.equals(pass)){			
+			location.href = "<%=request.getContextPath()%>/views/member/myPage/configuration/memberUpdate.jsp";	
+			}else{
+			 
+			 $("#divtest").text("비밀번호가 정확하지 않습니다.").css("color","red");
+			}
+		
+		});	
 	</script>
 	
 	
-	
+
 
 <!-- 	<div class="divbottom4">
 		<label class="label_bottom4">비밀번호가 정확하지 않습니다.</label>
