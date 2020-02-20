@@ -38,7 +38,7 @@
 	height: 60px;
 	text-align: center;
 	width: 200px;
-	line-height:60px;
+	line-height: 60px;
 }
 
 #middleInfo button {
@@ -230,6 +230,48 @@
 	/* font-family: 'Do Hyeon', sans-serif; */
 	/* border:1px solid black; */
 }
+
+#modifyIcon {
+	cursor: pointer;
+}
+
+#userIcon {
+	float: left;
+	position: relative;
+	width: 90px;
+	height: 90px;
+	border-radius: 70%;
+	overflow: hidden;
+}
+
+#artistprofile {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+#certiBtn, #schoolBtn, #careerBtn {
+	width: 352px;
+	border-color: darkolivegreen;
+	color: darkolivegreen;
+	font-family: 'Do Hyeon', sans-serif;
+}
+
+.inDiv {
+	text-align: center;
+	font-family: 'Do Hyeon', sans-serif;
+	font-size: 16px;
+	color: white;
+	/* height:40px; */
+	border-radius: 15px;
+	/* line-height:40px; */
+	background-color: darkolivegreen;
+}
+
+#schoolDiv {
+	width: 250px;
+	height: 200px;
+}
 </style>
 <link
 	href="https://fonts.googleapis.com/css?family=Do+Hyeon|ZCOOL+QingKe+HuangYou&display=swap"
@@ -257,7 +299,7 @@
 			<tr>
 				<td style="height: 400px;">
 					<button type="button" class="btn btn-primary btn-lg"
-						id="openModalBtn" style="margin-left:15px;">아티스트 신청하기</button>
+						id="openModalBtn" style="margin-left: 15px;">아티스트 신청하기</button>
 				</td>
 			</tr>
 		</table>
@@ -266,8 +308,7 @@
 		<!-- 4행 3열-->
 		<table id="bottomInfo">
 			<tr>
-				<td id="first" colspan="3">아티스트 어떻게
-					신청하나요?</td>
+				<td id="first" colspan="3">아티스트 어떻게 신청하나요?</td>
 			</tr>
 			<tr>
 				<td id="second" width="33%">STEP.01</td>
@@ -303,7 +344,7 @@
 				</div>
 				<div class="modal-body">
 					<form id="artistForm"
-						action="<%= request.getContextPath() %>/insert.ar" method="post" onsubmit="return check()">
+						action="<%=request.getContextPath()%>/insert.ar" method="post">
 						<div id="show1">
 							<table id="ArtistTable1">
 								<tr>
@@ -317,17 +358,19 @@
 							<table id="ArtistTable2">
 								<tr>
 									<td>
-										<div id="userIcon" style="float:left; position:relative;">
+										<div id="userIcon">
 											<img src="/hobbyist/static/images/user.png"
-											style="height: 90px">
+												id="artistprofile">
 										</div>
-										<div id="modifyIcon" style="float:left; position:absolute; top:123px; left:90px;">
-											<img src="/hobbyist/static/images/modifyIcon.png" style="height:30px;">
+										<div id="modifyIcon"
+											style="float: left; position: absolute; top: 123px; left: 90px;">
+											<img src="/hobbyist/static/images/modifyIcon.png"
+												style="height: 30px;">
 										</div>
 									</td>
 									<td>
-										<p>아티스트 닉네임</p> <input type="text" name="nickName" id="nickName"
-										style="height: 30px">
+										<p>아티스트 닉네임</p> <input type="text" name="nickName"
+										id="nickName" style="height: 30px">
 										<button type="button" id="checkNick" style="height: 30px;">중복확인</button>
 									</td>
 									<td colspan="2">
@@ -345,42 +388,75 @@
 									<td colspan="3">
 										<div id="div2div" style="width: 400px;">
 											<p>자기소개</p>
-											<textarea id="introduce" name="introduce" rows="5" cols="40" placeholder="자기소개 부분을 채워주세요."
-												style="width: 380px; height: 200px; text-align: left; color: rgb(49, 49, 49); resize:none;"></textarea>
-											<p style="text-align: right;"><label id="counter" >0</label>/255</p>
+											<textarea id="introduce" name="introduce" rows="5" cols="40"
+												placeholder="자기소개 부분을 채워주세요."
+												style="width: 380px; height: 200px; text-align: left; color: rgb(49, 49, 49); resize: none;"></textarea>
+											<p style="text-align: right;">
+												<label id="counter">0</label>/255
+											</p>
 										</div>
-										<script>
+										<div id="fileArea">
+											<input type="file" id="artistImg1" name="artistImg1"
+												onchange="loadImg(this)">
+										</div> <script>
 											$(function() {
 												//자기소개 부분 textarea에서 255자가 넘지 못하게
-												$("#introduce").keydown(function() {
-													var inputLength = $(this).val().length;
-													
-													if(inputLength > 255){
-														$(this).val($(this).val().substring(0, 255));
-													} else {
-														
-														$("#counter").html(inputLength);
-													}
-												});
-												
-												
+												$("#introduce").keydown(
+													function() {
+														var inputLength = $(this).val().length;
+
+															if (inputLength > 255) {
+																$(this).val($(this).val().substring(0,255));
+																
+															} else {
+																$("#counter").html(inputLength);
+															}
+													});
+
+												//닉네임 중복체크
 												$("#checkNick").click(function() {
-													var nick =  $("#nickName").val();
+													var nick = $("#nickName").val();
 													//console.log(nick);
-													
 													$.ajax({
-														url: "/hobbyist/checkNick.ar",
-														type:"post",
-														data:{nick : nick},
-														success: function(data) {
-															console.log("서버 전송 성공");
+														url : "/hobbyist/checkNick.ar",
+														type : "post",
+														data : {nick : nick},
+														success : function(data) {
+															//console.log("서버 전송 성공");
+															if (data == "fail") {
+																alert("닉네임이 중복됩니다.");
+															} else {
+																alert("사용 가능한 닉네임입니다.");
+															}
 														},
-														error: function(error) {
+														error : function(error) {
 															console.log(error);
 														}
 													});
 												});
+
+												// file input 태그 숨기기 
+												$("#fileArea").hide();
+
+												//수정 아이콘 클릭시 파일 첨부할 수 있께
+												$("#modifyIcon").click(function() {
+													$("#artistImg1").click();
+												});
+
 											});
+
+											// 파일 첨부해서 선택했을 경우 아티스트 프로필 변경
+											function loadImg(value) {
+												if (value.files && value.files[0]) {
+													var reader = new FileReader();
+
+													reader.onload = function(e) {
+														$("#artistprofile").attr("src",e.target.result);
+													}
+
+													reader.readAsDataURL(value.files[0]);
+												}
+											}
 										</script>
 									</td>
 								</tr>
@@ -411,7 +487,7 @@
 											<option value="sports">스포츠</option>
 									</select> <br> <select id="detailCategory">
 											<option>선택</option>
-											
+
 									</select> <br> <br> <select id="categoryName2">
 											<option value="">선택</option>
 											<option value="music">음악</option>
@@ -439,7 +515,7 @@
 											<option value="beauty">뷰티</option>
 											<option value="design">디자인</option>
 											<option value="sports">스포츠</option>
-									</select>  <br> <select id="detailCategory3">
+									</select> <br> <select id="detailCategory3">
 											<option>선택</option>
 											<option>음악</option>
 											<option>댄스</option>
@@ -461,72 +537,72 @@
 							</table>
 							<script>
 								/*카테고리 1에서 전문분야와 상세분야 선택 스크립트 */
-								$("#categoryName").change(function(){
-									var categoryName = $("#categoryName").val();
-									
-									$.ajax({
-										url: "/hobbyist/category.su",
-										type: "post",
-										data: {categoryName:categoryName},
-										success:function(data) {
-											$select = $("#detailCategory");
-											$select.find("option").remove();
-											
-											for(var key in data) {
-												var $option = $("<option>");
-												$option.text(data[key]);
-												$select.append($option);
+								$("#categoryName").change(function() {
+										var categoryName = $("#categoryName").val();
+
+										$.ajax({
+											url : "/hobbyist/category.su",
+											type : "post",
+											data : {categoryName : categoryName},
+											success : function(data) {
+												$select = $("#detailCategory");
+												$select.find("option").remove();
+
+												for ( var key in data) {
+													var $option = $("<option>");
+													$option.text(data[key]);
+													$select.append($option);
+												}
+											},
+											error : function(error) {
+												console.log(error);
 											}
-										},
-										error:function(error) {
-											console.log(error);
-										}
-									});
+										});
 								});
-								
+
 								/*카테고리 2에서 전문분야와 상세분야 선택 스크립트 */
-								$("#categoryName2").change(function(){
+								$("#categoryName2").change(function() {
 									var categoryName = $("#categoryName2").val();
-									
+
 									$.ajax({
-										url: "/hobbyist/category.su",
-										type: "post",
-										data: {categoryName:categoryName},
-										success:function(data) {
+										url : "/hobbyist/category.su",
+										type : "post",
+										data : {categoryName : categoryName},
+										success : function(data) {
 											$select = $("#detailCategory2");
 											$select.find("option").remove();
-											
-											for(var key in data) {
+
+											for (var key in data) {
 												var $option = $("<option>");
 												$option.text(data[key]);
 												$select.append($option);
 											}
 										},
-										error:function(error) {
+										error : function(error) {
 											console.log(error);
 										}
 									});
 								});
-								
+
 								/*카테고리 3에서 전문분야와 상세분야 선택 스크립트 */
-								$("#categoryName3").change(function(){
+								$("#categoryName3").change(function() {
 									var categoryName = $("#categoryName3").val();
-									
+
 									$.ajax({
-										url: "/hobbyist/category.su",
-										type: "post",
-										data: {categoryName:categoryName},
-										success:function(data) {
+										url : "/hobbyist/category.su",
+										type : "post",
+										data : {categoryName : categoryName},
+										success : function(data) {
 											$select = $("#detailCategory3");
 											$select.find("option").remove();
-											
-											for(var key in data) {
+
+											for (var key in data) {
 												var $option = $("<option>");
 												$option.text(data[key]);
 												$select.append($option);
 											}
 										},
-										error:function(error) {
+										error : function(error) {
 											console.log(error);
 										}
 									});
@@ -550,23 +626,22 @@
 										style="color: darkolivegreen; font-size: 13px;">선택 사항</label>
 									</td>
 									<td rowspan="6">
-										<div
-											style="border: 1px solid darkolivegreen; width: 250px; height: 300px;"></div>
+										<div id="certiDiv" style="width: 250px; height: 300px;"></div>
 									</td>
 								</tr>
 								<tr>
 									<td colspan="2"><input type="text" placeholder="자격증명"
-										style="width: 350px; height: 30px;"></td>
+										id="certiName" style="width: 350px; height: 30px;"></td>
 								</tr>
 								<tr>
-									<td><input type="text" placeholder="발급일"
-										style="width: 120px; height: 30px;"></td>
+									<td><input type="date" placeholder="발급일" id="certiDay"
+										style="width: 125px; height: 30px;"></td>
 									<td style="width: 220px;"><input type="text"
-										placeholder="발급 기관" style="width: 215px; height: 30px;"></td>
+										placeholder="발급 기관" id="certiSpace"
+										style="width: 215px; height: 30px;"></td>
 								</tr>
 								<tr>
-									<td colspan="2"><button
-											style="width: 352px; border-color: darkolivegreen; color: darkolivegreen; font-family: 'Do Hyeon', sans-serif;">확인</button></td>
+									<td colspan="2"><button type="button" id="certiBtn">확인</button></td>
 								</tr>
 								<tr>
 									<td colspan="2" style="font-size: 14px;">자격증 소유 시 취득 확인서를
@@ -576,11 +651,55 @@
 									</td>
 								</tr>
 								<tr>
-									<td><button>파일선택</button></td>
-									<td style="font-size: 13px;">선택된 파일 없음</td>
+									<!-- <td><button>파일선택</button></td>
+									<td style="font-size: 13px;">선택된 파일 없음</td> -->
+									<td colspan="2"><input type="file" id="certiFile">
+									</td>
 								</tr>
 							</table>
 						</div>
+						<script>
+							//자격증 확인 버튼 클릭시 동적으로 div 추가
+							$(function() {
+								$("#certiBtn").click(function() {
+									var certiName = $("#certiName").val();
+									var certiDay = $("#certiDay").val();
+									var certiSpace = $("#certiSpace").val();
+
+									if (certiName != '' && certiDay != '' && certiSpace != '') {
+
+										var certiInfo = {
+												certiName : certiName,
+												certiDay : certiDay,
+												certiSpace : certiSpace
+										};
+
+										$.ajax({
+											url : "/hobbyist/certiAdd.ar",
+											type : "post",
+											data : certiInfo,
+											success : function(data) {
+												console.log(data);
+
+												$div = $("#certiDiv");
+												var $inDiv = $("<div class='inDiv'>").text(data);
+												$div.append($inDiv);
+												$div.append("<br>")
+
+											},
+											error : function(status) {
+												console.log(status);
+											}
+
+										});
+									} else {
+										alert("모든 입력을 완료해 주세요.");
+									}
+
+								});
+							});
+						</script>
+
 						<div id="show4" style="display: none;">
 							<table id="ArtistTable7">
 								<tr>
@@ -598,30 +717,68 @@
 										style="color: darkolivegreen; font-size: 13px;">선택 사항</label>
 									</td>
 									<td rowspan="4">
-										<div
-											style="border: 1px solid darkolivegreen; width: 250px; height: 200px;"></div>
+										<div id="schoolDiv"></div>
 									</td>
 								</tr>
 								<tr>
-									<td colspan="2"><input type="text"
+									<td colspan="2"><input type="text" id="schoolName"
 										placeholder="학교명(ex. 서울대학교)"
 										style="width: 350px; height: 30px;"></td>
 								</tr>
 								<tr>
 									<td><input type="text" placeholder="전공(ex. 컴퓨터공학과)"
-										style="width: 210px; height: 30px;"></td>
-									<td><select style="height: 30px; width: 125px;">
-											<option>상태</option>
-											<option>재학</option>
-											<option>졸업</option>
+										id="major" style="width: 210px; height: 30px;"></td>
+									<td><select style="height: 30px; width: 125px;"
+										id="status">
+											<option value="">상태</option>
+											<option value="inSchool">재학</option>
+											<option value="graduate">졸업</option>
 									</select></td>
 								</tr>
 								<tr>
-									<td colspan="2"><button
-											style="width: 352px; border-color: darkolivegreen; color: darkolivegreen; font-family: 'Do Hyeon', sans-serif;">확인</button></td>
+									<td colspan="2"><button id="schoolBtn" type="button">확인</button></td>
 								</tr>
 							</table>
 						</div>
+						<script>
+							//학력 전공 입력후 "확인" 버튼 클릭 시 동적으로 div 추가
+							$(function() {
+								$("#schoolBtn").click(function() {
+									var schoolName = $("#schoolName").val();
+									var major = $("#major").val();
+									var status = $("#status").val();
+
+									if (schoolName != '' && major != '' && status != '') {
+										var schoolInfo = {
+											schoolName : schoolName,
+											major : major,
+											status : status
+										};
+
+										$.ajax({
+											url : "/hobbyist/schoolAdd.ar",
+											type : "post",
+											data : schoolInfo,
+											success : function(data) {
+												console.log(data);
+
+												$div = $("#schoolDiv");
+												var $inDiv = $("<div class='inDiv'>").text(data);
+												$div.append($inDiv);
+												$div.append("<br>");
+
+											},
+											error : function(status) {
+												console.log(status);
+											}
+										});
+									} else {
+										alert("모든 입력을 완료해 주세요.");
+									}
+								});
+							});
+						</script>
+
 						<div id="show5" style="display: none;">
 							<table id="ArtistTable9">
 								<tr>
@@ -639,60 +796,119 @@
 										style="color: darkolivegreen; font-size: 13px;">선택 사항</label>
 									</td>
 									<td rowspan="7">
-										<div
-											style="border: 1px solid darkolivegreen; width: 250px; height: 250px;"></div>
+										<div id="careerDiv"
+											style="width: 250px; height: 250px;"></div>
 									</td>
 								</tr>
 								<tr>
-									<td><input type="text" placeholder="기관명"
+									<td><input type="text" placeholder="기관명" id="officeName"
 										style="width: 170px; height: 30px;"></td>
-									<td><input type="text" placeholder="직위"
+									<td><input type="text" placeholder="직위" id="position"
 										style="width: 170px; height: 30px;"></td>
 								</tr>
 								<tr>
-									<td colspan="2"><input type="text"
-										placeholder="근무내용"
-										style="width: 352px; height: 30px;"></td>
+									<td colspan="2"><input type="text" placeholder="근무내용"
+										id="workContent" style="width: 352px; height: 30px;"></td>
 
 								</tr>
 								<tr>
 									<td colspan="2" style="font-family: 'Do Hyeon', sans-serif;">근무기간</td>
 								</tr>
 								<tr>
-									<td><select style="width: 170px; height: 30px;">
-											<option>년</option>
+									<td><select id="workYear"
+										style="width: 170px; height: 30px;">
+											<option value="">년</option>
+											<option value="0">0</option>
+											<option value="1">1</option>
+											<option value="2">2</option>
+											<option value="3">3</option>
+											<option value="4">4</option>
+											<option value="5">5</option>
+											<option value="6">6</option>
+											<option value="7">7</option>
+											<option value="8">8</option>
+											<option value="9">9</option>
+											<option value="10">10</option>
+											<option value="10년이상">10년 이상</option>
 									</select></td>
-									<td><select style="width: 170px; height: 30px;">
-											<option>월</option>
+									<td><select id="workMonth"
+										style="width: 170px; height: 30px;">
+											<option value="">개월</option>
+											<option value="0">0</option>
+											<option value="1">1</option>
+											<option value="2">2</option>
+											<option value="3">3</option>
+											<option value="4">4</option>
+											<option value="5">5</option>
+											<option value="6">6</option>
+											<option value="7">7</option>
+											<option value="8">8</option>
+											<option value="9">9</option>
+											<option value="10">10</option>
+											<option value="11">11</option>
 									</select></td>
 								</tr>
 								<tr>
-									<td colspan="2">프리랜서인 경우, 기관명, 직위에 '없음'이라고 적어주세요. </td>
+									<td colspan="2">프리랜서인 경우, 기관명, 직위에 '없음'이라고 적어주세요.</td>
 								</tr>
 								<tr>
-									<td colspan="2"><button
-											style="width: 352px; border-color: darkolivegreen; color: darkolivegreen; font-family: 'Do Hyeon', sans-serif;">확인</button></td>
+									<td colspan="2"><button type="button" id="careerBtn">확인</button></td>
 								</tr>
 							</table>
 						</div>
 					</form>
-					<script>
-						function check() {
-							false;
-						}
-					</script>
+
 				</div>
+				<script>
+					//경력사항 입력시 동적으로 div 추가
+					$(function() {
+						$("#careerBtn").click(function() {
+							var officeName = $("#officeName").val();
+							var position = $("#position").val();
+							var workContent = $("#workContent").val();
+							var workYear = $("#workYear").val();
+							var workMonth = $("#workMonth").val();
+
+							if (officeName != '' && position != '' && workContent != '' && workMonth != '') {
+								var careerInfo = {
+										officeName : officeName,
+										position : position,
+										workContent : workContent,
+										workYear : workYear,
+										workMonth : workMonth
+								};
+
+								$.ajax({
+									url : "/hobbyist/careerAdd.ar",
+									type : "post",
+									data : careerInfo,
+									success : function(data) {
+										console.log(data);
+
+										$div = $("#careerDiv");
+										var $inDiv = $("<div class='inDiv'>").text(data);
+										$div.append($inDiv);
+										$div.append("<br>");
+									},
+									error : function(status) {
+										console.log(status);
+									}
+								});
+							} else {alert("모든 입력을 완료해 주세요.");}
+						});
+					});
+				</script>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" id="closeModalBtn">이전</button>
 					<button type="button" class="btn btn-primary" id="nextModalBtn">다음</button>
 					<button type="button" class="btn btn-primary" id="saveModalBtn"
-						style="display: none; background-color:darkolivegreen;">저장</button>
+						style="display: none; background-color: darkolivegreen;">저장</button>
 				</div>
 			</div>
 		</div>
 	</div>
 	<script>
-		$(function(){
+		$(function() {
 			var num = 1;
 			// 모달 버튼에 이벤트를 건다.
 			$('#openModalBtn').on('click', function() {
@@ -701,38 +917,38 @@
 			// 모달 안의 취소 버튼에 이벤트를 건다.
 			$('#closeModalBtn').on('click', function() {
 				/* $('#modalBox').modal('hide'); */
-				if(num > 1) {
-					$("#show"+ num).hide();
+				if (num > 1) {
+					$("#show" + num).hide();
 					console.log(num);
 					num--;
-					$("#show"+ num).show();
+					$("#show" + num).show();
 					console.log(num);
-					
+
 				}
-				if(num < 5) {
+				if (num < 5) {
 					$("#nextModalBtn").show();
 					$("#saveModalBtn").hide();
 				}
 			});
 			$('#nextModalBtn').on('click', function() {
 
-				$("#show"+ num).hide();
+				$("#show" + num).hide();
 				console.log(num);
 				num++;
-				$("#show"+ num).show();
+				$("#show" + num).show();
 				console.log(num);
-				if(num == 5){
+				if (num == 5) {
 					$("#nextModalBtn").hide();
 					$("#saveModalBtn").show();
-				} 
-	
+				}
+
 			});
 			$('#saveModalBtn').on('click', function() {
 				$("#artistForm").submit();
 			});
 		});
 	</script>
-	<div style="height:30px;"></div>
+	<div style="height: 30px;"></div>
 	<%@ include file="../common/footer.jsp"%>
 </body>
 </html>

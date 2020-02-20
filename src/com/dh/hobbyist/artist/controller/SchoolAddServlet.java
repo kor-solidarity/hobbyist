@@ -1,27 +1,25 @@
 package com.dh.hobbyist.artist.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.dh.hobbyist.artist.model.service.ArtistService;
+import com.google.gson.Gson;
 
 /**
- * Servlet implementation class NickCheckServlet
+ * Servlet implementation class SchoolAddServlet
  */
-@WebServlet("/checkNick.ar")
-public class NickCheckServlet extends HttpServlet {
+@WebServlet("/schoolAdd.ar")
+public class SchoolAddServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public NickCheckServlet() {
+    public SchoolAddServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,21 +28,29 @@ public class NickCheckServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String nick = request.getParameter("nick");
+		String schoolName = request.getParameter("schoolName");
+		String major = request.getParameter("major");
+		String status = request.getParameter("status");
 		
-		int result = new ArtistService().nickCheck(nick);
+		/*System.out.println("certiName : " + certiName);
+		System.out.println("certiDay : " + certiDay);
+		System.out.println("certiSpace : " + certiSpace);*/
 		
-		String text = "";
-		if(result > 0) {
-			text = "fail";
-		} else {
-			text = "success";
+		String statusStr = null;
+		
+		switch(status) {
+		case "inSchool" : statusStr = "재학"; break;
+		case "graduate" : statusStr = "졸업"; break;
+		default: break;
 		}
 		
-		PrintWriter out = response.getWriter();
-		out.print(text);
-		out.flush();
-		out.close();
+		String schoolStr = schoolName + "/" + major + "/" + statusStr;
+		
+		
+		response.setContentType("application/json");
+		response.setCharacterEncoding("UTF-8");
+		
+		new Gson().toJson(schoolStr, response.getWriter());
 	}
 
 	/**
