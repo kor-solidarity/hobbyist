@@ -398,66 +398,7 @@
 										<div id="fileArea">
 											<input type="file" id="artistImg1" name="artistImg1"
 												onchange="loadImg(this)">
-										</div> <script>
-											$(function() {
-												//자기소개 부분 textarea에서 255자가 넘지 못하게
-												$("#introduce").keydown(
-													function() {
-														var inputLength = $(this).val().length;
-
-															if (inputLength > 255) {
-																$(this).val($(this).val().substring(0,255));
-																
-															} else {
-																$("#counter").html(inputLength);
-															}
-													});
-
-												//닉네임 중복체크
-												$("#checkNick").click(function() {
-													var nick = $("#nickName").val();
-													//console.log(nick);
-													$.ajax({
-														url : "/hobbyist/checkNick.ar",
-														type : "post",
-														data : {nick : nick},
-														success : function(data) {
-															//console.log("서버 전송 성공");
-															if (data == "fail") {
-																alert("닉네임이 중복됩니다.");
-															} else {
-																alert("사용 가능한 닉네임입니다.");
-															}
-														},
-														error : function(error) {
-															console.log(error);
-														}
-													});
-												});
-
-												// file input 태그 숨기기 
-												$("#fileArea").hide();
-
-												//수정 아이콘 클릭시 파일 첨부할 수 있께
-												$("#modifyIcon").click(function() {
-													$("#artistImg1").click();
-												});
-
-											});
-
-											// 파일 첨부해서 선택했을 경우 아티스트 프로필 변경
-											function loadImg(value) {
-												if (value.files && value.files[0]) {
-													var reader = new FileReader();
-
-													reader.onload = function(e) {
-														$("#artistprofile").attr("src",e.target.result);
-													}
-
-													reader.readAsDataURL(value.files[0]);
-												}
-											}
-										</script>
+										</div>
 									</td>
 								</tr>
 							</table>
@@ -535,79 +476,7 @@
 								</tr>
 
 							</table>
-							<script>
-								/*카테고리 1에서 전문분야와 상세분야 선택 스크립트 */
-								$("#categoryName").change(function() {
-										var categoryName = $("#categoryName").val();
-
-										$.ajax({
-											url : "/hobbyist/category.su",
-											type : "post",
-											data : {categoryName : categoryName},
-											success : function(data) {
-												$select = $("#detailCategory");
-												$select.find("option").remove();
-
-												for ( var key in data) {
-													var $option = $("<option>");
-													$option.text(data[key]);
-													$select.append($option);
-												}
-											},
-											error : function(error) {
-												console.log(error);
-											}
-										});
-								});
-
-								/*카테고리 2에서 전문분야와 상세분야 선택 스크립트 */
-								$("#categoryName2").change(function() {
-									var categoryName = $("#categoryName2").val();
-
-									$.ajax({
-										url : "/hobbyist/category.su",
-										type : "post",
-										data : {categoryName : categoryName},
-										success : function(data) {
-											$select = $("#detailCategory2");
-											$select.find("option").remove();
-
-											for (var key in data) {
-												var $option = $("<option>");
-												$option.text(data[key]);
-												$select.append($option);
-											}
-										},
-										error : function(error) {
-											console.log(error);
-										}
-									});
-								});
-
-								/*카테고리 3에서 전문분야와 상세분야 선택 스크립트 */
-								$("#categoryName3").change(function() {
-									var categoryName = $("#categoryName3").val();
-
-									$.ajax({
-										url : "/hobbyist/category.su",
-										type : "post",
-										data : {categoryName : categoryName},
-										success : function(data) {
-											$select = $("#detailCategory3");
-											$select.find("option").remove();
-
-											for (var key in data) {
-												var $option = $("<option>");
-												$option.text(data[key]);
-												$select.append($option);
-											}
-										},
-										error : function(error) {
-											console.log(error);
-										}
-									});
-								});
-							</script>
+							
 						</div>
 						<div id="show3" style="display: none;">
 							<table id="ArtistTable5">
@@ -622,7 +491,7 @@
 							<table id="ArtistTable6">
 								<tr>
 									<td colspan="2" style="font-family: 'Do Hyeon', sans-serif;">보유한
-										자격증을 작성해주세요.&nbsp;&nbsp; <label
+										자격증을 작성해주세요. (3개 이하로 작성)&nbsp;&nbsp; <label
 										style="color: darkolivegreen; font-size: 13px;">선택 사항</label>
 									</td>
 									<td rowspan="6">
@@ -630,15 +499,26 @@
 									</td>
 								</tr>
 								<tr>
-									<td colspan="2"><input type="text" placeholder="자격증명"
-										id="certiName" style="width: 350px; height: 30px;"></td>
+									<td colspan="2"><input type="text" placeholder="자격증명" name="certiName"
+										id="certiName" style="width: 350px; height: 30px;">
+										<input type="hidden" id="certiName1" name="certiName1">
+										<input type="hidden" id="certiName2" name="certiName2">
+										<input type="hidden" id="certiName3" name="certiName3"></td>
 								</tr>
 								<tr>
 									<td><input type="date" placeholder="발급일" id="certiDay"
-										style="width: 125px; height: 30px;"></td>
+										style="width: 125px; height: 30px;">
+										<input type="hidden" id="certiDay1" name="certiDay1">
+										<input type="hidden" id="certiDay2" name="certiDay2">
+										<input type="hidden" id="certiDay3" name="certiDay3">
+										</td>
 									<td style="width: 220px;"><input type="text"
 										placeholder="발급 기관" id="certiSpace"
-										style="width: 215px; height: 30px;"></td>
+										style="width: 215px; height: 30px;">
+										<input type="hidden" id="certiSpace1" name="certiSpace1">
+										<input type="hidden" id="certiSpace2" name="certiSpace2">
+										<input type="hidden" id="certiSpace3" name="certiSpace3">
+										</td>
 								</tr>
 								<tr>
 									<td colspan="2"><button type="button" id="certiBtn">확인</button></td>
@@ -658,47 +538,6 @@
 								</tr>
 							</table>
 						</div>
-						<script>
-							//자격증 확인 버튼 클릭시 동적으로 div 추가
-							$(function() {
-								$("#certiBtn").click(function() {
-									var certiName = $("#certiName").val();
-									var certiDay = $("#certiDay").val();
-									var certiSpace = $("#certiSpace").val();
-
-									if (certiName != '' && certiDay != '' && certiSpace != '') {
-
-										var certiInfo = {
-												certiName : certiName,
-												certiDay : certiDay,
-												certiSpace : certiSpace
-										};
-
-										$.ajax({
-											url : "/hobbyist/certiAdd.ar",
-											type : "post",
-											data : certiInfo,
-											success : function(data) {
-												console.log(data);
-
-												$div = $("#certiDiv");
-												var $inDiv = $("<div class='inDiv'>").text(data);
-												$div.append($inDiv);
-												$div.append("<br>")
-
-											},
-											error : function(status) {
-												console.log(status);
-											}
-
-										});
-									} else {
-										alert("모든 입력을 완료해 주세요.");
-									}
-
-								});
-							});
-						</script>
 
 						<div id="show4" style="display: none;">
 							<table id="ArtistTable7">
@@ -713,7 +552,7 @@
 							<table id="ArtistTable8">
 								<tr>
 									<td colspan="2" style="font-family: 'Do Hyeon', sans-serif;">학력
-										전공을 작성해주세요.&nbsp;&nbsp; <label
+										전공을 작성해주세요. (3개 이하로 작성)&nbsp;&nbsp; <label
 										style="color: darkolivegreen; font-size: 13px;">선택 사항</label>
 									</td>
 									<td rowspan="4">
@@ -723,62 +562,35 @@
 								<tr>
 									<td colspan="2"><input type="text" id="schoolName"
 										placeholder="학교명(ex. 서울대학교)"
-										style="width: 350px; height: 30px;"></td>
+										style="width: 350px; height: 30px;">
+										<input type="hidden" name="schoolName1" id="schoolName1">
+										<input type="hidden" name="schoolName2" id="schoolName2">
+										<input type="hidden" name="schoolName3" id="schoolName3">
+									</td>
 								</tr>
 								<tr>
 									<td><input type="text" placeholder="전공(ex. 컴퓨터공학과)"
-										id="major" style="width: 210px; height: 30px;"></td>
+										id="major" style="width: 210px; height: 30px;">
+										<input type="hidden" name="major1" id="major1">
+										<input type="hidden" name="major2" id="major2">
+										<input type="hidden" name="major3" id="major3">
+									</td>
 									<td><select style="height: 30px; width: 125px;"
 										id="status">
 											<option value="">상태</option>
 											<option value="inSchool">재학</option>
 											<option value="graduate">졸업</option>
-									</select></td>
+									</select>
+									<input type="hidden" name="status1" id="status1">
+									<input type="hidden" name="status2" id="status2">
+									<input type="hidden" name="status3" id="status3">
+									</td>
 								</tr>
 								<tr>
 									<td colspan="2"><button id="schoolBtn" type="button">확인</button></td>
 								</tr>
 							</table>
 						</div>
-						<script>
-							//학력 전공 입력후 "확인" 버튼 클릭 시 동적으로 div 추가
-							$(function() {
-								$("#schoolBtn").click(function() {
-									var schoolName = $("#schoolName").val();
-									var major = $("#major").val();
-									var status = $("#status").val();
-
-									if (schoolName != '' && major != '' && status != '') {
-										var schoolInfo = {
-											schoolName : schoolName,
-											major : major,
-											status : status
-										};
-
-										$.ajax({
-											url : "/hobbyist/schoolAdd.ar",
-											type : "post",
-											data : schoolInfo,
-											success : function(data) {
-												console.log(data);
-
-												$div = $("#schoolDiv");
-												var $inDiv = $("<div class='inDiv'>").text(data);
-												$div.append($inDiv);
-												$div.append("<br>");
-
-											},
-											error : function(status) {
-												console.log(status);
-											}
-										});
-									} else {
-										alert("모든 입력을 완료해 주세요.");
-									}
-								});
-							});
-						</script>
-
 						<div id="show5" style="display: none;">
 							<table id="ArtistTable9">
 								<tr>
@@ -792,7 +604,7 @@
 							<table id="ArtistTable10">
 								<tr>
 									<td colspan="2" style="font-family: 'Do Hyeon', sans-serif;">경력사항을
-										작성해주세요.&nbsp;&nbsp; <label
+										작성해주세요. (3개 이하로 작성)&nbsp;&nbsp; <label
 										style="color: darkolivegreen; font-size: 13px;">선택 사항</label>
 									</td>
 									<td rowspan="7">
@@ -802,13 +614,25 @@
 								</tr>
 								<tr>
 									<td><input type="text" placeholder="기관명" id="officeName"
-										style="width: 170px; height: 30px;"></td>
+										style="width: 170px; height: 30px;">
+										<input type="hidden" name="officeName1" id="officeName1">	
+										<input type="hidden" name="officeName2" id="officeName2">	
+										<input type="hidden" name="officeName3" id="officeName3">	
+									</td>
 									<td><input type="text" placeholder="직위" id="position"
-										style="width: 170px; height: 30px;"></td>
+										style="width: 170px; height: 30px;">
+										<input type="hidden" name="position1" id="position1">
+										<input type="hidden" name="position2" id="position2">
+										<input type="hidden" name="position3" id="position3">
+									</td>
 								</tr>
 								<tr>
 									<td colspan="2"><input type="text" placeholder="근무내용"
-										id="workContent" style="width: 352px; height: 30px;"></td>
+										id="workContent" style="width: 352px; height: 30px;">
+										<input type="hidden" name="workContent1" id="workContent1">
+										<input type="hidden" name="workContent2" id="workContent2">
+										<input type="hidden" name="workContent3" id="workContent3">
+									</td>
 
 								</tr>
 								<tr>
@@ -830,7 +654,11 @@
 											<option value="9">9</option>
 											<option value="10">10</option>
 											<option value="10년이상">10년 이상</option>
-									</select></td>
+										</select>
+										<input type="hidden" name="workYear1" id="workYear1">									
+										<input type="hidden" name="workYear2" id="workYear2">									
+										<input type="hidden" name="workYear3" id="workYear3">									
+									</td>
 									<td><select id="workMonth"
 										style="width: 170px; height: 30px;">
 											<option value="">개월</option>
@@ -846,7 +674,11 @@
 											<option value="9">9</option>
 											<option value="10">10</option>
 											<option value="11">11</option>
-									</select></td>
+										</select>
+										<input type="hidden" name="workMonth1" id="workMonth1">
+										<input type="hidden" name="workMonth2" id="workMonth2">
+										<input type="hidden" name="workMonth3" id="workMonth3">
+									</td>
 								</tr>
 								<tr>
 									<td colspan="2">프리랜서인 경우, 기관명, 직위에 '없음'이라고 적어주세요.</td>
@@ -859,45 +691,6 @@
 					</form>
 
 				</div>
-				<script>
-					//경력사항 입력시 동적으로 div 추가
-					$(function() {
-						$("#careerBtn").click(function() {
-							var officeName = $("#officeName").val();
-							var position = $("#position").val();
-							var workContent = $("#workContent").val();
-							var workYear = $("#workYear").val();
-							var workMonth = $("#workMonth").val();
-
-							if (officeName != '' && position != '' && workContent != '' && workMonth != '') {
-								var careerInfo = {
-										officeName : officeName,
-										position : position,
-										workContent : workContent,
-										workYear : workYear,
-										workMonth : workMonth
-								};
-
-								$.ajax({
-									url : "/hobbyist/careerAdd.ar",
-									type : "post",
-									data : careerInfo,
-									success : function(data) {
-										console.log(data);
-
-										$div = $("#careerDiv");
-										var $inDiv = $("<div class='inDiv'>").text(data);
-										$div.append($inDiv);
-										$div.append("<br>");
-									},
-									error : function(status) {
-										console.log(status);
-									}
-								});
-							} else {alert("모든 입력을 완료해 주세요.");}
-						});
-					});
-				</script>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" id="closeModalBtn">이전</button>
 					<button type="button" class="btn btn-primary" id="nextModalBtn">다음</button>
@@ -908,6 +701,298 @@
 		</div>
 	</div>
 	<script>
+		
+		$(function() {
+			//자기소개 부분 textarea에서 255자가 넘지 못하게
+			$("#introduce").keydown(
+				function() {
+					var inputLength = $(this).val().length;
+	
+						if (inputLength > 255) {
+							$(this).val($(this).val().substring(0,255));
+							
+						} else {
+							$("#counter").html(inputLength);
+						}
+				});
+	
+			//닉네임 중복체크
+			$("#checkNick").click(function() {
+				var nick = $("#nickName").val();
+				//console.log(nick);
+				$.ajax({
+					url : "/hobbyist/checkNick.ar",
+					type : "post",
+					data : {nick : nick},
+					success : function(data) {
+						//console.log("서버 전송 성공");
+						if (data == "fail") {
+							alert("닉네임이 중복됩니다.");
+						} else {
+							alert("사용 가능한 닉네임입니다.");
+						}
+					},
+					error : function(error) {
+						console.log(error);
+					}
+				});
+			});
+	
+			// file input 태그 숨기기 
+			$("#fileArea").hide();
+	
+			//수정 아이콘 클릭시 파일 첨부할 수 있께
+			$("#modifyIcon").click(function() {
+				$("#artistImg1").click();
+			});
+	
+		});
+	
+		// 파일 첨부해서 선택했을 경우 아티스트 프로필 변경
+		function loadImg(value) {
+			if (value.files && value.files[0]) {
+				var reader = new FileReader();
+	
+				reader.onload = function(e) {
+					$("#artistprofile").attr("src",e.target.result);
+				}
+	
+				reader.readAsDataURL(value.files[0]);
+			}
+		}
+		/*카테고리 1에서 전문분야와 상세분야 선택 스크립트 */
+		$("#categoryName").change(function() {
+				var categoryName = $("#categoryName").val();
+	
+				$.ajax({
+					url : "/hobbyist/category.su",
+					type : "post",
+					data : {categoryName : categoryName},
+					success : function(data) {
+						$select = $("#detailCategory");
+						$select.find("option").remove();
+	
+						for ( var key in data) {
+							var $option = $("<option>");
+							$option.text(data[key]);
+							$select.append($option);
+						}
+					},
+					error : function(error) {
+						console.log(error);
+					}
+				});
+		});
+	
+		/*카테고리 2에서 전문분야와 상세분야 선택 스크립트 */
+		$("#categoryName2").change(function() {
+			var categoryName = $("#categoryName2").val();
+	
+			$.ajax({
+				url : "/hobbyist/category.su",
+				type : "post",
+				data : {categoryName : categoryName},
+				success : function(data) {
+					$select = $("#detailCategory2");
+					$select.find("option").remove();
+	
+					for (var key in data) {
+						var $option = $("<option>");
+						$option.text(data[key]);
+						$select.append($option);
+					}
+				},
+				error : function(error) {
+					console.log(error);
+				}
+			});
+		});
+	
+		/*카테고리 3에서 전문분야와 상세분야 선택 스크립트 */
+		$("#categoryName3").change(function() {
+			var categoryName = $("#categoryName3").val();
+	
+			$.ajax({
+				url : "/hobbyist/category.su",
+				type : "post",
+				data : {categoryName : categoryName},
+				success : function(data) {
+					$select = $("#detailCategory3");
+					$select.find("option").remove();
+	
+					for (var key in data) {
+						var $option = $("<option>");
+						$option.text(data[key]);
+						$select.append($option);
+					}
+				},
+				error : function(error) {
+					console.log(error);
+				}
+			});
+		});
+		//자격증 확인 버튼 클릭시 동적으로 div 추가
+		$(function() {
+			var certiIndex = 1;
+			
+			$("#certiBtn").click(function() {
+				var certiName = $("#certiName").val();
+				var certiDay = $("#certiDay").val();
+				var certiSpace = $("#certiSpace").val();
+	
+				if (certiIndex <= 3){
+					
+					if (certiName != '' && certiDay != '' && certiSpace != '') {
+						
+						var certiInfo = {
+								certiName : certiName,
+								certiDay : certiDay,
+								certiSpace : certiSpace
+						};
+						/* certiSend[index++] = certiInfo; */
+							
+						$("#certiName" + certiIndex).val(certiName);
+						$("#certiDay" + certiIndex).val(certiDay);
+						$("#certiSpace" + certiIndex).val(certiSpace);
+						certiIndex++;
+						
+					
+		
+						$.ajax({
+							url : "/hobbyist/certiAdd.ar",
+							type : "post",
+							data : certiInfo,
+							success : function(data) {
+								console.log(data);
+		
+								$div = $("#certiDiv");
+								var $inDiv = $("<div class='inDiv'>").text(data);
+								$div.append($inDiv);
+								$div.append("<br>")
+		
+							},
+							error : function(status) {
+								console.log(status);
+							}
+		
+						});
+						
+					} else {
+						alert("모든 입력을 완료해 주세요.");
+					}
+					
+				} else {
+					alert("자격증은 최대 3개까지만 입력 가능합니다.");
+				}
+	
+			});
+		});
+		//학력 전공 입력후 "확인" 버튼 클릭 시 동적으로 div 추가
+		$(function() {
+			var schoolIndex = 1;
+			
+			$("#schoolBtn").click(function() {
+				var schoolName = $("#schoolName").val();
+				var major = $("#major").val();
+				var status = $("#status").val();
+	
+				if(schoolIndex <= 3) {
+					
+					if (schoolName != '' && major != '' && status != '') {
+						
+						var schoolInfo = {
+							schoolName : schoolName,
+							major : major,
+							status : status
+						};
+						
+						$("#schoolName" + schoolIndex).val(schoolName);
+						$("#major" + schoolIndex).val(major);
+						$("#status" + schoolIndex).val(status);
+						schoolIndex++;
+		
+						$.ajax({
+							url : "/hobbyist/schoolAdd.ar",
+							type : "post",
+							data : schoolInfo,
+							success : function(data) {
+								console.log(data);
+		
+								$div = $("#schoolDiv");
+								var $inDiv = $("<div class='inDiv'>").text(data);
+								$div.append($inDiv);
+								$div.append("<br>");
+		
+							},
+							error : function(status) {
+								console.log(status);
+							}
+						});
+						
+					} else {
+						alert("모든 입력을 완료해 주세요.");
+					}
+					
+				} else {
+					alert("학력/전공은 최대 3개까지만 입력 가능합니다.");
+				}
+			});
+		});
+		
+		//경력사항 입력시 동적으로 div 추가
+		$(function() {
+			var careerIndex = 1;
+			
+			$("#careerBtn").click(function() {
+				var officeName = $("#officeName").val();
+				var position = $("#position").val();
+				var workContent = $("#workContent").val();
+				var workYear = $("#workYear").val();
+				var workMonth = $("#workMonth").val();
+	
+				if(careerIndex <= 3) {
+					
+					if (officeName != '' && position != '' && workContent != '' && workMonth != '') {
+						
+						var careerInfo = {
+								officeName : officeName,
+								position : position,
+								workContent : workContent,
+								workYear : workYear,
+								workMonth : workMonth
+						};
+						
+						$("#officeName" + careerIndex).val(officeName);
+						$("#position" + careerIndex).val(position);
+						$("#workContent" + careerIndex).val(workContent);
+						$("#workYear" + careerIndex).val(workYear);
+						$("#workMonth" + careerIndex).val(workMonth);
+						careerIndex++;
+		
+						$.ajax({
+							url : "/hobbyist/careerAdd.ar",
+							type : "post",
+							data : careerInfo,
+							success : function(data) {
+								console.log(data);
+		
+								$div = $("#careerDiv");
+								var $inDiv = $("<div class='inDiv'>").text(data);
+								$div.append($inDiv);
+								$div.append("<br>");
+							},
+							error : function(status) {
+								console.log(status);
+							}
+						});
+						
+					} else {alert("모든 입력을 완료해 주세요.");}
+					
+				} else {
+					alert("경력은 최대 3개까지만 입력 가능합니다.");
+				}
+			});
+		});
 		$(function() {
 			var num = 1;
 			// 모달 버튼에 이벤트를 건다.
