@@ -165,7 +165,7 @@
 			$("#memberListL").click(function() {
 				$.ajax({
 					url: "/hobbyist/selectList.me",
-					type: 'get',
+					type: 'post',
 					success: function(data) {
 						console.log(data);
 						$table = $("#infoT");
@@ -204,6 +204,29 @@
 						console.log(status);
 					}
 				});
+			});
+		});
+		
+		$(function() {
+			$.ajax({
+				url: "hobbyist/selectList.at",
+				method: "post",
+				success: function(data) {
+					$table = $("#infoT");
+					$table.html('');
+					
+					var $tr = $("<tr>");
+					
+					$tr.append('<th style="width: 8%;">회원코드</th>' +
+								'<th style="width: 12%;">아이디</th>' +
+								'<th style="width: 9%;">이름</th>' +
+								'<th style="width: 12%;">전화번호</th>' +
+								'<th style="width: 17%;">이메일</th>' +
+								'<th style="width: 12%;">계좌번호 </th>' +
+								'<th style="width: 7%;">은행명</th>' +
+								'<th style="width: 14%;">등록일</th>' +
+								'<th style="width: 8%">프로필</th>');
+				}
 			});
 		});
 	</script>
