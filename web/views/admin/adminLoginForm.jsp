@@ -67,24 +67,26 @@
 </style>
 </head>
 <body>
-	<div id="logInArea">
-		<table id="logInTable">
-			<tr style="line-height: 180px;">
-				<td id="hobbyist" colspan="2">hobbyist</td>
-			</tr>
-			<tr>
-				<td id="id">아이디</td>
-				<td><input type="text" id="idT"></td>
-			</tr>
-			<tr>
-				<td id="password">비밀번호</td>
-				<td><input type="password" id="passwordT"></td>
-			</tr>
-			<tr>
-				<td></td>
-				<td id="logIn"><button id="logInBtn">로그인</button></td>
-			</tr>
-		</table>
-	</div>
+	<form action="<%=request.getContextPath()%>/login.ad" method="post">
+		<div id="logInArea">
+			<table id="logInTable">
+				<tr style="line-height: 180px;">
+					<td id="hobbyist" colspan="2">hobbyist</td>
+				</tr>
+				<tr>
+					<td id="id">아이디</td>
+					<td><input type="text" id="idT" name="adminId"></td>
+				</tr>
+				<tr>
+					<td id="password">비밀번호</td>
+					<td><input type="password" id="passwordT" name="adminPwd"></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td id="logIn"><button id="logInBtn">로그인</button></td>
+				</tr>
+			</table>
+		</div>
+	</form>
 </body>
 </html>

@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import com.dh.hobbyist.wrapper.LoginWrapper;
 
 
-@WebFilter("*.me")
+@WebFilter({"*.me", "*.ad"})
 public class EncryptFilter implements Filter {
 
 
