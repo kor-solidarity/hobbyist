@@ -64,6 +64,11 @@
 		color:white;
 	}
 	
+	#submenuWrap {
+		width: 1024px;
+		margin: 0 auto;
+	}
+	
 	/* div position이 relative라 겹쳐져 margin-top을 -30px로 통일 */ 
 	#danceWrap {
 		margin-left:70px;
@@ -115,86 +120,87 @@
 	
 	<!-- div가 차곡차곡 세로로 나열되어 있어 hide()로 숨겨도 공간이 벌어짐 -->
 	<!-- div에 position:relative 속성을 주어 겹쳐주고, table이 아닌 div에 margine을 적용 -->
-	<div id="musicWrap" class="nav2" style="position: relative;">
-		<table class="category2" id="music">
-			<tr>
-				<td>보컬</td>
-				<td>랩</td>
-				<td>국악</td>
-				<td>작사/작곡</td>
-				<td>기타연주</td>
-				<td>피아노</td>
-				<td>기타</td>
-			</tr>
-		</table>
+	<div id="submenuWrap">
+		<div id="musicWrap" class="nav2" style="position: relative;">
+			<table class="category2" id="music">
+				<tr>
+					<td>보컬</td>
+					<td>랩</td>
+					<td>국악</td>
+					<td>작사/작곡</td>
+					<td>기타연주</td>
+					<td>피아노</td>
+					<td>기타</td>
+				</tr>
+			</table>
+		</div>
+		<div id="danceWrap" class="nav2" style="position: relative;">
+			<table class="category2" id="dance" >
+				<tr>
+					<td>방송댄스</td>
+					<td>스트릿</td>
+					<td>현대무용</td>
+					<td>한국무용</td>
+					<td>기타</td>
+				</tr>
+			</table>
+		</div>
+		
+		<div id="videoWrap" class="nav2" style="position: relative;">
+			<table class="category2" id="video">
+				<tr>
+					<td>영상편집</td>
+					<td>영상촬영</td>
+					<td>사진촬영</td>
+					<td>기타</td>
+				</tr>
+			</table>
+		</div>
+		<div id="lifeWrap" class="nav2" style="position: relative;">
+			<table class="category2" id="life">
+				<tr>
+					<td>핸드메이드</td>
+					<td>커피/차</td>
+					<td>요리/베이킹</td>
+					<td>기타</td>
+				</tr>
+			</table>
+		</div>
+		<div id="beautyWrap" class="nav2" style="position: relative;">
+			<table class="category2" id="beauty">
+				<tr>
+					<td>메이크업</td>
+					<td>네일</td>
+					<td>패션</td>
+					<td>퍼스널컬러</td>
+					<td>스킨케어/마사지</td>
+					<td>헤어</td>
+					<td>기타</td>
+				</tr>
+			</table>
+		</div>
+		<div id="designWrap" class="nav2" style="position: relative;">
+			<table class="category2" id="design">
+				<tr>
+					<td>포토샵/일러스트레이터</td>
+					<td>인디자인</td>
+					<td>기타</td>
+				</tr>
+			</table>
+		</div>
+		<div id="sportsWrap" class="nav2" style="position: relative;">
+			<table class="category2" id="sports">
+				<tr>
+					<td>축구</td>
+					<td>농구</td>
+					<td>야구</td>
+					<td>수상 레저</td>
+					<td>스키/보드</td>
+					<td>기타</td>
+				</tr>
+			</table>
+		</div>
 	</div>
-	<div id="danceWrap" class="nav2" style="position: relative;">
-		<table class="category2" id="dance" >
-			<tr>
-				<td>방송댄스</td>
-				<td>스트릿</td>
-				<td>현대무용</td>
-				<td>한국무용</td>
-				<td>기타</td>
-			</tr>
-		</table>
-	</div>
-	
-	<div id="videoWrap" class="nav2" style="position: relative;">
-		<table class="category2" id="video">
-			<tr>
-				<td>영상편집</td>
-				<td>영상촬영</td>
-				<td>사진촬영</td>
-				<td>기타</td>
-			</tr>
-		</table>
-	</div>
-	<div id="lifeWrap" class="nav2" style="position: relative;">
-		<table class="category2" id="life">
-			<tr>
-				<td>핸드메이드</td>
-				<td>커피/차</td>
-				<td>요리/베이킹</td>
-				<td>기타</td>
-			</tr>
-		</table>
-	</div>
-	<div id="beautyWrap" class="nav2" style="position: relative;">
-		<table class="category2" id="beauty">
-			<tr>
-				<td>메이크업</td>
-				<td>네일</td>
-				<td>패션</td>
-				<td>퍼스널컬러</td>
-				<td>스킨케어/마사지</td>
-				<td>헤어</td>
-				<td>기타</td>
-			</tr>
-		</table>
-	</div>
-	<div id="designWrap" class="nav2" style="position: relative;">
-		<table class="category2" id="design">
-			<tr>
-				<td>포토샵/일러스트레이터</td>
-				<td>인디자인</td>
-				<td>기타</td>
-			</tr>
-		</table>
-	</div>
-	<div id="sportsWrap" class="nav2" style="position: relative;">
-		<table class="category2" id="sports">
-			<tr>
-				<td>축구</td>
-				<td>농구</td>
-				<td>야구</td>
-				<td>수상 레저</td>
-				<td>스키/보드</td>
-				<td>기타</td>
-			</tr>
-		</table>
-	</div>
-	
 	
 	<script>
 	$(function() {
