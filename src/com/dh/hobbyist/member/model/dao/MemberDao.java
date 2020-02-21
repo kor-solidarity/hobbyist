@@ -82,7 +82,7 @@ public class MemberDao {
 				loginMember.setBankOwner(rset.getString("MEMBER_BANK_OWNER"));
 				loginMember.setBankNum(rset.getString("MEMBER_BANK_NUM"));
 				loginMember.setDel(rset.getInt("MEMBER_DEL"));
-				loginMember.setPoints(rset.getInt("MEMBER_POINT"));
+				loginMember.setPoint(rset.getInt("MEMBER_POINT"));
 				loginMember.setRegDate(rset.getDate("REG_DATE"));
 				loginMember.setFirstLogin(rset.getInt("FIRST_LOGIN"));
 				loginMember.setWarnings(rset.getInt("WARNINGS"));

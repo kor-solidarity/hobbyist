@@ -13,7 +13,7 @@ public class Member implements java.io.Serializable{
 	private String bankOwner;
 	private String bankNum;
 	private int del;
-	private int points;
+	private int point;
 	private Date regDate;
 	private int firstLogin;
 	private int warnings;
@@ -26,7 +26,7 @@ public class Member implements java.io.Serializable{
 
 	
 	public Member(int memberCode, String memberId, String memberPwd, String memberName, String phone, String email,
-			String bankName, String bankOwner, String bankNum, int del, int points, Date regDate, int firstLogin,
+			String bankName, String bankOwner, String bankNum, int del, int point, Date regDate, int firstLogin,
 			int warnings, int isArtist, Date artistAccepted, String artistNick) {
 		super();
 		this.memberCode = memberCode;
@@ -39,7 +39,7 @@ public class Member implements java.io.Serializable{
 		this.bankOwner = bankOwner;
 		this.bankNum = bankNum;
 		this.del = del;
-		this.points = points;
+		this.point = point;
 		this.regDate = regDate;
 		this.firstLogin = firstLogin;
 		this.warnings = warnings;
@@ -149,13 +149,13 @@ public class Member implements java.io.Serializable{
 	}
 
 
-	public int getPoints() {
-		return points;
+	public int getPoint() {
+		return point;
 	}
 
 
-	public void setPoints(int points) {
-		this.points = points;
+	public void setPoint(int point) {
+		this.point = point;
 	}
 
 
@@ -224,7 +224,7 @@ public class Member implements java.io.Serializable{
 	public String toString() {
 		return "Member [memberCode=" + memberCode + ", memberId=" + memberId + ", memberPwd=" + memberPwd
 				+ ", memberName=" + memberName + ", phone=" + phone + ", email=" + email + ", bankName=" + bankName
-				+ ", bankOwner=" + bankOwner + ", bankNum=" + bankNum + ", del=" + del + ", points=" + points
+				+ ", bankOwner=" + bankOwner + ", bankNum=" + bankNum + ", del=" + del + ", point=" + point
 				+ ", regDate=" + regDate + ", firstLogin=" + firstLogin + ", warnings=" + warnings + ", isArtist="
 				+ isArtist + ", artistAccepted=" + artistAccepted + ", artistNick=" + artistNick + "]";
 	}
