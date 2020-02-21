@@ -162,6 +162,7 @@
 	
 	<script>
 		$(function() {
+			
 			$("#memberListL").click(function() {
 				$.ajax({
 					url: "/hobbyist/selectList.me",
@@ -209,7 +210,7 @@
 		
 			$("#artistListL").click(function() {
 				$.ajax({
-					url: "hobbyist/selectList.ar",
+					url: "/hobbyist/selectList.ar",
 					method: "post",
 					success: function(data) {
 						$table = $("#infoT");
@@ -219,29 +220,48 @@
 					
 						$tr.append('<th style="width: 8%;">회원코드</th>' +
 									'<th style="width: 12%;">아이디</th>' +
-									'<th style="width: 9%;">이름</th>' +
+									'<th style="width: 8%;">이름</th>' +
+									'<th style="width: 9%;">닉네임</th>' +
 									'<th style="width: 12%;">전화번호</th>' +
-									'<th style="width: 17%;">이메일</th>' +
-									'<th style="width: 12%;">계좌번호 </th>' +
-									'<th style="width: 7%;">은행명</th>' +
+									'<th style="width: 16%;">이메일</th>' +
+									'<th style="width: 13%;">계좌번호 </th>' +
 									'<th style="width: 14%;">등록일</th>' +
 									'<th style="width: 8%">프로필</th>');
 						
 						$table.append($tr);
 						
-						$each(data, function(index, value){
+						//$each(data, function(index, value){
+							
+						for(var key in data) {
+							
 							$tr = $("<tr>");
-							var $mcode = $("<td>").text(value.memberCode);
-							var $mId = $("<td>").text(decodeURIComponent(value.memberId));
-							var $mName = $("<td>").text(decodeURIComponent(value.memberName));
-							var $phone = $("<td>").text(decodeURIComponent(value.phone));
-							var $email = $("<td>").text(decodeURIComponent(value.email));
-							var $isArtist = $("<td>").text(value.isArtist);
-							var $warning = $("<td>").text(value.warning);
-							var $regDate = $("<td>").text(value.regDate);
+							var $acode = $("<td>").text(data[key].memberCode);
+							var $aId = $("<td>").text(data[key].memberId);
+							var $aName = $("<td>").text(data[key].memberName);
+							var $aNick = $("<td>").text(data[key].artistNick);
+							var $phone = $("<td>").text(data[key].phone);
+							var $email = $("<td>").text(data[key].email);
+							var $bank = $("<td>").text(data[key].bankName);
+							var $accept = $("<td>").text(data[key].artistAccepted);
+							var $profile = $("<td>").html("<button>조회</button>");
 							
+							$tr.append($acode);
+							$tr.append($aId);
+							$tr.append($aName);
+							$tr.append($aNick);
+							$tr.append($phone);
+							$tr.append($email);
+							$tr.append($bank);
+							$tr.append($accept);
+							$tr.append($profile);
+							$table.append($tr);
+						
+						}
 							
-						});
+						//});
+					},
+					error: function(status) {
+						console.log(status);
 					}
 				});
 			});

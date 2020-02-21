@@ -1,6 +1,7 @@
 package com.dh.hobbyist.member.controller;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -24,7 +25,17 @@ public class SelectArtistListServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		List<Member> artistList = new MemberService().selectArtistList();
 		
+//		HashMap hmp = null;
+//		for(Member artist : artistList) {
+//			hmp.put("pk", artist.getMemberCode());
+//			hmp.put("id", artist.getMemberId());
+//			hmp.put("name", artist.getMemberName());
+//			hmp.put("nick", artist.getArtistNick());
+//			hmp.put("phone", artist.getPhone());
+//			
+//		}
 		response.setContentType("application/json");
+		response.setCharacterEncoding("UTF-8");
 		new Gson().toJson(artistList, response.getWriter());
 		
 	}

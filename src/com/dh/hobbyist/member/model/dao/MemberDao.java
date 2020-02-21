@@ -72,7 +72,7 @@ public class MemberDao {
 			if(rset.next()) {
 				loginMember = new Member();
 				
-				loginMember.setMemberCode(rset.getInt("MEMBER_CODE"));
+				loginMember.setMemberCode(rset.getInt("MEMBER_PK"));
 				loginMember.setMemberId(rset.getString("MEMBER_ID"));
 				loginMember.setMemberPwd(rset.getString("MEMBER_PWD"));
 				loginMember.setMemberName(rset.getString("MEMBER_NAME"));
@@ -147,7 +147,7 @@ public class MemberDao {
 			
 			while(rset.next()) {
 				Member m = new Member();
-				m.setMemberCode(rset.getInt("MEMBER_CODE"));
+				m.setMemberCode(rset.getInt("MEMBER_PK"));
 				m.setMemberId(rset.getString("MEMBER_ID"));
 				m.setMemberName(rset.getString("MEMBER_NAME"));
 				m.setPhone(rset.getString("MEMBER_PHONE"));
@@ -185,7 +185,7 @@ public class MemberDao {
 			
 			while(rset.next()) {
 				Member m = new Member();
-				m.setMemberCode(rset.getInt("MEMBER_CODE"));
+				m.setMemberCode(rset.getInt("MEMBER_PK"));
 				m.setMemberId(rset.getString("MEMBER_ID"));
 				m.setMemberName(rset.getString("MEMBER_NAME"));
 				m.setArtistNick(rset.getString("ARTIST_NICK"));
