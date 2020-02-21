@@ -36,6 +36,7 @@ public class adminLoginServlet extends HttpServlet {
 		
 		String page = "";
 		if(loginAdmin != null) {
+			
 			HttpSession session = request.getSession();
 			session.setAttribute("loginAdmin", loginAdmin);
 			
