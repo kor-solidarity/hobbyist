@@ -133,7 +133,7 @@
 	height: 130px;
 	width: 130px;
 	magin: auto;
-	border-radius: 50px;
+	border-radius: 90px;
 }
 
 #gearwheel {
@@ -228,7 +228,7 @@ color: #556B2F;
 		<table class = tabletop2>
 			<tr>
 				<!--학생사진  -->
-				<td rowspan="4" class="profileImgArea" ><img id="profileImg" src="<%=request.getContextPath() %>/static/images/memberUpdate1.png"></td>
+				<td rowspan="4" class="profileImgArea" ><img id="profileImg" src="<%=request.getContextPath() %>/static/images/seolhyun.png"></td>
 				<td colspan="4" class="td1"></td>
 				<!--  설정 사진 -->
 				<td colspan="3" class="td2"><img id="gearwheel" src="<%=request.getContextPath() %>/static/images/gearwheel.png"></td>

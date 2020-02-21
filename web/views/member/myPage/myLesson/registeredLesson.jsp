@@ -115,6 +115,9 @@
 		font-size: 14px;
 		text-align: center;
 	}
+	.subMenuTitle {
+		cursor:pointer;
+	}
 </style>
 </head>
 <body>
@@ -124,14 +127,32 @@
 		<div id="subMenuArea">
 			<table id="subMenu">
 				<tr>
-					<td style="color:darkolivegreen;">수강한 수업</td>
-					<td>찜한 수업</td>
-					<td>등록한 건의</td>
-					<td>찜한 건의</td>
-					<td>등록한 수업</td>
+					<td style="color:darkolivegreen;"><label>수강한 수업</label></td>
+					<td onclick="goLikedLesson();"><label class="subMenuTitle">찜한 수업</label></td>
+					<td onclick="goRegisteredSuggestion();"><label class="subMenuTitle">등록한 건의</label></td>
+					<td onclick="goLikedSuggestion();"><label class="subMenuTitle">찜한 건의</label></td>
+					<td onclick="goOpenedLesson();"><label class="subMenuTitle">개설한 수업</label></td>
 				</tr>
 			</table>
 		</div>
+		<script>
+			function goRegisteredLesson() {
+				location.href = "<%=request.getContextPath()%>/views/member/myPage/myLesson/registeredLesson.jsp";
+			}
+			function goLikedLesson() {
+				location.href = "<%=request.getContextPath()%>/views/member/myPage/myLesson/likedLesson.jsp";
+			}			
+			function goRegisteredSuggestion() {
+				location.href = "<%=request.getContextPath()%>/views/member/myPage/myLesson/registeredSuggestion.jsp";
+			}			
+			function goLikedSuggestion() {
+				location.href = "<%=request.getContextPath()%>/views/member/myPage/myLesson/likedSuggestion.jsp";
+			}
+			function goOpenedLesson() {
+				location.href = "<%=request.getContextPath()%>/views/member/myPage/myLesson/openedLesson.jsp";
+			}
+		</script>
+		
 		<!-- 수업 목록 영역 -->
 		<table class="lessonArea" align="center">
 			<tr>
