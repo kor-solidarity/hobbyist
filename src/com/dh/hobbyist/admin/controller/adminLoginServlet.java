@@ -1,6 +1,8 @@
 package com.dh.hobbyist.admin.controller;
 
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import com.dh.hobbyist.admin.model.service.AdminService;
 import com.dh.hobbyist.admin.model.vo.Admin;
+import com.dh.hobbyist.member.model.service.MemberService;
 import com.dh.hobbyist.member.model.vo.Member;
 
 @WebServlet("/login.ad")
@@ -36,12 +39,24 @@ public class adminLoginServlet extends HttpServlet {
 			HttpSession session = request.getSession();
 			session.setAttribute("loginAdmin", loginAdmin);
 			
-			response.sendRedirect("views/admin/memberMgmt/memberList.jsp");
+			List<Member> memberList = new MemberService().selectList();
+			
+			//회원리스트를 바로 가져오기 위한 메소드
+			if(memberList != null) {
+				page = "views/admin/memberMgmt/memberList.jsp";
+				request.setAttribute("list", memberList);
+				
+			}else {
+				page = "views/common/errorPage.jsp";
+				request.setAttribute("msg", "회원정보를 로드 할 수 없습니다.");
+			}
+			
 			
 		}else {
+			page = "views/common/errorPage.jsp";
 			request.setAttribute("msg", "로그인에 실패하셨습니다.");
-			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
 		}
+		request.getRequestDispatcher(page).forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
