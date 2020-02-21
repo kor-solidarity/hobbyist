@@ -168,5 +168,45 @@ public class MemberDao {
 		
 		return memberList;
 	}
+	
+	//관리자에서 아티스트 정보 조회용 메소드 (찬영)
+	public List<Member> selectArtistList(Connection con) {
+		Statement stmt = null;
+		ResultSet rset = null;
+		List<Member> artistList = null;
+		
+		String query = prop.getProperty("selectArtistList");
+		
+		try {
+			stmt = con.createStatement();
+			rset = stmt.executeQuery(query);
+			
+			artistList = new ArrayList<Member>();
+			
+			while(rset.next()) {
+				Member m = new Member();
+				m.setMemberCode(rset.getInt("MEMBER_CODE"));
+				m.setMemberId(rset.getString("MEMBER_ID"));
+				m.setMemberName(rset.getString("MEMBER_NAME"));
+				m.setArtistNick(rset.getString("ARTIST_NICK"));
+				m.setPhone(rset.getString("MEMBER_PHONE"));
+				m.setEmail(rset.getString("MEMBER_EMAIL"));
+				m.setBankName(rset.getString("MEMBER_BANK_NAME"));
+				m.setBankOwner(rset.getString("MEMBER_BANK_OWNER"));
+				m.setBankNum(rset.getString("MEMBER_BANK_NUM"));
+				m.setArtistAccepted(rset.getDate("ARTIST_ACCEPTED"));
+				
+				artistList.add(m);
+				
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(stmt);
+			close(rset);
+		}
+		
+		return artistList;
+	}
 
 }

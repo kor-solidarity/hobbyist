@@ -55,15 +55,20 @@ public class MemberService {
 		
 		List<Member> memberList = new MemberDao().selectList(con);
 		
-		if(memberList != null) {
-			commit(con);
-		}else {
-			rollback(con);
-		}
-		
 		close(con);
 		
 		return memberList;
+	}
+	
+	//관리자에서 아티스트 정보 조회용 메소드 (찬영)
+	public List<Member> selectArtistList() {
+		Connection con = getConnection();
+		
+		List<Member> artistList = new MemberDao().selectArtistList(con);
+		
+		close(con);
+		
+		return artistList;
 	}
 
 }
