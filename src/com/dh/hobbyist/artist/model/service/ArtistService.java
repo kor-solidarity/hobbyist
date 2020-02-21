@@ -18,4 +18,23 @@ public class ArtistService {
 		return result;
 	}
 
+	//아티스트 전문 카테고리 삽입 메소드 
+	public int insertCategory(String memberPk, String[] details) {
+		Connection con = getConnection();
+		
+		int result = new ArtistDao().insertCategory(con, memberPk, details);
+		
+		if(result > 0) {
+			commit(con);
+		} else {
+			rollback(con);
+		}
+		
+		close(con);
+		
+		return result;
+	}
+
+	
+
 }

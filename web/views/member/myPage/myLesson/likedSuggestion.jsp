@@ -42,11 +42,11 @@
 	<div id="likedSugDiv1">
 		<table id="regSugTab1">
 			<tr>
-				<td style="text-align:center;"><label class="regSugLab">수강한 수업</label></td>
+				<td onclick="goRegLes();" style="text-align:center;"><label class="regSugLab">수강한 수업</label></td>
 				<td style="text-align:center;"><label class="regSugLab">찜한 수업</label></td>
 				<td onclick="goRegSug();" style="text-align:center;"><label class="regSugLab">등록한 건의</label></td>
 				<td onclick="goLikedSug();" style="color:darkolivegreen; text-align:center;"><label class="regSugLab">찜한 건의</label></td>
-				<td style="text-align:center;"><label class="regSugLab">등록한 수업</label></td>
+				<td style="text-align:center;"><label class="regSugLab">개설한 수업</label></td>
 				<td style="width:374px;"></td>
 			</tr>
 			<tr>
@@ -54,6 +54,9 @@
 			</tr>
 		</table>
 		<script>
+			function goRegLes() {
+				location.href = "<%=request.getContextPath()%>/views/member/myPage/myLesson/registeredLesson.jsp";
+			}
 			function goLikedSug() {
 				location.href = "<%=request.getContextPath()%>/views/member/myPage/myLesson/likedSuggestion.jsp";
 			}
