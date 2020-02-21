@@ -109,12 +109,14 @@ th {
 }
 
 .place-edit-table tr > td:nth-of-type(2) {
-    width: 85%;
-}
-
-.place-edit-table tr > td:nth-of-type(2)  {
+    /*width: 85%;*/
     width: 500px;
 }
+
+.place-edit-img  td{
+    width: unset !important;
+}
+
 .place-edit-table input[type=checkbox],
 .place-edit-table input[type=date]{
     width: unset !important;

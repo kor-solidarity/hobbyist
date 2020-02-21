@@ -109,7 +109,32 @@
                     <tr>
                         <%-- 사진등록창 5개 띄워야함.  --%>
                         <td style="width: 100%" colspan="2">
-
+                            <table style="width: 100%" class="place-edit-img">
+                                <tbody>
+                                <tr>
+                                    <td colspan="5">
+                                        <div style="text-align: center">※ 가장 왼쪽 사진이 대표사진으로 간주됩니다.</div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><img style="width: 150px"
+                                             src="<%=request.getContextPath()%>/static/images/iphoneCamera.png" alt="">
+                                    </td>
+                                    <td><img style="width: 150px"
+                                             src="<%=request.getContextPath()%>/static/images/iphoneCamera.png" alt="">
+                                    </td>
+                                    <td><img style="width: 150px"
+                                             src="<%=request.getContextPath()%>/static/images/iphoneCamera.png" alt="">
+                                    </td>
+                                    <td><img style="width: 150px"
+                                             src="<%=request.getContextPath()%>/static/images/iphoneCamera.png" alt="">
+                                    </td>
+                                    <td><img style="width: 150px"
+                                             src="<%=request.getContextPath()%>/static/images/iphoneCamera.png" alt="">
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
                         </td>
                     </tr>
                 </table>
@@ -117,10 +142,10 @@
                     <tr>
                         <td style="width: 40%">
                             <bold>등록일:</bold>
-                            <input type="date" name="registerDate" id="startDate"></td>
+                            <input type="datetime-local" name="registerDate" id="startDate"></td>
                         <td>
                             <bold>종료일:</bold>
-                            <input type="date" name="EndDate" id=""></td>
+                            <input type="datetime-local" name="EndDate" id=""></td>
                     </tr>
                 </table>
             </div>
@@ -135,16 +160,18 @@
 <script>
     $(function () {
         var date = new Date();
-        var month = date.getMonth() + 1
+        var month = date.getMonth() + 1;
         var day = date.getDate();
+        var hour = date.getHours();
+        var min = date.getMinutes();
         if (day < 10) {
             day = '0' + day.toString()
         }
         if (month < 10) {
             month = '0' + month.toString();
         }
-        // 시작날자 초기화
-        $("#startDate").val(date.getFullYear() + '-' + month + '-' + day);
+        // 시작일자 초기화
+        $("#startDate").val(date.getFullYear() + '-' + month + '-' + day + 'T' + hour + ':' + min);
 
     })
 </script>
