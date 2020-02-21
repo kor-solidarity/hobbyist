@@ -344,7 +344,7 @@
 				</div>
 				<div class="modal-body">
 					<form id="artistForm"
-						action="<%=request.getContextPath()%>/insert.ar" method="post">
+						action="<%=request.getContextPath()%>/insert.ar" method="post" encType="multipart/form-data">
 						<div id="show1">
 							<table id="ArtistTable1">
 								<tr>
@@ -374,11 +374,11 @@
 										<button type="button" id="checkNick" style="height: 30px;">중복확인</button>
 									</td>
 									<td colspan="2">
-										<p>계좌번호</p> <select style="height: 32px">
-											<option>은행명</option>
-											<option>신한은행</option>
-											<option>국민은행</option>
-											<option>농협은행</option>
+										<p>계좌번호</p> <select style="height: 32px" name="bankName">
+											<option value="">은행명</option>
+											<option value="SH">신한은행</option>
+											<option value="KB">국민은행</option>
+											<option value="NH">농협은행</option>
 									</select> <input type="text" name="bankNum" style="height: 30px">
 										<button style="height: 30px">계좌인증</button>
 									</td>
@@ -417,57 +417,46 @@
 								<tr>
 									<td style="vertical-align: top; color: black;">전문분야 및
 										상세분야를 선택해주세요.<label style="color: darkolivegreen;">(복수
-											선택)</label><br> <br> <select id="categoryName">
-											<option value="">선택</option>
-											<option value="music">음악</option>
-											<option value="dance">댄스</option>
-											<option value="picture">영상/사진</option>
-											<option value="life">라이프스타일</option>
-											<option value="beauty">뷰티</option>
-											<option value="design">디자인</option>
-											<option value="sports">스포츠</option>
-									</select> <br> <select id="detailCategory">
-											<option>선택</option>
-
-									</select> <br> <br> <select id="categoryName2">
-											<option value="">선택</option>
-											<option value="music">음악</option>
-											<option value="dance">댄스</option>
-											<option value="picture">영상/사진</option>
-											<option value="life">라이프스타일</option>
-											<option value="beauty">뷰티</option>
-											<option value="design">디자인</option>
-											<option value="sports">스포츠</option>
-									</select> <br> <select id="detailCategory2">
-											<option>선택</option>
-											<option>음악</option>
-											<option>댄스</option>
-											<option>영상/사진</option>
-											<option>라이프스타일</option>
-											<option>뷰티</option>
-											<option>디자인</option>
-											<option>스포츠</option>
-									</select> <br> <br> <select id="categoryName3">
-											<option value="">선택</option>
-											<option value="music">음악</option>
-											<option value="dance">댄스</option>
-											<option value="picture">영상/사진</option>
-											<option value="life">라이프스타일</option>
-											<option value="beauty">뷰티</option>
-											<option value="design">디자인</option>
-											<option value="sports">스포츠</option>
-									</select> <br> <select id="detailCategory3">
-											<option>선택</option>
-											<option>음악</option>
-											<option>댄스</option>
-											<option>영상/사진</option>
-											<option>라이프스타일</option>
-											<option>뷰티</option>
-											<option>디자인</option>
-											<option>스포츠</option>
-									</select>
-
-
+											선택)</label><br> <br> 
+											<select id="categoryName" name="categoryName">
+												<option value="">선택</option>
+												<option value="music">음악</option>
+												<option value="dance">댄스</option>
+												<option value="picture">영상/사진</option>
+												<option value="life">라이프스타일</option>
+												<option value="beauty">뷰티</option>
+												<option value="design">디자인</option>
+												<option value="sports">스포츠</option>
+											</select> <br> 
+											<select id="detailCategory" name="detailCategory">
+												<option value="">선택</option>
+											</select> <br> <br> 
+											<select id="categoryName2" name="categoryName2">
+												<option value="">선택</option>
+												<option value="music">음악</option>
+												<option value="dance">댄스</option>
+												<option value="picture">영상/사진</option>
+												<option value="life">라이프스타일</option>
+												<option value="beauty">뷰티</option>
+												<option value="design">디자인</option>
+												<option value="sports">스포츠</option>
+											</select> <br> 
+											<select id="detailCategory2" name="detailCategory2">
+												<option value="">선택</option>
+											</select> <br> <br> 
+											<select id="categoryName3" name="categoryName3">
+												<option value="">선택</option>
+												<option value="music">음악</option>
+												<option value="dance">댄스</option>
+												<option value="picture">영상/사진</option>
+												<option value="life">라이프스타일</option>
+												<option value="beauty">뷰티</option>
+												<option value="design">디자인</option>
+												<option value="sports">스포츠</option>
+											</select> <br> 
+											<select id="detailCategory3" name="detailCategory3">
+												<option value="">선택</option>
+											</select>
 									</td>
 									<!-- <td>
 										<div
@@ -533,7 +522,7 @@
 								<tr>
 									<!-- <td><button>파일선택</button></td>
 									<td style="font-size: 13px;">선택된 파일 없음</td> -->
-									<td colspan="2"><input type="file" id="certiFile">
+									<td colspan="2"><input type="file" id="certiFile" name="certiFile">
 									</td>
 								</tr>
 							</table>
@@ -720,22 +709,27 @@
 			$("#checkNick").click(function() {
 				var nick = $("#nickName").val();
 				//console.log(nick);
-				$.ajax({
-					url : "/hobbyist/checkNick.ar",
-					type : "post",
-					data : {nick : nick},
-					success : function(data) {
-						//console.log("서버 전송 성공");
-						if (data == "fail") {
-							alert("닉네임이 중복됩니다.");
-						} else {
-							alert("사용 가능한 닉네임입니다.");
+				if(nick == '') {
+					alert("닉네임을 적어주세요.");
+				} else {
+					
+					$.ajax({
+						url : "/hobbyist/checkNick.ar",
+						type : "post",
+						data : {nick : nick},
+						success : function(data) {
+							//console.log("서버 전송 성공");
+							if (data == "fail") {
+								alert("닉네임이 중복됩니다.");
+							} else {
+								alert("사용 가능한 닉네임입니다.");
+							}
+						},
+						error : function(error) {
+							console.log(error);
 						}
-					},
-					error : function(error) {
-						console.log(error);
-					}
-				});
+					});
+				}
 			});
 	
 			// file input 태그 숨기기 
