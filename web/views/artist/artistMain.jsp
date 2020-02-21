@@ -298,8 +298,12 @@
 			</tr>
 			<tr>
 				<td style="height: 400px;">
-					<button type="button" class="btn btn-primary btn-lg"
-						id="openModalBtn" style="margin-left: 15px;">아티스트 신청하기</button>
+					<% if(loginMember != null) { %>
+						<button type="button" class="btn btn-primary btn-lg"
+							id="openModalBtn" style="margin-left: 15px;">아티스트 신청하기</button>
+					<% } else { %>
+						<button type="button" class="btn btn-primary btn-lg" id="notLoginBtn" style="margin-left: 15px;">아티스트 신청</button>
+					<% } %>
 				</td>
 			</tr>
 		</table>
@@ -372,6 +376,9 @@
 										<p>아티스트 닉네임</p> <input type="text" name="nickName"
 										id="nickName" style="height: 30px">
 										<button type="button" id="checkNick" style="height: 30px;">중복확인</button>
+										<% if(loginMember != null) { %>
+											<input type="hidden" name="loginMemberPk" value="<%=loginMember.getMemberCode()%>">
+										<% } %>
 									</td>
 									<td colspan="2">
 										<p>계좌번호</p> <select style="height: 32px" name="bankName">
@@ -990,9 +997,15 @@
 		$(function() {
 			var num = 1;
 			// 모달 버튼에 이벤트를 건다.
+			
+			$('#notLoginBtn').on('click', function() {
+				alert("로그인 후 진행해주세요.");	
+			});
+			
 			$('#openModalBtn').on('click', function() {
 				$('#modalBox').modal('show');
 			});
+			
 			// 모달 안의 취소 버튼에 이벤트를 건다.
 			$('#closeModalBtn').on('click', function() {
 				/* $('#modalBox').modal('hide'); */

@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 
+import com.dh.hobbyist.artist.model.service.ArtistService;
 import com.dh.hobbyist.common.MyFileRenamePolicy;
 import com.oreilly.servlet.MultipartRequest;
 
@@ -63,6 +64,8 @@ public class InsertArtistServlet extends HttpServlet {
 			System.out.println("saveFile : " + saveFiles);
 			System.out.println("originFile : " + originFiles);
 			
+			String memberPk = multiRequest.getParameter("loginMemberPk");
+			
 			//"01. 자기소개" 에서 받아오는 input
 			String nickName = multiRequest.getParameter("nickName");
 			String bankName = multiRequest.getParameter("bankName");
@@ -79,6 +82,12 @@ public class InsertArtistServlet extends HttpServlet {
 			String categoryName3 = multiRequest.getParameter("categoryName3");
 			String detailCategory3 = multiRequest.getParameter("detailCategory3");
 			
+			String[] details = {detailCategory, detailCategory2, detailCategory3};
+			int categoryResult 
+					= new ArtistService().insertCategory(memberPk, details);
+			
+			
+			
 			//"03. 보유 자격증" 에서 받아오는 input
 			String certiName1 = multiRequest.getParameter("certiName1");
 			String certiDay1 = multiRequest.getParameter("certiDay1");
@@ -91,6 +100,12 @@ public class InsertArtistServlet extends HttpServlet {
 			String certiName3 = multiRequest.getParameter("certiName3");
 			String certiDay3 = multiRequest.getParameter("certiDay3");
 			String certiSpace3 = multiRequest.getParameter("certiSpace3");
+			
+			String[] certiNames = {certiName1, certiName2, certiName3};
+			String[] certiDays = {certiDay1, certiDay2, certiDay3};
+			String[] certiSpaces = {certiSpace1, certiSpace2, certiSpace3};
+			
+			
 			
 			//"04. 학력/전공" 에서 받아오는 input
 			String schoolName1 = multiRequest.getParameter("schoolName1");
@@ -125,6 +140,7 @@ public class InsertArtistServlet extends HttpServlet {
 			String workMonth3 = multiRequest.getParameter("workMonth3");
 			
 			
+			System.out.println("memberPk : " + memberPk);
 			System.out.println("nickName : " + nickName);
 			System.out.println("bankName : " + bankName);
 			System.out.println("bankNum : " + bankNum);

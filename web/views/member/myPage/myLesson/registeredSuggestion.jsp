@@ -46,7 +46,7 @@
 				<td style="text-align: center;"><label class="regSugLab">찜한 수업</label></td>
 				<td style="text-align: center; color:darkolivegreen;" onclick="goRegSug();"><label class="regSugLab">등록한 건의</label></td>
 				<td style="text-align: center;" onclick="goLikedSug();"><label class="regSugLab">찜한 건의</label></td>
-				<td style="text-align: center;"><label class="regSugLab">등록한 수업</label></td>
+				<td style="text-align: center;"><label class="regSugLab">개설한 수업</label></td>
 				<td style="width:374px;"></td>
 			</tr>
 			<tr>
