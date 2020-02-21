@@ -51,8 +51,9 @@
  	}
  	
  	#logout {
- 		border-style: solid;
+ 		border-style: 1px solid #4E4E4E;
  		color: #4E4E4E;
+ 		background: #DED842;
  		padding-left: 10px;
  		padding-right: 10px;
         border-top-left-radius:50px;
@@ -78,9 +79,15 @@
 		</table>
 		<table id="logoutT">
 			<tr>
-				<td style="text-align: right; width: 30px;"><label id="logout">로그아웃</label></td>
+				<td style="text-align: right; width: 30px;"><button id="logout">로그아웃</button></td>
 			</tr>
 		</table>
 	</header>
+	<script>
+		document.getElementById("logout").onclick = function (){
+
+			location.href = "<%=request.getContextPath()%>/logout.ad";
+		};
+	</script>
 </body>
 </html>

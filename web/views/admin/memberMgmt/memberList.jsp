@@ -205,28 +205,45 @@
 					}
 				});
 			});
-		});
 		
-		$(function() {
-			$.ajax({
-				url: "hobbyist/selectList.at",
-				method: "post",
-				success: function(data) {
-					$table = $("#infoT");
-					$table.html('');
+		
+			$("#artistListL").click(function() {
+				$.ajax({
+					url: "hobbyist/selectList.ar",
+					method: "post",
+					success: function(data) {
+						$table = $("#infoT");
+						$table.html('');
 					
-					var $tr = $("<tr>");
+						var $tr = $("<tr>");
 					
-					$tr.append('<th style="width: 8%;">회원코드</th>' +
-								'<th style="width: 12%;">아이디</th>' +
-								'<th style="width: 9%;">이름</th>' +
-								'<th style="width: 12%;">전화번호</th>' +
-								'<th style="width: 17%;">이메일</th>' +
-								'<th style="width: 12%;">계좌번호 </th>' +
-								'<th style="width: 7%;">은행명</th>' +
-								'<th style="width: 14%;">등록일</th>' +
-								'<th style="width: 8%">프로필</th>');
-				}
+						$tr.append('<th style="width: 8%;">회원코드</th>' +
+									'<th style="width: 12%;">아이디</th>' +
+									'<th style="width: 9%;">이름</th>' +
+									'<th style="width: 12%;">전화번호</th>' +
+									'<th style="width: 17%;">이메일</th>' +
+									'<th style="width: 12%;">계좌번호 </th>' +
+									'<th style="width: 7%;">은행명</th>' +
+									'<th style="width: 14%;">등록일</th>' +
+									'<th style="width: 8%">프로필</th>');
+						
+						$table.append($tr);
+						
+						$each(data, function(index, value){
+							$tr = $("<tr>");
+							var $mcode = $("<td>").text(value.memberCode);
+							var $mId = $("<td>").text(decodeURIComponent(value.memberId));
+							var $mName = $("<td>").text(decodeURIComponent(value.memberName));
+							var $phone = $("<td>").text(decodeURIComponent(value.phone));
+							var $email = $("<td>").text(decodeURIComponent(value.email));
+							var $isArtist = $("<td>").text(value.isArtist);
+							var $warning = $("<td>").text(value.warning);
+							var $regDate = $("<td>").text(value.regDate);
+							
+							
+						});
+					}
+				});
 			});
 		});
 	</script>
