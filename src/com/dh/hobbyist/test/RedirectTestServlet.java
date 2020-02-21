@@ -16,6 +16,6 @@ public class RedirectTestServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         System.out.println("RedirectTestServlet");
-        request.getRequestDispatcher("/views/admin/placeMgmt/edit.jsp").forward(request, response);
+        request.getRequestDispatcher("/views/admin/placeMgmt/add.jsp").forward(request, response);
     }
 }

@@ -55,78 +55,81 @@
             </table>
         </div>
         <hr id="firstLine">
-        <div id="infoArea" class="place-edit-div">
-            <table style="width : 95%; float : right" class="place-edit-table">
-                <!-- 테이블 첫번째 줄은 아이디, 비밀번호 등 조회할 내용 제목이다. background(#4E4E4E), font-color(white) 색 다르게 지정 -->
-                <tr>
-                    <td style="">업체명 :</td>
-                    <td style="">
-                        <input type="text" name="name" value="">
-                    </td>
-                </tr>
-                <tr>
-                    <td>전화번호 :</td>
-                    <td>
-                        <input type="text" name="phone" id="" value="">
-                    </td>
-                </tr>
-                <tr>
-                    <td>업체주소 :</td>
-                    <td>
-                        <input type="text" name="addr" style="width: 500px" id="" value="">
-                    </td>
-                </tr>
-                <tr>
-                    <td>사이트 주소</td>
-                    <td><input type="text" name="site" id="" value=""></td>
-                </tr>
-                <tr>
-                    <td>업체 소개 : <br>(영업일 가격 등)</td>
-                    <td>
-                        <textarea name="intro" id="" cols="75" rows="10"></textarea>
-                    </td>
-                </tr>
-                <tr>
-                    <td>영업시간</td>
-                    <td>
-                        <textarea name="time" id="" cols="75" rows="3"></textarea>
-                    </td>
-                </tr>
-                <tr>
-                    <td>공간규모 선택 :</td>
-                    <td>
-                        <input type="checkbox" name="size" value="big" id="big">&nbsp;<label for="big">대규모</label>
-                        <input type="checkbox" name="size" value="big" id="small">&nbsp;<label for="small">소규모</label>
-                        <input type="checkbox" name="size" value="big" id="one">&nbsp;<label for="one">일대일</label>
-                    </td>
-                </tr>
-                <tr>
-                    <td>사진등록</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <%-- 사진등록창 5개 띄워야함.  --%>
-                    <td style="width: 100%" colspan="2">
+        <form action="">
+            <div id="infoArea" class="place-edit-div">
+                <table style="width : 95%; float : right" class="place-edit-table">
+                    <!-- 테이블 첫번째 줄은 아이디, 비밀번호 등 조회할 내용 제목이다. background(#4E4E4E), font-color(white) 색 다르게 지정 -->
+                    <tr>
+                        <td style="">업체명 :</td>
+                        <td style="">
+                            <input type="text" name="name" value="">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>전화번호 :</td>
+                        <td>
+                            <input type="text" name="phone" id="" value="">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>업체주소 :</td>
+                        <td>
+                            <input type="text" name="addr" style="width: 500px" id="" value="">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>사이트 주소</td>
+                        <td><input type="text" name="site" id="" value=""></td>
+                    </tr>
+                    <tr>
+                        <td>업체 소개 : <br>(영업일 가격 등)</td>
+                        <td>
+                            <textarea name="intro" id="" cols="75" rows="10"></textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>영업시간</td>
+                        <td>
+                            <textarea name="time" id="" cols="75" rows="3"></textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>공간규모 선택 :</td>
+                        <td>
+                            <input type="checkbox" name="size" value="big" id="big">&nbsp;<label for="big">대규모</label>
+                            <input type="checkbox" name="size" value="big" id="small">&nbsp;<label
+                                for="small">소규모</label>
+                            <input type="checkbox" name="size" value="big" id="one">&nbsp;<label for="one">일대일</label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>사진등록</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <%-- 사진등록창 5개 띄워야함.  --%>
+                        <td style="width: 100%" colspan="2">
 
-                    </td>
-                </tr>
-            </table>
-            <table style="width : 95%; float : right" class="place-edit-table">
-                <tr>
-                    <td style="width: 40%">
-                        <bold>등록일:</bold>
-                        <input type="date" name="registerDate" id="startDate"></td>
-                    <td>
-                        <bold>종료일:</bold>
-                        <input type="date" name="EndDate" id=""></td>
-                </tr>
-            </table>
-        </div>
-        <%-- 마지막줄에는 삭제버튼 넣기.  --%>
-        <div class="" style="width :1100px;text-align : right; margin-left : 60px">
-            <button>등록</button>
-            <button>삭제</button>
-        </div>
+                        </td>
+                    </tr>
+                </table>
+                <table style="width : 95%; float : right" class="place-edit-table">
+                    <tr>
+                        <td style="width: 40%">
+                            <bold>등록일:</bold>
+                            <input type="date" name="registerDate" id="startDate"></td>
+                        <td>
+                            <bold>종료일:</bold>
+                            <input type="date" name="EndDate" id=""></td>
+                    </tr>
+                </table>
+            </div>
+            <%-- 마지막줄에는 삭제버튼 넣기.  --%>
+            <div class="" style="width :1100px;text-align : right; margin-left : 60px">
+                <button>등록</button>
+                <button>삭제</button>
+            </div>
+        </form>
     </article>
 </section>
 <script>
