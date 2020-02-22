@@ -9,6 +9,18 @@
 <title>Insert title here</title>
 <style>
 
+#divtest{
+
+	width: 1024px;
+	height: 120px;
+	margin-top: auto;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+	line-height:100px;
+}
+
+
 .divcenter2 {
 	margin-left: auto;
 	margin-right: auto;
@@ -147,6 +159,14 @@ center_td0 {
 	line-height: 26px;
 	color: #556B2F;
 }
+.divtest{
+	width: 1024px;
+	height: 30px;
+	margin: auto;
+	text-align: center;
+}
+
+
 </style>
 <link
 	href="https://fonts.googleapis.com/css?family=Do+Hyeon|ZCOOL+QingKe+HuangYou&display=swap"
@@ -170,7 +190,8 @@ center_td0 {
 
 		</table>
 	</div>
-
+	
+	<!-- 비밀번호 확인  -->
 	<div class="divbottom1">
 	<br>
 		<label class="label_bottom1">비밀번호 확인</label>
@@ -180,31 +201,43 @@ center_td0 {
 		<label class="label_bottom2">회원님의 정보를 안전하게 보호하기 위해 비밀번호를 다시 한
 			번 확인합니다.</label>
 	</div>
-
+	
+	
 	<div class="divbottom3">
+	<!--  비밀번호 확인 텍스트 -->
 		<label class="label_bottom3">비밀번호:&nbsp; </label><input type="text" class="password" id="pw">
-		<button onclick="passwdConfirm();" class="passclick" >확인</button>
-	</div>
-	<div id="divtest"> </div>
-	<script>
-	
-		$(function passwdConfirm() {
-			
-			var txtValue = $("#pw").val();
-			var pwdValue = $("#pwd").val();
-			var chkvalue = $("#chk").val();
-			
-			if(txtValue.equals(pass)){			
-			location.href = "<%=request.getContextPath()%>/views/member/myPage/configuration/memberUpdate.jsp";	
-			}else{
-			 
-			 $("#divtest").text("비밀번호가 정확하지 않습니다.").css("color","red");
-			}
+		<!-- 비밀번호 확인 버튼 -->
+		<button class="passclick" id="passclick" >확인</button>
 		
-		});	
-	</script>
+	</div>
 	
+	 
 	
+	<div id="divtest"> 
+
+		
+	</div>
+ 	 <script>
+	
+	 /* console.log( 'a1 : ' + $("#pw").typeof()); */
+	 
+		 //비밀번호 동일 확인 기능
+	 	$(function(){
+	 		$("#passclick").click(function(){
+				var textValue = $("#pw").val();
+				var pass = 1111;
+				
+				if(textValue == pass) {
+					location.href = "<%=request.getContextPath()%>/views/member/myPage/configuration/memberUpdate.jsp";	
+				}else{
+					 /* console.log( 'a4' + $("#pw").typeof()); */
+					 $("#divtest").text("비밀번호가 정확하지 않습니다.").css("color","gray");
+					}
+				
+				
+	 		});
+	 	})
+	</script>  
 
 
 <!-- 	<div class="divbottom4">
@@ -212,6 +245,7 @@ center_td0 {
 	</div>
  -->
 	<br><br><br><br>
+	<!-- footer 요소 포함  -->
 	<%@ include file="/views/common/footer.jsp"%>
 
 
