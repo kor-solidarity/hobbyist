@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" %>
+    pageEncoding="UTF-8" import="java.util.List, java.util.ArrayList, com.dh.hobbyist.member.model.vo.*"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -119,8 +119,8 @@
 		
 		<!-- 관리자 본문 들어갈 공간 -->
 		<article id="contents">
-		
 			<!-- hr 상단에 들어갈 상세 페이지, 정렬이나 검색등 보기들. 기본적으로 회원검색이 있다. -->
+			<form action="/hobbyist/index2.jsp" method="post">
 			<div id="searchDetailArea">
 				
 				<!-- 상세페이지, 정렬, 검색 테이블 -->
@@ -146,7 +146,8 @@
 				<table id="infoT" style="width: 100%; border-collapse: collapse; text-align: center;">
 					<!-- 테이블 첫번째 줄은 아이디, 비밀번호 등 조회할 내용 제목이다. background(#4E4E4E), font-color(white) 색 다르게 지정 -->
 					<tr>
-						<th style="width: 8%;">회원코드</th>
+						<th id="dd" style="width: 8%;">회원코드<th>
+						
 						<th style="width: 15%;">아이디</th>
 						<th style="width: 10%;">이름</th>
 						<th style="width: 15%;">전화번호</th>
@@ -155,14 +156,29 @@
 						<th style="width: 7%;">경고</th>
 						<th style="width: 17%;">가입일</th>
 					</tr>
+					
+					<%if(request.getAttribute("list") != null) { %>
+						<% ArrayList<Member> list = (ArrayList<Member>) request.getAttribute("list"); %>
+						<%for(Member m : list) { %>
+								<tr>
+         						<td><%= m.getMemberCode() %></td>
+        					 	<td><%= m.getMemberId() %></td>
+        					 	<td><%= m.getMemberName() %></td>
+    					     	<td><%= m.getPhone() %></td>
+    					     	<td><%= m.getEmail() %></td>
+    					     	<td><%= m.getIsArtist() %></td>
+    					     	<td><%= m.getWarnings() %></td>
+    					     	<td><%= m.getRegDate() %></td>
+    					     </tr>
+						<% } %>
+					<% } %>
 				</table>
 			</div>
+			</form>
 		</article>
 	</section>
-	
 	<script>
 		$(function() {
-			
 			$("#memberListL").click(function() {
 				$.ajax({
 					url: "/hobbyist/selectList.me",
@@ -224,8 +240,8 @@
 									'<th style="width: 9%;">닉네임</th>' +
 									'<th style="width: 12%;">전화번호</th>' +
 									'<th style="width: 16%;">이메일</th>' +
-									'<th style="width: 13%;">계좌번호 </th>' +
-									'<th style="width: 14%;">등록일</th>' +
+									'<th style="width: 14%;">계좌번호 </th>' +
+									'<th style="width: 13%;">등록일</th>' +
 									'<th style="width: 8%">프로필</th>');
 						
 						$table.append($tr);
@@ -241,9 +257,9 @@
 							var $aNick = $("<td>").text(data[key].artistNick);
 							var $phone = $("<td>").text(data[key].phone);
 							var $email = $("<td>").text(data[key].email);
-							var $bank = $("<td>").text(data[key].bankName);
+							var $bank = $("<td>").text(data[key].bankName + " " + data[key].bankOwner + "\n" + data[key].bankNum);
 							var $accept = $("<td>").text(data[key].artistAccepted);
-							var $profile = $("<td>").html("<button>조회</button>");
+							var $profile = $("<td>").html("<button id='showArtist'>조회</button>");
 							
 							$tr.append($acode);
 							$tr.append($aId);

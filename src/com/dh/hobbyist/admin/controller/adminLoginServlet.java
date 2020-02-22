@@ -36,13 +36,12 @@ public class adminLoginServlet extends HttpServlet {
 		
 		String page = "";
 		if(loginAdmin != null) {
-			
 			HttpSession session = request.getSession();
 			session.setAttribute("loginAdmin", loginAdmin);
 			
 			List<Member> memberList = new MemberService().selectList();
 			
-			//회원리스트를 바로 가져오기 위한 메소드
+			//회원리스트를 바로 가져오기 위한 메소드1
 			if(memberList != null) {
 				page = "views/admin/memberMgmt/memberList.jsp";
 				request.setAttribute("list", memberList);
