@@ -16,7 +16,7 @@
 	border-bottom: 1px solid black;
 	width: 1024px;
 	height: 50px;
-	text-algin: 
+	text-algin: center;  
 }
 
 .tablecenter2 {
@@ -269,7 +269,7 @@ background: #556B2F;
 
 
 	<div class="divcenter4">
-		<form>
+		<form action="<%=request.getContextPath() %>/register.me mthod ="post">
 			<table align="border" class="tablecenter4">
 				<tr>
 					<td colspan="1" style="width: 70px; text-align: left;"><label
@@ -312,10 +312,6 @@ background: #556B2F;
 					<td colspan="1"><button id="button1">인증하기</button></td>
 				</tr>
 
-
-
-
-
 				<tr></tr>
 
 				<tr>
@@ -334,12 +330,33 @@ background: #556B2F;
 						name="text" style="width: 165px;"></td>
 					<td colspan="1"><button id="button2">인증하기</button>
 				</tr>
-			
-			
-
-
-
 			</table>
+			<br><br>
+			<input type="submit" value="수정하기" class="bt_update" id="bt_update">  
+		
+			<script>
+			
+			$(function(){
+			$("#bt_update").click(funtion(){
+				var memberId = $("#memberId").val();
+				var idRegExp = /^[a-zA-z0-9{4,12}$/;
+			$.ajax({
+			url:"/hobbyist/idCheck.me"	
+			//클라이언트가 http요청을 보낼 서버의URL의 주소
+			type: "post",
+			data: {meberId: memberId},
+			//HTTP요청과 함께 서버로 보낼 데이터(HTTP요청과 함께 서버로 보낼 데이터)
+			success: function(data) {
+				if(!idRegExp.test(memberId)){
+					alert("영문, 숫자만으로 4~12자 이내로 입력하세요.");
+				}else{
+					if(data == "fail")
+				}
+			}
+			})	
+			}	
+			})
+		</script>
 
 			<script>
 				$("#button1").click(function(){
