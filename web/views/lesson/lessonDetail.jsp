@@ -5,19 +5,19 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <style>
 	#wrapTable {
 		border: 1px solid black;
-		margin: 0 auto;
+		margin: 20px auto 0px auto;
 	}
 	
 	#wrapTable td {
 		border: 1px solid black;
 	}
-	
+	 
 	#carouselTd {
 		/* width: 612px; */
 		
@@ -26,6 +26,8 @@
 	.container {
 		width: 612px;
 		height: 400px;
+		/* carousel-indicators가 td 바깥으로 벗어나 안쪽으로 집어넣기 위해 margin-top설정 */
+		margin-top: 20px;
 	}
 
 /* carousel 관련 CSS */
@@ -93,21 +95,17 @@
 			</div>
 			<!-- carousle 영영 끝 -->
 		</td>
-		<td></td>
-		<td></td>
+		<td style="width:306px;">최소 2명</td>
+		<td style="width:306px;">최대 2명</td>
 	</tr>
-		<td colspan="2"></td>
+		<td colspan="2">강남 | 1회차 | 02.03(월)</td>
 	<tr>
-		<td colspan="2"></td>
-	</tr>
-	<tr>
-		<td colspan="2"></td>
+		<td colspan="2">+ 추가 일정 보기</td>
 	</tr>
 	<tr>
-		<td colspan="2"></td>
+		<td colspan="2">원하시는 수업일정을 선택해주세요</td>
 	</tr>
 </table>
-
 
 </body>
 </html>
