@@ -89,6 +89,7 @@ public class MemberDao {
 				loginMember.setIsArtist(rset.getInt("IS_ARTIST"));
 				loginMember.setArtistAccepted(rset.getDate("ARTIST_ACCEPTED"));
 				loginMember.setArtistNick(rset.getString("ARTIST_NICK"));
+				loginMember.setArtistIntro(rset.getString("ARTIST_INTRO"));
 				
 			}
 			

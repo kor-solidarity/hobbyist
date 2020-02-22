@@ -20,14 +20,15 @@ public class Member implements java.io.Serializable{
 	private int isArtist;
 	private Date artistAccepted;
 	private String artistNick;
+	private String artistIntro;
 	
 	
 	public Member() {}
 
-	
+
 	public Member(int memberCode, String memberId, String memberPwd, String memberName, String phone, String email,
 			String bankName, String bankOwner, String bankNum, int del, int point, Date regDate, int firstLogin,
-			int warnings, int isArtist, Date artistAccepted, String artistNick) {
+			int warnings, int isArtist, Date artistAccepted, String artistNick, String artistIntro) {
 		super();
 		this.memberCode = memberCode;
 		this.memberId = memberId;
@@ -46,6 +47,7 @@ public class Member implements java.io.Serializable{
 		this.isArtist = isArtist;
 		this.artistAccepted = artistAccepted;
 		this.artistNick = artistNick;
+		this.artistIntro = artistIntro;
 	}
 
 
@@ -218,7 +220,16 @@ public class Member implements java.io.Serializable{
 		this.artistNick = artistNick;
 	}
 
-	
+
+	public String getArtistIntro() {
+		return artistIntro;
+	}
+
+
+	public void setArtistIntro(String artistIntro) {
+		this.artistIntro = artistIntro;
+	}
+
 
 	@Override
 	public String toString() {
@@ -226,9 +237,10 @@ public class Member implements java.io.Serializable{
 				+ ", memberName=" + memberName + ", phone=" + phone + ", email=" + email + ", bankName=" + bankName
 				+ ", bankOwner=" + bankOwner + ", bankNum=" + bankNum + ", del=" + del + ", point=" + point
 				+ ", regDate=" + regDate + ", firstLogin=" + firstLogin + ", warnings=" + warnings + ", isArtist="
-				+ isArtist + ", artistAccepted=" + artistAccepted + ", artistNick=" + artistNick + "]";
+				+ isArtist + ", artistAccepted=" + artistAccepted + ", artistNick=" + artistNick + ", artistIntro="
+				+ artistIntro + "]";
 	}
-	
+
 	
 	
 	

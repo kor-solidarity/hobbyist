@@ -261,7 +261,56 @@
         			$("#emailCheck").css({'color':'red', 'font-size':'11.5px'});
         			return false;
 	        	}
+	        	
+	        	
+	        	//인증하기 버튼 클릭시
+	        	$("#phoneBtn").click(function() {
+	        		var randomVal = ""; //유저에게 보낸 문자의 랜덤 숫자를 저장하기 위한 전역변수
+					var tel1 = $("#tel1").val();
+					var tel2 = $("#tel2").val();
+					var tel3 = $("#tel3").val();
+	        		var phone = {
+	        					tel1: tel1,
+	        					tel2: tel2,
+	        					tel3, tel3
+	        			};
+	        		
+	        		
+	        		$.ajax({
+	        		           url: "/hobbyist/phoneCertification.ph",
+	        		            type: "post",
+	        		            data: phone, 
+	        		            success: function(data) {
+	        		            						
+	        		            randomVal = data; //유저에게 문자로 보낸 랜덤 값을 그대로 리턴 받아서 전역변수로 선언한 randomVal에 넣어줬음
+	        		            console.log(data);
+	        		            						
+	        		            },
+	        		            error: function(error) {
+	        		            console.log(error);
+	        		            } 
+	        		         });
+
+	        	});
+					$("#checkBtn").click(function() {
+						var userSms = $("#num").val(); // 회원가입 폼에서 유저가 문자를 보고 입력한 숫자를 가져옴
+                    	
+	                     if(userSms == randomVal){  //인증번호가 같은 경우 행동
+	                       		alert("인증이 완료되었습니다.");
+	                     		return true;
+	                       }else{		    //인증번호가 다른 경우 행동
+	                        	alert("인증번호가 일치하지 않습니다. 확인 후 다시 입력하세요.");
+	                       		return false;
+	                        }
+
 	        });
+	        	
+	        	
+	    
+	        });
+	        
+	      
+	        	
 	        
         </script>
 
