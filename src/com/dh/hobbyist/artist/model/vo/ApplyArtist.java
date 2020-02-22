@@ -3,7 +3,7 @@ package com.dh.hobbyist.artist.model.vo;
 import java.sql.Date;
 
 public class ApplyArtist implements java.io.Serializable {
-	private int applyPk;
+	private int applyCode;
 	private Date applyDate;
 	private int applyAttempts;
 	private int applyConfirmed;
@@ -12,10 +12,10 @@ public class ApplyArtist implements java.io.Serializable {
 	
 	public ApplyArtist() {}
 
-	public ApplyArtist(int applyPk, Date applyDate, int applyAttempts, int applyConfirmed, String rejectReason,
+	public ApplyArtist(int applyCode, Date applyDate, int applyAttempts, int applyConfirmed, String rejectReason,
 			int applyMember) {
 		super();
-		this.applyPk = applyPk;
+		this.applyCode = applyCode;
 		this.applyDate = applyDate;
 		this.applyAttempts = applyAttempts;
 		this.applyConfirmed = applyConfirmed;
@@ -23,12 +23,12 @@ public class ApplyArtist implements java.io.Serializable {
 		this.applyMember = applyMember;
 	}
 
-	public int getApplyPk() {
-		return applyPk;
+	public int getApplyCode() {
+		return applyCode;
 	}
 
-	public void setApplyPk(int applyPk) {
-		this.applyPk = applyPk;
+	public void setApplyCode(int applyCode) {
+		this.applyCode = applyCode;
 	}
 
 	public Date getApplyDate() {
@@ -73,10 +73,11 @@ public class ApplyArtist implements java.io.Serializable {
 
 	@Override
 	public String toString() {
-		return "ApplyArtist [applyPk=" + applyPk + ", applyDate=" + applyDate + ", applyAttempts=" + applyAttempts
+		return "ApplyArtist [applyCode=" + applyCode + ", applyDate=" + applyDate + ", applyAttempts=" + applyAttempts
 				+ ", applyConfirmed=" + applyConfirmed + ", rejectReason=" + rejectReason + ", applyMember="
 				+ applyMember + "]";
 	}
+
 	
 	
 }

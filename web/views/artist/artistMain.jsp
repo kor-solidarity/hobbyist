@@ -381,7 +381,7 @@
 										<% } %>
 									</td>
 									<td colspan="2">
-										<p>계좌번호</p> <select style="height: 32px" name="bankName">
+										<p>계좌번호&nbsp;<label style="font-size:12px; coLor:black;">(본인 계좌로 이용해주세요.)</label></p> <select style="height: 32px" name="bankName">
 											<option value="">은행명</option>
 											<option value="SH">신한은행</option>
 											<option value="KB">국민은행</option>

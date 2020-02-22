@@ -3,7 +3,7 @@ package com.dh.hobbyist.artist.model.vo;
 import java.sql.Date;
 
 public class ArtistCerts implements java.io.Serializable {
-	private int certPk;
+	private int certCode;
 	private String certName;
 	private Date certDate;
 	private String certOrg;
@@ -11,21 +11,21 @@ public class ArtistCerts implements java.io.Serializable {
 	
 	public ArtistCerts() {}
 
-	public ArtistCerts(int certPk, String certName, Date certDate, String certOrg, int memberPk) {
+	public ArtistCerts(int certCode, String certName, Date certDate, String certOrg, int memberPk) {
 		super();
-		this.certPk = certPk;
+		this.certCode = certCode;
 		this.certName = certName;
 		this.certDate = certDate;
 		this.certOrg = certOrg;
 		this.memberPk = memberPk;
 	}
 
-	public int getCertPk() {
-		return certPk;
+	public int getCertCode() {
+		return certCode;
 	}
 
-	public void setCertPk(int certPk) {
-		this.certPk = certPk;
+	public void setCertCode(int certCode) {
+		this.certCode = certCode;
 	}
 
 	public String getCertName() {
@@ -62,9 +62,10 @@ public class ArtistCerts implements java.io.Serializable {
 
 	@Override
 	public String toString() {
-		return "ArtistCerts [certPk=" + certPk + ", certName=" + certName + ", certDate=" + certDate + ", certOrg="
+		return "ArtistCerts [certCode=" + certCode + ", certName=" + certName + ", certDate=" + certDate + ", certOrg="
 				+ certOrg + ", memberPk=" + memberPk + "]";
 	}
+
 	
 	
 }

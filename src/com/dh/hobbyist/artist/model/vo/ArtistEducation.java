@@ -1,7 +1,7 @@
 package com.dh.hobbyist.artist.model.vo;
 
 public class ArtistEducation implements java.io.Serializable {
-	private int eduPk;
+	private int eduCode;
 	private String eduInsitituteName;
 	private String eduMajor;
 	private int status;
@@ -9,21 +9,21 @@ public class ArtistEducation implements java.io.Serializable {
 	
 	public ArtistEducation() {}
 
-	public ArtistEducation(int eduPk, String eduInsitituteName, String eduMajor, int status, int memberPk) {
+	public ArtistEducation(int eduCode, String eduInsitituteName, String eduMajor, int status, int memberPk) {
 		super();
-		this.eduPk = eduPk;
+		this.eduCode = eduCode;
 		this.eduInsitituteName = eduInsitituteName;
 		this.eduMajor = eduMajor;
 		this.status = status;
 		this.memberPk = memberPk;
 	}
 
-	public int getEduPk() {
-		return eduPk;
+	public int getEduCode() {
+		return eduCode;
 	}
 
-	public void setEduPk(int eduPk) {
-		this.eduPk = eduPk;
+	public void setEduCode(int eduCode) {
+		this.eduCode = eduCode;
 	}
 
 	public String getEduInsitituteName() {
@@ -60,9 +60,10 @@ public class ArtistEducation implements java.io.Serializable {
 
 	@Override
 	public String toString() {
-		return "ArtistEducation [eduPk=" + eduPk + ", eduInsitituteName=" + eduInsitituteName + ", eduMajor=" + eduMajor
-				+ ", status=" + status + ", memberPk=" + memberPk + "]";
+		return "ArtistEducation [eduCode=" + eduCode + ", eduInsitituteName=" + eduInsitituteName + ", eduMajor="
+				+ eduMajor + ", status=" + status + ", memberPk=" + memberPk + "]";
 	}
+
 	
 	
 }
