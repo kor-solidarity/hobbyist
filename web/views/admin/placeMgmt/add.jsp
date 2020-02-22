@@ -55,14 +55,14 @@
             </table>
         </div>
         <hr id="firstLine">
-        <form action="">
+        <form enctype="multipart/form-data" method="post" action="<%=request.getContextPath()%>/add_place.ad">
             <div id="infoArea" class="place-edit-div">
                 <table style="width : 95%; float : right" class="place-edit-table">
                     <!-- 테이블 첫번째 줄은 아이디, 비밀번호 등 조회할 내용 제목이다. background(#4E4E4E), font-color(white) 색 다르게 지정 -->
                     <tr>
                         <td style="">업체명 :</td>
                         <td style="">
-                            <input type="text" name="name" value="">
+                            <input type="text" name="companyName" value="">
                         </td>
                     </tr>
                     <tr>
@@ -79,7 +79,7 @@
                     </tr>
                     <tr>
                         <td>사이트 주소</td>
-                        <td><input type="text" name="site" id="" value=""></td>
+                        <td><input type="text" name="website" id="" value=""></td>
                     </tr>
                     <tr>
                         <td>업체 소개 : <br>(영업일 가격 등)</td>
@@ -90,16 +90,16 @@
                     <tr>
                         <td>영업시간</td>
                         <td>
-                            <textarea name="time" id="" cols="75" rows="3"></textarea>
+                            <textarea name="serviceTime" id="" cols="75" rows="3"></textarea>
                         </td>
                     </tr>
                     <tr>
                         <td>공간규모 선택 :</td>
                         <td>
-                            <input type="checkbox" name="size" value="big" id="big">&nbsp;<label for="big">대규모</label>
-                            <input type="checkbox" name="size" value="big" id="small">&nbsp;<label
+                            <input type="checkbox" name="roomSize" value="big" id="big">&nbsp;<label for="big">대규모</label>
+                            <input type="checkbox" name="roomSize" value="big" id="small">&nbsp;<label
                                 for="small">소규모</label>
-                            <input type="checkbox" name="size" value="big" id="one">&nbsp;<label for="one">일대일</label>
+                            <input type="checkbox" name="roomSize" value="big" id="one">&nbsp;<label for="one">일대일</label>
                         </td>
                     </tr>
                     <tr>
@@ -117,19 +117,19 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td><img style="width: 150px"
+                                    <td><img id="pic1"
                                              src="<%=request.getContextPath()%>/static/images/iphoneCamera.png" alt="">
                                     </td>
-                                    <td><img style="width: 150px"
+                                    <td><img id="pic2"
                                              src="<%=request.getContextPath()%>/static/images/iphoneCamera.png" alt="">
                                     </td>
-                                    <td><img style="width: 150px"
+                                    <td><img id="pic3"
                                              src="<%=request.getContextPath()%>/static/images/iphoneCamera.png" alt="">
                                     </td>
-                                    <td><img style="width: 150px"
+                                    <td><img id="pic4"
                                              src="<%=request.getContextPath()%>/static/images/iphoneCamera.png" alt="">
                                     </td>
-                                    <td><img style="width: 150px"
+                                    <td><img id="pic5"
                                              src="<%=request.getContextPath()%>/static/images/iphoneCamera.png" alt="">
                                     </td>
                                 </tr>
@@ -141,24 +141,32 @@
                 <table style="width : 95%; float : right" class="place-edit-table">
                     <tr>
                         <td style="width: 40%">
-                            <bold>등록일:</bold>
-                            <input type="datetime-local" name="registerDate" id="startDate"></td>
+                            <bold>게제시작일:</bold>
+                            <input type="date" name="startDate" id="startDate"></td>
                         <td>
                             <bold>종료일:</bold>
-                            <input type="datetime-local" name="EndDate" id=""></td>
+                            <input type="date" name="endDate" id="endDate"></td>
                     </tr>
                 </table>
+                <div id="pic_files">
+                    <input type="file" name="file1" id="file1" onchange="changedPic(this, 1)">
+                    <input type="file" name="file2" id="file2" onchange="changedPic(this, 2)">
+                    <input type="file" name="file3" id="file3" onchange="changedPic(this, 3)">
+                    <input type="file" name="file4" id="file4" onchange="changedPic(this, 4)">
+                    <input type="file" name="file5" id="file5" onchange="changedPic(this, 5)">
+                </div>
             </div>
             <%-- 마지막줄에는 삭제버튼 넣기.  --%>
             <div class="" style="width :1100px;text-align : right; margin-left : 60px">
-                <button>등록</button>
-                <button>삭제</button>
+                <button type="submit">등록</button>
+                <button type="reset">초기화</button>
             </div>
         </form>
     </article>
 </section>
 <script>
     $(function () {
+        // 첫 시작일자 초기화 목적
         var date = new Date();
         var month = date.getMonth() + 1;
         var day = date.getDate();
@@ -170,10 +178,56 @@
         if (month < 10) {
             month = '0' + month.toString();
         }
+        if (hour < 10) {
+            hour = '0' + hour.toString();
+        }
+        if (min < 10) {
+            min = '0' + min.toString();
+        }
         // 시작일자 초기화
-        $("#startDate").val(date.getFullYear() + '-' + month + '-' + day + 'T' + hour + ':' + min);
+        $("#startDate").val(date.getFullYear() + '-' + month + '-' + day);// + 'T' + hour + ':' + min);
 
-    })
+        // 이미지파일 들어갈 파일인풋 삭제
+        $("#pic_files").hide();
+        // 각 사진 미리보기와 파일 인풋을 맞게 연동시켜준다.
+        $('#pic1').click(function () {
+                $('#file1').click();
+            }
+        );
+        $('#pic2').click(function () {
+                $('#file2').click();
+            }
+        );
+        $('#pic3').click(function () {
+                $('#file3').click();
+            }
+        );
+        $('#pic4').click(function () {
+                $('#file4').click();
+            }
+        );
+        $('#pic5').click(function () {
+                $('#file5').click();
+            }
+        );
+    });
+
+    // 사진 업로드시 미리보기에 반영
+    function changedPic (obj, num) {
+        if (obj.files && obj.files[0]) {
+            var pic = '#pic' + num;
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                // console.log(e.target)
+                // console.log(e.target.result);
+                $(pic).attr('src', e.target.result);
+            };
+            // todo 이게 정확히 뭐하는거지??
+            // 뭐던간에 없으면 위에 onload 자체가 작동하질 않음
+            reader.readAsDataURL(obj.files[0]);
+        }
+    }
 </script>
 </body>
 </html>

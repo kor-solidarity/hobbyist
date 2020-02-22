@@ -113,8 +113,11 @@ th {
     width: 500px;
 }
 
-.place-edit-img  td{
+.place-edit-img td{
     width: unset !important;
+}
+.place-edit-img img{
+    width: 195px;
 }
 
 .place-edit-table input[type=checkbox],
