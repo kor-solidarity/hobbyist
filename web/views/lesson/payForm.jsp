@@ -3,19 +3,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset=UTF-8">
+<meta charset="UTF-8">
 <title>Insert title here</title>
 <!-- 아임포트를 실행하기 위한 jquery 아임포트 js 코드 -->
-<script type="text/javascript"
-	src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-<script type="text/javascript"
-	src="https://service.iamport.kr/js/iamport.payment-1.1.5.js"></script>
-<link
-	href="https://fonts.googleapis.com/css?family=ZCOOL+QingKe+HuangYou&display=swap"
-	rel="stylesheet">
-<link
-	href="https://fonts.googleapis.com/css?family=Do+Hyeon&display=swap"
-	rel="stylesheet">
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+<link href="https://fonts.googleapis.com/css?family=ZCOOL+QingKe+HuangYou&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Do+Hyeon&display=swap" rel="stylesheet">
 <style>
 section {
 	margin: 0 auto;
@@ -145,105 +139,99 @@ input[type="button"], input[type="reset"] {
 		<hr>
 
 		<div id="contentDiv" style="overflow-y: auto; overflow-x: hidden;">
-			<form action="">
-				<table id="content">
-					<tr>
-						<td colspan="4" style="font-weight: bold; font-size: 24px;">수업
-							제목입력 수업제목을 아무거나 입력하세요.</td>
-					</tr>
-					<tr></tr>
-					<tr></tr>
-					<tr></tr>
-					<tr></tr>
-					<tr></tr>
-					<tr></tr>
-					<tr></tr>
-					<tr></tr>
-					<tr></tr>
-					<tr></tr>
-					<tr></tr>
-					<tr></tr>
-					<tr></tr>
-					<tr></tr>
-					<tr></tr>
-					<tr></tr>
-					<tr></tr>
-					<tr></tr>
-					<tr>
-						<td colspan="3">아티스트명</td>
-						<td>송삼동</td>
-					</tr>
-					<tr>
-						<td colspan="3">회차당 수업료</td>
-						<td>10000원</td>
-					</tr>
-					<tr>
-						<td colspan="3">총 회차</td>
-						<td>3회차</td>
-					</tr>
-					<tr>
-						<td colspan="3">전체 수업료</td>
-						<td>30000원</td>
-					</tr>
-					<tr>
-						<td colspan="4">수업 장소</td>
-					</tr>
-					<tr>
-						<td colspan="4" style="font-size: medium; font-weight: normal;">경기도
-							성남시 수정구 고등동 호반써밋 아파트</td>
-
-					</tr>
-					<tr>
-						<td colspan="3">수업일정</td>
-					</tr>
-					<tr>
-						<td></td>
-						<td colspan="4">
-							<div>1회차 | 02.03 (월) 19:00 - 21:00</div>
-							<div>2회차 | 02.03 (월) 19:00 - 21:00</div>
-							<div>3회차 | 02.03 (월) 19:00 - 21:00</div>
-							<div>4회차 | 02.03 (월) 19:00 - 21:00</div>
-							<div>5회차 | 02.03 (월) 19:00 - 21:00</div>
-							<div>6회차 | 02.03 (월) 19:00 - 21:00</div>
-							<div>7회차 | 02.03 (월) 19:00 - 21:00</div>
-							<div>8회차 | 02.03 (월) 19:00 - 21:00</div>
-						</td>
-					</tr>
-				</table>
+			<table id="content">
+				<tr>
+					<td colspan="4" style="font-weight: bold; font-size: 24px;">수업제목입력 수업제목을 아무거나 입력하세요.</td>
+				</tr>
+				<tr></tr>
+				<tr></tr>
+				<tr></tr>
+				<tr></tr>
+				<tr></tr>
+				<tr></tr>
+				<tr></tr>
+				<tr></tr>
+				<tr></tr>
+				<tr></tr>
+				<tr></tr>
+				<tr></tr>
+				<tr></tr>
+				<tr></tr>
+				<tr></tr>
+				<tr></tr>
+				<tr></tr>
+				<tr></tr>
+				
+				<tr>
+					<td colspan="3">아티스트명</td>
+					<td>송삼동</td>
+				</tr>
+				<tr>
+					<td colspan="3">회차당 수업료</td>
+					<td>10000원</td>
+				</tr>
+				<tr>
+					<td colspan="3">총 회차</td>
+					<td>3회차</td>
+				</tr>
+				<tr>
+					<td colspan="3">전체 수업료</td>
+					<td>30000원</td>
+				</tr>
+				<tr>
+					<td colspan="4">수업 장소</td>
+				</tr>
+				<tr>
+					<td colspan="4" style="font-size: medium; font-weight: normal;">
+						경기도 성남시 수정구 고등동 호반써밋 아파트
+					</td>
+				</tr>
+				<tr>
+					<td colspan="3">수업일정</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td colspan="4">
+						<div>1회차 | 02.03 (월) 19:00 - 21:00</div>
+						<div>2회차 | 02.03 (월) 19:00 - 21:00</div>
+						<div>3회차 | 02.03 (월) 19:00 - 21:00</div>
+						<div>4회차 | 02.03 (월) 19:00 - 21:00</div>
+						<div>5회차 | 02.03 (월) 19:00 - 21:00</div>
+						<div>6회차 | 02.03 (월) 19:00 - 21:00</div>
+						<div>7회차 | 02.03 (월) 19:00 - 21:00</div>
+						<div>8회차 | 02.03 (월) 19:00 - 21:00</div>
+					</td>
+				</tr>
+			</table>
 		</div>
 
 		<div id="payDiv" style="overflow-y: auto; overflow-x: hidden;">
 			<table id="pay">
 				<tr>
-					<td colspan="3"
-						style="color: gray; font-size: 16px; line-height: 20px;">(!)
-						3000 point 이상의 포인트만 사용이 가능합니다.</td>
+					<td colspan="3" style="color: gray; font-size: 16px; line-height: 20px;">(!) 3000 point 이상의 포인트만 사용이 가능합니다.</td>
 				</tr>
 				<tr>
-					<td colspan="3"
-						style="color: gray; font-size: 16px; line-height: 25px;">100
-						point 단위 사용가능</td>
+					<td colspan="3" style="color: gray; font-size: 16px; line-height: 25px;">100point 단위 사용가능</td>
 				</tr>
 				<tr>
 					<td colspan="2">보유 포인트 :</td>
-					<td style="font-weight: bold;">3000 point</td>
+					<td style="font-weight: bold;"><label id="myPoint">3000</label> point</td>
 				</tr>
 				<tr>
 					<td colspan="2">사용 포인트 :</td>
-					<td><input type="number" name="usingPoint"></td>
+					<td><label><input type="text" id="usingPoint" name="usingPoint"></label> point</td>
 				</tr>
 				<tr></tr>
 				<tr>
-					<td colspan="3" style="color: gray; font-size: 16px;">(!) 포인트를
-						제외한 결제금액의 1%가 적립됩니다.</td>
+					<td colspan="3" style="color: gray; font-size: 16px;">(!) 포인트를 제외한 결제금액의 1%가 적립됩니다.</td>
 				</tr>
 				<tr>
 					<td colspan="2">적립 예정 포인트 :</td>
-					<td style="color: blue; font-weight: bold;">270 point</td>
+					<td style="color: blue; font-weight: bold;"><label id="givePoint"></label> point</td>
 				</tr>
 				<tr>
 					<td colspan="2">결제 후 잔여 포인트 :</td>
-					<td style="font-weight: bold;">270 point</td>
+					<td style="font-weight: bold;"><label id="pointResult">3000</label> point</td>
 				</tr>
 			</table>
 			<table id="howToPay">
@@ -256,15 +244,15 @@ input[type="button"], input[type="reset"] {
 					</td>
 				</tr>
 				<tr>
-					<td colspan="3"
-						style="color: darkolivegreen; font-size: 13px; line-height: 15px;">
-						입금한 금액은 hobbyist에서 보관 후<br> 각 회차가 끝난 후 강사에게 입금될 예정입니다.
+					<td colspan="3" style="color: darkolivegreen; font-size: 13px; line-height: 15px;">
+						입금한 금액은 hobbyist에서 보관 후<br>
+						각 회차가 끝난 후 강사에게 입금될 예정입니다.
 					</td>
 				</tr>
 				<tr>
-					<td colspan="3"
-						style="color: red; font-size: 17px; text-decoration: underline;">환불계좌
-						등록은 환불 신청하실 때 등록하실 수 있습니다.</td>
+					<td colspan="3" style="color: red; font-size: 17px; text-decoration: underline;">
+						환불계좌 등록은 환불 신청하실 때 등록하실 수 있습니다.
+					</td>
 				</tr>
 			</table>
 		</div>
@@ -295,7 +283,7 @@ input[type="button"], input[type="reset"] {
 					id="payTermsBox"><label>결제약관 동의</label></td>
 			</tr>
 			<tr>
-				<td><br> <label id="refundTerms">환불 이용 약관</label></td>
+				<td><label id="refundTerms">환불 이용 약관</label></td>
 			</tr>
 			<tr>
 				<td>
@@ -324,16 +312,16 @@ input[type="button"], input[type="reset"] {
 		<table id="checkPay">
 			<tr>
 				<td style="color: gray; font-size: 20px;">전체 수업료</td>
-				<td style="color: gray; font-size: 20px;">10000원</td>
+				<td style="color: gray; font-size: 20px;"><label id="lessonMoney">100</label> 원</td>
 			</tr>
 			<tr>
 				<td style="color: gray; font-size: 20px;">사용 포인트</td>
-				<td style="color: gray; font-size: 20px;">(-) 3000원</td>
+				<td style="color: gray; font-size: 20px;">(-)<label id="usingPointResult"></label>원</td>
 			</tr>
 
 			<tr style="line-height: 50px;">
 				<td style="font-size: 25px; font-weight: bold;">결제 금액</td>
-				<td style="font-size: 25px; font-weight: bold;">7000원</td>
+				<td style="font-size: 25px; font-weight: bold;"><label id="moneyResult">100</label> 원</td>
 			</tr>
 		</table>
 
@@ -346,9 +334,35 @@ input[type="button"], input[type="reset"] {
 	<%@ include file="../common/footer.jsp"%>
 
 	<script>
-    $("#check_module").click(function() {
+
+		$("#usingPoint").keyup(function(){
+		
+    		var lessonMoney = Number($("#lessonMoney").text());	//수업료
+ 		  	var myPoint = Number($("#myPoint").text());			//보유 포인트
+    		var usingPoint = Number($("#usingPoint").val());	//사용 포인트
+    		
+    		$("#givePoint").text(Math.round((lessonMoney - usingPoint) / 100));	//적립포인트
+    		$("#pointResult").text(myPoint - usingPoint);		//잔여포인트
+    		$("#usingPointResult").text(usingPoint);			//최종 사용 포인트
+    		$("#moneyResult").text(lessonMoney - usingPoint);	//최종 결제 금액
     	
-   	  	if($("#payTermsBox").prop("checked") && $("#refundTermsBox").prop("checked")) {
+    		if(Number($("#pointResult").text()) < 0) {
+    			alert("안됩니다.");
+    			$("#usingPoint").val("");
+    			$("#usingPointResult").text("");
+    			$("#pointResult").text(myPoint);
+    			$("#moneyResult").text(lessonMoney);
+    			$("#givePoint").text("");
+    			
+  	  		}
+    	
+		});
+	
+    $("#check_module").click(function() {
+    	//결제 정보 불러오기
+    	var moneyResult = Number($("#moneyResult").text());		//최종 결제 금액
+    	
+   	  	if($("#payTermsBox").prop("checked") && $("#refundTermsBox").prop("checked")/*  && loginUser != null */) {		//로그인 유저가 널이 아닐때 추가하기!!
     	  
   			var IMP = window.IMP; // 생략가능
   	 		IMP.init('imp67942527');	// 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
@@ -368,9 +382,10 @@ input[type="button"], input[type="reset"] {
   	 
  	 		name: '이지호',    //결제창에서 보여질 이름
 	  
- 	  		amount: 100,	//가격
+ 	  		amount: moneyResult,	//가격
+ 	  		
 	  		buyer_email: 'iamport@siot.do',	
-	  		buyer_name: '구매자이름',
+	  		buyer_name: '이지호',
  	  		buyer_tel: '010-1234-5678',
  	  		buyer_addr: '서울특별시 강남구 삼성동',
   	  		buyer_postcode: '123-456',
@@ -380,24 +395,24 @@ input[type="button"], input[type="reset"] {
  	  		m_redirect_url: 'https://www.yourdomain.com/payments/complete'
 	    
 	  	}, function (rsp) {
- 	   		console.log(rsp);
- 	   
+	  		
   	  		if (rsp.success) {
  	    		var msg = '결제가 완료되었습니다.';
+ 	    		
 	    		msg += '고유ID : ' + rsp.imp_uid;	
-	    		
 	    		msg += '결제 금액 : ' + rsp.paid_amount;
+	    		
+	    		var info = {
+	    			imp_uid: rsp.imp_uid,
+	                money: moneyResult
+	    		}
 	    	
 	    		$.ajax({
-	            	url: "https://www.myservice.com/payments/complete", // 가맹점 서버
+	            	url: "<%= request.getContextPath()%>/payment.pa", // 가맹점 서버
+	            	data: info,
 	            	method: "post",
 	            	headers: { "Content-Type": "application/json" },
-	            	data: {
-	                	imp_uid: rsp.imp_uid,
-	                	
-	            	}
-	        	}).done(function (data) {
-	        		// 가맹점 서버 결제 API 성공시 로직
+	            	
 	        	});
 	    	
   	  	} else {
