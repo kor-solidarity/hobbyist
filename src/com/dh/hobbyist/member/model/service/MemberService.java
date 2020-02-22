@@ -9,7 +9,7 @@ import static com.dh.hobbyist.common.JDBCTemplate.*;
 
 public class MemberService {
 	
-	//회원가입용 메소드
+	//회원가입용 메소드(유승)
 	public int insertMember(Member member) {
 		
 		Connection con = getConnection();
@@ -26,7 +26,7 @@ public class MemberService {
 		
 		return result;
 	}
-
+	//로그인 메소드(유승)
 	public Member loginCheck(Member member) {
 		
 		Connection con = getConnection();
@@ -37,7 +37,7 @@ public class MemberService {
 		
 		return loginMember;
 	}
-
+	//아이디 중복체크 메소드(유승)
 	public int idCheck(String memberId) {
 		Connection con = getConnection();
 		
@@ -70,5 +70,28 @@ public class MemberService {
 		
 		return artistList;
 	}
+	
+	//회원 정보 수정 목록 메소드(재선)
+	   public List<Member> UpdateMemberList(){
+	      Connection con = getConnection();
+	      
+	      List<Member> UpdateMemberList = new MemberDao().UpdateMemberList(con);
+	      
+	      close(con);
+	      
+	      return UpdateMemberList;
+	   }
+	   
+	//아이디 찾기 메소드(유승)   
+	public Member findId(Member member) {
+		Connection con = getConnection();
+		
+		Member findMember = new MemberDao().findId(con, member);
+		
+		close(con);
+		
+		return findMember;
+	}
+	   
 
 }

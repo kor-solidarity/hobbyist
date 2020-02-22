@@ -1,11 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="com.dh.hobbyist.member.model.vo.Member"%>
+<%
+	Member findMember = (Member) session.getAttribute("findMember");
+%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="https://fonts.googleapis.com/css?family=Do+Hyeon|ZCOOL+QingKe+HuangYou&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Do+Hyeon|Nanum+Gothic|Roboto|ZCOOL+QingKe+HuangYou&display=swap" rel="stylesheet">
 
     <style>
         body {
@@ -31,37 +34,52 @@
         #contents {
             border: 1.2px solid darkolivegreen;
             width: 600px;
-            height: 440px;
+            height: 470px;
             margin: auto;
         }
-        #name {
+        #setPwd1 {
             width: 217px;
             height: 30px;
             margin-left: 18px;
             margin-top: 20px;
         }
-        .tel {
-            height: 30px;;
+        #setPwd2 {
+            width: 217px;
+            height: 30px;
         }
-        #nameLabel {
+        
+        #pwdLabel1 {
             margin-left: 12px;
         }
         
         .btns {
-            width:95px;
+            width:115px;
             height: 40px;
-            margin-top: 55px;
+            margin-top: 80px;
             font-family: 'Nanum Gothic', sans-serif; 
             font-size:14px;
+            
+            
+        }
+        #pwdBtn {
+        	background:lightgray;
+        	border:1px solid lightgray;
         }
         
-        #submit {
+        #loginBtn {
             background: darkolivegreen;
             color:white;
             border: 1px solid darkolivegreen;
         }
         input {
             margin-top: 20px;
+        }
+        
+        p {
+        	 /* font-family: 'Roboto', sans-serif; */
+        	 font-family: 'Nanum Gothic', sans-serif; 
+        	 
+        	font-size:16px;
         }
 
     </style>
@@ -71,23 +89,30 @@
         <h1 id="title" align="center" onclick="goHome();">hobbyist</h1>
     </div>
     <div id="contents" align="center">
-        <form action="<%=request.getContextPath()%>/findId.me" method="post">
             <h2>아이디 찾기</h2>
             <br><br>
-            <label id="nameLabel">이름</label>&nbsp; <input type="text" name="name" id="name" maxlength="10" size="22">
-            <br><br>
-            <label id="phoneLabel">휴대전화</label>&nbsp;&nbsp; <input type="text" class=tel name="tel1" id="tel1" maxlength="3" size="5"> - <input type="text" class=tel name="tel2" id="tel2" maxlength="4" size="5"> - <input type="text" class=tel name="tel3" id="tel3" maxlength="4" size="5"> 
-            <br><br>
+            <p>회원님의 정보와 일치하는 아이디는 <br>
+            	다음과 같습니다.</p><br>
+            <p style="font-weight:900; font-size:17.5px;" id="findId"><%=findMember.getMemberId() %></p>
            
-            <button type="submit" class="btns" id="submit">아이디 확인</button>
-        </form>
+           	<button onclick="goFindPwd();" class="btns" id="pwdBtn">비밀번호 찾기</button>&nbsp;&nbsp;&nbsp;&nbsp;
+            <button onclick="goLogin();" class="btns" id="loginBtn">로그인</button>
     </div>
+    
     <script>
-	    function goHome() {
-			location.href = "<%= request.getContextPath()%>/index.jsp";
-		}
-	    
-	
+    	function goLogin() {
+    		location.href = "<%=request.getContextPath()%>/views/member/loginForm.jsp";
+    	}
+    	
+    	function goFindPwd() {
+    		location.href = "<%= request.getContextPath()%>/views/member/findPwd.jsp";
+    	}
+    	function goHome() {
+    		location.href = "<%= request.getContextPath()%>/index.jsp";
+    	}
+    	
+    	
+    	
     </script>
 </body>
 </html>
