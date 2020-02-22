@@ -401,6 +401,11 @@ body {
 												<option>디자인</option>
 												<option>스포츠</option>
 											</select>
+											<script>
+												$(function(){
+													
+												});
+											</script>
 										</div>
 									</td>
 									<td colspan="2">
