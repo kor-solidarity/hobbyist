@@ -3,6 +3,7 @@ package com.dh.hobbyist.artist.controller;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.HashMap;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,7 +14,9 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 
 import com.dh.hobbyist.artist.model.service.ArtistService;
+import com.dh.hobbyist.artist.model.vo.ApplyArtist;
 import com.dh.hobbyist.common.MyFileRenamePolicy;
+import com.dh.hobbyist.member.model.vo.Member;
 import com.oreilly.servlet.MultipartRequest;
 
 /**
@@ -83,8 +86,8 @@ public class InsertArtistServlet extends HttpServlet {
 			String detailCategory3 = multiRequest.getParameter("detailCategory3");
 			
 			String[] details = {detailCategory, detailCategory2, detailCategory3};
-			int categoryResult 
-					= new ArtistService().insertCategory(memberPk, details);
+//			int categoryResult 
+//					= new ArtistService().insertCategory(memberPk, details);
 			
 			
 			
@@ -105,6 +108,12 @@ public class InsertArtistServlet extends HttpServlet {
 			String[] certiDays = {certiDay1, certiDay2, certiDay3};
 			String[] certiSpaces = {certiSpace1, certiSpace2, certiSpace3};
 			
+			HashMap<String, String[]> certsMap = new HashMap<String, String[]>();
+			certsMap.put("certiNames", certiNames);
+			certsMap.put("certiDays", certiDays);
+			certsMap.put("certiSpaces", certiSpaces);
+			
+			//int certiResult = new ArtistService().insertCerts(memberPk, certsMap);
 			
 			
 			//"04. 학력/전공" 에서 받아오는 input
@@ -119,6 +128,17 @@ public class InsertArtistServlet extends HttpServlet {
 			String schoolName3 = multiRequest.getParameter("schoolName3");
 			String major3 = multiRequest.getParameter("major3");
 			String status3 = multiRequest.getParameter("status3");
+			
+			String[] schoolNames = {schoolName1, schoolName2, schoolName3};
+			String[] majors = {major1, major2, major3};
+			String[] statuses = {status1, status2, status3};
+			
+			HashMap<String, String[]> eduMap = new HashMap<String, String[]>();
+			eduMap.put("schoolNames", schoolNames);
+			eduMap.put("majors", majors);
+			eduMap.put("statuses", statuses);
+			
+			//int eduResult = new ArtistService().insertEdu(memberPk, eduMap);
 			
 			//"05. 경력" 에서 받아오는 input
 			String officeName1 = multiRequest.getParameter("officeName1");
@@ -139,8 +159,28 @@ public class InsertArtistServlet extends HttpServlet {
 			String workYear3 = multiRequest.getParameter("workYear3");
 			String workMonth3 = multiRequest.getParameter("workMonth3");
 			
+			String[] officeNames = {officeName1, officeName2, officeName3};
+			String[] positions = {position1, position2, position3};
+			String[] workContents = {workContent1, workContent2, workContent3};
+			String[] workYears = {workYear1, workYear2, workYear3};
+			String[] workMonths = {workMonth1, workMonth2, workMonth3};
 			
-			System.out.println("memberPk : " + memberPk);
+			HashMap<String, String[]> careerMap = new HashMap<String, String[]>();
+			careerMap.put("officeNames", officeNames);
+			careerMap.put("positions", positions);
+			careerMap.put("workContents", workContents);
+			careerMap.put("workYears", workYears);
+			careerMap.put("workMonths", workMonths);
+			
+			Member requestMember = new Member();
+			requestMember.setArtistNick(nickName);
+			requestMember.setBankName(bankName);
+			requestMember.setBankNum(bankNum);
+			
+			
+			//int careerResult = new ArtistService().insertCareer(memberPk, careerMap);
+			
+			/*System.out.println("memberPk : " + memberPk);
 			System.out.println("nickName : " + nickName);
 			System.out.println("bankName : " + bankName);
 			System.out.println("bankNum : " + bankNum);
@@ -195,7 +235,7 @@ public class InsertArtistServlet extends HttpServlet {
 			System.out.println("position3 : " + position3);
 			System.out.println("workContent3 : " + workContent3);
 			System.out.println("workYear3 : " + workYear3);
-			System.out.println("workMonth3 : " + workMonth3);
+			System.out.println("workMonth3 : " + workMonth3);*/
 			
 		}
 		

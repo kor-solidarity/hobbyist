@@ -74,165 +74,143 @@
 		</table>
 	</div>
 	<div id="suggestDiv2">
-		<table id="suggestInsertTab1">
-			<tr>
-				<td style="font-size:22px;">수업건의하기</td>
-				<td style="font-size:16px; text-align:right;">건의할 수업의 옵션을 선택하세요</td>
-			</tr>
-			<tr>
-				<td colspan="2"><hr style="border: solid 1.5px darkolivegreen;"></td>
-			</tr>
-			<tr>
-				<td>카테고리</td>
-				<td>상세 카테고리</td>
-			</tr>
-			<tr>
-				<td>
-					<select id="categoryName">
-						<option value="">선택</option>
-						<option value="music">음악</option>
-						<option value="dance">댄스</option>
-						<option value="picture">영상/사진</option>
-						<option value="life">라이프스타일</option>
-						<option value="beauty">뷰티</option>
-						<option value="design">디자인</option>
-						<option value="sports">스포츠</option>
-					</select>
-				</td>
-				<td>
-					<select id="detailCategory">
-						<option>선택</option>
-					</select>
-				</td>
-			</tr>
-			<tr>
-				<td colspan="2"><hr style="border:solid 1.15px darkolivegreen;"></td>
-			</tr>
-			<tr>
-				<td colspan="2">수업인원</td>
-			</tr>
-			<tr>
-				<td>
-					<select id="maxNum">
-						<option>1:1</option>
-						<option>소규모(2인~8인)</option>
-						<option>대규모(9인 이상)</option>
-					</select>
-				</td>
-				<td></td>
-			</tr>
-			<tr>
-				<td colspan="2"><hr style="border:solid 1.15px darkolivegreen;"></td>
-			</tr>
-			<tr>
-				<td>수업료 (회차당)</td>
-				<td>수업회차</td>
-			</tr>
-			<tr>
-				<td>
-					<input type="text" id="classPay">
-				</td>
-				<td>
-					<select id="classTimes">
-						<option>일회차</option>
-						<option>다회차</option>
-					</select>
-				</td>
-			</tr>
-			<tr>
-				<td colspan="2"><hr style="border:solid 1.15px darkolivegreen;"></td>
-			</tr>
-			<tr>
-				<td>희망 지역</td>
-				<td>희망 일자</td>
-			</tr>
-			<tr>
-				<td>
-					<select id="area1" name="area1" onChange="cat_change(this.value, area2)">
-						<option>-선택-</option>
-						<option value='1'>서울</option>
-						<option value='2'>부산</option>
-						<option value='3'>대구</option>
-						<option value='4'>인천</option>
-						<option value='5'>광주</option>
-						<option value='6'>대전</option>
-						<option value='7'>울산</option>
-						<option value='8'>강원</option>
-						<option value='9'>경기</option>
-						<option value='10'>경남</option>
-						<option value='11'>경북</option>
-						<option value='12'>전남</option>
-						<option value='13'>전북</option>
-						<option value='14'>제주</option>
-						<option value='15'>충남</option>
-						<option value='16'>충북</option>
-					</select>
-					<select id="area2" name="area2">
-						<option>-선택-</option>
-					</select>
-				</td>
-				<td>
-					<!-- <select id="year">
-						<option>2020</option>
-						<option>2021</option>
-					</select>
-					년 &nbsp;
-					<select id="month">
-						<option>1</option>
-						<option>2</option>
-						<option>3</option>
-						<option>4</option>
-						<option>5</option>
-						<option>6</option>
-						<option>7</option>
-						<option>8</option>
-						<option>9</option>
-						<option>10</option>
-						<option>11</option>
-						<option>12</option>
-					</select>
-					월 &nbsp;
-					<select id="day">
-						<option>20</option>
-					</select>
-					일 &nbsp; -->
-					<input type="date">
-				</td>
-			</tr>
-			<tr>
-				<td></td>
-				<td style="color:#3c3c3c;">까지 개설되었으면 좋겠습니다.</td>
-			</tr>
-			<tr>
-				<td colspan="2"><hr style="border:solid 1.15px darkolivegreen;"></td>
-			</tr>
-			<tr>
-				<td colspan="2">수업 요일</td>
-			</tr>
-			<tr>
-				<td colspan="2" style="color:#3c3c3c;">
-					<input type="radio" name="day" id="weekday" value="weekday"><label for="weekday">평일</label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					<input type="radio" name="day" id="weekend" value="weekend"><label for="weekend">주말</label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					<input type="radio" name="day" id="irrelevant" value="irrelevant"><label for="irrelevant">무관</label>
-				</td>
-			</tr>
-			<tr></tr>
-			<tr>
-				<td colspan="2">수업 시간</td>
-			</tr>
-			<tr>
-				<td colspan="2" style="color:#3c3c3c;">
-					<input type="radio" name="time" id="dawn" value="dawn"><label for="dawn">새벽반</label>&nbsp;&nbsp;
-					<input type="radio" name="time" id="am" value="am"><label for="am">오전반</label>&nbsp;&nbsp;
-					<input type="radio" name="time" id="pm" value="pm"><label for="pm">오후반</label>&nbsp;&nbsp;
-					<input type="radio" name="time" id="evening" value="evening"><label for="evening">저녁반</label>&nbsp;&nbsp;
-					<input type="radio" name="time" id="irrelevant" value="irrelevant"><label for="irrelevant">무관</label>
-				</td>
-			</tr>
-			<tr>
-				<td colspan="2"><hr style="border:solid 1.15px darkolivegreen;"></td>
-			</tr>
-		</table>
+		<form id="sugInsert1" action="<%=request.getContextPath()%>/views/suggest/suggestInsertForm2.jsp" method="post">
+			<table id="suggestInsertTab1">
+				<tr>
+					<td style="font-size:22px;">수업건의하기</td>
+					<td style="font-size:16px; text-align:right;">건의할 수업의 옵션을 선택하세요</td>
+				</tr>
+				<tr>
+					<td colspan="2"><hr style="border: solid 1.5px darkolivegreen;"></td>
+				</tr>
+				<tr>
+					<td>카테고리</td>
+					<td>상세 카테고리</td>
+				</tr>
+				<tr>
+					<td>
+						<select id="categoryName">
+							<option value="">선택</option>
+							<option value="music">음악</option>
+							<option value="dance">댄스</option>
+							<option value="picture">영상/사진</option>
+							<option value="life">라이프스타일</option>
+							<option value="beauty">뷰티</option>
+							<option value="design">디자인</option>
+							<option value="sports">스포츠</option>
+						</select>
+					</td>
+					<td>
+						<select id="detailCategory" name="detailCategory">
+							<option>선택</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2"><hr style="border:solid 1.15px darkolivegreen;"></td>
+				</tr>
+				<tr>
+					<td colspan="2">수업인원</td>
+				</tr>
+				<tr>
+					<td>
+						<select id="maxNum" name="maxNum">
+							<option>1:1</option>
+							<option>소규모(2인~8인)</option>
+							<option>대규모(9인 이상)</option>
+						</select>
+					</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td colspan="2"><hr style="border:solid 1.15px darkolivegreen;"></td>
+				</tr>
+				<tr>
+					<td>수업료 (회차당)</td>
+					<td>수업회차</td>
+				</tr>
+				<tr>
+					<td>
+						<input type="text" id="classPay" name="classPay">
+					</td>
+					<td>
+						<select id="classTimes" name="classTimes">
+							<option>일회차</option>
+							<option>다회차</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2"><hr style="border:solid 1.15px darkolivegreen;"></td>
+				</tr>
+				<tr>
+					<td>희망 지역</td>
+					<td>희망 일자</td>
+				</tr>
+				<tr>
+					<td>
+						<select id="area1" name="area1" onChange="cat_change(this.value, area2)">
+							<option>-선택-</option>
+							<option value='1'>서울</option>
+							<option value='2'>부산</option>
+							<option value='3'>대구</option>
+							<option value='4'>인천</option>
+							<option value='5'>광주</option>
+							<option value='6'>대전</option>
+							<option value='7'>울산</option>
+							<option value='8'>강원</option>
+							<option value='9'>경기</option>
+							<option value='10'>경남</option>
+							<option value='11'>경북</option>
+							<option value='12'>전남</option>
+							<option value='13'>전북</option>
+							<option value='14'>제주</option>
+							<option value='15'>충남</option>
+							<option value='16'>충북</option>
+						</select>
+						<select id="area2" name="area2">
+							<option>-선택-</option>
+						</select>
+					</td>
+					<td>
+						<input type="date" name="wantDate">
+					</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td style="color:#3c3c3c;">까지 개설되었으면 좋겠습니다.</td>
+				</tr>
+				<tr>
+					<td colspan="2"><hr style="border:solid 1.15px darkolivegreen;"></td>
+				</tr>
+				<tr>
+					<td colspan="2">수업 요일</td>
+				</tr>
+				<tr>
+					<td colspan="2" style="color:#3c3c3c;">
+						<input type="radio" name="day" id="weekday" value="weekday"><label for="weekday">평일</label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<input type="radio" name="day" id="weekend" value="weekend"><label for="weekend">주말</label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<input type="radio" name="day" id="irrelevant" value="irrelevant"><label for="irrelevant">무관</label>
+					</td>
+				</tr>
+				<tr></tr>
+				<tr>
+					<td colspan="2">수업 시간</td>
+				</tr>
+				<tr>
+					<td colspan="2" style="color:#3c3c3c;">
+						<input type="radio" name="time" id="dawn" value="dawn"><label for="dawn">새벽반</label>&nbsp;&nbsp;
+						<input type="radio" name="time" id="am" value="am"><label for="am">오전반</label>&nbsp;&nbsp;
+						<input type="radio" name="time" id="pm" value="pm"><label for="pm">오후반</label>&nbsp;&nbsp;
+						<input type="radio" name="time" id="evening" value="evening"><label for="evening">저녁반</label>&nbsp;&nbsp;
+						<input type="radio" name="time" id="irrelevant" value="irrelevant"><label for="irrelevant">무관</label>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2"><hr style="border:solid 1.15px darkolivegreen;"></td>
+				</tr>
+			</table>
+		</form>
 		<br>
 		<div id="suggestBtns">
 			<button>취소</button> &nbsp;&nbsp; <button id="suggestNextBtn">다음</button>
@@ -241,7 +219,7 @@
 	<script>
 		$(function() {
 			$("#suggestBtns").click(function(){
-				location.href = "<%=request.getContextPath()%>/views/suggest/suggestInsertForm2.jsp";
+				$("#sugInsert1").submit();
 			});
 			
 			$("#categoryName").change(function(){

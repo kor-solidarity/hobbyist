@@ -1,39 +1,37 @@
 package com.dh.hobbyist.artist.model.vo;
 
 public class ArtistCategory implements java.io.Serializable {
-	private int memberPk;
-	private int categoryPk;
+	private int memberCode;
+	private int categoryCode;
 	
 	public ArtistCategory() {}
 
-	public ArtistCategory(int memberPk, int categoryPk) {
+	public ArtistCategory(int memberCode, int categoryCode) {
 		super();
-		this.memberPk = memberPk;
-		this.categoryPk = categoryPk;
+		this.memberCode = memberCode;
+		this.categoryCode = categoryCode;
 	}
 
-	public int getMemberPk() {
-		return memberPk;
+	public int getMemberCode() {
+		return memberCode;
 	}
 
-	public void setMemberPk(int memberPk) {
-		this.memberPk = memberPk;
+	public void setMemberCode(int memberCode) {
+		this.memberCode = memberCode;
 	}
 
-	public int getCategoryPk() {
-		return categoryPk;
+	public int getCategoryCode() {
+		return categoryCode;
 	}
 
-	public void setCategoryPk(int categoryPk) {
-		this.categoryPk = categoryPk;
+	public void setCategoryCode(int categoryCode) {
+		this.categoryCode = categoryCode;
 	}
 
 	@Override
 	public String toString() {
-		return "ArtistCategory [memberPk=" + memberPk + ", categoryPk=" + categoryPk + "]";
+		return "ArtistCategory [memberCode=" + memberCode + ", categoryCode=" + categoryCode + "]";
 	}
-	
-	
 
 	
 }
