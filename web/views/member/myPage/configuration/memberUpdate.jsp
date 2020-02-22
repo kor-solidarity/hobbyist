@@ -343,66 +343,20 @@ background: #556B2F;
 			$.ajax({
 			url:"/hobbyist/idCheck.me"	
 			//클라이언트가 http요청을 보낼 서버의URL의 주소
-			
-			})
-			
-				
-				
-			}	
-				
-				
-			})
-			
-			
-			$(function(){
-			$("#bt_update").click(function(){
-				var memberId = $("#memberId").val();
-				var idRegExp = /^[a-zA-z0-9]{4,12}$/;
-				
-			$.ajax({
-			url:"/hobbyist/idCheck.me"
-			//클라이언트가 HTTP요청을 보낼 서버의 URL 주소
 			type: "post",
 			data: {meberId: memberId},
-			//HTTP요청과 함꼐 서버로 보낼 데이터(HTTP요청과 함께 서버로 보낼 데이터)
+			//HTTP요청과 함께 서버로 보낼 데이터(HTTP요청과 함께 서버로 보낼 데이터)
 			success: function(data) {
 				if(!idRegExp.test(memberId)){
 					alert("영문, 숫자만으로 4~12자 이내로 입력하세요.");
 				}else{
-					if(data == "fail"){
-						
-					}
+					if(data == "fail")
 				}
-				
-				
 			}
-				
-				
-				
-				
-				
+			})	
+			}	
 			})
-			})
-			</script>
-			
-			
-			
-			
-			
-			
-			
-			});
-			
-			
-			
-			
-			
-			
-				
-
-
-
-
+		</script>
 
 			<script>
 				$("#button1").click(function(){

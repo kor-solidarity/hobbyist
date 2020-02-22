@@ -21,6 +21,7 @@ import com.dh.hobbyist.member.model.vo.Member;
  * Servlet implementation class UpdateMemberList
  */
 @WebServlet("/UpdateMember.me")
+
 public class UpdateMemberList extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
