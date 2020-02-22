@@ -18,7 +18,7 @@
 	#category {
 		font-family: 'Do Hyeon', sans-serif;
         font-size:22px;
-        border-collapse:seperate;
+        border-collapse:separate;
         border-spacing:60px 0px;
         cursor:pointer;
        	
@@ -40,7 +40,7 @@
 		font-family: 'Nanum Gothic', sans-serif;
 		font-size:13px;
 		font-weight:900;
-		border-collapse :seperate;
+		border-collapse :separate;
 		border-spacing: 10px; 
 		
 	}
@@ -86,7 +86,7 @@
 		width:1024px;
 		height:50px;
 		margin:auto;
-		margin-top:-150px; 
+		margin-top:30px; 
 		
 	}
 	.selection {
@@ -115,7 +115,7 @@
 		border:1px solid darkolivegreen;
 		font-family: 'Nanum Gothic', sans-serif;
 		font-size:13px;
-		border-collapse:seperate;
+		border-collapse:separate;
 		border-spacing: 5px;
 		
 	}
