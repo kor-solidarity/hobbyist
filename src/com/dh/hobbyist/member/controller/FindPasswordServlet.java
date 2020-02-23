@@ -12,42 +12,43 @@ import com.dh.hobbyist.member.model.service.MemberService;
 import com.dh.hobbyist.member.model.vo.Member;
 
 
-@WebServlet("/findId.me")
-public class FindIdServlet extends HttpServlet {
+@WebServlet("/findPwd.me")
+public class FindPasswordServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     
-    public FindIdServlet() {
+    public FindPasswordServlet() {
         super();
     }
 
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String name = request.getParameter("name");
+		String memberId = request.getParameter("memberId");
+		String memberName = request.getParameter("memberName");
 		String tel1 = request.getParameter("tel1");
 		String tel2 = request.getParameter("tel2");
 		String tel3 = request.getParameter("tel3");
 		
 		String phone = tel1 + "-" + tel2 + "-" + tel3;
 		
-		/*System.out.println("(find Id) name : " + name);
-		System.out.println("(find Id) phone : " + phone);*/
+		System.out.println("(find Password) Id : " + memberId);
+		System.out.println("(find Password) name : " + memberName);
+		System.out.println("(find Password) phone : " + phone);
 		
 		Member member = new Member();
-		member.setMemberName(name);
+		member.setMemberId(memberId);
+		member.setMemberName(memberName);
 		member.setPhone(phone);
 		
-		Member findMember = new MemberService().findId(member);
-		
+		Member findMember = new MemberService().findPassword(member);
 		
 		if(findMember != null) {
 			HttpSession session = request.getSession();
 			session.setAttribute("findMember", findMember);
-			response.sendRedirect("views/member/successFindId.jsp");
+			response.sendRedirect("views/member/setPwd.jsp");
 		}else {
-			request.getRequestDispatcher("views/member/failedFindId.jsp").forward(request, response);
+			request.getRequestDispatcher("views/member/failedFindPwd.jsp").forward(request, response);
 		}
-		
 	}
 
 	

@@ -274,6 +274,64 @@ public class MemberDao {
 		
 		return findMember;
 	}
+	
+	//비밀번호 찾기 메소드(유승)
+	public Member findPassword(Connection con, Member member) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		Member findMember = null;
+		
+		String query = prop.getProperty("findPassword");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, member.getMemberId());
+			pstmt.setString(2, member.getMemberName());
+			pstmt.setString(3, member.getPhone());
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				findMember = new Member();
+				
+				findMember.setMemberId(rset.getString("MEMBER_ID"));
+				findMember.setMemberId(rset.getString("MEMBER_PWD"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+			close(rset);
+		}
+		
+		return findMember;
+	}
+	
+	//비밀번호 재설정(유승)
+	public int setPassword(Connection con, String memberPwd, String memberId) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("setPassword");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, memberPwd);
+			pstmt.setString(2, memberId);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
+	
+	
 
 
 }

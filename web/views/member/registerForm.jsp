@@ -20,6 +20,7 @@
             font-family: 'ZCOOL QingKe HuangYou', cursive;
             margin-top: 50px;
             font-size: 60px;
+            cursor:pointer;
         }
         h2 {
             font-family: 'Do Hyeon', sans-serif;
@@ -50,7 +51,8 @@
         }
         .btnz {
             width:90px;
-            height: 40px;;
+            height: 40px;
+            cursor:pointer;
         }
        .btns {
        		width:70px;
@@ -60,6 +62,7 @@
        		height:26px;
        		text-align:center;
        		line-height:26px;
+       		cursor:pointer;
        }
        
        

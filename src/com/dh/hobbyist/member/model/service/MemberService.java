@@ -92,6 +92,28 @@ public class MemberService {
 		
 		return findMember;
 	}
+	
+	//비밀번호 찾기 메소드(유승)
+	public Member findPassword(Member member) {
+		Connection con = getConnection();
+		
+		Member findMember = new MemberDao().findPassword(con, member);
+		
+		close(con);
+		
+		return findMember;
+	}
+	
+	//비밀번호 재설정(유승)
+	public int setPassword(String memberPwd, String memberId) {
+		Connection con = getConnection();
+		
+		int result = new MemberDao().setPassword(con, memberPwd, memberId);
+		
+		close(con);
+		
+		return result;
+	}
 	   
 
 }

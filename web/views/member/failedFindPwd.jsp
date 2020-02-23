@@ -20,6 +20,7 @@
             font-family: 'ZCOOL QingKe HuangYou', cursive;
             margin-top: 50px;
             font-size: 60px;
+            cursor: pointer;
         }
         h2 {
             font-family: 'Do Hyeon', sans-serif;
@@ -31,7 +32,7 @@
         #contents {
             border: 1.2px solid darkolivegreen;
             width: 600px;
-            height: 400px;
+            height: 430px;
             margin: auto;
         }
         #setPwd1 {
@@ -52,13 +53,19 @@
         .btns {
             width:115px;
             height: 40px;
-            margin-top: 100px;
+            margin-top: 80px;
             font-family: 'Nanum Gothic', sans-serif; 
             font-size:14px;
+            cursor:pointer;
+            
             
         }
+        #pwdBtn {
+        	background:lightgray;
+        	border:1px solid lightgray;
+        }
         
-        #loginBtn {
+        #joinBtn {
             background: darkolivegreen;
             color:white;
             border: 1px solid darkolivegreen;
@@ -81,18 +88,20 @@
         <h1 id="title" align="center" onclick="goHome();">hobbyist</h1>
     </div>
     <div id="contents" align="center">
-            <h2>비밀번호 재설정</h2>
+            <h2>아이디 찾기</h2>
             <br><br>
-            <p>비밀번호 재설정이 <br>
-            	완료되었습니다.</p>
+            <p>입력하신 정보와 일치하는 계정이 존재하지 않습니다.</p><br><br>
+            
            
-            <button onclick="goLogin();" class="btns" id="loginBtn">로그인</button>
+           	<button onclick="goHome();" class="btns" id="pwdBtn">홈으로</button>&nbsp;&nbsp;&nbsp;&nbsp;
+            <button onclick="goRegister();" class="btns" id="joinBtn">가입하기</button>
     </div>
     
     <script>
-    	function goLogin() {
-    		location.href = "<%=request.getContextPath()%>/views/member/loginForm.jsp";
+    	function goRegister() {
+    		location.href = "<%=request.getContextPath()%>/views/member/registerForm.jsp";
     	}
+    	
     	function goHome() {
     		location.href = "<%= request.getContextPath()%>/index.jsp";
     	}
