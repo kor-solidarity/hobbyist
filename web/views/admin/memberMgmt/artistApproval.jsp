@@ -165,6 +165,9 @@
     	color:darkolivegreen;
     	font-size:18px;
     }
+    #registerText {
+    	cursor:pointer;
+    }
 </style>
 </head>
 
@@ -222,13 +225,39 @@
                		<th style="width:250px;">거절사유</th>
                </tr>
                <% for(ApplyArtist aa : applyList) { %>
-               	<tr>	
+               	<tr>
+               		<input type="hidden" value="<%=aa.getApplyMember()%>">	
                		<td><%=aa.getApplyCode() %></td>
                		<td><%=aa.getApplyMemberId() %></td>
-               		<td><%=aa.getApplyMemberId() %>님의 등록글</td>
+               		<td id="registerText" style="text-decoration: underline;"><%=aa.getApplyMemberId() %>님의 등록글</td>
                		<td><%=aa.getApplyDate() %></td>
-               		<td><%=aa.getApplyConfirmed() %></td>
-               		<td><%=aa.getRejectReason() %></td>
+               		<td>
+	               		<%
+	               			if(aa.getApplyConfirmed() == 0) {
+	               		%> 	
+	               			<button id="approvalBtn">승인</button> &nbsp;
+	                   		<button id="refuseBtn">거절</button>
+	               		<%} else {
+	               			if(aa.getRejectReason() == null) {
+	               			%>
+	               				승인 처리됨
+	               			<%
+	               			} else {
+	               			%>
+	               				거절 처림됨
+	               			<%	
+	               			}
+	               		} %>
+               		</td>
+               		<td>
+               			<%
+               				if(aa.getRejectReason() != null) {
+               			%>
+               				<a><%=aa.getApplyMemberId() %>님의 거절사유</a>
+               			<%
+               				} 
+               			%>
+               		</td>
                	</tr>
                <% } %>
                <tr>
@@ -399,7 +428,9 @@
             </table>
             <script>
             	$("#approvalBtn").click(function() {
-					alert("아티스트 승인하시겠습니까?");
+					if(confirm("아티스트 승인하시겠습니까?")) {
+						
+					}
 				});
             </script>
          </div>
@@ -554,6 +585,8 @@
 			<script>
 			$(document).ready(function() {
 				$("#registerText").click(function() {
+					var num = $(this).parent().children("input").val();
+					//console.log(num);
 					$("#myModal2").modal();
 				});
 			});

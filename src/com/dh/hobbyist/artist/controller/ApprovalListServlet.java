@@ -33,7 +33,7 @@ public class ApprovalListServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ArrayList<ApplyArtist> list = new ArtistAdminService().selectApplyList();
 	
-		System.out.println(list);
+		//System.out.println(list);
 		
 		String page = "";
 		if(list != null) {
