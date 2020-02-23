@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page import="com.dh.hobbyist.member.model.vo.Member" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -304,6 +306,7 @@ body {
 </head>
 <body>
 <%@ include file="../common/menubar.jsp"%>
+
 	<table style="border:1px solid black;">
 		<tr>
 			<td colspan="2" rowspan="4">
@@ -339,7 +342,7 @@ body {
 
 	</div>
 	<div id="bottom">
-		<!-- 4행 3열-->
+		
 		<table id="bottomInfo">
 			<tr>
 				<td id="first" colspan="3">수업 개설 어떻게 진행되나요?</td>
@@ -392,35 +395,35 @@ body {
 									<td style="width: 33%">
 										<div>카데고리</div>
 										<div>
-											<select name="category" style="color:black;">
+											<select id="category" style="color:black;">
+												<option>선택</option>
 												<option value="music">음악</option>
-												<option>댄스</option>
-												<option>영상/사진</option>
-												<option>라이프스타일</option>
-												<option>뷰티</option>
-												<option>디자인</option>
-												<option>스포츠</option>
+												<option value="dance">댄스</option>
+												<option value="picture">영상/사진</option>
+												<option value="life">라이프스타일</option>
+												<option value="beauty">뷰티</option>
+												<option value="design">디자인</option>
+												<option value="sports">스포츠</option>
 											</select>
 										</div>
 									</td>
 									<td colspan="2">
 										<div>수업제목</div>
 										<div>
-											<!-- <input id="titleText" type="text" style="width:400px;"> -->
-											<textarea id="lessonTitle" name="lessonTitle" rows="2" cols="45" placeholder="수업제목을 입력하세요" style="resize:none;"></textarea>
+											<textarea id="lessonTitle" name="lessonTitle" rows="2" cols="45" placeholder="수업제목을 입력하세요" 
+												style="text-align: left; font-family: 'Nanum Gothic', sans-serif; font-size: 16px; resize:none;"></textarea>
 										</div>
-										<div align="right" style="margin-right:50px;"><span id="counter">0</span><span>/55</span></div>
+										<div align="right" style="margin-right:50px;"><span id="titleCounter">0</span><span>/55</span></div>
 										<script>
 											$(function(){
-												$("#lessonTitle").keydown(function(){
+												$("#lessonTitle").keyup(function(){
 													var inputLength = $(this).val().length;
 													
 													if(inputLength > 55) {
 														$(this).val($(this).val().substring(0, 55));
 													} else {														
-														$("#counter").html(inputLength);
+														$("#titleCounter").html(inputLength);
 													}
-													
 												})
 											});
 										</script>
@@ -429,12 +432,32 @@ body {
 								<tr>
 									<td>
 										<div>상세 카테고리</div> 
-										<select name="subCategory" style="color: black;"></select>
+										<select id="subCategory" style="color: black;"></select>
 										<script>
 											$(function(){
 												$("#category").change(function(){
-													$ajax({
-														url: ""
+													var categoryName = $("#category").val();
+													
+													$.ajax({
+														url: "/hobbyist/category.su",
+														type: "get",
+														data: {categoryName : categoryName},
+														success: function(data) {
+															
+															$select = $("#subCategory");
+															$select.find("option").remove();
+															
+															for(var i = 0; i < data.length; i++) {
+																var $option = $("<option>");
+																$option.val(data[i].categoryCode);
+																$option.text(data[i].nodeName);
+																$select.append($option);
+															}
+															
+														},
+														error: function(error) {
+															console.log(error);
+														}
 													});
 												});
 											});
@@ -501,6 +524,7 @@ body {
 							</table>
 						</div>
 						<div id="show2" style="display: none;">
+					
 							<table id="LessonTable3">
 								<tr>
 									<td>01. 기본정보</td>
@@ -513,7 +537,7 @@ body {
 							<table id="LessonTable4">
 		                        <tr height="20px">
 		                            <td colspan="2" style="width:90%">
-		                                <span style="color:black">보유한 기술</span>&nbsp;&nbsp;<span style="color:#A7A1A1">(해당 수업정보에 노출시킬 기술을 선택하세요)</span>
+		                                <span style="color:black">보유한 자격</span>&nbsp;&nbsp;<span style="color:#A7A1A1">(해당 수업정보에 노출시킬 자격증 을 선택하세요)</span>
 		                            </td>
 		                            <td style="width:10%">
 		                                <button type="button" class="btn btn-primary btnAll">전체선택</button>
@@ -537,6 +561,11 @@ body {
 		                                 <span class="item">스타벅스 매니저 / 3년 2개월</span>
 		                            </td>
 		                        </tr>
+		                        <script>
+			                		$(function(){
+			                			//session에서 회원코드를 받아와 아티스트 자격정보와 경력 정보를 span으로 만들어 출력해야한다.
+			                		});
+		                        </script>
 		                    </table>
 						</div>
 						<div id="show3" style="display: none;">
@@ -557,9 +586,23 @@ body {
 								</tr>
 								<tr>
 									<td>
-										<textarea name="introduce" rows="5" cols="40"
-												style="width: 600px; height: 300px; text-align: left; color: rgb(49, 49, 49); resize:none;"></textarea>
-										<div>0/400</div>
+										<textarea id="artIntro" name="artIntro" rows="5" cols="40"
+												style="width: 600px; height: 300px; text-align: left; font-family: 'Nanum Gothic', sans-serif; font-size: 18px; color: rgb(49, 49, 49); resize:none;"></textarea>
+										<div><span id="artIntroCtn">0</span><span>/400</span></div>
+										<script>
+											$(function(){
+												$("#artIntro").keyup(function(){
+													var inputLength = $(this).val().length;
+													
+													if(inputLength > 400) {
+														$(this).val($(this).val().substring(0, 400));
+													} else {														
+														$("#artIntroCtn").html(inputLength);
+													}
+													
+												})
+											});
+										</script>
 									</td>
 								</tr>
 							</table>
@@ -582,9 +625,23 @@ body {
 								</tr>
 								<tr>
 									<td>
-										<textarea name="introduce" rows="5" cols="40"
-												style="width: 600px; height: 300px; text-align: left; color: rgb(49, 49, 49); resize:none;"></textarea>
-										<div>0/400</div>
+										<textarea id="lessonIntro" name="lessonIntro" rows="5" cols="40"
+												style="width: 600px; height: 300px; text-align: left; font-family: 'Nanum Gothic', sans-serif; font-size: 18px; 
+												color: rgb(49, 49, 49); resize:none;"></textarea>
+										<div><span id="lessonIntroCtn">0</span>/400</div>
+										<script>
+											$(function(){
+												$("#lessonIntro").keyup(function(){
+													var inputLength = $(this).val().length;
+													
+													if(inputLength > 400) {
+														$(this).val($(this).val().substring(0, 400));
+													} else {
+														$("#lessonIntroCtn").html(inputLength);
+													}
+												});
+											});
+										</script>
 									</td>
 								</tr>
 							</table>
@@ -757,7 +814,7 @@ body {
 			$('#saveModalBtn').on('click', function() {
 				$("#LessonForm").submit();
 			});
-		});
+		});		
 	</script>
 	<div style="height:30px;"></div>
 	<%@ include file="../common/footer.jsp"%>
