@@ -401,11 +401,6 @@ body {
 												<option>디자인</option>
 												<option>스포츠</option>
 											</select>
-											<script>
-												$(function(){
-													
-												});
-											</script>
 										</div>
 									</td>
 									<td colspan="2">
@@ -433,15 +428,17 @@ body {
 								</tr>
 								<tr>
 									<td>
-										<div>상세 카테고리</div> <select name="subCategory" style="color:black;">
-											<option value="music">음악</option>
-											<option>댄스</option>
-											<option>영상/사진</option>
-											<option>라이프스타일</option>
-											<option>뷰티</option>
-											<option>디자인</option>
-											<option>스포츠</option>
-									</select>
+										<div>상세 카테고리</div> 
+										<select name="subCategory" style="color: black;"></select>
+										<script>
+											$(function(){
+												$("#category").change(function(){
+													$ajax({
+														url: ""
+													});
+												});
+											});
+										</script>
 									</td>
 									<td>
 										<div>수업 최소인원</div> <select name="subCategory" style="color:black;">
