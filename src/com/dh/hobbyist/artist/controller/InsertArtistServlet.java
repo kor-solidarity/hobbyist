@@ -108,13 +108,10 @@ public class InsertArtistServlet extends HttpServlet {
 			String introduce = multiRequest.getParameter("introduce");
 			
 			//"02. 전문분야" 에서 받아오는 input
-			String categoryName = multiRequest.getParameter("categoryName");
 			String detailCategory = multiRequest.getParameter("detailCategory");
 			
-			String categoryName2 = multiRequest.getParameter("categoryName2");
 			String detailCategory2 = multiRequest.getParameter("detailCategory2");
 			
-			String categoryName3 = multiRequest.getParameter("categoryName3");
 			String detailCategory3 = multiRequest.getParameter("detailCategory3");
 			
 			String[] details = {detailCategory, detailCategory2, detailCategory3};
@@ -238,62 +235,7 @@ public class InsertArtistServlet extends HttpServlet {
 				request.setAttribute("msg", "아티스트 등록 실패");
 			}
 			request.getRequestDispatcher(page).forward(request, response);
-			/*System.out.println("memberPk : " + memberPk);
-			System.out.println("nickName : " + nickName);
-			System.out.println("bankName : " + bankName);
-			System.out.println("bankNum : " + bankNum);
-			System.out.println("introduce : " + introduce);
 			
-			System.out.println("categoryName : " + categoryName);
-			System.out.println("detailCategory : " + detailCategory);
-			
-			System.out.println("cateogryName2 : " + categoryName2);
-			System.out.println("detailCategory2 : " + detailCategory2);
-			
-			System.out.println("categoryName3 : " +categoryName3);
-			System.out.println("detailCategory3 : " + detailCategory3);
-			
-			System.out.println("certiName1 : " + certiName1);
-			System.out.println("certiDay1 : " + certiDay1);
-			System.out.println("certiSpace1 : " + certiSpace1);
-			
-			System.out.println("certiName2 : " + certiName2);
-			System.out.println("certiDay2 : " + certiDay2);
-			System.out.println("certiSpace2 : " + certiSpace2);
-			
-			System.out.println("certiName3 : " + certiName3);
-			System.out.println("certiDay3 : " + certiDay3);
-			System.out.println("certiSpace3 : " + certiSpace3);
-			
-			System.out.println("schoolName1 : " + schoolName1);
-			System.out.println("major1 : " + major1);
-			System.out.println("status1 : " + status1);
-			
-			System.out.println("schoolName2 : " + schoolName2);
-			System.out.println("major2 : " + major2);
-			System.out.println("status2 : " + status2);
-			
-			System.out.println("schoolName3 : " + schoolName3);
-			System.out.println("major3 : " + major3);
-			System.out.println("status3 : " + status3);
-			
-			System.out.println("officeName1 : " + officeName1);
-			System.out.println("position1 : " + position1);
-			System.out.println("workContent1 : " + workContent1);
-			System.out.println("workYear1 : " + workYear1);
-			System.out.println("workMonth1 : " + workMonth1);
-			
-			System.out.println("officeName2 : " + officeName2);
-			System.out.println("position2 : " + position2);
-			System.out.println("workContent2 : " + workContent2);
-			System.out.println("workYear2 : " + workYear2);
-			System.out.println("workMonth2 : " + workMonth2);
-			
-			System.out.println("officeName3 : " + officeName3);
-			System.out.println("position3 : " + position3);
-			System.out.println("workContent3 : " + workContent3);
-			System.out.println("workYear3 : " + workYear3);
-			System.out.println("workMonth3 : " + workMonth3);*/
 			
 		}
 		

@@ -72,7 +72,7 @@ public class ArtistDao {
 				if(!details[i].equals("")) {
 					pstmt = con.prepareStatement(query);
 					pstmt.setInt(1, Integer.parseInt(memberPk));
-					pstmt.setString(2, details[i]);
+					pstmt.setInt(2, Integer.parseInt(details[i]));
 					result = pstmt.executeUpdate();
 				}
 				

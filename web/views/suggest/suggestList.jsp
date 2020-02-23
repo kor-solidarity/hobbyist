@@ -89,7 +89,9 @@
 					<button id="suggestSearchBtn" style="height: 30px; width: 70px;">검색</button>
 				</td>
 				<td>
+					<% if(loginMember != null) { %>
 					<button id="suggestWriteBtn" style="height: 30px; width: 80px;">글쓰기</button>
+					<%} %>
 				</td>
 			</tr>
 		</table>

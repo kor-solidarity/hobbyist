@@ -1,8 +1,7 @@
-package com.dh.hobbyist.suggest.controller;
+package com.dh.hobbyist.artist.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,21 +9,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.dh.hobbyist.suggest.model.service.CategoryService;
-import com.dh.hobbyist.suggest.model.vo.Category;
-import com.google.gson.Gson;
+import com.dh.hobbyist.artist.model.service.ArtistAdminService;
+import com.dh.hobbyist.artist.model.vo.ApplyArtist;
 
 /**
- * Servlet implementation class SuggestCategoryServlet
+ * Servlet implementation class ApprovalListServlet
  */
-@WebServlet("/category.su")
-public class SuggestCategoryServlet extends HttpServlet {
+@WebServlet("/approvalList.ar")
+public class ApprovalListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SuggestCategoryServlet() {
+    public ApprovalListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,20 +31,20 @@ public class SuggestCategoryServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String categoryName = request.getParameter("categoryName");
-		int categoryCode = 0;
+		ArrayList<ApplyArtist> list = new ArtistAdminService().selectApplyList();
+	
+		System.out.println(list);
 		
-		//DB에서 쓰이는 대분류의 categoryCode 설정 (integer로 형변환)
-		categoryCode = Integer.parseInt(categoryName);
+		String page = "";
+		if(list != null) {
+			page = "views/admin/memberMgmt/artistApproval.jsp";
+			request.setAttribute("applyList", list);
+		} else {
+			page = "views/common/errorPage.jsp";
+			request.setAttribute("msg", "아티스트신청내역 조회 실패");
+		}
 		
-		List<Category> list = new CategoryService().selectDetailCategory(categoryCode);
-		//System.out.println("category : " + categoryCode);
-		//System.out.println("list : " + list);
-		
-		response.setContentType("application/json");
-		response.setCharacterEncoding("UTF-8");
-		
-		new Gson().toJson(list, response.getWriter());
+		request.getRequestDispatcher(page).forward(request, response);
 	}
 
 	/**

@@ -9,11 +9,12 @@ public class ApplyArtist implements java.io.Serializable {
 	private int applyConfirmed;
 	private String rejectReason;
 	private int applyMember;
+	private String applyMemberId;
 	
 	public ApplyArtist() {}
 
 	public ApplyArtist(int applyCode, Date applyDate, int applyAttempts, int applyConfirmed, String rejectReason,
-			int applyMember) {
+			int applyMember, String applyMemberId) {
 		super();
 		this.applyCode = applyCode;
 		this.applyDate = applyDate;
@@ -21,6 +22,7 @@ public class ApplyArtist implements java.io.Serializable {
 		this.applyConfirmed = applyConfirmed;
 		this.rejectReason = rejectReason;
 		this.applyMember = applyMember;
+		this.applyMemberId = applyMemberId;
 	}
 
 	public int getApplyCode() {
@@ -71,13 +73,20 @@ public class ApplyArtist implements java.io.Serializable {
 		this.applyMember = applyMember;
 	}
 
+	public String getApplyMemberId() {
+		return applyMemberId;
+	}
+
+	public void setApplyMemberId(String applyMemberId) {
+		this.applyMemberId = applyMemberId;
+	}
+
 	@Override
 	public String toString() {
 		return "ApplyArtist [applyCode=" + applyCode + ", applyDate=" + applyDate + ", applyAttempts=" + applyAttempts
 				+ ", applyConfirmed=" + applyConfirmed + ", rejectReason=" + rejectReason + ", applyMember="
-				+ applyMember + "]";
+				+ applyMember + ", applyMemberId=" + applyMemberId + "]";
 	}
 
-	
 	
 }

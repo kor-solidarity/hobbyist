@@ -8,7 +8,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
+
+import com.dh.hobbyist.suggest.model.vo.Category;
+
 import static com.dh.hobbyist.common.JDBCTemplate.*;
 
 public class CategoryDao {
@@ -25,9 +29,9 @@ public class CategoryDao {
 	}
 
 	//대분류 카테고리를 통해 소분류 카테고리들을 뽑아오는 메소드
-	public ArrayList<String> selectDetailCategory(Connection con, int categoryCode) {
+	public List<Category> selectDetailCategory(Connection con, int categoryCode) {
 		PreparedStatement pstmt = null;
-		ArrayList<String> list = null;
+		List<Category> list = null;
 		ResultSet rset = null;
 		int i = 0;
 		String query = prop.getProperty("selectDetailCategory");
@@ -38,12 +42,18 @@ public class CategoryDao {
 			
 			rset = pstmt.executeQuery();
 			
-			list = new ArrayList<String>();
+			list = new ArrayList<Category>();
 			
 			while(rset.next()) {
-				String category = rset.getString("NODE_NAME");
+				Category c = new Category();
+				c.setCategoryCode(rset.getInt("CATEGORY_PK"));
+				c.setNodeDepth(rset.getInt("NODE_DEPTH"));
+				c.setNodePath(rset.getString("NODE_PATH"));
+				c.setNodeName(rset.getString("NODE_NAME"));
+				c.setParentCode(rset.getInt("PARENT_PK"));
+				c.setChildExist(rset.getInt("CHILD_EXIST"));
 				
-				list.add(category);
+				list.add(c);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
