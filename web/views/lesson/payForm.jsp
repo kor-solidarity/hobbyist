@@ -312,7 +312,7 @@ input[type="button"], input[type="reset"] {
 		<table id="checkPay">
 			<tr>
 				<td style="color: gray; font-size: 20px;">전체 수업료</td>
-				<td style="color: gray; font-size: 20px;"><label id="lessonMoney">100</label> 원</td>
+				<td style="color: gray; font-size: 20px;"><label id="lessonMoney">3100</label> 원</td>
 			</tr>
 			<tr>
 				<td style="color: gray; font-size: 20px;">사용 포인트</td>
@@ -321,7 +321,7 @@ input[type="button"], input[type="reset"] {
 
 			<tr style="line-height: 50px;">
 				<td style="font-size: 25px; font-weight: bold;">결제 금액</td>
-				<td style="font-size: 25px; font-weight: bold;"><label id="moneyResult">100</label> 원</td>
+				<td style="font-size: 25px; font-weight: bold;"><label id="moneyResult">3100</label> 원</td>
 			</tr>
 		</table>
 
@@ -341,7 +341,7 @@ input[type="button"], input[type="reset"] {
  		  	var myPoint = Number($("#myPoint").text());			//보유 포인트
     		var usingPoint = Number($("#usingPoint").val());	//사용 포인트
     		
-    		$("#givePoint").text(Math.round((lessonMoney - usingPoint) / 100));	//적립포인트
+    		$("#givePoint").text(Math.round((lessonMoney - usingPoint) / 100));	//적립예정 포인트
     		$("#pointResult").text(myPoint - usingPoint);		//잔여포인트
     		$("#usingPointResult").text(usingPoint);			//최종 사용 포인트
     		$("#moneyResult").text(lessonMoney - usingPoint);	//최종 결제 금액
@@ -361,6 +361,8 @@ input[type="button"], input[type="reset"] {
     $("#check_module").click(function() {
     	//결제 정보 불러오기
     	var moneyResult = Number($("#moneyResult").text());		//최종 결제 금액
+    	var givePoint = Number($("#givePoint").text());
+    	var usingPoint = Number($("#usingPoint").text());
     	
    	  	if($("#payTermsBox").prop("checked") && $("#refundTermsBox").prop("checked")/*  && loginUser != null */) {		//로그인 유저가 널이 아닐때 추가하기!!
     	  
@@ -368,22 +370,13 @@ input[type="button"], input[type="reset"] {
   	 		IMP.init('imp67942527');	// 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
  	   
   	 		IMP.request_pay({
- 	 		pg: 'inicis', // version 1.1.0부터 지원.
-
-  	  		/*  'samsung':삼성페이,
-  	  			'card':신용카드,
- 	   			'trans':실시간계좌이체,
-	   			'vbank':가상계좌,
-   	 			'phone':휴대폰소액결제   */
-   	 	 
-  	 		merchant_uid: 'merchant_' + new Date().getTime(),
- 	  		/*	merchant_uid에 경우
- 	   			https://docs.iamport.kr/implementation/payment	*/
-  	 
- 	 		name: '이지호',    //결제창에서 보여질 이름
-	  
+ 	 		pg: 'inicis',
+ 	 		pay_method : 'card',
+  	 		merchant_uid: 'merchant_' + new Date().getTime(),	/*	merchant_uid에 경우	https://docs.iamport.kr/implementation/payment	*/
+ 	 		name : '수업제목',
+ 	 		usingPoint: usingPoint,	//사용포인트
+ 	 		givePoint: givePoint,	//지금 포인트
  	  		amount: moneyResult,	//가격
- 	  		
 	  		buyer_email: 'iamport@siot.do',	
 	  		buyer_name: '이지호',
  	  		buyer_tel: '010-1234-5678',
@@ -402,16 +395,19 @@ input[type="button"], input[type="reset"] {
 	    		msg += '고유ID : ' + rsp.imp_uid;	
 	    		msg += '결제 금액 : ' + rsp.paid_amount;
 	    		
-	    		var info = {
-	    			imp_uid: rsp.imp_uid,
-	                money: moneyResult
-	    		}
-	    	
+	    		console.log(rsp.imp_uid);
+	    		console.log(rsp.name);
 	    		$.ajax({
 	            	url: "<%= request.getContextPath()%>/payment.pa", // 가맹점 서버
-	            	data: info,
-	            	method: "post",
-	            	headers: { "Content-Type": "application/json" },
+	            	method: "POST",
+	            	data: {
+	            		impUid : rsp.imp_uid,
+			    		merchantUid : rsp.merchant_uid,
+			    		productName : rsp.name,
+			    		price : rsp.paid_amount,
+			    		buyerName : rsp.buyer_name,
+			    		givePoint : givePoint
+	            	}
 	            	
 	        	});
 	    	

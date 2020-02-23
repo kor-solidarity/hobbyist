@@ -16,10 +16,16 @@ public class PaymentServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String money = request.getParameter("imp_uid");
-		String impNum = request.getParameter("money");
+		String impUid = request.getParameter("impUid");
+		int price = Integer.parseInt(request.getParameter("price"));
+		String productName = request.getParameter("productName");
+		String buyerName = request.getParameter("buyerName");
+		int usingPoint = Integer.parseInt(request.getParameter("usingPoint"));
+		int givePoint = Integer.parseInt(request.getParameter("givePoint"));
 		
-		System.out.println(money + ", " + impNum);
+		System.out.println(impUid + ", " + price + ", " + productName);
+		System.out.println(usingPoint);
+		System.out.println(givePoint);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
