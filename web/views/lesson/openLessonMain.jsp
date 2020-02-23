@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="com.dh.hobbyist.member.model.vo.Member" %>
 
 <!DOCTYPE html>
 <html>
@@ -302,6 +301,10 @@ body {
 	padding: 5px;
 }
 
+.nanum {
+	font-family: 'Nanum Gothic', sans-serif;
+}
+
 </style>
 </head>
 <body>
@@ -395,15 +398,15 @@ body {
 									<td style="width: 33%">
 										<div>카데고리</div>
 										<div>
-											<select id="category" style="color:black;">
+											<select id="category" class="nanum" style="color:black;">
 												<option>선택</option>
-												<option value="music">음악</option>
-												<option value="dance">댄스</option>
-												<option value="picture">영상/사진</option>
-												<option value="life">라이프스타일</option>
-												<option value="beauty">뷰티</option>
-												<option value="design">디자인</option>
-												<option value="sports">스포츠</option>
+												<option value="1">음악</option>
+												<option value="9">댄스</option>
+												<option value="15">영상/사진</option>
+												<option value="20">라이프스타일</option>
+												<option value="25">뷰티</option>
+												<option value="33">디자인</option>
+												<option value="37">스포츠</option>
 											</select>
 										</div>
 									</td>
@@ -432,7 +435,7 @@ body {
 								<tr>
 									<td>
 										<div>상세 카테고리</div> 
-										<select id="subCategory" style="color: black;"></select>
+										<select id="subCategory" class="nanum" style="color: black;"></select>
 										<script>
 											$(function(){
 												$("#category").change(function(){
@@ -464,64 +467,98 @@ body {
 										</script>
 									</td>
 									<td>
-										<div>수업 최소인원</div> <select name="subCategory" style="color:black;">
-											<option value="music">음악</option>
-											<option>댄스</option>
-											<option>영상/사진</option>
-											<option>라이프스타일</option>
-											<option>뷰티</option>
-											<option>디자인</option>
-											<option>스포츠</option>
-									</select>
+										<div>수업 최소인원</div> 
+										<input id="min" class="nanum" name="min" type="number" style="width:100px">
+										<label style="font-weight:normal; color:black;">&nbsp;명</label>
+										<script>
+											$(function() {
+												$("#min").change(function() {
+													var min = $(this).val();
+													if (min < 0) {
+														alert("음수는 입력하실 수 없습니다.");
+													}
+												});
+											});
+										</script>
 									</td>
 									<td>
-										<div>수업 최대인원</div> <select name="subCategory" style="color:black;">
-											<option value="music">음악</option>
-											<option>댄스</option>
-											<option>영상/사진</option>
-											<option>라이프스타일</option>
-											<option>뷰티</option>
-											<option>디자인</option>
-											<option>스포츠</option>
-									</select>
+										<div>수업 최대인원</div> 
+										<input id="max" class="nanum" name="max" type="number" style="width:100px">
+										<label style="font-weight:normal; color:black;">&nbsp;명</label>
+										<script>
+											$(function() {
+												$("#max").change(function() {
+													var max = $(this).val();
+													var min = $("#min").val();
+													
+													if (max < 0) {
+														alert("음수는 입력하실 수 없습니다.");
+													} else if (max < min) {
+														alert("최대인원은 최소인원보다 같거나 많아야 합니다.")
+													}
+												});
+											});
+										</script>
 									</td>
 								</tr>
 								<tr>
 									<td style="vertical-align: bottom;">이미지 업로드</td>
 									<td>
 										<div>총 회차</div> 
-										<select name="subCategory" style="color:black;">
-											<option value="music">음악</option>
-											<option>댄스</option>
-											<option>영상/사진</option>
-											<option>라이프스타일</option>
-											<option>뷰티</option>
-											<option>디자인</option>
-											<option>스포츠</option>
-										</select>
+										<input id="rounds" class="nanum" name="rounds" type="number" style="width:100px">
+										<label style="font-weight:normal; color:black;">&nbsp;회</label>
+										<script>
+											$(function() {
+												$("#rounds").change(function() {
+													var rounds = $(this).val();
+													
+													if (rounds < 0) {
+														alert("음수는 입력하실 수 없습니다.");
+													} 
+												});
+											});
+										</script>
 									</td>
 									<td>
 										<div>회차당 비용</div> 
-										<select name="subCategory" style="color:black;">
-											<option value="music">음악</option>
-											<option>댄스</option>
-											<option>영상/사진</option>
-											<option>라이프스타일</option>
-											<option>뷰티</option>
-											<option>디자인</option>
-											<option>스포츠</option>
-										</select>
+										<input id="cost" class="nanum" name="rounds" type="number" style="width:100px">
+										<label style="font-weight:normal; color:black;">&nbsp;원</label>
+										<script>
+											$(function() {
+												$("#cost").change(function() {
+													var cost = $(this).val();
+													
+													if (cost < 0) {
+														alert("음수는 입력하실 수 없습니다.");
+													} 
+												});
+											});
+										</script>
 									</td>
 								</tr>
 								<tr>
 									<td colspan="3">
-										<img src="<%= request.getContextPath() %>/static/images/iphoneCamera.png" width="80px" height="80px">
-										<img src="<%= request.getContextPath() %>/static/images/iphoneCamera.png" width="80px" height="80px">
-										<img src="<%= request.getContextPath() %>/static/images/iphoneCamera.png" width="80px" height="80px">
-										<img src="<%= request.getContextPath() %>/static/images/iphoneCamera.png" width="80px" height="80px">
+										<span id="contentImgArea1" style="margin:0 5px">
+											<img id="contentImg1" width="80" height="80" src="<%= request.getContextPath() %>/static/images/iphoneCamera.png">
+										</span>
+										<span id="contentImgArea2" style="margin:0 5px">
+											<img id="contentImg2" width="80" height="80" src="<%= request.getContextPath() %>/static/images/iphoneCamera.png">
+										</span>
+										<span id="contentImgArea3" style="margin:0 5px">
+											<img id="contentImg3" width="80" height="80" src="<%= request.getContextPath() %>/static/images/iphoneCamera.png">
+										</span>
+										<span id="contentImgArea4" style="margin:0 5px">
+											<img id="contentImg4" width="80" height="80" src="<%= request.getContextPath() %>/static/images/iphoneCamera.png">
+										</span>
 									</td>
 								</tr>
 							</table>
+							<div id="fileArea">
+								<input type="file" id="lessonImg1" name="lessonImg1" onchange="loadImg(this, 1);">
+								<input type="file" id="lessonImg2" name="lessonImg1" onchange="loadImg(this, 1);">
+								<input type="file" id="lessonImg1" name="lessonImg1" onchange="loadImg(this, 1);">
+								<input type="file" id="lessonImg1" name="lessonImg1" onchange="loadImg(this, 1);">
+							</div>
 						</div>
 						<div id="show2" style="display: none;">
 					
