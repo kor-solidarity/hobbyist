@@ -25,19 +25,19 @@ public class PhoneCertificationServlet extends HttpServlet {
 			String tel2 = request.getParameter("tel2");
 			String tel3 = request.getParameter("tel3");
 		
-			System.out.println("tel1 : " + tel1);
+			/*System.out.println("tel1 : " + tel1);
 			System.out.println("tel2 : " + tel2);
-			System.out.println("tel3 : " + tel3);
+			System.out.println("tel3 : " + tel3);*/
 			
 			String phone = tel1 + tel2 + tel3;
 			
 			System.out.println(phone);
 			
 			String randomVal = new Coolsms().sms(phone);
+			
 			//String randomVal = phone;
 			
-			
-	//		List<Board> replyList = new BoardService().insertReply(board);
+		
 			
 			response.setContentType("application/json");
 			response.setCharacterEncoding("UTF-8");

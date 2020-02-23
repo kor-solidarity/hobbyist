@@ -29,7 +29,8 @@ public class MemberDao {
 			e.printStackTrace();
 		}
 	}
-
+	
+	//회원가입 메소드(유승)
 	public int insertMember(Connection con, Member member) {
 		PreparedStatement pstmt = null;
 		int result = 0;
@@ -54,7 +55,8 @@ public class MemberDao {
 		
 		return result;
 	}
-
+	
+	//로그인 메소드(유승)
 	public Member loginCheck(Connection con, Member member) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -103,7 +105,7 @@ public class MemberDao {
 		
 		return loginMember;
 	}
-
+	//아이디 중복체크 메소드(유승)
 	public int idCheck(Connection con, String memberId) {
 		int result = 0;
 		PreparedStatement pstmt = null;
@@ -209,5 +211,69 @@ public class MemberDao {
 		
 		return artistList;
 	}
+	
+	 //회원정보 수정 메소드 (재선)
+	   public List<Member> UpdateMemberList(Connection con) {
+	      Statement stmt =null;
+	      ResultSet rset =null;
+	      List<Member> memberList = null;
+	      
+	      String query = prop.getProperty("updateMemberList");
+	      
+	      try {
+	         stmt = con.createStatement();
+	         rset = stmt.executeQuery(query);
+	         
+	         memberList = new ArrayList<Member>();
+	         
+	         while(rset.next()) {
+	            Member m = new Member();
+	            m.setMemberId(rset.getString("MEMBER_ID"));
+	            m.setMemberName(rset.getString("MEMBER_NAME"));
+	            m.setEmail(rset.getString("MEMBER_EMAIL"));
+	            m.setPhone(rset.getString("MEMBER_PHONE"));
+	            m.setPhone(rset.getString("MEMBER_PWD"));
+	            memberList.add(m);
+	         }
+	      }catch(SQLException e) {
+	         e.printStackTrace();
+	      }finally {
+	         close(stmt);
+	         close(rset);
+	      }
+	      return memberList;   
+	   }
+	 
+	//아이디 찾기 메소드(유승)
+	public Member findId(Connection con, Member member) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		Member findMember = null;
+		
+		String query = prop.getProperty("findId");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, member.getMemberName());
+			pstmt.setString(2, member.getPhone());
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				findMember = new Member();
+				
+				findMember.setMemberId(rset.getString("MEMBER_ID"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+			close(rset);
+		}
+		
+		return findMember;
+	}
+
 
 }

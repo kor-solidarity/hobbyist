@@ -31,7 +31,7 @@
         #contents {
             border: 1.2px solid darkolivegreen;
             width: 600px;
-            height: 470px;
+            height: 430px;
             margin: auto;
         }
         #setPwd1 {
@@ -63,7 +63,7 @@
         	border:1px solid lightgray;
         }
         
-        #loginBtn {
+        #joinBtn {
             background: darkolivegreen;
             color:white;
             border: 1px solid darkolivegreen;
@@ -76,7 +76,7 @@
         	 /* font-family: 'Roboto', sans-serif; */
         	 font-family: 'Nanum Gothic', sans-serif; 
         	 
-        	font-size:15.5px;
+        	font-size:16px;
         }
 
     </style>
@@ -88,22 +88,18 @@
     <div id="contents" align="center">
             <h2>아이디 찾기</h2>
             <br><br>
-            <p>회원님의 정보와 일치하는 아이디는 <br>
-            	다음과 같습니다.</p><br>
-            <p style="font-weight:900; font-size:16.5px;">hyeon****</p>
+            <p>입력하신 정보와 일치하는 아이디가 존재하지 않습니다.</p><br><br>
+            
            
-           	<button onclick="goFindPwd();" class="btns" id="pwdBtn">비밀번호 찾기</button>&nbsp;&nbsp;&nbsp;&nbsp;
-            <button onclick="goLogin();" class="btns" id="loginBtn">로그인</button>
+           	<button onclick="goHome();" class="btns" id="pwdBtn">홈으로</button>&nbsp;&nbsp;&nbsp;&nbsp;
+            <button onclick="goRegister();" class="btns" id="joinBtn">가입하기</button>
     </div>
     
     <script>
-    	function goLogin() {
-    		location.href = "<%=request.getContextPath()%>/views/member/loginForm.jsp";
+    	function goRegister() {
+    		location.href = "<%=request.getContextPath()%>/views/member/registerForm.jsp";
     	}
     	
-    	function goFindPwd() {
-    		location.href = "<%= request.getContextPath()%>/views/member/findPwd.jsp";
-    	}
     	function goHome() {
     		location.href = "<%= request.getContextPath()%>/index.jsp";
     	}

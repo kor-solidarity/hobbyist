@@ -272,7 +272,7 @@
 	        		var phone = {
 	        					tel1: tel1,
 	        					tel2: tel2,
-	        					tel3, tel3
+	        					tel3: tel3
 	        			};
 	        		
 	        		
