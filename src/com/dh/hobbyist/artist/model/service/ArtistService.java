@@ -1,9 +1,12 @@
 package com.dh.hobbyist.artist.model.service;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.dh.hobbyist.artist.model.dao.ArtistDao;
+import com.dh.hobbyist.common.model.vo.Image;
+import com.dh.hobbyist.member.model.vo.Member;
 
 import static com.dh.hobbyist.common.JDBCTemplate.*;
 public class ArtistService {
@@ -19,7 +22,7 @@ public class ArtistService {
 		return result;
 	}
 
-	//아티스트 전문 카테고리 삽입 메소드 
+	//아티스트 전문 카테고리 등록 메소드 
 	public int insertCategory(String memberPk, String[] details) {
 		Connection con = getConnection();
 		
@@ -36,7 +39,7 @@ public class ArtistService {
 		return result;
 	}
 
-	//아티스트 자격증 삽입 메소드
+	//아티스트 자격증 등록 메소드
 	public int insertCerts(String memberPk, HashMap<String, String[]> certsMap) {
 		Connection con = getConnection();
 		
@@ -53,7 +56,7 @@ public class ArtistService {
 		return result;
 	}
 
-	//학력/전공 삽입 메소드
+	//학력/전공 등록 메소드
 	public int insertEdu(String memberPk, HashMap<String, String[]> eduMap) {
 		Connection con = getConnection();
 		
@@ -70,7 +73,7 @@ public class ArtistService {
 		return result;
 	}
 
-	//경력 삽입 메소드
+	//경력 등록 메소드
 	public int insertCareer(String memberPk, HashMap<String, String[]> careerMap) {
 		Connection con = getConnection();
 		
@@ -84,6 +87,60 @@ public class ArtistService {
 		
 		close(con);
 		
+		return result;
+	}
+
+	//member 테이블에서 아티스트 닉네임과 아티스트 소개, 계좌번호 업데이트
+	public int updateMember(Member requestMember) {
+		Connection con = getConnection();
+		
+		int result = new ArtistDao().updateMember(con, requestMember);
+		
+		if(result > 0) {
+			commit(con);
+		} else {
+			rollback(con);
+		}
+		
+		close(con);
+		
+		return result;
+	}
+
+	//프로필 사진 파일과 학력, 자격증 파일 등록
+	public int insertImage(ArrayList<Image> fileList) {
+		Connection con = getConnection();
+		
+		int result = 0;
+		
+		for(int i = 0; i < fileList.size(); i++) {
+			result += new ArtistDao().insertImage(con, fileList.get(i));
+		}
+		
+		if(result == fileList.size()) {
+			commit(con);
+			result = 1;
+		} else {
+			rollback(con);
+			result = 0;
+		}
+		
+		return result;
+	}
+
+	//아티스트 신청 내역 등록
+	public int insertApply(String memberPk) {
+		Connection con = getConnection();
+		
+		int count = new ArtistDao().selectApplyCount(con, memberPk);
+		
+		int result = new ArtistDao().insertApply(con, memberPk, count);
+		
+		if(result > 0) {
+			commit(con);
+		} else {
+			rollback(con);
+		}
 		return result;
 	}
 

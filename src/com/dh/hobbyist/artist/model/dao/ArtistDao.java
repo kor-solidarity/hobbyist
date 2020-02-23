@@ -8,8 +8,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Properties;
+
+import com.dh.hobbyist.common.model.vo.Image;
+import com.dh.hobbyist.member.model.vo.Member;
+
 import static com.dh.hobbyist.common.JDBCTemplate.*;
 
 public class ArtistDao {
@@ -53,7 +58,7 @@ public class ArtistDao {
 		return result;
 	}
 	
-	//아티스트 전문 카테고리 삽입 메소드 
+	//아티스트 전문 카테고리 등록 메소드 
 	public int insertCategory(Connection con, String memberPk, String[] details) {
 		PreparedStatement pstmt = null;
 		int result = 0;
@@ -83,7 +88,7 @@ public class ArtistDao {
 		return result;
 	}
 
-	//아티스트 자격증 삽입 메소드
+	//아티스트 자격증 등록 메소드
 	public int insertCerts(Connection con, String memberPk, HashMap<String, String[]> certsMap) {
 		PreparedStatement pstmt = null;
 		int result = 0;
@@ -119,7 +124,7 @@ public class ArtistDao {
 		return result;
 	}
 
-	// 학력/전공 삽입 메소드
+	// 학력/전공 등록 메소드
 	public int insertEdu(Connection con, String memberPk, HashMap<String, String[]> eduMap) {
 		PreparedStatement pstmt = null;
 		int result = 0;
@@ -155,7 +160,7 @@ public class ArtistDao {
 		return result;
 	}
 
-	//경력 삽입 메소드
+	//경력 등록 메소드
 	public int insertCareer(Connection con, String memberPk, HashMap<String, String[]> careerMap) {
 		PreparedStatement pstmt = null;
 		int result = 0;
@@ -194,6 +199,106 @@ public class ArtistDao {
 		
 		return result;
 	}
+
+	//member 테이블에서 아티스트 닉네임과 아티스트 소개, 계좌번호 업데이트
+	public int updateMember(Connection con, Member requestMember) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("updateMember");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, requestMember.getArtistNick());
+			pstmt.setString(2, requestMember.getArtistIntro());
+			pstmt.setString(3, requestMember.getBankName());
+			pstmt.setInt(4, requestMember.getMemberCode());
+			pstmt.setString(5, requestMember.getBankNum());
+			pstmt.setInt(6, requestMember.getMemberCode());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	//프로필 사진 파일과 학력, 자격증 파일 등록
+	public int insertImage(Connection con, Image image) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("insertImage");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, image.getImageRoute());
+			pstmt.setString(2, image.getImageName());
+			pstmt.setString(3, image.getImageType());
+			pstmt.setInt(4, image.getImageFkPk());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+
+	//신청내역 수 조회용 
+	public int selectApplyCount(Connection con, String memberPk) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int result = 0;
+		
+		String query = prop.getProperty("selectApplyCount"); 
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, Integer.parseInt(memberPk));
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				result = rset.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+		
+		return result;
+	}
+
+	public int insertApply(Connection con, String memberPk, int count) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		int attempt = count + 1;
+		
+		String query = prop.getProperty("insertApply");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, attempt);
+			pstmt.setInt(2, Integer.parseInt(memberPk));
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
 	
 
 }

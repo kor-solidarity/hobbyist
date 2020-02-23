@@ -521,7 +521,7 @@
 								</tr>
 								<tr>
 									<td colspan="2" style="font-size: 14px;">자격증 소유 시 취득 확인서를
-										첨부해주세요.
+										다음 페이지에서 첨부해주세요.
 										<p style="color: red; font-size: 10px;">취득 확인서가 여러 개일시 한
 											파일로 압축해서 첨부해주세요</p>
 									</td>
@@ -529,7 +529,7 @@
 								<tr>
 									<!-- <td><button>파일선택</button></td>
 									<td style="font-size: 13px;">선택된 파일 없음</td> -->
-									<td colspan="2"><input type="file" id="certiFile" name="certiFile">
+									<td colspan="2">
 									</td>
 								</tr>
 							</table>
@@ -584,6 +584,14 @@
 								</tr>
 								<tr>
 									<td colspan="2"><button id="schoolBtn" type="button">확인</button></td>
+								</tr>
+								<tr>
+									<td colspan="2" style="font-size:14px;">자격증 취득확인서와 학력 증명서를 첨부해주세요.
+										<p style="color: red; font-size: 10px;">한개의 파일로 압축해서 첨부해주세요</p>
+									</td>
+								</tr>
+								<tr>
+									<td colspan="2"><input type="file" id="certiFile" name="certiFile"></td>
 								</tr>
 							</table>
 						</div>
