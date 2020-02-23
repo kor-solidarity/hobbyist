@@ -21,6 +21,7 @@
             font-family: 'ZCOOL QingKe HuangYou', cursive;
             margin-top: 50px;
             font-size: 60px;
+            cursor:pointer;
         }
         #contents {
 
@@ -48,6 +49,7 @@
             height: 45px;
             margin-top: 10px;
             font-size: 15px;
+            cursor:pointer;
             
         }
         #loginBtn {
@@ -81,9 +83,9 @@
         </form>
         <button id="joinBtn" onclick="register();">회원가입</button>
         <br><br>
-        <label class="find" onclick="findId();">아이디 찾기</label>&nbsp;&nbsp;
+        <label class="find" onclick="findId();" style="cursor:pointer;">아이디 찾기</label>&nbsp;&nbsp;
         <label class="find"> | </label>&nbsp;
-        <label class="find" onclick="findPwd();">비밀번호 찾기</label>
+        <label class="find" onclick="findPwd();" style="cursor:pointer;">비밀번호 찾기</label>
     </div>
 	<script>
 		function register() {

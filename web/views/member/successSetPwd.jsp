@@ -1,8 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="com.dh.hobbyist.member.model.vo.Member"%>
-<%
-	Member findMember = (Member) session.getAttribute("findMember");
-%>
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,6 +20,7 @@
             font-family: 'ZCOOL QingKe HuangYou', cursive;
             margin-top: 50px;
             font-size: 60px;
+            cursor:pointer;
         }
         h2 {
             font-family: 'Do Hyeon', sans-serif;
@@ -34,7 +32,7 @@
         #contents {
             border: 1.2px solid darkolivegreen;
             width: 600px;
-            height: 470px;
+            height: 400px;
             margin: auto;
         }
         #setPwd1 {
@@ -55,15 +53,11 @@
         .btns {
             width:115px;
             height: 40px;
-            margin-top: 80px;
+            margin-top: 100px;
             font-family: 'Nanum Gothic', sans-serif; 
             font-size:14px;
             cursor:pointer;
             
-        }
-        #pwdBtn {
-        	background:lightgray;
-        	border:1px solid lightgray;
         }
         
         #loginBtn {
@@ -71,6 +65,11 @@
             color:white;
             border: 1px solid darkolivegreen;
         }
+        #pwdBtn {
+        	background:lightgray;
+        	border:1px solid lightgray;
+        }
+        
         input {
             margin-top: 20px;
         }
@@ -89,13 +88,12 @@
         <h1 id="title" align="center" onclick="goHome();">hobbyist</h1>
     </div>
     <div id="contents" align="center">
-            <h2>아이디 찾기</h2>
+            <h2>비밀번호 재설정</h2>
             <br><br>
-            <p>회원님의 정보와 일치하는 아이디는 <br>
-            	다음과 같습니다.</p><br>
-            <p style="font-weight:900; font-size:17.5px;" id="findId"><%=findMember.getMemberId() %></p>
-           
-           	<button onclick="goFindPwd();" class="btns" id="pwdBtn">비밀번호 찾기</button>&nbsp;&nbsp;&nbsp;&nbsp;
+            <p>비밀번호 재설정이 <br>
+            	완료되었습니다.</p>
+            	
+            <button onclick="goHome();" class="btns" id="homeBtn">홈으로</button>&nbsp;&nbsp;&nbsp;&nbsp;
             <button onclick="goLogin();" class="btns" id="loginBtn">로그인</button>
     </div>
     
@@ -103,15 +101,9 @@
     	function goLogin() {
     		location.href = "<%=request.getContextPath()%>/views/member/loginForm.jsp";
     	}
-    	
-    	function goFindPwd() {
-    		location.href = "<%= request.getContextPath()%>/views/member/findPwd.jsp";
-    	}
     	function goHome() {
     		location.href = "<%= request.getContextPath()%>/index.jsp";
     	}
-    	
-    	
     	
     </script>
 </body>

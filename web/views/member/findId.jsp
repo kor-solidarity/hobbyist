@@ -20,6 +20,7 @@
             font-family: 'ZCOOL QingKe HuangYou', cursive;
             margin-top: 50px;
             font-size: 60px;
+            cursor:pointer;
         }
         h2 {
             font-family: 'Do Hyeon', sans-serif;
@@ -53,6 +54,7 @@
             margin-top: 55px;
             font-family: 'Nanum Gothic', sans-serif; 
             font-size:14px;
+            cursor:pointer;
         }
         
         #submit {
