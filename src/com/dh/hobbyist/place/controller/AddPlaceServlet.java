@@ -1,6 +1,8 @@
 package com.dh.hobbyist.place.controller;
 
 import com.dh.hobbyist.common.MyFileRenamePolicy;
+import com.dh.hobbyist.place.model.service.PlaceService;
+import com.dh.hobbyist.place.model.vo.CompanyAds;
 import com.dh.hobbyist.place.model.vo.PlaceCompany;
 import com.oreilly.servlet.MultipartRequest;
 import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
@@ -51,7 +53,7 @@ public class AddPlaceServlet extends HttpServlet {
             // 내용물 확인.
             // 이때 역순으로 파일이 불러져온다.
             // 중요한 참고사항임
-            // nextElement() 하면
+            // nextElement() 하면 가장 마지막으로 들어갔을 pic5 부터 불러와진다는 소리.
             while (files.hasMoreElements()) {
                 String name = files.nextElement();
                 System.out.println("name: " + name);
@@ -89,9 +91,29 @@ public class AddPlaceServlet extends HttpServlet {
             // 종료일
             Date endDate = Date.valueOf(multipartRequest.getParameter("endDate"));
 
-            //
-            // PlaceCompany inputPC = new PlaceCompany();
-            // inputPC.
+            // 공간대여업체 객체
+            PlaceCompany inputPC = new PlaceCompany();
+            // 받은 값 넣기
+            inputPC.setCompany_name(companyName);
+            inputPC.setPhone(phone);
+            inputPC.setAddress(addr);
+            inputPC.setWebsite(website);
+            inputPC.setIntro(intro);
+            inputPC.setService_time(serviceTime);
+            inputPC.setRoom_size(roomSize);
+
+            // 공간대여업체 광고게제 관련 객체
+            CompanyAds inputAds  = new CompanyAds();
+            inputAds.setStartDate(startDate);
+            inputAds.setEndDate(endDate);
+
+            int insert_company_result = new PlaceService().insertPlaceCompany(inputPC);
+            // 들어가짐? 그럼 바로 광고게제정보도 넣는다
+            if (insert_company_result > 0) {
+                // 위에 커밋된 대여업체 바로 불러온다
+                PlaceCompany company = new PlaceService().getLatestInserted();
+                // int insert_ads_result = new PlaceService().
+            }
 
         }
     }

@@ -1,6 +1,8 @@
 package com.dh.hobbyist.common.model.vo;
 
-public class Image {
+import java.io.Serializable;
+
+public class Image implements Serializable {
     int imageCode;
     String imageRoute;
     String imageName;
@@ -8,7 +10,7 @@ public class Image {
     int imageFkPk;
     int imageMain;
 
-    public Image(int imageCode) {
+    public Image() {
     }
 
     public Image(int imageCode, String imageRoute, String imageName, String imageType, int imageFkPk, int imageMain) {

@@ -6,17 +6,17 @@ public class CompanyAds {
     // COMPANY_ADS 테이블
     int adPk;
     int companyPk;
-    Date startTime;
-    Date endTime;
+    Date startDate;
+    Date endDate;
 
     public CompanyAds() {
     }
 
-    public CompanyAds(int adPk, int companyPk, Date startTime, Date endTime) {
+    public CompanyAds(int adPk, int companyPk, Date startDate, Date endDate) {
         this.adPk = adPk;
         this.companyPk = companyPk;
-        this.startTime = startTime;
-        this.endTime = endTime;
+        this.startDate = startDate;
+        this.endDate = endDate;
     }
 
     @Override
@@ -24,8 +24,8 @@ public class CompanyAds {
         return "CompanyAds{" +
                 "adPk=" + adPk +
                 ", companyPk=" + companyPk +
-                ", startTime=" + startTime +
-                ", endTime=" + endTime +
+                ", startDate=" + startDate +
+                ", endDate=" + endDate +
                 '}';
     }
 
@@ -45,19 +45,19 @@ public class CompanyAds {
         this.companyPk = companyPk;
     }
 
-    public Date getStartTime() {
-        return startTime;
+    public Date getStartDate() {
+        return startDate;
     }
 
-    public void setStartTime(Date startTime) {
-        this.startTime = startTime;
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
     }
 
-    public Date getEndTime() {
-        return endTime;
+    public Date getEndDate() {
+        return endDate;
     }
 
-    public void setEndTime(Date endTime) {
-        this.endTime = endTime;
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
     }
 }
