@@ -222,14 +222,9 @@ background: #C4C4C4;
 background: #C4C4C4;
 }
 
-#update {
-font-family: Do Hyeon;
-font-style: normal;
-font-weight: normal;
-font-size: 25px;
-line-height: 31px;
-color: #FFFFFF;
-background: #556B2F;
+#bt_update {
+
+
 }
 
 #bank {
@@ -331,7 +326,7 @@ background: #556B2F;
 					<td colspan="1"><button id="button2">인증하기</button>
 				</tr>
 			</table>
-			<br><br>
+			<br><br><br><br>
 			<input type="submit" value="수정하기" class="bt_update" id="bt_update">  
 		
 			<script>
@@ -341,7 +336,7 @@ background: #556B2F;
 				var memberId = $("#memberId").val();
 				var idRegExp = /^[a-zA-z0-9{4,12}$/;
 			$.ajax({
-			url:"/hobbyist/idCheck.me"	
+			url:/hobbyist/src/com/dh/hobbyist/member/controller/UpdateMemberListServlet.java
 			//클라이언트가 http요청을 보낼 서버의URL의 주소
 			type: "post",
 			data: {meberId: memberId},
@@ -350,7 +345,7 @@ background: #556B2F;
 				if(!idRegExp.test(memberId)){
 					alert("영문, 숫자만으로 4~12자 이내로 입력하세요.");
 				}else{
-					if(data == "fail")
+					if(data == "fail");
 				}
 			}
 			})	
@@ -371,7 +366,7 @@ background: #556B2F;
 				</script>
 
 			<br> <br>
-			<button id="update">수정하기</button>
+		
 		</form>
 	</div>
 
