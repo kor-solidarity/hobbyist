@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.dh.hobbyist.suggest.model.service.SuggestService;
 import com.dh.hobbyist.suggest.model.vo.Petition;
 
 /**
@@ -65,20 +66,20 @@ public class InsertSuggestServlet extends HttpServlet {
 		petition.setTitle(sugTitle);
 		petition.setContents(sugContent);
 		petition.setPetitionedMember(Integer.parseInt(loginMemberCode));
-		petition.setCategoryName(detailCategory);
-		
+		petition.setCategoryCode(Integer.parseInt(detailCategory));
+
 		System.out.println(petition);
-//		System.out.println("detailCategory : " + detailCategory);
-//		System.out.println("maxNum : " + maxNum);
-//		System.out.println("classPay : " + classPay);
-//		System.out.println("classTimes : " + classTimes);
-//		System.out.println("area1 : " + area1);
-//		System.out.println("area2 : " + area2);
-//		System.out.println("wantDate : " + wantDate);
-//		System.out.println("day : " + day);
-//		System.out.println("time : " + time);
-//		System.out.println("sugTitle : " + sugTitle);
-//		System.out.println("sugContent : " + sugContent);
+		
+		int result = new SuggestService().insertSuggest(petition);
+		
+		
+		if(result > 0) {
+			request.getRequestDispatcher("views/suggest/suggestList.jsp").forward(request, response);;
+		} else {
+			request.setAttribute("msg", "게시판 작성 실패");
+			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
+		}
+
 	
 	}
 

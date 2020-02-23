@@ -91,13 +91,13 @@
 					<td>
 						<select id="categoryName">
 							<option value="">선택</option>
-							<option value="music">음악</option>
-							<option value="dance">댄스</option>
-							<option value="picture">영상/사진</option>
-							<option value="life">라이프스타일</option>
-							<option value="beauty">뷰티</option>
-							<option value="design">디자인</option>
-							<option value="sports">스포츠</option>
+							<option value="1">음악</option>
+							<option value="9">댄스</option>
+							<option value="15">영상/사진</option>
+							<option value="20">라이프스타일</option>
+							<option value="25">뷰티</option>
+							<option value="33">디자인</option>
+							<option value="37">스포츠</option>
 						</select>
 					</td>
 					<td>
@@ -190,7 +190,7 @@
 					<td colspan="2" style="color:#3c3c3c;">
 						<input type="radio" name="day" id="weekday" value="weekday"><label for="weekday">평일</label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						<input type="radio" name="day" id="weekend" value="weekend"><label for="weekend">주말</label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						<input type="radio" name="day" id="irrelevant" value="irrelevant"><label for="irrelevant">무관</label>
+						<input type="radio" name="day" id="irrelevant1" value="irrelevant"><label for="irrelevant1">무관</label>
 					</td>
 				</tr>
 				<tr></tr>
@@ -203,7 +203,7 @@
 						<input type="radio" name="time" id="am" value="am"><label for="am">오전반</label>&nbsp;&nbsp;
 						<input type="radio" name="time" id="pm" value="pm"><label for="pm">오후반</label>&nbsp;&nbsp;
 						<input type="radio" name="time" id="evening" value="evening"><label for="evening">저녁반</label>&nbsp;&nbsp;
-						<input type="radio" name="time" id="irrelevant" value="irrelevant"><label for="irrelevant">무관</label>
+						<input type="radio" name="time" id="irrelevant2" value="irrelevant"><label for="irrelevant2">무관</label>
 					</td>
 				</tr>
 				<tr>
@@ -239,7 +239,8 @@
 						
 						for(var key in data) {
 							var $option = $("<option>");
-							$option.text(data[key]);
+							$option.text(data[key].nodeName);
+							$option.val(data[key].categoryCode);
 							$select.append($option);
 							}
 					},

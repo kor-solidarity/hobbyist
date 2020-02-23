@@ -112,7 +112,7 @@
 			<!-- 큰 메뉴안의 상세 메뉴 여러개 -->
 			<div id="smallMenu">
 				<label style="color: #DED842;">회원 리스트</label><br>
-				<label>아티스트 승인</label><br>
+				<label onclick="goArtistApproval();">아티스트 승인</label><br>
 				<label>알림 보내기</label>
 			</div>
 		</article>
@@ -282,6 +282,10 @@
 				});
 			});
 		});
+		
+		function goArtistApproval() {
+			location.href = "<%=request.getContextPath()%>/approvalList.ar";
+		}
 	</script>
 </body>
 </html>

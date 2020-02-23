@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="java.util.ArrayList, com.dh.hobbyist.artist.model.vo.*"%>
+<%
+	ArrayList<ApplyArtist> applyList = (ArrayList<ApplyArtist>) request.getAttribute("applyList");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -218,6 +221,16 @@
                		<th style="width:200px;">승인</th>
                		<th style="width:250px;">거절사유</th>
                </tr>
+               <% for(ApplyArtist aa : applyList) { %>
+               	<tr>	
+               		<td><%=aa.getApplyCode() %></td>
+               		<td><%=aa.getApplyMemberId() %></td>
+               		<td><%=aa.getApplyMemberId() %>님의 등록글</td>
+               		<td><%=aa.getApplyDate() %></td>
+               		<td><%=aa.getApplyConfirmed() %></td>
+               		<td><%=aa.getRejectReason() %></td>
+               	</tr>
+               <% } %>
                <tr>
                    <td>3</td>
                    <td>hyeon0705</td>

@@ -98,12 +98,20 @@
 }
 
 #ArtistTable2 {
-	color: darkolivegreen;
-	font-family: 'Do Hyeon', sans-serif;
+	
+	/*font-family: 'Do Hyeon', sans-serif;*/
+	font-family: 'Nanum Gothic', ;
+	width:700px;
+	/*font-size:15px;*/
 	border-spacing: 15px;
 	border-collapse: separate;
 }
 
+#ArtistTable2 p {
+	color: darkolivegreen;
+ 	font-family: 'Do Hyeon', sans-serif;
+ 	font-size:15px;
+}
 #ArtistTable2 button {
 	background: darkolivegreen;
 	color: white;
@@ -272,9 +280,10 @@
 	width: 250px;
 	height: 200px;
 }
+
 </style>
 <link
-	href="https://fonts.googleapis.com/css?family=Do+Hyeon|ZCOOL+QingKe+HuangYou&display=swap"
+	href="https://fonts.googleapis.com/css?family=Do+Hyeon|ZCOOL+QingKe+HuangYou|Nanum+Gothic&display=swap"
 	rel="stylesheet">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -374,19 +383,19 @@
 									</td>
 									<td>
 										<p>아티스트 닉네임</p> <input type="text" name="nickName"
-										id="nickName" style="height: 30px">
+										id="nickName" style="height: 30px; width:150px;">
 										<button type="button" id="checkNick" style="height: 30px;">중복확인</button>
 										<% if(loginMember != null) { %>
 											<input type="hidden" name="loginMemberPk" value="<%=loginMember.getMemberCode()%>">
 										<% } %>
 									</td>
 									<td colspan="2">
-										<p>계좌번호&nbsp;<label style="font-size:12px; coLor:black;">(본인 계좌로 이용해주세요.)</label></p> <select style="height: 32px" name="bankName">
+										<p>계좌번호&nbsp;<label style="font-size:13px; coLor:black;">(본인 계좌로 이용해주세요.)</label></p> <select style="height: 32px" name="bankName">
 											<option value="">은행명</option>
 											<option value="SH">신한은행</option>
 											<option value="KB">국민은행</option>
 											<option value="NH">농협은행</option>
-									</select> <input type="text" name="bankNum" style="height: 30px">
+									</select> <input type="text" name="bankNum" style="height: 30px; width:150px;">
 										<button style="height: 30px">계좌인증</button>
 									</td>
 								</tr>
@@ -427,39 +436,39 @@
 											선택)</label><br> <br> 
 											<select id="categoryName" name="categoryName">
 												<option value="">선택</option>
-												<option value="music">음악</option>
-												<option value="dance">댄스</option>
-												<option value="picture">영상/사진</option>
-												<option value="life">라이프스타일</option>
-												<option value="beauty">뷰티</option>
-												<option value="design">디자인</option>
-												<option value="sports">스포츠</option>
+												<option value="1">음악</option>
+												<option value="9">댄스</option>
+												<option value="15">영상/사진</option>
+												<option value="20">라이프스타일</option>
+												<option value="25">뷰티</option>
+												<option value="33">디자인</option>
+												<option value="37">스포츠</option>
 											</select> <br> 
 											<select id="detailCategory" name="detailCategory">
 												<option value="">선택</option>
 											</select> <br> <br> 
 											<select id="categoryName2" name="categoryName2">
 												<option value="">선택</option>
-												<option value="music">음악</option>
-												<option value="dance">댄스</option>
-												<option value="picture">영상/사진</option>
-												<option value="life">라이프스타일</option>
-												<option value="beauty">뷰티</option>
-												<option value="design">디자인</option>
-												<option value="sports">스포츠</option>
+												<option value="1">음악</option>
+												<option value="9">댄스</option>
+												<option value="15">영상/사진</option>
+												<option value="20">라이프스타일</option>
+												<option value="25">뷰티</option>
+												<option value="33">디자인</option>
+												<option value="37">스포츠</option>
 											</select> <br> 
 											<select id="detailCategory2" name="detailCategory2">
 												<option value="">선택</option>
 											</select> <br> <br> 
 											<select id="categoryName3" name="categoryName3">
 												<option value="">선택</option>
-												<option value="music">음악</option>
-												<option value="dance">댄스</option>
-												<option value="picture">영상/사진</option>
-												<option value="life">라이프스타일</option>
-												<option value="beauty">뷰티</option>
-												<option value="design">디자인</option>
-												<option value="sports">스포츠</option>
+												<option value="1">음악</option>
+												<option value="9">댄스</option>
+												<option value="15">영상/사진</option>
+												<option value="20">라이프스타일</option>
+												<option value="25">뷰티</option>
+												<option value="33">디자인</option>
+												<option value="37">스포츠</option>
 											</select> <br> 
 											<select id="detailCategory3" name="detailCategory3">
 												<option value="">선택</option>
@@ -774,18 +783,19 @@
 				var categoryName = $("#categoryName").val();
 	
 				$.ajax({
-					url : "/hobbyist/category.su",
-					type : "post",
-					data : {categoryName : categoryName},
-					success : function(data) {
+					url: "/hobbyist/category.su",
+					type: "post",
+					data: {categoryName	: categoryName},
+					success: function(data) {
 						$select = $("#detailCategory");
 						$select.find("option").remove();
-	
-						for ( var key in data) {
+							
+						for(var key in data) {
 							var $option = $("<option>");
-							$option.text(data[key]);
+							$option.text(data[key].nodeName);
+							$option.val(data[key].categoryCode);
 							$select.append($option);
-						}
+							}
 					},
 					error : function(error) {
 						console.log(error);
@@ -798,18 +808,19 @@
 			var categoryName = $("#categoryName2").val();
 	
 			$.ajax({
-				url : "/hobbyist/category.su",
-				type : "post",
-				data : {categoryName : categoryName},
-				success : function(data) {
+				url: "/hobbyist/category.su",
+				type: "post",
+				data: {categoryName	: categoryName},
+				success: function(data) {
 					$select = $("#detailCategory2");
 					$select.find("option").remove();
-	
-					for (var key in data) {
+						
+					for(var key in data) {
 						var $option = $("<option>");
-						$option.text(data[key]);
+						$option.text(data[key].nodeName);
+						$option.val(data[key].categoryCode);
 						$select.append($option);
-					}
+						}
 				},
 				error : function(error) {
 					console.log(error);
@@ -822,18 +833,19 @@
 			var categoryName = $("#categoryName3").val();
 	
 			$.ajax({
-				url : "/hobbyist/category.su",
-				type : "post",
-				data : {categoryName : categoryName},
-				success : function(data) {
+				url: "/hobbyist/category.su",
+				type: "post",
+				data: {categoryName	: categoryName},
+				success: function(data) {
 					$select = $("#detailCategory3");
 					$select.find("option").remove();
-	
-					for (var key in data) {
+						
+					for(var key in data) {
 						var $option = $("<option>");
-						$option.text(data[key]);
+						$option.text(data[key].nodeName);
+						$option.val(data[key].categoryCode);
 						$select.append($option);
-					}
+						}
 				},
 				error : function(error) {
 					console.log(error);
