@@ -6,9 +6,7 @@ import static com.dh.hobbyist.common.JDBCTemplate.close;
 
 import java.io.FileReader;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.Properties;
 
 public class PlaceDao {
@@ -54,7 +52,36 @@ public class PlaceDao {
     }
 
     // 마지막 기입된 회사 불러오기
-    public PlaceCompany selectLatestCompany() {
-return null;
+    public PlaceCompany selectLatestCompany(Connection con) {
+        Statement stmt = null;
+        ResultSet resultSet = null;
+        PlaceCompany company = null;
+
+        String query = prop.getProperty("selectLatestCompany");
+
+        try {
+            stmt = con.createStatement();
+            resultSet = stmt.executeQuery(query);
+
+            if (resultSet.next()) {
+                company = new PlaceCompany();
+                company.setCompany_pk(resultSet.getInt("company_pk"));
+                company.setCompany_name(resultSet.getString("company_name"));
+                company.setPhone(resultSet.getString("phone"));
+                company.setAddress(resultSet.getString("address"));
+                company.setWebsite(resultSet.getString("website"));
+                company.setIntro(resultSet.getString("intro"));
+                company.setService_time(resultSet.getString("service_time"));
+                company.setRoom_size(resultSet.getString("room_size"));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally {
+            close(resultSet);
+            close(stmt);
+        }
+
+        return company;
     }
 }

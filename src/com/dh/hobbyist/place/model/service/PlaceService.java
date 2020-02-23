@@ -31,7 +31,7 @@ public class PlaceService {
     public PlaceCompany getLatestInserted() {
         Connection con = getConnection();
 
-        PlaceCompany company = new PlaceDao().selectLatestCompany();
+        PlaceCompany company = new PlaceDao().selectLatestCompany(con);
         return null;
     }
 }
