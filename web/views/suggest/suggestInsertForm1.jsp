@@ -115,9 +115,9 @@
 				<tr>
 					<td>
 						<select id="maxNum" name="maxNum">
-							<option>1:1</option>
-							<option>소규모(2인~8인)</option>
-							<option>대규모(9인 이상)</option>
+							<option value="일대일">1:1</option>
+							<option value="소규모">소규모(2인~8인)</option>
+							<option value="">대규모(9인 이상)</option>
 						</select>
 					</td>
 					<td></td>
@@ -336,7 +336,7 @@
 
 			 sel.options[0] = new Option('-선택-','', '', 'true');
 			 for(i=0; i<name.length; i++){
-		  		sel.options[i+1] = new Option(name[i],val[i]);
+		  		sel.options[i+1] = new Option(name[i], name[i]);
 		 	}
 
 		}

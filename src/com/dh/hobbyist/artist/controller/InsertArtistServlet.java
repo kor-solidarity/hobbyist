@@ -1,5 +1,6 @@
 package com.dh.hobbyist.artist.controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Enumeration;
@@ -16,6 +17,7 @@ import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 import com.dh.hobbyist.artist.model.service.ArtistService;
 import com.dh.hobbyist.artist.model.vo.ApplyArtist;
 import com.dh.hobbyist.common.MyFileRenamePolicy;
+import com.dh.hobbyist.common.model.vo.Image;
 import com.dh.hobbyist.member.model.vo.Member;
 import com.oreilly.servlet.MultipartRequest;
 
@@ -68,6 +70,36 @@ public class InsertArtistServlet extends HttpServlet {
 			System.out.println("originFile : " + originFiles);
 			
 			String memberPk = multiRequest.getParameter("loginMemberPk");
+
+			
+			ArrayList<Image> fileList = new ArrayList<Image>();
+			
+			for(int i = originFiles.size() - 1; i >= 0; i--) {
+				Image img = new Image();
+				img.setImageRoute(savePath);
+				img.setImageName(saveFiles.get(i));
+				if(i == originFiles.size() - 1) {
+					img.setImageType("아티스트증명");
+				} else {
+					img.setImageType("프로필");
+				}
+				img.setImageFkPk(Integer.parseInt(memberPk));
+				
+				fileList.add(img);
+			}
+			
+			//아티스트 증멸 파일 과 프로필 사진 처리
+			int imageResult = new ArtistService().insertImage(fileList);
+			
+			if(imageResult > 0) {
+				
+			} else {
+				for(int i = 0; i <saveFiles.size(); i++) {
+					File failedFile = new File(savePath + saveFiles.get(i));
+					failedFile.delete();
+				}
+			}
+			
 			
 			//"01. 자기소개" 에서 받아오는 input
 			String nickName = multiRequest.getParameter("nickName");
@@ -86,8 +118,10 @@ public class InsertArtistServlet extends HttpServlet {
 			String detailCategory3 = multiRequest.getParameter("detailCategory3");
 			
 			String[] details = {detailCategory, detailCategory2, detailCategory3};
-//			int categoryResult 
-//					= new ArtistService().insertCategory(memberPk, details);
+			
+			//아티스트 전문분야 처리
+			int categoryResult 
+					= new ArtistService().insertCategory(memberPk, details);
 			
 			
 			
@@ -113,7 +147,8 @@ public class InsertArtistServlet extends HttpServlet {
 			certsMap.put("certiDays", certiDays);
 			certsMap.put("certiSpaces", certiSpaces);
 			
-			//int certiResult = new ArtistService().insertCerts(memberPk, certsMap);
+			//아티스트 보유 자격증 처리
+			int certiResult = new ArtistService().insertCerts(memberPk, certsMap);
 			
 			
 			//"04. 학력/전공" 에서 받아오는 input
@@ -138,7 +173,8 @@ public class InsertArtistServlet extends HttpServlet {
 			eduMap.put("majors", majors);
 			eduMap.put("statuses", statuses);
 			
-			//int eduResult = new ArtistService().insertEdu(memberPk, eduMap);
+			//아티스트 학력/전공 처리
+			int eduResult = new ArtistService().insertEdu(memberPk, eduMap);
 			
 			//"05. 경력" 에서 받아오는 input
 			String officeName1 = multiRequest.getParameter("officeName1");
@@ -172,14 +208,36 @@ public class InsertArtistServlet extends HttpServlet {
 			careerMap.put("workYears", workYears);
 			careerMap.put("workMonths", workMonths);
 			
+			//아티스트 경력 처리
+			int careerResult = new ArtistService().insertCareer(memberPk, careerMap);
+			
 			Member requestMember = new Member();
+			requestMember.setMemberCode(Integer.parseInt(memberPk));
 			requestMember.setArtistNick(nickName);
 			requestMember.setBankName(bankName);
 			requestMember.setBankNum(bankNum);
+			requestMember.setArtistIntro(introduce);
 			
+			//MEMBER 업데이트
+			int memberResult = new ArtistService().updateMember(requestMember);
 			
-			//int careerResult = new ArtistService().insertCareer(memberPk, careerMap);
+			int totalResult = 0;
 			
+			//모든 사항 등록 시 신청내역 등록
+			if(imageResult > 0 && categoryResult > 0 && certiResult > 0 && eduResult > 0 && careerResult > 0 && memberResult > 0) {
+				totalResult = new ArtistService().insertApply(memberPk);
+			}
+			
+			String page = "";
+			
+			if(totalResult > 0) {
+				page = "views/common/successPage.jsp";
+				request.setAttribute("successCode", "applyArtist");
+			} else {
+				page = "views/common/errorPage.jsp";
+				request.setAttribute("msg", "아티스트 등록 실패");
+			}
+			request.getRequestDispatcher(page).forward(request, response);
 			/*System.out.println("memberPk : " + memberPk);
 			System.out.println("nickName : " + nickName);
 			System.out.println("bankName : " + bankName);

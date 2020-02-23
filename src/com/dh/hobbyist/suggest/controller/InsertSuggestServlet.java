@@ -1,6 +1,8 @@
 package com.dh.hobbyist.suggest.controller;
 
 import java.io.IOException;
+import java.sql.Date;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -41,25 +43,42 @@ public class InsertSuggestServlet extends HttpServlet {
 		String sugContent = request.getParameter("sugContent");
 		String loginMemberCode = request.getParameter("loginMemberCode");
 		
+		String[] cat_name = {"서울","부산","대구","인천","광주","대전","울산","강원","경기","경남","경북","전남","전북","제주","충남","충북"};
+		
+		String location = cat_name[Integer.parseInt(area1) - 1] + "/" + area2;
+		
 		Petition petition = new Petition();
 		petition.setNumOfStudents(maxNum);
 		petition.setCost(Integer.parseInt(classPay));
+		
+		if(classTimes.equals("일회차")) {
+			petition.setNumOfLessons(0);
+		} else if(classTimes.equals("다회차")) {
+			petition.setNumOfLessons(1);
+		}
+		Date requestedDate = Date.valueOf(wantDate);
+		
+		petition.setLocation(location);
+		petition.setRequestedDate(requestedDate);
 		petition.setRequestedDays(day);
 		petition.setRequestTime(time);
+		petition.setTitle(sugTitle);
+		petition.setContents(sugContent);
 		petition.setPetitionedMember(Integer.parseInt(loginMemberCode));
+		petition.setCategoryName(detailCategory);
 		
-		
-		System.out.println("detailCategory : " + detailCategory);
-		System.out.println("maxNum : " + maxNum);
-		System.out.println("classPay : " + classPay);
-		System.out.println("classTimes : " + classTimes);
-		System.out.println("area1 : " + area1);
-		System.out.println("area2 : " + area2);
-		System.out.println("wantDate : " + wantDate);
-		System.out.println("day : " + day);
-		System.out.println("time : " + time);
-		System.out.println("sugTitle : " + sugTitle);
-		System.out.println("sugContent : " + sugContent);
+		System.out.println(petition);
+//		System.out.println("detailCategory : " + detailCategory);
+//		System.out.println("maxNum : " + maxNum);
+//		System.out.println("classPay : " + classPay);
+//		System.out.println("classTimes : " + classTimes);
+//		System.out.println("area1 : " + area1);
+//		System.out.println("area2 : " + area2);
+//		System.out.println("wantDate : " + wantDate);
+//		System.out.println("day : " + day);
+//		System.out.println("time : " + time);
+//		System.out.println("sugTitle : " + sugTitle);
+//		System.out.println("sugContent : " + sugContent);
 	
 	}
 
