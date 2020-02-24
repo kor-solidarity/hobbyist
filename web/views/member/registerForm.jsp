@@ -306,6 +306,8 @@
 
 	        	});
         	
+	       		
+	       		
         	
         	
 				$(document).on('click', '#checkBtn', function checkNum() {

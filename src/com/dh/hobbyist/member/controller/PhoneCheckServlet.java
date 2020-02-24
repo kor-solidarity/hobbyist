@@ -33,6 +33,7 @@ public class PhoneCheckServlet extends HttpServlet {
 		
 		int result = new MemberService().phoneCheck(phone);
 		
+		
 		String text = "";
 		if(result > 0) {
 			text = "fail";

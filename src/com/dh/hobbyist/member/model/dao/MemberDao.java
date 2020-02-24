@@ -314,6 +314,7 @@ public class MemberDao {
 		
 		String query = prop.getProperty("setPassword");
 		
+		
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, memberPwd);

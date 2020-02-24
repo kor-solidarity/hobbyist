@@ -44,6 +44,7 @@ public class PhoneCertificationServlet extends HttpServlet {
 			
 			new Gson().toJson(randomVal, response.getWriter());
 			
+			
 		}
 		
 		
