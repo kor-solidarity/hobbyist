@@ -132,7 +132,7 @@
     	}
     	
     	function goSuggest() {
-    		location.href = "<%= request.getContextPath()%>/views/suggest/suggestList.jsp";
+    		location.href = "<%= request.getContextPath()%>/selectList.sg";
     	}
     	
     	function goClass() {
