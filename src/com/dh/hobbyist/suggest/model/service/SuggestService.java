@@ -2,10 +2,13 @@ package com.dh.hobbyist.suggest.model.service;
 
 import java.sql.Connection;
 import java.util.ArrayList;
+import java.util.List;
 
 import com.dh.hobbyist.suggest.model.dao.SuggestDao;
 import com.dh.hobbyist.suggest.model.vo.PageInfo;
 import com.dh.hobbyist.suggest.model.vo.Petition;
+import com.dh.hobbyist.suggest.model.vo.Reply;
+
 import static com.dh.hobbyist.common.JDBCTemplate.*;
 
 public class SuggestService {
@@ -77,4 +80,33 @@ public class SuggestService {
 		return p;
 	}
 
+	//댓글 등록용 메소드
+	public List<Reply> insertReply(Reply reply) {
+		Connection con = getConnection();
+		List<Reply> replyList = null;
+		
+		int result = new SuggestDao().insertReply(con, reply);
+		
+		if(result > 0) {
+			commit(con);
+			replyList = new SuggestDao().selectReplyList(con, reply.getLessonPetitionCode());
+		} else {
+			rollback(con);
+		}
+		
+		close(con);
+		
+		return replyList;
+	}
+
+	public List<Reply> selectReplyList(int lessonPetitionCode) {
+		Connection con = getConnection();
+		List<Reply> replyList = null;
+		
+		replyList = new SuggestDao().selectReplyList(con, lessonPetitionCode);
+		
+		close(con);
+		
+		return replyList;
+	}
 }

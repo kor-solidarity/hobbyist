@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="com.dh.hobbyist.suggest.model.vo.*, java.util.List"%>
+<%
+	Petition petition = (Petition) request.getAttribute("petition");
+	List<Reply> replyList = (List<Reply>) request.getAttribute("replyList");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,12 +24,13 @@
 	font-size: 30px;
 	}
 	#suggestDetailDiv1 {
-	width: 1000px;
+	width: 900px;
 	/* height: 500px; */
 	margin-left: auto;
 	margin-right: auto;
 	}
 	#suggestDetaiTab1 {
+	width:100%;
 	font-family: 'Do Hyeon', sans-serif;
 	color:darkolivegreen;
 	margin:auto;
@@ -53,6 +58,7 @@
 	background-color: darkolivegreen;
 	}
 </style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <title>hobbyist</title>
 </head>
 <body>
@@ -72,45 +78,87 @@
 		<table id="suggestDetaiTab1">
 			<tr>
 				<td colspan="2" style="font-size:22px;">수업건의하기</td>
-				<td colspan="2" style="font-size:16px; text-align:right; color:#3c3c3c;"><label>차은우</label>|<label>2020-01-24 11:36</label>|조회<label>2258</label></td>
+				<td colspan="2" style="font-size:16px; text-align:right; color:#3c3c3c;"><label><%=petition.getMemberName() %></label>|<label><%=petition.getPetitionedTime() %></label>|조회<label><%=petition.getViews() %></label></td>
 			</tr>
 			<tr>
 				<td colspan="4"><hr style="border: solid 1.5px darkolivegreen;"></td>
 			</tr>
 			<tr>
 				<td style="font-size:20px;">건의 제목</td>
-				<td colspan="3" style=" font-family:initial; font-weight:bold; color:#3c3c3c;">야구 클래스</td>
+				<td colspan="3" style=" font-family:initial; font-weight:bold; color:#3c3c3c;"><%=petition.getTitle() %></td>
 			</tr>
 			<tr>
 				<td colspan="4"><hr style="border: solid 1.15px darkolivegreen;"></td>
 			</tr>
 			<tr>
 				<td id="suggestTd1">카테고리</td>
-				<td id="suggestTd2">스포츠</td>
+				<td id="suggestTd2">
+					<% if(petition.getCategoryParentCode() == 1) { %>
+							음악
+					<%} else if(petition.getCategoryParentCode() == 9) { %>
+							댄스
+					<%} else if(petition.getCategoryParentCode() == 15) { %>
+							영상/사진
+					<%} else if(petition.getCategoryParentCode() == 20) { %>
+							라이프스타일
+					<%} else if(petition.getCategoryParentCode() == 25) { %>
+							뷰티
+					<%} else if(petition.getCategoryParentCode() == 33) { %>
+							디자인
+					<%} else if(petition.getCategoryParentCode() == 37) { %>
+							스포츠
+					<%} %>	
+				</td>
 				<td id="suggestTd1">상세 카테고리</td>
-				<td id="suggestTd2">기타</td>
+				<td id="suggestTd2"><%= petition.getCategoryName() %></td>
 			</tr>
 			<tr>
 				<td id="suggestTd1">수업 인원</td>
-				<td colspan="3" id="suggestTd2">소규모(2인~8인)</td>
+				<td colspan="3" id="suggestTd2"><%=petition.getNumOfStudents() %></td>
 			</tr>
 			<tr>
 				<td id="suggestTd1">수업료 (회차당)</td>
-				<td id="suggestTd2">100,000원</td>
+				<td id="suggestTd2"><%=petition.getCost() %>원</td>
 				<td id="suggestTd1">수업회차</td>
-				<td id="suggestTd2">다회차</td>
+				<td id="suggestTd2">
+					<% if(petition.getNumOfLessons() == 1) { %>
+						다회차
+					<%} else {%>
+						일회차
+					<%} %>
+				</td>
 			</tr>
 			<tr>
 				<td id="suggestTd1">희망 지역</td>
-				<td id="suggestTd2">서울시 강남구</td>
+				<td id="suggestTd2"><%=petition.getLocation() %></td>
 				<td id="suggestTd1">희망일자</td>
-				<td id="suggestTd2">2020년 2월 20일</td>
+				<td id="suggestTd2"><%=petition.getRequestedDate() %></td>
 			</tr>
 			<tr>
 				<td id="suggestTd1">수업 요일</td>
-				<td id="suggestTd2">주말</td>
+				<td id="suggestTd2">
+					<% if(petition.getRequestedDays().equals("weekday")) { %>
+						평일
+					<%} else if(petition.getRequestedDays().equals("weekend")) { %>
+						주말
+					<%} else { %>
+						무관
+					<%} %>
+				</td>
 				<td id="suggestTd1">수업 시간</td>
-				<td id="suggestTd2">오전반</td>
+				<td id="suggestTd2">
+					<% if(petition.getRequestTime().equals("dawn")) { %>
+						새벽반
+					<%} else if(petition.getRequestTime().equals("am")) { %>
+						오전반
+					<%} else if(petition.getRequestTime().equals("pm")) { %>
+						오후반
+					<%} else if(petition.getRequestTime().equals("evening")) { %>
+						저녁반
+					<%} else { %>
+						무관
+					<%} %>
+				</td>
 			</tr>
 			<tr>
 				<td colspan="4"><hr style="border: solid 1.15px darkolivegreen;"></td>
@@ -130,7 +178,7 @@
 			<tr>
 				<td colspan="4" style="font-family:initial; color:black;">
 					<p>
-						안녕하세요. 강남구에서 야구 수업을 듣고 싶은 학생입니다. 3명에서 8명 정도로 수업 진행했으면 좋겠습니다. <br>주말 오전 10시쯤 생각하고 있습니다. 수업이 열릴 수 있도록 동참 부탁드려요~!  감사합니다.
+						<%=petition.getContents() %>
 					</p>
 				</td>
 			</tr>
@@ -169,12 +217,26 @@
       
             		<tr>
               			<td><textArea rows="3" cols="80" id="replyContent" style="resize:none;" placeholder="댓글로 수업에 동참해보세요!(50자 이상 기재)"></textArea></td>
-               			<td><button id="addReply">댓글 등록</button></td>
+               			<td>
+               				<%if(loginMember != null) { %>
+               					<button id="addReply">댓글 등록</button>
+               				<%} else { %>
+               					<button id="noneLogin" onclick="noneLogin();">댓글 등록</button>
+               				<%} %>
+               			</td>
             		</tr>
          		</table>
      		 </div>
       		 <div id="replySelectArea">
          		<table id="replySelectTable" border="1" align="center">
+         			<% for(Reply r : replyList) { %>
+         				<tr>
+         					<input type="hidden" value="<%=r.getReplyCode() %>">
+         					<td><%=r.getMemberName()%></td>
+         					<td><%=r.getReplyContent() %></td>
+         					<td><%=r.getReplyDate() %></td>
+         				</tr>
+         			<%} %>
          		</table>
       		 </div>
    		</div>
@@ -184,8 +246,51 @@
    		</div>
    		<script>
    			function goList() {
-   				location.href = "<%=request.getContextPath()%>/views/suggest/suggestList.jsp";
+   				location.href = "<%=request.getContextPath()%>/selectList.sg";
    			}
+   			
+   			function noneLogin() {
+   				alert("로그인 후 진행해주세요.");
+   			}
+   			
+   			$(function() {
+   				$("#addReply").click(function() {
+   					var writer = <%=loginMember.getMemberCode()%>;
+   					var pid = <%= petition.getPetitionCode()%>;
+   					var content = $("#replyContent").val();
+   					
+   					$.ajax({
+   						url: "/hobbyist/insertReply.sg",
+   						data: {
+   							writer: writer,
+   							pid: pid,
+   							content: content
+   						},
+   						type : "post",
+   						success: function(data) {
+   							var $replySelectTable = $("#replySelectTable");
+   							$replySelectTable.html('');
+   							
+   							for(var key in data) {
+   								var $tr = $("<tr>");
+   								var $writerTd = $("<td>").text(data[key].memberName).css("width", "100px");
+   								var $contentTd = $("<td>").text(data[key].replyContent).css("width", "400px");
+   								var $dateTd = $("<td>").text(data[key].replyDate).css("width", "200px");
+   								
+   								$tr.append($writerTd);
+   								$tr.append($contentTd);
+   								$tr.append($dateTd);
+   								
+   								$replySelectTable.prepend($tr);
+   							} 
+   						},
+   						error: function(error) {
+   							console.log(error);
+   						}
+   						
+   					});
+   				});
+   			});
    		</script>
 	</div>
 	<br><br><br>

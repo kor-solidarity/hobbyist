@@ -10,20 +10,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.dh.hobbyist.suggest.model.service.SuggestService;
-import com.dh.hobbyist.suggest.model.vo.Petition;
 import com.dh.hobbyist.suggest.model.vo.Reply;
+import com.google.gson.Gson;
 
 /**
- * Servlet implementation class SelectOneSuggestServlet
+ * Servlet implementation class InsertReplyServlet
  */
-@WebServlet("/selectOne.sg")
-public class SelectOneSuggestServlet extends HttpServlet {
+@WebServlet("/insertReply.sg")
+public class InsertReplyServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SelectOneSuggestServlet() {
+    public InsertReplyServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,26 +32,25 @@ public class SelectOneSuggestServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int num = Integer.parseInt(request.getParameter("num"));
+		int writer = Integer.parseInt(request.getParameter("writer"));
+		int pid = Integer.parseInt(request.getParameter("pid"));
+		String content = request.getParameter("content");
 		
-		Petition p = new SuggestService().selectOne(num);
+		System.out.println("writer : " + writer);
+		System.out.println("pid : " + pid);
+		System.out.println("content : " + content);
 		
-		//System.out.println("petition detail : " + p);
+		Reply reply = new Reply();
+		reply.setLessonPetitionCode(pid);
+		reply.setMemberCode(writer);
+		reply.setReplyContent(content);
 		
-		List<Reply> replyList = new SuggestService().selectReplyList(num);
+		List<Reply> replyList = new SuggestService().insertReply(reply);
 		
-		String page = "";
+		response.setContentType("application/json");
+		response.setCharacterEncoding("UTF-8");
 		
-		if(p != null) {
-			page = "views/suggest/suggestDetail.jsp";
-			request.setAttribute("petition", p);
-			request.setAttribute("replyList", replyList);
-		} else {
-			page = "views/common/errorPage.jsp";
-			request.setAttribute("msg", "건의 게시판 상세 조회 실패");
-		}
-		
-		request.getRequestDispatcher(page).forward(request, response);
+		new Gson().toJson(replyList, response.getWriter());
 	}
 
 	/**

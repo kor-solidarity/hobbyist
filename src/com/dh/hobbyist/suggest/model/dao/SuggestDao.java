@@ -8,10 +8,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 import com.dh.hobbyist.suggest.model.vo.PageInfo;
 import com.dh.hobbyist.suggest.model.vo.Petition;
+import com.dh.hobbyist.suggest.model.vo.Reply;
+
 import static com.dh.hobbyist.common.JDBCTemplate.*;
 
 public class SuggestDao {
@@ -227,31 +230,94 @@ public class SuggestDao {
 			
 			if(rset.next()) {
 				p = new Petition();
-				p.setPetitionCode(rset.getInt(columnIndex));
-				p.setNumOfStudents(rset.getString(columnIndex));
-				p.setCost(rset.getInt(columnIndex));
-				p.setNumOfLessons(rset.getInt(columnIndex));
-				p.setLocation(rset.getString(columnIndex));
-				p.setRequestedDate(rset.getDate(columnIndex));
-				p.setRequestedDays(rset.getString(columnIndex));
-				p.setRequestTime(rset.getString(columnIndex));
-				p.setTitle(rset.getString(columnIndex));
-				p.setContents(rset.getString(columnIndex));
-				p.setPetitionedTime(rset.getDate(columnIndex));
-				p.setWishlisted(rset.getInt(columnIndex));
-				p.setViews(rset.getInt());
-				p.setPetitionedMember(rset.getInt(columnIndex));
-				p.setCategoryCode(rset.getInt(columnIndex));
-				p.setCategoryName(rset.getString(columnIndex));
-				p.setMemberName(rset.getString(columnIndex));
-				p.setCategoryParentCode(rset.getInt(columnIndex));
+				p.setPetitionCode(rset.getInt("PETITION_PK"));
+				p.setNumOfStudents(rset.getString("NUM_OF_STUDENTS"));
+				p.setCost(rset.getInt("COST"));
+				p.setNumOfLessons(rset.getInt("NUM_OF_LESSONS"));
+				p.setLocation(rset.getString("LOCATION"));
+				p.setRequestedDate(rset.getDate("REQUESTED_DATE"));
+				p.setRequestedDays(rset.getString("REQUESTED_DAYS"));
+				p.setRequestTime(rset.getString("REQUESTED_TIME"));
+				p.setTitle(rset.getString("TITLE"));
+				p.setContents(rset.getString("CONTENTS"));
+				p.setPetitionedTime(rset.getDate("PETITIONED_TIME"));
+				p.setWishlisted(rset.getInt("WISHLISTED"));
+				p.setViews(rset.getInt("VIEWS"));
+				p.setPetitionedMember(rset.getInt("PETITIONED_MEMBER"));
+				p.setCategoryCode(rset.getInt("CATEGORY_PK"));
+				p.setCategoryName(rset.getString("NODE_NAME"));
+				p.setMemberName(rset.getString("MEMBER_NAME"));
+				p.setCategoryParentCode(rset.getInt("PARENT_PK"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
 		}
 		
 		
-		return null;
+		return p;
+	}
+	public int insertReply(Connection con, Reply reply) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("insertReply");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, reply.getLessonPetitionCode());
+			pstmt.setString(2, reply.getReplyContent());
+			pstmt.setInt(3, reply.getMemberCode());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
+	//댓글 전체 조회용 메소드
+	public List<Reply> selectReplyList(Connection con, int lessonPetitionCode) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		List<Reply> list = null;
+		
+		String query = prop.getProperty("selectReplyList");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, lessonPetitionCode);
+			
+			rset = pstmt.executeQuery();
+			
+			list = new ArrayList<Reply>();
+			
+			while(rset.next()) {
+				Reply r = new Reply();
+				r.setReplyCode(rset.getInt("REPLY_PK"));
+				r.setLessonPetitionCode(rset.getInt("LESSON_PETITION_PK"));
+				r.setReplyDate(rset.getDate("REPLY_DATE"));
+				r.setReplyContent(rset.getString("REPLY_CONTENT"));
+				r.setMemberCode(rset.getInt("MEMBER_PK"));
+				r.setDeleted(rset.getInt("DELETED"));
+				r.setMemberName(rset.getString("MEMBER_NAME"));
+				
+				list.add(r);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+		
+		return list;
 	}
 
 }
