@@ -619,8 +619,8 @@ body {
 		                            </td>
 		                        </tr>
 		                        <tr>
-		                            <td colspan="3">
-		                                <span class="item">커피 바리스타 자격증 1급</span>
+		                            <td id="certsArea" colspan="3">
+		                                <!-- <span class="item">커피 바리스타 자격증 1급</span> -->
 		                            </td>
 		                        </tr>
 		                        <tr height="20px">
@@ -636,12 +636,12 @@ body {
 		                                 <span class="item">스타벅스 매니저 / 3년 2개월</span>
 		                            </td>
 		                        </tr>
-		                        <script>
+		                        <!-- <script>
 			                		$(function(){
 			                			var title = document.createElement("span");
 			                			
 			                		});
-		                        </script>
+		                        </script> -->
 		                    </table>
 						</div>
 						<div id="show3" style="display: none;">
@@ -888,7 +888,34 @@ body {
 				num++;
 				$("#show"+ num).show();
 				console.log(num);
-				if(num == 6){
+				
+				if(num == 2) {
+					console.log("num == 2 일때 진입");
+					
+					$.ajax({
+						url: "/hobbyist/selectCerts.ar",
+						type: "get",
+						success: function(data) {
+							
+							$certsArea = $("#certsArea");
+							
+							for(var i = 0; i < data.length; i++) {
+								var certName = decodeURIComponent(data[i].certName);
+								
+								console.log("cert : " + certName);
+								console.log("data[i] : " + data[i]);
+								
+								$certsArea.append("<span class='item' value='" + data[i].certCode + "'>" + certName + "</span>");
+							}
+						},
+						error: function(error) {
+							console.log("error 진입");
+							console.log(error);
+						}
+					});
+				}
+				
+				if(num == 6) {
 					$("#nextModalBtn").hide();
 					$("#saveModalBtn").show();
 				} 
@@ -900,6 +927,8 @@ body {
 			});
 		});		
 	</script>
+	
+	<!-- 하단 회색 영역 -->
 	<div style="height:30px;"></div>
 	<%@ include file="../common/footer.jsp"%>
 </body>

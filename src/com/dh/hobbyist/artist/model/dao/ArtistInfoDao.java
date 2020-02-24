@@ -32,6 +32,8 @@ public class ArtistInfoDao {
 		ArrayList<ArtistCerts> list = null;
 		ArtistCerts ac = null;
 		
+		//System.out.println("aCode : " + aCode);
+		
 		String query = prop.getProperty("selectCerts");
 		
 		try {
@@ -40,6 +42,8 @@ public class ArtistInfoDao {
 			
 			rset = pstmt.executeQuery();
 			
+			list = new ArrayList<ArtistCerts>();
+			
 			while(rset.next()) {
 				ac = new ArtistCerts();
 				ac.setCertCode(rset.getInt("CERT_PK"));
@@ -47,6 +51,8 @@ public class ArtistInfoDao {
 				ac.setCertDate(rset.getDate("CERT_DATE"));
 				ac.setCertOrg(rset.getString("CERT_ORG"));
 				ac.setMemberPk(rset.getInt("MEMBER_PK"));
+				
+				System.out.println("ac : " + ac);
 				
 				list.add(ac);
 			}
