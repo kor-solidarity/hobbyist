@@ -1,8 +1,10 @@
 package com.dh.hobbyist.place.model.dao;
 
+import com.dh.hobbyist.common.model.vo.Image;
+import com.dh.hobbyist.place.model.vo.CompanyAds;
 import com.dh.hobbyist.place.model.vo.PlaceCompany;
 
-import static com.dh.hobbyist.common.JDBCTemplate.close;
+import static com.dh.hobbyist.common.JDBCTemplate.*;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -27,9 +29,12 @@ public class PlaceDao {
     // 회사정보 기입 (은석)
     public int insertPlaceCompany(Connection con, PlaceCompany inputPC) {
         PreparedStatement pstmt = null;
+        Statement statement = null;
+        ResultSet resultSet = null;
         int result = 0;
 
         String query = prop.getProperty("insertPlaceCompany");
+        String pkQuery = prop.getProperty("selectPlaceCompanySeqCurrval");
         try {
             pstmt = con.prepareStatement(query);
             pstmt.setString(1, inputPC.getCompany_name());
@@ -41,9 +46,19 @@ public class PlaceDao {
             pstmt.setString(7, inputPC.getRoom_size());
 
             result = pstmt.executeUpdate();
+
+            // 잘 들어갔으면 안에서 값 빼온다.
+            // 시퀀스는 세션 지나면 currval 만으로 조회가 안되기 때문에 꼭 바로바로 확인을 해야함.
+            if (result > 0) {
+                statement = con.createStatement();
+
+                resultSet = statement.executeQuery(pkQuery);
+                result = resultSet.getInt("currval");
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
+            close(resultSet);
             close(pstmt);
         }
 
@@ -52,7 +67,7 @@ public class PlaceDao {
     }
 
     // 마지막 기입된 회사 불러오기
-    public PlaceCompany selectLatestCompany(Connection con) {
+    public PlaceCompany selectPlaceCompany(Connection con, int pk) {
         Statement stmt = null;
         ResultSet resultSet = null;
         PlaceCompany company = null;
@@ -77,11 +92,63 @@ public class PlaceDao {
 
         } catch (SQLException e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             close(resultSet);
             close(stmt);
         }
 
         return company;
+    }
+
+    public int insertAds(Connection con, PlaceCompany company, CompanyAds inputAds) {
+        PreparedStatement preparedStatement = null;
+        int result = 0;
+
+        String query = prop.getProperty("insertAds");
+
+        try {
+            preparedStatement = con.prepareStatement(query);
+
+            preparedStatement.setInt(1, company.getCompany_pk());
+            preparedStatement.setDate(2, inputAds.getStartDate());
+            preparedStatement.setDate(3, inputAds.getEndDate());
+
+            result = preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            // PreparedStatement 클래스는 Statement 를 상속받기 때문에 그냥 대상이 Statement 여도 상관없다.
+            close(preparedStatement);
+        }
+
+        return result;
+    }
+
+    // 공간대여업체 이미지파일 디비에 인서트
+    public int insertImage(Connection con, Image image, int isMain) {
+        PreparedStatement preparedStatement = null;
+        int result = 0;
+
+        String query = prop.getProperty("insertImage");
+
+        try {
+            preparedStatement = con.prepareStatement(query);
+
+            preparedStatement.setString(1, image.getImageRoute());
+            preparedStatement.setString(2, image.getImageName());
+            preparedStatement.setString(3, image.getImageType());
+            preparedStatement.setInt(4, image.getImageFkPk());
+            preparedStatement.setInt(5, isMain);
+
+            result = preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            close(preparedStatement);
+        }
+
+        return result;
     }
 }
