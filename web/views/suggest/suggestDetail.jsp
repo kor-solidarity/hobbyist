@@ -57,6 +57,13 @@
 	border: 1px solid darkolivegreen;
 	background-color: darkolivegreen;
 	}
+	#replySelectArea {
+		width:850px;
+	}
+	#replySelectTable {
+		width:100%;
+	}
+	
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <title>hobbyist</title>
@@ -208,7 +215,7 @@
 				<td colspan="4"><hr style="border: solid 1.15px darkolivegreen;"></td>
 			</tr>
 			<tr>
-				<td colspan="4">댓글 <label>0</label></td>
+				<td colspan="4">댓글 <label><%=replyList.size() %></label></td>
 			</tr>
 		</table>
 		<div class="replyArea">
@@ -227,14 +234,30 @@
             		</tr>
          		</table>
      		 </div>
+     		 <br>
       		 <div id="replySelectArea">
-         		<table id="replySelectTable" border="1" align="center">
+         		<table id="replySelectTable" align="center">
          			<% for(Reply r : replyList) { %>
          				<tr>
          					<input type="hidden" value="<%=r.getReplyCode() %>">
-         					<td><%=r.getMemberName()%></td>
-         					<td><%=r.getReplyContent() %></td>
+         					<td rowspan="2">
+         						<% if(!r.getImageRoot().equals("null/null")) { %>
+         							<img src = "<%=r.getImageRoot() %>" style="height:70px; width:70px;">
+         						<%} else { %>
+         							<img src = "/hobbyist/static/images/user.png" style="height:70px; width:70px;">
+         						<%} %>
+         					</td>
+         					<td style="color:darkolivegreen; font-family: 'Do Hyeon', sans-serif;"><%=r.getMemberName()%></td>
+         					<td style="width:500px;"></td>
+         					
          					<td><%=r.getReplyDate() %></td>
+         					<td style="color:darkolivegreen;">신고</td>
+         				</tr>
+         				<tr>
+							<td colspan="4"><%=r.getReplyContent() %></td>         				
+         				</tr>
+         				<tr>
+         					<td colspan="5"><hr></td>
          				</tr>
          			<%} %>
          		</table>
@@ -273,15 +296,16 @@
    							
    							for(var key in data) {
    								var $tr = $("<tr>");
-   								var $writerTd = $("<td>").text(data[key].memberName).css("width", "100px");
+   								/* var $writerTd = $("<td>").text(data[key].memberName).css("width", "100px");
    								var $contentTd = $("<td>").text(data[key].replyContent).css("width", "400px");
    								var $dateTd = $("<td>").text(data[key].replyDate).css("width", "200px");
    								
    								$tr.append($writerTd);
    								$tr.append($contentTd);
    								$tr.append($dateTd);
+   								 */
    								
-   								$replySelectTable.prepend($tr);
+   								$replySelectTabl.append($tr);
    							} 
    						},
    						error: function(error) {

@@ -10,11 +10,12 @@ public class Reply implements java.io.Serializable {
 	private int memberCode;
 	private int deleted;
 	private String memberName;
+	private String imageRoot;
 	
 	public Reply() {}
 
 	public Reply(int replyCode, int lessonPetitionCode, Date replyDate, String replyContent, int memberCode,
-			int deleted, String memberName) {
+			int deleted, String memberName, String imageRoot) {
 		super();
 		this.replyCode = replyCode;
 		this.lessonPetitionCode = lessonPetitionCode;
@@ -23,6 +24,7 @@ public class Reply implements java.io.Serializable {
 		this.memberCode = memberCode;
 		this.deleted = deleted;
 		this.memberName = memberName;
+		this.imageRoot = imageRoot;
 	}
 
 	public int getReplyCode() {
@@ -81,13 +83,20 @@ public class Reply implements java.io.Serializable {
 		this.memberName = memberName;
 	}
 
+	public String getImageRoot() {
+		return imageRoot;
+	}
+
+	public void setImageRoot(String imageRoot) {
+		this.imageRoot = imageRoot;
+	}
+
 	@Override
 	public String toString() {
 		return "Reply [replyCode=" + replyCode + ", lessonPetitionCode=" + lessonPetitionCode + ", replyDate="
 				+ replyDate + ", replyContent=" + replyContent + ", memberCode=" + memberCode + ", deleted=" + deleted
-				+ ", memberName=" + memberName + "]";
+				+ ", memberName=" + memberName + ", imageRoot=" + imageRoot + "]";
 	}
 
-	
 	
 }

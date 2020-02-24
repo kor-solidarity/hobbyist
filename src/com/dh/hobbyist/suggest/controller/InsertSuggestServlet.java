@@ -75,8 +75,8 @@ public class InsertSuggestServlet extends HttpServlet {
 		
 		if(result > 0) {
 			//request.getRequestDispatcher("/selectList.sg").forward(request, response);;
-			String page = request.getContextPath() + "/selectList.sg";
-			request.getRequestDispatcher(page).forward(request, response);
+			//String page = "/hobbyist/selectList.sg";
+			response.sendRedirect("/hobbyist/selectList.sg");
 		} else {
 			request.setAttribute("msg", "게시판 작성 실패");
 			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
