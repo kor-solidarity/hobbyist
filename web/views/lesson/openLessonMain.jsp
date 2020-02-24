@@ -512,8 +512,8 @@ body {
 												$("#rounds").change(function() {
 													var rounds = $(this).val();
 													
-													if (rounds < 0) {
-														alert("음수는 입력하실 수 없습니다.");
+													if (rounds <= 0) {
+														alert("1회 이상을 입력해주세요");
 													} 
 												});
 											});
@@ -528,8 +528,8 @@ body {
 												$("#cost").change(function() {
 													var cost = $(this).val();
 													
-													if (cost < 0) {
-														alert("음수는 입력하실 수 없습니다.");
+													if (cost <= 0) {
+														alert("양수를 입력해주세요");
 													} 
 												});
 											});
