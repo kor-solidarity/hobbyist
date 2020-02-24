@@ -1,4 +1,4 @@
-package com.dh.hobbyist.member.controller;
+package com.dh.hobbyist.memberUpdate.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -22,13 +22,13 @@ import com.dh.hobbyist.member.model.vo.Member;
  */
 @WebServlet("/UpdateMemberR.me")
 
-public class UpdateMemberListServletR extends HttpServlet {
+public class memberUpdateServletR extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public UpdateMemberListServletR() {
+    public memberUpdateServletR() {
         super();
         // TODO Auto-generated constructor stub
     }
