@@ -4,9 +4,13 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Properties;
 
+import com.dh.hobbyist.suggest.model.vo.PageInfo;
 import com.dh.hobbyist.suggest.model.vo.Petition;
 import static com.dh.hobbyist.common.JDBCTemplate.*;
 
@@ -54,6 +58,200 @@ public class SuggestDao {
 		}
 		
 		return result;
+	}
+	
+	//건의 게시판 전체 조회용 메소드
+	public ArrayList<Petition> selectList(Connection con) {
+		ArrayList<Petition> list = null;
+		Statement stmt = null;
+		ResultSet rset = null;
+		
+		String query = prop.getProperty("selectList");
+		
+		try {
+			stmt = con.createStatement();
+			rset = stmt.executeQuery(query);
+			
+			list = new ArrayList<Petition>();
+			
+			while(rset.next()) {
+				Petition p = new Petition();
+				p.setPetitionCode(rset.getInt("PETITION_PK"));
+				p.setNumOfStudents(rset.getString("NUM_OF_STUDENTS"));
+				p.setCost(rset.getInt("COST"));
+				p.setNumOfLessons(rset.getInt("NUM_OF_LESSONS"));
+				p.setLocation(rset.getString("LOCATION"));
+				p.setRequestedDate(rset.getDate("REQUESTED_DATE"));
+				p.setRequestedDays(rset.getString("REQUESTED_DAYS"));
+				p.setRequestTime(rset.getString("REQUESTED_TIME"));
+				p.setTitle(rset.getString("TITLE"));
+				p.setContents(rset.getString("CONTENTS"));
+				p.setPetitionedTime(rset.getDate("PETITIONED_TIME"));
+				p.setWishlisted(rset.getInt("WISHLISTED"));
+				p.setViews(rset.getInt("VIEWS"));
+				p.setPetitionedMember(rset.getInt("PETITIONED_MEMBER"));
+				p.setCategoryCode(rset.getInt("CATEGORY_PK"));
+				p.setMemberName(rset.getString("MEMBER_NAME"));
+				p.setCategoryParentCode(rset.getInt("PARENT_PK"));
+				
+				list.add(p);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(stmt);
+		}
+		
+		return list;
+	}
+	
+	//건의 게시판 갯수 조회용 메소드
+	public int getListCount(Connection con) {
+		Statement stmt = null;
+		ResultSet rset = null;
+		
+		int listCount = 0;
+		
+		String query = prop.getProperty("listCount");
+		
+		try {
+			stmt = con.createStatement();
+			rset = stmt.executeQuery(query);
+			
+			if(rset.next()) {
+				listCount = rset.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(stmt);
+		}
+		
+		
+		return listCount;
+	}
+	
+	//페이징 처리 포함한 건의게시판 조회용 메소드
+	public ArrayList<Petition> selectList(Connection con, PageInfo pi) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<Petition> list = null;
+		
+		String query = prop.getProperty("selectListWithPaging");
+		
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			
+			int startRow = (pi.getCurrentPage() - 1) * pi.getLimit() + 1;
+			int endRow = startRow + pi.getLimit() - 1;
+			
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			
+			rset = pstmt.executeQuery();
+			
+			list = new ArrayList<Petition>();
+			
+			while(rset.next()) {
+				Petition p = new Petition();
+				p.setPetitionCode(rset.getInt("PETITION_PK"));
+				p.setNumOfStudents(rset.getString("NUM_OF_STUDENTS"));
+				p.setCost(rset.getInt("COST"));
+				p.setNumOfLessons(rset.getInt("NUM_OF_LESSONS"));
+				p.setLocation(rset.getString("LOCATION"));
+				p.setRequestedDate(rset.getDate("REQUESTED_DATE"));
+				p.setRequestedDays(rset.getString("REQUESTED_DAYS"));
+				p.setRequestTime(rset.getString("REQUESTED_TIME"));
+				p.setTitle(rset.getString("TITLE"));
+				p.setContents(rset.getString("CONTENTS"));
+				p.setPetitionedTime(rset.getDate("PETITIONED_TIME"));
+				p.setWishlisted(rset.getInt("WISHLISTED"));
+				p.setViews(rset.getInt("VIEWS"));
+				p.setPetitionedMember(rset.getInt("PETITIONED_MEMBER"));
+				p.setCategoryCode(rset.getInt("CATEGORY_PK"));
+				p.setMemberName(rset.getString("MEMBER_NAME"));
+				p.setCategoryParentCode(rset.getInt("PARENT_PK"));
+				
+				list.add(p);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+		
+		return list;
+	}
+	
+	//조회수 증가용 메소드
+	public int updateCount(Connection con, int num) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("updateCount");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, num);
+			pstmt.setInt(2, num);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
+	//건의 게시판 하나 조회용 메소드
+	public Petition selectOne(Connection con, int num) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		Petition p = null;
+		
+		String query = prop.getProperty("selectOne");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, num);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				p = new Petition();
+				p.setPetitionCode(rset.getInt(columnIndex));
+				p.setNumOfStudents(rset.getString(columnIndex));
+				p.setCost(rset.getInt(columnIndex));
+				p.setNumOfLessons(rset.getInt(columnIndex));
+				p.setLocation(rset.getString(columnIndex));
+				p.setRequestedDate(rset.getDate(columnIndex));
+				p.setRequestedDays(rset.getString(columnIndex));
+				p.setRequestTime(rset.getString(columnIndex));
+				p.setTitle(rset.getString(columnIndex));
+				p.setContents(rset.getString(columnIndex));
+				p.setPetitionedTime(rset.getDate(columnIndex));
+				p.setWishlisted(rset.getInt(columnIndex));
+				p.setViews(rset.getInt());
+				p.setPetitionedMember(rset.getInt(columnIndex));
+				p.setCategoryCode(rset.getInt(columnIndex));
+				p.setCategoryName(rset.getString(columnIndex));
+				p.setMemberName(rset.getString(columnIndex));
+				p.setCategoryParentCode(rset.getInt(columnIndex));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		
+		return null;
 	}
 
 }

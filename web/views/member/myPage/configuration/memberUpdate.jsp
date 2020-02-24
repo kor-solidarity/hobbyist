@@ -1,6 +1,11 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8" import="java.util.*, com.dh.hobbyist.member.model.dao.*"%>
+<%
+	List<Member> UpdateMemberListR = (List<Member>) request.getAttribute("UpdateMemberListR");
+	/* Member m = updateMemberListR.get(0); */
+
+%>
+
 	
 <!DOCTYPE html>
 <html>
@@ -249,7 +254,7 @@ color: #FFFFFF;
 </head>
 <body>
 	<%@ include file="/views/common/myPage.jsp"%>
-
+	
 
 	<div class="divcenter2">
 		<table align="border" class="tablecenter2">
@@ -276,24 +281,33 @@ color: #FFFFFF;
 
 
 	<div class="divcenter4">
+
 		<form action="<%=request.getContextPath() %>/register.me mthod ="post">
 			<table align="border" class="tablecenter4">
+		<%-- 	<% System.out.println(m)%>
+			<% 	
+			
+			for(int i=0; i<UpdateMemberListR.size(); i++){
+		
+			%> --%>
 				<tr>
 		<td colspan="1" style="width: 70px; text-align: left;"><label id="labelId">아이디</label></td>	
 		<td colspan="5" class="id" style="text-align: left;"><input style="width: 260px;" type="text" name="text" max-length=15
-						autofocus placeholder="아이디를 입력하세요."></td>
+						value="<%-- <%= UpdateMemberListR.get(i).getMemberId();%> --%>" autofocus placeholder=""></td>
 					<td></td>
 				</tr>
-				
+		<%--   	<% } %>
+		  	 --%>
 				<tr>
 					<td colspan="1" style="width: 70px; text-align: left;"><label
 						id="labelId">패스워드</label></td>	
-					<td colspan="5" class="id" style="text-align: left;"><input
-						style="width: 260px;" type="password" name="password" max-length=15
-						autofocus placeholder="패스워드를 입력하세요."></td>
+					<td colspan="5" class="id" style="text-align: left;"><input style="width: 260px;" type="password" name="password" max-length=15
+						 autofocus placeholder="패스워드를 입력하세요."></td>
 					<td></td>
-				</tr>
-
+				</tr> 
+		  	
+		  	
+		  	
 				<tr>
 					<td colspan="1" style="width: 70px; text-align: left;"><label
 						id="labelName">이름</label></td>
@@ -349,9 +363,14 @@ color: #FFFFFF;
 		</form>
 	</div>
 		
-	<!-- 	  -->
+	
 	
 	<script>
+
+	
+	
+	
+	
 	function checkPassword(password){
 	if(password != ""){
 		if(!/^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,20}$/.test(password)){
@@ -366,6 +385,9 @@ color: #FFFFFF;
 	$("#pwdCheck1").html("비밀번호를 입력해주세요.");
 	$("#pwdCheck1").css({'color':'red', 'font-size': '11.5px'});
 	return false;
+	
+	
+	
 	}
 
 	$("#email").change(function(){
@@ -400,7 +422,7 @@ color: #FFFFFF;
 			tel3: tel3
 	};
 	$.ajax({
-		url:"/hobbyist/member/controller/UpdateMemberListServlet.java"
+		url:"/hobbyist/phoneCertification.ph;"
 		type: "post",
 		data: phone,
 		success: function(data){
@@ -412,6 +434,7 @@ color: #FFFFFF;
 		}
 	});
 	});
+	
 	$("#checkBtn").click(function() {
 		var userSms = $("#num").val(); // 회원가입 폼에서 유저가 문자를 보고 입력한 숫자를 가져옴
     	

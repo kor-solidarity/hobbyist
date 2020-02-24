@@ -24,6 +24,10 @@
 					alertMessage = "아티스트 등록이 완료되었습니다.\n아티스트 권한은 관리자 심사 후 부여됩니다. 권한부여 심사는 \n약 1~5일 이내에 완료됩니다.";
 					movePath = "/hobbyist/views/artist/artistMain.jsp";
 					break;
+				case "insertPayment" :
+					alertMessage = "결제완료 되었습니다.";
+					movePath = "/hobbyist/index.jsp";
+					break;
 			}
 			
 			alert(alertMessage);

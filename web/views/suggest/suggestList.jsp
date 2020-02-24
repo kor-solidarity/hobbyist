@@ -1,6 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+	pageEncoding="UTF-8" import="java.util.ArrayList, com.dh.hobbyist.suggest.model.vo.Petition, com.dh.hobbyist.suggest.model.vo.PageInfo" %>
+<%
+	ArrayList<Petition> suggestList = (ArrayList<Petition>) request.getAttribute("suggestList");
+	PageInfo pi = (PageInfo) request.getAttribute("pi");
+	int listCount = pi.getListCount();
+	int currentPage = pi.getCurrentPage();
+	int maxPage = pi.getMaxPage();
+	int startPage = pi.getStartPage();
+	int endPage = pi.getEndPage();
+	
+%>
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -35,7 +45,6 @@
 
 #suggestListArea {
 	width: 1000px;
-	height: 500px;
 	margin-left: auto;
 	margin-right: auto;
 }
@@ -50,6 +59,7 @@
 #suggestListTable {
 	border: 1.5px solid darkolivegreen;
 	border-radius:5px;
+	height: 150px;
 }
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -98,268 +108,86 @@
 
 	</div>
 	<div id="suggestListArea">
-		<div class="suggest-list" align="center">
-			<!--4행 3열-->
-			<table id="suggestListTable">
-				<tr>
-					<td colspan="2">의정부시 농구 수업</td>
-					<td style="width:70px;"></td>
+		<% for(Petition p : suggestList) { %>
+			<div class="suggest-list" align="center">
+			<input type="hidden" value="<%=p.getPetitionCode() %>">
+				<!--4행 3열-->
+				<table id="suggestListTable">
+					<tr>
+						<td colspan="2"><%=p.getTitle()%></td>
+						<td style="width:70px;"></td>
 				</tr>
 				<tr>
 					<td colspan="2"></td>
-					<td rowspan="2" style="text-align:right;"><img src="/hobbyist/static/images/sports.png" style="width:50px; height:50px;"></td>
+					<td rowspan="2" style="text-align:right;">
+					<% if(p.getCategoryParentCode() == 1) { %>
+					 	<img src="/hobbyist/static/images/music.png" style="width:50px; height:50px;">
+					<%} else if(p.getCategoryParentCode() == 9) { %>
+						<img src="/hobbyist/static/images/dance.png" style="width:50px; height:50px;">
+					<%} else if(p.getCategoryParentCode() == 15) { %>
+						<img src="/hobbyist/static/images/phoneCamera.png" style="width:50px; height:50px;">
+					<%} else if(p.getCategoryParentCode() == 20) { %>
+						<img src="/hobbyist/static/images/life.png" style="width:50px; height:50px;">
+					<%} else if(p.getCategoryParentCode() == 25) { %>
+						<img src="/hobbyist/static/images/beauty.png" style="width:50px; height:50px;">
+					<%} else if(p.getCategoryParentCode() == 33) { %>
+						<img src="/hobbyist/static/images/design.png" style="width:50px; height:50px;">
+					<%} else if(p.getCategoryParentCode() == 37) { %>
+						<img src="/hobbyist/static/images/sports.png" style="width:50px; height:50px;">
+					<%} %>
+					</td>
 				</tr>
 				<tr>
-					<td><img src="/hobbyist/static/images/heart.png" style="width:20px; height:20px;"> (10)</td>
-					<td><img src="/hobbyist/static/images/dialogicon.png" style="width:20px; height:20px"> (8)</td>
+					<td><img src="/hobbyist/static/images/heart.png" style="width:20px; height:20px;"> (<%=p.getWishlisted() %>)</td>
+					<td><img src="/hobbyist/static/images/dialogicon.png" style="width:20px; height:20px"> (<%=p.getViews() %>)</td>
 				</tr>
 				<tr>
-					<td colspan="2">당산|저녁반|2~4명</td>
-					<td style="text-align:right; color:darkolivegreen; font-weight:bold;">이지호</td>
+					<td colspan="2"><%=p.getLocation() %>/<%=p.getNumOfStudents() %></td>
+					<td style="text-align:right; color:darkolivegreen; font-weight:bold;"><%=p.getMemberName() %></td>
 				</tr>
 			</table>
 		</div>
-		<div class="suggest-list" align="center">
-			<!--4행 3열-->
-			<table id="suggestListTable">
-				<tr>
-					<td colspan="2">의정부시 농구 수업</td>
-					<td style="width:70px;"></td>
-				</tr>
-				<tr>
-					<td colspan="2"></td>
-					<td rowspan="2" style="text-align:right;"><img src="/hobbyist/static/images/sports.png" style="width:50px; height:50px;"></td>
-				</tr>
-				<tr>
-					<td><img src="/hobbyist/static/images/heart.png" style="width:20px; height:20px;"> (10)</td>
-					<td><img src="/hobbyist/static/images/dialogicon.png" style="width:20px; height:20px"> (8)</td>
-				</tr>
-				<tr>
-					<td colspan="2">당산|저녁반|2~4명</td>
-					<td style="text-align:right; color:darkolivegreen; font-weight:bold;">이지호</td>
-				</tr>
-			</table>
-		</div>
-		<div class="suggest-list" align="center">
-			<!--4행 3열-->
-			<table id="suggestListTable">
-				<tr>
-					<td colspan="2">의정부시 농구 수업</td>
-					<td style="width:70px;"></td>
-				</tr>
-				<tr>
-					<td colspan="2"></td>
-					<td rowspan="2" style="text-align:right;"><img src="/hobbyist/static/images/sports.png" style="width:50px; height:50px;"></td>
-				</tr>
-				<tr>
-					<td><img src="/hobbyist/static/images/heart.png" style="width:20px; height:20px;"> (10)</td>
-					<td><img src="/hobbyist/static/images/dialogicon.png" style="width:20px; height:20px"> (8)</td>
-				</tr>
-				<tr>
-					<td colspan="2">당산|저녁반|2~4명</td>
-					<td style="text-align:right; color:darkolivegreen; font-weight:bold;">이지호</td>
-				</tr>
-			</table>
-		</div>
-		<div class="suggest-list" align="center">
-			<!--4행 3열-->
-			<table id="suggestListTable">
-				<tr>
-					<td colspan="2">의정부시 농구 수업</td>
-					<td style="width:70px;"></td>
-				</tr>
-				<tr>
-					<td colspan="2"></td>
-					<td rowspan="2" style="text-align:right;"><img src="/hobbyist/static/images/sports.png" style="width:50px; height:50px;"></td>
-				</tr>
-				<tr>
-					<td><img src="/hobbyist/static/images/heart.png" style="width:20px; height:20px;"> (10)</td>
-					<td><img src="/hobbyist/static/images/dialogicon.png" style="width:20px; height:20px"> (8)</td>
-				</tr>
-				<tr>
-					<td colspan="2">당산|저녁반|2~4명</td>
-					<td style="text-align:right; color:darkolivegreen; font-weight:bold;">이지호</td>
-				</tr>
-			</table>
-		</div>
-		<div class="suggest-list" align="center">
-			<!--4행 3열-->
-			<table id="suggestListTable">
-				<tr>
-					<td colspan="2">의정부시 농구 수업</td>
-					<td style="width:70px;"></td>
-				</tr>
-				<tr>
-					<td colspan="2"></td>
-					<td rowspan="2" style="text-align:right;"><img src="/hobbyist/static/images/sports.png" style="width:50px; height:50px;"></td>
-				</tr>
-				<tr>
-					<td><img src="/hobbyist/static/images/heart.png" style="width:20px; height:20px;"> (10)</td>
-					<td><img src="/hobbyist/static/images/dialogicon.png" style="width:20px; height:20px"> (8)</td>
-				</tr>
-				<tr>
-					<td colspan="2">당산|저녁반|2~4명</td>
-					<td style="text-align:right; color:darkolivegreen; font-weight:bold;">이지호</td>
-				</tr>
-			</table>
-		</div>
-		<div class="suggest-list" align="center">
-			<!--4행 3열-->
-			<table id="suggestListTable">
-				<tr>
-					<td colspan="2">의정부시 농구 수업</td>
-					<td style="width:70px;"></td>
-				</tr>
-				<tr>
-					<td colspan="2"></td>
-					<td rowspan="2" style="text-align:right;"><img src="/hobbyist/static/images/sports.png" style="width:50px; height:50px;"></td>
-				</tr>
-				<tr>
-					<td><img src="/hobbyist/static/images/heart.png" style="width:20px; height:20px;"> (10)</td>
-					<td><img src="/hobbyist/static/images/dialogicon.png" style="width:20px; height:20px"> (8)</td>
-				</tr>
-				<tr>
-					<td colspan="2">당산|저녁반|2~4명</td>
-					<td style="text-align:right; color:darkolivegreen; font-weight:bold;">이지호</td>
-				</tr>
-			</table>
-		</div>
-		<div class="suggest-list" align="center">
-			<!--4행 3열-->
-			<table id="suggestListTable">
-				<tr>
-					<td colspan="2">의정부시 농구 수업</td>
-					<td style="width:70px;"></td>
-				</tr>
-				<tr>
-					<td colspan="2"></td>
-					<td rowspan="2" style="text-align:right;"><img src="/hobbyist/static/images/sports.png" style="width:50px; height:50px;"></td>
-				</tr>
-				<tr>
-					<td><img src="/hobbyist/static/images/heart.png" style="width:20px; height:20px;"> (10)</td>
-					<td><img src="/hobbyist/static/images/dialogicon.png" style="width:20px; height:20px"> (8)</td>
-				</tr>
-				<tr>
-					<td colspan="2">당산|저녁반|2~4명</td>
-					<td style="text-align:right; color:darkolivegreen; font-weight:bold;">이지호</td>
-				</tr>
-			</table>
-		</div>
-		<div class="suggest-list" align="center">
-			<!--4행 3열-->
-			<table id="suggestListTable">
-				<tr>
-					<td colspan="2">의정부시 농구 수업</td>
-					<td style="width:70px;"></td>
-				</tr>
-				<tr>
-					<td colspan="2"></td>
-					<td rowspan="2" style="text-align:right;"><img src="/hobbyist/static/images/sports.png" style="width:50px; height:50px;"></td>
-				</tr>
-				<tr>
-					<td><img src="/hobbyist/static/images/heart.png" style="width:20px; height:20px;"> (10)</td>
-					<td><img src="/hobbyist/static/images/dialogicon.png" style="width:20px; height:20px"> (8)</td>
-				</tr>
-				<tr>
-					<td colspan="2">당산|저녁반|2~4명</td>
-					<td style="text-align:right; color:darkolivegreen; font-weight:bold;">이지호</td>
-				</tr>
-			</table>
-		</div>
-		<div class="suggest-list" align="center">
-			<!--4행 3열-->
-			<table id="suggestListTable">
-				<tr>
-					<td colspan="2">의정부시 농구 수업</td>
-					<td style="width:70px;"></td>
-				</tr>
-				<tr>
-					<td colspan="2"></td>
-					<td rowspan="2" style="text-align:right;"><img src="/hobbyist/static/images/sports.png" style="width:50px; height:50px;"></td>
-				</tr>
-				<tr>
-					<td><img src="/hobbyist/static/images/heart.png" style="width:20px; height:20px;"> (10)</td>
-					<td><img src="/hobbyist/static/images/dialogicon.png" style="width:20px; height:20px"> (8)</td>
-				</tr>
-				<tr>
-					<td colspan="2">당산|저녁반|2~4명</td>
-					<td style="text-align:right; color:darkolivegreen; font-weight:bold;">이지호</td>
-				</tr>
-			</table>
-		</div>
-		<div class="suggest-list" align="center">
-			<!--4행 3열-->
-			<table id="suggestListTable">
-				<tr>
-					<td colspan="2">의정부시 농구 수업</td>
-					<td style="width:70px;"></td>
-				</tr>
-				<tr>
-					<td colspan="2"></td>
-					<td rowspan="2" style="text-align:right;"><img src="/hobbyist/static/images/sports.png" style="width:50px; height:50px;"></td>
-				</tr>
-				<tr>
-					<td><img src="/hobbyist/static/images/heart.png" style="width:20px; height:20px;"> (10)</td>
-					<td><img src="/hobbyist/static/images/dialogicon.png" style="width:20px; height:20px"> (8)</td>
-				</tr>
-				<tr>
-					<td colspan="2">당산|저녁반|2~4명</td>
-					<td style="text-align:right; color:darkolivegreen; font-weight:bold;">이지호</td>
-				</tr>
-			</table>
-		</div>
-		<div class="suggest-list" align="center">
-			<!--4행 3열-->
-			<table id="suggestListTable">
-				<tr>
-					<td colspan="2">의정부시 농구 수업</td>
-					<td style="width:70px;"></td>
-				</tr>
-				<tr>
-					<td colspan="2"></td>
-					<td rowspan="2" style="text-align:right;"><img src="/hobbyist/static/images/sports.png" style="width:50px; height:50px;"></td>
-				</tr>
-				<tr>
-					<td><img src="/hobbyist/static/images/heart.png" style="width:20px; height:20px;"> (10)</td>
-					<td><img src="/hobbyist/static/images/dialogicon.png" style="width:20px; height:20px"> (8)</td>
-				</tr>
-				<tr>
-					<td colspan="2">당산|저녁반|2~4명</td>
-					<td style="text-align:right; color:darkolivegreen; font-weight:bold;">이지호</td>
-				</tr>
-			</table>
-		</div>
-		<div class="suggest-list" align="center">
-			<!--4행 3열-->
-			<table id="suggestListTable">
-				<tr>
-					<td colspan="2">의정부시 농구 수업</td>
-					<td style="width:70px;"></td>
-				</tr>
-				<tr>
-					<td colspan="2"></td>
-					<td rowspan="2" style="text-align:right;"><img src="/hobbyist/static/images/sports.png" style="width:50px; height:50px;"></td>
-				</tr>
-				<tr>
-					<td><img src="/hobbyist/static/images/heart.png" style="width:20px; height:20px;"> (10)</td>
-					<td><img src="/hobbyist/static/images/dialogicon.png" style="width:20px; height:20px"> (8)</td>
-				</tr>
-				<tr>
-					<td colspan="2">당산|저녁반|2~4명</td>
-					<td style="text-align:right; color:darkolivegreen; font-weight:bold;">이지호</td>
-				</tr>
-			</table>
-		</div>	
+		<%} %>
+		
 	</div>
+	<br><br>
 	<div class="SuggestPagingArea" align="center">
-		◀이전 1/2/3/4/5/6/7/8/9/10  다음▶
+		<button onclick="location.href='<%=request.getContextPath() %>/selectList.sg?currentPage=1'"><<<</button>
+		
+		<%if(currentPage <= 1) { %>
+			<button disabled><</button>
+		<%} else { %>
+			<button onclick="location.href='<%=request.getContextPath()%>/selectList.sg?currentPage=<%=currentPage -1%>'"><</button>
+		<%} %>
+		
+		<% for(int p = startPage; p <= endPage; p++) {
+				if(p == currentPage) {	
+		%>
+				<button disabled><%= p %></button>
+		
+		<% 		} else {
+		%>
+				
+				<button onclick="location.href='<%=request.getContextPath()%>/selectList.sg?currentPage=<%=p%>'"><%= p %></button>
+		
+		<%		}
+			}
+		%>
+		<%if(currentPage >= maxPage) { %>
+			<button disabled>></button>
+		<%} else { %>
+			<button onclick="location.href='<%=request.getContextPath() %>/selectList.sg?currentPage=<%=currentPage+1 %>'">></button>
+		<% } %>
+		<button onclick="location.href='<%=request.getContextPath()%>/selectList.sg?currentPage=<%=maxPage%>'">>>></button>	
 	</div>
 	<br><br><br><br>
 	<%@ include file="../common/footer.jsp"%>
 	<script>
 		$(function(){
 			$(".suggest-list").click(function(){
-				location.href = "<%=request.getContextPath()%>/views/suggest/suggestDetail.jsp";
+				var num = $(this).children("input").val();
+				console.log(num);
+				location.href = "<%=request.getContextPath()%>/selectOne.sg?num=" + num;
 			});
 	    	$("#suggestWriteBtn").click(function(){
 	    		location.href = "<%=request.getContextPath()%>/views/suggest/suggestInsertForm1.jsp";

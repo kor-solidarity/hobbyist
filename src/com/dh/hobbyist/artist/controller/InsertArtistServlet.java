@@ -47,7 +47,7 @@ public class InsertArtistServlet extends HttpServlet {
 			
 			String root = request.getSession().getServletContext().getRealPath("/");
 			
-			String savePath = root + "static/upload/artist";
+			String savePath = "web/static/upload/artist";
 			
 			MultipartRequest multiRequest = 
 					new MultipartRequest(request, savePath, maxSize, "UTF-8", new MyFileRenamePolicy());
