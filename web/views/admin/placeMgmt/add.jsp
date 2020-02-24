@@ -5,7 +5,7 @@
   Time : 오후 1 :49
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html; charset=UTF-8" language="java" %>
+<%@ page contentType="text/html; charset=UTF-8" language="java" pageEncoding="utf-8" %>
 <html>
 <head>
     <title>Title</title>
@@ -118,19 +118,19 @@
                                 </tr>
                                 <tr>
                                     <td><img id="pic1"
-                                             src="<%=request.getContextPath()%>/static/images/iphoneCamera.png" alt="">
+                                             src="<%=request.getContextPath()%>/static/images/iphoneCameraW.png" alt="">
                                     </td>
                                     <td><img id="pic2"
-                                             src="<%=request.getContextPath()%>/static/images/iphoneCamera.png" alt="">
+                                             src="<%=request.getContextPath()%>/static/images/iphoneCameraW.png" alt="">
                                     </td>
                                     <td><img id="pic3"
-                                             src="<%=request.getContextPath()%>/static/images/iphoneCamera.png" alt="">
+                                             src="<%=request.getContextPath()%>/static/images/iphoneCameraW.png" alt="">
                                     </td>
                                     <td><img id="pic4"
-                                             src="<%=request.getContextPath()%>/static/images/iphoneCamera.png" alt="">
+                                             src="<%=request.getContextPath()%>/static/images/iphoneCameraW.png" alt="">
                                     </td>
                                     <td><img id="pic5"
-                                             src="<%=request.getContextPath()%>/static/images/iphoneCamera.png" alt="">
+                                             src="<%=request.getContextPath()%>/static/images/iphoneCameraW.png" alt="">
                                     </td>
                                 </tr>
                                 </tbody>

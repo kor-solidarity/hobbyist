@@ -53,7 +53,9 @@ public class PlaceDao {
                 statement = con.createStatement();
 
                 resultSet = statement.executeQuery(pkQuery);
-                result = resultSet.getInt("currval");
+                if (resultSet.next()) {
+                    result = resultSet.getInt("currval");
+                }
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -68,15 +70,20 @@ public class PlaceDao {
 
     // 마지막 기입된 회사 불러오기
     public PlaceCompany selectPlaceCompany(Connection con, int pk) {
-        Statement stmt = null;
+        PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         PlaceCompany company = null;
 
-        String query = prop.getProperty("selectLatestCompany");
+        String query = prop.getProperty("selectPlaceCompany");
 
         try {
-            stmt = con.createStatement();
-            resultSet = stmt.executeQuery(query);
+            // stmt = con.createStatement();
+            preparedStatement = con.prepareStatement(query);
+            // resultSet = stmt.executeQuery(query);
+
+            preparedStatement.setInt(1, pk);
+
+            resultSet = preparedStatement.executeQuery();
 
             if (resultSet.next()) {
                 company = new PlaceCompany();
@@ -94,7 +101,7 @@ public class PlaceDao {
             e.printStackTrace();
         } finally {
             close(resultSet);
-            close(stmt);
+            close(preparedStatement);
         }
 
         return company;

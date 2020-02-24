@@ -29,6 +29,7 @@ public class AddPlaceServlet extends HttpServlet {
         System.out.println("gotten into add_place ");
         // request 가 multipart/form-data 방식으로 들어온건가?
         if (ServletFileUpload.isMultipartContent(request)) {
+            System.out.println("request.getCharacterEncoding(): " + request.getCharacterEncoding());
             // 20mb
             int maxSize = 20 * 1024 * 1024;
             System.out.println("isMultipartContent");
@@ -58,6 +59,11 @@ public class AddPlaceServlet extends HttpServlet {
             // nextElement() 하면 가장 마지막으로 들어갔을 pic5 부터 불러와진다는 소리.
             while (files.hasMoreElements()) {
                 String name = files.nextElement();
+                // 만일 아무것도 들어간게 없으면 null 처리된다. 이걸 거르기 위한 조치
+                if (multipartRequest.getFilesystemName(name) == null) {
+                    System.out.println("null file, pass");
+                    continue;
+                }
                 System.out.println("name: " + name);
 
                 // 저장된 파일명들 다 넣기
@@ -116,24 +122,28 @@ public class AddPlaceServlet extends HttpServlet {
             // 들어가짐? 그럼 바로 광고게제정보도 넣는다
             if (insert_company_result > 0) {
                 // 위에 커밋된 대여업체 바로 불러온다
-                // TODO: 2020-02-24 이거 당장 조치해야함!! select 문 pk 안넣음 
                 PlaceCompany company = new PlaceService().selectPlaceCompany(insert_company_result);
+
                 int insert_ads_result = new PlaceService().insertAds(company, inputAds);
+
                 System.out.println("insert_ads_result: " + insert_ads_result);
                 // 광고정보 넣는거 끝났으면 이제 이미지 추가
 
                 // db 에 추가될 파일 목록
                 ArrayList<Image> fileList = new ArrayList<>();
-                // 전송순서의 역으로 하나하나 불러온다.
-                for (int i = fileName.size() - 1; i <= 0; i++) {
+                // 전송순서의 역으로 하나하나 불러넣는다.
+                for (int i = fileName.size() - 1; i >= 0; i--) {
+                    System.out.println(i);
                     Image image = new Image();
                     image.setImageRoute(savePath);
                     image.setImageName(fileName.get(i));
                     image.setImageType("PLACE_COMPANY");
                     image.setImageFkPk(company.getCompany_pk());
+
+                    fileList.add(image);
                 }
                 // 위에 insert_ads_result 가 거짓이면 뭐가나올지 안정하긴 했는데... 어 음...
-
+                System.out.println("fileList: " + fileList);
                 int insert_pics_result = new PlaceService().insertImageList(fileList);
                 System.out.println("insert_pics_result: " + insert_pics_result);
                 if (insert_pics_result > 0) {
