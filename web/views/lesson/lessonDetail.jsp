@@ -20,7 +20,7 @@
 	}
 	
 	#wrapTable {
-		margin: 0 auto;
+		margin: 0 auto 12px auto;
 		border-collapse: separate;
 		border-spacing: 25px 0px;
 		/* border-left: 2px dashed darkolivegreen;
@@ -40,7 +40,7 @@
 	}
 	
 	#secondTable {
-		margin: 0px auto 0px auto;
+		margin: 0px auto 24px auto;
 		font-family: 'Do Hyeon', sans-serif;
 		font-size: 22px;
 		width: 1024px;
@@ -292,7 +292,7 @@
 						<td id="profileImgArea" rowspan="3">
 							<img src="<%= request.getContextPath() %>/static/images/seolhyun.png" id="profileImg">
 						</td>
-						<td style="width:380px; color:darkolivegreen;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;☆★★★★ <label style="color:black; font-weight:normal;">(3)</label></td>
+						<td style="width:380px; color:darkolivegreen;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;★★★★☆ <label style="color:black; font-weight:normal;">(3)</label></td>
 						<td></td>
 						<td colspan="2" style="text-align:right;">
 							25,000원 / 회<br>
@@ -378,7 +378,12 @@
 			</td>
 		</tr>
 	</table>
+	
+	<div style="width:100%; height:25px; background-color:#E2E2E2;"></div>	
+	
 </section>
+
+<%@ include file="../common/footer.jsp" %>
 
 </body>
 </html>
