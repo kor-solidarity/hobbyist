@@ -352,7 +352,7 @@
         	$("#emailCheck").html("");
 			
         	
-        	 $("#memberForm").submit(function() {
+        	 /* $("#memberForm").submit(function() {
         		if($("#memberId").val() == "") {
         			return false;
         		}
@@ -405,7 +405,7 @@
         			return false;
         		}
         	
-        	}); 
+        	});  */
        
         }); 
 	     
