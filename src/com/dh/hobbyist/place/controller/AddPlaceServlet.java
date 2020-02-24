@@ -1,6 +1,7 @@
 package com.dh.hobbyist.place.controller;
 
 import com.dh.hobbyist.common.MyFileRenamePolicy;
+import com.dh.hobbyist.common.model.vo.Image;
 import com.dh.hobbyist.place.model.service.PlaceService;
 import com.dh.hobbyist.place.model.vo.CompanyAds;
 import com.dh.hobbyist.place.model.vo.PlaceCompany;
@@ -38,11 +39,12 @@ public class AddPlaceServlet extends HttpServlet {
             System.out.println("root : " + root);
 
             //파일 저장 경로
-            String savePath = root + "static/upload/place";
+            String savePath = "static/upload/place";
 
             // 사진파일은 이 객체가 생성되는 순간 알아서 저장됨.
             MultipartRequest multipartRequest =
-                    new MultipartRequest(request, savePath, maxSize, new MyFileRenamePolicy());
+                    new MultipartRequest(request, root + savePath,
+                            maxSize, new MyFileRenamePolicy());
             // 저장될 파일이름
             ArrayList<String> fileName = new ArrayList<>();
 
@@ -68,6 +70,7 @@ public class AddPlaceServlet extends HttpServlet {
             }
             System.out.println("fileName: " + fileName);
 
+
             // 파일건은 위로 끝. 이제 다른 값들 가져오기.
             // 회사명
             String companyName = multipartRequest.getParameter("companyName");
@@ -76,7 +79,7 @@ public class AddPlaceServlet extends HttpServlet {
             // 주소
             String addr = multipartRequest.getParameter("addr");
             // 사이트 주소
-            String  website = multipartRequest.getParameter("website");
+            String website = multipartRequest.getParameter("website");
             // 업체소개
             String intro = multipartRequest.getParameter("intro");
             // 영업시간
@@ -101,20 +104,45 @@ public class AddPlaceServlet extends HttpServlet {
             inputPC.setIntro(intro);
             inputPC.setService_time(serviceTime);
             inputPC.setRoom_size(roomSize);
+            System.out.println("roomSize: " + roomSize);
 
             // 공간대여업체 광고게제 관련 객체
-            CompanyAds inputAds  = new CompanyAds();
+            CompanyAds inputAds = new CompanyAds();
             inputAds.setStartDate(startDate);
             inputAds.setEndDate(endDate);
 
             int insert_company_result = new PlaceService().insertPlaceCompany(inputPC);
+            System.out.println("insert_company_result: " + insert_company_result);
             // 들어가짐? 그럼 바로 광고게제정보도 넣는다
             if (insert_company_result > 0) {
                 // 위에 커밋된 대여업체 바로 불러온다
-                PlaceCompany company = new PlaceService().getLatestInserted();
-                // int insert_ads_result = new PlaceService().
-            }
+                // TODO: 2020-02-24 이거 당장 조치해야함!! select 문 pk 안넣음 
+                PlaceCompany company = new PlaceService().selectPlaceCompany(insert_company_result);
+                int insert_ads_result = new PlaceService().insertAds(company, inputAds);
+                System.out.println("insert_ads_result: " + insert_ads_result);
+                // 광고정보 넣는거 끝났으면 이제 이미지 추가
 
+                // db 에 추가될 파일 목록
+                ArrayList<Image> fileList = new ArrayList<>();
+                // 전송순서의 역으로 하나하나 불러온다.
+                for (int i = fileName.size() - 1; i <= 0; i++) {
+                    Image image = new Image();
+                    image.setImageRoute(savePath);
+                    image.setImageName(fileName.get(i));
+                    image.setImageType("PLACE_COMPANY");
+                    image.setImageFkPk(company.getCompany_pk());
+                }
+                // 위에 insert_ads_result 가 거짓이면 뭐가나올지 안정하긴 했는데... 어 음...
+
+                int insert_pics_result = new PlaceService().insertImageList(fileList);
+                System.out.println("insert_pics_result: " + insert_pics_result);
+                if (insert_pics_result > 0) {
+                    // 여기까지 왔으면 다 성공한거임. 업체 목록으로 옮긴다.
+                    // response.sendRedirect(request.getContextPath() + "/");
+                    System.out.println("success!!");
+                }
+
+            }
         }
     }
 }

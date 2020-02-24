@@ -97,9 +97,9 @@
                 <tr>
                     <td>공간규모 선택 :</td>
                     <td>
-                        <input type="checkbox" name="size" value="big" id="big">&nbsp;<label for="big">대규모</label>
-                        <input type="checkbox" name="size" value="big" id="small">&nbsp;<label for="small">소규모</label>
-                        <input type="checkbox" name="size" value="big" id="one">&nbsp;<label for="one">일대일</label>
+                        <input type="checkbox" name="size" value="3" id="big">&nbsp;<label for="big">대규모</label>
+                        <input type="checkbox" name="size" value="2" id="small">&nbsp;<label for="small">소규모</label>
+                        <input type="checkbox" name="size" value="1" id="one">&nbsp;<label for="one">일대일</label>
                     </td>
                 </tr>
                 <tr>
