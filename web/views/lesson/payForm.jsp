@@ -416,6 +416,7 @@ input[type="button"], input[type="reset"] {
 	            			}
 	        			});
 	    				var msg = data.page;
+						location.href = "/hobbyist/index.jsp";
 	    
   	  			} else {
   	 					var msg = '결제에 실패하였습니다.';
@@ -423,7 +424,6 @@ input[type="button"], input[type="reset"] {
  	  			}
   	  				alert(msg);
 		  		});
-					location.href = "/hobbyist/index.jsp";
 	    	}	//100포인트 이상일때 else문 끝
  	   
      	} else {		//checked if문 끝
