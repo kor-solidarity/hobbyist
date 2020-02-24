@@ -30,8 +30,8 @@
         }
         #contents {
             border: 1.2px solid darkolivegreen;
-            width: 600px;
-            height: 500px;
+            width: 700px;
+            height: 600px;
             margin: auto;
         }
         #memberName, #memberId {
@@ -64,10 +64,22 @@
         }
         input {
             margin-top: 20px;
+            height:30px;
         }
         #memberId {
         	margin-left:9px;
         }
+        
+         .btns2 {
+       		width:70px;
+       		font-size: 13px;
+       		background:whitesmoke;
+       		border:1px solid gray;
+       		height:30px;
+       		text-align:center;
+       		line-height:30px;
+       		cursor:pointer;
+       }
 
     </style>
 </head>
@@ -83,9 +95,10 @@
             <br><br>
             <label id="nameLabel">이름</label>&nbsp; <input type="text" name="memberName" id="memberName" maxlength="10" size="22">
             <br><br>
-            <label id="phoneLabel">휴대전화</label>&nbsp;&nbsp; <input type="text" class=tel name="tel1" id="tel1" maxlength="3" size="5"> - <input type="text" class=tel name="tel2" id="tel2" maxlength="4" size="5"> - <input type="text" class=tel name="tel3" id="tel3" maxlength="4" size="5"> 
+            <label id="phoneLabel">휴대전화</label>&nbsp;&nbsp; <input type="text" class=tel name="tel1" id="tel1" maxlength="3" size="5"> - <input type="text" class=tel name="tel2" id="tel2" maxlength="4" size="5"> - <input type="text" class=tel name="tel3" id="tel3" maxlength="4" size="5">&nbsp;<div class="btns2" id="phoneBtn">인증하기</div> 
             <br><br>
-           
+           	<label id="numLabel">인증번호</label>&nbsp;<input type="text" id="num" name="num" placeholder="인증번호를 입력해주세요" size="29">&nbsp;<div class="btns2" id="checkBtn">인증확인</div>
+           	<br><br>
             <button class="btns" id="submit">비밀번호 재설정</button>
         </form>
     </div>

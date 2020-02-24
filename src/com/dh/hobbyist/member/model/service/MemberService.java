@@ -71,16 +71,7 @@ public class MemberService {
 		return artistList;
 	}
 	
-	//회원 정보 수정 목록 메소드(재선)
-	   public List<Member> UpdateMemberList(){
-	      Connection con = getConnection();
-	      
-	      List<Member> UpdateMemberList = new MemberDao().UpdateMemberList(con);
-	      
-	      close(con);
-	      
-	      return UpdateMemberList;
-	   }
+	
 	   
 	//아이디 찾기 메소드(유승)   
 	public Member findId(Member member) {

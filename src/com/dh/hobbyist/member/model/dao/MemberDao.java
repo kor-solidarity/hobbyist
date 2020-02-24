@@ -212,37 +212,7 @@ public class MemberDao {
 		return artistList;
 	}
 	
-	 //회원정보 수정 메소드 (재선)
-	   public List<Member> UpdateMemberList(Connection con) {
-	      Statement stmt =null;
-	      ResultSet rset =null;
-	      List<Member> memberList = null;
-	      
-	      String query = prop.getProperty("updateMemberList");
-	      
-	      try {
-	         stmt = con.createStatement();
-	         rset = stmt.executeQuery(query);
-	         
-	         memberList = new ArrayList<Member>();
-	         
-	         while(rset.next()) {
-	            Member m = new Member();
-	            m.setMemberId(rset.getString("MEMBER_ID"));
-	            m.setMemberName(rset.getString("MEMBER_NAME"));
-	            m.setEmail(rset.getString("MEMBER_EMAIL"));
-	            m.setPhone(rset.getString("MEMBER_PHONE"));
-	            m.setPhone(rset.getString("MEMBER_PWD"));
-	            memberList.add(m);
-	         }
-	      }catch(SQLException e) {
-	         e.printStackTrace();
-	      }finally {
-	         close(stmt);
-	         close(rset);
-	      }
-	      return memberList;   
-	   }
+	 
 	 
 	//아이디 찾기 메소드(유승)
 	public Member findId(Connection con, Member member) {
