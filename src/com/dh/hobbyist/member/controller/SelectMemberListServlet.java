@@ -62,6 +62,7 @@ public class SelectMemberListServlet extends HttpServlet {
 		}else {
 			page = "views/common/errorPage.jsp";
 			request.setAttribute("msg", "회원정보를 불러올수 없습니다.");
+			request.getRequestDispatcher(page).forward(request, response);
 		}
 		
 		

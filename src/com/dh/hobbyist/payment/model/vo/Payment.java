@@ -1,6 +1,7 @@
 package com.dh.hobbyist.payment.model.vo;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 public class Payment {
 	private int paymentCode;			// 시퀀스
@@ -9,7 +10,7 @@ public class Payment {
 	private int payCost;				// 결제금액
 	private String payMethod = "card";	// 결제방식 기본이 카드 
 	private String impNum;				// 결제 고유 번호
-	private Date payDate;				// 결제일
+	private Timestamp payDate;				// 결제일
 	private int scheduleCode;			// 수업일정 코드
 	private int artistCode;				// 아티스트 코드
 	private int memberCode;				// 결제한 회원코드
@@ -17,7 +18,7 @@ public class Payment {
 	public Payment() {}
 
 	public Payment(int paymentCode, int usingPoint, int givePoint, int payCost, String payMethod, String impNum,
-			Date payDate, int scheduleCode, int artistCode, int memberCode) {
+			Timestamp payDate, int scheduleCode, int artistCode, int memberCode) {
 		super();
 		this.paymentCode = paymentCode;
 		this.usingPoint = usingPoint;
@@ -79,11 +80,11 @@ public class Payment {
 		this.impNum = impNum;
 	}
 
-	public Date getPayDate() {
+	public Timestamp getPayDate() {
 		return payDate;
 	}
 
-	public void setPayDate(Date payDate) {
+	public void setPayDate(Timestamp payDate) {
 		this.payDate = payDate;
 	}
 
