@@ -98,7 +98,7 @@
 				</tr>
 				<tr>
 					<td colspan="2">
-						<input type="text" name="sugTitle" placeholder="제목을 입력해주세요" style="width:600px; height:20px;">
+						<input type="text" name="sugTitle" placeholder="제목을 입력해주세요 (15자 이내)" maxlength="15" style="width:600px; height:20px;">
 					</td>
 				</tr>
 				<tr>
@@ -106,7 +106,7 @@
 				</tr>
 				<tr>
 					<td colspan="2">
-						<textarea name="sugContent" rows="5" cols="40" style="width:598px; height:450px; resize:none;" placeholder="내용을 입력해주세요 (200자 이상)"></textarea>
+						<textarea name="sugContent" rows="5" cols="40" style="width:598px; height:450px; resize:none;" placeholder="내용을 입력해주세요"></textarea>
 					</td>
 				</tr>
 			</table>
