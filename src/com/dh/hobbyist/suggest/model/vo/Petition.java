@@ -18,12 +18,16 @@ public class Petition implements java.io.Serializable {
 	private int views;
 	private int petitionedMember;
 	private int categoryCode;
+	private String categoryName;
+	private String memberName;
+	private int categoryParentCode;
 	
 	public Petition() {}
 
 	public Petition(int petitionCode, String numOfStudents, int cost, int numOfLessons, String location,
 			Date requestedDate, String requestedDays, String requestTime, String title, String contents,
-			Date petitionedTime, int wishlisted, int views, int petitionedMember, int categoryCode) {
+			Date petitionedTime, int wishlisted, int views, int petitionedMember, int categoryCode, String categoryName,
+			String memberName, int categoryParentCode) {
 		super();
 		this.petitionCode = petitionCode;
 		this.numOfStudents = numOfStudents;
@@ -40,6 +44,9 @@ public class Petition implements java.io.Serializable {
 		this.views = views;
 		this.petitionedMember = petitionedMember;
 		this.categoryCode = categoryCode;
+		this.categoryName = categoryName;
+		this.memberName = memberName;
+		this.categoryParentCode = categoryParentCode;
 	}
 
 	public int getPetitionCode() {
@@ -162,6 +169,30 @@ public class Petition implements java.io.Serializable {
 		this.categoryCode = categoryCode;
 	}
 
+	public String getCategoryName() {
+		return categoryName;
+	}
+
+	public void setCategoryName(String categoryName) {
+		this.categoryName = categoryName;
+	}
+
+	public String getMemberName() {
+		return memberName;
+	}
+
+	public void setMemberName(String memberName) {
+		this.memberName = memberName;
+	}
+
+	public int getCategoryParentCode() {
+		return categoryParentCode;
+	}
+
+	public void setCategoryParentCode(int categoryParentCode) {
+		this.categoryParentCode = categoryParentCode;
+	}
+
 	@Override
 	public String toString() {
 		return "Petition [petitionCode=" + petitionCode + ", numOfStudents=" + numOfStudents + ", cost=" + cost
@@ -169,9 +200,9 @@ public class Petition implements java.io.Serializable {
 				+ ", requestedDays=" + requestedDays + ", requestTime=" + requestTime + ", title=" + title
 				+ ", contents=" + contents + ", petitionedTime=" + petitionedTime + ", wishlisted=" + wishlisted
 				+ ", views=" + views + ", petitionedMember=" + petitionedMember + ", categoryCode=" + categoryCode
-				+ "]";
+				+ ", categoryName=" + categoryName + ", memberName=" + memberName + ", categoryParentCode="
+				+ categoryParentCode + "]";
 	}
 
-	
 	
 }
