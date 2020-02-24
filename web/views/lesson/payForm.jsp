@@ -211,7 +211,7 @@ input[type="button"], input[type="reset"] {
 					<td colspan="3" style="color: gray; font-size: 16px; line-height: 20px;">(!) 3000 point 이상의 포인트만 사용이 가능합니다.</td>
 				</tr>
 				<tr>
-					<td colspan="3" style="color: gray; font-size: 16px; line-height: 25px;">100point 단위 사용가능</td>
+					<td colspan="3" style="color: gray; font-size: 16px; line-height: 23px;">100point 단위 사용가능</td>
 				</tr>
 				<tr>
 					<td colspan="2">보유 포인트 :</td>
@@ -223,7 +223,7 @@ input[type="button"], input[type="reset"] {
 				</tr>
 				<tr></tr>
 				<tr>
-					<td colspan="3" style="color: gray; font-size: 16px;">(!) 포인트를 제외한 결제금액의 1%가 적립됩니다.</td>
+					<td colspan="3" style="color: gray; font-size: 16px; line-height: 23px;">(!) 포인트를 제외한 결제금액의 1%가 적립되며 적립은 수업일정이 끝난 후 지급됩니다.</td>
 				</tr>
 				<tr>
 					<td colspan="2">적립 예정 포인트 :</td>
@@ -231,7 +231,7 @@ input[type="button"], input[type="reset"] {
 				</tr>
 				<tr>
 					<td colspan="2">결제 후 잔여 포인트 :</td>
-					<td style="font-weight: bold;"><label id="pointResult">3000</label> point</td>
+					<td style="font-weight: bold;"><label id="afterPoint">3000</label> point</td>
 				</tr>
 			</table>
 			<table id="howToPay">
@@ -334,91 +334,97 @@ input[type="button"], input[type="reset"] {
 	<%@ include file="../common/footer.jsp"%>
 
 	<script>
-
-		$("#usingPoint").keyup(function(){
-		
-    		var lessonMoney = Number($("#lessonMoney").text());	//수업료
- 		  	var myPoint = Number($("#myPoint").text());			//보유 포인트
-    		var usingPoint = Number($("#usingPoint").val());	//사용 포인트
-    		
-    		$("#givePoint").text(Math.round((lessonMoney - usingPoint) / 100));	//적립예정 포인트
-    		$("#pointResult").text(myPoint - usingPoint);		//잔여포인트
-    		$("#usingPointResult").text(usingPoint);			//최종 사용 포인트
-    		$("#moneyResult").text(lessonMoney - usingPoint);	//최종 결제 금액
+	   	$("#usingPoint").keyup(function(){
+			var lessonMoney = Number($("#lessonMoney").text());	//수업료
+	 	  	var myPoint = Number($("#myPoint").text());			//보유 포인트
+	    	var usingPoint = Number($("#usingPoint").val());	//사용 포인트
+	    	var givePoint = Number($("#givePoint").text());
+  		  
+	    	$("#givePoint").text(Math.round((lessonMoney - usingPoint) * 0.01));	//적립예정 포인트
+    			$("#afterPoint").text(myPoint - usingPoint);		//잔여포인트
+    			$("#usingPointResult").text(usingPoint);			//최종 사용 포인트
+    			$("#moneyResult").text(lessonMoney - usingPoint);	//최종 결제 금액
     	
-    		if(Number($("#pointResult").text()) < 0) {
-    			alert("안됩니다.");
-    			$("#usingPoint").val("");
-    			$("#usingPointResult").text("");
-    			$("#pointResult").text(myPoint);
-    			$("#moneyResult").text(lessonMoney);
-    			$("#givePoint").text("");
+    			if(Number($("#afterPoint").text()) < 0) {
+    				alert("안됩니다.");
+    				$("#usingPoint").val("");
+    				$("#givePoint").text(lessonMoney * 0.01);
+    				$("#usingPointResult").text("");
+    				$("#afterPoint").text(myPoint);
+  	 	 			$("#moneyResult").text(lessonMoney);
     			
-  	  		}
+  		  		}
     	
 		});
 	
     $("#check_module").click(function() {
     	//결제 정보 불러오기
     	var moneyResult = Number($("#moneyResult").text());		//최종 결제 금액
-    	var givePoint = Number($("#givePoint").text());
-    	var usingPoint = Number($("#usingPoint").text());
+    	var givePoint = Number($("#givePoint").text());			//지급 예정 금액
+    	var usingPoint = Number($("#usingPoint").val());		//사용 금액
     	
    	  	if($("#payTermsBox").prop("checked") && $("#refundTermsBox").prop("checked")/*  && loginUser != null */) {		//로그인 유저가 널이 아닐때 추가하기!!
     	  
-  			var IMP = window.IMP; // 생략가능
-  	 		IMP.init('imp67942527');	// 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
+	    	if(usingPoint < 100) {
+	    		alert("100포인트 이상 사용 가능합니다.");
+	    	}else {
+	  			var IMP = window.IMP; // 생략가능
+  		 		IMP.init('imp67942527');	// 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
  	   
-  	 		IMP.request_pay({
- 	 		pg: 'inicis',
- 	 		pay_method : 'card',
-  	 		merchant_uid: 'merchant_' + new Date().getTime(),	/*	merchant_uid에 경우	https://docs.iamport.kr/implementation/payment	*/
- 	 		name : '수업제목',
- 	 		usingPoint: usingPoint,	//사용포인트
- 	 		givePoint: givePoint,	//지금 포인트
- 	  		amount: moneyResult,	//가격
-	  		buyer_email: 'iamport@siot.do',	
-	  		buyer_name: '이지호',
- 	  		buyer_tel: '010-1234-5678',
- 	  		buyer_addr: '서울특별시 강남구 삼성동',
-  	  		buyer_postcode: '123-456',
- 	  
-  	  		/* 모바일 결제시, 결제가 끝나고 랜딩되는 URL을 지정
- 	  		(카카오페이, 페이코, 다날의 경우는 필요없음. PC와 마찬가지로 callback함수로 결과가 떨어짐 */
- 	  		m_redirect_url: 'https://www.yourdomain.com/payments/complete'
+  		 		IMP.request_pay({
+ 		 		pg: 'inicis',
+ 		 		pay_method : 'card',
+ 	 	 		merchant_uid: 'merchant_' + new Date().getTime(),	/*	merchant_uid에 경우	https://docs.iamport.kr/implementation/payment	*/
+ 		 		name : '수업제목',
+ 		 		usingPoint: usingPoint,	//사용포인트
+ 		 		givePoint: givePoint,	//지금 포인트
+ 		  		amount: moneyResult,	//가격
+		  		buyer_email: 'iamport@siot.do',	
+		  		buyer_name: '이지호',
+ 		  		buyer_tel: '010-1234-5678',
+ 		  		buyer_addr: '서울특별시 강남구 삼성동',
+  	  			buyer_postcode: '123-456',
+ 	 	 
+  	  			/* 모바일 결제시, 결제가 끝나고 랜딩되는 URL을 지정
+ 	  			(카카오페이, 페이코, 다날의 경우는 필요없음. PC와 마찬가지로 callback함수로 결과가 떨어짐 */
+ 	  			m_redirect_url: 'https://www.yourdomain.com/payments/complete'
 	    
-	  	}, function (rsp) {
+			  	}, function (rsp) {
 	  		
-  	  		if (rsp.success) {
- 	    		var msg = '결제가 완료되었습니다.';
+	  	  			if (rsp.success) {
+ 		 	  	 		var msg = '결제가 완료되었습니다.';
  	    		
-	    		msg += '고유ID : ' + rsp.imp_uid;	
-	    		msg += '결제 금액 : ' + rsp.paid_amount;
-	    		
-	    		console.log(rsp.imp_uid);
-	    		console.log(rsp.name);
-	    		$.ajax({
-	            	url: "<%= request.getContextPath()%>/payment.pa", // 가맹점 서버
-	            	method: "POST",
-	            	data: {
-	            		impUid : rsp.imp_uid,
-			    		merchantUid : rsp.merchant_uid,
-			    		productName : rsp.name,
-			    		price : rsp.paid_amount,
-			    		buyerName : rsp.buyer_name,
-			    		givePoint : givePoint
-	            	}
-	            	
-	        	});
-	    	
-  	  	} else {
-  	 			var msg = '결제에 실패하였습니다.';
-  				msg += '에러내용 : ' + rsp.error_msg;
- 	  	}
-  	  
-  	  		alert(msg);
-  	  
-  		});
+		    			msg += '고유ID : ' + rsp.imp_uid;	
+		    			msg += '결제 금액 : ' + rsp.paid_amount;
+	    			
+		    			console.log(rsp.imp_uid);
+		    			console.log(rsp.name);
+	    				$.ajax({
+	   	 	  	    	  	url: "<%= request.getContextPath()%>/payment.pa", // 가맹점 서버
+	        		    	method: "POST",
+	            			data: {
+			    				memberCode : <%=loginMember.getMemberCode()%>,		//회원코드
+			    				aritistCode : "dd",
+	         	  	 			impUid : rsp.imp_uid,				//고유번호
+			    				merchantUid : rsp.merchant_uid,		//머천트 임의 고유번호
+			    				productName : rsp.name,				//상품명
+			    				price : rsp.paid_amount,			//가격
+			    				usingPoint: usingPoint,
+			  		  			givePoint : givePoint,				//적립예정 포인트
+			  		  			payDate : rsp.paid_at				//결제 일시
+			  		  			
+	            			}
+	        			});
+	    				var msg = data.page;
+	    
+  	  			} else {
+  	 					var msg = '결제에 실패하였습니다.';
+  						msg += '에러내용 : ' + rsp.error_msg;
+ 	  			}
+  	  				alert(msg);
+		  		});
+					location.href = "/hobbyist/index.jsp";
+	    	}	//100포인트 이상일때 else문 끝
  	   
      	} else {		//checked if문 끝
     	  
