@@ -28,7 +28,7 @@ public class CommonFilter implements Filter {
 		HttpServletRequest hRequest = (HttpServletRequest) request;
 		if(hRequest.getMethod().equalsIgnoreCase("post")) {
 			hRequest.setCharacterEncoding("UTF-8");
-			//System.out.println("인코딩 완료");
+			System.out.println("인코딩 완료");
 		}
 		
 		chain.doFilter(request, response);

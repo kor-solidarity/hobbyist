@@ -30,7 +30,7 @@ public class PlaceService {
         return result;
     }
 
-    // 마지막으로 추가된 업체 가져오기 (은석)
+    // 업체 가져오기 (은석)
     public PlaceCompany selectPlaceCompany(int pk) {
         Connection con = getConnection();
 
@@ -71,12 +71,17 @@ public class PlaceService {
             //
             result += new PlaceDao().insertImage(con, fileList.get(i), isMain);
         }
+        System.out.println("result: " + result);
+        System.out.println("fileList: " + fileList.size());
 
         if (result == fileList.size()) {
             commit(con);
+            System.out.println("commit");
             result = 1;
         } else {
             rollback(con);
+            System.out.println("rollback");
+            result = 0;
         }
         return result;
     }
