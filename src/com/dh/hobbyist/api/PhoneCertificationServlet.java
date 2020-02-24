@@ -33,11 +33,11 @@ public class PhoneCertificationServlet extends HttpServlet {
 			
 			System.out.println(phone);
 			
-			String randomVal = new Coolsms().sms(phone);
+			//String randomVal = new Coolsms().sms(phone);
 			
-			//String randomVal = phone;
+			String randomVal = phone;
 			
-		
+			System.out.println("인증번호 : " + randomVal);
 			
 			response.setContentType("application/json");
 			response.setCharacterEncoding("UTF-8");

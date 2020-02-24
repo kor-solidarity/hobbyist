@@ -18,13 +18,13 @@ public class Coolsms {
 	    
 	    int random = new Random().nextInt(8998)+1001;
 	
-	    String random1 = Integer.toString(random);
+	    String randomVal = Integer.toString(random);
 	    
 	    HashMap<String, String> params = new HashMap<String, String>();
 	    params.put("to", phone); // 수신번호
 	    params.put("from", "01090692522"); // 발신번호
 	    params.put("type", "SMS"); // Message type ( SMS, LMS, MMS, ATA )
-	    params.put("text", "[hobbyist] 인증번호 [" + random1 + "] 를 입력해주세요."); // 문자내용    
+	    params.put("text", "[hobbyist] 인증번호 [" + randomVal + "] 를 입력해주세요."); // 문자내용    
 	    params.put("app_version", "JAVA SDK v1.2"); // application name and version
 	
 	    
@@ -36,6 +36,6 @@ public class Coolsms {
 	      System.out.println(e.getCode());
 	    }
 	    
-	    return random1;
+	    return randomVal;
 	  }
 }

@@ -12,20 +12,26 @@ import javax.servlet.http.HttpServletResponse;
 import com.dh.hobbyist.member.model.service.MemberService;
 
 
-@WebServlet("/idCheck.me")
-public class IdCheckServlet extends HttpServlet {
+@WebServlet("/phoneCheck.me")
+public class PhoneCheckServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     
-    public IdCheckServlet() {
+    public PhoneCheckServlet() {
         super();
     }
 
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String memberId = request.getParameter("memberId");
+		String tel1 = request.getParameter("tel1");
+		String tel2 = request.getParameter("tel2");
+		String tel3 = request.getParameter("tel3");
 		
-		int result = new MemberService().idCheck(memberId);
+		String phone = tel1 + "-" + tel2 + "-" + tel3;
+		
+		System.out.println("(Phone Check) phone : " + phone);
+		
+		int result = new MemberService().phoneCheck(phone);
 		
 		String text = "";
 		if(result > 0) {
@@ -33,10 +39,12 @@ public class IdCheckServlet extends HttpServlet {
 		}else {
 			text = "success";
 		}
+		
 		PrintWriter out = response.getWriter();
 		out.print(text);
 		out.flush();
 		out.close();
+		
 	}
 
 	
