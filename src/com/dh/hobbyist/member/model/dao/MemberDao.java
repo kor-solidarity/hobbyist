@@ -295,7 +295,7 @@ public class MemberDao {
 				findMember = new Member();
 				
 				findMember.setMemberId(rset.getString("MEMBER_ID"));
-				findMember.setMemberId(rset.getString("MEMBER_PWD"));
+				/*findMember.setMemberId(rset.getString("MEMBER_PWD"));*/
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -314,6 +314,7 @@ public class MemberDao {
 		
 		String query = prop.getProperty("setPassword");
 		
+		
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, memberPwd);
@@ -327,6 +328,34 @@ public class MemberDao {
 			close(pstmt);
 		}
 		
+		return result;
+	}
+	
+	//휴대전화 중복 체크(유승)
+	public int phoneCheck(Connection con, String phone) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String query = prop.getProperty("phoneCheck");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, phone);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				result = rset.getInt(1);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+			close(rset);
+		}
+
 		return result;
 	}
 	

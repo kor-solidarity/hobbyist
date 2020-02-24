@@ -114,6 +114,17 @@ public class MemberService {
 		
 		return result;
 	}
+	//휴대전화 중복 체크(유승)
+	public int phoneCheck(String phone) {
+		Connection con = getConnection();
+		
+		int result = new MemberDao().phoneCheck(con, phone);
+		
+		close(con);
+		
+		return result;
+	}
 	   
 
+	
 }
