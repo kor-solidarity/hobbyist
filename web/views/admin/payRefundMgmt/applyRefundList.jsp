@@ -300,6 +300,7 @@
 		});
 		
 		function approve() {
+			
 			alert("환불 승인 하시겠습니까?");
 		}
 		

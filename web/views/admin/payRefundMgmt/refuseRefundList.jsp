@@ -222,7 +222,7 @@
    	       		</tr>
    	       		<tr>
    	       			<td>진행회차</td>
-   	       			<td>dgd</td>
+   	       			<td></td>
    	       		</tr>
    	       		<tr>
    	       			<td>잔여회차</td>

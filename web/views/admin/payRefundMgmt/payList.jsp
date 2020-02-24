@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
  <style>
  
  	section {
@@ -125,7 +126,7 @@
 				<table id="searchT">
 					<tr>
 						<td style="text-align: left; vertical-align: bottom;">
-							<label style="font-weight: bold;" onclick="goPayList();">결제 내역</label> &nbsp; &nbsp; 
+							<label id="paymentListL" style="font-weight: bold;" onclick="goPayList();">결제 내역</label> &nbsp; &nbsp; 
 							<label style="font-weight: bold; color: gray;">환불 내역</label>&nbsp; &nbsp; 
 							<label style="font-weight: bold; color: gray;">반려 내역</label>
 						</td>
@@ -142,21 +143,52 @@
 			
 			<!-- 정보 추가되는 본문 테이블 -->
 			<div id="infoArea">
-				<table style="width: 100%;">
+				<table id="infoT" style="width: 100%;">
 					<!-- 테이블 첫번째 줄은 아이디, 비밀번호 등 조회할 내용 제목이다. background(#4E4E4E), font-color(white) 색 다르게 지정 -->
 					<tr>
-						<th style="width: 8%;">결제코드</th>
-						<th style="width: 13%;">수업일정 코드</th>
-						<th style="width: 12%;">아이디</th>
-						<th style="width: 10%;">이름</th>
-						<th style="width: 15%;">전화번호</th>
-						<th style="width: 12%;">담당 아티스트</th>
-						<th style="width: 12%;">결제 금액</th>
+						<th style="width: 7%;">결제코드</th>
+						<th style="width: 10%;">수업일정 코드</th>
+						<th style="width: 8%;">회원코드</th>
+						<th style="width: 9%;">이름</th>
+						<th style="width: 11%;">전화번호</th>
+						<th style="width: 11%;">결제 금액</th>
+						<th style="width: 9%;">사용 포인트</th>
+						<th style="width: 9%;">지급 포인트</th>
+						<th style="width: 15%;">주문번호</th>
 						<th style="width: 15%;">결제일</th>
 					</tr>
 				</table>
 			</div>
 		</article>
 	</section>
+	<script>
+		$(function() {
+			$("#paymentListL").click(function() {
+				$.ajax({
+					url: "/hobbyist/selectPaymentList.pa",
+					type: 'post',
+					success: function(data) {
+						$table = $("#infoT");
+						$table.html("");
+						
+						var $tr = $("<tr>");
+						
+						$tr.append('<th style="width: 7%;">결제코드</th>' +
+									'<th style="width: 10%;">수업일정 코드</th>' +
+									'<th style="width: 8%;">회원코드</th>' +
+									'<th style="width: 9%;">이름</th>' +
+									'<th style="width: 11%;">전화번호</th>' +
+									'<th style="width: 11%;">결제 금액</th>' +
+									'<th style="width: 9%;">사용 포인트</th>' +
+									'<th style="width: 19%;">적립예정 포인트</th>' +
+									'<th style="width: 15%;">주문번호</th>' +
+									'<th style="width: 15%;">결제일</th>');
+						
+						$table.append($tr);
+					}
+				});
+			});
+		})
+	</script>
 </body>
 </html>

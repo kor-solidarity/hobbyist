@@ -415,14 +415,14 @@ input[type="button"], input[type="reset"] {
 			  		  			
 	            			}
 	        			});
-	    				var msg = data.page;
+	    				var msg = "결제가 완료되었습니다.";
+	    				alert(msg);
 						location.href = "/hobbyist/index.jsp";
-	    
   	  			} else {
   	 					var msg = '결제에 실패하였습니다.';
   						msg += '에러내용 : ' + rsp.error_msg;
+	  	  				alert(msg);
  	  			}
-  	  				alert(msg);
 		  		});
 	    	}	//100포인트 이상일때 else문 끝
  	   

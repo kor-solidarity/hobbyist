@@ -146,8 +146,7 @@
 				<table id="infoT" style="width: 100%; border-collapse: collapse; text-align: center;">
 					<!-- 테이블 첫번째 줄은 아이디, 비밀번호 등 조회할 내용 제목이다. background(#4E4E4E), font-color(white) 색 다르게 지정 -->
 					<tr>
-						<th id="dd" style="width: 8%;">회원코드<th>
-						
+						<th style="width: 8%;">회원코드</th>
 						<th style="width: 15%;">아이디</th>
 						<th style="width: 10%;">이름</th>
 						<th style="width: 15%;">전화번호</th>
@@ -190,7 +189,14 @@
 						
 						var $tr = $("<tr>");
 						
-						$tr.append('<th style="width: 8%;">회원코드</th><th style="width: 15%;">아이디</th><th style="width: 10%;">이름</th><th style="width: 15%;">전화번호</th><th style="width: 20%;">이메일</th><th style="width: 8%;">아티스트 </th><th style="width: 7%;">경고</th><th style="width: 17%;">가입일</th>');  
+						$tr.append('<th style="width: 8%;">회원코드</th>' +
+									'<th style="width: 15%;">아이디</th>' +
+									'<th style="width: 10%;">이름</th>' +
+									'<th style="width: 15%;">전화번호</th>' +
+									'<th style="width: 20%;">이메일</th>' +
+									'<th style="width: 8%;">아티스트 </th>' +
+									'<th style="width: 7%;">경고</th>' +
+									'<th style="width: 17%;">가입일</th>');  
 						
 						$table.append($tr);
 						

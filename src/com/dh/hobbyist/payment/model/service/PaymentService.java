@@ -1,6 +1,7 @@
 package com.dh.hobbyist.payment.model.service;
 
 import java.sql.Connection;
+import java.util.List;
 
 import com.dh.hobbyist.payment.model.dao.PaymentDao;
 import com.dh.hobbyist.payment.model.vo.Payment;
@@ -22,6 +23,16 @@ public class PaymentService {
 		close(con);
 		
 		return result;
+	}
+
+	public List<Payment> selectList() {
+		Connection con = getConnection();
+		
+		List<Payment> payList = new PaymentDao().selectList(con);
+		
+		close(con);
+		
+		return payList;
 	}
 
 }
