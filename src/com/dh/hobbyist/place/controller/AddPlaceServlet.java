@@ -91,7 +91,34 @@ public class AddPlaceServlet extends HttpServlet {
             // 영업시간
             String serviceTime = multipartRequest.getParameter("serviceTime");
             // 공간규모
-            String roomSize = multipartRequest.getParameter("roomSize");
+            String roomSize1 = multipartRequest.getParameter("roomSize1");
+            String roomSize2 = multipartRequest.getParameter("roomSize2");
+            String roomSize3 = multipartRequest.getParameter("roomSize3");
+
+            System.out.println("roomSize1: " + roomSize1);
+            System.out.println("roomSize2: " + roomSize2);
+            System.out.println("roomSize3: " + roomSize3);
+
+            String roomSize = "";
+
+            if (roomSize1 != null) {
+                roomSize += "1";
+            }
+            if (roomSize2 != null) {
+                if (roomSize.length() > 0) {
+                    roomSize += ",2";
+                } else {
+                    roomSize += "2";
+                }
+            }
+            if (roomSize3 != null) {
+                if (roomSize.length() > 0) {
+                    roomSize += ",3";
+                } else {
+                    roomSize += "3";
+                }
+            }
+
 
             // 위 까지가 PLACE_COMPANY 테이블
             // 다음은 COMPANY_ADS table
@@ -144,13 +171,19 @@ public class AddPlaceServlet extends HttpServlet {
                 }
                 // 위에 insert_ads_result 가 거짓이면 뭐가나올지 안정하긴 했는데... 어 음...
                 System.out.println("fileList: " + fileList);
-                int insert_pics_result = new PlaceService().insertImageList(fileList);
+                int insert_pics_result = 1;
+                if (fileList.size() > 0) {
+                    insert_pics_result = new PlaceService().insertImageList(fileList);
+                }
                 System.out.println("insert_pics_result: " + insert_pics_result);
                 if (insert_pics_result > 0) {
                     // 여기까지 왔으면 다 성공한거임. 업체 목록으로 옮긴다.
                     // response.sendRedirect(request.getContextPath() + "/");
-                    System.out.println("success!!");
+
+                }else {
+
                 }
+
 
             }
         }

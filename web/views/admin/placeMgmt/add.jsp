@@ -96,10 +96,10 @@
                     <tr>
                         <td>공간규모 선택 :</td>
                         <td>
-                            <input type="checkbox" name="roomSize" value="3" id="big">&nbsp;<label for="big">대규모</label>
-                            <input type="checkbox" name="roomSize" value="2" id="small">&nbsp;<label
+                            <input type="checkbox" name="roomSize3" value="3" id="big">&nbsp;<label for="big">대규모</label>
+                            <input type="checkbox" name="roomSize2" value="2" id="small">&nbsp;<label
                                 for="small">소규모</label>
-                            <input type="checkbox" name="roomSize" value="1" id="one">&nbsp;<label for="one">일대일</label>
+                            <input type="checkbox" name="roomSize1" value="1" id="one">&nbsp;<label for="one">일대일</label>
                         </td>
                     </tr>
                     <tr>
