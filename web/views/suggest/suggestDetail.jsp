@@ -3,6 +3,7 @@
 <%
 	Petition petition = (Petition) request.getAttribute("petition");
 	List<Reply> replyList = (List<Reply>) request.getAttribute("replyList");
+	
 %>
 <!DOCTYPE html>
 <html>
@@ -63,7 +64,17 @@
 	#replySelectTable {
 		width:100%;
 	}
-	
+	.box {
+		width: 70px;
+    	height: 70px; 
+   	 	border-radius: 70%;
+    	overflow: hidden;
+	}
+	.profile {
+		width:100%;
+		height:100%;
+		object-fit: cover;
+	}
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <title>hobbyist</title>
@@ -215,7 +226,7 @@
 				<td colspan="4"><hr style="border: solid 1.15px darkolivegreen;"></td>
 			</tr>
 			<tr>
-				<td colspan="4">댓글 <label><%=replyList.size() %></label></td>
+				<td colspan="4">댓글 <label id="replyCount"><%=replyList.size() %></label></td>
 			</tr>
 		</table>
 		<div class="replyArea">
@@ -242,9 +253,13 @@
          					<input type="hidden" value="<%=r.getReplyCode() %>">
          					<td rowspan="2">
          						<% if(!r.getImageRoot().equals("null/null")) { %>
-         							<img src = "<%=r.getImageRoot() %>" style="height:70px; width:70px;">
+         							<div class="box">
+	         							<img class="profile" src = "<%=r.getImageRoot() %>">
+         							</div>
          						<%} else { %>
-         							<img src = "/hobbyist/static/images/user.png" style="height:70px; width:70px;">
+         							<div class="box">
+         								<img class="profile" src = "/hobbyist/static/images/user.png">
+         							</div>
          						<%} %>
          					</td>
          					<td style="color:darkolivegreen; font-family: 'Do Hyeon', sans-serif;"><%=r.getMemberName()%></td>
@@ -277,10 +292,13 @@
    			}
    			
    			$(function() {
+   				
    				$("#addReply").click(function() {
-   					var writer = <%=loginMember.getMemberCode()%>;
+   					
+	   				var writer = <%=loginMember.getMemberCode()%>;
    					var pid = <%= petition.getPetitionCode()%>;
    					var content = $("#replyContent").val();
+   					
    					
    					$.ajax({
    						url: "/hobbyist/insertReply.sg",
@@ -293,9 +311,23 @@
    						success: function(data) {
    							var $replySelectTable = $("#replySelectTable");
    							$replySelectTable.html('');
-   							
+   							$("#replyCount").text(data.length);
+   							//console.log(data.length);
    							for(var key in data) {
-   								var $tr = $("<tr>");
+   								var str = "<tr><input type='hidden' value=" + data[key].replyCode + ">";
+   								str += "<td rowspan='2'>";
+   								if(data[key].imageRoot != "null/null") {
+   									str += "<div class='box'><img class='profile' src = " + data[key].imageRoot + "></div>";
+   								} else {
+   									str += "<div class='box'><img class='profile' src = '/hobbyist/static/images/user.png'></div>";
+   								}
+   								str += "</td><td style=" + "color:darkolivegreen; font-family: 'Do Hyeon', serif;" + ">" + data[key].memberName + "</td>";
+   								str += "<td style='width:500px;'></td>";
+   								str += "<td>" + data[key].replyDate + "</td>";
+   								str += "<td style='color:darkolivegreen;'>신고</td>";
+   								str += "</tr><tr><td colspan='4'>" + data[key].replyContent + "</td></tr>";
+   								str += "<tr><td colspan='5'><hr></td></tr>";
+   								//var $tr = $("<tr>");
    								/* var $writerTd = $("<td>").text(data[key].memberName).css("width", "100px");
    								var $contentTd = $("<td>").text(data[key].replyContent).css("width", "400px");
    								var $dateTd = $("<td>").text(data[key].replyDate).css("width", "200px");
@@ -305,7 +337,7 @@
    								$tr.append($dateTd);
    								 */
    								
-   								$replySelectTabl.append($tr);
+   								$replySelectTable.append(str);
    							} 
    						},
    						error: function(error) {

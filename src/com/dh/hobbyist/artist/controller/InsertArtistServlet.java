@@ -47,7 +47,7 @@ public class InsertArtistServlet extends HttpServlet {
 			
 			String root = request.getSession().getServletContext().getRealPath("/");
 			
-			String savePath = "web/static/upload/artist";
+			String savePath = root + "static/upload/artist";
 			
 			MultipartRequest multiRequest = 
 					new MultipartRequest(request, savePath, maxSize, "UTF-8", new MyFileRenamePolicy());
@@ -75,17 +75,20 @@ public class InsertArtistServlet extends HttpServlet {
 			ArrayList<Image> fileList = new ArrayList<Image>();
 			
 			for(int i = originFiles.size() - 1; i >= 0; i--) {
-				Image img = new Image();
-				img.setImageRoute(savePath);
-				img.setImageName(saveFiles.get(i));
-				if(i == originFiles.size() - 1) {
-					img.setImageType("아티스트증명");
-				} else {
-					img.setImageType("프로필");
+				if(saveFiles.get(i) != null) {
+					
+					Image img = new Image();
+					img.setImageRoute("/hobbyist/static/upload/artist");
+					img.setImageName(saveFiles.get(i));
+					if(i == originFiles.size() - 1) {
+						img.setImageType("profile");
+					} else {
+						img.setImageType("artistproof");
+					}
+					img.setImageFkPk(Integer.parseInt(memberPk));
+					
+					fileList.add(img);
 				}
-				img.setImageFkPk(Integer.parseInt(memberPk));
-				
-				fileList.add(img);
 			}
 			
 			//아티스트 증멸 파일 과 프로필 사진 처리
