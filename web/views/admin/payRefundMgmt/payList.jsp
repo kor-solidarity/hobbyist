@@ -82,6 +82,7 @@
  		height: 500px;
  		overflow-x: hidden;
         overflow-y: auto;
+        text-align: center;
  	}
  	
  	th {
@@ -126,7 +127,7 @@
 				<table id="searchT">
 					<tr>
 						<td style="text-align: left; vertical-align: bottom;">
-							<label id="paymentListL" style="font-weight: bold;" onclick="goPayList();">결제 내역</label> &nbsp; &nbsp; 
+							<label id="paymentListL" style="font-weight: bold;">결제 내역</label> &nbsp; &nbsp; 
 							<label style="font-weight: bold; color: gray;">환불 내역</label>&nbsp; &nbsp; 
 							<label style="font-weight: bold; color: gray;">반려 내역</label>
 						</td>
@@ -143,7 +144,7 @@
 			
 			<!-- 정보 추가되는 본문 테이블 -->
 			<div id="infoArea">
-				<table id="infoT" style="width: 100%;">
+				<table id="infoT" style="width: 100%; border-collapse: collapse;">
 					<!-- 테이블 첫번째 줄은 아이디, 비밀번호 등 조회할 내용 제목이다. background(#4E4E4E), font-color(white) 색 다르게 지정 -->
 					<tr>
 						<th style="width: 7%;">결제코드</th>
@@ -153,7 +154,6 @@
 						<th style="width: 11%;">전화번호</th>
 						<th style="width: 11%;">결제 금액</th>
 						<th style="width: 9%;">사용 포인트</th>
-						<th style="width: 9%;">지급 포인트</th>
 						<th style="width: 15%;">주문번호</th>
 						<th style="width: 15%;">결제일</th>
 					</tr>
@@ -170,7 +170,7 @@
 					success: function(data) {
 						$table = $("#infoT");
 						$table.html("");
-						
+						console.log(data);
 						var $tr = $("<tr>");
 						
 						$tr.append('<th style="width: 7%;">결제코드</th>' +
@@ -180,11 +180,37 @@
 									'<th style="width: 11%;">전화번호</th>' +
 									'<th style="width: 11%;">결제 금액</th>' +
 									'<th style="width: 9%;">사용 포인트</th>' +
-									'<th style="width: 19%;">적립예정 포인트</th>' +
 									'<th style="width: 15%;">주문번호</th>' +
 									'<th style="width: 15%;">결제일</th>');
 						
 						$table.append($tr);
+						
+						for(key in data) {
+							$tr= $("<tr>");
+							var $pcode = $("<td>").text(data[key].paymentCode);
+							var $scheduleCode = $("<td>").text(data[key].scheduleCode);
+							var $mCode = $("<td>").text(data[key].memberCode);
+							var $mName = $("<td>").text(data[key].memberName);
+							var $phone = $("<td>").text(data[key].phone);
+							var $cost = $("<td>").text(data[key].payCost);
+							var $uPoint = $("<td>").text(data[key].usingPoint);
+							var $impNum = $("<td>").text(data[key].impNum);
+							var $patDate = $("<td>").text(data[key].payDate);
+							
+							$tr.append($pcode);
+							$tr.append($scheduleCode);
+							$tr.append($mCode);
+							$tr.append($mName);
+							$tr.append($phone);
+							$tr.append($cost);
+							$tr.append($uPoint);
+							$tr.append($impNum);
+							$tr.append($patDate);
+							$table.append($tr);
+						}
+					},
+					error: function(status) {
+						console.log(status);
 					}
 				});
 			});

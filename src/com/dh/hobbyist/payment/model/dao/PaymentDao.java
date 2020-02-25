@@ -75,18 +75,25 @@ public class PaymentDao {
 				p.setPaymentCode(rset.getInt("PAYMENT_PK"));
 				p.setUsingPoint(rset.getInt("POINTS_USED"));
 				p.setGivePoint(rset.getInt("POINTS_GIVEN"));
-				p.setPayCost(rset.getInt("PATMENT_COSTS"));
+				p.setPayCost(rset.getInt("PAYMENT_COSTS"));
+				p.setMemberName(rset.getString("MEMBER_NAME"));
+				p.setPhone(rset.getString("MEMBER_PHONE"));
 				p.setPayMethod(rset.getString("PAYMENT_METHOD"));
 				p.setImpNum(rset.getString("PAYMENT_IMP_NUM"));
 				p.setPayDate(rset.getTimestamp("PAYMENT_DATE"));
 				p.setScheduleCode(rset.getInt("LESSON_SCHEDULE_PK"));
 				p.setArtistCode(rset.getInt("ARTIST_PK"));
 				p.setMemberCode(rset.getInt("MEMBER_PK"));
+				
+				payList.add(p);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}finally {
+			close(stmt);
+			close(rset);
 		}
-		return null;
+		System.out.println(payList);
+		return payList;
 	}
-
 }
