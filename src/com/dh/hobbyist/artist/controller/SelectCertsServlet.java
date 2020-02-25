@@ -58,11 +58,11 @@ public class SelectCertsServlet extends HttpServlet {
 				certsInfo = new JSONObject();
 				certsInfo.put("certCode", certs.getCertCode());
 				certsInfo.put("certName", URLEncoder.encode(certs.getCertName(), "UTF-8"));
-				certsInfo.put("certDate", URLEncoder.encode(certs.getCertDate().toString()));
+				certsInfo.put("certDate", URLEncoder.encode(certs.getCertDate().toString(), "UTF-8"));
 				certsInfo.put("certOrg", URLEncoder.encode(certs.getCertOrg(), "UTF-8"));
 				certsInfo.put("memberPk", certs.getMemberPk());
 				
-				System.out.println("certsInfo : " + certsInfo);
+				//System.out.println("certsInfo : " + certsInfo);
 				
 				result.add(certsInfo);
 			}

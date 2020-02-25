@@ -632,8 +632,7 @@ body {
 		                            </td>
 		                        </tr>
 		                        <tr>
-		                            <td colspan="3">
-		                                 <span class="item">스타벅스 매니저 / 3년 2개월</span>
+		                            <td id="careerArea" colspan="3">
 		                            </td>
 		                        </tr>
 		                    </table>
@@ -733,8 +732,8 @@ body {
 											<tr>
 												<td style="width:25%;">지역</td>
 												<td style="width:25%;">상세지역</td>
-												<td style="width:25%;">시작시간</td>
-												<td style="width:25%;">종료시간</td>
+												<td style="width:25%;">N회차 시작시간</td>
+												<td style="width:25%;">N회차 종료시간</td>
 											</tr>
 											<tr>
 												<td>
@@ -784,7 +783,7 @@ body {
 											</tr>
 											<tr>
 												<td colspan="2">상세주소</td>
-												<td colspan="2">1회차 일정 / 총 4회차</td>
+												<td colspan="2">N회차 일자 / 총 4회차</td>
 											</tr>
 											<tr style="height:65%;">
 												<td colspan="2" style="border:1px solid black;"></td>
@@ -883,9 +882,11 @@ body {
 				$("#show"+ num).show();
 				console.log(num);
 				
+				//"02. 자격/경력" 페이지로 가기 위한 "다음" 버튼 클릭 시
 				if(num == 2) {
 					//console.log("num == 2 일때 진입");
 					
+					//아티스트 자격 조회
 					$.ajax({
 						url: "/hobbyist/selectCerts.ar",
 						type: "get",
@@ -897,10 +898,6 @@ body {
 							for(var i = 0; i < data.length; i++) {
 								var certName = decodeURIComponent(data[i].certName);
 								
-								
-								console.log("cert : " + certName);
-								console.log("data[i] : " + data[i]);
-								
 								$certsArea.append("<span class='item' value='" + data[i].certCode + "'>" + certName + "</span>");
 							}
 						},
@@ -910,9 +907,29 @@ body {
 						}
 					});
 					
+					//아티스트 경력 조회
 					$.ajax({
 						url: "/hobbyist/selectCareer.ar",
 						type: "get",
+						success: function(data) {
+							
+							$careerArea = $("#careerArea");
+							$careerArea.find("span").remove();
+							
+							for(var i = 0; i < data.length; i++) {
+								var orgName = decodeURIComponent(data[i].orgName);
+								var rank = decodeURIComponent(data[i].rank);
+								var term = decodeURIComponent(data[i].occupationTerm);
+								
+								console.log("data[i].occupationTerm : " + data[i].occupationTerm);
+								console.log("term : " + term);
+								
+								$careerArea.append("<span class='item' value='" + data[i].recCode + "'>" + orgName + " " + rank + " / " + term + "</span>");
+							}
+						},
+						error: function(error) {
+							console.log(error);
+						}
 						
 					});
 				}
