@@ -51,13 +51,21 @@
 	margin: auto;
 }
 
-.password {
+.password1 {
 	font-weight: normal;
 	font-size: 30px;
 	line-height: 37px;
 	width: 1024px;
 	margin: auto;
 }
+.password2 {
+	font-weight: normal;
+	font-size: 30px;
+	line-height: 37px;
+	width: 1024px;
+	margin: auto;
+}
+
 
 center_td0 {
 	width: 128px;
@@ -142,6 +150,12 @@ center_td0 {
 	width: 800px;
 	text-align: center;
 }
+.divcenter5 {
+	margin: auto;
+	width: 800px;
+	text-align: center;
+	height: 50px;
+}
 
 .divdiv {
 	position: absolute;
@@ -173,7 +187,14 @@ center_td0 {
 	line-height: 25px;
 	color: #556B2F;
 }
-
+#labelPw2{
+	font-family: Do Hyeon;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 20px;
+	line-height: 25px;
+	color: #556B2F;
+}
 
 
 #labelName {
@@ -202,6 +223,16 @@ center_td0 {
 	line-height: 25px;
 	color: #556B2F;
 }
+
+#labelTel2 {
+	font-family: Do Hyeon;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 20px;
+	line-height: 25px;
+	color: #556B2F;
+}
+
 
 #labelHyphen1 {
 	font-family: Do Hyeon;
@@ -288,11 +319,14 @@ color: #FFFFFF;
 			src="<%=request.getContextPath()%>/static/images/memberUpdate1.png">
 	</div>
 
-
+	<div class="divcenter5">
+	
+	</div>
 
 	<div class="divcenter4">
 
-		<form action="<%=request.getContextPath() %>/register.me mthod ="post">
+		<form action="<%=request.getContextPath() %>/register.me" method="post">
+		
 			<table align="border" class="tablecenter4">
 		 	
 			<% if(UpdateMemberListR != null){%>
@@ -301,6 +335,7 @@ color: #FFFFFF;
 			for(int i=0; i<UpdateMemberListR.size(); i++){
 			
 			%> 
+			
 				<tr>
 		<td colspan="1" style="width: 70px; text-align: left;"><label id="labelId">아이디</label></td>	
 		<td colspan="5" class="id" style="text-align: left;"><input style="width: 260px;" type="text" name="textId" max-length=15
@@ -310,41 +345,60 @@ color: #FFFFFF;
 		   	<% } %>
 		  	 	<% } %>
 		  	 	
-	
-		
-		  	 	
-		  	 	
+				<tr>
+				<td colspan="1" style= "height:10px;"></td>
+				</tr>		  	 	
 		  	 	
 				<tr>
-					<td colspan="1" style="width: 70px; text-align: left;"><label
-						id="labelPw">패스워드</label></td>	
-					<td colspan="5" class="id" style="text-align: left;"><input style="width: 260px;" type="password" name="password" max-length=15
+					<td colspan="1" style="width: 100px; text-align: left;"><label
+						id="labelPw">비밀번호</label></td>	
+					<td colspan="5" class="id" style="text-align: left;"><input style="width: 260px;" type="password" name="password1" max-length=15
 						 autofocus placeholder="패스워드를 입력하세요."></td>
 					<td></td>
 				</tr> 
+		
+					<tr>
+				<td colspan="1" style= "height:10px;"></td>
+				</tr>
+
+		  		<tr>
+					<td colspan="1" style="width: 100px; text-align: left;"><label
+						id="labelPw2">비밀번호확인</label></td>	
+					<td colspan="5" class="id2" style="text-align: left;"><input style="width: 260px;" type="password" name="password2" max-length=15
+						 autofocus placeholder="패스워드를 입력하세요."></td>
+					<td></td>
+				</tr>
 		  	
-		  	
+		  		<tr>
+				<td colspan="1" style= "height:10px;"></td>
+				</tr>
 		  	
 				<tr>
-					<td colspan="1" style="width: 70px; text-align: left;"><label
+					<td colspan="1" style="width: 100px; text-align: left;"><label
 						id="labelName">이름</label></td>
 					<td colspan="5" class="nm" style="text-align: left;"><input
-						style="width: 260px;" type="name" name="name" max-length=5
-						placeholder="이름을 입력하세요."></td>
+						style="width: 260px;" type="name" name="name" max-length=5 placeholder="이름을 입력하세요."></td>
 					<td></td>
 				</tr>
 
 				<tr>
-					<td colspan="1" style="width: 70px; text-align: left;"><label
+				<td colspan="1" style= "height:10px;"></td>
+				</tr>
+
+				<tr>
+					<td colspan="1" style="width: 100px; text-align: left;"><label
 						id="LabelEmail">이메일</label></td>
 					<td colspan="5" class="em" style="text-align: left;"><input
-						style="width: 260px;" type="email" name="email"
-						placeholder="이메일을 입력하세요."></td>
+						style="width: 260px;" type="email" name="email" placeholder="이메일을 입력하세요."></td>
 					<td></td>
 				</tr>
-
+		
 				<tr>
-					<td colspan="1" style="width: 70px; text-align: left;"><label
+				<td colspan="1" style= "height:10px;"></td>
+				</tr>
+		
+				<tr>
+					<td colspan="1" style="width: 100px; text-align: left;"><label
 						id="labelTell">전화번호</label></td>
 					<td colspan="1"><input type="tel" name="tel1" id="tel1"
 						style="text-align: left; width: 70px;"></td>
@@ -356,13 +410,25 @@ color: #FFFFFF;
 					
 					<td colspan="1"><button id="button1">인증하기</button></td>
 				</tr>
-
-				<tr></tr>
+	
+				<tr>
+				<td colspan="1" style= "height:10px;"></td>
+				</tr>
+	
+				<tr>
+					<td colspan="1" style="width: 100px; text-align: left;"><label
+						id="labelTel2">인증번호</label></td>
+					<td colspan="5" class="em" style="text-align: left;"><input style="width: 260px;" type="text" name="email2" placeholder="인증번호를 입력해주세요"></td>
+					<td colspan="1"><button id="button4">인증확인</button></td>
+				</tr>
+			
+				<tr>
+				<td colspan="1" style= "height:10px;"></td>
+				</tr>
 
 				<tr>
-					<td colspan="1" style="width: 70px; text-align: left;"><label id="labelAccount">계좌번호</label></td>
-					<td colspan="1" style="width: 30px;"><select name="bank"
-						style="width: 70px;">
+					<td colspan="1" style="width: 90px; text-align: left;"><label id="labelAccount">계좌번호</label></td>
+					<td colspan="1" style="width: 30px;"><select name="bank" style="width: 75px;">
 							<option value="">신한</option>
 							<option value="">국민</option>
 							<option value="">하나</option>
@@ -374,7 +440,7 @@ color: #FFFFFF;
 					<td colspan="1"><button id="button2">인증하기</button></td>
 				</tr>
 			</table>
-			<br><br><br><br>
+			<br>
 			<input type="submit" value="수정하기" class="bt_update" id="bt_update">  
 		
 		
@@ -432,7 +498,7 @@ color: #FFFFFF;
 	//인증하기 버튼 클릭시
 	
 		var randomVal = ""; //유저에게 보낸 문자의 랜덤 숫자를 저장하기 위한 전역변수
-		$(document).on('click', '#button1', function checkPhone() {
+		$(document).on('click', '#button1', function() {
 		var tel1 = $("#tel1").val();
 		var tel2 = $("#tel2").val();
 		var tel3 = $("#tel3").val();
