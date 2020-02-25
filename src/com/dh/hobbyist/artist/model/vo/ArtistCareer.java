@@ -5,19 +5,19 @@ public class ArtistCareer implements java.io.Serializable {
 	private String orgName;
 	private String rank;
 	private String occupation;
-	private String ocuupationTerm;
+	private String occupationTerm;
 	private int memberPk;
 	
 	public ArtistCareer() {}
 
-	public ArtistCareer(int recCode, String orgName, String rank, String occupation, String ocuupationTerm,
+	public ArtistCareer(int recCode, String orgName, String rank, String occupation, String occupationTerm,
 			int memberPk) {
 		super();
 		this.recCode = recCode;
 		this.orgName = orgName;
 		this.rank = rank;
 		this.occupation = occupation;
-		this.ocuupationTerm = ocuupationTerm;
+		this.occupationTerm = occupationTerm;
 		this.memberPk = memberPk;
 	}
 
@@ -53,12 +53,12 @@ public class ArtistCareer implements java.io.Serializable {
 		this.occupation = occupation;
 	}
 
-	public String getOcuupationTerm() {
-		return ocuupationTerm;
+	public String getOccupationTerm() {
+		return occupationTerm;
 	}
 
-	public void setOcuupationTerm(String ocuupationTerm) {
-		this.ocuupationTerm = ocuupationTerm;
+	public void setOccupationTerm(String occupationTerm) {
+		this.occupationTerm = occupationTerm;
 	}
 
 	public int getMemberPk() {
@@ -72,7 +72,7 @@ public class ArtistCareer implements java.io.Serializable {
 	@Override
 	public String toString() {
 		return "ArtistCareer [recCode=" + recCode + ", orgName=" + orgName + ", rank=" + rank + ", occupation="
-				+ occupation + ", ocuupationTerm=" + ocuupationTerm + ", memberPk=" + memberPk + "]";
+				+ occupation + ", occupationTerm=" + occupationTerm + ", memberPk=" + memberPk + "]";
 	}
 
 	

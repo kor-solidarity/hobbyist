@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
 
+import com.dh.hobbyist.artist.model.vo.ArtistCareer;
 import com.dh.hobbyist.artist.model.vo.ArtistCerts;
 
 public class ArtistInfoDao {
@@ -53,6 +54,47 @@ public class ArtistInfoDao {
 				ac.setMemberPk(rset.getInt("MEMBER_PK"));
 				
 				System.out.println("ac : " + ac);
+				
+				list.add(ac);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+	}
+
+	public ArrayList<ArtistCareer> selectCareer(Connection con, int aCode) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<ArtistCareer> list = null;
+		ArtistCareer ac = null;
+				
+		String query = prop.getProperty("selectCareer");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, aCode);
+			
+			rset = pstmt.executeQuery();
+			
+			list = new ArrayList<ArtistCareer>();
+			
+			while(rset.next()) {
+				ac = new ArtistCareer();
+				ac.setRecCode(rset.getInt("REC_PK"));
+				ac.setOrgName(rset.getString("ORG_NAME"));
+				ac.setRank(rset.getString("RANK"));
+				ac.setOccupation(rset.getString("OCCUPATION"));
+				ac.setOccupationTerm(rset.getString("OCCUPATION_TERM"));
+				ac.setMemberPk(rset.getInt("MEMBER_PK"));
+				
+				//System.out.println(rset.getString("OCCUPATION_TERM"));
+				System.out.println("ac.getOccupationTerm() : " + ac.getOccupationTerm());
 				
 				list.add(ac);
 			}
