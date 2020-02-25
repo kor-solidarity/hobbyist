@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.dh.hobbyist.payment.model.service.PaymentService;
 import com.dh.hobbyist.payment.model.vo.Payment;
+import com.google.gson.Gson;
 
 @WebServlet("/selectPaymentList.pa")
 public class SelectPaymentListServlet extends HttpServlet {
@@ -22,6 +23,10 @@ public class SelectPaymentListServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		List<Payment> payList = new PaymentService().selectList();
+		
+		response.setContentType("application/json");
+		response.setCharacterEncoding("UTF-8");
+		new Gson().toJson(payList, response.getWriter());
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

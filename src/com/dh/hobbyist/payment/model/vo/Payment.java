@@ -9,22 +9,26 @@ public class Payment {
 	private int givePoint;				// 지급 포인트
 	private int payCost;				// 결제금액
 	private String payMethod = "card";	// 결제방식 기본이 카드 
+	private String memberName;			// 회원이름
+	private String phone;				// 전화번호
 	private String impNum;				// 결제 고유 번호
-	private Timestamp payDate;				// 결제일
+	private Timestamp payDate;			// 결제일
 	private int scheduleCode;			// 수업일정 코드
 	private int artistCode;				// 아티스트 코드
 	private int memberCode;				// 결제한 회원코드
 	
 	public Payment() {}
 
-	public Payment(int paymentCode, int usingPoint, int givePoint, int payCost, String payMethod, String impNum,
-			Timestamp payDate, int scheduleCode, int artistCode, int memberCode) {
+	public Payment(int paymentCode, int usingPoint, int givePoint, int payCost, String payMethod, String memberName,
+			String phone, String impNum, Timestamp payDate, int scheduleCode, int artistCode, int memberCode) {
 		super();
 		this.paymentCode = paymentCode;
 		this.usingPoint = usingPoint;
 		this.givePoint = givePoint;
 		this.payCost = payCost;
 		this.payMethod = payMethod;
+		this.memberName = memberName;
+		this.phone = phone;
 		this.impNum = impNum;
 		this.payDate = payDate;
 		this.scheduleCode = scheduleCode;
@@ -72,6 +76,22 @@ public class Payment {
 		this.payMethod = payMethod;
 	}
 
+	public String getMemberName() {
+		return memberName;
+	}
+
+	public void setMemberName(String memberName) {
+		this.memberName = memberName;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
 	public String getImpNum() {
 		return impNum;
 	}
@@ -115,7 +135,9 @@ public class Payment {
 	@Override
 	public String toString() {
 		return "Payment [paymentCode=" + paymentCode + ", usingPoint=" + usingPoint + ", givePoint=" + givePoint
-				+ ", payCost=" + payCost + ", payMethod=" + payMethod + ", impNum=" + impNum + ", payDate=" + payDate
-				+ ", scheduleCode=" + scheduleCode + ", artistCode=" + artistCode + ", memberCode=" + memberCode + "]";
+				+ ", payCost=" + payCost + ", payMethod=" + payMethod + ", memberName=" + memberName + ", phone="
+				+ phone + ", impNum=" + impNum + ", payDate=" + payDate + ", scheduleCode=" + scheduleCode
+				+ ", artistCode=" + artistCode + ", memberCode=" + memberCode + "]";
 	}
 }
+	
