@@ -1,14 +1,19 @@
 package com.dh.hobbyist.payment.model.dao;
 
+import static com.dh.hobbyist.common.JDBCTemplate.close;
+
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 import com.dh.hobbyist.payment.model.vo.Payment;
-import static com.dh.hobbyist.common.JDBCTemplate.*;
 
 public class PaymentDao {
 	private Properties prop = new Properties();
@@ -50,6 +55,38 @@ public class PaymentDao {
 		}
 		System.out.println("result : " + result);
 		return result;
+	}
+
+	public List<Payment> selectList(Connection con) {
+		Statement stmt = null;
+		ResultSet rset = null;
+		List<Payment> payList = null;
+		
+		String query = prop.getProperty("selectList");
+		
+		try {
+			stmt = con.createStatement();
+			rset = stmt.executeQuery(query);
+			
+			payList = new ArrayList<Payment>();
+			
+			while(rset.next()) {
+				Payment p = new Payment();
+				p.setPaymentCode(rset.getInt("PAYMENT_PK"));
+				p.setUsingPoint(rset.getInt("POINTS_USED"));
+				p.setGivePoint(rset.getInt("POINTS_GIVEN"));
+				p.setPayCost(rset.getInt("PATMENT_COSTS"));
+				p.setPayMethod(rset.getString("PAYMENT_METHOD"));
+				p.setImpNum(rset.getString("PAYMENT_IMP_NUM"));
+				p.setPayDate(rset.getTimestamp("PAYMENT_DATE"));
+				p.setScheduleCode(rset.getInt("LESSON_SCHEDULE_PK"));
+				p.setArtistCode(rset.getInt("ARTIST_PK"));
+				p.setMemberCode(rset.getInt("MEMBER_PK"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 }
