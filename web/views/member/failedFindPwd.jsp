@@ -88,7 +88,7 @@
         <h1 id="title" align="center" onclick="goHome();">hobbyist</h1>
     </div>
     <div id="contents" align="center">
-            <h2>아이디 찾기</h2>
+            <h2>비밀번호 찾기</h2>
             <br><br>
             <p>입력하신 정보와 일치하는 계정이 존재하지 않습니다.</p><br><br>
             
