@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Properties;
 
 import com.dh.hobbyist.common.model.vo.Image;
@@ -297,6 +298,72 @@ public class ArtistDao {
 		}
 		
 		return result;
+	}
+
+	public Member selectOneArtist(Connection con, int num) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		Member m = null;
+		
+		String query = prop.getProperty("selectOneArtist");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, num);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				m = new Member();
+				m.setMemberId(rset.getString("MEMBER_ID"));
+				m.setMemberName(rset.getString("MEMBER_NAME"));
+				m.setArtistNick(rset.getString("ARTIST_NICK"));
+				m.setArtistIntro(rset.getString("ARTIST_INTRO"));
+				m.setBankName(rset.getString("MEMBER_BANK_NAME"));
+				m.setBankOwner(rset.getString("MEMBER_BANK_OWNER"));
+				m.setBankNum(rset.getString("MEMBER_BANK_NUM"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return m;
+	}
+
+	public List<Image> selectImageList(Connection con, int num) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		List<Image> imgList = null;
+		
+		String query = prop.getProperty("selectImageList");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, num);
+			
+			rset = pstmt.executeQuery();
+			
+			imgList = new ArrayList<Image>();
+			
+			while(rset.next()) {
+				Image img = new Image();
+				img.setImageCode(rset.getInt("IMAGE_PK"));
+				img.setImageRoute(rset.getString("IMAGE_ROUTE"));
+				img.setImageName(rset.getString("IMAGE_NAME"));
+				img.setImageType(rset.getString("IMAGE_TYPE"));
+				
+				imgList.add(img);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+		
+		return imgList;
 	}
 
 	

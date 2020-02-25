@@ -224,7 +224,7 @@ public class InsertArtistServlet extends HttpServlet {
 			int totalResult = 0;
 			
 			//모든 사항 등록 시 신청내역 등록
-			if(imageResult > 0 && categoryResult > 0 && certiResult > 0 && eduResult > 0 && careerResult > 0 && memberResult > 0) {
+			if(imageResult > 0 && categoryResult > 0 && memberResult > 0) {
 				totalResult = new ArtistService().insertApply(memberPk);
 			}
 			
