@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-import com.dh.hobbyist.member.model.vo.Member;
+import com.dh.hobbyist.memberUpdate.model.vo.*;
 
 public class MemberDao {
 	
@@ -46,11 +46,12 @@ public class MemberDao {
 	         
 	         while(rset.next()) {
 	            Member m = new Member();
+	            m.setMemberCode(rset.getInt("MEMBER_PK"));
 	            m.setMemberId(rset.getString("MEMBER_ID"));
+	            m.setPhone(rset.getString("MEMBER_PWD"));
 	            m.setMemberName(rset.getString("MEMBER_NAME"));
 	            m.setEmail(rset.getString("MEMBER_EMAIL"));
 	            m.setPhone(rset.getString("MEMBER_PHONE"));
-	            m.setPhone(rset.getString("MEMBER_PWD"));
 	            memberList.add(m);
 	         }
 	      }catch(SQLException e) {
@@ -61,4 +62,60 @@ public class MemberDao {
 	      }
 	      return memberList;   
 	   }
+	   
+	   public Member memberUpdate(Connection con, Member member) {
+		   PreparedStatement pstmt = null;
+		   ResultSet rset = null;
+		   
+		   Member memberUpdate = null;
+		
+		   String query = prop.getProperty("memberUpdate");
+		   
+		   try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(0, member.getMemberCode());
+			pstmt.setString(1, member.getMemberId());
+			pstmt.setString(2, member.getMemberPwd());
+			pstmt.setString(3, member.getMemberName());
+			pstmt.setString(4, member.getEmail());
+			pstmt.setString(5, member.getPhone());
+			
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				memberUpdate  = new Member();
+				memberUpdate.setMemberCode(rset.getInt("MEMBER_PK"));
+				memberUpdate.setMemberId(rset.getString("MEMBER_ID"));
+				memberUpdate.setMemberPwd(rset.getString("MEMBER_PWD"));
+				memberUpdate.setMemberName(rset.getString("MEMBER_NAME"));
+				memberUpdate.setPhone(rset.getString("MEMBER_PHONE"));
+				memberUpdate.setEmail(rset.getString("MEMBER_EAMAIL"));
+				memberUpdate.setBankName(rset.getString("MEMBER_BANK_NAME"));
+				memberUpdate.setBankOwner(rset.getString("MEMBER_BANK_NAME"));
+				memberUpdate.setBankNum(rset.getString("MEMBER_BANK_NUM"));
+				memberUpdate.setDel(rset.getInt("MEBER_DEL"));
+				memberUpdate.setPoint(rset.getInt("MEMBEER_POINT"));
+				memberUpdate.setRegDate(rset.getDate("REG_DATE"));
+				memberUpdate.setFirstLogin(rset.getInt("FIRST_LOGIN"));
+				memberUpdate.setWarnings(rset.getInt("WRANINGS"));
+				memberUpdate.setIsArtist(rset.getInt("IS_ARTIST"));
+				memberUpdate.setArtistAccepted(rset.getDate("ARTIST_ACCEPTED"));
+				memberUpdate.setArtistNick(rset.getString("ARTIST_NICK"));
+				memberUpdate.setArtistIntro(rset.getString("ARTIST_INTRO"));
+			}
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}  
+		   return memberUpdate;  
+	   }
+	   
+	   
+	   
 }
