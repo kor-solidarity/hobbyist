@@ -173,15 +173,15 @@
 				<table style="width: 100%; text-align: center;">
 					<!-- 테이블 첫번째 줄은 아이디, 비밀번호 등 조회할 내용 제목이다. background(#4E4E4E), font-color(white) 색 다르게 지정 -->
 					<tr>
+						<th style="width: 8%;">신청코드</th>
 						<th style="width: 8%;">결제코드</th>
-						<th style="width: 11%;">수업일정 코드</th>
 						<th style="width: 11%;">아이디</th>
-						<th style="width: 7%;">이름</th>
+						<th style="width: 8%;">이름</th>
 						<th style="width: 13%;">전화번호</th>
-						<th style="width: 11%;">담당 아티스트</th>
+						<th style="width: 10%;">아티스트 코드</th>
 						<th style="width: 11%;">환불 금액</th>
-						<th style="width: 17%;">환불계좌</th>
-						<th style="width: 14%;">상세보기</th>
+						<th style="width: 18%;">신청일</th>
+						<th style="width: 12%;">상세보기</th>
 					</tr>
 					<tr>
 						<td style="width: 8%;">결제코드</td>
@@ -237,7 +237,7 @@
    	       		</tr>
    	       		<tr>
    	       			<td>진행회차</td>
-   	       			<td>dgd</td>
+   	       			<td></td>
    	       		</tr>
    	       		<tr>
    	       			<td>잔여회차</td>
@@ -302,6 +302,8 @@
 		function approve() {
 			
 			alert("환불 승인 하시겠습니까?");
+			
+			
 		}
 		
 		function refuse() {
