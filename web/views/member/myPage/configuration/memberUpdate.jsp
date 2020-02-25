@@ -325,7 +325,7 @@ color: #FFFFFF;
 
 	<div class="divcenter4">
 
-		<form action="<%=request.getContextPath() %>/register.me" method="post">
+		<form action="<%=request.getContextPath() %>/hobbyist/web/views/member/myPage/configuration/memberUpdate.jsp method="post">
 		
 			<table align="border" class="tablecenter4">
 		 	
@@ -408,7 +408,7 @@ color: #FFFFFF;
 					<td colspan="1" style="width: 3px;"><label id="labelHyphen2">-</label></td>
 					<td colspan="1"><input type="tel" name="tel3" id="tel3" style="text-align: left; width: 75px;"></td>
 					
-					<td colspan="1"><button id="button1">인증하기</button></td>
+					<td colspan="1"><label id="button1">인증하기</label></td>
 				</tr>
 	
 				<tr>
@@ -416,7 +416,7 @@ color: #FFFFFF;
 				</tr>
 	
 				<tr>
-					<td colspan="1" style="width: 100px; text-align: left;"><label
+					<td colspan="1" style="width: 100px; text-align: left;" color:><label
 						id="labelTel2">인증번호</label></td>
 					<td colspan="5" class="em" style="text-align: left;"><input style="width: 260px;" type="text" name="email2" placeholder="인증번호를 입력해주세요"></td>
 					<td colspan="1"><button id="button4">인증확인</button></td>
@@ -498,7 +498,7 @@ color: #FFFFFF;
 	//인증하기 버튼 클릭시
 	
 		var randomVal = ""; //유저에게 보낸 문자의 랜덤 숫자를 저장하기 위한 전역변수
-		$(document).on('click', '#button1', function() {
+		$(document).on('click', '#button1', function () {
 		var tel1 = $("#tel1").val();
 		var tel2 = $("#tel2").val();
 		var tel3 = $("#tel3").val();

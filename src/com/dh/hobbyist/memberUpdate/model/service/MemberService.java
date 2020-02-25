@@ -3,8 +3,9 @@ package com.dh.hobbyist.memberUpdate.model.service;
 import java.sql.Connection;
 import java.util.List;
 
-import com.dh.hobbyist.member.model.dao.MemberDao;
-import com.dh.hobbyist.member.model.vo.Member;
+import com.dh.hobbyist.memberUpdate.model.dao.MemberDao;
+import com.dh.hobbyist.memberUpdate.model.vo.Member;
+
 import static com.dh.hobbyist.common.JDBCTemplate.*;
 
 public class MemberService {
@@ -18,11 +19,15 @@ public class MemberService {
 	      List<Member> UpdateMemberList = new MemberDao().UpdateMemberList(con);
 	      
 	      close(con);
-	      
 	      return UpdateMemberList;
 	   }
 	   
-	
+	public Member memberUpdate(Member member) {
+		Connection con = getConnection();
+		Member memberUpdate = new MemberDao().memberUpdate(con, member);
+		close(con);
+		return memberUpdate;
+	}
 	   
 
 	
