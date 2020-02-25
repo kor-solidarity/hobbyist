@@ -188,6 +188,7 @@ body {
     color: black;
     padding: 5px;
     font-size: 15px;
+    margin-right: 15px;
 }
 
 #LessonTable5 {
@@ -620,7 +621,6 @@ body {
 		                        </tr>
 		                        <tr>
 		                            <td id="certsArea" colspan="3">
-		                                <!-- <span class="item">커피 바리스타 자격증 1급</span> -->
 		                            </td>
 		                        </tr>
 		                        <tr height="20px">
@@ -636,12 +636,6 @@ body {
 		                                 <span class="item">스타벅스 매니저 / 3년 2개월</span>
 		                            </td>
 		                        </tr>
-		                        <!-- <script>
-			                		$(function(){
-			                			var title = document.createElement("span");
-			                			
-			                		});
-		                        </script> -->
 		                    </table>
 						</div>
 						<div id="show3" style="display: none;">
@@ -890,7 +884,7 @@ body {
 				console.log(num);
 				
 				if(num == 2) {
-					console.log("num == 2 일때 진입");
+					//console.log("num == 2 일때 진입");
 					
 					$.ajax({
 						url: "/hobbyist/selectCerts.ar",
@@ -898,9 +892,11 @@ body {
 						success: function(data) {
 							
 							$certsArea = $("#certsArea");
+							$certsArea.find("span").remove();
 							
 							for(var i = 0; i < data.length; i++) {
 								var certName = decodeURIComponent(data[i].certName);
+								
 								
 								console.log("cert : " + certName);
 								console.log("data[i] : " + data[i]);
@@ -912,6 +908,12 @@ body {
 							console.log("error 진입");
 							console.log(error);
 						}
+					});
+					
+					$.ajax({
+						url: "/hobbyist/selectCareer.ar",
+						type: "get",
+						
 					});
 				}
 				
