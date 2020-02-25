@@ -1,6 +1,7 @@
 package com.dh.hobbyist.suggest.controller;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -36,16 +37,14 @@ public class InsertReplyServlet extends HttpServlet {
 		int pid = Integer.parseInt(request.getParameter("pid"));
 		String content = request.getParameter("content");
 		
-		System.out.println("writer : " + writer);
-		System.out.println("pid : " + pid);
-		System.out.println("content : " + content);
-		
 		Reply reply = new Reply();
 		reply.setLessonPetitionCode(pid);
 		reply.setMemberCode(writer);
 		reply.setReplyContent(content);
 		
 		List<Reply> replyList = new SuggestService().insertReply(reply);
+		
+		//Collections.reverse(replyList);
 		
 		response.setContentType("application/json");
 		response.setCharacterEncoding("UTF-8");

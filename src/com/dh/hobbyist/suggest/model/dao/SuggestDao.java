@@ -307,6 +307,7 @@ public class SuggestDao {
 				r.setMemberCode(rset.getInt("MEMBER_PK"));
 				r.setDeleted(rset.getInt("DELETED"));
 				r.setMemberName(rset.getString("MEMBER_NAME"));
+				r.setImageRoot(rset.getString("IMAGE_ROUTE") + "/" + rset.getString("IMAGE_NAME"));
 				
 				list.add(r);
 			}
