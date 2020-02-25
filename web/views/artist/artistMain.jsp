@@ -98,11 +98,8 @@
 }
 
 #ArtistTable2 {
-	
-	/*font-family: 'Do Hyeon', sans-serif;*/
 	font-family: 'Nanum Gothic', ;
 	width:700px;
-	/*font-size:15px;*/
 	border-spacing: 15px;
 	border-collapse: separate;
 }
@@ -201,15 +198,12 @@
 }
 
 #ArtistTable8 {
-	/* border: 1px solid black; */
 	border-spacing: 15px;
 	border-collapse: separate;
 }
 
 #ArtistTable8 td {
 	width: 30px;
-	/* font-family: 'Do Hyeon', sans-serif; */
-	/* border:1px solid black; */
 }
 
 #ArtistTable9 {
@@ -228,15 +222,12 @@
 }
 
 #ArtistTable10 {
-	/* border: 1px solid black; */
 	border-spacing: 15px;
 	border-collapse: separate;
 }
 
 #ArtistTable10 td {
 	width: 30px;
-	/* font-family: 'Do Hyeon', sans-serif; */
-	/* border:1px solid black; */
 }
 
 #modifyIcon {
@@ -270,9 +261,7 @@
 	font-family: 'Do Hyeon', sans-serif;
 	font-size: 16px;
 	color: white;
-	/* height:40px; */
 	border-radius: 15px;
-	/* line-height:40px; */
 	background-color: darkolivegreen;
 }
 
@@ -714,10 +703,9 @@
 		</div>
 	</div>
 	<script>
-		
 		$(function() {
 			//자기소개 부분 textarea에서 255자가 넘지 못하게
-			$("#introduce").keydown(
+			$("#introduce").keyup(
 				function() {
 					var inputLength = $(this).val().length;
 	
@@ -1014,6 +1002,8 @@
 				}
 			});
 		});
+		
+	
 		$(function() {
 			var num = 1;
 			// 모달 버튼에 이벤트를 건다.
@@ -1031,10 +1021,8 @@
 				/* $('#modalBox').modal('hide'); */
 				if (num > 1) {
 					$("#show" + num).hide();
-					console.log(num);
 					num--;
 					$("#show" + num).show();
-					console.log(num);
 
 				}
 				if (num < 5) {
@@ -1045,10 +1033,8 @@
 			$('#nextModalBtn').on('click', function() {
 
 				$("#show" + num).hide();
-				console.log(num);
 				num++;
 				$("#show" + num).show();
-				console.log(num);
 				if (num == 5) {
 					$("#nextModalBtn").hide();
 					$("#saveModalBtn").show();
@@ -1056,7 +1042,11 @@
 
 			});
 			$('#saveModalBtn').on('click', function() {
-				$("#artistForm").submit();
+				if($("#artistImg1").val() == "") {
+					alert("필수사항을 모두 입력해주세요.");
+				} else {
+					$("#artistForm").submit();
+				}
 			});
 		});
 	</script>

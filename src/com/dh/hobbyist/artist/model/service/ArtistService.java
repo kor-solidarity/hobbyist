@@ -3,6 +3,7 @@ package com.dh.hobbyist.artist.model.service;
 import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import com.dh.hobbyist.artist.model.dao.ArtistDao;
 import com.dh.hobbyist.common.model.vo.Image;
@@ -143,6 +144,30 @@ public class ArtistService {
 		}
 		return result;
 	}
+
+	//아티스트 신청한 회원 한명 조회
+	public Member selectOneArtist(int num) {
+		Connection con = getConnection();
+		
+		Member m = new ArtistDao().selectOneArtist(con, num);
+		
+		close(con);
+		
+		return m;
+	}
+
+	//아티스트 신청한 회원이 첨부한 이미지 조회
+	public List<Image> selectImageList(int num) {
+		Connection con = getConnection();
+		
+		List<Image> imgList = new ArtistDao().selectImageList(con, num);
+	
+		close(con);
+		
+		return imgList;
+	}
+
+	
 
 	
 

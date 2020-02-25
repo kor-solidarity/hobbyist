@@ -165,7 +165,7 @@
     	color:darkolivegreen;
     	font-size:18px;
     }
-    #registerText {
+    .registerText {
     	cursor:pointer;
     }
 </style>
@@ -229,7 +229,7 @@
                		<input type="hidden" value="<%=aa.getApplyMember()%>">	
                		<td><%=aa.getApplyCode() %></td>
                		<td><%=aa.getApplyMemberId() %></td>
-               		<td id="registerText" style="text-decoration: underline;"><%=aa.getApplyMemberId() %>님의 등록글</td>
+               		<td class="registerText" style="text-decoration: underline;"><%=aa.getApplyMemberId() %>님의 등록글</td>
                		<td><%=aa.getApplyDate() %></td>
                		<td>
 	               		<%
@@ -260,170 +260,6 @@
                		</td>
                	</tr>
                <% } %>
-               <tr>
-                   <td>3</td>
-                   <td>hyeon0705</td>
-                   <td id="registerText" style="text-decoration: underline;">hyeon0705님의 등록글</td>
-                   <td>2020-01-26<br>18:14:20</td>
-                   <td>
-                   	<button id="approvalBtn">승인</button> &nbsp;
-                   	<button id="refuseBtn" class="btn btn-info btn-lg">거절</button>
-                   </td>
-                   <td></td>
-               </tr>
-               <tr>
-                   <td>3</td>
-                   <td>hyeon0705</td>
-                   <td style="text-decoration: underline;">hyeon0705님의 등록글</td>
-                   <td>2020-01-26<br>18:14:20</td>
-                   <td>
-                   	<button id="approvalBtn">승인</button> &nbsp;
-                   	<button id="refuseBtn">거절</button>
-                   </td>
-                   <td></td>
-               </tr>
-               <tr>
-                   <td>3</td>
-                   <td>hyeon0705</td>
-                   <td style="text-decoration: underline;">hyeon0705님의 등록글</td>
-                   <td>2020-01-26<br>18:14:20</td>
-                   <td>
-                   	<button id="approvalBtn">승인</button> &nbsp;
-                   	<button id="refuseBtn">거절</button>
-                   </td>
-                   <td></td>
-               </tr>
-               <tr>
-                   <td>3</td>
-                   <td>hyeon0705</td>
-                   <td style="text-decoration: underline;">hyeon0705님의 등록글</td>
-                   <td>2020-01-26<br>18:14:20</td>
-                   <td>
-                   	<button id="approvalBtn">승인</button> &nbsp;
-                   	<button id="refuseBtn">거절</button>
-                   </td>
-                   <td></td>
-               </tr>
-               <tr>
-                   <td>3</td>
-                   <td>hyeon0705</td>
-                   <td style="text-decoration: underline;">hyeon0705님의 등록글</td>
-                   <td>2020-01-26<br>18:14:20</td>
-                   <td>
-                   	<button id="approvalBtn">승인</button> &nbsp;
-                   	<button id="refuseBtn">거절</button>
-                   </td>
-                   <td></td>
-               </tr>
-               <tr>
-                   <td>3</td>
-                   <td>hyeon0705</td>
-                   <td style="text-decoration: underline;">hyeon0705님의 등록글</td>
-                   <td>2020-01-26<br>18:14:20</td>
-                   <td>
-                   	<button id="approvalBtn">승인</button> &nbsp;
-                   	<button id="refuseBtn">거절</button>
-                   </td>
-                   <td></td>
-               </tr>
-               <tr>
-                   <td>3</td>
-                   <td>hyeon0705</td>
-                   <td style="text-decoration: underline;">hyeon0705님의 등록글</td>
-                   <td>2020-01-26<br>18:14:20</td>
-                   <td>
-                   	<button id="approvalBtn">승인</button> &nbsp;
-                   	<button id="refuseBtn">거절</button>
-                   </td>
-                   <td></td>
-               </tr>
-               <tr>
-                   <td>3</td>
-                   <td>hyeon0705</td>
-                   <td style="text-decoration: underline;">hyeon0705님의 등록글</td>
-                   <td>2020-01-26<br>18:14:20</td>
-                   <td>
-                   	<button id="approvalBtn">승인</button> &nbsp;
-                   	<button id="refuseBtn">거절</button>
-                   </td>
-                   <td></td>
-               </tr>
-               <tr>
-                   <td>3</td>
-                   <td>hyeon0705</td>
-                   <td style="text-decoration: underline;">hyeon0705님의 등록글</td>
-                   <td>2020-01-26<br>18:14:20</td>
-                   <td>
-                   	<button id="approvalBtn">승인</button> &nbsp;
-                   	<button id="refuseBtn">거절</button>
-                   </td>
-                   <td></td>
-               </tr>
-               <tr>
-                   <td>3</td>
-                   <td>hyeon0705</td>
-                   <td style="text-decoration: underline;">hyeon0705님의 등록글</td>
-                   <td>2020-01-26<br>18:14:20</td>
-                   <td>
-                   	<button id="approvalBtn">승인</button> &nbsp;
-                   	<button id="refuseBtn">거절</button>
-                   </td>
-                   <td></td>
-               </tr>
-               <tr>
-                   <td>3</td>
-                   <td>hyeon0705</td>
-                   <td style="text-decoration: underline;">hyeon0705님의 등록글</td>
-                   <td>2020-01-26<br>18:14:20</td>
-                   <td>
-                   	<button id="approvalBtn">승인</button> &nbsp;
-                   	<button id="refuseBtn">거절</button>
-                   </td>
-                   <td></td>
-               </tr>
-               <tr>
-                   <td>3</td>
-                   <td>hyeon0705</td>
-                   <td style="text-decoration: underline;">hyeon0705님의 등록글</td>
-                   <td>2020-01-26<br>18:14:20</td>
-                   <td>
-                   	<button id="approvalBtn">승인</button> &nbsp;
-                   	<button id="refuseBtn">거절</button>
-                   </td>
-                   <td></td>
-               </tr>
-               <tr>
-                   <td>3</td>
-                   <td>hyeon0705</td>
-                   <td style="text-decoration: underline;">hyeon0705님의 등록글</td>
-                   <td>2020-01-26<br>18:14:20</td>
-                   <td>
-                   	<button id="approvalBtn">승인</button> &nbsp;
-                   	<button id="refuseBtn">거절</button>
-                   </td>
-                   <td></td>
-               </tr>
-               <tr>
-                   <td>3</td>
-                   <td>hyeon0705</td>
-                   <td style="text-decoration: underline;">hyeon0705님의 등록글</td>
-                   <td>2020-01-26<br>18:14:20</td>
-                   <td>
-                   	<button id="approvalBtn">승인</button> &nbsp;
-                   	<button id="refuseBtn">거절</button>
-                   </td>
-                   <td></td>
-               </tr>
-               <tr>
-                   <td>3</td>
-                   <td>hyeon0705</td>
-                   <td style="text-decoration: underline;">hyeon0705님의 등록글</td>
-                   <td>2020-01-26<br>18:14:20</td>
-                   <td>
-                   	거절 처리됨
-                   </td>
-                   <td style="text-decoration: underline;">hyeon0705님의 거절 사유</td>
-               </tr>
                
             </table>
             <script>
@@ -579,14 +415,25 @@
 							<button type="button" data-dismiss="modal"class="btn btn-primary" id="checkArtistBtn">확인</button>
 						</div>
 					</div>
-
 				</div>
 			</div>
 			<script>
 			$(document).ready(function() {
-				$("#registerText").click(function() {
+				$(".registerText").click(function() {
 					var num = $(this).parent().children("input").val();
-					//console.log(num);
+
+					$.ajax({
+						url: "applyInfo.ar",
+						data: {num},
+						type: "post",
+						success: function(data) {
+							console.log("서버 전공 성공");
+						},
+						error: function(error) {
+							console.log(error);
+						}
+					});
+					
 					$("#myModal2").modal();
 				});
 			});
