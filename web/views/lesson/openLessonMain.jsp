@@ -616,7 +616,7 @@ body {
 		                                <span style="color:black">보유한 자격</span>&nbsp;&nbsp;<span style="color:#A7A1A1">(해당 수업정보에 노출시킬 자격증 을 선택하세요)</span>
 		                            </td>
 		                            <td style="width:10%">
-		                                <button type="button" class="btn btn-primary btnAll">전체선택</button>
+		                                <button type="button" class="btn btn-primary btnAll" onclick="certsAll();">전체선택</button>
 		                            </td>
 		                        </tr>
 		                        <tr>
@@ -628,7 +628,7 @@ body {
 		                                <span style="color:black">등록한 경력</span>&nbsp;&nbsp;<span style="color:#A7A1A1">(해당 수업정보에 노출시킬 기술을 선택하세요)</span>
 		                            </td>
 		                            <td>
-		                                <button type="button" class="btn btn-primary btnAll">전체선택</button>
+		                                <button type="button" class="btn btn-primary btnAll" onclick="careerAll();">전체선택</button>
 		                            </td>
 		                        </tr>
 		                        <tr>
@@ -873,6 +873,7 @@ body {
 					$("#saveModalBtn").hide();
 				}
 			});
+			
 			// 모달 안의 다음 버튼에 이벤트를 건다.
 			$('#nextModalBtn').on('click', function() {
 
@@ -921,9 +922,6 @@ body {
 								var rank = decodeURIComponent(data[i].rank);
 								var term = decodeURIComponent(data[i].occupationTerm);
 								
-								console.log("data[i].occupationTerm : " + data[i].occupationTerm);
-								console.log("term : " + term);
-								
 								$careerArea.append("<span class='item' value='" + data[i].recCode + "'>" + orgName + " " + rank + " / " + term + "</span>");
 							}
 						},
@@ -932,6 +930,8 @@ body {
 						}
 						
 					});
+					
+					
 				}
 				
 				if(num == 6) {
@@ -944,7 +944,30 @@ body {
 			$('#saveModalBtn').on('click', function() {
 				$("#LessonForm").submit();
 			});
+			
+			/* $(document).on("toggle", '.item', 
+					
+				function(){
+					$(this).css({'background':'darkolivegreen', 'color':'white'});
+				},
+				function(){
+					$(this).css({'backgro7nd':'lightgray', 'color':'black'});
+			}); */
+			
+			$(document).on("click", '.item', function(){
+					$(this).css({'background':'darkolivegreen', 'color':'white'});
+			});
+			
 		});		
+		
+		function certsAll() {
+			$("#certsArea").find('span').css({'background':'darkolivegreen', 'color':'white'});
+		}
+		
+		function careerAll() {
+			$("#careerArea").find('span').css({'background':'darkolivegreen', 'color':'white'});
+		}
+		
 	</script>
 	
 	<!-- 하단 회색 영역 -->
