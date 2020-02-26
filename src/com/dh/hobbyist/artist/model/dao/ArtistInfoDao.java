@@ -53,7 +53,7 @@ public class ArtistInfoDao {
 				ac.setCertOrg(rset.getString("CERT_ORG"));
 				ac.setMemberPk(rset.getInt("MEMBER_PK"));
 				
-				System.out.println("ac : " + ac);
+				//System.out.println("ac : " + ac);
 				
 				list.add(ac);
 			}
@@ -94,7 +94,7 @@ public class ArtistInfoDao {
 				ac.setMemberPk(rset.getInt("MEMBER_PK"));
 				
 				//System.out.println(rset.getString("OCCUPATION_TERM"));
-				System.out.println("ac.getOccupationTerm() : " + ac.getOccupationTerm());
+				//System.out.println("ac.getOccupationTerm() : " + ac.getOccupationTerm());
 				
 				list.add(ac);
 			}
