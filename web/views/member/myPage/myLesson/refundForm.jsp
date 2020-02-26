@@ -55,7 +55,7 @@
 		font-size: 25px;
 	}
 	
-	input[type=submit] {
+	button[type=button] {
 		background: darkolivegreen;
 		color: white;
 		font-size: 25px;
@@ -76,6 +76,7 @@
  
  </div>
  
+ <form name="goRefund" action="/hobbyist/index.jsp" method="post">
  <div id="refundArea">
  	<table id="payInfoT1">
  		<tr>
@@ -118,10 +119,20 @@
  							  75% 이상 진행된 수업에 대한 남은금액은 환불 받을 수 없습니다.</div>
  	
  	<div style="text-align: center; margin-top: 60px;">
- 		<input type="reset" value="취소">&nbsp; &nbsp;<input type="submit" value="환불신청">
+ 		<input type="reset" value="취소">&nbsp; &nbsp;<button type="button" onclick="go();">환불신청</button>
  	</div>
  </div>
- 
-<%@ include file="/views/common/footer.jsp" %>
+ </form>
+	<%@ include file="/views/common/footer.jsp" %>
+<script>
+	function go() {
+		var submit = confirm('정말로 환불 하시겠습니까?');
+		
+		if(submit == true) {
+			alert("환불신청이 완료되었습니다.");
+			goRefund.submit();
+		}
+	}
+</script>
 </body>
 </html>

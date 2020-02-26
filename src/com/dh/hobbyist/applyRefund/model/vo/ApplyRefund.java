@@ -12,11 +12,18 @@ public class ApplyRefund {
 	private int artistCode;			//아티스트 코드
 	private int refundCost;			//환불금액
 	private Timestamp applyDate;	//신청일
+	private int totalOrder;			//총 수업회차
+	private int totalProgress;		//진행회차
+	private int usingPoint;			//사용포인트
+	private int givePoint; 			//지금예정포인트
+	private int payCost;			//결제금액
+	private int resultCost;			//환불금액
 	
 	public ApplyRefund() {}
 
 	public ApplyRefund(int refundCode, int paymentCode, int memberCode, String memberName, String phone, int artistCode,
-			int refundCost, Timestamp applyDate) {
+			int refundCost, Timestamp applyDate, int totalOrder, int totalProgress, int usingPoint, int givePoint,
+			int payCost, int resultCost) {
 		super();
 		this.refundCode = refundCode;
 		this.paymentCode = paymentCode;
@@ -26,6 +33,12 @@ public class ApplyRefund {
 		this.artistCode = artistCode;
 		this.refundCost = refundCost;
 		this.applyDate = applyDate;
+		this.totalOrder = totalOrder;
+		this.totalProgress = totalProgress;
+		this.usingPoint = usingPoint;
+		this.givePoint = givePoint;
+		this.payCost = payCost;
+		this.resultCost = resultCost;
 	}
 
 	public int getRefundCode() {
@@ -92,10 +105,61 @@ public class ApplyRefund {
 		this.applyDate = applyDate;
 	}
 
+	public int getTotalOrder() {
+		return totalOrder;
+	}
+
+	public void setTotalOrder(int totalOrder) {
+		this.totalOrder = totalOrder;
+	}
+
+	public int getTotalProgress() {
+		return totalProgress;
+	}
+
+	public void setTotalProgress(int totalProgress) {
+		this.totalProgress = totalProgress;
+	}
+
+	public int getUsingPoint() {
+		return usingPoint;
+	}
+
+	public void setUsingPoint(int usingPoint) {
+		this.usingPoint = usingPoint;
+	}
+
+	public int getGivePoint() {
+		return givePoint;
+	}
+
+	public void setGivePoint(int givePoint) {
+		this.givePoint = givePoint;
+	}
+
+	public int getPayCost() {
+		return payCost;
+	}
+
+	public void setPayCost(int payCost) {
+		this.payCost = payCost;
+	}
+
+	public int getResultCost() {
+		return resultCost;
+	}
+
+	public void setResultCost(int resultCost) {
+		this.resultCost = resultCost;
+	}
+
 	@Override
 	public String toString() {
 		return "ApplyRefund [refundCode=" + refundCode + ", paymentCode=" + paymentCode + ", memberCode=" + memberCode
 				+ ", memberName=" + memberName + ", phone=" + phone + ", artistCode=" + artistCode + ", refundCost="
-				+ refundCost + ", applyDate=" + applyDate + "]";
+				+ refundCost + ", applyDate=" + applyDate + ", totalOrder=" + totalOrder + ", totalProgress="
+				+ totalProgress + ", usingPoint=" + usingPoint + ", givePoint=" + givePoint + ", payCost=" + payCost
+				+ ", resultCost=" + resultCost + "]";
 	}
+	
 }
