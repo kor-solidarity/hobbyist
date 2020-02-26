@@ -113,7 +113,7 @@
     	background-color:#4E4E4E;
     	color:white;
     }
-    #approvalBtn {
+    .approvalBtn {
     	background-color:#3D74CD;
     	color:white;
     	padding: 5px;
@@ -122,7 +122,7 @@
     	height:30px;
 	    border: 1px solid #3D74CD;
     }
-    #refuseBtn {
+    .refuseBtn {
     	background-color:#C72222;
     	font-size:15px;
     	color:white;
@@ -240,16 +240,16 @@
 	               		<%
 	               			if(aa.getApplyConfirmed() == 0) {
 	               		%> 	
-	               			<button id="approvalBtn">승인</button> &nbsp;
-	                   		<button id="refuseBtn">거절</button>
+	               			<button class="approvalBtn">승인</button> &nbsp;
+	                   		<button class="refuseBtn">거절</button>
 	               		<%} else {
-	               			if(aa.getRejectReason() == null) {
-	               			%>
+	               				if(aa.getRejectReason() == null) {
+	               		%>
 	               				승인 처리됨
 	               			<%
-	               			} else {
+	               				} else {
 	               			%>
-	               				거절 처림됨
+	               				거절 처리됨
 	               			<%	
 	               			}
 	               		} %>
@@ -268,11 +268,7 @@
                
             </table>
             <script>
-            	$("#approvalBtn").click(function() {
-					if(confirm("아티스트 승인하시겠습니까?")) {
-						
-					}
-				});
+            	
             </script>
          </div>
 			<div class="modal fade" id="myModal1" role="dialog">
@@ -297,7 +293,7 @@
 								</tr>
 								<tr>
 									<td>
-										<textarea rows="5" cols="40" style="resize:none; width:500px; height:300px;" placeholder="입력하신 거절 사유가 회원의 알림으로 보내지게 됩니다."></textarea>
+										<textarea id="rejectReason" rows="5" cols="40" style="resize:none; width:500px; height:300px;" placeholder="입력하신 거절 사유가 회원의 알림으로 보내지게 됩니다."></textarea>
 									</td>
 								</tr>
 							</table>
@@ -311,13 +307,6 @@
 
 				</div>
 			</div>
-			<script>
-				$(document).ready(function() {
-					$("#refuseBtn").click(function() {
-						$("#myModal1").modal();
-					});
-				});
-			</script>
 			
 			<div class="modal fade" id="myModal2" role="dialog">
 				<div class="modal-dialog">
@@ -470,6 +459,13 @@
 									var list = data[key];
 									var len = data[key].length;
 									
+									$("#cat1").text('');
+									$("#cat2").text('');
+									$("#cat3").text('');
+									$("#detailCat1").text('');
+									$("#detailCat2").text('');
+									$("#detailCat3").text('');
+									
 									for(var i = 0; i < len; i++) {
 										var category = list[i];
 										
@@ -498,6 +494,13 @@
 									var list = data[key];
 									var len = data[key].length;
 									
+									$("#certs1").text('');
+									$("#certs2").text('');
+									$("#certs3").text('');
+									$("#certsDetail1").text('');
+									$("#certsDetail2").text('');
+									$("#certsDetail3").text('');
+									
 									for(var i = 0; i < len; i++) {
 										var cert = list[i];
 										
@@ -516,6 +519,10 @@
 									var list = data[key];
 									var len = data[key].length;
 									
+									$("#career1").text('');
+									$("#career2").text('');
+									$("#career3").text('');
+									
 									for(var i = 0; i < len; i++) {
 										var career = list[i];
 										
@@ -530,6 +537,10 @@
 								if(key == 'arEduList') {
 									var list = data[key];
 									var len = data[key].length;
+									
+									$("#edu1").text('');
+									$("#edu2").text('');
+									$("#edu3").text('');
 									
 									for(var i = 0; i < len; i++) {
 										var edu = list[i];
@@ -556,8 +567,6 @@
 									for(var i = 0; i < len; i++) {
 										var img = list[i];
 										
-										//console.log(img);
-										
 										var root = img.imageRoute + "/" + img.imageName;
 										
 										if(img.imageType == 'profile' && len == 1) {
@@ -570,7 +579,6 @@
 										if(img.imageType == 'artistproof') {
 											$("#proofFile").attr("src", root);
 											$("#fileCode").val(img.imageCode);
-											//console.log(root);
 										}
 									}
 								}
@@ -591,21 +599,38 @@
 					if(num == "") {
 						alert("첨부파일이 존재하지 않습니다.");
 					} else {
-						$.ajax({
-							url:"/hobbyist/download.ar",
-							data: {num : num},
-							type: "get",
-							success: function(data) {
-								console.log("서버 전송 성공!");
-							},
-							error: function(error) {
-								console.log(error);
-							}
-						});
+						location.href = "<%=request.getContextPath()%>/download.ar?num=" + num;
 					}
 					
 				});
+				
+				var refuseApplyCode = "";
+				
+				$(".refuseBtn").click(function() {
+					refuseApplyCode = $(this).parent().parent().children("td").first().text();
+					
+					
+					$("#myModal1").modal();
+				});
+				
+				$("#checkModalBtn").click(function() {
+					var rejectReason = $("#rejectReason").val();
+					
+					location.href = "<%=request.getContextPath()%>/refuse.ar?applyCode=" + refuseApplyCode + "&rejectReason=" + rejectReason;
+				}); 
+				
+				//승인 버튼 클릭시
+				$(".approvalBtn").click(function() {
+					if(confirm("아티스트 승인하시겠습니까?")) {
+						var num = $(this).parent().parent().children("td").first().text();
+						var memCode = $(this).parent().parent().children("input").val();
+	
+						location.href = "<%=request.getContextPath()%>/permit.ar?num=" + num + "&memCode=" + memCode;
+					}
+				});
 			});
+			
+			
 			
 			</script>
       </article>

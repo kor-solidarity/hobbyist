@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.dh.hobbyist.suggest.model.service.SuggestService;
 import com.dh.hobbyist.suggest.model.vo.Reply;
 import com.google.gson.Gson;
+import com.dh.hobbyist.member.model.vo.Member;
 
 /**
  * Servlet implementation class InsertReplyServlet
@@ -33,7 +34,8 @@ public class InsertReplyServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int writer = Integer.parseInt(request.getParameter("writer"));
+		
+		int writer = ((Member) request.getSession().getAttribute("loginMember")).getMemberCode();
 		int pid = Integer.parseInt(request.getParameter("pid"));
 		String content = request.getParameter("content");
 		

@@ -506,6 +506,99 @@ public class ArtistDao {
 		return arCareerList;
 	}
 
+	public Image selectOneImage(Connection con, int num) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		Image img = null;
+		
+		String query = prop.getProperty("selectOneImage");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, num);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				img = new Image();
+				img.setImageRoute(rset.getString("IMAGE_ROUTE"));
+				img.setImageName(rset.getString("IMAGE_NAME"));
+				
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return img;
+	}
+
+	
+	public int updateApplyConfirmed(Connection con, int num) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("updateApplyConfirmed");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, num);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public int updateArtistAccepted(Connection con, int memCode) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("updateArtistAccepted");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, memCode);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int updateRejectReason(Connection con, int applyCode, String rejectReason) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("updateRejectReason");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, rejectReason);
+			pstmt.setInt(2, applyCode);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
 	
 
 }
