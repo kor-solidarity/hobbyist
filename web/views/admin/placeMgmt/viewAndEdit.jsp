@@ -1,9 +1,11 @@
-<%--
+<%@ page import="com.dh.hobbyist.place.model.vo.PlaceCompany" %><%--
   Created by IntelliJ IDEA.
   User : SOY
   Date : 2020-02-18
   Time : 오후 1 :49
   To change this template use File | Settings | File Templates.
+
+  공간대여업체정보 조회페이지. 만일 수정을 누르면 바로 수정페이지로 변신시킨다.
 --%>
 <%@ page contentType="text/html; charset=UTF-8" language="java" pageEncoding="utf-8" %>
 <html>
@@ -16,6 +18,10 @@
 </head>
 <body>
 <%@ include file="/views/common/adminMenubar.jsp" %>
+
+<%
+    // PlaceCompany company = request
+%>
 
 <section>
 
@@ -42,15 +48,7 @@
                 <tr>
                     <td style="text-align : left; vertical-align : bottom;">
                         <label style="font-weight : bold;">공간대여관리 편집</label></td>
-                    <%--                    <td style="padding-right : 20px; text-align : right; vertical-align : bottom;">--%>
-                    <%--                        <select name="category" id="category">--%>
-                    <%--                            <option value="all" selected>전체</option>--%>
-                    <%--                            <option value="all">업체명</option>--%>
-                    <%--                            <option value="all">업주명</option>--%>
-                    <%--                        </select>--%>
-                    <%--                        <input style="" class="" name="searchMember">--%>
-                    <%--                        <button id="searchBtn">검색</button>--%>
-                    <%--                    </td>--%>
+
                 </tr>
             </table>
         </div>
@@ -141,10 +139,10 @@
                 <table style="width : 95%; float : right" class="place-edit-table">
                     <tr>
                         <td style="width: 40%">
-                            <label for="startDate"><b>게제시작일:</b></label>
+                            <bold>게제시작일:</bold>
                             <input type="date" name="startDate" id="startDate"></td>
                         <td>
-                            <label for="endDate"><b>종료일:</b></label>
+                            <bold>종료일:</bold>
                             <input type="date" name="endDate" id="endDate"></td>
                     </tr>
                 </table>

@@ -43,9 +43,10 @@ public class AddPlaceServlet extends HttpServlet {
             String savePath = "static/upload/place";
 
             // 사진파일은 이 객체가 생성되는 순간 알아서 저장됨.
+            // 중간에 인코딩 빼먹지 말것.
             MultipartRequest multipartRequest =
                     new MultipartRequest(request, root + savePath,
-                            maxSize, new MyFileRenamePolicy());
+                            maxSize, "UTF-8", new MyFileRenamePolicy());
             // 저장될 파일이름
             ArrayList<String> fileName = new ArrayList<>();
 
@@ -80,6 +81,7 @@ public class AddPlaceServlet extends HttpServlet {
             // 파일건은 위로 끝. 이제 다른 값들 가져오기.
             // 회사명
             String companyName = multipartRequest.getParameter("companyName");
+            System.out.println("companyName: " + companyName);
             // 폰번
             String phone = multipartRequest.getParameter("phone");
             // 주소
@@ -90,6 +92,7 @@ public class AddPlaceServlet extends HttpServlet {
             String intro = multipartRequest.getParameter("intro");
             // 영업시간
             String serviceTime = multipartRequest.getParameter("serviceTime");
+            System.out.println("serviceTime " + serviceTime);
             // 공간규모
             String roomSize1 = multipartRequest.getParameter("roomSize1");
             String roomSize2 = multipartRequest.getParameter("roomSize2");
@@ -101,6 +104,7 @@ public class AddPlaceServlet extends HttpServlet {
 
             String roomSize = "";
 
+            System.out.println();
             if (roomSize1 != null) {
                 roomSize += "1";
             }
@@ -123,9 +127,13 @@ public class AddPlaceServlet extends HttpServlet {
             // 위 까지가 PLACE_COMPANY 테이블
             // 다음은 COMPANY_ADS table
             // 광고 게제 시작일
-            Date startDate = Date.valueOf(multipartRequest.getParameter("startDate"));
+            String startDateString = multipartRequest.getParameter("startDate");
+            String endDateString = multipartRequest.getParameter("endDate");
+            System.out.println("endDateString: " + endDateString);
+            System.out.println("startDateString: " + startDateString);
+            Date startDate = Date.valueOf(startDateString);
             // 종료일
-            Date endDate = Date.valueOf(multipartRequest.getParameter("endDate"));
+            Date endDate = Date.valueOf(endDateString);
 
             // 공간대여업체 객체
             PlaceCompany inputPC = new PlaceCompany();
