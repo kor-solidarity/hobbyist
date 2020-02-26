@@ -1,4 +1,5 @@
-<%--
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="com.dh.hobbyist.place.model.vo.PlaceCompany" %><%--
   Created by IntelliJ IDEA.
   User: SOY
   Date: 2020-02-18
@@ -18,7 +19,9 @@
 </head>
 <body>
 <%@ include file="/views/common/adminMenubar.jsp" %>
-
+<%
+    // ArrayList<PlaceCompany> list =
+%>
 <section>
 
     <!-- 왼쪽 사이드바 메뉴  -->
@@ -42,8 +45,6 @@
             <!-- 상세페이지, 정렬, 검색 테이블 -->
             <table id="searchT" border="0">
                 <tr>
-<%--                    <td style="text-align: left; vertical-align: bottom;">--%>
-<%--                        <label style="font-weight: bold;">신고 관리</label></td>--%>
                     <td style="padding-right: 20px; text-align: right; vertical-align: bottom;">
                         <select name="category" id="category">
                             <option value="all" selected>전체</option>
@@ -63,18 +64,19 @@
                 <tr>
                     <th style="">번호</th>
                     <th style="">업체명</th>
-                    <th style="">업주명</th>
+<%--                    <th style="">업주명</th>--%>
                     <th style="">전화번호</th>
                     <th style="">등록일</th>
                     <th style="">종료일</th>
                     <th style="">조회</th>
-                    <th style="">편집</th>
+                    <%--이건 이제 조회창 안에서 건든다--%>
+<%--                    <th style="">편집</th>--%>
                     <th style="">선택</th>
                 </tr>
                 <tr>
                     <td>1</td>
                     <td>Gamblerz studio</td>
-                    <td>임찬영</td>
+<%--                    <td>임찬영</td>--%>
                     <td>010-6747-1107</td>
                     <td>2020/01/30</td>
                     <td>2020/02/06</td>
@@ -84,14 +86,13 @@
                                 onclick="location.href='<%=request.getContextPath()%>/admin/seePlace.adm?id=1'">조회
                         </button>
                     </td>
+<%--                    <td>--%>
+<%--                        위와동일--%>
+<%--                        <button class="inquery-btn"--%>
+<%--                                onclick="location.href='<%=request.getContextPath()%>/admin/editPlace.adm?id=1'">편집--%>
+<%--                        </button>--%>
+<%--                    </td>--%>
                     <td>
-                        <%--위와동일--%>
-                        <button class="inquery-btn"
-                                onclick="location.href='<%=request.getContextPath()%>/admin/editPlace.adm?id=1'">편집
-                        </button>
-                    </td>
-                    <td>
-                        <%--  --%>
                         <input type="checkbox" class="place-checkbox" name="placeId" id="" value="(업체번호)">
                     </td>
                 </tr>

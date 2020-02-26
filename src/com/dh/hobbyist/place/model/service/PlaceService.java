@@ -1,9 +1,11 @@
 package com.dh.hobbyist.place.model.service;
 
 import com.dh.hobbyist.common.model.vo.Image;
+import com.dh.hobbyist.common.model.vo.PageInfo;
 import com.dh.hobbyist.place.model.dao.PlaceDao;
 import com.dh.hobbyist.place.model.vo.CompanyAds;
 import com.dh.hobbyist.place.model.vo.PlaceCompany;
+import com.dh.hobbyist.place.model.vo.PlaceCompanyForList;
 
 import static com.dh.hobbyist.common.JDBCTemplate.*;
 
@@ -35,6 +37,8 @@ public class PlaceService {
         Connection con = getConnection();
 
         PlaceCompany company = new PlaceDao().selectPlaceCompany(con, pk);
+
+        close(con);
         return company;
     }
 
@@ -51,6 +55,7 @@ public class PlaceService {
             System.out.println("rollback occurred wtf");
             rollback(con);
         }
+        close(con);
 
         return result;
     }
@@ -83,6 +88,29 @@ public class PlaceService {
             System.out.println("rollback");
             result = 0;
         }
+        close(con);
         return result;
+    }
+
+    public int getListCount() {
+        Connection con = getConnection();
+        int result = 0;
+
+        result = new PlaceDao().getListCount(con);
+
+
+        close(con);
+        return result;
+    }
+
+    // 목록조회에 쓸 명단들.
+    public ArrayList<PlaceCompanyForList> selectList(PageInfo pageInfo) {
+        Connection con = getConnection();
+
+        ArrayList<PlaceCompanyForList> companyArrayList = new PlaceDao().selectList(con, pageInfo);
+
+        close(con);
+
+        return companyArrayList;
     }
 }

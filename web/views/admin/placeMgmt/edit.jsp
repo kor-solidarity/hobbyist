@@ -42,15 +42,6 @@
                 <tr>
                     <td style="text-align : left; vertical-align : bottom;">
                         <label style="font-weight : bold;">공간대여관리 편집</label></td>
-                    <%--                    <td style="padding-right : 20px; text-align : right; vertical-align : bottom;">--%>
-                    <%--                        <select name="category" id="category">--%>
-                    <%--                            <option value="all" selected>전체</option>--%>
-                    <%--                            <option value="all">업체명</option>--%>
-                    <%--                            <option value="all">업주명</option>--%>
-                    <%--                        </select>--%>
-                    <%--                        <input style="" class="" name="searchMember">--%>
-                    <%--                        <button id="searchBtn">검색</button>--%>
-                    <%--                    </td>--%>
                 </tr>
             </table>
         </div>
@@ -67,23 +58,23 @@
                 <tr>
                     <td>전화번호 :</td>
                     <td>
-                        <input type="text" name="phone" id="" value="010-2868-8080">
+                        <input type="text" name="phone"  value="010-2868-8080">
                     </td>
                 </tr>
                 <tr>
                     <td>업체주소 :</td>
                     <td>
-                        <input type="text" name="addr" id="" value="경기도 성남시 고등동 1123-1010">
+                        <input type="text" name="addr"  value="경기도 성남시 고등동 1123-1010">
                     </td>
                 </tr>
                 <tr>
                     <td>사이트 주소</td>
-                    <td><input type="text" name="site" id="" value="www.drifterz.com"></td>
+                    <td><input type="text" name="site"  value="www.drifterz.com"></td>
                 </tr>
                 <tr>
                     <td>업체 소개 : <br>(영업일 가격 등)</td>
                     <td>
-                        <textarea name="intro" id="" cols="75" rows="10">넓은 공간에서 연습하실 분들 환영합니다~~~
+                        <textarea name="intro"  cols="75" rows="10">넓은 공간에서 연습하실 분들 환영합니다~~~
 야탑역 도보 10분거리에 위치해 있습니다~
 </textarea>
                     </td>
@@ -91,7 +82,7 @@
                 <tr>
                     <td>영업시간</td>
                     <td>
-                        <textarea name="time" id="" cols="75" rows="3"></textarea>
+                        <textarea name="time"  cols="75" rows="3"></textarea>
                     </td>
                 </tr>
                 <tr>
@@ -120,7 +111,7 @@
                         <input type="date" name="registerDate" id="startDate"></td>
                     <td>
                         <bold>종료일:</bold>
-                        <input type="date" name="EndDate" id=""></td>
+                        <input type="date" name="EndDate" ></td>
                 </tr>
             </table>
         </div>

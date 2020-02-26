@@ -1,14 +1,17 @@
 package com.dh.hobbyist.place.model.dao;
 
 import com.dh.hobbyist.common.model.vo.Image;
+import com.dh.hobbyist.common.model.vo.PageInfo;
 import com.dh.hobbyist.place.model.vo.CompanyAds;
 import com.dh.hobbyist.place.model.vo.PlaceCompany;
+import com.dh.hobbyist.place.model.vo.PlaceCompanyForList;
 
 import static com.dh.hobbyist.common.JDBCTemplate.*;
 
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.Properties;
 
 public class PlaceDao {
@@ -44,7 +47,7 @@ public class PlaceDao {
             pstmt.setString(5, inputPC.getIntro());
             pstmt.setString(6, inputPC.getService_time());
             pstmt.setString(7, inputPC.getRoom_size());
-
+            System.out.println(pstmt.toString());
             result = pstmt.executeUpdate();
 
             // 잘 들어갔으면 안에서 값 빼온다.
@@ -157,5 +160,74 @@ public class PlaceDao {
         }
 
         return result;
+    }
+
+    public int getListCount(Connection con) {
+        Statement statement = null;
+        ResultSet resultSet = null;
+
+        int list = 0;
+
+        String query = prop.getProperty("placeListCount");
+
+        try {
+            statement = con.createStatement();
+            resultSet = statement.executeQuery(query);
+
+            if (resultSet.next()) {
+                list = resultSet.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            close(resultSet);
+            close(statement);
+        }
+
+        return list;
+    }
+
+    public ArrayList<PlaceCompanyForList> selectList(Connection con, PageInfo pageInfo) {
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        ArrayList<PlaceCompanyForList> companyArrayList = null;
+
+        String query = prop.getProperty("selectPagedPlaceCompanyList");
+
+        try {
+            preparedStatement = con.prepareStatement(query);
+
+            // 불러와야 하는 목록의 첫글 - 2페이지면 21번째글
+            int startNum = (pageInfo.getCurrentPage() - 1) * pageInfo.getLimit() + 1;
+            // 불러와야 하는 목록의 마지막글 - 2페이지면 30번글.
+            int endNum = startNum + pageInfo.getLimit() -1;
+
+            preparedStatement.setInt(1, startNum);
+            preparedStatement.setInt(2, endNum);
+
+            resultSet = preparedStatement.executeQuery();
+
+            companyArrayList = new ArrayList<>();
+
+            while (resultSet.next()) {
+                PlaceCompanyForList pc = new PlaceCompanyForList();
+                // 번호 이름 전번 시작일 종료일
+                pc.setCompany_pk(resultSet.getInt("company_pk"));
+                pc.setCompany_name(resultSet.getString("company_name"));
+                pc.setPhone(resultSet.getString("phone"));
+                pc.setStartDate(Date.valueOf(resultSet.getString("start_date")));
+                pc.setEndDate(Date.valueOf(resultSet.getString("end_date")));
+
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally {
+            close(resultSet);
+            close(preparedStatement);
+        }
+
+
+        return companyArrayList;
     }
 }
