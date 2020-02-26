@@ -44,7 +44,7 @@
 	font-family:initial; 
 	color:#3c3c3c;
 	}
-	#addReply {
+	#addReply, #noneLogin {
 	height:50px;
 	margin-top:-5px;
 	}
@@ -295,7 +295,6 @@
    				
    				$("#addReply").click(function() {
    					
-	   				var writer = <%=loginMember.getMemberCode()%>;
    					var pid = <%= petition.getPetitionCode()%>;
    					var content = $("#replyContent").val();
    					
@@ -303,7 +302,6 @@
    					$.ajax({
    						url: "/hobbyist/insertReply.sg",
    						data: {
-   							writer: writer,
    							pid: pid,
    							content: content
    						},
@@ -312,7 +310,7 @@
    							var $replySelectTable = $("#replySelectTable");
    							$replySelectTable.html('');
    							$("#replyCount").text(data.length);
-   							//console.log(data.length);
+
    							for(var key in data) {
    								var str = "<tr><input type='hidden' value=" + data[key].replyCode + ">";
    								str += "<td rowspan='2'>";
@@ -327,15 +325,6 @@
    								str += "<td style='color:darkolivegreen;'>신고</td>";
    								str += "</tr><tr><td colspan='4'>" + data[key].replyContent + "</td></tr>";
    								str += "<tr><td colspan='5'><hr></td></tr>";
-   								//var $tr = $("<tr>");
-   								/* var $writerTd = $("<td>").text(data[key].memberName).css("width", "100px");
-   								var $contentTd = $("<td>").text(data[key].replyContent).css("width", "400px");
-   								var $dateTd = $("<td>").text(data[key].replyDate).css("width", "200px");
-   								
-   								$tr.append($writerTd);
-   								$tr.append($contentTd);
-   								$tr.append($dateTd);
-   								 */
    								
    								$replySelectTable.append(str);
    							} 

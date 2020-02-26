@@ -215,6 +215,59 @@ public class ArtistService {
 		return arCareerList;
 	}
 
+	//아티스트 증명 첨부파일  조회
+	public Image selectOneImage(int num) {
+		Connection con = getConnection();
+		
+		Image img = new ArtistDao().selectOneImage(con, num);
+		
+		close(con);
+		
+		return img;
+	}
+
+	//아티스트 승인 처리
+	public int permitArtist(int num, int memCode) {
+		Connection con = getConnection();
+		
+		int result1 = new ArtistDao().updateApplyConfirmed(con, num);
+		int result2 = 0;
+		int result = 0;
+		
+		if(result1 > 0) {
+			result2 = new ArtistDao().updateArtistAccepted(con, memCode);
+		}
+		if(result2 > 0) {
+			result = 1;
+		} 
+		
+		if(result > 0) {
+			commit(con);
+		} else {
+			rollback(con);
+		}
+		
+		close(con);
+		
+		return result;
+	}
+
+	//아티스트 거절 처리
+	public int refuseArtist(int applyCode, String rejectReason) {
+		Connection con = getConnection();
+		
+		int result = new ArtistDao().updateRejectReason(con, applyCode, rejectReason);
+		
+		if(result > 0) {
+			commit(con);
+		} else {
+			rollback(con);
+		}
+		
+		return result;
+	}
+
+
 	
 
 	
