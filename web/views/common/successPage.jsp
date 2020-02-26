@@ -28,6 +28,10 @@
 					alertMessage = "결제완료 되었습니다.";
 					movePath = "/hobbyist/index.jsp";
 					break;
+				case "insertCategory" :
+					alertMessage = "관심 카테고리 설정이 완료되었습니다.";
+					movePath = "/hobbyist/index.jsp";
+					break;
 			}
 			
 			alert(alertMessage);

@@ -75,11 +75,18 @@
             background: darkolivegreen;
             color:white;
             border: 1px solid darkolivegreen;
+            width:90px;
+            height: 40px;
+            cursor:pointer;
+        
         }
         
         #checkPwd1, #checkPwd2 {
         	text-align:center;
         }
+        
+        
+        	
         
     </style>
 </head>
@@ -157,7 +164,7 @@
             <br><br>
             <input type="reset" value="가입취소" class="btnz" id="reset" onclick="goLogin();">&nbsp;&nbsp;
             <!-- <input type="submit" value="가입하기" class="btnz" id="submit"> -->
-            <span id="submit" class="btnz" onclick="insertMember();">가입하기</span>
+            <span id="submit" class="btnz" onclick="insertMember();" style="width:90px; height:40px;">가입하기</span>
         </form>
         
         <script>
@@ -173,6 +180,7 @@
 	        ckId = false;
 	        ckPw = false;
 	        ckPw2 = false;
+	        ckName = false;
 	        ckPhone = false;
 	        ckNum = false;
 	        ckEmail = false;
@@ -184,6 +192,7 @@
 	        	
 	        	if(ckId == true) {
 	        		if(ckPw == true && ckPw2 == true) {
+	        		   if(chName == true) {
 	        			if(ckPhone == true) {
 	        				if(ckNum == true) {
 	        					if(ckEmail == true) {
@@ -197,6 +206,9 @@
 	        			} else {
 	        				alert("휴대전화를 다시 확인해주세요");
 	        			}
+	        		   }else {
+	        			   alert("이름을 다시 확인해주세요");
+	        		   }	
 	        		} else {
 	        			alert("비밀번호를 다시 확인해주세요");
 	        		}
@@ -242,7 +254,7 @@
         		});
         	
         
-        	
+        		
 	        	$("#memberPwd").change(function() {
 	        		ckPw = checkPassword($('#memberPwd').val());
 	        		console.log("ckPw : " + ckPw);
@@ -293,6 +305,23 @@
 	        		
 	        	}
 	        	$("#pwdCheck2").html("");
+	        	
+	        	
+	        	//이름 유효성 검사
+	        	$("#memberName").change(function() {
+	        		chName = checkName($('#memberName').val());
+	        	});
+	        	
+	        	function checkName(name) {
+	        		$("#memberName").focus();
+	        		if(name != "") {
+	        			if(!/^[가-힣]+$/.test(name)) {
+	        				return false;
+	        			}
+	        			return true;
+	        		}
+	        		return false;
+	        	}
 	        	
 	        	
 	        	//인증하기 버튼 클릭시
@@ -395,60 +424,6 @@
 	        	$("#emailCheck").html("");
 				
 	        	
-	        	 /* $("#memberForm").submit(function() {
-	        		if($("#memberId").val() == "") {
-	        			return false;
-	        		}
-	        		
-	        		if(!idRegExp.test($("#memberId").val)) {
-	        			return false;
-	        		}
-	        		
-	        		if($("#memberPwd").val() == "") {
-	        			return false;
-	        		}
-	        		
-	        		if(!pwdRegExp.test($("#memberPwd").val())) {
-	        			return false;
-	        		}
-	        		
-	        		if($("#memberPwd2").val() == "") {
-	        			return false;
-	        		}
-	        		
-	        		if(!$("#memberPwd").val() == $("#memberPwd2").val()) {
-	        			return false;
-	        		}
-	        		
-	        		if($("#tel1").val() == ""){
-	        			return false;
-	        		}
-	        		
-	        		if($("#tel2").val() == ""){
-	        			return false;
-	        		}
-	        		
-	        		if($("#tel3").val() == ""){
-	        			return false;
-	        		}
-	        		
-	        		if($("#num").val() == "") {
-	        			return false;
-	        		}
-	        		
-	        		if(!userSms == randomVal) {
-	        			return false;
-	        		}
-	        		
-	        		if($("#email").val() == "") {
-	        			return false;
-	        		}
-	        		
-	        		if(!emailRegExp.test($("#email").val())) {
-	        			return false;
-	        		}
-	        	
-	        	});  */
        
       	  }); 
 	     
