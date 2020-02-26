@@ -5,6 +5,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import com.dh.hobbyist.artist.model.vo.ArtistCareer;
+import com.dh.hobbyist.artist.model.vo.ArtistCategory;
+import com.dh.hobbyist.artist.model.vo.ArtistCerts;
+import com.dh.hobbyist.artist.model.vo.ArtistEducation;
 import com.dh.hobbyist.artist.model.dao.ArtistDao;
 import com.dh.hobbyist.common.model.vo.Image;
 import com.dh.hobbyist.member.model.vo.Member;
@@ -166,6 +170,54 @@ public class ArtistService {
 		
 		return imgList;
 	}
+
+	//아티스트 신청한 회원의 전문분야 조회
+	public List<ArtistCategory> selectArtistCategoryList(int num) {
+		Connection con = getConnection();
+		
+		List<ArtistCategory> arCatList = new ArtistDao().selectArtistCategoryList(con, num);
+		
+		close(con);
+		
+		return arCatList;
+	}
+
+	//아티스트 신청한 회원의 보유자격증 조회
+	public List<ArtistCerts> selectArtistCertsList(int num) {
+		Connection con = getConnection();
+		
+		List<ArtistCerts> arCertsList = new ArtistDao().selectArtistCertsList(con, num);
+		
+		close(con);
+		
+		return arCertsList;
+	}
+
+	//아티스트 신청한 회원의 학력 조회
+	public List<ArtistEducation> selectArtistEduList(int num) {
+		Connection con = getConnection();
+		
+		List<ArtistEducation> arEduList = new ArtistDao().selectArtistEduList(con, num);
+		
+		close(con);
+		
+		return arEduList;
+	}
+
+	//아티스트 신청한 회원의 경력 조회
+	public List<ArtistCareer> selectArtistCareerList(int num) {
+		Connection con = getConnection();
+		
+		List<ArtistCareer> arCareerList = new ArtistDao().selectArtistCareerList(con, num);
+		
+		close(con);
+		
+		return arCareerList;
+	}
+
+	
+
+	
 
 	
 

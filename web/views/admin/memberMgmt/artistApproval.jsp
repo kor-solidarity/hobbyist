@@ -168,6 +168,11 @@
     .registerText {
     	cursor:pointer;
     }
+    #downloadDiv {
+    	color:DodgerBlue;
+    	cursor:pointer;
+    	width:80px;
+    }
 </style>
 </head>
 
@@ -334,21 +339,17 @@
 									<tr>
 										<td>
 											<div class="box" style="background: #BDBDBD;">
-												<img class="profile" src="/hobbyist/static/images/seolhyun.png">
+												<img class="profile" id="profileImg" src="/hobbyist/static/images/user.png">
 											</div>
 										</td>
-										<td>hyeon</td>
+										<td id="arNick"></td>
 									</tr>
 									<tr>
-										<td colspan="2">안녕하세요 현직 바리스타 hyeon입니다~!! :D 사실 저는 처음부터
-											바리스타는 아니었습니다. 주말에 친척 카페에 일손을 도와 드리러 몇 번 간 것이 회사에서는 느껴보지 못했던
-											에너지와 활력이 들정도로 매력적이었습니다. 그렇게 시작했고 남들보다 늦었다는 생각에 초반에는 실무를 배우면서도
-											따로 공부를 많이 했습니다. 기회가 된다면 이런 것들을 더 많은 분들과 나누고 싶다는 생각에 등록하게
-											되었습니다~</td>
+										<td id="arContent" colspan="2"></td>
 									</tr>
 									<tr>
 										<td>계좌번호</td>
-										<td>신한 김설현 11041259260</td>
+										<td id="arBank"></td>
 									</tr>
 									<tr>
 										<td colspan="2"><hr></td>
@@ -357,16 +358,16 @@
 										<td colspan="2" class="emp">전문분야 및 상세분야</td>
 									</tr>
 									<tr>
-										<td>라이프 스타일</td>
-										<td>커피/차</td>
+										<td id="cat1"></td>
+										<td id="detailCat1"></td>
 									</tr>
 									<tr>
-										<td>라이프 스타일</td>
-										<td>요리/베이킹</td>
+										<td id="cat2"></td>
+										<td id="detailCat2"></td>
 									</tr>
 									<tr>
-										<td>음악</td>
-										<td>기타연주</td>
+										<td id="cat3"></td>
+										<td id="detailCat3"></td>
 									</tr>
 									<tr>
 										<td colspan="2"><hr></td>
@@ -375,16 +376,24 @@
 										<td colspan="2" class="emp">보유 자격증</td>
 									</tr>
 									<tr>
-										<td colspan="2">커피 바리스타 자격증 1급<br>(2019.01.20, 커피협회)
+										<td colspan="2"><label id="certs1"></label><br><p id="certsDetail1"></p>
 										</td>
 									</tr>
 									<tr>
-										<td colspan="2">베이킹 자격증<br>(2019.07.06, 베이킹협회)
+										<td colspan="2"><label id="certs2"></label><br><p id="certsDetail2"></p>
+										</td>
+									</tr>
+									<tr>
+										<td colspan="2"><label id="certs3"></label><br><p id="certsDetail3"></p>
 										</td>
 									</tr>
 									<tr>
 										<td>첨부파일</td>
-										<td><a href="#">[다운로드]</a></td>
+										<td><div id="downloadDiv">[다운로드]</div></td>
+									</tr>
+									<tr style="display:none;">
+										<td><img id="proofFile" src=""></td>
+										<td><input type="hidden" id="fileCode" name="fileCode"></td>
 									</tr>
 									<tr>
 										<td colspan="2"><hr></td>
@@ -393,7 +402,13 @@
 										<td colspan="2" class="emp">학력/전공</td>
 									</tr>
 									<tr>
-										<td colspan="2">경민대학교 호텔조리학과 졸업</td>
+										<td colspan="2" id="edu1"></td>
+									</tr>
+									<tr>
+										<td colspan="2" id="edu2"></td>
+									</tr>
+									<tr>
+										<td colspan="2" id="edu3"></td>
 									</tr>
 									<tr>
 										<td colspan="2"><hr></td>
@@ -402,10 +417,13 @@
 										<td colspan="2" class="emp">경력</td>
 									</tr>
 									<tr>
-										<td colspan="2">스타벅스 매니저 / 관리 및 음료 제조 / 3년 2개월</td>
+										<td colspan="2" id="career1"></td>
 									</tr>
 									<tr>
-										<td colspan="2">개인카페 사장 / 가게 운영 및 음료 제조 / 8개월</td>
+										<td colspan="2" id="career2"></td>
+									</tr>
+									<tr>
+										<td colspan="2" id="career3"></td>
 									</tr>
 								</table>
 							</div>
@@ -423,11 +441,141 @@
 					var num = $(this).parent().children("input").val();
 
 					$.ajax({
-						url: "applyInfo.ar",
+						url: "/hobbyist/applyInfo.ar",
 						data: {num},
 						type: "post",
 						success: function(data) {
-							console.log("서버 전공 성공");
+
+							for(var key in data) {
+								
+								//console.log(key + ": " + data[key]);
+								//console.log(data[key].length);
+								
+								if(key == 'member') {
+									var list = data[key];
+									var mem = list[0];
+									$("#arNick").text(mem.artistNick);
+									$("#arContent").text(mem.artistIntro);
+									
+									var bankName = "";
+									switch(mem.bankName) {
+									case "SH" : bankName = "신한"; break;
+									case "NH" : bankName = "농협"; break;
+									case "KB" : bankName = "국민"; break;
+									}
+									$("#arBank").text(bankName + " " + mem.bankOwner + " " + mem.bankNum);
+								}
+								
+								if(key == 'arCatList') {
+									var list = data[key];
+									var len = data[key].length;
+									
+									for(var i = 0; i < len; i++) {
+										var category = list[i];
+										
+										var parentName = "";
+										
+										switch(category.categoryParentCode) {
+										case 1: parentName = "음악"; break;
+										case 9: parentName = "댄스"; break;
+										case 15: parentName = "영상/사진"; break;
+										case 20: parentName = "라이프스타일"; break;
+										case 25: parentName = "뷰티"; break;
+										case 33: parentName = "디자인"; break;
+										case 37: parentName = "스포츠"; break;
+										}
+										var catId = "#cat" + (i + 1);
+										var detailCatId = "#detailCat" + (i + 1);
+										$(catId).text(parentName);
+										$(detailCatId).text(category.categoryName);
+										
+									}
+									
+									
+								}
+								
+								if(key == 'arCertsList') {
+									var list = data[key];
+									var len = data[key].length;
+									
+									for(var i = 0; i < len; i++) {
+										var cert = list[i];
+										
+										var certsId = "#certs" + (i + 1);
+										var certsDetailId = "#certsDetail" + (i + 1);
+										
+										var str = "(" + cert.certDate + ", " + cert.certOrg + ")";
+										
+										$(certsId).text(cert.certName);
+										$(certsDetailId).text(str);
+										
+									}
+								}
+								
+								if(key == 'arCareerList') {
+									var list = data[key];
+									var len = data[key].length;
+									
+									for(var i = 0; i < len; i++) {
+										var career = list[i];
+										
+										var careerId = "#career" + (i + 1);
+										
+										var str = career.orgName + "  " + career.rank + " / " + career.occupation + " / " + career.occupationTerm;
+										
+										$(careerId).text(str);
+									}
+								}
+								
+								if(key == 'arEduList') {
+									var list = data[key];
+									var len = data[key].length;
+									
+									for(var i = 0; i < len; i++) {
+										var edu = list[i];
+										
+										var eduId = "#edu" + (i + 1);
+										
+										var status = "";
+										
+										switch(edu.status) {
+										case 0 : status = "재학"; break;
+										case 1 : status = "졸업"; break;
+										}
+										
+										var str = edu.eduInsitituteName + " / " + edu.eduMajor + " / " + status;
+										
+										$(eduId).text(str);
+									}
+								}
+								
+								if(key == 'imgList') {
+									var list = data[key];
+									var len = data[key].length;
+									
+									for(var i = 0; i < len; i++) {
+										var img = list[i];
+										
+										//console.log(img);
+										
+										var root = img.imageRoute + "/" + img.imageName;
+										
+										if(img.imageType == 'profile' && len == 1) {
+											$("#profileImg").attr("src", root);
+											$("#fileCode").val("");
+										} else if(img.imageType == 'profile' && len != 1) {
+											$("#profileImg").attr("src", root);
+										}
+										
+										if(img.imageType == 'artistproof') {
+											$("#proofFile").attr("src", root);
+											$("#fileCode").val(img.imageCode);
+											//console.log(root);
+										}
+									}
+								}
+								
+							}
 						},
 						error: function(error) {
 							console.log(error);
@@ -435,6 +583,27 @@
 					});
 					
 					$("#myModal2").modal();
+				});
+				
+				$("#downloadDiv").click(function() {
+					var num = $("#fileCode").val();
+					
+					if(num == "") {
+						alert("첨부파일이 존재하지 않습니다.");
+					} else {
+						$.ajax({
+							url:"/hobbyist/download.ar",
+							data: {num : num},
+							type: "get",
+							success: function(data) {
+								console.log("서버 전송 성공!");
+							},
+							error: function(error) {
+								console.log(error);
+							}
+						});
+					}
+					
 				});
 			});
 			
