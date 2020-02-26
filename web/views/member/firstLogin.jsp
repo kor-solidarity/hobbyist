@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -90,8 +91,8 @@
 		margin-right:50px;
 	}
 	
-	#myCategory {
-		width:140px; 
+	.myCategory-list {
+		max-width:230px;
 		height:33px;
 		border-radius:20px;
 		background:darkolivegreen;
@@ -106,14 +107,16 @@
 		display: none;
 	}
 	
+	
 </style>
 </head>
 <body>
 	<%@ include file="/views/common/menubar.jsp"  %>
+	<% if(loginMember != null) { %>
 	<div id="main">
 	<h2 id="title">관심 카테고리 등록</h2>
 	<h3 id="content">관심 카테고리(3개 이하)를 설정하면 관심수업을 추천해드립니다!</h3>
-	<form action="<%=request.getContextPath() %>/index.jsp" method="post">
+	<form action="<%=request.getContextPath() %>/category.me" method="post">
 	<div class="category-list" id="category-list1">
 		<p class="cTitle">카테고리</p>
 		<select id="pCategory">
@@ -168,25 +171,39 @@
 	<div class="category-list" id="category-list3">
 		<p class="cTitle">내가 선택한 카테고리</p>
 		<div id="selectCategory">
-			<div id="myCategory">
-			</div>
-			<script>
-				$("#cCategory").change(function() {
+		<input type="hidden" name="categoryCode" id="myCategory1">	
+		<span  class="myCategory-list" id="myCategory1">
+		</span>		
+		<script>
+			$("#cCategory").change(function() {
+				var $selectOp1 = $("#pCategory option:selected");
+				var $selectOp2 = $("#cCategory option:selected");
+				
 					if($("#cCategory option").is(":selected")) {
-						$("#myCategory").text($("#pCategory option:selected").text() + "-" + $("#cCategory option:selected").text());
-						$("#myCategory").val($("#cCategory option:selected").val());
-						$("#myCategory").css({'display':'block'});
-						
-						console.log($("#cCategory option:selected").val());
+						$(".myCategory-list").text($selectOp1.text() + "-" +  $selectOp2.text());
+						$("#myCategory1").val($selectOp2.val());
+						$(".myCategory-list").css({'display':'block'});
+
+						console.log($selectOp2.val());
+						console.log(typeof $selectOp2.val());
 					}
-				});
-			</script>
+			});
+			
+		</script>
+
 		</div>
 	</div>
-	
+	<%-- <input type="hidden" name="memberCode" value="<%=loginMember.getMemberCode()%>"> --%>
 	<button type="submit" id="btn">확인</button>
 	</form>
 	</div>
 	<%@ include file="/views/common/footer.jsp"  %>
+	
+	<% } else { 
+		request.setAttribute("msg", "잘못된 경로로 접근하셨습니다.");
+		request.getRequestDispatcher("../common/errorPage.jsp").forward(request, response);
+	} %>
+	
+
 </body>
 </html>

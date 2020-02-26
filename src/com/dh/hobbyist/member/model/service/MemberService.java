@@ -115,6 +115,23 @@ public class MemberService {
 		
 		return result;
 	}
+	
+	//첫 로그인 관심 카테고리 설정
+	public int insertCategory(int memberCode, int categoryCode) {
+		Connection con = getConnection();
+		
+		int result = new MemberDao().insertCategory(con, memberCode, categoryCode);
+		
+		if(result > 0) {
+			commit(con);
+		}else {
+			rollback(con);
+		}
+		
+		close(con);
+		
+		return result;
+	}
 	   
 
 	

@@ -329,6 +329,29 @@ public class MemberDao {
 		return result;
 	}
 	
+	//첫 로그인 관심 카테고리 설정
+	public int insertCategory(Connection con, int memberCode, int categoryCode) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String query = prop.getProperty("insertCategory");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, memberCode);
+			pstmt.setInt(2, categoryCode);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+
+		return result;
+	}
+	
 	
 	
 
