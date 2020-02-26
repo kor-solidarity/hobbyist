@@ -194,17 +194,6 @@
 						<td style="width: 17%;">환불계좌</td>
 						<td style="width: 14%;"><button id="Btn">조회</button></td>
 					</tr>
-					<tr>
-						<td style="width: 8%;">결제코드</td>
-						<td style="width: 11%;">수업일정 코드</td>
-						<td style="width: 11%;">아이디</td>
-						<td style="width: 7%;">이름</td>
-						<td style="width: 13%;">전화번호</td>
-						<td style="width: 11%;">담당 아티스트</td>
-						<td style="width: 11%;">환불 금액</td>
-						<td style="width: 17%;">환불계좌</td>
-						<td style="width: 14%;"><button id="Btn">조회</button></td>
-					</tr>
 				</table>
 			</div>
 		</article>
@@ -218,7 +207,7 @@
    	   <!-- Modal content-->
    	   <div class="modal-content">
    	     <div class="modal-header" style="background: #4E4E4E ; color: white;">
-   	       <h4 class="modal-title">신청내역 조회</h4>
+   	       <h4 class="modal-title" style="font-family: 'ZCOOL QingKe HuangYou', cursive;">hobbyist</h4>
    	       <button type="button" class="close" data-dismiss="modal" style="color: white;">x</button>
    	     </div>
    	     <div class="modal-body">
@@ -264,7 +253,7 @@
    		 </div>
   		</div>
   		
-  		
+  		<!-- 반려시 뜨는 모달 -->
   		<div class="modal fade" id="myModal1" role="dialog" style="display: none;">
    	 <div class="modal-dialog">
     
@@ -293,7 +282,7 @@
   	</form>
   
 	<script>
-		$(document).ready(function(){
+		$(document).ready(function() {
 		    $("#Btn").click(function(){
 	   	    	 $("#myModal").modal();
 		    });
@@ -302,12 +291,10 @@
 		function approve() {
 			
 			alert("환불 승인 하시겠습니까?");
-			
-			
 		}
 		
 		function refuse() {
-			 $("#myModal1").modal();
+			$("#myModal1").modal();
 			$("#myModal1").show();
 		}
 	</script>
