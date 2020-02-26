@@ -156,7 +156,8 @@
             </table>
             <br><br>
             <input type="reset" value="가입취소" class="btnz" id="reset" onclick="goLogin();">&nbsp;&nbsp;
-            <input type="submit" value="가입하기" class="btnz" id="submit">
+            <!-- <input type="submit" value="가입하기" class="btnz" id="submit"> -->
+            <span id="submit" class="btnz" onclick="insertMember();">가입하기</span>
         </form>
         
         <script>
@@ -168,250 +169,292 @@
 	        	location.href = "<%= request.getContextPath()%>/views/member/loginForm.jsp";
 	        }
 	        
+	        //submit 여부를 결정하기 위한 check 변수 선언
+	        ckId = false;
+	        ckPw = false;
+	        ckPw2 = false;
+	        ckPhone = false;
+	        ckNum = false;
+	        ckEmail = false;
 	        
-	      
+	        //각 check 변수에 따라 submit 여부를 결정하기 위한 메소드
+	    	function insertMember() {
+	        	console.log("가입하기 버튼 클릭");
+	        	console.log("ckId : " + ckId);
+	        	
+	        	if(ckId == true) {
+	        		if(ckPw == true && ckPw2 == true) {
+	        			if(ckPhone == true) {
+	        				if(ckNum == true) {
+	        					if(ckEmail == true) {
+		        					$("#memberForm").submit();        				
+	        					} else {
+	        						alert("이메일을 다시 확인해주세요");
+	        					}	        					
+	        				} else {
+	        					alert("인증번호를 올바로 입력해주세요");
+	        				}
+	        			} else {
+	        				alert("휴대전화를 다시 확인해주세요");
+	        			}
+	        		} else {
+	        			alert("비밀번호를 다시 확인해주세요");
+	        		}
+	        	} else {
+	        		alert("아이디를 다시 확인해주세요");
+	        	}
+	        }     	
 	      
         	
-        	
-	       	 $(function() {
+	       	$(function() {
         		$(document).on('click', '#idBtn', function checkId() {
         			var memberId = $("#memberId").val();
             		var idRegExp = /^[a-zA-z0-9]{4,12}$/;
-					 $("#memberId").focus(); 
-	        		
+					$("#memberId").focus(); 
+					 
 	        		$.ajax({
 	        			url: "/hobbyist/idCheck.me",
 	        			type: "post",
+	        			async: false,
 	        			data: {memberId: memberId},
 	        			success: function(data) {
+	        				
 	        				if(!idRegExp.test(memberId)) {
 	        					alert("영문, 숫자만으로 4~12자 이내로 입력하세요.");
-	        					return false;
+	        					/* return false; */
+	        					ckId = false;
 	        				}else {
 	        					if(data == "fail") {
 		        					alert("이미 존재하는 아이디입니다.");
-		        					return false;
+		        					/* return false; */
+		        					ckId = false;
 		        				}else {
 		        					alert("사용 가능한 아이디입니다.");
-		        					return true;
+		        					/* return true; */
+		        					ckId = true;
 		        				}
 	        				}
-	        				
-	        				
 	        			},
 	        			error: function(error) {
 	        				console.log(error);
 	        			}
 	        		});
-        	});
+        		});
         	
         
         	
-        	$("#memberPwd").change(function() {
-        		checkPassword($('#memberPwd').val());
-        	});
-        	
-        	
-        	function checkPassword(password) {
-        		 $("#memberPwd").focus(); 
-        		if(password != "") {
-        			if(!/^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,20}$/.test(password)) {
-	        			$("#pwdCheck1").html("영문, 숫자, 특수문자 조합 8~20자 이내로 입력해주세요.");
-	        			$("#pwdCheck1").css({'color':'red', 'font-size':'11.5px'});
+	        	$("#memberPwd").change(function() {
+	        		ckPw = checkPassword($('#memberPwd').val());
+	        		console.log("ckPw : " + ckPw);
+	        	});
+	        	
+	        	
+	        	function checkPassword(password) {
+	        		 $("#memberPwd").focus(); 
+	        		if(password != "") {
+	        			if(!/^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,20}$/.test(password)) {
+		        			$("#pwdCheck1").html("영문, 숫자, 특수문자 조합 8~20자 이내로 입력해주세요.");
+		        			$("#pwdCheck1").css({'color':'red', 'font-size':'11.5px'});
+		        			return false;
+		        		}
+		        		$("#pwdCheck1").html("사용 가능한 비밀번호입니다.");
+		        		$("#pwdCheck1").css({'color':'green', 'font-size':'11.5px'});
+		        		return true;
+	        			
+	        		}
+	        		$("#pwdCheck1").html("비밀번호를 입력해주세요.");
+	    			$("#pwdCheck1").css({'color':'red', 'font-size':'11.5px'});
+	    			return false; 
+	        		
+	        	}
+	        	$("pwdCheck1").html("");
+	        	
+	        	
+	        	$("#memberPwd2").change(function() {
+	        		ckPw2 = checkPassword2($('#memberPwd').val(), $('#memberPwd2').val());
+	        	});
+	        	
+	        	var pwd1 = $("#memberPwd").val();
+	        	var pwd2 = $("#memberPwd2").val();
+	        	
+	        	function checkPassword2(pwd1, pwd2) {
+	        		 $("#memberPwd2").focus(); 
+	        		if(pwd1 != "" && pwd2 != "") {
+	        			if(pwd1 != pwd2) {
+		        			$("#pwdCheck2").html("비밀번호가 일치하지 않습니다.");
+		        			$("#pwdCheck2").css({'color':'red', 'font-size':'11.5px'});
+		        			return false;
+		        		}
+		        		$("#pwdCheck2").html("비밀번호가 일치합니다.");
+		        		$("#pwdCheck2").css({'color':'green', 'font-size':'11.5px'});
+		        		return true;
+	        		}
+	        		return false; 
+	        		
+	        	}
+	        	$("#pwdCheck2").html("");
+	        	
+	        	
+	        	//인증하기 버튼 클릭시
+	        	
+	       		var randomVal = ""; //유저에게 보낸 문자의 랜덤 숫자를 저장하기 위한 전역변수
+	    		$(document).on('click', '#phoneBtn', function checkPhone() {
+					var tel1 = $("#tel1").val();
+					var tel2 = $("#tel2").val();
+					var tel3 = $("#tel3").val();
+	        		var phone = {
+	        					tel1: tel1,
+	        					tel2: tel2,
+	        					tel3: tel3
+	        			};
+	        		
+	        		$.ajax({
+	        			url: "/hobbyist/phoneCheck.me",
+	        			type: "post",
+	        			data: phone,
+	        			async: false,
+	        			success: function(data) {
+	        				if(data == "fail") {
+	        					alert("이미 가입한 이력이 있는 번호입니다.\n확인 후 다시 진행해주세요.");
+	        					/* return false; */
+	        					ckPhone = false;
+	        				}else {
+	        					 $.ajax({
+	  	        		           url: "/hobbyist/phoneCertification.ph",
+	  	        		            type: "post",
+	  	        		            data: phone, 
+	  	        		            async: false,
+	  	        		            success: function(data) {
+	  	        		            						
+	  	        		            randomVal = data; //유저에게 문자로 보낸 랜덤 값을 그대로 리턴 받아서 전역변수로 선언한 randomVal에 넣어줬음
+	  	        		            console.log(data);
+	  	        		            						
+	  	        		            },
+	  	        		            error: function(error) {
+	  	        		            console.log(error);
+	  	        		            } 
+	  	        		         }); 
+	        					
+	        					alert("인증번호가 발송되었습니다.");
+	        					/* return true; */
+	        					ckPhone = true;
+	        				}
+	        			},
+	        			error: function(error) {
+	        				console.log(error);
+	        			}
+	        		});
+	
+	        		  
+	
+	        	});
+	
+	    		
+				$(document).on('click', '#checkBtn', function checkNum() {
+					var userSms = $("#num").val(); // 회원가입 폼에서 유저가 문자를 보고 입력한 숫자를 가져옴
+	            	
+	                 if(userSms == randomVal){  //인증번호가 같은 경우 행동
+	                   		alert("인증이 완료되었습니다.");
+	                 		/* return true; */
+	                 		ckNum = true;
+	                   }else{		    //인증번호가 다른 경우 행동
+	                    	alert("인증번호가 일치하지 않습니다. 확인 후 다시 입력하세요.");
+	                   		/* return false; */
+	                   		ckNum = false;
+	                    }
+	   			 });
+	        	
+	        	
+	        	
+	        	$("#email").change(function() {
+	        		ckEmail = checkEmail($('#email').val());
+	        	});
+	        	
+	        	
+	        	function checkEmail(email) {
+	        		$("#email").focus();
+	        		var email = $("#email").val();
+	              	var regEmail = /([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+	              	
+	        		if(email != "") {
+	        			if(!regEmail.test(email)) {
+	        				$("#emailCheck").html("올바른 이메일 형식으로 입력해주세요.");
+		        			$("#emailCheck").css({'color':'red', 'font-size':'11.5px'});
+		        			return false;
+	        			} else {
+		        			$("#emailCheck").html("");
+			        		return true;
+	        			}
+	        		} else {
+		        		$("#emailCheck").html("이메일을 입력해주세요.");
+		    			$("#emailCheck").css({'color':'red', 'font-size':'11.5px'});
+		    			return false;
+	        		}
+	        	}
+	        	
+	        	$("#emailCheck").html("");
+				
+	        	
+	        	 /* $("#memberForm").submit(function() {
+	        		if($("#memberId").val() == "") {
 	        			return false;
 	        		}
-	        		$("#pwdCheck1").html("사용 가능한 비밀번호입니다.");
-	        		$("#pwdCheck1").css({'color':'green', 'font-size':'11.5px'});
-	        		return true;
-        			
-        		}
-        		$("#pwdCheck1").html("비밀번호를 입력해주세요.");
-    			$("#pwdCheck1").css({'color':'red', 'font-size':'11.5px'});
-    			return false; 
-        		
-        	}
-        	$("pwdCheck1").html("");
-        	
-        	
-        	$("#memberPwd2").change(function() {
-        		checkPassword2($('#memberPwd').val(), $('#memberPwd2').val());
-        	});
-        	
-        	var pwd1 = $("#memberPwd").val();
-        	var pwd2 = $("#memberPwd2").val();
-        	
-        	function checkPassword2(pwd1, pwd2) {
-        		 $("#memberPwd2").focus(); 
-        		if(pwd1 != "" && pwd2 != "") {
-        			if(pwd1 != pwd2) {
-	        			$("#pwdCheck2").html("비밀번호가 일치하지 않습니다.");
-	        			$("#pwdCheck2").css({'color':'red', 'font-size':'11.5px'});
+	        		
+	        		if(!idRegExp.test($("#memberId").val)) {
 	        			return false;
 	        		}
-	        		$("#pwdCheck2").html("비밀번호가 일치합니다.");
-	        		$("#pwdCheck2").css({'color':'green', 'font-size':'11.5px'});
-	        		return true;
-        		}
-        		return false; 
-        		
-        	}
-        	$("#pwdCheck2").html("");
-        	
-        	
-        	//인증하기 버튼 클릭시
-        	
-       		var randomVal = ""; //유저에게 보낸 문자의 랜덤 숫자를 저장하기 위한 전역변수
-    		$(document).on('click', '#phoneBtn', function checkPhone() {
-				var tel1 = $("#tel1").val();
-				var tel2 = $("#tel2").val();
-				var tel3 = $("#tel3").val();
-        		var phone = {
-        					tel1: tel1,
-        					tel2: tel2,
-        					tel3: tel3
-        			};
-        		
-        		$.ajax({
-        			url: "/hobbyist/phoneCheck.me",
-        			type: "post",
-        			data: phone,
-        			async: false,
-        			success: function(data) {
-        				if(data == "fail") {
-        					alert("이미 가입한 이력이 있는 번호입니다.\n확인 후 다시 진행해주세요.");
-        					return false;
-        				}else {
-        					 $.ajax({
-  	        		           url: "/hobbyist/phoneCertification.ph",
-  	        		            type: "post",
-  	        		            data: phone, 
-  	        		            async: false,
-  	        		            success: function(data) {
-  	        		            						
-  	        		            randomVal = data; //유저에게 문자로 보낸 랜덤 값을 그대로 리턴 받아서 전역변수로 선언한 randomVal에 넣어줬음
-  	        		            console.log(data);
-  	        		            						
-  	        		            },
-  	        		            error: function(error) {
-  	        		            console.log(error);
-  	        		            } 
-  	        		         }); 
-        					
-        					alert("인증번호가 발송되었습니다.");
-        					return true;
-        				}
-        			},
-        			error: function(error) {
-        				console.log(error);
-        			}
-        		});
-
-        		  
-
-        	});
-
-    		
-			$(document).on('click', '#checkBtn', function checkNum() {
-				var userSms = $("#num").val(); // 회원가입 폼에서 유저가 문자를 보고 입력한 숫자를 가져옴
-            	
-                 if(userSms == randomVal){  //인증번호가 같은 경우 행동
-                   		alert("인증이 완료되었습니다.");
-                 		return true;
-                   }else{		    //인증번호가 다른 경우 행동
-                    	alert("인증번호가 일치하지 않습니다. 확인 후 다시 입력하세요.");
-                   		return false;
-                    }
-   			 });
-        	
-        	
-        	
-        	$("#email").change(function() {
-        		checkEmail($('#email').val());
-        	});
-        	
-        	
-        	
-        	function checkEmail(email) {
-        		$("#email").focus();
-        		var email = $("#email").val();
-              	var regEmail = /([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
-              	
-        		if(email != "") {
-        			if(!regEmail.test(email)) {
-        				$("#emailCheck").html("올바른 이메일 형식으로 입력해주세요.");
-	        			$("#emailCheck").css({'color':'red', 'font-size':'11.5px'});
+	        		
+	        		if($("#memberPwd").val() == "") {
 	        			return false;
-        			}
-        			$("#emailCheck").html("");
-	        		return true;
-        		}
-        		 $("#emailCheck").html("이메일을 입력해주세요.");
-    			$("#emailCheck").css({'color':'red', 'font-size':'11.5px'});
-    			return false;
-        	}
-        	$("#emailCheck").html("");
-			
-        	
-        	 /* $("#memberForm").submit(function() {
-        		if($("#memberId").val() == "") {
-        			return false;
-        		}
-        		
-        		if(!idRegExp.test($("#memberId").val)) {
-        			return false;
-        		}
-        		
-        		if($("#memberPwd").val() == "") {
-        			return false;
-        		}
-        		
-        		if(!pwdRegExp.test($("#memberPwd").val())) {
-        			return false;
-        		}
-        		
-        		if($("#memberPwd2").val() == "") {
-        			return false;
-        		}
-        		
-        		if(!$("#memberPwd").val() == $("#memberPwd2").val()) {
-        			return false;
-        		}
-        		
-        		if($("#tel1").val() == ""){
-        			return false;
-        		}
-        		
-        		if($("#tel2").val() == ""){
-        			return false;
-        		}
-        		
-        		if($("#tel3").val() == ""){
-        			return false;
-        		}
-        		
-        		if($("#num").val() == "") {
-        			return false;
-        		}
-        		
-        		if(!userSms == randomVal) {
-        			return false;
-        		}
-        		
-        		if($("#email").val() == "") {
-        			return false;
-        		}
-        		
-        		if(!emailRegExp.test($("#email").val())) {
-        			return false;
-        		}
-        	
-        	});  */
+	        		}
+	        		
+	        		if(!pwdRegExp.test($("#memberPwd").val())) {
+	        			return false;
+	        		}
+	        		
+	        		if($("#memberPwd2").val() == "") {
+	        			return false;
+	        		}
+	        		
+	        		if(!$("#memberPwd").val() == $("#memberPwd2").val()) {
+	        			return false;
+	        		}
+	        		
+	        		if($("#tel1").val() == ""){
+	        			return false;
+	        		}
+	        		
+	        		if($("#tel2").val() == ""){
+	        			return false;
+	        		}
+	        		
+	        		if($("#tel3").val() == ""){
+	        			return false;
+	        		}
+	        		
+	        		if($("#num").val() == "") {
+	        			return false;
+	        		}
+	        		
+	        		if(!userSms == randomVal) {
+	        			return false;
+	        		}
+	        		
+	        		if($("#email").val() == "") {
+	        			return false;
+	        		}
+	        		
+	        		if(!emailRegExp.test($("#email").val())) {
+	        			return false;
+	        		}
+	        	
+	        	});  */
        
-        }); 
+      	  }); 
 	     
 	    
 	   
-	        	
+	       
 	        	  
 	        	
 	        	 
