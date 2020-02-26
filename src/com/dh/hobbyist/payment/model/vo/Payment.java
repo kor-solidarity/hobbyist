@@ -1,6 +1,5 @@
 package com.dh.hobbyist.payment.model.vo;
 
-import java.sql.Date;
 import java.sql.Timestamp;
 
 public class Payment {
