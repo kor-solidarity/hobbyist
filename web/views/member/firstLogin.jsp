@@ -4,8 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> -->
- 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> 
 <title>Insert title here</title>
 <style>
 
@@ -36,8 +35,7 @@
 	.category-list {
 		margin-left:50px;
 		margin-right:130px;
-		float:left;
-		display:inline-block;
+		display:block;
 	}
 	.cTitle {
 		font-family: 'Do Hyeon', sans-serif;
@@ -49,6 +47,7 @@
 		height:33px;
 		font-family: 'Nanum Gothic', sans-serif;
 		font-size:16px;
+	
 		
 	}
 	#cCategory {
@@ -60,10 +59,14 @@
 	}
 	
 	#category-list2 {
-		
-		margin-top:-3px;
-		
+		margin-top: 150px;
 	}
+	
+	#category-list3 {
+		margin-left: 450px;
+		margin-top: -348px;
+	}
+	
 	
 	#selectCategory {
 		width:500px;
@@ -72,9 +75,7 @@
 	}
 	
 	
-	#category-list3 {
-		margin-top:-300px;
-	}
+	
 	
 	#btn {
 		width:100px;
@@ -89,8 +90,8 @@
 		margin-right:50px;
 	}
 	
-	#selectOne {
-		width:140px;
+	#myCategory {
+		width:140px; 
 		height:33px;
 		border-radius:20px;
 		background:darkolivegreen;
@@ -102,6 +103,7 @@
 		line-height:33px;
 		margin-top:20px;
 		margin-left:20px;
+		display: none;
 	}
 	
 </style>
@@ -115,49 +117,73 @@
 	<div class="category-list" id="category-list1">
 		<p class="cTitle">카테고리</p>
 		<select id="pCategory">
-		<option value="music">음악</option>
-		<option value="dance">댄스</option>
-		<option value="video">영상/사진</option>
-		<option value="lifeStyle">라이프스타일</option>
-		<option value="beauty">뷰티</option>
-		<option value="design">디자인</option>
-		<option value="sports">스포츠</option>
+		<option>----선택----</option>
+		<option value="1">음악</option>
+		<option value="9">댄스</option>
+		<option value="15">영상/사진</option>
+		<option value="20">라이프스타일</option>
+		<option value="25">뷰티</option>
+		<option value="33">디자인</option>
+		<option value="37">스포츠</option>
+		</select>
+	</div>
+
+	<div class="category-list" id="category-list2">
+		<p class="cTitle">상세 카테고리</p>
+		<select id="cCategory">
+		<option>----선택----</option>
+		<script>
+			$(function() {
+				$("#pCategory").change(function() {
+					var categoryName = $("#pCategory").val();
+					
+					$.ajax({
+						url: "/hobbyist/category.su",
+						type: "get",
+						data: {categoryName: categoryName},
+						success: function(data) {
+							
+							$select = $("#cCategory");
+							$select.find("option").remove();
+							$select.append($("<option>").text("----선택----"));
+							
+							for(var i = 0; i < data.length; i++) {
+								var $option = $("<option>");
+								$option.val(data[i].categoryCode);
+								$option.text(data[i].nodeName);
+								$select.append($option);
+							}
+						},
+						error: function(error) {
+							console.log(error);
+						}
+					});
+				});
+			});
+		</script>
 		</select>
 	</div>
 	
-		<div class="category-list" id="category-list2">
+	
+	<div class="category-list" id="category-list3">
 		<p class="cTitle">내가 선택한 카테고리</p>
 		<div id="selectCategory">
-			<div id="selectOne">음악/보컬</div>
+			<div id="myCategory">
+			</div>
+			<script>
+				$("#cCategory").change(function() {
+					if($("#cCategory option").is(":selected")) {
+						$("#myCategory").text($("#pCategory option:selected").text() + "-" + $("#cCategory option:selected").text());
+						$("#myCategory").val($("#cCategory option:selected").val());
+						$("#myCategory").css({'display':'block'});
+						
+						console.log($("#cCategory option:selected").val());
+					}
+				});
+			</script>
 		</div>
 	</div>
 	
-	<div class="category-list" id="category-list3">
-		<p class="cTitle">상세 카테고리</p>
-		<select id="cCategory">
-		<option >보컬</option>
-		<option>랩</option>
-		<option>국악</option>
-		<option>작사/작곡</option>
-		<option>기타연주</option>
-		<option>피아노</option>
-		<option>기타</option>
-		</select>
-	</div>
-	<!-- <script>
-		$(function() {
-			$("#pCategory option:eq(1)").click(function() {
-				$("#cCategory option:eq(0)").replaceWith("<option>방송댄스</option>");
-				$("#cCategory option:eq(1)").replaceWith("<option>스트릿</option>");
-				$("#cCategory option:eq(2)").replaceWith("<option>현대무용</option>");
-				$("#cCategory option:eq(3)").replaceWith("<option>한국무용</option>");
-				$("#cCategory option:eq(4)").replaceWith("<option>기타</option>");
-				$("#cCategory option:eq(5)")remove();
-				$("#cCategory option:eq(6)")remove();
-			});
-		});
-		
-	</script> -->
 	<button type="submit" id="btn">확인</button>
 	</form>
 	</div>
