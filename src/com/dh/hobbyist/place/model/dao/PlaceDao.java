@@ -215,9 +215,11 @@ public class PlaceDao {
                 pc.setCompany_pk(resultSet.getInt("company_pk"));
                 pc.setCompany_name(resultSet.getString("company_name"));
                 pc.setPhone(resultSet.getString("phone"));
-                pc.setStartDate(Date.valueOf(resultSet.getString("start_date")));
-                pc.setEndDate(Date.valueOf(resultSet.getString("end_date")));
+                // System.out.println(resultSet.getString("start_date"));
+                pc.setStartDate(resultSet.getDate("start_date"));
+                pc.setEndDate(resultSet.getDate("end_date"));
 
+                companyArrayList.add(pc);
             }
 
         } catch (SQLException e) {
