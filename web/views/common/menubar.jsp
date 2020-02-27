@@ -103,7 +103,7 @@
                 <%if(loginMember == null) { %>
                 <td onclick="goLogin();">로그인</td>
                 <% }else { %>
-                <td style="padding-bottom:5px;"><%=loginMember.getMemberName() %>님  <img src="/hobbyist/static/images/logoutIcon3.png" id="logoutBtn" style="width:16px; height:16px; vertical-align:middle;" onclick="goLogout();"> </td>
+                <td style="padding-bottom:5px;"><%=loginMember.getMemberName() %>님  <img src="/hobbyist/static/images/logoutIcon3.png" id="logoutBtn" style="width:16px; height:16px; vertical-align:middle;" onclick="logoutConfirm();"> </td>
                 <% } %>
                 
             </tr>
@@ -123,7 +123,17 @@
     		location.href = "<%= request.getContextPath()%>/views/member/loginForm.jsp";
     	}
     	
+    	function logoutConfirm() {
+    		var conf = confirm("로그아웃을 하시겠습니까?");
+    		
+    		if(conf == true) {
+    			goLogout();
+    		}
+    	}
+    	
+    	
     	function goLogout() {
+    	
     		location.href = "<%= request.getContextPath()%>/logout.me";
     	}
     	
@@ -139,8 +149,8 @@
     		location.href = "<%= request.getContextPath()%>/views/lesson/openLessonMain.jsp";
     	}
     	function goMyPage() {
-    		location.href = "<%= request.getContextPath()%>/views/member/myPage/myLesson/registeredLesson.jsp";
-    	}
+            location.href = "<%= request.getContextPath()%>/myPage.me";
+         }
     	
     </script>
 </body>

@@ -72,11 +72,14 @@
             margin-right: 20px;
         }
         #submit {
+        	display:inline-block;
             background: darkolivegreen;
             color:white;
-            border: 1px solid darkolivegreen;
-            width:90px;
-            height: 40px;
+            width:90px; 
+            height:40px; 
+            line-height:40px; 
+            font-size: 12px;
+            font-weight:100;
             cursor:pointer;
         
         }
@@ -164,7 +167,7 @@
             <br><br>
             <input type="reset" value="가입취소" class="btnz" id="reset" onclick="goLogin();">&nbsp;&nbsp;
             <!-- <input type="submit" value="가입하기" class="btnz" id="submit"> -->
-            <span id="submit" class="btnz" onclick="insertMember();" style="width:90px; height:40px;">가입하기</span>
+            <span id="submit" class="btnz" onclick="insertMember();">가입하기</span>
         </form>
         
         <script>
@@ -192,7 +195,7 @@
 	        	
 	        	if(ckId == true) {
 	        		if(ckPw == true && ckPw2 == true) {
-	        		   if(chName == true) {
+	        		   if(ckName == true) {
 	        			if(ckPhone == true) {
 	        				if(ckNum == true) {
 	        					if(ckEmail == true) {
@@ -309,7 +312,7 @@
 	        	
 	        	//이름 유효성 검사
 	        	$("#memberName").change(function() {
-	        		chName = checkName($('#memberName').val());
+	        		ckName = checkName($('#memberName').val());
 	        	});
 	        	
 	        	function checkName(name) {
@@ -427,17 +430,6 @@
        
       	  }); 
 	     
-	    
-	   
-	       
-	        	  
-	        	
-	        	 
-	       
-	    
-	      	
-	        	
-	        
         </script>
 
 </body>

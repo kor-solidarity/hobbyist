@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import com.dh.hobbyist.artist.model.vo.ApplyArtist;
 import com.dh.hobbyist.member.model.vo.Member;
 
 public class MemberDao {
@@ -94,6 +95,7 @@ public class MemberDao {
 				loginMember.setArtistIntro(rset.getString("ARTIST_INTRO"));
 				
 			}
+			
 			
 			
 		} catch (SQLException e) {
@@ -329,7 +331,7 @@ public class MemberDao {
 		return result;
 	}
 	
-	//첫 로그인 관심 카테고리 설정
+	//첫 로그인 관심 카테고리 설정(유승)
 	public int insertCategory(Connection con, int memberCode, int categoryCode) {
 		int result = 0;
 		PreparedStatement pstmt = null;
@@ -351,8 +353,89 @@ public class MemberDao {
 
 		return result;
 	}
+	//첫 로그인 여부 확인용 로그인 카운트(유승)
+	public int loginCount(Connection con, Member member) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String query = prop.getProperty("loginCount");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, member.getFirstLogin() + 1);
+			pstmt.setString(2, member.getMemberId());
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		
+		return result;
+	}
 	
-	
+	//회원의 프로필 이미지 경로 조회(지호)
+	   public String selectImageRoot(Connection con, int memberCode) {
+	      String imageRoot = "";
+	      PreparedStatement pstmt = null;
+	      ResultSet rset = null;
+	      
+	      String query = prop.getProperty("selectImageRoot");
+	      
+	      try {
+	         pstmt = con.prepareStatement(query);
+	         pstmt.setInt(1, memberCode);
+	         
+	         rset = pstmt.executeQuery();
+	         
+	         if(rset.next()) {
+	            imageRoot += rset.getString("IMAGE_ROUTE");
+	            imageRoot += "/";
+	            imageRoot += rset.getString("IMAGE_NAME");
+	         }
+	      } catch (SQLException e) {
+	         e.printStackTrace();
+	      } finally {
+	         close(rset);
+	         close(pstmt);
+	      }
+	      
+	      return imageRoot;
+	   }
+
+	   //회원의 아티스트 승인 신청내역 조회(지호)
+	   public ApplyArtist selectOneApplyArtist(Connection con, int memberCode) {
+	      PreparedStatement pstmt = null;
+	      ResultSet rset = null;
+	      ApplyArtist aa = null;
+	      
+	      String query = prop.getProperty("selectOneApplyArtist");
+	      
+	      try {
+	         pstmt = con.prepareStatement(query);
+	         pstmt.setInt(1, memberCode);
+	         
+	         rset = pstmt.executeQuery();
+	         
+	         if(rset.next()) {
+	            aa = new ApplyArtist();
+	            aa.setApplyCode(rset.getInt("APPLY_PK"));
+	            aa.setApplyDate(rset.getDate("APPLY_DATE"));
+	            aa.setApplyAttempts(rset.getInt("APPLY_ATTEMPTS"));
+	            aa.setApplyConfirmed(rset.getInt("APPLY_CONFIRMED"));
+	            aa.setRejectReason(rset.getString("REJECT_REASON"));
+	         }
+	      } catch (SQLException e) {
+	         e.printStackTrace();
+	      } finally {
+	         close(rset);
+	         close(pstmt);
+	      }
+	      
+	      return aa;
+	   }
 	
 
 

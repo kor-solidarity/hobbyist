@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
 <style>
 	
@@ -167,26 +168,26 @@
     	취미는 <label style="color:darkolivegreen; font-family: 'ZCOOL QingKe HuangYou', cursive; font-weight:900">hobbyist  </label> 에서!</p>
     </div>
    <div id="nav">
-	<table align="center" onclick="category();">
+	<table align="center">
    	<tr>
-   		<td><img src="static/images/music.png" class="icon"></td>
-   		<td><img src="static/images/dance.png" class="icon"></td>
-   		<td><img src="static/images/video.png" class="icon"></td>
-   		<td><img src="static/images/life.png" class="icon"></td>
-   		<td><img src="static/images/beauty.png" class="icon"></td>
-   		<td><img src="static/images/design.png" class="icon"></td>
-   		<td><img src="static/images/sports.png" class="icon"></td>
-   		<td><img src="static/images/space.png" class="icon"></td>
+   		<td><img src="static/images/music.png" class="icon" id="music"></td>
+   		<td><img src="static/images/dance.png" class="icon" id="dance"></td>
+   		<td><img src="static/images/video.png" class="icon" id="video"></td>
+   		<td><img src="static/images/life.png" class="icon" id="life"></td>
+   		<td><img src="static/images/beauty.png" class="icon" id="beauty"></td>
+   		<td><img src="static/images/design.png" class="icon" id="design"></td>
+   		<td><img src="static/images/sports.png" class="icon" id="sports"></td>
+   		<td><img src="static/images/space.png" class="icon" id="space"></td>
    	</tr>
    	<tr>
-   		<td class="nLabel">음악</td>
-   		<td class="nLabel">댄스</td>
-   		<td class="nLabel">영상/사진</td>
-   		<td class="nLabel">라이프스타일</td>
-   		<td class="nLabel">뷰티</td>
-   		<td class="nLabel">디자인</td>
-   		<td class="nLabel">스포츠</td>
-   		<td class="nLabel">공간대여</td>
+   		<td class="nLabel" id="music">음악</td>
+   		<td class="nLabel" id="dance">댄스</td>
+   		<td class="nLabel" id="video">영상/사진</td>
+   		<td class="nLabel" id="life">라이프스타일</td>
+   		<td class="nLabel" id="beauty">뷰티</td>
+   		<td class="nLabel" id="design">디자인</td>
+   		<td class="nLabel" id="sports">스포츠</td>
+   		<td class="nLabel" id="space">공간대여</td>
    	</tr>
    </table>
    </div>
@@ -354,10 +355,19 @@
 	<%@ include file="views/common/footer.jsp" %>
 	
 	<script>
-		function category() {
+		<%-- function category() {
 			location.href = "<%=request.getContextPath()%>/views/lesson/categoryMenu.jsp";
 			
-		}
+		} --%>
+		
+		$(function() {
+			
+			$("#music").click(function() {
+				location.href = "<%=request.getContextPath()%>/views/lesson/musicCategory.jsp";
+			});
+			
+			
+		});
 	</script>
 </body>
 </html>
