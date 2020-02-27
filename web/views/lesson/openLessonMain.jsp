@@ -191,6 +191,30 @@ body {
     margin-right: 15px;
 }
 
+.item2 {
+	border-radius: 8px;
+    background-color: darkolivegreen;
+    width: 85%;
+    color: white;
+    padding: 5px;
+    font-size: 15px;
+    margin-bottom: 5px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.item3 {
+	border-radius: 8px;
+    background-color: darkolivegreen;
+    width: 85%;
+    color: white;
+    padding: 5px;
+    font-size: 15px;
+    margin-bottom: 5px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 #LessonTable5 {
 	font-size: 20px;
 	font-family: 'Do Hyeon', sans-serif;
@@ -506,7 +530,7 @@ body {
 									<td style="vertical-align: bottom;">이미지 업로드</td>
 									<td>
 										<div>총 회차</div> 
-										<input id="rounds" class="nanum" name="rounds" type="number" style="width:100px">
+										<input id="inputOrder" class="nanum" name="inputOrder" type="number" style="width:100px">
 										<label style="font-weight:normal; color:black;">&nbsp;회</label>
 										<script>
 											$(function() {
@@ -529,8 +553,8 @@ body {
 												$("#cost").change(function() {
 													var cost = $(this).val();
 													
-													if (cost <= 0) {
-														alert("양수를 입력해주세요");
+													if (cost < 10000) {
+														alert("회차당 비용은 최소 10000원 이상이어야 합니다.");
 													} 
 												});
 											});
@@ -727,72 +751,58 @@ body {
 							</table>
 							<table id="LessonTable10" style="width:100%; height:450px;">
 								<tr>
-									<td style="width:67%">
-										<table style="height:100%">
-											<tr>
-												<td style="width:25%;">지역</td>
-												<td style="width:25%;">상세지역</td>
-												<td style="width:25%;">N회차 시작시간</td>
-												<td style="width:25%;">N회차 종료시간</td>
-											</tr>
-											<tr>
-												<td>
-													<select class='nanum' name="region" onChange="regionChange(this.value, subRegion);" style="color:black;">
-														<option>-선택-</option>
-														<option value='1'>서울</option>
-														<option value='2'>부산</option>
-														<option value='3'>대구</option>
-														<option value='4'>인천</option>
-														<option value='5'>광주</option>
-														<option value='6'>대전</option>
-														<option value='7'>울산</option>
-														<option value='8'>강원</option>
-														<option value='9'>경기</option>
-														<option value='10'>경남</option>
-														<option value='11'>경북</option>
-														<option value='12'>전남</option>
-														<option value='13'>전북</option>
-														<option value='14'>제주</option>
-														<option value='15'>충남</option>
-														<option value='16'>충북</option>
-														<option value='261'>세종</option>
-													</select>
-												</td>
-												<td>
-													<select class='nanum' name="subRegion" style="color:black;">
-														<option>-선택-</option>
-													</select>
-												</td>
-												<td>
-													<input class="nanum" type="datetime-local">
-												</td>
-												<td>
-													<input class="nanum" type="time">
-											</tr>
-											<tr>
-												<td colspan="2">상세주소</td>
-												<td colspan="2">N회차 일자 / 총 4회차</td>
-											</tr>
-											<tr style="height:65%;">
-												<td colspan="2" style="border:1px solid black;"></td>
-												<td colspan="2" style="border:1px solid black;"></td>
-											</tr>
-											<tr style="height:15%;">
-												<td colspan="2" style="border:1px solid black;">강남구 테헤란로 14길 남도빌딩 5F</td>
-												<td colspan="2"></td>
-											</tr>
-										</table>
+									<td style="width: 80px;">지역</td>
+									<td style="width: 130px;">상세지역</td>
+									<td colspan="2"><label class="curOrder">1</label>회차 시작시간</td>
+									<td style="width: 165px;"><label class="curOrder">1</label>회차 종료시간</td>
+								</tr>
+								<tr>
+									<td>
+										<select id="region" class='nanum' name="region" onChange="regionChange(this.value, subRegion);" style="color: black;">
+											<option>-선택-</option>
+											<option value='1'>서울</option>
+											<option value='2'>부산</option>
+											<option value='3'>대구</option>
+											<option value='4'>인천</option>
+											<option value='5'>광주</option>
+											<option value='6'>대전</option>
+											<option value='7'>울산</option>
+											<option value='261'>세종</option>
+											<option value='8'>강원</option>
+											<option value='9'>경기</option>
+											<option value='10'>경남</option>
+											<option value='11'>경북</option>
+											<option value='12'>전남</option>
+											<option value='13'>전북</option>
+											<option value='14'>제주</option>
+											<option value='15'>충남</option>
+											<option value='16'>충북</option>
+											</select>
+										</td>
+									<td>
+										<select id="subRegion" class='nanum' name="subRegion" style="color: black;">
+											<option>-선택-</option>
+										</select>
 									</td>
-									<td style="width:33%;">
-										<table style="height:100%; width:100%;">
-											<tr style="height: 25%;"></tr>
-											<tr style="border:1px solid black;">
-												<td style="width: 100%;">
-													
-												</td>
-											</tr>
-										</table>
-									</td>
+									<td colspan="2"><input id="startTime" class="nanum" type="datetime-local"></td>
+									<td><input id="endTime" class="nanum" type="time"><button id="insertOrderBtn" type="button" class="btn btn-primary btnAll" style="padding: 6px 10px"onclick="insertOrder();">▼</button></td>
+								</tr>
+								<tr>
+									<td colspan="2">상세주소</td>
+									<td style="width:160px;"></td>
+									<td colspan="2">등록된 회차 목록 / 총 <label id="showOrder">4</label>회차</td>
+								</tr>
+								<tr style="height: 65%;">
+									<td colspan="2" style="border: 1px solid darkolivegreen;"></td>
+									<td></td>
+									<td id= "orderListArea" colspan="2" style="border: 1px solid darkolivegreen;"></td>
+								</tr>
+								<tr style="height: 15%;">
+									<td colspan="2" style="border: 1px solid darkolivegreen;">강남구 테헤란로
+										14길 남도빌딩 5F</td>
+									<td></td>
+									<td style="width: 100px;"></td>
+									<td></td>
 								</tr>
 							</table>
 						</div>
@@ -807,15 +817,13 @@ body {
 									<td>05. 일정등록</td>
 								</tr>
 							</table>
-							<table id="LessonTable12">
+							<table id="LessonTable12" style="width:100%">
 								<tr>
-		                            <td style="width:100%;">
+		                            <td style="width:100%;">등록된 수업일정 목록
 		                            </td>
 								</tr>
 								<tr>
-									<td>
-										<span class="item">강남 | 1회차 | 02.03(월)19:00-21:00</span>
-									</td>
+									<td id="scheduleListArea"></td>
 								</tr>
 							</table>
 						</div>
@@ -875,8 +883,6 @@ body {
 				
 				//"02. 자격/경력" 페이지로 가기 위한 "다음" 버튼 클릭 시
 				if(num == 2) {
-					//console.log("num == 2 일때 진입");
-					
 					//아티스트 자격 조회
 					$.ajax({
 						url: "/hobbyist/selectCerts.ar",
@@ -927,6 +933,17 @@ body {
 				if(num == 6) {
 					$("#nextModalBtn").hide();
 					$("#saveModalBtn").show();
+					
+					var order1 = $("#order1").text();
+					var region = $("#region").val();
+					var subRegion = $("#subRegion").val();
+					
+					$scheduleListArea = $("#scheduleListArea");
+					$scheduleListArea.append("<span class='item2'>" + region + " " + subRegion + " | " + order1 + "</span>");
+
+					console.log("orderNum : " + orderNum);
+					console.log("startTime : " + startTime);
+					console.log("endTime : " + endTime);
 				} 
 	
 			});
@@ -978,7 +995,7 @@ body {
 	
 		//지역 시군구 선택 메소드
 		var cat1_num = new Array(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,261);
-		var cat1_name = new Array('서울','부산','대구','인천','광주','대전','울산','강원','경기','경남','경북','전남','전북','제주','충남','충북', '세종');
+		var cat1_name = new Array('서울','부산','대구','인천','광주','대전','울산','강원','경기','경남','경북','전남','전북','제주','충남','충북','세종');
 
 		var cat2_num = new Array();
 		var cat2_name = new Array();
@@ -1084,6 +1101,51 @@ body {
 				sel.options[i+1] = new Option(name[i], name[i]);
 			}
 		}
+		
+		//n회차 수를 나타내는 변수. insertOrder() 안에서는 계속 +되어야 하여 전역변수로 바깥에 선언.
+		orderNum = 1;
+		
+		//수업 회차 등록 메소드
+		function insertOrder() {
+			//console.log("startTime : " + $("#startTime").val());
+			//console.log("endTime : " + $("#endTime").val());
+			
+			//"01기본정보" 화면에서 사용자가 입력한 총 회차
+			var inputOrder = $("#inputOrder").val();
+			//"05일정등록" 화면에서 보여지는 총 회차
+			var showOrder = $("#showOrder");
+			showOrder.text(inputOrder);
+			
+			//"05일정등록" 화면에서 현재입력 회차
+			var curOrder = $(".curOrder");
+			
+			
+			console.log("inputOrder : " + inputOrder);
+			console.log("typeof(inputOrder) : " + typeof(inputOrder));
+			
+			startTime = $("#startTime").val();
+			endTime = $("#endTime").val();
+			
+			var insertOrderBtn = document.getElementById('insertOrderBtn');
+			
+			if(startTime == "" || endTime == "") {
+				alert("시간을 모두 입력해주세요");
+			} else {
+				if(orderNum < inputOrder) {
+					$orderListArea = $("#orderListArea");
+					$orderListArea.append("<div id='order" + orderNum + "' class='item2'>" + orderNum + "회차 | " + startTime.substring(0, 10) + " | " + startTime.substring(11, 16) + "~" + endTime + "</div>");
+					orderNum++;
+				} else {
+					$orderListArea = $("#orderListArea");
+					$orderListArea.append("<div id='order" + orderNum + "' class='item2'>" + orderNum + "회차 | " + startTime.substring(0, 10) + " | " + startTime.substring(11, 16) + "~" + endTime + "</div>");
+					alert("모든 회차를 입력하셨습니다");
+					insertOrderBtn.disabled = 'disabled';
+				} 
+			}
+			
+			curOrder.text(orderNum);
+			
+		};
 		
 	</script>
 	
