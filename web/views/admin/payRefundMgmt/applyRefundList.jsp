@@ -213,27 +213,39 @@
    	     <div class="modal-body">
    	       <table id="modalT">
    	       		<tr>
-   	       			<td>수업이름</td>
+   	       			<td>결제 고유번호</td>
    	       			<td></td>
    	       		</tr>
    	       		<tr>
-   	       			<td>가격</td>
+   	       			<td>수업 제목</td>
    	       			<td></td>
    	       		</tr>
    	       		<tr>
-   	       			<td>수업회차</td>
+   	       			<td>결제 금액</td>
    	       			<td></td>
    	       		</tr>
    	       		<tr>
-   	       			<td>진행회차</td>
+   	       			<td>사용 포인트</td>
    	       			<td></td>
    	       		</tr>
    	       		<tr>
-   	       			<td>잔여회차</td>
+   	       			<td>환불 금액</td>
    	       			<td></td>
    	       		</tr>
    	       		<tr>
-   	       			<td>환불사유</td>
+   	       			<td>수업 회차</td>
+   	       			<td></td>
+   	       		</tr>
+   	       		<tr>
+   	       			<td>진행 회차</td>
+   	       			<td></td>
+   	       		</tr>
+   	       		<tr>
+   	       			<td>잔여 회차</td>
+   	       			<td></td>
+   	       		</tr>
+   	       		<tr>
+   	       			<td>환불 사유</td>
    	       			<td></td>
    	       		</tr>
    	       		<tr>
