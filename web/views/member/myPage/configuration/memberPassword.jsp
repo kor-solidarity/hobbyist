@@ -165,8 +165,8 @@ center_td0 {
 	rel="stylesheet">
 </head>
 <body>
-	<%@ include file="/views/common/myPage.jsp"%>
-	<%String passCheck = loginMember.getMemberPwd(); %>
+	<%-- <%--  <%@ include file="/views/common/myPage.jsp"%> 
+	<%String passCheck = loginMember.getMemberPwd(); %> --%> --%>
 	<div class="divcenter2">
 		<table align="border" class="tablecenter2">
 			<tr>
@@ -216,7 +216,7 @@ center_td0 {
 	 		$("#passclick").click(function(){
 	 			console.log( 'a1 : ' + $("#pw"));
 	 			var passValue = $("#pw").val();
-				var passCheck = 3+3L8p4PqsplFRLIDga0Oi8MfWf60fhYe6jUrIcQNdW6Jnh2LuB4ZogKGL9DkT3fkyYHH85gzbZunGfPvTeF/g==;
+				var passCheck = passCheck;
 				
 				console.log("passCheck");
 				if(passValue == passCheck) {

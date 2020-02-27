@@ -48,14 +48,14 @@
 	margin: auto;
 }
 
-.password1 {
+.userPwd {
 	font-weight: normal;
 	font-size: 30px;
 	line-height: 37px;
 	width: 1024px;
 	margin: auto;
 }
-.password2 {
+.userPwd2 {
 	font-weight: normal;
 	font-size: 30px;
 	line-height: 37px;
@@ -282,7 +282,7 @@ color: #FFFFFF;
 
 }
 
-#bank {
+#bankName {
 	width: 100px;
 }
 </style>
@@ -342,7 +342,7 @@ color: #FFFFFF;
 				<tr>
 					<td colspan="1" style="width: 100px; text-align: left;"><label
 						id="labelPw">비밀번호</label></td>	
-					<td colspan="5" class="id" style="text-align: left;"><input style="width: 260px;" type="password" name="password1" value="" max-length=15 autofocus placeholder="패스워드를 입력하세요."></td>
+					<td colspan="5" class="id" style="text-align: left;"><input style="width: 260px;" type="password" name="userPwd" value="" max-length=15 autofocus placeholder="패스워드를 입력하세요."></td>
 					<td></td>
 				</tr> 
 		
@@ -353,7 +353,7 @@ color: #FFFFFF;
 		  		<tr>
 					<td colspan="1" style="width: 100px; text-align: left;"><label
 						id="labelPw2">비밀번호확인</label></td>	
-					<td colspan="5" class="id2" style="text-align: left;"><input style="width: 260px;" type="password" name="password2" value="" max-length=15 autofocus placeholder="패스워드를 입력하세요."></td>
+					<td colspan="5" class="id2" style="text-align: left;"><input style="width: 260px;" type="password" name="userPwd2" value="" max-length=15 autofocus placeholder="패스워드를 입력하세요."></td>
 					<td></td>
 				</tr>
 		  	
@@ -417,7 +417,7 @@ color: #FFFFFF;
 
 				<tr>
 					<td colspan="1" style="width: 90px; text-align: left;"><label id="labelAccount">계좌번호</label></td>
-					<td colspan="1" style="width: 30px;"><select name="bank" style="width: 75px; value="<%=loginMember.getBankName() %>">
+					<td colspan="1" style="width: 30px;"><select name="bankName" style="width: 75px; value="<%=loginMember.getBankName() %>">
 							<option value="">신한</option>
 							<option value="">국민</option>
 							<option value="">하나</option>
@@ -425,7 +425,7 @@ color: #FFFFFF;
 							<option value="">케이뱅크</option>
 					</select></td>
 					<td colspan="1" style="width: 10px;"></td>
-					<td colspan="3" style="text-align: center;"><input type="text" name="bankText" style="width: 165px;" value="<%=loginMember.getBankNum() %>"></td>
+					<td colspan="3" style="text-align: center;"><input type="text" name="bankNum" style="width: 165px;" value="<%=loginMember.getBankNum() %>"></td>
 					<td colspan="1"><button id="button2">인증하기</button></td>
 				</tr>
 			</table>
