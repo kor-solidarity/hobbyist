@@ -296,11 +296,17 @@
 			</tr>
 			<tr>
 				<td style="height: 400px;">
-					<% if(loginMember != null) { %>
-						<button type="button" class="btn btn-primary btn-lg"
-							id="openModalBtn" style="margin-left: 15px;">아티스트 신청하기</button>
-					<% } else { %>
-						<button type="button" class="btn btn-primary btn-lg" id="notLoginBtn" style="margin-left: 15px;">아티스트 신청</button>
+					<% if(loginMember != null) { 
+						if(loginMember.getIsArtist() != 1) { %>
+							<button type="button" class="btn btn-primary btn-lg"
+								id="openModalBtn" style="margin-left: 15px;">아티스트 신청하기</button>
+						<%} else { %>
+							<button type="button" class="btn btn-primary btn-lg"
+								id="isArtistBtn" style="margint-left:15px;">아티스트 신청하기</button>
+						<%} 
+						} else { %>
+							<button type="button" class="btn btn-primary btn-lg" 
+								id="notLoginBtn" style="margin-left: 15px;">아티스트 신청하기</button>
 					<% } %>
 				</td>
 			</tr>
@@ -379,7 +385,7 @@
 										<% } %>
 									</td>
 									<td colspan="2">
-										<p>계좌번호&nbsp;<label style="font-size:13px; coLor:black;">(본인 계좌로 이용해주세요.)</label></p> <select style="height: 32px" name="bankName">
+										<p>계좌번호&nbsp;<label style="font-size:13px; coLor:black;">(본인 명의 계좌로 이용해주세요.)</label></p> <select style="height: 32px" name="bankName">
 											<option value="">은행명</option>
 											<option value="SH">신한은행</option>
 											<option value="KB">국민은행</option>
@@ -1010,6 +1016,10 @@
 			
 			$('#notLoginBtn').on('click', function() {
 				alert("로그인 후 진행해주세요.");	
+			});
+			
+			$('#isArtistBtn').on('click', function() {
+				alert("이미 아티스트 권한입니다.");
 			});
 			
 			$('#openModalBtn').on('click', function() {

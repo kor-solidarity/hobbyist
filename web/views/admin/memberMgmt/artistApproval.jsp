@@ -134,7 +134,7 @@
     #aaModalTab {
     	margin:auto;
     }
-    #checkModalBtn, #checkArtistBtn {
+    #checkModalBtn, #checkArtistBtn, #checkReasonBtn {
        color: white;
        background-color: #4E4E4E;
        padding: 5px;
@@ -172,6 +172,10 @@
     	color:DodgerBlue;
     	cursor:pointer;
     	width:80px;
+    }
+    .reasonDiv {
+    	color:DodgerBlue;
+    	cursor:pointer;
     }
 </style>
 </head>
@@ -258,7 +262,8 @@
                			<%
                				if(aa.getRejectReason() != null) {
                			%>
-               				<a><%=aa.getApplyMemberId() %>님의 거절사유</a>
+               				<div class="reasonDiv"><%=aa.getApplyMemberId() %>님의 거절사유</div>
+               				<input type="hidden" id="reasonInput" value="<%=aa.getRejectReason() %>">
                			<%
                				} 
                			%>
@@ -420,6 +425,38 @@
 						</div>
 						<div class="modal-footer">
 							<button type="button" data-dismiss="modal"class="btn btn-primary" id="checkArtistBtn">확인</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div class="modal fade" id="myModal3" role="dialog">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header" style="background-color:#4E4E4E; height:42px;">
+							<label style="font-size:18px; color:white;">hobbyist</label>
+							<button type="button" class="close" data-dismiss="modal" style="color:white">×</button>
+							<h4 class="modal-title"></h4>
+						</div>
+						<div class="modal-body">
+							<br>
+							<table>
+								<tr>
+									<td style="font-size:18px; font-weight:bold;">
+										거절 사유
+									</td>
+								</tr>
+								<tr style="height:20px;">
+								</tr>
+								<tr>
+									<td id="reasonTd">
+										
+									</td>
+								</tr>
+							</table>
+						</div>
+						<div class="modal-footer">
+							<button type="button" data-dismiss="modal" class="btn btn-primary" id="checkReasonBtn">확인</button>
 						</div>
 					</div>
 				</div>
@@ -627,6 +664,14 @@
 	
 						location.href = "<%=request.getContextPath()%>/permit.ar?num=" + num + "&memCode=" + memCode;
 					}
+				});
+				
+				//거절 사유 클릭시
+				$(".reasonDiv").click(function() {
+					var reason = $(this).parent().children("input").val();
+					$("#reasonTd").text('');
+					$("#reasonTd").text(reason);
+					$("#myModal3").modal();
 				});
 			});
 			
