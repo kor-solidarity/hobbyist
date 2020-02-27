@@ -276,6 +276,7 @@
             	
             </script>
          </div>
+         	<!--거절 사유 입력 모달  -->
 			<div class="modal fade" id="myModal1" role="dialog">
 				<div class="modal-dialog">
 
@@ -313,6 +314,7 @@
 				</div>
 			</div>
 			
+			<!--  아티스트 신청 내역 상세 보기 모달 -->
 			<div class="modal fade" id="myModal2" role="dialog">
 				<div class="modal-dialog">
 
@@ -430,6 +432,7 @@
 				</div>
 			</div>
 			
+			<!-- 거절사유 보여주는 모달 -->
 			<div class="modal fade" id="myModal3" role="dialog">
 				<div class="modal-dialog">
 					<div class="modal-content">
