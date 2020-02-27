@@ -82,34 +82,34 @@
 	font-size: 15px;
 }
 
-#ArtistTable1 {
+#ArtistTable1, #reArtistTable1 {
 	font-size: 20px;
 	font-family: 'Do Hyeon', sans-serif;
 	border-spacing: 20px;
 }
 
-#ArtistTable1  td {
+#ArtistTable1  td, #reArtistTable1 td {
 	width: 130px;
 	color: #A7A1A1;
 }
 
-#ArtistTable1  td:first-child {
+#ArtistTable1  td:first-child, #reArtistTable1 td:first-child {
 	color: darkolivegreen;
 }
 
-#ArtistTable2 {
+#ArtistTable2, #reArtistTable2 {
 	font-family: 'Nanum Gothic', ;
 	width:700px;
 	border-spacing: 15px;
 	border-collapse: separate;
 }
 
-#ArtistTable2 p {
+#ArtistTable2 p, #reArtistTable2 p {
 	color: darkolivegreen;
  	font-family: 'Do Hyeon', sans-serif;
  	font-size:15px;
 }
-#ArtistTable2 button {
+#ArtistTable2 button, #reArtistTable2 button {
 	background: darkolivegreen;
 	color: white;
 	padding: 5px;
@@ -122,119 +122,116 @@
 	font-size: 20px;
 }
 
-#ArtistDiv3 {
+#ArtistDiv3, #reArtistDiv3 {
 	font-size: 30px;
 	font-family: 'Do Hyeon', sans-serif;
 	color: darkolivegreen;
 }
 
-#ArtistTable3 {
+#ArtistTable3, #reArtistTable3 {
 	font-size: 20px;
 	font-family: 'Do Hyeon', sans-serif;
 	border-spacing: 20px;
 }
 
-#ArtistTable3  td {
+#ArtistTable3  td, #reArtistTable3 td {
 	width: 130px;
 	color: #A7A1A1;
 }
 
-#ArtistTable3  td:nth-child(2) {
+#ArtistTable3  td:nth-child(2), #reArtistTable3 td:nth-child(2) {
 	color: darkolivegreen;
 }
 
-#ArtistTable4 {
+#ArtistTable4, #reArtistTable4 {
 	color: darkolivegreen;
 	font-family: 'Do Hyeon', sans-serif;
 	border-spacing: 30px;
 	border-collapse: separate;
 }
 
-#ArtistTable4 select {
+#ArtistTable4 select, #reArtistTable4 select {
 	width: 300px;
 	height: 30px;
 }
 
-#ArtistTable5 {
+#ArtistTable5, #reArtistTable5 {
 	font-size: 20px;
 	font-family: 'Do Hyeon', sans-serif;
 	border-spacing: 20px;
 }
 
-#ArtistTable5  td {
+#ArtistTable5  td, #reArtistTable5 td {
 	width: 130px;
 	color: #A7A1A1;
 }
 
-#ArtistTable5  td:nth-child(3) {
+#ArtistTable5  td:nth-child(3), #reArtistTable5 td:nth-child(3) {
 	color: darkolivegreen;
 }
 
-#ArtistTable6 {
-	/* border: 1px solid black; */
+#ArtistTable6, #reArtistTable6 {
 	border-spacing: 15px;
 	border-collapse: separate;
 }
 
-#ArtistTable6 td {
+#ArtistTable6 td, #reArtistTable6 td {
 	width: 30px;
-	/* font-family: 'Do Hyeon', sans-serif; */
-	/* border:1px solid black; */
 }
 
-#ArtistTable7 {
+#ArtistTable7, #reArtistTable7 {
 	font-size: 20px;
 	font-family: 'Do Hyeon', sans-serif;
 	border-spacing: 20px;
 }
 
-#ArtistTable7  td {
+#ArtistTable7  td, #reArtistTable7 td {
 	width: 130px;
 	color: #A7A1A1;
 }
 
-#ArtistTable7  td:nth-child(4) {
+#ArtistTable7  td:nth-child(4), #reArtistTable7 td:nth-child(4) {
 	color: darkolivegreen;
 }
 
-#ArtistTable8 {
+#ArtistTable8, #reArtistTable8 {
 	border-spacing: 15px;
 	border-collapse: separate;
 }
 
-#ArtistTable8 td {
+#ArtistTable8 td, #reArtistTable8 td {
 	width: 30px;
 }
 
-#ArtistTable9 {
+#ArtistTable9, #reArtistTable9 {
 	font-size: 20px;
 	font-family: 'Do Hyeon', sans-serif;
 	border-spacing: 20px;
 }
 
-#ArtistTable9  td {
+#ArtistTable9  td, #reArtistTable9 td {
 	width: 130px;
 	color: #A7A1A1;
 }
 
-#ArtistTable9  td:nth-child(5) {
+#ArtistTable9  td:nth-child(5), #reArtistTable9 td:nth-child(5) {
 	color: darkolivegreen;
 }
 
-#ArtistTable10 {
+#ArtistTable10, #reArtistTable10 {
 	border-spacing: 15px;
 	border-collapse: separate;
 }
 
-#ArtistTable10 td {
+#ArtistTable10 td, #reArtistTable10 td {
 	width: 30px;
 }
 
-#modifyIcon {
+#modifyIcon, #reModifyIcon {
 	cursor: pointer;
 }
 
-#userIcon {
+#userIcon, #reUserIcon {
 	float: left;
 	position: relative;
 	width: 90px;
@@ -243,7 +240,7 @@
 	overflow: hidden;
 }
 
-#artistprofile {
+#artistprofile, #reArtistprofile {
 	width: 100%;
 	height: 100%;
 	object-fit: cover;
@@ -297,14 +294,19 @@
 			<tr>
 				<td style="height: 400px;">
 					<% if(loginMember != null) { 
-						if(loginMember.getIsArtist() != 1) { %>
+						if(loginMember.getIsArtist() != 1) { 
+							if(loginMember.getArtistNick() == null) {%>
 							<button type="button" class="btn btn-primary btn-lg"
 								id="openModalBtn" style="margin-left: 15px;">아티스트 신청하기</button>
+							<%} else { %>
+								<button type="button" class="btn btn-primary btn-lg"
+									id="reOpenModalBtn" style="margin-left: 15px;">아티스트 신청하기</button>
+							<%} %>
 						<%} else { %>
 							<button type="button" class="btn btn-primary btn-lg"
 								id="isArtistBtn" style="margint-left:15px;">아티스트 신청하기</button>
-						<%} 
-						} else { %>
+						<%}%> 
+						<%} else { %>
 							<button type="button" class="btn btn-primary btn-lg" 
 								id="notLoginBtn" style="margin-left: 15px;">아티스트 신청하기</button>
 					<% } %>
@@ -390,7 +392,7 @@
 											<option value="SH">신한은행</option>
 											<option value="KB">국민은행</option>
 											<option value="NH">농협은행</option>
-									</select> <input type="text" name="bankNum" style="height: 30px; width:150px;">
+									</select> <input type="text" name="bankNum" style="height: 30px; width:150px;"  placeholder=" ' - ' 없이 입력해주세요">
 										<button style="height: 30px">계좌인증</button>
 									</td>
 								</tr>
@@ -469,14 +471,8 @@
 												<option value="">선택</option>
 											</select>
 									</td>
-									<!-- <td>
-										<div
-											style="border: 1px solid darkolivegreen; width: 300px; height: 400px;"></div>
-									</td>  -->
 								</tr>
-
 							</table>
-							
 						</div>
 						<div id="show3" style="display: none;">
 							<table id="ArtistTable5">
@@ -531,8 +527,6 @@
 									</td>
 								</tr>
 								<tr>
-									<!-- <td><button>파일선택</button></td>
-									<td style="font-size: 13px;">선택된 파일 없음</td> -->
 									<td colspan="2">
 									</td>
 								</tr>
@@ -708,6 +702,373 @@
 			</div>
 		</div>
 	</div>
+	
+	
+	<!-- 기존 아티스트 신청한 내역이 있는 회원의  모달 -->
+	<div id="modalBox2" class="modal fade" id="myModal" tabindex="-1"
+		role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document" style="width: 700px;">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">×</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">아티스트 신청</h4>
+				</div>
+				<div class="modal-body">
+					<form id="reartistForm"
+						action="<%=request.getContextPath()%>/update.ar" method="post" encType="multipart/form-data">
+						<div id="reShow1">
+							<table id="reArtistTable1">
+								<tr>
+									<td>01. 자기소개</td>
+									<td>02. 전문분야</td>
+									<td>03. 보유 자격증</td>
+									<td>04. 학력/전공</td>
+									<td>05. 경력</td>
+								</tr>
+							</table>
+							<table id="reArtistTable2">
+								<tr>
+									<td>
+										<div id="reUserIcon">
+											<img src="/hobbyist/static/images/user.png"
+												id="reArtistprofile">
+										</div>
+										<div id="reModifyIcon"
+											style="float: left; position: absolute; top: 123px; left: 90px;">
+											<img src="/hobbyist/static/images/modifyIcon.png"
+												style="height: 30px;">
+										</div>
+									</td>
+									<td>
+										<% if(loginMember != null)  {%>
+										<p>아티스트 닉네임</p> <input type="text" name="reNickName"
+										id=reNickName" style="height: 30px; width:150px;" value="<%=loginMember.getArtistNick()%>">
+										<button type="button" id="reCheckNick" style="height: 30px;">중복확인</button>
+										
+											<input type="hidden" name="reLoginMemberPk" value="<%=loginMember.getMemberCode()%>">
+										
+									</td>
+									<td colspan="2">
+										<p>계좌번호&nbsp;<label style="font-size:13px; coLor:black;">(본인 명의 계좌로 이용해주세요.)</label></p> <select style="height: 32px" name="reBankName">
+											<option value="">은행명</option>
+											<option value="SH">신한은행</option>
+											<option value="KB">국민은행</option>
+											<option value="NH">농협은행</option>
+									</select> <input type="text" name="reBankNum" style="height: 30px; width:150px;" placeholder=" ' - ' 없이 입력해주세요" value="<%=loginMember.getBankNum()%>">
+										<button style="height: 30px">계좌인증</button>
+									</td>
+								</tr>
+								<tr>
+									<td></td>
+									<td colspan="3">
+										<div id="div2div" style="width: 400px;">
+											<p>자기소개</p>
+											<textarea id="reIntroduce" name="reIntroduce" rows="5" cols="40"
+												placeholder="자기소개 부분을 채워주세요."
+												style="width: 380px; height: 200px; text-align: left; color: rgb(49, 49, 49); resize: none;"><%=loginMember.getArtistIntro()%></textarea>
+											<p style="text-align: right;">
+												<label id="reCounter"><%=loginMember.getArtistIntro().length()%></label>/255
+											</p>
+										</div>
+										<div id="reFileArea">
+											<input type="file" id="reArtistImg1" name="reArtistImg1"
+												onchange="reloadImg(this)">
+										</div>
+										<% } %>
+									</td>
+								</tr>
+							</table>
+						</div>
+						<div id="reShow2" style="display: none;">
+							<table id="reArtistTable3">
+								<tr>
+									<td>01. 자기소개</td>
+									<td>02. 전문분야</td>
+									<td>03. 보유 자격증</td>
+									<td>04. 학력/전공</td>
+									<td>05. 경력</td>
+								</tr>
+							</table>
+							<table id="reArtistTable4">
+								<tr>
+									<td style="vertical-align: top; color: black;">전문분야 및
+										상세분야를 선택해주세요.<label style="color: darkolivegreen;">(복수
+											선택)</label><br> <br> 
+											<select id="reCategoryName" name="reCategoryName">
+												<option value="">선택</option>
+												<option value="1">음악</option>
+												<option value="9">댄스</option>
+												<option value="15">영상/사진</option>
+												<option value="20">라이프스타일</option>
+												<option value="25">뷰티</option>
+												<option value="33">디자인</option>
+												<option value="37">스포츠</option>
+											</select> <br> 
+											<select id="reDetailCategory" name="reDetailCategory">
+												<option value="">선택</option>
+											</select> <br> <br> 
+											<select id="reCategoryName2" name="reCategoryName2">
+												<option value="">선택</option>
+												<option value="1">음악</option>
+												<option value="9">댄스</option>
+												<option value="15">영상/사진</option>
+												<option value="20">라이프스타일</option>
+												<option value="25">뷰티</option>
+												<option value="33">디자인</option>
+												<option value="37">스포츠</option>
+											</select> <br> 
+											<select id="reDetailCategory2" name="reDetailCategory2">
+												<option value="">선택</option>
+											</select> <br> <br> 
+											<select id="reCategoryName3" name="reCategoryName3">
+												<option value="">선택</option>
+												<option value="1">음악</option>
+												<option value="9">댄스</option>
+												<option value="15">영상/사진</option>
+												<option value="20">라이프스타일</option>
+												<option value="25">뷰티</option>
+												<option value="33">디자인</option>
+												<option value="37">스포츠</option>
+											</select> <br> 
+											<select id="reDetailCategory3" name="reDetailCategory3">
+												<option value="">선택</option>
+											</select>
+									</td>
+								</tr>
+							</table>
+						</div>
+						<div id="reShow3" style="display: none;">
+							<table id="reArtistTable5">
+								<tr>
+									<td>01. 자기소개</td>
+									<td>02. 전문분야</td>
+									<td>03. 보유 자격증</td>
+									<td>04. 학력/전공</td>
+									<td>05. 경력</td>
+								</tr>
+							</table>
+							<table id="reArtistTable6">
+								<tr>
+									<td colspan="2" style="font-family: 'Do Hyeon', sans-serif;">보유한
+										자격증을 작성해주세요. (3개 이하로 작성)&nbsp;&nbsp; <label
+										style="color: darkolivegreen; font-size: 13px;">선택 사항</label>
+									</td>
+									<td rowspan="6">
+										<div id="reCertiDiv" style="width: 250px; height: 300px;"></div>
+									</td>
+								</tr>
+								<tr>
+									<td colspan="2"><input type="text" placeholder="자격증명" name="reCertiName"
+										id="reCertiName" style="width: 350px; height: 30px;">
+										<input type="hidden" id="reCertiName1" name="reCertiName1">
+										<input type="hidden" id="reCertiName2" name="reCertiName2">
+										<input type="hidden" id="reCertiName3" name="reCertiName3"></td>
+								</tr>
+								<tr>
+									<td><input type="date" placeholder="발급일" id="reCertiDay"
+										style="width: 125px; height: 30px;">
+										<input type="hidden" id="reCertiDay1" name="reCertiDay1">
+										<input type="hidden" id="reCertiDay2" name="reCertiDay2">
+										<input type="hidden" id="reCertiDay3" name="reCertiDay3">
+										</td>
+									<td style="width: 220px;"><input type="text"
+										placeholder="발급 기관" id="reCertiSpace"
+										style="width: 215px; height: 30px;">
+										<input type="hidden" id="reCertiSpace1" name="reCertiSpace1">
+										<input type="hidden" id="reCertiSpace2" name="reCertiSpace2">
+										<input type="hidden" id="reCertiSpace3" name="reCertiSpace3">
+										</td>
+								</tr>
+								<tr>
+									<td colspan="2"><button type="button" id="reCertiBtn">확인</button></td>
+								</tr>
+								<tr>
+									<td colspan="2" style="font-size: 14px;">자격증 소유 시 취득 확인서를
+										다음 페이지에서 첨부해주세요.
+										<p style="color: red; font-size: 10px;">취득 확인서가 여러 개일시 한
+											파일로 압축해서 첨부해주세요</p>
+									</td>
+								</tr>
+								<tr>
+									<td colspan="2">
+									</td>
+								</tr>
+							</table>
+						</div>
+
+						<div id="reShow4" style="display: none;">
+							<table id="reArtistTable7">
+								<tr>
+									<td>01. 자기소개</td>
+									<td>02. 전문분야</td>
+									<td>03. 보유 자격증</td>
+									<td>04. 학력/전공</td>
+									<td>05. 경력</td>
+								</tr>
+							</table>
+							<table id="reArtistTable8">
+								<tr>
+									<td colspan="2" style="font-family: 'Do Hyeon', sans-serif;">학력
+										전공을 작성해주세요. (3개 이하로 작성)&nbsp;&nbsp; <label
+										style="color: darkolivegreen; font-size: 13px;">선택 사항</label>
+									</td>
+									<td rowspan="4">
+										<div id="reSchoolDiv"></div>
+									</td>
+								</tr>
+								<tr>
+									<td colspan="2"><input type="text" id="reSchoolName"
+										placeholder="학교명(ex. 서울대학교)"
+										style="width: 350px; height: 30px;">
+										<input type="hidden" name="reSchoolName1" id="reSchoolName1">
+										<input type="hidden" name="reSchoolName2" id="reSchoolName2">
+										<input type="hidden" name="reSchoolName3" id="reSchoolName3">
+									</td>
+								</tr>
+								<tr>
+									<td><input type="text" placeholder="전공(ex. 컴퓨터공학과)"
+										id="reMajor" style="width: 210px; height: 30px;">
+										<input type="hidden" name="reMajor1" id="reMajor1">
+										<input type="hidden" name="reMajor2" id="reMajor2">
+										<input type="hidden" name="reMajor3" id="reMajor3">
+									</td>
+									<td><select style="height: 30px; width: 125px;"
+										id="reStatus">
+											<option value="">상태</option>
+											<option value="inSchool">재학</option>
+											<option value="graduate">졸업</option>
+									</select>
+									<input type="hidden" name="reStatus1" id="reStatus1">
+									<input type="hidden" name="reStatus2" id="reStatus2">
+									<input type="hidden" name="reStatus3" id="reStatus3">
+									</td>
+								</tr>
+								<tr>
+									<td colspan="2"><button id="reSchoolBtn" type="button">확인</button></td>
+								</tr>
+								<tr>
+									<td colspan="2" style="font-size:14px;">자격증 취득확인서와 학력 증명서를 첨부해주세요.
+										<p style="color: red; font-size: 10px;">한개의 파일로 압축해서 첨부해주세요</p>
+									</td>
+								</tr>
+								<tr>
+									<td colspan="2"><input type="file" id="reCertiFile" name="reCertiFile"></td>
+								</tr>
+							</table>
+						</div>
+						<div id="reShow5" style="display: none;">
+							<table id="reArtistTable9">
+								<tr>
+									<td>01. 자기소개</td>
+									<td>02. 전문분야</td>
+									<td>03. 보유 자격증</td>
+									<td>04. 학력/전공</td>
+									<td>05. 경력</td>
+								</tr>
+							</table>
+							<table id="reArtistTable10">
+								<tr>
+									<td colspan="2" style="font-family: 'Do Hyeon', sans-serif;">경력사항을
+										작성해주세요. (3개 이하로 작성)&nbsp;&nbsp; <label
+										style="color: darkolivegreen; font-size: 13px;">선택 사항</label>
+									</td>
+									<td rowspan="7">
+										<div id="reCareerDiv"
+											style="width: 250px; height: 250px;"></div>
+									</td>
+								</tr>
+								<tr>
+									<td><input type="text" placeholder="기관명" id="reOfficeName"
+										style="width: 170px; height: 30px;">
+										<input type="hidden" name="reOfficeName1" id="reOfficeName1">	
+										<input type="hidden" name="reOfficeName2" id="reOfficeName2">	
+										<input type="hidden" name="reOfficeName3" id="reOfficeName3">	
+									</td>
+									<td><input type="text" placeholder="직위" id="rePosition"
+										style="width: 170px; height: 30px;">
+										<input type="hidden" name="rePosition1" id="rePosition1">
+										<input type="hidden" name="rePosition2" id="rePosition2">
+										<input type="hidden" name="rePosition3" id="rePosition3">
+									</td>
+								</tr>
+								<tr>
+									<td colspan="2"><input type="text" placeholder="근무내용"
+										id="reWorkContent" style="width: 352px; height: 30px;">
+										<input type="hidden" name="reWorkContent1" id="reWorkContent1">
+										<input type="hidden" name="reWorkContent2" id="reWorkContent2">
+										<input type="hidden" name="reWorkContent3" id="reWorkContent3">
+									</td>
+
+								</tr>
+								<tr>
+									<td colspan="2" style="font-family: 'Do Hyeon', sans-serif;">근무기간</td>
+								</tr>
+								<tr>
+									<td><select id="reWorkYear"
+										style="width: 170px; height: 30px;">
+											<option value="">년</option>
+											<option value="0">0</option>
+											<option value="1">1</option>
+											<option value="2">2</option>
+											<option value="3">3</option>
+											<option value="4">4</option>
+											<option value="5">5</option>
+											<option value="6">6</option>
+											<option value="7">7</option>
+											<option value="8">8</option>
+											<option value="9">9</option>
+											<option value="10">10</option>
+											<option value="10년이상">10년 이상</option>
+										</select>
+										<input type="hidden" name="reWorkYear1" id="reWorkYear1">									
+										<input type="hidden" name="reWorkYear2" id="reWorkYear2">									
+										<input type="hidden" name="reWorkYear3" id="reWorkYear3">									
+									</td>
+									<td><select id="reWorkMonth"
+										style="width: 170px; height: 30px;">
+											<option value="">개월</option>
+											<option value="0">0</option>
+											<option value="1">1</option>
+											<option value="2">2</option>
+											<option value="3">3</option>
+											<option value="4">4</option>
+											<option value="5">5</option>
+											<option value="6">6</option>
+											<option value="7">7</option>
+											<option value="8">8</option>
+											<option value="9">9</option>
+											<option value="10">10</option>
+											<option value="11">11</option>
+										</select>
+										<input type="hidden" name="reWorkMonth1" id="reWorkMonth1">
+										<input type="hidden" name="reWorkMonth2" id="reWorkMonth2">
+										<input type="hidden" name="reWorkMonth3" id="reWorkMonth3">
+									</td>
+								</tr>
+								<tr>
+									<td colspan="2">프리랜서인 경우, 기관명, 직위에 '없음'이라고 적어주세요.</td>
+								</tr>
+								<tr>
+									<td colspan="2"><button type="button" id="reCareerBtn">확인</button></td>
+								</tr>
+							</table>
+						</div>
+					</form>
+
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" id="reCloseModalBtn">이전</button>
+					<button type="button" class="btn btn-primary" id="reNextModalBtn">다음</button>
+					<button type="button" class="btn btn-primary" id="reSaveModalBtn"
+						style="display: none; background-color: darkolivegreen;">저장</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
 	<script>
 		$(function() {
 			//자기소개 부분 textarea에서 255자가 넘지 못하게
@@ -722,7 +1083,18 @@
 							$("#counter").html(inputLength);
 						}
 				});
-	
+			
+			$("#reIntroduce").keyup (function(){
+				var inputLength = $(this).val().length;
+				
+				if (inputLength > 255) {
+					$(this).val($(this).val().substring(0,255));
+					
+				} else {
+					$("#reCounter").html(inputLength);
+				}
+			});
+			
 			//닉네임 중복체크
 			$("#checkNick").click(function() {
 				var nick = $("#nickName").val();
@@ -752,12 +1124,15 @@
 	
 			// file input 태그 숨기기 
 			$("#fileArea").hide();
+			$("#reFileArea").hide();
 	
 			//수정 아이콘 클릭시 파일 첨부할 수 있께
 			$("#modifyIcon").click(function() {
 				$("#artistImg1").click();
 			});
-	
+			$("#reModifyIcon").click(function() {
+				$("#reArtistImg1").click();
+			});
 		});
 	
 		// 파일 첨부해서 선택했을 경우 아티스트 프로필 변경
@@ -772,6 +1147,19 @@
 				reader.readAsDataURL(value.files[0]);
 			}
 		}
+		
+		function reloadImg(value) {
+			if(value.files && value.files[0]) {
+				var reader = new FileReader();
+				
+				reader.onload = function(e) {
+					$("#reArtistprofile").attr("src", e.target.result);
+				}
+				
+				reader.readAsDataURL(value.files[0]);
+			}	
+		}
+		
 		/*카테고리 1에서 전문분야와 상세분야 선택 스크립트 */
 		$("#categoryName").change(function() {
 				var categoryName = $("#categoryName").val();
@@ -1012,6 +1400,7 @@
 	
 		$(function() {
 			var num = 1;
+			var reNum = 1;
 			// 모달 버튼에 이벤트를 건다.
 			
 			$('#notLoginBtn').on('click', function() {
@@ -1024,6 +1413,22 @@
 			
 			$('#openModalBtn').on('click', function() {
 				$('#modalBox').modal('show');
+			});
+			
+			$('#reOpenModalBtn').on('click', function() {
+				
+				/* $.ajax({
+					url:"/hobbyist/restoreInfo.ar",
+					type:"post",
+					success:function(data) {
+						console.log('서버전송성공');
+					},
+					error:function(status) {
+						console.log(status);
+					}
+				}); */
+				
+				$('#modalBox2').modal('show');	
 			});
 			
 			// 모달 안의 취소 버튼에 이벤트를 건다.
@@ -1056,6 +1461,39 @@
 					alert("필수사항을 모두 입력해주세요.");
 				} else {
 					$("#artistForm").submit();
+				}
+			});
+			
+			// 모달 안의 취소 버튼에 이벤트를 건다.
+			$('#reCloseModalBtn').on('click', function() {
+				/* $('#modalBox').modal('hide'); */
+				if (reNum > 1) {
+					$("#reShow" + reNum).hide();
+					reNum--;
+					$("#reShow" + reNum).show();
+
+				}
+				if (reNum < 5) {
+					$("#reNextModalBtn").show();
+					$("#reSaveModalBtn").hide();
+				}
+			});
+			$('#reNextModalBtn').on('click', function() {
+
+				$("#reShow" + reNum).hide();
+				reNum++;
+				$("#reShow" + reNum).show();
+				if (reNum == 5) {
+					$("#reNextModalBtn").hide();
+					$("#reSaveModalBtn").show();
+				}
+
+			});
+			$('#reSaveModalBtn').on('click', function() {
+				if($("#reArtistImg1").val() == "") {
+					alert("필수사항을 모두 입력해주세요.");
+				} else {
+					$("#reArtistForm").submit();
 				}
 			});
 		});

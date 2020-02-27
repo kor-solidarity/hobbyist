@@ -245,7 +245,6 @@
 					<%} else { %>
 						<img id="profileImg" src=<%=imageRoot%>>
 					<%} %>
-				<%-- 		<img id="profileImg" src="<%=request.getContextPath() %>/static/images/seolhyun.png"> --%>
 				</td>
 				<td colspan="4" class="td1"></td>
 				<!--  설정 사진 -->
@@ -268,7 +267,7 @@
 			</tr>
 			<tr>
 				<td colspan="4" class="td8"><!-- 아티스트 심사 대기중입니다. -->
-					
+					<%if(loginMember != null && applyArtist != null) { %>
 					<%if(loginMember.getArtistNick() != null && loginMember.getIsArtist() == 0) {
 					
 						if(applyArtist.getApplyConfirmed() == 0) {%>
@@ -276,7 +275,9 @@
 							아티스트 심사 대기 중입니다.
 						<%} else { %>
 							아티스트 심사 결과 거절 처리되었습니다. &nbsp; <button id="rejectBtn" onclick="rejectReason();">거절사유 확인</button>
+							<input type="hidden" id="reasonInput" value="<%=applyArtist.getRejectReason()%>">
 						<%}	
+						}
 					}%>
 				</td>
 				<td colspan="4" class="pointArea">보유 포인트&nbsp; :&nbsp; <%=loginMember.getPoint() %>p&nbsp;&nbsp;&nbsp;</td>
@@ -305,7 +306,7 @@
 	
 	<script>
 		function rejectReason() {
-			alert('관리자 심사 결과 <%=applyArtist.getRejectReason()%> 로 인해 권한 부여가 거절 되었습니다.');
+			alert('관리자 심사 결과 ' + document.getElementById("reasonInput").value + '로 인해 권한 부여가 거절 되었습니다.');
 		}
 	</script>
 </body>
