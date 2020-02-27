@@ -175,7 +175,7 @@
 					<tr>
 						<th style="width: 8%;">신청코드</th>
 						<th style="width: 8%;">결제코드</th>
-						<th style="width: 11%;">아이디</th>
+						<th style="width: 11%;">회원코드</th>
 						<th style="width: 8%;">이름</th>
 						<th style="width: 13%;">전화번호</th>
 						<th style="width: 10%;">아티스트 코드</th>
@@ -184,14 +184,14 @@
 						<th style="width: 12%;">상세보기</th>
 					</tr>
 					<tr>
-						<td style="width: 8%;">결제코드</td>
-						<td style="width: 11%;">수업일정 코드</td>
-						<td style="width: 11%;">아이디</td>
-						<td style="width: 7%;">이름</td>
-						<td style="width: 13%;">전화번호</td>
-						<td style="width: 11%;">아티스트담당</td>
-						<td style="width: 11%;">환불 금액</td>
-						<td style="width: 17%;">환불계좌</td>
+						<td style="width: 8%;">1</td>
+						<td style="width: 11%;">2</td>
+						<td style="width: 11%;">3</td>
+						<td style="width: 7%;">임찬영</td>
+						<td style="width: 13%;">01067471107</td>
+						<td style="width: 11%;">1</td>
+						<td style="width: 11%;">20000</td>
+						<td style="width: 17%;">2020-11-01</td>
 						<td style="width: 14%;"><button id="Btn">조회</button></td>
 					</tr>
 				</table>
