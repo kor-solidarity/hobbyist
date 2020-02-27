@@ -1,4 +1,5 @@
-<%@ page import="com.dh.hobbyist.place.model.vo.PlaceCompany" %><%--
+<%@ page import="com.dh.hobbyist.place.model.vo.PlaceCompany" %>
+<%@ page import="com.sun.org.apache.xpath.internal.operations.Bool" %><%--
   Created by IntelliJ IDEA.
   User : SOY
   Date : 2020-02-18
@@ -20,7 +21,9 @@
 <%@ include file="/views/common/adminMenubar.jsp" %>
 
 <%
-    // PlaceCompany company = request
+    PlaceCompany company = (PlaceCompany) request.getAttribute("placeCompany");
+    // 수정모드인지 확인
+    Boolean onEdit = false;
 %>
 
 <section>
@@ -53,51 +56,61 @@
             </table>
         </div>
         <hr id="firstLine">
-        <form enctype="multipart/form-data" method="post" action="<%=request.getContextPath()%>/add_place.ad">
+        <form enctype="multipart/form-data" method="post" action="<%=request.getContextPath()%>/adminUpdateCompany.ad">
             <div id="infoArea" class="place-edit-div">
                 <table style="width : 95%; float : right" class="place-edit-table">
                     <!-- 테이블 첫번째 줄은 아이디, 비밀번호 등 조회할 내용 제목이다. background(#4E4E4E), font-color(white) 색 다르게 지정 -->
                     <tr>
                         <td style="">업체명 :</td>
                         <td style="">
-                            <input type="text" name="companyName" value="">
+                            <input type="text" name="companyName" value="<%=company.getCompany_name()%>" disabled>
                         </td>
                     </tr>
                     <tr>
                         <td>전화번호 :</td>
                         <td>
-                            <input type="text" name="phone" id="" value="">
+                            <input type="text" name="phone" id="" value="<%=company.getPhone()%>" disabled>
                         </td>
                     </tr>
                     <tr>
                         <td>업체주소 :</td>
                         <td>
-                            <input type="text" name="addr" style="width: 500px" id="" value="">
+                            <input type="text" name="addr" style="width: 500px" id="" value="<%=company.getAddress()%>" disabled>
                         </td>
                     </tr>
                     <tr>
                         <td>사이트 주소</td>
-                        <td><input type="text" name="website" id="" value=""></td>
+                        <td><input type="text" name="website" id="" value="<%=company.getWebsite()%>" ></td>
                     </tr>
                     <tr>
                         <td>업체 소개 : <br>(영업일 가격 등)</td>
                         <td>
-                            <textarea name="intro" id="" cols="75" rows="10"></textarea>
+                            <textarea name="intro" id="" cols="75" rows="10" disabled>
+                                <%=company.getIntro()%>
+                            </textarea>
                         </td>
                     </tr>
                     <tr>
                         <td>영업시간</td>
                         <td>
-                            <textarea name="serviceTime" id="" cols="75" rows="3"></textarea>
+                            <textarea name="serviceTime" id="" cols="75" rows="3">
+                                <%=company.getService_time()%>
+                            </textarea>
                         </td>
                     </tr>
                     <tr>
                         <td>공간규모 선택 :</td>
                         <td>
-                            <input type="checkbox" name="roomSize3" value="3" id="big">&nbsp;<label for="big">대규모</label>
+                            <%
+                                String room_size = company.getRoom_size();
+                                room_size.split(",");
+                            %>
+                            <input type="checkbox" name="roomSize3" value="3" id="big">&nbsp;<label
+                                for="big">대규모</label>
                             <input type="checkbox" name="roomSize2" value="2" id="small">&nbsp;<label
                                 for="small">소규모</label>
-                            <input type="checkbox" name="roomSize1" value="1" id="one">&nbsp;<label for="one">일대일</label>
+                            <input type="checkbox" name="roomSize1" value="1" id="one">&nbsp;<label
+                                for="one">일대일</label>
                         </td>
                     </tr>
                     <tr>

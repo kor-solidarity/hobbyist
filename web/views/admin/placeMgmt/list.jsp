@@ -1,7 +1,8 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="com.dh.hobbyist.place.model.vo.PlaceCompany" %>
 <%@ page import="com.dh.hobbyist.place.model.vo.PlaceCompanyForList" %>
-<%@ page import="com.dh.hobbyist.common.model.vo.PageInfo" %><%--
+<%@ page import="com.dh.hobbyist.common.model.vo.PageInfo" %>
+<%@ page import="java.sql.Date" %><%--
   Created by IntelliJ IDEA.
   User: SOY
   Date: 2020-02-18
@@ -68,7 +69,7 @@
         </div>
         <hr id="firstLine">
         <div id="infoArea">
-            <table style="width: 100%;text-align: center;" class="admin-table">
+            <table style="width: 100%;text-align: center;" class="admin-table" id="companyTable">
                 <!-- 테이블 첫번째 줄은 아이디, 비밀번호 등 조회할 내용 제목이다. background(#4E4E4E), font-color(white) 색 다르게 지정 -->
                 <tr>
                     <th style="">번호</th>
@@ -77,52 +78,113 @@
                     <th style="">등록일</th>
                     <th style="">종료일</th>
                     <th style="">조회</th>
-                    <th style="">선택</th>
+                    <th style="">비고</th>
                 </tr>
+                <%
+                    for (PlaceCompanyForList l : list) { %>
+
                 <tr>
-                    <%
-                        for (PlaceCompanyForList l : list) { %>
-                    <td><%=l.getCompany_pk()%></td>
-                    <td><%=l.getCompany_name()%></td>
-                    <td><%=l.getPhone()%></td>
-                    <td><%=l.getStartDate()%></td>
-                    <td><%=l.getEndDate()%></td>
+                    <td><%=l.getCompany_pk()%>
+                    </td>
+                    <td><%=l.getCompany_name()%>
+                    </td>
+                    <td><%=l.getPhone()%>
+                    </td>
+                    <td><%=l.getStartDate()%>
+                    </td>
+                    <td class="endDate"><%=l.getEndDate()%>
+                    </td>
                     <td>
                         <%-- 추후 코드 본격적으로 넣을때 id 부분도 손봐야함. --%>
                         <button class="inquery-btn"
-                                onclick="location.href='<%=request.getContextPath()%>/admin/seePlace.ad?id=<%=l.getCompany_pk()%>'">조회
+                                onclick="location.href='<%=request.getContextPath()%>/viewPlaceInfo.ad?id=<%=l.getCompany_pk()%>&currentPage=<%=pi.getCurrentPage()%>'">
+                            조회
                         </button>
                     </td>
-                    <td>
-                        <input type="checkbox" class="place-checkbox" name="placeId" id="company<%=l.getCompany_pk()%>" value="(업체번호)">
+                    <td class="deadline">
+                        <%--                        <input type="checkbox" class="place-checkbox" name="placeId" id="company<%=l.getCompany_pk()%>" value="(업체번호)">--%>
+                        <%-- 게시종료까지 몇일 남았는지 확인 --%>
+                        <%
+                            // 몇일 남았는지 계산하기.
+                            Date deadLine = l.getEndDate();
+
+                            Date now = new Date(System.currentTimeMillis());
+
+                            long diff = deadLine.getTime() - now.getTime();
+                            // System.out.println("diff: " + diff);
+                            // ms * 초 * 분 * 시간
+                            int days_calc = 1000 * 60 * 60 * 24;
+                            // 몇일 남았는가?
+                            long dDay = diff / days_calc;
+                            // 위에 0일인 경우 시간이 지났는가?
+                            long leftovers = diff % days_calc;
+                        %>
+                        <%-- 모든 시간이 0 이상이면 아직 시간이 남은거임--%>
+                        <% if (dDay >= 0 && leftovers >= 0) { %>
+                        <span style="color: green">종료까지 D-<%=dDay + 1%></span>
+                        <%--여기 걸렸으면 기한이 지난거--%>
+                        <% } else { %>
+                        <span style="color: red">광고마감</span>
+                        <% } %>
                     </td>
-                    <%
-                        }
-                    %>
-<%--                    <td>1</td>--%>
-<%--                    <td>Gamblerz studio</td>--%>
-<%--                    <td>010-6747-1107</td>--%>
-<%--                    <td>2020/01/30</td>--%>
-<%--                    <td>2020/02/06</td>--%>
-<%--                    <td>--%>
-<%--                        &lt;%&ndash; 추후 코드 본격적으로 넣을때 id 부분도 손봐야함. &ndash;%&gt;--%>
-<%--                        <button class="inquery-btn"--%>
-<%--                                onclick="location.href='<%=request.getContextPath()%>/admin/seePlace.ad?id=1'">조회--%>
-<%--                        </button>--%>
-<%--                    </td>--%>
-<%--                    <td>--%>
-<%--                        <input type="checkbox" class="place-checkbox" name="placeId" id="" value="(업체번호)">--%>
-<%--                    </td>--%>
+                </tr>
+                <%
+                    }
+                %>
+                <tr>
+                    <td colspan="7">
+
+                        <div class="pagingArea" align="center">
+                            <button onclick="location.href='<%=request.getContextPath()%>/adminPlaceList.ad?currentPage=1'">
+                                <<
+                            </button>
+                            <% if (currentPage <= 1) { %>
+                            <button disabled><</button>
+                            <% } else { %>
+                            <button onclick="location.href='<%=request.getContextPath()%>/adminPlaceList.ad?currentPage=<%=currentPage - 1%>'">
+                                <
+                            </button>
+                            <% } %>
+
+                            <% for (int p = startPage; p <= endPage; p++) {
+                                if (p == currentPage) {
+                            %>
+                            <button disabled><%= p %>
+                            </button>
+                            <%
+                            } else {
+                            %>
+                            <button onclick="location.href='<%=request.getContextPath()%>/adminPlaceList.ad?currentPage=<%=p%>'"><%= p %>
+                            </button>
+                            <%
+                                    }
+                                }
+                            %>
+
+
+                            <% if (currentPage >= maxPage) { %>
+                            <button disabled>></button>
+                            <% } else { %>
+                            <button onclick="location.href='<%=request.getContextPath()%>/adminPlaceList.ad?currentPage=<%=currentPage + 1%>'">
+                                >
+                            </button>
+                            <% } %>
+
+                            <button onclick="location.href='<%=request.getContextPath()%>/adminPlaceList.ad?currentPage=<%=maxPage%>'">
+                                >>
+                            </button>
+                        </div>
+                    </td>
                 </tr>
             </table>
         </div>
+
         <%-- 마지막줄에는 삭제버튼 넣기.  --%>
         <div class="" style="width:1100px;text-align: right; margin-left: 60px">
-            <button>등록</button>
+            <button onclick="location.href='<%=request.getContextPath()%>/add_place.ad'">등록</button>
             <button>삭제</button>
         </div>
     </article>
 </section>
-
 </body>
 </html>

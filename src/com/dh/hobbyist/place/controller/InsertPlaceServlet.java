@@ -19,8 +19,8 @@ import java.util.ArrayList;
 import java.util.Enumeration;
 
 // 관리자 페이지에서 공간대여업체를 추가함.
-@WebServlet(name = "AddPlaceServlet", urlPatterns = "/add_place.ad")
-public class AddPlaceServlet extends HttpServlet {
+@WebServlet(name = "InsertPlaceServlet", urlPatterns = "/add_place.ad")
+public class InsertPlaceServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doGet(request, response);
     }
