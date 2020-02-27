@@ -26,7 +26,6 @@
 	}
 	#suggestDetailDiv1 {
 	width: 900px;
-	/* height: 500px; */
 	margin-left: auto;
 	margin-right: auto;
 	}

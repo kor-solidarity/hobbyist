@@ -66,8 +66,8 @@ public class InsertArtistServlet extends HttpServlet {
 				originFiles.add(multiRequest.getOriginalFileName(name));
 			}
 			
-			System.out.println("saveFile : " + saveFiles);
-			System.out.println("originFile : " + originFiles);
+			//System.out.println("saveFile : " + saveFiles);
+			//System.out.println("originFile : " + originFiles);
 			
 			String memberPk = multiRequest.getParameter("loginMemberPk");
 

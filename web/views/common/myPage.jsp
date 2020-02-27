@@ -1,10 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8" import="com.dh.hobbyist.artist.model.vo.ApplyArtist"%>
+<%
+	String imageRoot = (String) request.getAttribute("imageRoot");
+	ApplyArtist applyArtist = (ApplyArtist) request.getAttribute("applyArtist");
+%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>hobbyist</title>
 <style>
 	.divtop1 {
 		top: 30px;
@@ -201,6 +205,16 @@
 	 	color: #6F6C6C;
 	 	text-align: right;
 	}
+	#rejectBtn {
+		background-color:#4E4E4E;
+		font-family: Do Hyeon;
+		font-size:18px;
+		color:white;
+		padding: 5px;
+		height:30px;
+		border: 1px solid #4E4E4E;
+		border-radius:5%;
+	}
 </style>
 <link
 	href="https://fonts.googleapis.com/css?family=Do+Hyeon|ZCOOL+QingKe+HuangYou&display=swap"
@@ -225,23 +239,47 @@
 		<table class = tabletop2>
 			<tr>
 				<!--학생사진  -->
-				<td rowspan="4" class="profileImgArea" ><img id="profileImg" src="<%=request.getContextPath() %>/static/images/seolhyun.png"></td>
+				<td rowspan="4" class="profileImgArea" >
+					<%if(imageRoot == "") { %>
+						<img id="profileImg" src="<%=request.getContextPath() %>/static/images/user.png">
+					<%} else { %>
+						<img id="profileImg" src=<%=imageRoot%>>
+					<%} %>
+				<%-- 		<img id="profileImg" src="<%=request.getContextPath() %>/static/images/seolhyun.png"> --%>
+				</td>
 				<td colspan="4" class="td1"></td>
 				<!--  설정 사진 -->
 				<td colspan="3" class="td2"><img id="gearwheel" src="<%=request.getContextPath() %>/static/images/gearwheel.png"></td>
 				<td colspan="1" class="memberUpdate">회원정보 수정&nbsp;&nbsp;&nbsp;</td>
 			</tr>
 			<tr>	
-				<td colspan="4" class="td4">학생</td>
+				<td colspan="4" class="td4">
+					<%if(loginMember.getIsArtist() == 1) { %>
+						아티스트
+					<%} else { %>
+						학생
+					<%} %>
+				</td>
 				<td colspan="4" class="td5"></td>
 			</tr>
 			<tr>
-				<td colspan="4" class="name">김설현<em id="nim"> &nbsp;님</em></td>
+				<td colspan="4" class="name"><%=loginMember.getMemberName() %><em id="nim"> &nbsp;님</em></td>
 				<td colspan="4" class="td7"></td>
 			</tr>
 			<tr>
-				<td colspan="4" class="td8">아티스트 심사 대기중입니다.</td>
-				<td colspan="4" class="pointArea">보유 포인트&nbsp; :&nbsp; 2500p&nbsp;&nbsp;&nbsp;</td>
+				<td colspan="4" class="td8"><!-- 아티스트 심사 대기중입니다. -->
+					
+					<%if(loginMember.getArtistNick() != null && loginMember.getIsArtist() == 0) {
+					
+						if(applyArtist.getApplyConfirmed() == 0) {%>
+						
+							아티스트 심사 대기 중입니다.
+						<%} else { %>
+							아티스트 심사 결과 거절 처리되었습니다. &nbsp; <button id="rejectBtn" onclick="rejectReason();">거절사유 확인</button>
+						<%}	
+					}%>
+				</td>
+				<td colspan="4" class="pointArea">보유 포인트&nbsp; :&nbsp; <%=loginMember.getPoint() %>p&nbsp;&nbsp;&nbsp;</td>
 			</tr>
 		</table>
 	</div>
@@ -264,6 +302,11 @@
 			</tr>
 		</table>
 	</div>
-
+	
+	<script>
+		function rejectReason() {
+			alert('관리자 심사 결과 <%=applyArtist.getRejectReason()%> 로 인해 권한 부여가 거절 되었습니다.');
+		}
+	</script>
 </body>
 </html>
