@@ -1,10 +1,7 @@
+<%@page import="com.dh.hobbyist.memberUpdate.controller.memberUpdateServletM"%>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" import="java.util.*, com.dh.hobbyist.member.model.dao.*"%>
-<%
-	List<Member> UpdateMemberListR = (List<Member>) request.getAttribute("UpdateMemberListR");
-	/* Member m = updateMemberListR.get(0); */
-
-%>
 
 	
 <!DOCTYPE html>
@@ -269,7 +266,7 @@ background: #C4C4C4;
 background: #C4C4C4;
 }
 
-#bt_update {
+#updateBtn {
 
 width: 110px;
 height: 40px;
@@ -295,8 +292,9 @@ color: #FFFFFF;
 </head>
 <body>
 	<%@ include file="/views/common/myPage.jsp"%>
-	
-
+	<!--dao에있는 전화번호 값을 배열로 -빼고 담아준다 -->
+	<% String[] phone = loginMember.getPhone().split("-"); %>
+	<% System.out.println(phone); %>
 	<div class="divcenter2">
 		<table align="border" class="tablecenter2">
 			<tr>
@@ -324,26 +322,18 @@ color: #FFFFFF;
 	</div>
 
 	<div class="divcenter4">
-
-		<form action="<%=request.getContextPath() %>/hobbyist/web/views/member/myPage/configuration/memberUpdate.jsp method="post">
+		
+		<!-- 회원정보수정 서블릿으로전송 -->
+		<form id="updateForm" action="<%=request.getContextPath() %>"/UpdateMemberM.me" method="post">
 		
 			<table align="border" class="tablecenter4">
 		 	
-			<% if(UpdateMemberListR != null){%>
-			<%
-			
-			for(int i=0; i<UpdateMemberListR.size(); i++){
-			
-			%> 
 			
 				<tr>
 		<td colspan="1" style="width: 70px; text-align: left;"><label id="labelId">아이디</label></td>	
-		<td colspan="5" class="id" style="text-align: left;"><input style="width: 260px;" type="text" name="textId" max-length=15
-						value="<%=UpdateMemberListR.get(i).getMemberId()%>" autofocus placeholder=""></td>
+		<td colspan="5" class="id" style="text-align: left;"><input style="width: 260px;" type="text" name="userId" id="userId" max-length=15 value="<%=loginMember.getMemberId()%>" autofocus placeholder=""></td>
 					<td></td>
 				</tr>
-		   	<% } %>
-		  	 	<% } %>
 		  	 	
 				<tr>
 				<td colspan="1" style= "height:10px;"></td>
@@ -352,8 +342,7 @@ color: #FFFFFF;
 				<tr>
 					<td colspan="1" style="width: 100px; text-align: left;"><label
 						id="labelPw">비밀번호</label></td>	
-					<td colspan="5" class="id" style="text-align: left;"><input style="width: 260px;" type="password" name="password1" max-length=15
-						 autofocus placeholder="패스워드를 입력하세요."></td>
+					<td colspan="5" class="id" style="text-align: left;"><input style="width: 260px;" type="password" name="password1" value="" max-length=15 autofocus placeholder="패스워드를 입력하세요."></td>
 					<td></td>
 				</tr> 
 		
@@ -364,8 +353,7 @@ color: #FFFFFF;
 		  		<tr>
 					<td colspan="1" style="width: 100px; text-align: left;"><label
 						id="labelPw2">비밀번호확인</label></td>	
-					<td colspan="5" class="id2" style="text-align: left;"><input style="width: 260px;" type="password" name="password2" max-length=15
-						 autofocus placeholder="패스워드를 입력하세요."></td>
+					<td colspan="5" class="id2" style="text-align: left;"><input style="width: 260px;" type="password" name="password2" value="" max-length=15 autofocus placeholder="패스워드를 입력하세요."></td>
 					<td></td>
 				</tr>
 		  	
@@ -377,7 +365,7 @@ color: #FFFFFF;
 					<td colspan="1" style="width: 100px; text-align: left;"><label
 						id="labelName">이름</label></td>
 					<td colspan="5" class="nm" style="text-align: left;"><input
-						style="width: 260px;" type="name" name="name" max-length=5 placeholder="이름을 입력하세요."></td>
+						style="width: 260px;" type="name" name="name" max-length=5 placeholder="이름을 입력하세요." value="<%=loginMember.getMemberName()%>"></td>
 					<td></td>
 				</tr>
 
@@ -389,7 +377,7 @@ color: #FFFFFF;
 					<td colspan="1" style="width: 100px; text-align: left;"><label
 						id="LabelEmail">이메일</label></td>
 					<td colspan="5" class="em" style="text-align: left;"><input
-						style="width: 260px;" type="email" name="email" placeholder="이메일을 입력하세요."></td>
+						style="width: 260px;" type="email" name="email" placeholder="이메일을 입력하세요." value="<%=loginMember.getEmail() %>"></td>
 					<td></td>
 				</tr>
 		
@@ -400,13 +388,14 @@ color: #FFFFFF;
 				<tr>
 					<td colspan="1" style="width: 100px; text-align: left;"><label
 						id="labelTell">전화번호</label></td>
-					<td colspan="1"><input type="tel" name="tel1" id="tel1"
+					<td colspan="1"><input type="tel" name="tel1" id="tel1" value="<%=phone[0]%>"
 						style="text-align: left; width: 70px;"></td>
 					<td colspan="1" style="width: 3px;"><label id="labelHyphen1">-</label></td>
-					<td colspan="1"><input type="tel" name="tel2" id="tel2"
+					<td colspan="1"><input type="tel" name="tel2" id="tel2" value="<%=phone[1]%>"
+					
 						style="text-align: left; width: 70px;"></td>
 					<td colspan="1" style="width: 3px;"><label id="labelHyphen2">-</label></td>
-					<td colspan="1"><input type="tel" name="tel3" id="tel3" style="text-align: left; width: 75px;"></td>
+					<td colspan="1"><input type="tel" name="tel3" id="tel3" value="<%=phone[2]%>" style="text-align: left; width: 75px;" value="<%=loginMember.getPhone() %>"></td>
 					
 					<td colspan="1"><label id="button1">인증하기</label></td>
 				</tr>
@@ -428,7 +417,7 @@ color: #FFFFFF;
 
 				<tr>
 					<td colspan="1" style="width: 90px; text-align: left;"><label id="labelAccount">계좌번호</label></td>
-					<td colspan="1" style="width: 30px;"><select name="bank" style="width: 75px;">
+					<td colspan="1" style="width: 30px;"><select name="bank" style="width: 75px; value="<%=loginMember.getBankName() %>">
 							<option value="">신한</option>
 							<option value="">국민</option>
 							<option value="">하나</option>
@@ -436,66 +425,32 @@ color: #FFFFFF;
 							<option value="">케이뱅크</option>
 					</select></td>
 					<td colspan="1" style="width: 10px;"></td>
-					<td colspan="3" style="text-align: center;"><input type="text" name="text" style="width: 165px;"></td>
+					<td colspan="3" style="text-align: center;"><input type="text" name="bankText" style="width: 165px;" value="<%=loginMember.getBankNum() %>"></td>
 					<td colspan="1"><button id="button2">인증하기</button></td>
 				</tr>
 			</table>
 			<br>
-			<input type="submit" value="수정하기" class="bt_update" id="bt_update">  
-		
-		
+			<!--수정하기버튼  -->
+			<div id="updateBtn" onclick="updateMember();">수정하기</div>
 		</form>
 	</div>
-		
+	
+	<script>
+	function updateMember(){
+		$("#updateForm").sumbit();
+	}
+	
+	
+	</script>	
+	
+	
+	
+	
 	
 	
 	<script>
-
 	
-	
-	
-	
-	function checkPassword(password){
-	if(password != ""){
-		if(!/^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,20}$/.test(password)){
-		$("#pwdCheck1").html("영문, 숫자, 특수문자 조합으로 8자리 이상 입력해주세요.");	
-		$("#pwdCheck1").css({'color':'red','font-size':'11.5px'});
-		return false;
-		}
-		$("#pwdCheck1").html("사용 가능한 비밀번호입니다.");
-		$("#pwdCheck1").css({'color':'green','font-size':'11.5px'});
-		return true;
-	}
-	$("#pwdCheck1").html("비밀번호를 입력해주세요.");
-	$("#pwdCheck1").css({'color':'red', 'font-size': '11.5px'});
-	return false;
-	
-	
-	
-	}
-
-	$("#email").change(function(){
-		checkEmail($('#email').val());
-	});
-	
-	var email = $("#email").val();
-	var regEmail = /([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
-	
-	function checkEmail(email){
-	if(email != ""){
-		if(!regEmail.test(email)){
-		$("#emailCheck").html("올바른 이메일 형식으로 입력해주세요")	;
-		$("#emailCheck").css({'color':'red', 'font-size':'11.5px'});
-		return false;		
-		}
-		$("#emailCheck").html(" ");
-		return true;
-	}
-	$("#emailCheck").html("이메일을 입력해주세요");	
-	$("#emailCheck").css({'color':'red', 'font-size': '11.5px'});
-	}
-	
-	//인증하기 버튼 클릭시
+	//전화번호 인증하기 버튼 클릭시
 	
 		var randomVal = ""; //유저에게 보낸 문자의 랜덤 숫자를 저장하기 위한 전역변수
 		$(document).on('click', '#button1', function () {
@@ -542,8 +497,6 @@ color: #FFFFFF;
 				console.log(error);
 			}
 		});
-
-		  
 
 	});
 

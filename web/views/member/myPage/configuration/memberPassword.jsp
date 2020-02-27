@@ -8,9 +8,8 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-//
-#divtest{
 
+#divtest{
 	width: 1024px;
 	height: 120px;
 	margin-top: auto;
@@ -19,7 +18,6 @@
 	text-align: center;
 	line-height:100px;
 }
-
 
 .divcenter2 {
 	margin-left: auto;
@@ -159,12 +157,6 @@ center_td0 {
 	line-height: 26px;
 	color: #556B2F;
 }
-.divtest{
-	width: 1024px;
-	height: 30px;
-	margin: auto;
-	text-align: center;
-}
 
 
 </style>
@@ -174,7 +166,7 @@ center_td0 {
 </head>
 <body>
 	<%@ include file="/views/common/myPage.jsp"%>
-	
+	<%String passCheck = loginMember.getMemberPwd(); %>
 	<div class="divcenter2">
 		<table align="border" class="tablecenter2">
 			<tr>
@@ -205,8 +197,7 @@ center_td0 {
 	
 	<div class="divbottom3">
 	<!--  비밀번호 확인 텍스트 -->
-		<label class="label_bottom3">비밀번호:&nbsp; </label><input type="text" class="password" id="pw">
-		<!-- 비밀번호 확인 버튼 -->
+		<label class="label_bottom3">비밀번호:&nbsp; </label><input type="text" class="password" id="pw" placeholder="비밀번호를 입력하세요.">
 		<button class="passclick" id="passclick" >확인</button>
 		
 	</div>
@@ -218,19 +209,22 @@ center_td0 {
 		
 	</div>
  	 <script>
-	
-	 /* console.log( 'a1 : ' + $("#pw").typeof()); */
-	 
+ 	console.log("passCheck");
+ 
 		 //비밀번호 동일 확인 기능
 	 	$(function(){
 	 		$("#passclick").click(function(){
-				var textValue = $("#pw").val();
-				var pass = 1111;
+	 			console.log( 'a1 : ' + $("#pw"));
+	 			var passValue = $("#pw").val();
+				var passCheck = 3+3L8p4PqsplFRLIDga0Oi8MfWf60fhYe6jUrIcQNdW6Jnh2LuB4ZogKGL9DkT3fkyYHH85gzbZunGfPvTeF/g==;
 				
-				if(textValue == pass) {
+				console.log("passCheck");
+				if(passValue == passCheck) {
+					console.log("passCheck");
 					location.href = "<%=request.getContextPath()%>/views/member/myPage/configuration/memberUpdate.jsp";	
 				}else{
 					 /* console.log( 'a4' + $("#pw").typeof()); */
+					 
 					 $("#divtest").text("비밀번호가 정확하지 않습니다.").css("color","gray");
 					}
 				

@@ -13,19 +13,19 @@ public class MemberService {
 
 	
 	//회원 정보 수정 목록 메소드(재선)
-	   public List<Member> UpdateMemberList(){
-	      Connection con = getConnection();
-	      
-	      List<Member> UpdateMemberList = new MemberDao().UpdateMemberList(con);
-	      
-	      close(con);
-	      return UpdateMemberList;
-	   }
-	   
-	public Member memberUpdate(Member member) {
+	
+	public int memberUpdate(Member member) {
 		Connection con = getConnection();
-		Member memberUpdate = new MemberDao().memberUpdate(con, member);
+		
+		int memberUpdate = new MemberDao().memberUpdate(con, member);
+		
+		if(memberUpdate > 0) {
+			commit(con);
+		}else {
+			rollback(con);
+		}
 		close(con);
+		
 		return memberUpdate;
 	}
 	   
