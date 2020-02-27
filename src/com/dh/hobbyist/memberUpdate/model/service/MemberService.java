@@ -1,12 +1,14 @@
 package com.dh.hobbyist.memberUpdate.model.service;
 
+import static com.dh.hobbyist.common.JDBCTemplate.close;
+import static com.dh.hobbyist.common.JDBCTemplate.commit;
+import static com.dh.hobbyist.common.JDBCTemplate.getConnection;
+import static com.dh.hobbyist.common.JDBCTemplate.rollback;
+
 import java.sql.Connection;
-import java.util.List;
 
 import com.dh.hobbyist.memberUpdate.model.dao.MemberDao;
 import com.dh.hobbyist.memberUpdate.model.vo.Member;
-
-import static com.dh.hobbyist.common.JDBCTemplate.*;
 
 public class MemberService {
 	
@@ -19,6 +21,7 @@ public class MemberService {
 		
 		int memberUpdate = new MemberDao().memberUpdate(con, member);
 		
+		
 		if(memberUpdate > 0) {
 			commit(con);
 		}else {
@@ -28,6 +31,19 @@ public class MemberService {
 		
 		return memberUpdate;
 	}
+
+	//패스워드 확인 목록
+	public Member pwCheck(Member member) {
+		Connection con = getConnection();
+		
+		Member loginMember = new MemberDao().pwCheck(con, member);
+		
+		close(con);
+		
+		return loginMember;
+	}
+
+	
 	   
 
 	

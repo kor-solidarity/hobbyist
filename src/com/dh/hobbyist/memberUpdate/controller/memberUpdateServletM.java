@@ -29,44 +29,45 @@ public class memberUpdateServletM extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	String textId = request.getParameter("userId");
-	String password1 = request.getParameter("password1");
-	String password2 = request.getParameter("password2");
+	String userId = request.getParameter("userId");
+	String userPwd = request.getParameter("userPwd");
 	String name = request.getParameter("name");
 	String email = request.getParameter("email");
-	String email2 = request.getParameter("email2");
-	String bank = request.getParameter("bank");
-	String bankText = request.getParameter("bankText");
+	String tel1 = request.getParameter("tel1");
+	String tel2 = request.getParameter("tel2");
+	String tel3 = request.getParameter("tel3");
+	String phone = tel1 + "-" + tel2 + "-" + tel3;
+	String bankName = request.getParameter("bankName");
+	String bankNum = request.getParameter("bankNum");
 
-	System.out.println("userId" + textId);
-	System.out.println("password1" + password1);
-	System.out.println("password2"+ password2);
+	System.out.println("userId" + userId);
+	System.out.println("password1" + userPwd);
 	System.out.println("name" + name);
 	System.out.println("email" + email);
-	System.out.println("email2" + email2);
-	System.out.println("bank" + bank);
-	System.out.println("bankText" + bankText);
+	System.out.println("phone" + phone);
+	System.out.println("bank" + bankName);
+	System.out.println("bankText" + bankNum);
 	
 	Member member = new Member();
-	member.setMemberId(textId);
-	member.setMemberPwd(password1);
-	member.setMemberPwd(password2);
+	member.setMemberId(userId);
+	member.setMemberPwd(userPwd);
 	member.setMemberName(name);
 	member.setEmail(email);
-	member.setEmail(email2);
-	member.setBankName(bank);
-	member.setBankNum(bankText);
+	member.setPhone(phone);
+	member.setBankName(bankName);
+	member.setBankNum(bankNum);
 	
 	int result = new MemberService().memberUpdate(member);
 	
-	String page = "";
+	String page="";
 	if(result >0) {
-		page = request.getContextPath() + "";
-		response.sendRedirect(page);
+		page = "/views/common/successPage.jsp";
+		request.setAttribute("successCode", "updateMember");
 	}else {
-		request.setAttribute("msg", "게시판 작성 실패!");
-		request.getRequestDispatcher("").forward(request, response);
+		page = "/views/common/errorPage.jsp";
+		request.setAttribute("msg", "회원정보 수정 실패!!");
 	}
+	request.getRequestDispatcher(page).forward(request, response);
 }
 	
 
