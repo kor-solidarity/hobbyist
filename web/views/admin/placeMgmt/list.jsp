@@ -1,5 +1,7 @@
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="com.dh.hobbyist.place.model.vo.PlaceCompany" %><%--
+<%@ page import="com.dh.hobbyist.place.model.vo.PlaceCompany" %>
+<%@ page import="com.dh.hobbyist.place.model.vo.PlaceCompanyForList" %>
+<%@ page import="com.dh.hobbyist.common.model.vo.PageInfo" %><%--
   Created by IntelliJ IDEA.
   User: SOY
   Date: 2020-02-18
@@ -7,6 +9,7 @@
   To change this template use File | Settings | File Templates.
 
   관리자페이지 - 공간대여광고업체목록 관리
+  진입주소: /adminPlaceList.ad
 --%>
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
 <html>
@@ -20,7 +23,13 @@
 <body>
 <%@ include file="/views/common/adminMenubar.jsp" %>
 <%
-    // ArrayList<PlaceCompany> list =
+    ArrayList<PlaceCompanyForList> list = (ArrayList<PlaceCompanyForList>) request.getAttribute("list");
+    PageInfo pi = (PageInfo) request.getAttribute("pi");
+    int listCount = pi.getListCount();
+    int currentPage = pi.getCurrentPage();
+    int maxPage = pi.getMaxPage();
+    int startPage = pi.getStartPage();
+    int endPage = pi.getEndPage();
 %>
 <section>
 
@@ -64,37 +73,46 @@
                 <tr>
                     <th style="">번호</th>
                     <th style="">업체명</th>
-<%--                    <th style="">업주명</th>--%>
                     <th style="">전화번호</th>
                     <th style="">등록일</th>
                     <th style="">종료일</th>
                     <th style="">조회</th>
-                    <%--이건 이제 조회창 안에서 건든다--%>
-<%--                    <th style="">편집</th>--%>
                     <th style="">선택</th>
                 </tr>
                 <tr>
-                    <td>1</td>
-                    <td>Gamblerz studio</td>
-<%--                    <td>임찬영</td>--%>
-                    <td>010-6747-1107</td>
-                    <td>2020/01/30</td>
-                    <td>2020/02/06</td>
+                    <%
+                        for (PlaceCompanyForList l : list) { %>
+                    <td><%=l.getCompany_pk()%></td>
+                    <td><%=l.getCompany_name()%></td>
+                    <td><%=l.getPhone()%></td>
+                    <td><%=l.getStartDate()%></td>
+                    <td><%=l.getEndDate()%></td>
                     <td>
                         <%-- 추후 코드 본격적으로 넣을때 id 부분도 손봐야함. --%>
                         <button class="inquery-btn"
-                                onclick="location.href='<%=request.getContextPath()%>/admin/seePlace.adm?id=1'">조회
+                                onclick="location.href='<%=request.getContextPath()%>/admin/seePlace.ad?id=<%=l.getCompany_pk()%>'">조회
                         </button>
                     </td>
+                    <td>
+                        <input type="checkbox" class="place-checkbox" name="placeId" id="company<%=l.getCompany_pk()%>" value="(업체번호)">
+                    </td>
+                    <%
+                        }
+                    %>
+<%--                    <td>1</td>--%>
+<%--                    <td>Gamblerz studio</td>--%>
+<%--                    <td>010-6747-1107</td>--%>
+<%--                    <td>2020/01/30</td>--%>
+<%--                    <td>2020/02/06</td>--%>
 <%--                    <td>--%>
-<%--                        위와동일--%>
+<%--                        &lt;%&ndash; 추후 코드 본격적으로 넣을때 id 부분도 손봐야함. &ndash;%&gt;--%>
 <%--                        <button class="inquery-btn"--%>
-<%--                                onclick="location.href='<%=request.getContextPath()%>/admin/editPlace.adm?id=1'">편집--%>
+<%--                                onclick="location.href='<%=request.getContextPath()%>/admin/seePlace.ad?id=1'">조회--%>
 <%--                        </button>--%>
 <%--                    </td>--%>
-                    <td>
-                        <input type="checkbox" class="place-checkbox" name="placeId" id="" value="(업체번호)">
-                    </td>
+<%--                    <td>--%>
+<%--                        <input type="checkbox" class="place-checkbox" name="placeId" id="" value="(업체번호)">--%>
+<%--                    </td>--%>
                 </tr>
             </table>
         </div>
