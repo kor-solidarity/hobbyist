@@ -155,22 +155,6 @@
 						<th style="width: 7%;">경고</th>
 						<th style="width: 17%;">가입일</th>
 					</tr>
-					
-					<%if(request.getAttribute("list") != null) { %>
-						<% ArrayList<Member> list = (ArrayList<Member>) request.getAttribute("list"); %>
-						<%for(Member m : list) { %>
-								<tr>
-         						<td><%= m.getMemberCode() %></td>
-        					 	<td><%= m.getMemberId() %></td>
-        					 	<td><%= m.getMemberName() %></td>
-    					     	<td><%= m.getPhone() %></td>
-    					     	<td><%= m.getEmail() %></td>
-    					     	<td><%= m.getIsArtist() %></td>
-    					     	<td><%= m.getWarnings() %></td>
-    					     	<td><%= m.getRegDate() %></td>
-    					     </tr>
-						<% } %>
-					<% } %>
 				</table>
 			</div>
 			</form>
@@ -178,7 +162,58 @@
 	</section>
 	<script>
 		$(function() {
+			$.ajax({
+				url: "/hobbyist/selectList.me",
+				type: 'post',
+				success: function(data) {
+					console.log(data);
+					$table = $("#infoT");
+					$table.html('');
+					
+					var $tr = $("<tr>");
+					
+					$tr.append('<th style="width: 8%;">회원코드</th>' +
+								'<th style="width: 15%;">아이디</th>' +
+								'<th style="width: 10%;">이름</th>' +
+								'<th style="width: 15%;">전화번호</th>' +
+								'<th style="width: 20%;">이메일</th>' +
+								'<th style="width: 8%;">아티스트 </th>' +
+								'<th style="width: 7%;">경고</th>' +
+								'<th style="width: 17%;">가입일</th>');  
+					
+					$table.append($tr);
+					
+					$.each(data, function(index, value) {
+						
+						$tr = $("<tr>");
+						var $mcode = $("<td>").text(value.memberCode);
+						var $mId = $("<td>").text(decodeURIComponent(value.memberId));
+						var $mName = $("<td>").text(decodeURIComponent(value.memberName));
+						var $phone = $("<td>").text(decodeURIComponent(value.phone));
+						var $email = $("<td>").text(decodeURIComponent(value.email));
+						var $isArtist = $("<td>").text(value.isArtist);
+						var $warning = $("<td>").text(value.warning);
+						var $regDate = $("<td>").text(value.regDate);
+						
+						$tr.append($mcode);
+						$tr.append($mId);
+						$tr.append($mName);
+						$tr.append($phone);
+						$tr.append($email);
+						$tr.append($isArtist);
+						$tr.append($warning);
+						$tr.append($regDate);
+						$table.append($tr);
+					});
+				},
+				error: function(status) {
+					console.log(status);
+				}
+			});
 			$("#memberListL").click(function() {
+				$("#artistListL").css("color", "gray");
+				$("#memberListL").css("color", "black");
+				
 				$.ajax({
 					url: "/hobbyist/selectList.me",
 					type: 'post',
@@ -231,6 +266,9 @@
 		
 		
 			$("#artistListL").click(function() {
+				$("#artistListL").css("color", "black");
+				$("#memberListL").css("color", "gray");
+				
 				$.ajax({
 					url: "/hobbyist/selectList.ar",
 					method: "post",

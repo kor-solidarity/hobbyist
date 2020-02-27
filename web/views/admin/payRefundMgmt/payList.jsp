@@ -163,6 +163,56 @@
 	</section>
 	<script>
 		$(function() {
+			$.ajax({
+				url: "/hobbyist/selectPaymentList.pa",
+				type: 'post',
+				success: function(data) {
+					$table = $("#infoT");
+					$table.html("");
+					console.log(data);
+					var $tr = $("<tr>");
+					
+					$tr.append('<th style="width: 7%;">결제코드</th>' +
+								'<th style="width: 10%;">수업일정 코드</th>' +
+								'<th style="width: 8%;">회원코드</th>' +
+								'<th style="width: 9%;">이름</th>' +
+								'<th style="width: 11%;">전화번호</th>' +
+								'<th style="width: 11%;">결제 금액</th>' +
+								'<th style="width: 9%;">사용 포인트</th>' +
+								'<th style="width: 15%;">주문번호</th>' +
+								'<th style="width: 15%;">결제일</th>');
+					
+					$table.append($tr);
+					
+					for(key in data) {
+						$tr= $("<tr>");
+						var $pcode = $("<td>").text(data[key].paymentCode);
+						var $scheduleCode = $("<td>").text(data[key].scheduleCode);
+						var $mCode = $("<td>").text(data[key].memberCode);
+						var $mName = $("<td>").text(data[key].memberName);
+						var $phone = $("<td>").text(data[key].phone);
+						var $cost = $("<td>").text(data[key].payCost);
+						var $uPoint = $("<td>").text(data[key].usingPoint);
+						var $impNum = $("<td>").text(data[key].impNum);
+						var $patDate = $("<td>").text(data[key].payDate);
+						
+						$tr.append($pcode);
+						$tr.append($scheduleCode);
+						$tr.append($mCode);
+						$tr.append($mName);
+						$tr.append($phone);
+						$tr.append($cost);
+						$tr.append($uPoint);
+						$tr.append($impNum);
+						$tr.append($patDate);
+						$table.append($tr);
+					}
+				},
+				error: function(status) {
+					console.log(status);
+				}
+			});
+			
 			$("#paymentListL").click(function() {
 				$.ajax({
 					url: "/hobbyist/selectPaymentList.pa",

@@ -185,14 +185,14 @@
 					</tr>
 					<tr>
 						<td style="width: 8%;">1</td>
-						<td style="width: 11%;">2</td>
+						<td style="width: 11%;">1</td>
 						<td style="width: 11%;">3</td>
 						<td style="width: 7%;">임찬영</td>
 						<td style="width: 13%;">01067471107</td>
-						<td style="width: 11%;">1</td>
+						<td style="width: 11%;">3</td>
 						<td style="width: 11%;">20000</td>
 						<td style="width: 17%;">2020-11-01</td>
-						<td style="width: 14%;"><button id="Btn">조회</button></td>
+						<td style="width: 14%;"><button class="Btn">조회</button></td>
 					</tr>
 				</table>
 			</div>
@@ -217,7 +217,7 @@
    	       			<td></td>
    	       		</tr>
    	       		<tr>
-   	       			<td>수업 제목</td>
+   	       			<td id="">수업 제목</td>
    	       			<td></td>
    	       		</tr>
    	       		<tr>
@@ -294,9 +294,29 @@
   	</form>
   
 	<script>
+	$(function() {
+		
+		
 		$(document).ready(function() {
-		    $("#Btn").click(function(){
-	   	    	 $("#myModal").modal();
+		    $(".Btn").click(function(){
+		    	var num = Number($(this).parent().parent().children("td:nth-child(2)").text());
+		    	console.log(num);
+		    	
+		    	$.ajax({
+		    		url: "/hobbyist/selectApplyDetail.re",
+					data: {num : num},
+					type: "post",
+					success: function(data) {
+						
+						
+					},
+					error: function(error) {
+						console.log(error);
+					}
+		    		
+		    	});
+		    	
+	   	    	$("#myModal").modal();
 		    });
 		});
 		
@@ -309,6 +329,7 @@
 			$("#myModal1").modal();
 			$("#myModal1").show();
 		}
+	});
 	</script>
 	
 </body>

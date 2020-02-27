@@ -18,12 +18,13 @@ public class ApplyRefund {
 	private int givePoint; 			//지금예정포인트
 	private int payCost;			//결제금액
 	private int resultCost;			//환불금액
+	private String impNum;			//결제고유번호
 	
 	public ApplyRefund() {}
 
 	public ApplyRefund(int refundCode, int paymentCode, int memberCode, String memberName, String phone, int artistCode,
 			int refundCost, Timestamp applyDate, int totalOrder, int totalProgress, int usingPoint, int givePoint,
-			int payCost, int resultCost) {
+			int payCost, int resultCost, String impNum) {
 		super();
 		this.refundCode = refundCode;
 		this.paymentCode = paymentCode;
@@ -39,6 +40,7 @@ public class ApplyRefund {
 		this.givePoint = givePoint;
 		this.payCost = payCost;
 		this.resultCost = resultCost;
+		this.impNum = impNum;
 	}
 
 	public int getRefundCode() {
@@ -153,13 +155,21 @@ public class ApplyRefund {
 		this.resultCost = resultCost;
 	}
 
+	public String getImpNum() {
+		return impNum;
+	}
+
+	public void setImpNum(String impNum) {
+		this.impNum = impNum;
+	}
+
 	@Override
 	public String toString() {
 		return "ApplyRefund [refundCode=" + refundCode + ", paymentCode=" + paymentCode + ", memberCode=" + memberCode
 				+ ", memberName=" + memberName + ", phone=" + phone + ", artistCode=" + artistCode + ", refundCost="
 				+ refundCost + ", applyDate=" + applyDate + ", totalOrder=" + totalOrder + ", totalProgress="
 				+ totalProgress + ", usingPoint=" + usingPoint + ", givePoint=" + givePoint + ", payCost=" + payCost
-				+ ", resultCost=" + resultCost + "]";
+				+ ", resultCost=" + resultCost + ", impNum=" + impNum + "]";
 	}
 	
 }
