@@ -1,6 +1,8 @@
 package com.dh.hobbyist.member.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -38,18 +40,27 @@ public class LoginServlet extends HttpServlet {
 		
 		System.out.println("loginMember : " + loginMember);
 		
+		System.out.println("first login : " + loginMember.getFirstLogin());
+		
 		if(loginMember != null) {
 			HttpSession session = request.getSession();
 			session.setAttribute("loginMember", loginMember);
 			if(loginMember.getFirstLogin() == 0) {
-				response.sendRedirect("index.jsp");
-			}else {
 				response.sendRedirect("views/member/firstLogin.jsp");
+				int result = new MemberService().loginCount(member);
+			}else {
+				response.sendRedirect("index.jsp");
 			}
-		
+			
+			
 		}else {
-			request.setAttribute("msg", "로그인에 실패하셨습니다.");
-			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
+			
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter out = response.getWriter();
+			
+			out.println("<script>alert('아이디나 비밀번호를 확인 후 다시 시도해주세요.');location.href='views/member/loginForm.jsp';</script>");
+			out.flush();
+			out.close();
 		}
 		
 	}

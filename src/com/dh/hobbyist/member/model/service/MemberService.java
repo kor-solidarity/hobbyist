@@ -3,6 +3,7 @@ package com.dh.hobbyist.member.model.service;
 import java.sql.Connection;
 import java.util.List;
 
+import com.dh.hobbyist.artist.model.vo.ApplyArtist;
 import com.dh.hobbyist.member.model.dao.MemberDao;
 import com.dh.hobbyist.member.model.vo.Member;
 import static com.dh.hobbyist.common.JDBCTemplate.*;
@@ -116,7 +117,7 @@ public class MemberService {
 		return result;
 	}
 	
-	//첫 로그인 관심 카테고리 설정
+	//첫 로그인 관심 카테고리 설정(유승)
 	public int insertCategory(int memberCode, int categoryCode) {
 		Connection con = getConnection();
 		
@@ -132,7 +133,38 @@ public class MemberService {
 		
 		return result;
 	}
+	//첫 로그인 여부 확인용 로그인 카운트(유승)
+	public int loginCount(Member member) {
+		Connection con = getConnection();
+		
+		int result = new MemberDao().loginCount(con, member);
+		
+		close(con);
+		
+		return result;
+	}
 	   
 
-	
+	//회원의 프로필 이미지 경로 조회(지호)
+	   public String selectImageRoot(int memberCode) {
+	      Connection con = getConnection();
+	      
+	      String imageRoot = new MemberDao().selectImageRoot(con, memberCode);
+	      
+	      close(con);
+	      
+	      return imageRoot;
+	   }
+	   
+	   //회원의 아티스트 승인 신청 내역 조회(지호)
+	   public ApplyArtist selectOneApplyArtist(int memberCode) {
+	      Connection con = getConnection();
+	      
+	      ApplyArtist aa = new MemberDao().selectOneApplyArtist(con, memberCode);
+	      
+	      close(con);
+	      
+	      return aa;
+	   }
+	      
 }
