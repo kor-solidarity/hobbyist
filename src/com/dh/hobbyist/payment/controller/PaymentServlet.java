@@ -27,7 +27,7 @@ public class PaymentServlet extends HttpServlet {
 		int price = Integer.parseInt(request.getParameter("price"));
 		int usingPoint = Integer.parseInt(request.getParameter("usingPoint"));
 		int givePoint = Integer.parseInt(request.getParameter("givePoint"));
-		int artistCode = 1;
+		int artistCode = 3;
 		
 		
 		System.out.println("mCode : " + mCode);

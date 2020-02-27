@@ -155,17 +155,6 @@
 						<th style="width: 14%;">환불일</th>
 						<th style="width: 17%;">환불계좌</th>
 					</tr>
-					<tr>
-						<td style="width: 8%;">결제코드</td>
-						<td style="width: 11%;">수업일정 코드</td>
-						<td style="width: 11%;">아이디</td>
-						<td style="width: 7%;">이름</td>
-						<td style="width: 13%;">전화번호</td>
-						<td style="width: 11%;">담당 아티스트</td>
-						<td style="width: 11%;">환불 금액</td>
-						<td style="width: 14%;">환불일</td>
-						<td><button id="Btn">조회</button></td>
-					</tr>
 				</table>
 			</div>
 		</article>
