@@ -42,20 +42,10 @@ public class pwConfirmServlet extends HttpServlet {
 	if(loginMember != null) {
 		HttpSession session = request.getSession();
 		session.setAttribute("pwCheck", loginMember);
-		if(loginMember.getFirstLogin() ==0) {
-		response.sendRedirect("/views/member/myPage/configuration/memberPassword.jsp");
-		int result = new MemberService().pwCheck(loginMember);
-	}else {
-		response.sendRedirect("index.jsp");
-	}
-	}else {
-		response.setContentType("text/hmtl; charset=UTF-8");
-		PrtintWriter out = response.getWriter();
-		
-		out.println("<script>alert('아이디나 비밀번호를 확인 후 다시 시도해주세요.');location.href='views/member/myPage/configuration/memberPassword.jsp';</script>");
-		out.flush();
-		out.close();
-	}
+		response.sendRedirect("views/member/myPage/configuration/memberPassword.jsp");
+	}		
+	
+
 	
 	
 	}
