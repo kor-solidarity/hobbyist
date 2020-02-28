@@ -1,7 +1,7 @@
 <%@page import="com.dh.hobbyist.memberUpdate.controller.memberUpdateServletM"%>
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8" import="java.util.*, com.dh.hobbyist.member.model.dao.*"%>
+	pageEncoding="UTF-8" import="java.util.*, com.dh.hobbyist.memberUpdate.*"%>
 
 	
 <!DOCTYPE html>
@@ -324,7 +324,7 @@ color: #FFFFFF;
 	<div class="divcenter4">
 		
 		<!-- 회원정보수정 서블릿으로전송 -->
-		<form id="updateForm" action="<%=request.getContextPath() %>"/UpdateMemberM.me" method="post">
+		<form id="updateForm" action="<%=request.getContextPath() %>/UpdateMemberM.me" method="post">
 		
 			<table align="border" class="tablecenter4">
 		 	
@@ -439,17 +439,31 @@ color: #FFFFFF;
 	function updateMember(){
 		$("#updateForm").sumbit();
 	}
-	
-	
 	</script>	
 	
 	
+	
+	<script>
+	//패스워드 값일치하는지 확인
+	$(function(){
+	var userPwd = $("userPwd").val();
+	var userPwd2 = $("userPwd2").val();	
+	
+	if(userPwd ==! null){}l
+	if(userPwd == userPwd2){
+	console.log("userPwd");
+	}
+	
+	
+	})
+	
+	
+	</script>
 	
 	
 	
 	
 	<script>
-	
 	//전화번호 인증하기 버튼 클릭시
 	
 		var randomVal = ""; //유저에게 보낸 문자의 랜덤 숫자를 저장하기 위한 전역변수

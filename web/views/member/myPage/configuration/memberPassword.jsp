@@ -81,25 +81,32 @@ center_td0 {
 	width: 128px;
 }
 
+.divbottom0 {
+	width: 1024px;
+	margin: auto;
+/* 	text-align: center; */
+ 	height: 60px; 
+}
+
 .divbottom1 {
 	width: 1024px;
 	margin: auto;
 	text-align: center;
-	height: 80px;
+	height: 100px;
 }
 
 .divbottom2 {
 	width: 1024px;
 	margin: auto;
 	text-align: center;
-	height: 40px;
+	height: 100px;
 }
 
 .divbottom3 {
 	width: 1024px;
 	margin: auto;
 	text-align: center;
-	height: 60px;
+	height: 70px;
 }
 
 .divbottom4 {
@@ -167,6 +174,8 @@ center_td0 {
 <body>
 	 <%@ include file="/views/common/myPage.jsp"%> 
 	<%String passCheck = loginMember.getMemberPwd();%> 
+	
+	<form id="pwConfirmForm" action="<%=request.getContextPath() %>/pwConfirm.me" method="post"> 
 	<div class="divcenter2">
 		<table align="border" class="tablecenter2">
 			<tr>
@@ -183,6 +192,9 @@ center_td0 {
 		</table>
 	</div>
 	
+	<div class="divbottom0">
+	</div>
+	
 	<!-- 비밀번호 확인  -->
 	<div class="divbottom1">
 	<br>
@@ -197,22 +209,27 @@ center_td0 {
 	
 	<div class="divbottom3">
 	<!--  비밀번호 확인 텍스트 -->
-		<label class="label_bottom3">비밀번호:&nbsp; </label><input type="text" class="password" id="pw" placeholder="비밀번호를 입력하세요.">
-		<button class="passclick" id="passclick" >확인</button>
+		<label class="label_bottom3">비밀번호:&nbsp; </label><input type="password" class="memberPwd" id="memberPwd" placeholder="비밀번호를 입력하세요.">
+		<button class="passclick" id="passclick" onclick="pwConfirm();">확인</button>
+	</div>
 	</div>
 	
-	<div id="divtest"> 
+	<script>
+	function pwConfirm(){
+		console.log("인증완료");
+		$("pwConfirmForm").sumbit();
+	}
 
-		
-	</div>
+	</script>
+
  	 <script>
  	console.log("passCheck");
  
 		 //비밀번호 동일 확인 기능
 	 	$(function(){
-	 		$("#passclick").click(function(){
-	 			console.log( 'a1 : ' + $("#pw"));
-	 			var passValue = $("#pw").val();
+	 		$("#memberPwd").click(function(){
+	 			console.log( 'a1 : ' + $("#memberPwd"));
+	 			var passValue = $("#memberPwd").val();
 				var passCheck = passCheck;
 				
 				console.log("passCheck");
