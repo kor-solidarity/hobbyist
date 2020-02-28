@@ -11,7 +11,7 @@ import static com.dh.hobbyist.common.JDBCTemplate.*;
 
 public class LessonService {
 	
-	//카테고리별 리스트 페이지 메솓(유승)
+	//카테고리별 리스트 페이지 메소드(유승)
 	public ArrayList<HashMap<String, Object>> selectCategoryList() {
 		Connection con = getConnection();
 		
