@@ -20,6 +20,7 @@
             font-family: 'ZCOOL QingKe HuangYou', cursive;
             margin-top: 50px;
             font-size: 60px;
+            cursor:pointer;
         }
         h2 {
             font-family: 'Do Hyeon', sans-serif;
@@ -87,12 +88,12 @@
         <h1 id="title" align="center" onclick="goHome();">hobbyist</h1>
     </div>
     <div id="contents" align="center">
-            <h2>비밀번호 찾기</h2>
+            <h2>아이디 찾기</h2>
             <br><br>
             <p>입력하신 정보와 일치하는 계정이 존재하지 않습니다.</p><br><br>
             
            
-           	<button onclick="goFindId();" class="btns" id="pwdBtn">아이디 찾기</button>&nbsp;&nbsp;&nbsp;&nbsp;
+           	<button onclick="goHome();" class="btns" id="pwdBtn">홈으로</button>&nbsp;&nbsp;&nbsp;&nbsp;
             <button onclick="goRegister();" class="btns" id="joinBtn">가입하기</button>
     </div>
     
@@ -105,9 +106,9 @@
     		location.href = "<%= request.getContextPath()%>/index.jsp";
     	}
     	
-    	function goFindId() {
+    	<%-- function goFindId() {
     		location.href = "<%=request.getContextPath()%>/views/member/findId.jsp";
-    	}
+    	} --%>
     	
     </script>
 </body>

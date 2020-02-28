@@ -92,17 +92,14 @@
 	    }
 	    
 	   
+	   
 </style>
 </head>
 <body>
 	<%@ include file="/views/common/menubar.jsp" %>
 	<%@ include file="/views/common/categorybar.jsp" %>
 	
-	<script>
-		$(function() {
-			
-		});
-	</script>
+	
 	
 	
 	<div id="nav3">

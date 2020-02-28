@@ -23,7 +23,7 @@ public class FindIdServlet extends HttpServlet {
 
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String name = request.getParameter("name");
+		String memberName = request.getParameter("memberName");
 		String tel1 = request.getParameter("tel1");
 		String tel2 = request.getParameter("tel2");
 		String tel3 = request.getParameter("tel3");
@@ -34,7 +34,7 @@ public class FindIdServlet extends HttpServlet {
 		System.out.println("(find Id) phone : " + phone);*/
 		
 		Member member = new Member();
-		member.setMemberName(name);
+		member.setMemberName(memberName);
 		member.setPhone(phone);
 		
 		Member findMember = new MemberService().findId(member);
