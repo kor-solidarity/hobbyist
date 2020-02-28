@@ -116,7 +116,7 @@
        		font-family: 'Nanum Gothic', sans-serif;
        		font-size:13px;
        		border:1px solid darkolivegreen;
-       		border-collapse:seperate;
+       		border-collapse:separate;
 			border-spacing: 5px;
        		
        }
@@ -362,8 +362,8 @@
 		
 		$(function() {
 			
-			$("#music").click(function() {
-				location.href = "<%=request.getContextPath()%>/views/lesson/musicCategory.jsp";
+			$("#beauty").click(function() {
+				location.href = "<%=request.getContextPath()%>/selectList.le";
 			});
 			
 			

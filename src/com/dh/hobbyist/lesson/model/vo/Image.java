@@ -1,12 +1,12 @@
 package com.dh.hobbyist.lesson.model.vo;
 
 public class Image {
-	private int imageCode;
-	private String imageRoute;
-	private String imageName;
-	private String imageType;
-	private int imageFkPk;
-	private int imageMain;
+	private int imageCode;          //이미지 관리번호
+	private String imageRoute;      //이미지 경로
+	private String imageName;       //이미지 파일명
+	private String imageType;       //이미지 구분 
+	private int imageFkPk;          //해당 구분 내의 테이블 관리 번호
+	private int imageMain;          //메인사진 여부
 	
 	public Image() {}
 
