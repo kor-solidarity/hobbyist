@@ -165,8 +165,8 @@ center_td0 {
 	rel="stylesheet">
 </head>
 <body>
-	<%-- <%--  <%@ include file="/views/common/myPage.jsp"%> 
-	<%String passCheck = loginMember.getMemberPwd(); %> --%> --%>
+	 <%@ include file="/views/common/myPage.jsp"%> 
+	<%String passCheck = loginMember.getMemberPwd();%> 
 	<div class="divcenter2">
 		<table align="border" class="tablecenter2">
 			<tr>
@@ -199,10 +199,7 @@ center_td0 {
 	<!--  비밀번호 확인 텍스트 -->
 		<label class="label_bottom3">비밀번호:&nbsp; </label><input type="text" class="password" id="pw" placeholder="비밀번호를 입력하세요.">
 		<button class="passclick" id="passclick" >확인</button>
-		
 	</div>
-	
-	 
 	
 	<div id="divtest"> 
 

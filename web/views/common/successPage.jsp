@@ -32,6 +32,10 @@
 					alertMessage = "관심 카테고리 설정이 완료되었습니다.";
 					movePath = "/hobbyist/index.jsp";
 					break;
+				case "updateMember" :
+					alertMessage = "회원 정보 수정 실패";
+					movePath = "/hobbyist/index.jsp";
+					break;
 			}
 			
 			alert(alertMessage);
