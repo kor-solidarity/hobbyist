@@ -125,7 +125,7 @@
 					<%} else if(p.getCategoryParentCode() == 9) { %>
 						<img src="/hobbyist/static/images/dance.png" style="width:50px; height:50px;">
 					<%} else if(p.getCategoryParentCode() == 15) { %>
-						<img src="/hobbyist/static/images/phoneCamera.png" style="width:50px; height:50px;">
+						<img src="/hobbyist/static/images/video.png" style="width:50px; height:50px;">
 					<%} else if(p.getCategoryParentCode() == 20) { %>
 						<img src="/hobbyist/static/images/life.png" style="width:50px; height:50px;">
 					<%} else if(p.getCategoryParentCode() == 25) { %>
