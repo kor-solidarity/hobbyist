@@ -1,8 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" import="com.dh.hobbyist.artist.model.vo.ApplyArtist"%>
 <%
-	String imageRoot = (String) request.getAttribute("imageRoot");
-	ApplyArtist applyArtist = (ApplyArtist) request.getAttribute("applyArtist");
+	/* String imageRoot = (String) request.getAttribute("imageRoot");
+	ApplyArtist applyArtist = (ApplyArtist) request.getAttribute("applyArtist"); */
+	String imageRoot = (String) session.getAttribute("imageRoot");
+	ApplyArtist applyArtist = (ApplyArtist) session.getAttribute("applyArtist");
 %>
 <!DOCTYPE html>
 <html>
@@ -132,6 +134,10 @@
 		font-size: 25px;
 		background: #black;
 	}
+	
+	button[class^=Center_button] {
+		cursor: pointer;
+	}
 		
 	.profileImgArea {
 		text-align: center;
@@ -248,8 +254,8 @@
 				</td>
 				<td colspan="4" class="td1"></td>
 				<!--  설정 사진 -->
-				<td colspan="3" class="td2"><img id="gearwheel" src="<%=request.getContextPath() %>/static/images/gearwheel.png"></td>
-				<td colspan="1" class="memberUpdate">회원정보 수정&nbsp;&nbsp;&nbsp;</td>
+				<td colspan="3" class="td2"><img id="gearwheel" src="<%=request.getContextPath() %>/static/images/gearwheel.png" onclick="goConfiguration();" style="cursor:pointer;"></td>
+				<td colspan="1" class="memberUpdate" onclick="goConfiguration();" style="cursor:pointer;">회원정보 수정&nbsp;&nbsp;&nbsp;</td>
 			</tr>
 			<tr>	
 				<td colspan="4" class="td4">
@@ -292,13 +298,13 @@
 	<div class="divcenter1">
 		<table align="border" class="tablecenter1">
 			<tr>
-				<td><button class="Center_button1">나의 수업</button></td>
-				<td><button class="Center_button2">나의 정산</button></td>
+				<td><button class="Center_button1" onclick="goMyLesson();">나의 수업</button></td>
+				<td><button class="Center_button2" onclick="goMyCal();">나의 정산</button></td>
 				<td><button class="Center_button3">나의 결제</button></td>
-				<td><button class="Center_button3">나의 리뷰</button></td>
-				<td><button class="Center_button4">나의 댓글</button></td>
-				<td><button class="Center_button5">나의 문의/신고</button></td>
-				<td style="width:9%" align="right"><button class="Center_button6">설정</button></td>
+				<td><button class="Center_button3" onclick="goMyReviews();">나의 리뷰</button></td>
+				<td><button class="Center_button4" onclick="goMyComments();">나의 댓글</button></td>
+				<td><button class="Center_button5" onclick="goMyReports();">나의 문의/신고</button></td>
+				<td style="width:9%" align="right"><button class="Center_button6" onclick="goConfiguration();">설정</button></td>
 				
 			</tr>
 		</table>
@@ -307,6 +313,30 @@
 	<script>
 		function rejectReason() {
 			alert('관리자 심사 결과 ' + document.getElementById("reasonInput").value + '로 인해 권한 부여가 거절 되었습니다.');
+		}
+		
+		function goMyLesson() {
+			location.href = "<%= request.getContextPath()%>/views/member/myPage/myLesson/registeredLesson.jsp";
+		}
+		
+		function goMyCal() {
+			location.href = "<%= request.getContextPath()%>/views/member/myPage/myCalculations/calculationsList.jsp";
+		}
+		
+		function goMyReviews() {
+			location.href = "<%= request.getContextPath()%>/views/member/myPage/myReviews/writeList.jsp";
+		}
+		
+		function goMyComments() {
+			location.href = "<%= request.getContextPath()%>/views/member/myPage/myComments/commentsList.jsp";
+		}
+		
+		function goMyReports() {
+			location.href = "<%= request.getContextPath() %>/views/member/myPage/myReports/list.jsp";
+		}
+		
+		function goConfiguration() {
+			location.href = "<%= request.getContextPath() %>/views/member/myPage/configuration/memberUpdate.jsp";
 		}
 	</script>
 </body>
