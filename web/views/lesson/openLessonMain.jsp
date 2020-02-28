@@ -407,7 +407,7 @@ body {
 				</div>
 				<div class="modal-body">
 					<form id="LessonForm"
-						action="<%= request.getContextPath() %>/insert.ar" method="post">
+						action="<%= request.getContextPath() %>/insert.le" method="post">
 						<div id="show1">
 							<table id="LessonTable1">
 								<tr>
@@ -545,7 +545,7 @@ body {
 										</script>
 									</td>
 									<td>
-										<div>회차당 비용</div> 
+										<div>회차당 수업료</div> 
 										<input id="cost" class="nanum" name="rounds" type="number" style="width:100px">
 										<label style="font-weight:normal; color:black;">&nbsp;원</label>
 										<script>
@@ -554,7 +554,7 @@ body {
 													var cost = $(this).val();
 													
 													if (cost < 10000) {
-														alert("회차당 비용은 최소 10000원 이상이어야 합니다.");
+														alert("회차당 수업료는 최소 10000원 이상이어야 합니다.");
 													} 
 												});
 											});
@@ -935,11 +935,23 @@ body {
 					$("#saveModalBtn").show();
 					
 					var order1 = $("#order1").text();
-					var region = $("#region").val();
+					var regionVal = Number($("#region").val()) - 1;
 					var subRegion = $("#subRegion").val();
 					
+					console.log("regionVal : " + regionVal);
+					console.log("cat1_name[regionVal] : " + cat1_name[regionVal]);
+					
+					//selected 속성이 true인 것을 고르면 되려나
+					var region = cat1_name[regionVal];
+					
 					$scheduleListArea = $("#scheduleListArea");
-					$scheduleListArea.append("<span class='item2'>" + region + " " + subRegion + " | " + order1 + "</span>");
+					
+					//추가로 넣은 세종시 처리를 별도로 해주기 위한 조건문
+					if(regionVal < 16) {
+						$scheduleListArea.append("<span class='item2'>" + region + " " + subRegion + " | " + order1 + "</span>");
+					} else {
+						$scheduleListArea.append("<span class='item2'> 세종 " + subRegion + " | " + order1 + "</span>");
+					}
 
 					console.log("orderNum : " + orderNum);
 					console.log("startTime : " + startTime);

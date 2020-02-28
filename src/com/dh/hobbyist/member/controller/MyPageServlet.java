@@ -6,6 +6,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.dh.hobbyist.artist.model.vo.ApplyArtist;
 import com.dh.hobbyist.common.model.vo.Image;
@@ -45,11 +46,19 @@ public class MyPageServlet extends HttpServlet {
 		String page = "";
 		
 	
-		page = "views/common/myPage.jsp";
-		request.setAttribute("imageRoot", imageRoot);
+		//page = "views/common/myPage.jsp";
+		/*request.setAttribute("imageRoot", imageRoot);
 		request.setAttribute("applyArtist", aa);
 		
-		request.getRequestDispatcher(page).forward(request, response);
+		request.getRequestDispatcher(page).forward(request, response);*/
+		
+		page = "views/member/myPage/myLesson/registeredLesson.jsp";
+		
+		HttpSession session = request.getSession();
+		session.setAttribute("imageRoot", imageRoot);
+		session.setAttribute("applyArtist", aa);
+		
+		response.sendRedirect(page);
 	}
 
 	/**
