@@ -13,11 +13,12 @@ public class Refund {
 	private int refundCost;
 	private Timestamp refundDate;
 	private String reason;
+	private String impNum;		
 	
 	public Refund() {}
 
 	public Refund(int refundCode, int payCode, int schedulCode, String memberCode, String memberName, String phone,
-			int artistCode, int refundCost, Timestamp refundDate, String reason) {
+			int artistCode, int refundCost, Timestamp refundDate, String reason, String impNum) {
 		super();
 		this.refundCode = refundCode;
 		this.payCode = payCode;
@@ -29,6 +30,7 @@ public class Refund {
 		this.refundCost = refundCost;
 		this.refundDate = refundDate;
 		this.reason = reason;
+		this.impNum = impNum;
 	}
 
 	public int getRefundCode() {
@@ -111,10 +113,19 @@ public class Refund {
 		this.reason = reason;
 	}
 
+	public String getImpNum() {
+		return impNum;
+	}
+
+	public void setImpNum(String impNum) {
+		this.impNum = impNum;
+	}
+
 	@Override
 	public String toString() {
 		return "Refund [refundCode=" + refundCode + ", payCode=" + payCode + ", schedulCode=" + schedulCode
 				+ ", memberCode=" + memberCode + ", memberName=" + memberName + ", phone=" + phone + ", artistCode="
-				+ artistCode + ", refundCost=" + refundCost + ", refundDate=" + refundDate + ", reason=" + reason + "]";
+				+ artistCode + ", refundCost=" + refundCost + ", refundDate=" + refundDate + ", reason=" + reason
+				+ ", impNum=" + impNum + "]";
 	}
 }
