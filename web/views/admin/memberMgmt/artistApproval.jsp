@@ -194,7 +194,7 @@
          
          <!-- 큰 메뉴안의 상세 메뉴 여러개 -->
          <div id="smallMenu">
-            <label>회원 리스트</label><br>
+            <label id="memberList">회원 리스트</label><br>
             <label style="color: #DED842;">아티스트 승인</label><br>
             <label>알림 보내기</label>
          </div>
@@ -675,6 +675,10 @@
 					$("#reasonTd").text('');
 					$("#reasonTd").text(reason);
 					$("#myModal3").modal();
+				});
+				
+				$("#memberList").click(function() {
+					location.href = "<%=request.getContextPath()%>/views/admin/memberMgmt/memberList.jsp";
 				});
 			});
 			

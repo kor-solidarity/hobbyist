@@ -1,37 +1,28 @@
 package com.dh.hobbyist.artist.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.dh.hobbyist.artist.model.service.ArtistService;
-import com.dh.hobbyist.artist.model.vo.ArtistCareer;
-import com.dh.hobbyist.artist.model.vo.ArtistCategory;
-import com.dh.hobbyist.artist.model.vo.ArtistCerts;
-import com.dh.hobbyist.artist.model.vo.ArtistEducation;
-import com.dh.hobbyist.common.model.vo.Image;
-import com.dh.hobbyist.member.model.vo.Member;
-import com.google.gson.Gson;
+import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
+
+import com.dh.hobbyist.common.MyFileRenamePolicy;
+import com.oreilly.servlet.MultipartRequest;
 
 /**
- * Servlet implementation class RestoreArtistInfoServlet
+ * Servlet implementation class UpdateArtistServlet
  */
-@WebServlet("/restoreInfo.ar")
-public class RestoreArtistInfoServlet extends HttpServlet {
+@WebServlet("/update.ar")
+public class UpdateArtistServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public RestoreArtistInfoServlet() {
+    public UpdateArtistServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -40,14 +31,22 @@ public class RestoreArtistInfoServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int memberCode = ((Member) request.getSession().getAttribute("loginMember")).getMemberCode();
+		if(ServletFileUpload.isMultipartContent(request)) {
+			
+			int maxSize = 1024 * 1024 * 10;
+			
+			String root = request.getSession().getServletContext().getRealPath("/");
+			
+			String savePath = root + "static/upload/artist";
+			
+			MultipartRequest multiRequest = 
+					new MultipartRequest(request, savePath, maxSize, "UTF-8", new MyFileRenamePolicy());
+			
+			String reNickName = multiRequest.getParameter("reNickName");
+			System.out.println("reNickName : " + reNickName);
+		}
 		
-		List<Image> imgList = new ArtistService().selectImageList(memberCode);
-		
-		response.setContentType("application/json");
-		response.setCharacterEncoding("UTF-8");
-		
-		new Gson().toJson(imgList, response.getWriter());
+	
 	}
 
 	/**

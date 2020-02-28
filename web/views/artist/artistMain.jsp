@@ -246,7 +246,7 @@
 	object-fit: cover;
 }
 
-#certiBtn, #schoolBtn, #careerBtn {
+#certiBtn, #schoolBtn, #careerBtn, #reCertiBtn, #reSchoolBtn, #reCareerBtn {
 	width: 352px;
 	border-color: darkolivegreen;
 	color: darkolivegreen;
@@ -262,7 +262,7 @@
 	background-color: darkolivegreen;
 }
 
-#schoolDiv {
+#schoolDiv, #reSchoolDiv {
 	width: 250px;
 	height: 200px;
 }
@@ -743,16 +743,15 @@
 										</div>
 									</td>
 									<td>
-										<% if(loginMember != null)  {%>
-										<p>아티스트 닉네임</p> <input type="text" name="reNickName"
-										id=reNickName" style="height: 30px; width:150px;" value="<%=loginMember.getArtistNick()%>">
-										<button type="button" id="reCheckNick" style="height: 30px;">중복확인</button>
-										
+										<% if(loginMember != null && loginMember.getArtistNick() != null)  {%>
+											<p>아티스트 닉네임</p> <input type="text" name="reNickName"
+												id=reNickName" style="height: 30px; width:150px;" value="<%=loginMember.getArtistNick()%>">
+											<button type="button" id="reCheckNick" style="height: 30px;">중복확인</button>
 											<input type="hidden" name="reLoginMemberPk" value="<%=loginMember.getMemberCode()%>">
-										
 									</td>
 									<td colspan="2">
-										<p>계좌번호&nbsp;<label style="font-size:13px; coLor:black;">(본인 명의 계좌로 이용해주세요.)</label></p> <select style="height: 32px" name="reBankName">
+										<input type="hidden" id="hiddenName" value="<%=loginMember.getBankName()%>">
+										<p>계좌번호&nbsp;<label style="font-size:13px; coLor:black;">(본인 명의 계좌로 이용해주세요.)</label></p> <select style="height: 32px" name="reBankName" id="reBankName">
 											<option value="">은행명</option>
 											<option value="SH">신한은행</option>
 											<option value="KB">국민은행</option>
@@ -797,7 +796,7 @@
 									<td style="vertical-align: top; color: black;">전문분야 및
 										상세분야를 선택해주세요.<label style="color: darkolivegreen;">(복수
 											선택)</label><br> <br> 
-											<select id="reCategoryName" name="reCategoryName">
+											<select id="reCategoryName1" name="reCategoryName1">
 												<option value="">선택</option>
 												<option value="1">음악</option>
 												<option value="9">댄스</option>
@@ -807,7 +806,7 @@
 												<option value="33">디자인</option>
 												<option value="37">스포츠</option>
 											</select> <br> 
-											<select id="reDetailCategory" name="reDetailCategory">
+											<select id="reDetailCategory1" name="reDetailCategory1">
 												<option value="">선택</option>
 											</select> <br> <br> 
 											<select id="reCategoryName2" name="reCategoryName2">
@@ -950,7 +949,7 @@
 									<td colspan="2"><button id="reSchoolBtn" type="button">확인</button></td>
 								</tr>
 								<tr>
-									<td colspan="2" style="font-size:14px;">자격증 취득확인서와 학력 증명서를 첨부해주세요.
+									<td colspan="2" style="font-size:14px;">자격증 취득확인서와 학력 증명서를 첨부해주세요.<label style="font-size: 12px;">(첨부파일은 새로 첨부해주세요.)</label>
 										<p style="color: red; font-size: 10px;">한개의 파일로 압축해서 첨부해주세요</p>
 									</td>
 								</tr>
@@ -1184,7 +1183,30 @@
 					}
 				});
 		});
-	
+	    $("#reCategoryName1").change(function() {
+	    	var categoryName = $("#reCategoryName1").val();
+	    	
+			$.ajax({
+				url: "/hobbyist/category.su",
+				type: "post",
+				data: {categoryName	: categoryName},
+				success: function(data) {
+					$select = $("#reDetailCategory1");
+					$select.find("option").remove();
+						
+					for(var key in data) {
+						var $option = $("<option>");
+						$option.text(data[key].nodeName);
+						$option.val(data[key].categoryCode);
+						$select.append($option);
+						}
+				},
+				error : function(error) {
+					console.log(error);
+				}
+			});
+	    });
+	    
 		/*카테고리 2에서 전문분야와 상세분야 선택 스크립트 */
 		$("#categoryName2").change(function() {
 			var categoryName = $("#categoryName2").val();
@@ -1209,6 +1231,29 @@
 				}
 			});
 		});
+		$("#reCategoryName2").change(function() {
+		    var categoryName = $("#reCategoryName2").val();
+		    	
+			$.ajax({
+				url: "/hobbyist/category.su",
+				type: "post",
+				data: {categoryName	: categoryName},
+				success: function(data) {
+					$select = $("#reDetailCategory2");
+					$select.find("option").remove();
+							
+					for(var key in data) {
+						var $option = $("<option>");
+						$option.text(data[key].nodeName);
+						$option.val(data[key].categoryCode);
+						$select.append($option);
+						}
+				},
+				error : function(error) {
+					console.log(error);
+				}
+			});
+		  });
 	
 		/*카테고리 3에서 전문분야와 상세분야 선택 스크립트 */
 		$("#categoryName3").change(function() {
@@ -1234,6 +1279,30 @@
 				}
 			});
 		});
+		$("#reCategoryName3").change(function() {
+		    var categoryName = $("#reCategoryName3").val();
+		    	
+			$.ajax({
+				url: "/hobbyist/category.su",
+				type: "post",
+				data: {categoryName	: categoryName},
+				success: function(data) {
+					$select = $("#reDetailCategory3");
+					$select.find("option").remove();
+							
+					for(var key in data) {
+						var $option = $("<option>");
+						$option.text(data[key].nodeName);
+						$option.val(data[key].categoryCode);
+						$select.append($option);
+						}
+				},
+				error : function(error) {
+					console.log(error);
+				}
+			});
+		  });
+		
 		//자격증 확인 버튼 클릭시 동적으로 div 추가
 		$(function() {
 			var certiIndex = 1;
@@ -1252,32 +1321,25 @@
 								certiDay : certiDay,
 								certiSpace : certiSpace
 						};
-						/* certiSend[index++] = certiInfo; */
 							
 						$("#certiName" + certiIndex).val(certiName);
 						$("#certiDay" + certiIndex).val(certiDay);
 						$("#certiSpace" + certiIndex).val(certiSpace);
 						certiIndex++;
-						
 					
-		
 						$.ajax({
 							url : "/hobbyist/certiAdd.ar",
 							type : "post",
 							data : certiInfo,
 							success : function(data) {
-								console.log(data);
-		
 								$div = $("#certiDiv");
 								var $inDiv = $("<div class='inDiv'>").text(data);
 								$div.append($inDiv);
 								$div.append("<br>")
-		
 							},
 							error : function(status) {
 								console.log(status);
 							}
-		
 						});
 						
 					} else {
@@ -1290,6 +1352,55 @@
 	
 			});
 		});
+		$(function() {
+			var certiIndex = 1;
+			
+			$("#reCertiBtn").click(function() {
+				var certiName = $("#reCertiName").val();
+				var certiDay = $("#reCertiDay").val();
+				var certiSpace = $("#reCertiSpace").val();
+	
+				if (certiIndex <= 3){
+					
+					if (certiName != '' && certiDay != '' && certiSpace != '') {
+						
+						var certiInfo = {
+								certiName : certiName,
+								certiDay : certiDay,
+								certiSpace : certiSpace
+						};
+							
+						$("#reCertiName" + certiIndex).val(certiName);
+						$("#reCertiDay" + certiIndex).val(certiDay);
+						$("#reCertiSpace" + certiIndex).val(certiSpace);
+						certiIndex++;
+						
+						$.ajax({
+							url : "/hobbyist/certiAdd.ar",
+							type : "post",
+							data : certiInfo,
+							success : function(data) {
+								$div = $("#reCertiDiv");
+								var $inDiv = $("<div class='inDiv'>").text(data);
+								$div.append($inDiv);
+								$div.append("<br>")
+							},
+							error : function(status) {
+								console.log(status);
+							}
+						});
+						
+					} else {
+						alert("모든 입력을 완료해 주세요.");
+					}
+					
+				} else {
+					alert("자격증은 최대 3개까지만 입력 가능합니다.");
+				}
+	
+			});
+		});
+		
 		//학력 전공 입력후 "확인" 버튼 클릭 시 동적으로 div 추가
 		$(function() {
 			var schoolIndex = 1;
@@ -1319,9 +1430,55 @@
 							type : "post",
 							data : schoolInfo,
 							success : function(data) {
-								console.log(data);
-		
 								$div = $("#schoolDiv");
+								var $inDiv = $("<div class='inDiv'>").text(data);
+								$div.append($inDiv);
+								$div.append("<br>");
+		
+							},
+							error : function(status) {
+								console.log(status);
+							}
+						});
+						
+					} else {
+						alert("모든 입력을 완료해 주세요.");
+					}
+					
+				} else {
+					alert("학력/전공은 최대 3개까지만 입력 가능합니다.");
+				}
+			});
+		});
+		$(function() {
+			var schoolIndex = 1;
+			
+			$("#reSchoolBtn").click(function() {
+				var schoolName = $("#reSchoolName").val();
+				var major = $("#reMajor").val();
+				var status = $("#reStatus").val();
+	
+				if(schoolIndex <= 3) {
+					
+					if (schoolName != '' && major != '' && status != '') {
+						
+						var schoolInfo = {
+							schoolName : schoolName,
+							major : major,
+							status : status
+						};
+						
+						$("#reSchoolName" + schoolIndex).val(schoolName);
+						$("#reMajor" + schoolIndex).val(major);
+						$("#reStatus" + schoolIndex).val(status);
+						schoolIndex++;
+		
+						$.ajax({
+							url : "/hobbyist/schoolAdd.ar",
+							type : "post",
+							data : schoolInfo,
+							success : function(data) {
+								$div = $("#reSchoolDiv");
 								var $inDiv = $("<div class='inDiv'>").text(data);
 								$div.append($inDiv);
 								$div.append("<br>");
@@ -1377,8 +1534,6 @@
 							type : "post",
 							data : careerInfo,
 							success : function(data) {
-								console.log(data);
-		
 								$div = $("#careerDiv");
 								var $inDiv = $("<div class='inDiv'>").text(data);
 								$div.append($inDiv);
@@ -1396,7 +1551,57 @@
 				}
 			});
 		});
+		$(function() {
+			var careerIndex = 1;
+			
+			$("#reCareerBtn").click(function() {
+				var officeName = $("#reOfficeName").val();
+				var position = $("#rePosition").val();
+				var workContent = $("#reWorkContent").val();
+				var workYear = $("#reWorkYear").val();
+				var workMonth = $("#reWorkMonth").val();
+	
+				if(careerIndex <= 3) {
+					
+					if (officeName != '' && position != '' && workContent != '' && workMonth != '') {
+						
+						var careerInfo = {
+								officeName : officeName,
+								position : position,
+								workContent : workContent,
+								workYear : workYear,
+								workMonth : workMonth
+						};
+						
+						$("#reOfficeName" + careerIndex).val(officeName);
+						$("#rePosition" + careerIndex).val(position);
+						$("#reWorkContent" + careerIndex).val(workContent);
+						$("#reWorkYear" + careerIndex).val(workYear);
+						$("#reWorkMonth" + careerIndex).val(workMonth);
+						careerIndex++;
 		
+						$.ajax({
+							url : "/hobbyist/careerAdd.ar",
+							type : "post",
+							data : careerInfo,
+							success : function(data) {
+								$div = $("#reCareerDiv");
+								var $inDiv = $("<div class='inDiv'>").text(data);
+								$div.append($inDiv);
+								$div.append("<br>");
+							},
+							error : function(status) {
+								console.log(status);
+							}
+						});
+						
+					} else {alert("모든 입력을 완료해 주세요.");}
+					
+				} else {
+					alert("경력은 최대 3개까지만 입력 가능합니다.");
+				}
+			});
+		});
 	
 		$(function() {
 			var num = 1;
@@ -1417,16 +1622,27 @@
 			
 			$('#reOpenModalBtn').on('click', function() {
 				
-				/* $.ajax({
+				$("#reBankName").val($("#hiddenName").val());
+				
+				$.ajax({
 					url:"/hobbyist/restoreInfo.ar",
 					type:"post",
 					success:function(data) {
-						console.log('서버전송성공');
+						
+						for(var key in data) {
+							
+							var img = data[key];
+							var root = img.imageRoute + "/" + img.imageName;
+									
+							if(img.imageType == 'profile') {
+								$("#reArtistprofile").attr("src", root);
+							} 
+						}
 					},
 					error:function(status) {
 						console.log(status);
 					}
-				}); */
+				});
 				
 				$('#modalBox2').modal('show');	
 			});
@@ -1490,16 +1706,13 @@
 
 			});
 			$('#reSaveModalBtn').on('click', function() {
-				if($("#reArtistImg1").val() == "") {
-					alert("필수사항을 모두 입력해주세요.");
-				} else {
-					$("#reArtistForm").submit();
-				}
+				
+					$("#reartistForm").submit();
+				
 			});
 		});
 	</script>
 	<div style="height: 30px;"></div>
 	<%@ include file="../common/footer.jsp"%>
-	
 </body>
 </html>
