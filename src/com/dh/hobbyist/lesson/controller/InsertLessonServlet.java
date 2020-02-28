@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.dh.hobbyist.member.model.vo.Member;
+
 /**
  * Servlet implementation class InsertLessonServlet
  */
@@ -27,10 +29,23 @@ public class InsertLessonServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String lessonName = request.getParameter("lessonTitle");
-		String minSt = request.getParameter("min");
-		String maxSt = request.getParameter("max");
-		String totalOrder = request.getParameter("inputOrder");
+		int minStudents = Integer.parseInt(request.getParameter("min"));
+		int maxStudents = Integer.parseInt(request.getParameter("max"));
+		int totalLessons = Integer.parseInt(request.getParameter("inputOrder"));
+		int totalCosts = Integer.parseInt(request.getParameter("cost"));
+		String artistIntro = request.getParameter("artIntro");
+		String lessonIntro = request.getParameter("lessonIntro");
+		String status = "일정 진행중";
+		int categoryCode = Integer.parseInt(request.getParameter("subCategory"));
 		
+		int artistCode = ((Member) (request.getSession().getAttribute("loginMember"))).getMemberCode();
+		
+		System.out.println("Servlet Test : " + lessonName + ", " + minStudents + ", " + maxStudents + ", " + totalLessons + ", " + totalCosts + ", " + artistIntro + ", " +
+						lessonIntro + ", " + status + ", " + categoryCode + ", " + artistCode);
+		
+		
+		
+							
 	}
 
 	/**

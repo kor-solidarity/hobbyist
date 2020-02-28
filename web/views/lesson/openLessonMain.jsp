@@ -460,7 +460,7 @@ body {
 								<tr>
 									<td>
 										<div>상세 카테고리</div> 
-										<select id="subCategory" class="nanum" style="color: black;"></select>
+										<select id="subCategory" class="nanum" name="subCategory" style="color: black;"></select>
 										<script>
 											$(function(){
 												$("#category").change(function(){
@@ -546,7 +546,7 @@ body {
 									</td>
 									<td>
 										<div>회차당 수업료</div> 
-										<input id="cost" class="nanum" name="rounds" type="number" style="width:100px">
+										<input id="cost" class="nanum" name="cost" type="number" style="width:100px">
 										<label style="font-weight:normal; color:black;">&nbsp;원</label>
 										<script>
 											$(function() {

@@ -336,7 +336,7 @@
 		}
 		
 		function goConfiguration() {
-			location.href = "<%= request.getContextPath() %>/views/member/myPage/configuration/memberUpdate.jsp";
+			location.href = "<%= request.getContextPath() %>/views/member/myPage/configuration/memberPassword.jsp";
 		}
 	</script>
 </body>
