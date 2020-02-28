@@ -19,8 +19,8 @@ import java.util.ArrayList;
 import java.util.Enumeration;
 
 // 관리자 페이지에서 공간대여업체를 추가함.
-@WebServlet(name = "InsertPlaceServlet", urlPatterns = "/add_place.ad")
-public class InsertPlaceServlet extends HttpServlet {
+@WebServlet(name = "AddPlaceServlet", urlPatterns = "/add_place.ad")
+public class AddPlaceServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doGet(request, response);
     }
@@ -184,14 +184,16 @@ public class InsertPlaceServlet extends HttpServlet {
                     insert_pics_result = new PlaceService().insertImageList(fileList);
                 }
                 System.out.println("insert_pics_result: " + insert_pics_result);
+                String page = "";
                 if (insert_pics_result > 0) {
                     // 여기까지 왔으면 다 성공한거임. 업체 목록으로 옮긴다.
                     // response.sendRedirect(request.getContextPath() + "/");
-
-                }else {
-
+                    page = "/adminPlaceList.ad";
+                } else {
+                    request.setAttribute("msg", "추가중 오류가 났습니다");
+                    page = "/views/common/errorPage.jsp";
                 }
-
+                request.getRequestDispatcher(page).forward(request, response);
 
             }
         }

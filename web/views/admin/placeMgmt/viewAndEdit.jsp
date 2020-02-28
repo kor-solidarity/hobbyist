@@ -1,5 +1,8 @@
 <%@ page import="com.dh.hobbyist.place.model.vo.PlaceCompany" %>
-<%@ page import="com.sun.org.apache.xpath.internal.operations.Bool" %><%--
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="com.dh.hobbyist.common.model.vo.Image" %>
+<%@ page import="com.dh.hobbyist.place.model.vo.CompanyAds" %>
+<%--
   Created by IntelliJ IDEA.
   User : SOY
   Date : 2020-02-18
@@ -22,6 +25,9 @@
 
 <%
     PlaceCompany company = (PlaceCompany) request.getAttribute("placeCompany");
+    ArrayList<Image> images = (ArrayList<Image>) request.getAttribute("images");
+    System.out.println("images: " + images.size());
+    CompanyAds companyAds = (CompanyAds) request.getAttribute("companyAds");
     // 수정모드인지 확인
     Boolean onEdit = false;
 %>
@@ -63,39 +69,40 @@
                     <tr>
                         <td style="">업체명 :</td>
                         <td style="">
-                            <input type="text" name="companyName" value="<%=company.getCompany_name()%>" disabled>
+                            <input type="text" name="companyName" id="companyName"
+                                   value="<%=company.getCompany_name()%>" disabled>
                         </td>
                     </tr>
                     <tr>
                         <td>전화번호 :</td>
                         <td>
-                            <input type="text" name="phone" id="" value="<%=company.getPhone()%>" disabled>
+                            <input type="text" name="phone" id="phone" value="<%=company.getPhone()%>" disabled>
                         </td>
                     </tr>
                     <tr>
                         <td>업체주소 :</td>
                         <td>
-                            <input type="text" name="addr" style="width: 500px" id="" value="<%=company.getAddress()%>" disabled>
+                            <input type="text" name="addr" style="width: 500px" id="addr"
+                                   value="<%=company.getAddress()%>"
+                                   disabled>
                         </td>
                     </tr>
                     <tr>
                         <td>사이트 주소</td>
-                        <td><input type="text" name="website" id="" value="<%=company.getWebsite()%>" ></td>
+                        <td><input type="text" name="website" disabled value="<%=company.getWebsite()%>"></td>
                     </tr>
                     <tr>
                         <td>업체 소개 : <br>(영업일 가격 등)</td>
                         <td>
-                            <textarea name="intro" id="" cols="75" rows="10" disabled>
-                                <%=company.getIntro()%>
-                            </textarea>
+                            <textarea name="intro" id="intro" cols="75" rows="10"
+                                      disabled><%=company.getIntro()%></textarea>
                         </td>
                     </tr>
                     <tr>
                         <td>영업시간</td>
                         <td>
-                            <textarea name="serviceTime" id="" cols="75" rows="3">
-                                <%=company.getService_time()%>
-                            </textarea>
+                            <textarea name="serviceTime" id="serviceTime" cols="75"
+                                      rows="3" disabled><%=company.getService_time()%></textarea>
                         </td>
                     </tr>
                     <tr>
@@ -103,14 +110,33 @@
                         <td>
                             <%
                                 String room_size = company.getRoom_size();
-                                room_size.split(",");
+                                System.out.println(room_size);
+                                String[] room_size_array = room_size.split(",");
+                                boolean rSize1 = false;
+                                boolean rSize2 = false;
+                                boolean rSize3 = false;
+                                for (int i = 0; i < room_size_array.length; i++) {
+                                    if (room_size_array[i].equals("1")) {
+                                        rSize1 = true;
+                                    } else if (room_size_array[i].equals("2")) {
+                                        rSize2 = true;
+                                    } else if (room_size_array[i].equals("3")) {
+                                        rSize3 = true;
+                                    }
+                                }
                             %>
-                            <input type="checkbox" name="roomSize3" value="3" id="big">&nbsp;<label
-                                for="big">대규모</label>
-                            <input type="checkbox" name="roomSize2" value="2" id="small">&nbsp;<label
-                                for="small">소규모</label>
-                            <input type="checkbox" name="roomSize1" value="1" id="one">&nbsp;<label
-                                for="one">일대일</label>
+                            <input type="checkbox" name="roomSize1" value="1" id="one" disabled
+                                <% if(rSize1){ %>
+                                   checked
+                                <% } %>> <label for="one">일대일</label>
+                            <input type="checkbox" name="roomSize2" value="2" id="small" disabled
+                                <% if(rSize2){ %>
+                                   checked
+                                <% } %>> <label for="small">소규모</label>
+                            <input type="checkbox" name="roomSize3" value="3" id="big" disabled
+                                <% if(rSize3){ %>
+                                   checked
+                                <% } %>>&nbsp;<label for="big">대규모</label>
                         </td>
                     </tr>
                     <tr>
@@ -128,21 +154,41 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td><img id="pic1"
+                                    <%
+                                        // 사진로딩
+                                        int counter = 1;
+                                    %>
+                                    <%--Image mainImage = null;--%>
+                                    <%--// 1차로 메인을 솎아낸다.--%>
+                                    <%--for (Image img : images) {--%>
+                                    <%--    if (img.getImageMain() == 1) {--%>
+                                    <%--        mainImage = img;--%>
+                                    <%--        break;--%>
+                                    <%--    }--%>
+                                    <%--}--%>
+
+                                    <%-- 포문 돌려가면서 사진을 채운다--%>
+                                    <% for (Image image : images) {%>
+                                    <td>
+                                        <img src="<%=request.getContextPath()%>/<%=image.getImageRoute()%>/<%=image.getImageName()%>"
+                                             id="pic<%=counter%>">
+                                    </td>
+                                    <%counter++;%>
+                                    <% } %>
+                                    <%--카운터가 5 이하면 빈칸 마저 채운다--%>
+                                    <%
+                                        if (counter < 5) {
+                                            for (int i = counter; i <= 5; i++) {
+                                    %>
+                                    <td>
+                                        <img id="pic<%=counter%>"
                                              src="<%=request.getContextPath()%>/static/images/iphoneCameraW.png" alt="">
                                     </td>
-                                    <td><img id="pic2"
-                                             src="<%=request.getContextPath()%>/static/images/iphoneCameraW.png" alt="">
-                                    </td>
-                                    <td><img id="pic3"
-                                             src="<%=request.getContextPath()%>/static/images/iphoneCameraW.png" alt="">
-                                    </td>
-                                    <td><img id="pic4"
-                                             src="<%=request.getContextPath()%>/static/images/iphoneCameraW.png" alt="">
-                                    </td>
-                                    <td><img id="pic5"
-                                             src="<%=request.getContextPath()%>/static/images/iphoneCameraW.png" alt="">
-                                    </td>
+                                    <%
+                                                counter++;
+                                            }
+                                        }
+                                    %>
                                 </tr>
                                 </tbody>
                             </table>
@@ -153,7 +199,11 @@
                     <tr>
                         <td style="width: 40%">
                             <bold>게제시작일:</bold>
-                            <input type="date" name="startDate" id="startDate"></td>
+                            <%
+                                System.out.println(companyAds.getStartDate());
+                            %>
+                            <input type="date" name="startDate" id="startDate" value="<%=companyAds.getStartDate()%>">
+                        </td>
                         <td>
                             <bold>종료일:</bold>
                             <input type="date" name="endDate" id="endDate"></td>
@@ -167,16 +217,19 @@
                     <input type="file" name="file5" id="file5" onchange="changedPic(this, 5)">
                 </div>
             </div>
-            <%-- 마지막줄에는 삭제버튼 넣기.  --%>
             <div class="" style="width :1100px;text-align : right; margin-left : 60px">
-                <button type="submit">등록</button>
-                <button type="reset">초기화</button>
+                <button>수정</button>
+                <button type="submit" disabled>등록</button>
+                <%-- 목록으로 돌아가게끔 조정. --%>
+                <button onclick="">목록으로 돌아가기</button>
             </div>
         </form>
     </article>
 </section>
 <script>
+    // 이 기능은 수정버튼 누를때만 활성화됨
     $(function () {
+        // todo 여긴 조회창임. 첫 시작시 시작·종료일 조정,
         // 첫 시작일자 초기화 목적
         var date = new Date();
         var month = date.getMonth() + 1;
@@ -185,15 +238,6 @@
         var min = date.getMinutes();
         if (day < 10) {
             day = '0' + day.toString()
-        }
-        if (month < 10) {
-            month = '0' + month.toString();
-        }
-        if (hour < 10) {
-            hour = '0' + hour.toString();
-        }
-        if (min < 10) {
-            min = '0' + min.toString();
         }
         // 시작일자 초기화
         $("#startDate").val(date.getFullYear() + '-' + month + '-' + day);// + 'T' + hour + ':' + min);

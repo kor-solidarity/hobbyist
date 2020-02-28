@@ -200,7 +200,7 @@ public class PlaceDao {
             // 불러와야 하는 목록의 첫글 - 2페이지면 21번째글
             int startNum = (pageInfo.getCurrentPage() - 1) * pageInfo.getLimit() + 1;
             // 불러와야 하는 목록의 마지막글 - 2페이지면 30번글.
-            int endNum = startNum + pageInfo.getLimit() -1;
+            int endNum = startNum + pageInfo.getLimit() - 1;
 
             preparedStatement.setInt(1, startNum);
             preparedStatement.setInt(2, endNum);
@@ -224,12 +224,82 @@ public class PlaceDao {
 
         } catch (SQLException e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             close(resultSet);
             close(preparedStatement);
         }
 
 
         return companyArrayList;
+    }
+
+    // 공간대여업체에 엮여 등록된 이미지 사진목록 (은석)
+    public ArrayList<Image> selectImage(Connection con, int parseInt) {
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        ArrayList<Image> imgList = null;
+
+        String query = prop.getProperty("selectImageList");
+
+        try {
+            preparedStatement = con.prepareStatement(query);
+
+            preparedStatement.setInt(1, parseInt);
+
+            resultSet = preparedStatement.executeQuery();
+            imgList = new ArrayList<>();
+            while (resultSet.next()) {
+                Image img = new Image();
+
+                img.setImageCode(resultSet.getInt(1));
+                img.setImageRoute(resultSet.getString(2));
+                img.setImageName(resultSet.getString(3));
+                img.setImageType(resultSet.getString(4));
+                img.setImageFkPk(resultSet.getInt(5));
+                img.setImageMain(resultSet.getInt(6));
+                imgList.add(img);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            close(resultSet);
+            close(preparedStatement);
+        }
+
+        return imgList;
+    }
+
+    public CompanyAds selectCompanyAds(Connection con, int pk) {
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        CompanyAds companyAds = null;
+
+        // 기한이 남은 경우에만 불러온다.
+        String query = prop.getProperty("selectCompanyAd");
+
+        try {
+            preparedStatement = con.prepareStatement(query);
+
+            preparedStatement.setInt(1, pk);
+
+            resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                companyAds = new CompanyAds();
+
+                companyAds.setAdPk(resultSet.getInt(1));
+                companyAds.setCompanyPk(resultSet.getInt(2));
+                companyAds.setStartDate(resultSet.getDate(3));
+                companyAds.setEndDate(resultSet.getDate(4));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            close(resultSet);
+            close(preparedStatement);
+        }
+
+        return companyAds;
     }
 }

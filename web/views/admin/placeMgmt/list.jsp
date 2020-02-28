@@ -97,7 +97,7 @@
                     <td>
                         <%-- 추후 코드 본격적으로 넣을때 id 부분도 손봐야함. --%>
                         <button class="inquery-btn"
-                                onclick="location.href='<%=request.getContextPath()%>/viewPlaceInfo.ad?id=<%=l.getCompany_pk()%>&currentPage=<%=pi.getCurrentPage()%>'">
+                                onclick="location.href='<%=request.getContextPath()%>/addPlaceCompany.ad?pk=<%=l.getCompany_pk()%>&currentPage=<%=pi.getCurrentPage()%>'">
                             조회
                         </button>
                     </td>
@@ -181,7 +181,7 @@
 
         <%-- 마지막줄에는 삭제버튼 넣기.  --%>
         <div class="" style="width:1100px;text-align: right; margin-left: 60px">
-            <button onclick="location.href='<%=request.getContextPath()%>/add_place.ad'">등록</button>
+            <button onclick="location.href='<%=request.getContextPath()%>/addPlaceCompany.ad'">등록</button>
             <button>삭제</button>
         </div>
     </article>
