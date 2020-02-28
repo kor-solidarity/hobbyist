@@ -113,4 +113,25 @@ public class PlaceService {
 
         return companyArrayList;
     }
+
+    // 각 회사별 등록된 사진 목록
+    public ArrayList<Image> selectCompanyImage(int parseInt) {
+        Connection con = getConnection();
+
+        ArrayList<Image> images = new PlaceDao().selectImage(con, parseInt);
+
+        close(con);
+
+        return images;
+    }
+
+    // 회사별 등록된 홍보가능 일정목록.
+    public CompanyAds selectCompanyAds(int pk) {
+        Connection con = getConnection();
+        CompanyAds ads = new PlaceDao().selectCompanyAds(con, pk);
+
+        close(con);
+
+        return ads;
+    }
 }
