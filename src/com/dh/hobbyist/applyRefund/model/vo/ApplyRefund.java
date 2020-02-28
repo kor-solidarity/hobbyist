@@ -6,6 +6,7 @@ public class ApplyRefund {
 	
 	private int refundCode;			//신청코드
 	private int paymentCode;		//결제코드
+	private String lessonName;
 	private int memberCode;			//회원코드
 	private String memberName;		//회원이름
 	private String phone;			//전화번호
@@ -13,7 +14,8 @@ public class ApplyRefund {
 	private int refundCost;			//환불금액
 	private Timestamp applyDate;	//신청일
 	private int totalOrder;			//총 수업회차
-	private int totalProgress;		//진행회차
+	private int finishOrder;		//진행회차
+	private int leftOrder;			//잔여회차
 	private int usingPoint;			//사용포인트
 	private int givePoint; 			//지금예정포인트
 	private int payCost;			//결제금액
@@ -22,12 +24,13 @@ public class ApplyRefund {
 	
 	public ApplyRefund() {}
 
-	public ApplyRefund(int refundCode, int paymentCode, int memberCode, String memberName, String phone, int artistCode,
-			int refundCost, Timestamp applyDate, int totalOrder, int totalProgress, int usingPoint, int givePoint,
-			int payCost, int resultCost, String impNum) {
+	public ApplyRefund(int refundCode, int paymentCode, String lessonName, int memberCode, String memberName,
+			String phone, int artistCode, int refundCost, Timestamp applyDate, int totalOrder, int finishOrder,
+			int leftOrder, int usingPoint, int givePoint, int payCost, int resultCost, String impNum) {
 		super();
 		this.refundCode = refundCode;
 		this.paymentCode = paymentCode;
+		this.lessonName = lessonName;
 		this.memberCode = memberCode;
 		this.memberName = memberName;
 		this.phone = phone;
@@ -35,7 +38,8 @@ public class ApplyRefund {
 		this.refundCost = refundCost;
 		this.applyDate = applyDate;
 		this.totalOrder = totalOrder;
-		this.totalProgress = totalProgress;
+		this.finishOrder = finishOrder;
+		this.leftOrder = leftOrder;
 		this.usingPoint = usingPoint;
 		this.givePoint = givePoint;
 		this.payCost = payCost;
@@ -57,6 +61,14 @@ public class ApplyRefund {
 
 	public void setPaymentCode(int paymentCode) {
 		this.paymentCode = paymentCode;
+	}
+
+	public String getLessonName() {
+		return lessonName;
+	}
+
+	public void setLessonName(String lessonName) {
+		this.lessonName = lessonName;
 	}
 
 	public int getMemberCode() {
@@ -115,12 +127,20 @@ public class ApplyRefund {
 		this.totalOrder = totalOrder;
 	}
 
-	public int getTotalProgress() {
-		return totalProgress;
+	public int getFinishOrder() {
+		return finishOrder;
 	}
 
-	public void setTotalProgress(int totalProgress) {
-		this.totalProgress = totalProgress;
+	public void setFinishOrder(int finishOrder) {
+		this.finishOrder = finishOrder;
+	}
+
+	public int getLeftOrder() {
+		return leftOrder;
+	}
+
+	public void setLeftOrder(int leftOrder) {
+		this.leftOrder = leftOrder;
 	}
 
 	public int getUsingPoint() {
@@ -165,11 +185,11 @@ public class ApplyRefund {
 
 	@Override
 	public String toString() {
-		return "ApplyRefund [refundCode=" + refundCode + ", paymentCode=" + paymentCode + ", memberCode=" + memberCode
-				+ ", memberName=" + memberName + ", phone=" + phone + ", artistCode=" + artistCode + ", refundCost="
-				+ refundCost + ", applyDate=" + applyDate + ", totalOrder=" + totalOrder + ", totalProgress="
-				+ totalProgress + ", usingPoint=" + usingPoint + ", givePoint=" + givePoint + ", payCost=" + payCost
-				+ ", resultCost=" + resultCost + ", impNum=" + impNum + "]";
+		return "ApplyRefund [refundCode=" + refundCode + ", paymentCode=" + paymentCode + ", lessonName=" + lessonName
+				+ ", memberCode=" + memberCode + ", memberName=" + memberName + ", phone=" + phone + ", artistCode="
+				+ artistCode + ", refundCost=" + refundCost + ", applyDate=" + applyDate + ", totalOrder=" + totalOrder
+				+ ", finishOrder=" + finishOrder + ", leftOrder=" + leftOrder + ", usingPoint=" + usingPoint
+				+ ", givePoint=" + givePoint + ", payCost=" + payCost + ", resultCost=" + resultCost + ", impNum="
+				+ impNum + "]";
 	}
-	
 }

@@ -1,6 +1,6 @@
 package com.dh.hobbyist.payment.model.dao;
 
-import static com.dh.hobbyist.common.JDBCTemplate.close;
+import static com.dh.hobbyist.common.JDBCTemplate.*;
 
 import java.io.FileReader;
 import java.io.IOException;

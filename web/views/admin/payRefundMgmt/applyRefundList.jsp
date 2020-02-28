@@ -5,8 +5,13 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<%@ include file="/views/common/boot4-script.jsp" %>
-<%@ include file="/views/common/boot4.jsp" %>
+<link href="https://fonts.googleapis.com/css?family=ZCOOL+QingKe+HuangYou&display=swap" rel="stylesheet">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
  <style>
  
  	section {
@@ -83,12 +88,14 @@
  		height: 500px;
  		overflow-x: hidden;
         overflow-y: auto;
+        text-align: center;
  	}
  	
  	th {
  		background: #4E4E4E;
  		color: white;
  		height: 35px;
+ 		text-align: center;
  	}
  	
  	#infoArea td {
@@ -120,6 +127,9 @@
  		overflow-x: hidden;
         overflow-y: auto;
         resize: none;
+ 	}
+ 	#infoT {
+ 		width:100%;
  	}
 </style>
 </head>
@@ -170,23 +180,23 @@
 			
 			<!-- 정보 추가되는 본문 테이블 -->
 			<div id="infoArea">
-				<table style="width: 100%; text-align: center;">
+				<table id="infoT">
 					<!-- 테이블 첫번째 줄은 아이디, 비밀번호 등 조회할 내용 제목이다. background(#4E4E4E), font-color(white) 색 다르게 지정 -->
 					<tr>
 						<th style="width: 8%;">신청코드</th>
-						<th style="width: 8%;">결제코드</th>
+						<th style="width: 11%;">결제코드</th>
 						<th style="width: 11%;">회원코드</th>
-						<th style="width: 8%;">이름</th>
+						<th style="width: 7%;">이름</th>
 						<th style="width: 13%;">전화번호</th>
-						<th style="width: 10%;">아티스트 코드</th>
+						<th style="width: 11%;">아티스트 코드</th>
 						<th style="width: 11%;">환불 금액</th>
-						<th style="width: 18%;">신청일</th>
-						<th style="width: 12%;">상세보기</th>
+						<th style="width: 17%;">신청일</th>
+						<th style="width: 14%;">상세보기</th>
 					</tr>
 					<tr>
 						<td style="width: 8%;">1</td>
-						<td style="width: 11%;">1</td>
 						<td style="width: 11%;">3</td>
+						<td style="width: 11%;">1</td>
 						<td style="width: 7%;">임찬영</td>
 						<td style="width: 13%;">01067471107</td>
 						<td style="width: 11%;">3</td>
@@ -206,47 +216,46 @@
     
    	   <!-- Modal content-->
    	   <div class="modal-content">
-   	     <div class="modal-header" style="background: #4E4E4E ; color: white;">
-   	       <h4 class="modal-title" style="font-family: 'ZCOOL QingKe HuangYou', cursive;">hobbyist</h4>
+   	     <div class="modal-header" style="background: #4E4E4E ; color: white; height: 80px;">
    	       <button type="button" class="close" data-dismiss="modal" style="color: white;">x</button>
+   	       <h4 class="modal-title" style="font-family: 'ZCOOL QingKe HuangYou', cursive; font-size: 30px;">hobbyist</h4>
    	     </div>
    	     <div class="modal-body">
    	       <table id="modalT">
    	       		<tr>
-   	       			<td>결제 고유번호</td>
-   	       			<td></td>
+   	       			<td id="imp">결제 고유번호</td>
+   	       			<td id="impNum"></td>
    	       		</tr>
    	       		<tr>
    	       			<td id="">수업 제목</td>
-   	       			<td></td>
+   	       			<td id="lessonName"></td>
    	       		</tr>
    	       		<tr>
    	       			<td>결제 금액</td>
-   	       			<td></td>
+   	       			<td id="payCost"></td>
    	       		</tr>
    	       		<tr>
    	       			<td>사용 포인트</td>
-   	       			<td></td>
+   	       			<td id="usingPoint"></td>
    	       		</tr>
    	       		<tr>
    	       			<td>환불 금액</td>
-   	       			<td></td>
+   	       			<td id="refundCost"></td>
    	       		</tr>
    	       		<tr>
    	       			<td>수업 회차</td>
-   	       			<td></td>
+   	       			<td id="totalOrder"></td>
    	       		</tr>
    	       		<tr>
    	       			<td>진행 회차</td>
-   	       			<td></td>
+   	       			<td id="finishOrder"></td>
    	       		</tr>
    	       		<tr>
    	       			<td>잔여 회차</td>
-   	       			<td></td>
+   	       			<td id="leftOrder"></td>
    	       		</tr>
    	       		<tr>
    	       			<td>환불 사유</td>
-   	       			<td></td>
    	       		</tr>
    	       		<tr>
    	       			<td colspan="2">
@@ -307,6 +316,16 @@
 					data: {num : num},
 					type: "post",
 					success: function(data) {
+						
+						$("#impNum").text(data.impNum);
+						$("#lessonName").text(data.lessonName);
+						$("#payCost").text(data.payCost);
+						$("#usingPoint").text(data.usingPoint);
+						/* 환불금액 */
+						$("#totalOrder").text(data.totalOrder);
+						$("#finishOrder").text(data.finishOrder);
+						$("#leftOrder").text(data.leftOrder);
+						/* 환불사유 modal reason */
 						
 						
 					},
