@@ -61,12 +61,13 @@
             font-family: 'Nanum Gothic', sans-serif; 
             font-size:14px;
             cursor:pointer;
+            line-height: 40px;
         }
         
         #submit {
             background: darkolivegreen;
             color:white;
-            border: 1px solid darkolivegreen;
+            /* border: 1px solid darkolivegreen; */
         }
         input {
             margin-top: 20px;
@@ -87,7 +88,7 @@
             <label id="pwdLabel2">새 비밀번호 확인</label>&nbsp; <input type="password" name="memberPwd2" id="memberPwd2" maxlength="18" size="22">
             <br><input type="hidden" name="memberId" value="<%=findMember.getMemberId()%>"><br>
            
-            <button type="submit" class="btns" id="submit">비밀번호 재설정</button>
+            <div class="btns" id="submit" onclick="checkPwd();">비밀번호 재설정</div>
     </div>
     </form>
     <script>
@@ -96,50 +97,78 @@
     		location.href = "<%= request.getContextPath()%>/index.jsp";
     	}
     	
-
-    	$("#memberPwd").change(function() {
-    		checkPassword($('#memberPwd').val());
-    	});
+    	ckpwd1 = false;
+    	ckpwd2 = false;
     	
-    	function checkPassword(password) {
-    		 $("#memberPwd").focus(); 
-    		if(password != "") {
-    			if(!/^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,20}$/.test(password)) {
+    	function checkPwd() {
+    		
+    		if($("#memberPwd").val() != "" && $("#memberPwd2").val() != "") {
+    			if(ckpwd1 == true) {
+        			if(ckpwd2 == true) {
+        				$('form').submit();
+        			}else {
+        				alert("비밀번호가 일치하지 않습니다.");
+        			}
+        		}else {
         			alert("영문, 숫자, 특수문자 조합 8~20자 이내로 입력해주세요.");
-        			return false;
         		}
-        		
-        		return true;
-    			
+    		}else {
+    			alert("비밀번호를 입력해주세요.");
     		}
-   			alert("비밀번호를 입력해주세요.");
-			return false; 
+    		
+    		
     		
     	}
     	
     	
-    	$("#memberPwd2").change(function() {
-    		checkPassword2($('#memberPwd').val(), $('#memberPwd2').val());
+		
+    	$(function() {
+    		$("#memberPwd").change(function() {
+        		ckpwd1 = checkPassword($('#memberPwd').val());
+        	});
+        	
+        	function checkPassword(password) {
+        		 $("#memberPwd").focus(); 
+        		if(password != "") {
+        			if(!/^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,20}$/.test(password)) {
+            			
+            			return false;
+            		}
+            		
+        			return true;
+        			
+        		}
+       			
+       			return false; 
+        		
+        	}
+        	
+        	
+        	$("#memberPwd2").change(function() {
+        		ckpwd2 = checkPassword2($('#memberPwd').val(), $('#memberPwd2').val());
+        	});
+        	
+        	var pwd1 = $("#memberPwd").val();
+        	var pwd2 = $("#memberPwd2").val();
+        	
+        	function checkPassword2(pwd1, pwd2) {
+        		 $("#memberPwd2").focus(); 
+        		if(pwd1 != "" && pwd2 != "") {
+        			if(pwd1 != pwd2) {
+            			
+            			return false;
+            		}
+            		
+        			return true;
+        		}
+        		
+        		return false; 
+        		
+        		
+        	}
     	});
     	
-    	var pwd1 = $("#memberPwd").val();
-    	var pwd2 = $("#memberPwd2").val();
     	
-    	function checkPassword2(pwd1, pwd2) {
-    		 $("#memberPwd2").focus(); 
-    		if(pwd1 != "" && pwd2 != "") {
-    			if(pwd1 != pwd2) {
-        			alert("비밀번호가 일치하지 않습니다.");
-        			return false;
-        		}
-        		
-        		return true;
-    		}
-    		alert("비밀번호를 입력해주세요.");
-    		return false; 
-    		
-    		
-    	}
     	
     	
     	   

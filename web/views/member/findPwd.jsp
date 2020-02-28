@@ -56,6 +56,7 @@
             font-family: 'Nanum Gothic', sans-serif; 
             font-size:14px;
             cursor:pointer;
+            line-height:40px;
         }
         
         #submit {
@@ -124,7 +125,7 @@
             		<td><div class="btns2" id="checkBtn">인증확인</div></td>
             	</tr>
             </table>
-            <button type="submit" class="btns" id="submit">비밀번호 재설정</button>
+            <div class="btns" id="submit" onclick="checkAll();">비밀번호 재설정</div>
         </form>
     </div>
     
@@ -132,6 +133,21 @@
 	    function goHome() {
 			location.href = "<%= request.getContextPath()%>/index.jsp";
 		}
+	    
+	    
+	    ckNum = false;
+	    
+	    function checkAll() {
+	    	if($("#num").val() != "") {
+	    		if(ckNum == true) {
+	    			$('form').submit();
+	    		}else {
+	    			alert("인증번호가 일치하지 않습니다.");
+	    		}
+	    	}else {
+	    		alert("인증 번호를 입력해주세요.");
+	    	}
+	    }
 	    
 	    $(function() {
        		var randomVal = ""; 
@@ -190,10 +206,10 @@
             	
                  if(userSms == randomVal){  //인증번호가 같은 경우 행동
                    		alert("인증이 완료되었습니다.");
-                 		return true;
+                 		ckNum = true;
                    }else{		    //인증번호가 다른 경우 행동
                     	alert("인증번호가 일치하지 않습니다. 확인 후 다시 입력하세요.");
-                   		return false;
+                   		ckNum = false;
                     }
    			 });
 	    	
