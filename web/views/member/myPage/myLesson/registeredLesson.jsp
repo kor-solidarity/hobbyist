@@ -143,7 +143,7 @@
 				location.href = "<%=request.getContextPath()%>/views/member/myPage/myLesson/likedLesson.jsp";
 			}			
 			function goRegisteredSuggestion() {
-				location.href = "<%=request.getContextPath()%>/views/member/myPage/myLesson/registeredSuggestion.jsp";
+				location.href = "<%=request.getContextPath()%>/selectMyList.sg";
 			}			
 			function goLikedSuggestion() {
 				location.href = "<%=request.getContextPath()%>/views/member/myPage/myLesson/likedSuggestion.jsp";

@@ -109,4 +109,48 @@ public class SuggestService {
 		
 		return replyList;
 	}
+
+	//마이페이지에서 쓰일 내가 등록한 건의 게시판 갯수 조회용 메소드
+	public int getMyListCount(int memberCode) {
+		Connection con = getConnection();
+		
+		int listCount = new SuggestDao().getMyListCount(con, memberCode);
+		
+		close(con);
+		
+		return listCount;
+	}
+
+	//마이페이지에 쓰일 내가 등록한 건의 게시판 리스트 조회용 메소드 (페이징 처리)
+	public ArrayList<Petition> selectMyList(int memberCode, PageInfo pi) {
+		Connection con = getConnection();
+		
+		ArrayList<Petition> list = new SuggestDao().selectMyList(con, memberCode, pi);
+		
+		close(con);
+		
+		return list;
+	}
+
+	//마이페이지에서 쓰일 나의 댓글 갯수 조회용 메소드
+	public int getMyReplyList(int memberCode) {
+		Connection con = getConnection();
+		
+		int listCount = new SuggestDao().getMyReplyList(con, memberCode);
+		
+		close(con);
+		
+		return listCount;
+	}
+
+	//마이페이지에 쓰일 나의 댓글 리스트 조회용 메소드 (페이징 처리)
+	public ArrayList<Reply> selectMyReplyList(PageInfo pi, int memberCode) {
+		Connection con = getConnection();
+		
+		ArrayList<Reply> list = new SuggestDao().selectMyReplyList(con, memberCode, pi);
+		
+		close(con);
+		
+		return list;
+	}
 }

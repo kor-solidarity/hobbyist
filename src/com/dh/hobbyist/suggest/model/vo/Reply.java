@@ -11,11 +11,13 @@ public class Reply implements java.io.Serializable {
 	private int deleted;
 	private String memberName;
 	private String imageRoot;
+	private String petitionTitle;
+	private int rowNum;
 	
 	public Reply() {}
 
 	public Reply(int replyCode, int lessonPetitionCode, Date replyDate, String replyContent, int memberCode,
-			int deleted, String memberName, String imageRoot) {
+			int deleted, String memberName, String imageRoot, String petitionTitle, int rowNum) {
 		super();
 		this.replyCode = replyCode;
 		this.lessonPetitionCode = lessonPetitionCode;
@@ -25,6 +27,8 @@ public class Reply implements java.io.Serializable {
 		this.deleted = deleted;
 		this.memberName = memberName;
 		this.imageRoot = imageRoot;
+		this.petitionTitle = petitionTitle;
+		this.rowNum = rowNum;
 	}
 
 	public int getReplyCode() {
@@ -91,12 +95,29 @@ public class Reply implements java.io.Serializable {
 		this.imageRoot = imageRoot;
 	}
 
+	public String getPetitionTitle() {
+		return petitionTitle;
+	}
+
+	public void setPetitionTitle(String petitionTitle) {
+		this.petitionTitle = petitionTitle;
+	}
+
+	public int getRowNum() {
+		return rowNum;
+	}
+
+	public void setRowNum(int rowNum) {
+		this.rowNum = rowNum;
+	}
+
 	@Override
 	public String toString() {
 		return "Reply [replyCode=" + replyCode + ", lessonPetitionCode=" + lessonPetitionCode + ", replyDate="
 				+ replyDate + ", replyContent=" + replyContent + ", memberCode=" + memberCode + ", deleted=" + deleted
-				+ ", memberName=" + memberName + ", imageRoot=" + imageRoot + "]";
+				+ ", memberName=" + memberName + ", imageRoot=" + imageRoot + ", petitionTitle=" + petitionTitle
+				+ ", rowNum=" + rowNum + "]";
 	}
 
-	
+
 }
