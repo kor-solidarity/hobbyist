@@ -251,6 +251,7 @@
 			$("#cDesign").css({'color':'black'});
 			$("#cSports").css({'color':'black'});
 			$("#cSpace").css({'color':'black'});
+			location.href = "<%= request.getContextPath()%>/selectMusic.le";
 		});
 		
 		$("#cDance").mouseenter(function() {
@@ -294,6 +295,7 @@
 			$("#cDesign").css({'color':'black'});
 			$("#cSports").css({'color':'black'});
 			$("#cSpace").css({'color':'black'});
+			location.href = "<%= request.getContextPath()%>/selectDance.le";
 			
 		});
 		
@@ -338,6 +340,7 @@
 			$("#cDesign").css({'color':'black'});
 			$("#cSports").css({'color':'black'});
 			$("#cSpace").css({'color':'black'});
+			location.href = "<%= request.getContextPath()%>/selectVideo.le";
 		});
 		
 		$("#cLife").mouseenter(function() {
@@ -381,6 +384,7 @@
 			$("#cDesign").css({'color':'black'});
 			$("#cSports").css({'color':'black'});
 			$("#cSpace").css({'color':'black'});
+			location.href = "<%= request.getContextPath()%>/selectLife.le";
 		});
 		
 		$("#cBeauty").mouseenter(function() {
@@ -424,6 +428,7 @@
 			$("#cDesign").css({'color':'black'});
 			$("#cSports").css({'color':'black'});
 			$("#cSpace").css({'color':'black'});
+			location.href = "<%= request.getContextPath()%>/selectBeauty.le";
 		});
 		$("#cDesign").mouseenter(function() {
 			$("#musicWrap").css({'z-index':'1'});
@@ -466,6 +471,7 @@
 			$("#cBeauty").css({'color':'black'});
 			$("#cSports").css({'color':'black'});
 			$("#cSpace").css({'color':'black'});
+			location.href = "<%= request.getContextPath()%>/selectDesign.le";
 		});
 		
 		$("#cSports").mouseenter(function() {
@@ -509,6 +515,7 @@
 			$("#cBeauty").css({'color':'black'});
 			$("#cDesign").css({'color':'black'});
 			$("#cSpace").css({'color':'black'});
+			location.href = "<%= request.getContextPath()%>/selectSports.le";
 		});
 		
 		$("#cSpace").mouseenter(function() {

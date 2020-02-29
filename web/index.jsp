@@ -104,8 +104,8 @@
        }
       	.lesson-list {
       		display:inline-block;
-      		width:250px;
-       		height:300px;
+      		width:240px;
+       		height:270px;
        		margin:auto;
        		margin-right: 65px;
        		margin-bottom:30px;
@@ -114,7 +114,7 @@
        
        #lessonTable {
        		font-family: 'Nanum Gothic', sans-serif;
-       		font-size:13px;
+       		font-size:12px;
        		border:1px solid darkolivegreen;
        		border-collapse:separate;
 			border-spacing: 5px;
@@ -149,7 +149,7 @@
        }
        
        #lessonImg {
-       		width:250px;
+       		width:240px;
        		height:130px;
        }
        #artistImg {
@@ -157,6 +157,15 @@
        		height:60px;
        		border-radius:50px 50px 50px 50px;
        }
+       
+       #lessonLabel {
+			font-family: 'Nanum Gothic', sans-serif;
+			font-size:14px;
+			font-weight:900;
+			margin-bottom:20px;
+		}
+     
+     
      
 </style>
 </head>
@@ -224,7 +233,7 @@
    		<td colspan="2"><img src="static/images/coffee.jpg" id="lessonImg"></td>
    </tr>
    	<tr>
-   		<td colspan="2">[카페,커피] 2시간이면 나도 바리스타!</td>
+   		<td colspan="2" id="lessonLabel">[카페,커피] 2시간이면 나도 바리스타!</td>
    	</tr>
    	<tr>
    		<td></td>

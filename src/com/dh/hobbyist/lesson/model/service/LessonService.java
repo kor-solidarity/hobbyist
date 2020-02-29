@@ -44,16 +44,49 @@ public class LessonService {
 		return list;
 	}
 	
-	//뷰티 카테고리 페이지 메소드(유승)
-	public ArrayList<HashMap<String, Object>> selectCategoryBeauty() {
-		Connection con = getConnection();
+		//라이프스타일 카테고리 페이지 메소드(유승)
+		public ArrayList<HashMap<String, Object>> selectCategoryLife() {
+			Connection con = getConnection();
+			
+			ArrayList<HashMap<String, Object>> list = new LessonDao().selectCategoryLife(con);
+			
+			close(con);
+			
+			return list;
+		}
+	
+		//뷰티 카테고리 페이지 메소드(유승)
+		public ArrayList<HashMap<String, Object>> selectCategoryBeauty() {
+			Connection con = getConnection();
 		
-		ArrayList<HashMap<String, Object>> list = new LessonDao().selectCategoryBeauty(con);
+			ArrayList<HashMap<String, Object>> list = new LessonDao().selectCategoryBeauty(con);
 		
-		close(con);
+			close(con);
 		
-		return list;
+			return list;
 	}
+	
+		//디자인 카테고리 페이지 메소드(유승)
+		public ArrayList<HashMap<String, Object>> selectCategoryDesign() {
+			Connection con = getConnection();
+			
+			ArrayList<HashMap<String, Object>> list = new LessonDao().selectCategoryDesign(con);
+			
+			close(con);
+			
+			return list;
+		}
+		
+		//스포츠 카테고리 페이지 메소드(유승)
+		public ArrayList<HashMap<String, Object>> selectCategorySports() {
+			Connection con = getConnection();
+			
+			ArrayList<HashMap<String, Object>> list = new LessonDao().selectCategorySports(con);
+			
+			close(con);
+			
+			return list;
+		}
 	
 	//카테고리별 페이지 리스트 메소드(유승)
 	public ArrayList<HashMap<String, Object>> selectCategoryLessonList(int parentCode) {
