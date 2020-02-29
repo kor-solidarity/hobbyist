@@ -124,7 +124,7 @@
     	}
     	
     	function logoutConfirm() {
-    		var conf = confirm("로그아웃을 하시겠습니까?");
+    		var conf = confirm("로그아웃 하시겠습니까?");
     		
     		if(conf == true) {
     			goLogout();

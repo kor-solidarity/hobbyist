@@ -46,7 +46,7 @@ public class LoginServlet extends HttpServlet {
 			session.setAttribute("loginMember", loginMember);
 			if(loginMember.getFirstLogin() == 0) {
 				response.sendRedirect("views/member/firstLogin.jsp");
-				int result = new MemberService().loginCount(member);
+				
 			}else {
 				response.sendRedirect("index.jsp");
 			}

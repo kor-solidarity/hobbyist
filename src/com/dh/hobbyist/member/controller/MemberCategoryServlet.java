@@ -31,10 +31,18 @@ public class MemberCategoryServlet extends HttpServlet {
 		
 		int result = new MemberService().insertCategory(memberCode, categoryCode);
 		
+		Member member = new Member();
+		member.setMemberCode(memberCode);
+		
 		String page = "";
 		if(result > 0) {
 			page = "views/common/successPage.jsp";
 			request.setAttribute("successCode", "insertCategory");
+			int result2 = new MemberService().loginCount(member);
+			if(result2 > 0) {
+				System.out.println("first login : " + member.getFirstLogin());
+			}
+			
 		}else {
 			page = "views/common/errorPage.jsp";
 			request.setAttribute("msg", "관심 카테고리 설정에 실패했습니다.");
