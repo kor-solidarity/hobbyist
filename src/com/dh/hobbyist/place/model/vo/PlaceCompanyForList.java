@@ -1,9 +1,10 @@
 package com.dh.hobbyist.place.model.vo;
 
+import java.io.Serializable;
 import java.sql.Date;
 
 // 관리자 목록조회용 회사목록 (은석)
-public class PlaceCompanyForList {
+public class PlaceCompanyForList implements Serializable {
     int company_pk;
     String company_name;
     String phone;
