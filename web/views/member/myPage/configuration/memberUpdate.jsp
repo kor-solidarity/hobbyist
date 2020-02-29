@@ -266,6 +266,9 @@ background: #C4C4C4;
 background: #C4C4C4;
 }
 
+#button4 {
+background: #C4C4C4;
+}
 #updateBtn {
 
 width: 110px;
@@ -277,7 +280,7 @@ font-style: normal;
 font-weight: normal;
 font-size: 25px;
 line-height: 31px;
-
+margin:auto;
 color: #FFFFFF;
 
 }
@@ -397,7 +400,7 @@ color: #FFFFFF;
 					<td colspan="1" style="width: 3px;"><label id="labelHyphen2">-</label></td>
 					<td colspan="1"><input type="tel" name="tel3" id="tel3" value="<%=phone[2]%>" style="text-align: left; width: 75px;" value="<%=loginMember.getPhone() %>"></td>
 					
-					<td colspan="1"><label id="button1">인증하기</label></td>
+					<td colspan="1"><button id="button1">인증하기</label></td>
 				</tr>
 	
 				<tr>
@@ -407,7 +410,7 @@ color: #FFFFFF;
 				<tr>
 					<td colspan="1" style="width: 100px; text-align: left;" color:><label
 						id="labelTel2">인증번호</label></td>
-					<td colspan="5" class="em" style="text-align: left;"><input style="width: 260px;" type="text" name="email2" placeholder="인증번호를 입력해주세요"></td>
+					<td colspan="5" class="em" style="text-align: left;"><input style="width: 260px;" type="text" name="pwsame" id="pwsame" placeholder="인증번호를 입력해주세요"></td>
 					<td colspan="1"><button id="button4">인증확인</button></td>
 				</tr>
 			
@@ -460,12 +463,8 @@ color: #FFFFFF;
 	
 	</script>
 	
-	
-	
-	
 	<script>
-	//전화번호 인증하기 버튼 클릭시
-	
+	//전화번호 인증하기 버튼 클릭시	
 		var randomVal = ""; //유저에게 보낸 문자의 랜덤 숫자를 저장하기 위한 전역변수
 		$(document).on('click', '#button1', function () {
 		var tel1 = $("#tel1").val();
@@ -513,13 +512,22 @@ color: #FFFFFF;
 		});
 
 	});
-
-		
-		
-
+</script>
+<script>
+$function(){
+var phone = $("#phone").val();
+var pwsame = %("#pwsame").val();
 	
+if(phone == pwsame){
+	alert("인증이 확인되었습니다.");
+	}else{
+		alert("다시 인증하세요.");
+	}
+}
+}
+}
+</script>	
 	
-	</script>
 	
 	
 	<br>

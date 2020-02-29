@@ -33,7 +33,7 @@
 					movePath = "/hobbyist/index.jsp";
 					break;
 				case "updateMember" :
-					alertMessage = "회원 정보 수정 실패";
+					alertMessage = "회원 정보 수정이 완료되었습니다.";
 					movePath = "/hobbyist/index.jsp";
 					break;
 				case "insertLesson" :
