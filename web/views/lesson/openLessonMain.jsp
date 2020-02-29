@@ -424,7 +424,7 @@ body {
 										<div>카데고리</div>
 										<div>
 											<select id="category" class="nanum" style="color:black;">
-												<option>선택</option>
+												<option value="">선택</option>
 												<option value="1">음악</option>
 												<option value="9">댄스</option>
 												<option value="15">영상/사진</option>
@@ -460,7 +460,9 @@ body {
 								<tr>
 									<td>
 										<div>상세 카테고리</div> 
-										<select id="subCategory" class="nanum" name="subCategory" style="color: black;"></select>
+										<select id="subCategory" class="nanum" name="subCategory" style="color: black;">
+											<option value="">--------</option>
+										</select>
 										<script>
 											$(function(){
 												$("#category").change(function(){
@@ -679,16 +681,16 @@ body {
 								</tr>
 								<tr>
 									<td>
-										<textarea id="artIntro" name="artIntro" rows="5" cols="40"
-												style="width: 600px; height: 300px; text-align: left; font-family: 'Nanum Gothic', sans-serif; font-size: 18px; color: rgb(49, 49, 49); resize:none;"></textarea>
-										<div><span id="artIntroCtn">0</span><span>/400</span></div>
+										<textarea id="artIntro" name="artIntro" rows="4" cols="40"
+												style="width: 600px; height: 250px; text-align: left; font-family: 'Nanum Gothic', sans-serif; font-size: 18px; color: rgb(49, 49, 49); resize:none;"></textarea>
+										<div><span id="artIntroCtn">0</span><span>/255</span></div>
 										<script>
 											$(function(){
 												$("#artIntro").keyup(function(){
 													var inputLength = $(this).val().length;
 													
-													if(inputLength > 400) {
-														$(this).val($(this).val().substring(0, 400));
+													if(inputLength > 255) {
+														$(this).val($(this).val().substring(0, 255));
 													} else {														
 														$("#artIntroCtn").html(inputLength);
 													}
@@ -875,12 +877,17 @@ body {
 			// 모달 안의 다음 버튼에 이벤트를 건다.
 			$('#nextModalBtn').on('click', function() {
 				
+				//"01. 기본정보" 항목
 				var lessonTitle = document.getElementById("lessonTitle").value;
 				var min = document.getElementById("min").value;
 				var max = document.getElementById("max").value;
 				var inputOrder = document.getElementById("inputOrder").value;
 				var cost = document.getElementById("cost").value;
 				var subCategory = document.getElementById("subCategory").value;
+				//"03. 아티스트소개" 항목
+				var artIntro = document.getElementById("artIntro").value;
+				//"04. 수업소개" 항목
+				var lessonIntro = document.getElementById("lessonIntro").value;
 				
 				console.log("subCategory : " + subCategory);
 				
@@ -888,11 +895,18 @@ body {
 				if(lessonTitle == "" || min == "" || max == "" || inputOrder == "" || cost == "" || subCategory == "") {
 					alert("모든 항목을 입력해주세요");
 				} else {
-					$("#show"+ num).hide();
-					console.log(num);
-					num++;
-					$("#show"+ num).show();
-					console.log(num);
+					
+					if(num == 3 && artIntro == "") {
+						alert("아티스트 소개를 입력해주세요");
+					} else if (num == 4 && lessonIntro == "") {
+						alert("수업소개를 입력해주세요");
+					} else {
+						$("#show"+ num).hide();
+						console.log(num);
+						num++;
+						$("#show"+ num).show();
+						console.log(num);
+					}
 				}
 				
 				
