@@ -1,6 +1,8 @@
 package com.dh.hobbyist.place.model.vo;
 
-public class PlaceCompany {
+import java.io.Serializable;
+
+public class PlaceCompany implements Serializable {
     // 공간대여업체 테이블 객체
     // PLACE_TABLE
 

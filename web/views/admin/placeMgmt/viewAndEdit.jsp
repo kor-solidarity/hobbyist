@@ -62,7 +62,8 @@
             </table>
         </div>
         <hr id="firstLine">
-        <form enctype="multipart/form-data" method="post" action="<%=request.getContextPath()%>/adminUpdateCompany.ad">
+        <form enctype="multipart/form-data" method="post" onreset="resetClicked()"
+              action="<%=request.getContextPath()%>/adminUpdateCompany.ad">
             <div id="infoArea" class="place-edit-div">
                 <table style="width : 95%; float : right" class="place-edit-table">
                     <!-- 테이블 첫번째 줄은 아이디, 비밀번호 등 조회할 내용 제목이다. background(#4E4E4E), font-color(white) 색 다르게 지정 -->
@@ -202,11 +203,19 @@
                             <%
                                 System.out.println(companyAds.getStartDate());
                             %>
-                            <input type="date" name="startDate" id="startDate" disabled>
+                            <input type="date" name="startDate" id="startDate"
+                                <% if (companyAds.getStartDate() != null) { %>
+                                   value="<%=companyAds.getStartDate()%>"
+                                <% } %>
+                                   disabled>
                         </td>
                         <td>
                             <bold>종료일:</bold>
-                            <input type="date" name="endDate" id="endDate" disabled></td>
+                            <input type="date" name="endDate" id="endDate"
+                                <% if (companyAds.getEndDate() != null) { %>
+                                   value="<%=companyAds.getEndDate()%>"
+                                <% } %>
+                                   disabled></td>
                     </tr>
                 </table>
                 <div id="pic_files">
@@ -216,11 +225,13 @@
                     <input type="file" name="file4" id="file4" onchange="changedPic(this, 4)">
                     <input type="file" name="file5" id="file5" onchange="changedPic(this, 5)">
                     <input type="text" name="fileChanged" value="0">
+                    <input type="text" name="companyPk" value="<%=company.getCompany_pk()%>" hidden>
                 </div>
             </div>
             <div class="" style="width :1100px;text-align : right; margin-left : 60px">
-                <input type="button" onclick="startEdit()">수정</input>
-                <button type="submit" disabled>등록</button>
+                <input type="button" onclick="startEdit()" id="editBtn" value="수정"/>&nbsp;
+                <button type="reset" id="reset" hidden>수정취소</button>
+                <button type="submit" id="submitBtn" disabled>등록</button>
                 <%-- 목록으로 돌아가게끔 조정. --%>
                 <button onclick="">목록으로 돌아가기</button>
             </div>
@@ -230,32 +241,43 @@
 <script>
     // 이 기능은 수정버튼 누를때만 활성화됨
     $(function () {
-        // todo 여긴 조회창임. 첫 시작시 시작·종료일 조정,
+        // return;
+        // console.log(" not supposed to happen");
         // 첫 시작일자 초기화 목적
-        var startDate = null;
-        var endDate = null;
-        <%
-            // companyAds 가 존재하는가? 존재한다면 아직 기한이 있는거임.
-            // 그렇다면 바로 채운다.
-            if (companyAds!= null){%>
-        startDate = "<%=companyAds.getStartDate()%>";
-        endDate = "<%=companyAds.getEndDate()%>";
-        <% } %>
 
-        // 시작일자 초기화
-        if (startDate != null) {
-            $("#startDate").val(startDate);
-            $("#endDate").val(endDate);
-        }
+        // 날짜가 들어가는게 확인됨.
+        <%--var startDate = null;--%>
+        <%--var endDate = null;--%>
+        <%--<%--%>
+        <%--    // companyAds 가 존재하는가? 존재한다면 아직 기한이 있는거임.--%>
+        <%--    // 그렇다면 바로 채운다.--%>
+        <%--    if (companyAds!= null){%>--%>
+        <%--startDate = "<%=companyAds.getStartDate()%>";--%>
+        <%--endDate = "<%=companyAds.getEndDate()%>";--%>
+        <%--<% } %>--%>
+
+        <%--// 시작일자 초기화--%>
+        <%--if (startDate != null) {--%>
+        <%--    $("#startDate").val(startDate);--%>
+        <%--    $("#endDate").val(endDate);--%>
+        <%--}--%>
 
         // 이미지파일 들어갈 파일인풋 삭제
         $("#pic_files").hide();
 
     });
 
+    function resetClicked () {
+        // 취소를 누르면 모든걸 다 되돌린다
+        $("#reset").hide();
+    }
+
     function startEdit () {
+        alert("start edit");
         // disabled 뜬거 다 제거
-        $("input, textarea").removeAttr("disabled");
+        $("input, textarea, #submitBtn").removeAttr("disabled");
+        $("#reset").removeAttr("hidden");
+
 
         // 각 사진 미리보기와 파일 인풋을 맞게 연동시켜준다.
         $('#pic1').click(function () {

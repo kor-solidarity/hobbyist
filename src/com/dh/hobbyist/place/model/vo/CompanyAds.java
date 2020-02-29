@@ -1,8 +1,9 @@
 package com.dh.hobbyist.place.model.vo;
 
+import java.io.Serializable;
 import java.sql.Date;
 
-public class CompanyAds {
+public class CompanyAds implements Serializable {
     // COMPANY_ADS 테이블
     int adPk;
     int companyPk;
