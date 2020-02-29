@@ -1,6 +1,6 @@
 package com.dh.hobbyist.admin.model.vo;
 
-public class Admin {
+public class Admin implements java.io.Serializable{
 	private int adminCode;
 	private String adminId;
 	private String adminPwd;

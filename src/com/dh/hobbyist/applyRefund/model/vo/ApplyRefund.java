@@ -2,14 +2,15 @@ package com.dh.hobbyist.applyRefund.model.vo;
 
 import java.sql.Timestamp;
 
-public class ApplyRefund {
+public class ApplyRefund implements java.io.Serializable{
 	
 	private int refundCode;			//신청코드
 	private int paymentCode;		//결제코드
-	private String lessonName;
+	private String lessonName;		//수업이름
 	private int memberCode;			//회원코드
 	private String memberName;		//회원이름
 	private String phone;			//전화번호
+	private String email;			//이메일
 	private int artistCode;			//아티스트 코드
 	private int refundCost;			//환불금액
 	private Timestamp applyDate;	//신청일
@@ -25,8 +26,8 @@ public class ApplyRefund {
 	public ApplyRefund() {}
 
 	public ApplyRefund(int refundCode, int paymentCode, String lessonName, int memberCode, String memberName,
-			String phone, int artistCode, int refundCost, Timestamp applyDate, int totalOrder, int finishOrder,
-			int leftOrder, int usingPoint, int givePoint, int payCost, int resultCost, String impNum) {
+			String phone, String email, int artistCode, int refundCost, Timestamp applyDate, int totalOrder,
+			int finishOrder, int leftOrder, int usingPoint, int givePoint, int payCost, int resultCost, String impNum) {
 		super();
 		this.refundCode = refundCode;
 		this.paymentCode = paymentCode;
@@ -34,6 +35,7 @@ public class ApplyRefund {
 		this.memberCode = memberCode;
 		this.memberName = memberName;
 		this.phone = phone;
+		this.email = email;
 		this.artistCode = artistCode;
 		this.refundCost = refundCost;
 		this.applyDate = applyDate;
@@ -93,6 +95,14 @@ public class ApplyRefund {
 
 	public void setPhone(String phone) {
 		this.phone = phone;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public int getArtistCode() {
@@ -186,10 +196,10 @@ public class ApplyRefund {
 	@Override
 	public String toString() {
 		return "ApplyRefund [refundCode=" + refundCode + ", paymentCode=" + paymentCode + ", lessonName=" + lessonName
-				+ ", memberCode=" + memberCode + ", memberName=" + memberName + ", phone=" + phone + ", artistCode="
-				+ artistCode + ", refundCost=" + refundCost + ", applyDate=" + applyDate + ", totalOrder=" + totalOrder
-				+ ", finishOrder=" + finishOrder + ", leftOrder=" + leftOrder + ", usingPoint=" + usingPoint
-				+ ", givePoint=" + givePoint + ", payCost=" + payCost + ", resultCost=" + resultCost + ", impNum="
-				+ impNum + "]";
+				+ ", memberCode=" + memberCode + ", memberName=" + memberName + ", phone=" + phone + ", email=" + email
+				+ ", artistCode=" + artistCode + ", refundCost=" + refundCost + ", applyDate=" + applyDate
+				+ ", totalOrder=" + totalOrder + ", finishOrder=" + finishOrder + ", leftOrder=" + leftOrder
+				+ ", usingPoint=" + usingPoint + ", givePoint=" + givePoint + ", payCost=" + payCost + ", resultCost="
+				+ resultCost + ", impNum=" + impNum + "]";
 	}
 }
