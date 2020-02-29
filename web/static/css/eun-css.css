@@ -137,15 +137,15 @@
 }
 
 /*신고페이지 상세정보 모달 내용*/
-.report-table {
+.report-table-modal {
     padding: 10px;
 }
 
-.report-table td:first-of-type {
+.report-table-modal td:first-of-type {
     width: 20%;
 }
 
-.report-table td:nth-of-type(2) {
+.report-table-modal td:nth-of-type(2) {
     width: 80%;
 }
 

@@ -202,11 +202,11 @@
                             <%
                                 System.out.println(companyAds.getStartDate());
                             %>
-                            <input type="date" name="startDate" id="startDate" value="<%=companyAds.getStartDate()%>">
+                            <input type="date" name="startDate" id="startDate" disabled>
                         </td>
                         <td>
                             <bold>종료일:</bold>
-                            <input type="date" name="endDate" id="endDate"></td>
+                            <input type="date" name="endDate" id="endDate" disabled></td>
                     </tr>
                 </table>
                 <div id="pic_files">
@@ -215,10 +215,11 @@
                     <input type="file" name="file3" id="file3" onchange="changedPic(this, 3)">
                     <input type="file" name="file4" id="file4" onchange="changedPic(this, 4)">
                     <input type="file" name="file5" id="file5" onchange="changedPic(this, 5)">
+                    <input type="text" name="fileChanged" value="0">
                 </div>
             </div>
             <div class="" style="width :1100px;text-align : right; margin-left : 60px">
-                <button>수정</button>
+                <input type="button" onclick="startEdit()">수정</input>
                 <button type="submit" disabled>등록</button>
                 <%-- 목록으로 돌아가게끔 조정. --%>
                 <button onclick="">목록으로 돌아가기</button>
@@ -231,19 +232,31 @@
     $(function () {
         // todo 여긴 조회창임. 첫 시작시 시작·종료일 조정,
         // 첫 시작일자 초기화 목적
-        var date = new Date();
-        var month = date.getMonth() + 1;
-        var day = date.getDate();
-        var hour = date.getHours();
-        var min = date.getMinutes();
-        if (day < 10) {
-            day = '0' + day.toString()
-        }
+        var startDate = null;
+        var endDate = null;
+        <%
+            // companyAds 가 존재하는가? 존재한다면 아직 기한이 있는거임.
+            // 그렇다면 바로 채운다.
+            if (companyAds!= null){%>
+        startDate = "<%=companyAds.getStartDate()%>";
+        endDate = "<%=companyAds.getEndDate()%>";
+        <% } %>
+
         // 시작일자 초기화
-        $("#startDate").val(date.getFullYear() + '-' + month + '-' + day);// + 'T' + hour + ':' + min);
+        if (startDate != null) {
+            $("#startDate").val(startDate);
+            $("#endDate").val(endDate);
+        }
 
         // 이미지파일 들어갈 파일인풋 삭제
         $("#pic_files").hide();
+
+    });
+
+    function startEdit () {
+        // disabled 뜬거 다 제거
+        $("input, textarea").removeAttr("disabled");
+
         // 각 사진 미리보기와 파일 인풋을 맞게 연동시켜준다.
         $('#pic1').click(function () {
                 $('#file1').click();
@@ -265,7 +278,7 @@
                 $('#file5').click();
             }
         );
-    });
+    }
 
     // 사진 업로드시 미리보기에 반영
     function changedPic (obj, num) {
