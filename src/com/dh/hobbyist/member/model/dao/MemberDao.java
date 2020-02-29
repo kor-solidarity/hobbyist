@@ -355,16 +355,16 @@ public class MemberDao {
 	}
 	//첫 로그인 여부 확인용 로그인 카운트(유승)
 	public int loginCount(Connection con, Member member) {
-		int result = 0;
+		int result2 = 0;
 		PreparedStatement pstmt = null;
 		
 		String query = prop.getProperty("loginCount");
 		
 		try {
 			pstmt = con.prepareStatement(query);
-			pstmt.setInt(1, member.getFirstLogin() + 1);
-			pstmt.setString(2, member.getMemberId());
-			result = pstmt.executeUpdate();
+			pstmt.setInt(1, member.getMemberCode());
+			
+			result2 = pstmt.executeUpdate();
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -373,7 +373,7 @@ public class MemberDao {
 		}
 		
 		
-		return result;
+		return result2;
 	}
 	
 	//회원의 프로필 이미지 경로 조회(지호)

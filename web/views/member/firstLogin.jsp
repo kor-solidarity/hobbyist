@@ -89,6 +89,7 @@
 		float:right;
 		margin-top:100px;
 		margin-right:50px;
+		cursor: pointer;
 	}
 	
 	.myCategory-list {

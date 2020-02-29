@@ -29,6 +29,7 @@
 	#category td {
 		padding-left: 30px;
 		padding-right: 30px;
+		cursor:pointer;
 	}
 	
 	#category td:hover{
@@ -57,6 +58,7 @@
 		border-radius:10px;
 		padding:5px;
 		marign-left:5px;
+		cursor:pointer;
 	}
 	
 	.category2 td:hover {

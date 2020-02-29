@@ -167,6 +167,8 @@
     	<p>2020년 첫 시작,<br>
     	취미는 <label style="color:darkolivegreen; font-family: 'ZCOOL QingKe HuangYou', cursive; font-weight:900">hobbyist  </label> 에서!</p>
     </div>
+   
+  <%--  <form action="<%=request.getContextPath() %>/selectCategory.le" method="post"> --%>
    <div id="nav">
 	<table align="center">
    	<tr>
@@ -190,7 +192,8 @@
    		<td class="nLabel" id="space">공간대여</td>
    	</tr>
    </table>
-   </div>
+    </div>
+  
    
    <div id="line"></div>
    <div id="section">
@@ -360,14 +363,65 @@
 			
 		} --%>
 		
-		$(function() {
+
+			 $(function() {
+				
+				$("#music").click(function() {
+					location.href = "<%= request.getContextPath()%>/selectMusic.le";
+				});
+				
+				$("#dance").click(function() {
+					location.href = "<%= request.getContextPath()%>/selectDance.le";
+				});
+				
+				$("#video").click(function() {
+					location.href = "<%= request.getContextPath()%>/selectVideo.le";
+				});
+				
+				$("#life").click(function() {
+					location.href = "<%= request.getContextPath()%>/selectLife.le";
+				});
+				
+				$("#beauty").click(function() {
+					location.href = "<%= request.getContextPath()%>/selectBeauty.le";
+				});
+				
+				$("#design").click(function() {
+					location.href = "<%= request.getContextPath()%>/selectDesign.le";
+				});
+				
+				$("#sports").click(function() {
+					location.href = "<%= request.getContextPath()%>/selectSports.le";
+				});
+				
+				
+				/* 
+				var $parent = $("#parentCode");
+				
+				
+				if($("#music").data('clicked')) {
+					$parent.val('1');
+				}else if($("#dance").data('clicked')) {
+					$parent.val('9');
+				}else if($("#video").data('clicked')) {
+					$parent.val('15');
+				}else if($("#life").data('clicked')) {
+					$parent.val('20');
+				}else if($("#beauty").data('clicked')) {
+					$parent.val('25');
+				}else if($("#design").data('clicked')) {
+					$parent.val('33');
+				}else if($("#sports").data('clicked')) {
+					$parent.val('37');
+				}
+				
+				
+				console.log($("#parentCode").val());
+				console.log(typeof $("#parentCode").val()); */
+			}); 
+		
 			
-			$("#beauty").click(function() {
-				location.href = "<%=request.getContextPath()%>/selectList.le";
-			});
-			
-			
-		});
+	
 	</script>
 </body>
 </html>

@@ -137,15 +137,21 @@ public class MemberService {
 	public int loginCount(Member member) {
 		Connection con = getConnection();
 		
-		int result = new MemberDao().loginCount(con, member);
+		int result2 = new MemberDao().loginCount(con, member);
+		
+		if(result2 > 0) {
+			commit(con);
+		}else {
+			rollback(con);
+		}
 		
 		close(con);
 		
-		return result;
+		return result2;
 	}
 	   
 
-	//회원의 프로필 이미지 경로 조회(지호)
+	   //회원의 프로필 이미지 경로 조회(지호)
 	   public String selectImageRoot(int memberCode) {
 	      Connection con = getConnection();
 	      
