@@ -267,6 +267,90 @@ public class ArtistService {
 		return result;
 	}
 
+	//기존 아티스트 신청내역이 있는 회원의 전문분야 카테고리 업데이트
+	public int updateCategory(String memberPk, String[] details) {
+		Connection con = getConnection();
+		
+		int result1 = new ArtistDao().deleteCategory(con, memberPk);
+		int result = new ArtistDao().insertCategory(con, memberPk, details);
+		
+		if(result > 0) {
+			commit(con);
+		} else {
+			rollback(con);
+		}
+		return result;
+	}
+
+	//기존 아티스트 신청내역이 있는 회원의 보유 자격증 업데이트
+	public int updateCerts(String memberPk, HashMap<String, String[]> certsMap) {
+		Connection con = getConnection();
+		
+		int result1 = new ArtistDao().deleteCerts(con, memberPk);
+		int result = new ArtistDao().insertCerts(con, memberPk, certsMap);
+		
+		if(result > 0) {
+			commit(con);
+		} else {
+			rollback(con);
+		}
+		
+		return result;
+	}
+
+	//기존 아티스트 신청내역이 있는 회원의 학력/전공 업데이트
+	public int updateEdu(String memberPk, HashMap<String, String[]> eduMap) {
+		Connection con = getConnection();
+		
+		int result1 = new ArtistDao().deleteEdu(con, memberPk);
+		int result = new ArtistDao().insertEdu(con, memberPk, eduMap);
+		
+		if(result > 0) {
+			commit(con);
+		} else {
+			rollback(con);
+		}
+		
+		return result;
+	}
+
+	//기존 아티스트 신청내역이 있는 회원의 경력 업데이트
+	public int updateCareer(String memberPk, HashMap<String, String[]> careerMap) {
+		Connection con = getConnection();
+		
+		int result1 = new ArtistDao().deleteCareer(con, memberPk);
+		int result = new ArtistDao().insertCareer(con, memberPk, careerMap);
+		
+		if(result > 0) {
+			commit(con);
+		} else {
+			rollback(con);
+		}
+		
+		return result;
+	}
+
+	//기존 아티스트 신청내역이 있는 회원의 이미지 업데이트
+	public int updateImage(ArrayList<Image> fileList) {
+		Connection con = getConnection();
+		
+		int result = 0;
+		
+		for(int i = 0; i < fileList.size(); i++) {
+			result += new ArtistDao().updateImage(con, fileList.get(i));
+		}
+		
+		if(result == fileList.size()) {
+			commit(con);
+			result = 1;
+		} else {
+			rollback(con);
+			result = 0;
+		}
+		
+		return result;
+	}
+
 
 	
 
