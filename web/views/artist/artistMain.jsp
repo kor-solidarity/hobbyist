@@ -267,6 +267,14 @@
 	height: 200px;
 }
 
+.allCancelBtn {
+	font-family: 'Do Hyeon', sans-serif;
+	font-size: 16px;
+	color: white;
+	background-color: #BE9524;
+	border-radius:5px;
+	
+}
 </style>
 <link
 	href="https://fonts.googleapis.com/css?family=Do+Hyeon|ZCOOL+QingKe+HuangYou|Nanum+Gothic&display=swap"
@@ -856,6 +864,7 @@
 										style="color: darkolivegreen; font-size: 13px;">선택 사항</label>
 									</td>
 									<td rowspan="6">
+										<div class="allCancelDiv" style="height:60px;"><button class="allCancelBtn" id="reCertiCancelBtn" type="button">전부 삭제</button></div>
 										<div id="reCertiDiv" style="width: 250px; height: 300px;"></div>
 									</td>
 								</tr>
@@ -915,6 +924,7 @@
 										style="color: darkolivegreen; font-size: 13px;">선택 사항</label>
 									</td>
 									<td rowspan="4">
+										<div class="allCancelDiv" style="height:60px;"><button class="allCancelBtn" id="reSchoolCancelBtn" type="button">전부 삭제</button></div>
 										<div id="reSchoolDiv"></div>
 									</td>
 								</tr>
@@ -975,6 +985,7 @@
 										style="color: darkolivegreen; font-size: 13px;">선택 사항</label>
 									</td>
 									<td rowspan="7">
+										<div class="allCancelDiv" style="height:60px;"><button class="allCancelBtn" id="reCareerCancelBtn" type="button">전부 삭제</button></div>
 										<div id="reCareerDiv"
 											style="width: 250px; height: 250px;"></div>
 									</td>
@@ -1383,7 +1394,7 @@
 								$div = $("#reCertiDiv");
 								var $inDiv = $("<div class='inDiv'>").text(data);
 								$div.append($inDiv);
-								$div.append("<br>")
+								$div.append("<br>");
 							},
 							error : function(status) {
 								console.log(status);
@@ -1398,6 +1409,25 @@
 					alert("자격증은 최대 3개까지만 입력 가능합니다.");
 				}
 	
+			});
+			
+			//전체삭제 버튼 클릭시
+			$("#reCertiCancelBtn").click(function() {
+				$("#reCertiDiv").children('div.inDiv').remove();
+				$("#reCertiDiv").children('br').remove();
+				
+				$("#reCertiName1").val('');
+				$("#reCertiDay1").val('');
+				$("#reCertiSpace1").val('');
+				
+				$("#reCertiName2").val('');
+				$("#reCertiDay2").val('');
+				$("#reCertiSpace2").val('');
+				
+				$("#reCertiName3").val('');
+				$("#reCertiDay3").val('');
+				$("#reCertiSpace3").val('');
+				certiIndex = 1;
 			});
 		});
 		
@@ -1496,6 +1526,25 @@
 				} else {
 					alert("학력/전공은 최대 3개까지만 입력 가능합니다.");
 				}
+			});
+			
+			//전체 삭제 버튼 클릭시
+			$("#reSchoolCancelBtn").click(function() {
+				$("#reSchoolDiv").children('div.inDiv').remove();
+				$("#reSchoolDiv").children('br').remove();
+				
+				$("#reSchoolName1").val('');
+				$("#reMajor1").val('');
+				$("#reStatus1").val('');
+				
+				$("#reSchoolName2").val('');
+				$("#reMajor2").val('');
+				$("#reStatus2").val('');
+				
+				$("#reSchoolName3").val('');
+				$("#reMajor3").val('');
+				$("#reStatus3").val('');
+				schoolIndex = 1;
 			});
 		});
 		
@@ -1600,6 +1649,31 @@
 				} else {
 					alert("경력은 최대 3개까지만 입력 가능합니다.");
 				}
+			});
+			
+			//전체 삭제 클릭시
+			$("#reCareerCancelBtn").click(function() {
+				$("#reCareerDiv").children('div.inDiv').remove();
+				$("#reCareerDiv").children('br').remove();
+				
+				$("#reOfficeName1").val('');
+				$("#rePosition1").val('');
+				$("#reWorkContent1").val('');
+				$("#reWorkYear1").val('');
+				$("#reWorkMonth1").val('');
+				
+				$("#reOfficeName2").val('');
+				$("#rePosition2").val('');
+				$("#reWorkContent2").val('');
+				$("#reWorkYear2").val('');
+				$("#reWorkMonth2").val('');
+				
+				$("#reOfficeName3").val('');
+				$("#rePosition3").val('');
+				$("#reWorkContent3").val('');
+				$("#reWorkYear3").val('');
+				$("#reWorkMonth3").val('');
+				careerIndex = 1;
 			});
 		});
 	
