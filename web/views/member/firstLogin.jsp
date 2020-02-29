@@ -105,7 +105,7 @@
 		line-height:33px;
 		margin-top:20px;
 		margin-left:20px;
-		display: none;
+		display: inline-block;
 	}
 	
 	
@@ -171,12 +171,31 @@
 	
 	<div class="category-list" id="category-list3">
 		<p class="cTitle">내가 선택한 카테고리</p>
-		<div id="selectCategory">
-		<input type="hidden" name="categoryCode" id="myCategory1">	
-		<span  class="myCategory-list" id="myCategory1">
-		</span>		
-		<script>
-			$("#cCategory").change(function() {
+		<table id="selectCategory">
+		<!-- <input type="hidden" name="categoryCode" id="myCategory1">	
+		<div  class="myCategory-list" id="myCategory1">
+		</div> -->
+			<tr>
+				<td>
+					<div  id="myCategory" ></div>
+				</td>
+			</tr>	
+			<tr>
+				<td><input type="hidden" name="categoryCode1" id="selectCategory1"></td>
+			</tr>
+			<tr>
+				<td><input type="hidden" name="categoryCode2" id="selectCategory2"></td>
+			</tr>
+			<tr>
+				<td><input type="hidden" name="categoryCode3" id="selectCategory3"></td>
+			</tr>
+		</table>
+	</div>
+	<button type="submit" id="btn">확인</button>
+	</form>
+	</div>
+	<script>
+			/* $("#cCategory").change(function() {
 				var $selectOp1 = $("#pCategory option:selected");
 				var $selectOp2 = $("#cCategory option:selected");
 				
@@ -188,16 +207,41 @@
 						console.log($selectOp2.val());
 						console.log(typeof $selectOp2.val());
 					}
+			}); */
+			
+			$(function() {
+				var selectIndex = 1;
+				
+				$("#cCategory").change(function() {
+					var selectOp1 = $("#pCategory option:selected").val();
+					var selectOp2 = $("#cCategory option:selected").val();
+					
+					if(selectIndex <= 3) {
+						if(selectOp1 != '' && selectOp2 != '') {
+							
+							$("#selectCategory" + selectIndex).val(selectOp2);
+							selectIndex++;
+							
+							
+								$div = $("#myCategory");
+								var $inDiv = $("<div class='myCategory-list'>").text($("#cCategory option:selected").text());
+								$div.append($inDiv);
+								$div.append("<br>");
+						
+						}else {
+							alert("관심 카테고리를 설정해주세요.");
+						}
+					}else {
+						alert("관심 카테고리는 최대 3개까지만 입력 가능합니다.")
+					}
+					
+					console.log(selectOp2);
+				});
 			});
 			
 		</script>
-
-		</div>
-	</div>
-	<%-- <input type="hidden" name="memberCode" value="<%=loginMember.getMemberCode()%>"> --%>
-	<button type="submit" id="btn">확인</button>
-	</form>
-	</div>
+	
+	
 	<%@ include file="/views/common/footer.jsp"  %>
 	
 	<% } else { 

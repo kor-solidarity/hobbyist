@@ -406,6 +406,13 @@
 		</div> -->
 	</div>
 	
+	<script>
+		$(function() {
+			$("#cDance").css({'color':'darkolivegreen'});
+			$("#dance").show();
+		});
+	</script>
+	
 	<%@ include file="/views/common/footer.jsp" %>
 </body>
 </html>

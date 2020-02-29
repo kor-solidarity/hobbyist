@@ -405,7 +405,12 @@
 			</table>
 		</div> -->
 	</div>
-	
+	<script>
+		$(function() {
+			$("#cDesign").css({'color':'darkolivegreen'});
+			$("#design").show();
+		});
+	</script>
 	<%@ include file="/views/common/footer.jsp" %>
 </body>
 </html>

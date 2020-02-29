@@ -49,6 +49,11 @@
 			border-spacing: 5px;
 			
 		}
+		
+		#lessonTable #tableImg {
+			border-collapse:collapse;
+			border-spacing: 0px;
+		}
 		#lessonLabel {
 			font-family: 'Nanum Gothic', sans-serif;
 			font-size:14px;
@@ -237,7 +242,7 @@
 				<input type="hidden" value="<%= hmap.get("lessonCode")%>">
 					<table id="lessonTable" align="center">
 						<tr>
-							<td colspan="2">
+							<td colspan="2" id="tableImg">
 							<%-- <% if(hmap.get("imageType").equals("PLACE_COMPANY")) { %>
 							<img src="<%=hmap.get("imageRoute") %>/<%=hmap.get("imageName") %>" id="lessonImg">
 							<% } %> --%>
@@ -405,6 +410,13 @@
 			</table>
 		</div> -->
 	</div>
+	
+	<script>
+		$(function() {
+			$("#cBeauty").css({'color':'darkolivegreen'});
+			$("#beauty").show();
+		});
+	</script>
 	
 	<%@ include file="/views/common/footer.jsp" %>
 </body>
