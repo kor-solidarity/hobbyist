@@ -2,7 +2,7 @@ package com.dh.hobbyist.refund.model.vo;
 
 import java.sql.Timestamp;
 
-public class Refund {
+public class Refund implements java.io.Serializable{
 	private int refundCode;
 	private int payCode;
 	private int schedulCode;

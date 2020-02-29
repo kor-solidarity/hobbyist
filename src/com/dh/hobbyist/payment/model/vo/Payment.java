@@ -2,7 +2,7 @@ package com.dh.hobbyist.payment.model.vo;
 
 import java.sql.Timestamp;
 
-public class Payment {
+public class Payment implements java.io.Serializable{
 	private int paymentCode;			// 시퀀스
 	private int usingPoint;				// 사용 포인트
 	private int givePoint;				// 지급 포인트
