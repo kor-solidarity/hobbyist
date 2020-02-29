@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.dh.hobbyist.lesson.model.service.LessonRelatedService;
+import com.dh.hobbyist.lesson.model.vo.Lesson;
 import com.dh.hobbyist.member.model.vo.Member;
 
 /**
@@ -31,21 +33,41 @@ public class InsertLessonServlet extends HttpServlet {
 		String lessonName = request.getParameter("lessonTitle");
 		int minStudents = Integer.parseInt(request.getParameter("min"));
 		int maxStudents = Integer.parseInt(request.getParameter("max"));
-		int totalLessons = Integer.parseInt(request.getParameter("inputOrder"));
-		int totalCosts = Integer.parseInt(request.getParameter("cost"));
+		int totalOrders = Integer.parseInt(request.getParameter("inputOrder"));
+		int costPerOrder = Integer.parseInt(request.getParameter("cost"));
+		int totalCosts = totalOrders * costPerOrder;
 		String artistIntro = request.getParameter("artIntro");
 		String lessonIntro = request.getParameter("lessonIntro");
-		String status = "일정 진행중";
 		int categoryCode = Integer.parseInt(request.getParameter("subCategory"));
-		
 		int artistCode = ((Member) (request.getSession().getAttribute("loginMember"))).getMemberCode();
 		
-		System.out.println("Servlet Test : " + lessonName + ", " + minStudents + ", " + maxStudents + ", " + totalLessons + ", " + totalCosts + ", " + artistIntro + ", " +
-						lessonIntro + ", " + status + ", " + categoryCode + ", " + artistCode);
+		/*System.out.println("Servlet Test : " + lessonName + ", " + minStudents + ", " + maxStudents + ", " + totalOrders + ", " + costPerOrder + ", " + artistIntro + ", " +
+						lessonIntro + ", " + status + ", " + categoryCode + ", " + artistCode);*/
 		
+		Lesson lesson = new Lesson();
+		lesson.setLessonName(lessonName);
+		lesson.setMinStudents(minStudents);
+		lesson.setMaxStudents(maxStudents);
+		lesson.setTotalOrders(totalOrders);
+		lesson.setCostPerOrder(costPerOrder);
+		lesson.setTotalCosts(totalCosts);
+		lesson.setArtistIntro(artistIntro);
+		lesson.setLessonIntro(lessonIntro);
+		lesson.setCategoryCode(categoryCode);
+		lesson.setArtistCode(artistCode);
 		
+		int result = new LessonRelatedService().insertLesson(lesson);	
 		
-							
+		String page = "";
+		if(result > 0) {
+			page = "views/common/successPage.jsp";
+			request.setAttribute("successCode", "insertLesson");
+		} else {
+			page = "views/common/errorPage.jsp";
+			request.setAttribute("msg", "수업 등록에 실패하였습니다");
+		}
+		
+		request.getRequestDispatcher(page).forward(request, response);
 	}
 
 	/**
