@@ -273,7 +273,6 @@
 	color: white;
 	background-color: #BE9524;
 	border-radius:5px;
-	
 }
 </style>
 <link
@@ -499,6 +498,7 @@
 										style="color: darkolivegreen; font-size: 13px;">선택 사항</label>
 									</td>
 									<td rowspan="6">
+										<div class="allCancelDiv" style="height:60px;"><button class="allCancelBtn" id="certiCancelBtn" type="button">전부 삭제</button></div>
 										<div id="certiDiv" style="width: 250px; height: 300px;"></div>
 									</td>
 								</tr>
@@ -558,6 +558,7 @@
 										style="color: darkolivegreen; font-size: 13px;">선택 사항</label>
 									</td>
 									<td rowspan="4">
+										<div class="allCancelDiv" style="height:60px;"><button class="allCancelBtn" id="schoolCancelBtn" type="button">전부 삭제</button></div>
 										<div id="schoolDiv"></div>
 									</td>
 								</tr>
@@ -618,6 +619,7 @@
 										style="color: darkolivegreen; font-size: 13px;">선택 사항</label>
 									</td>
 									<td rowspan="7">
+										<div class="allCancelDiv" style="height:60px;"><button class="allCancelBtn" id="careerCancelBtn" type="button">전부 삭제</button></div>
 										<div id="careerDiv"
 											style="width: 250px; height: 250px;"></div>
 									</td>
@@ -1346,7 +1348,11 @@
 								$div = $("#certiDiv");
 								var $inDiv = $("<div class='inDiv'>").text(data);
 								$div.append($inDiv);
-								$div.append("<br>")
+								$div.append("<br>");
+								
+								$("#certiName").val('');
+								$("#certiDay").val('');
+								$("#certiSpace").val('');
 							},
 							error : function(status) {
 								console.log(status);
@@ -1361,6 +1367,25 @@
 					alert("자격증은 최대 3개까지만 입력 가능합니다.");
 				}
 	
+			});
+			
+			//전체 삭제 버튼 클릭시
+			$("#certiCancelBtn").click(function() {
+				$("#certiDiv").children('div.inDiv').remove();
+				$("#certiDiv").children('br').remove();
+				
+				$("#certiName1").val('');
+				$("#certiDay1").val('');
+				$("#certiSpace1").val('');
+				
+				$("#certiName2").val('');
+				$("#certiDay2").val('');
+				$("#certiSpace2").val('');
+				
+				$("#certiName3").val('');
+				$("#certiDay3").val('');
+				$("#certiSpace3").val('');
+				certiIndex = 1;
 			});
 		});
 		$(function() {
@@ -1395,6 +1420,10 @@
 								var $inDiv = $("<div class='inDiv'>").text(data);
 								$div.append($inDiv);
 								$div.append("<br>");
+								
+								$("#reCertiName").val('');
+								$("#reCertiDay").val('');
+								$("#reCertiSpace").val('');
 							},
 							error : function(status) {
 								console.log(status);
@@ -1464,6 +1493,10 @@
 								var $inDiv = $("<div class='inDiv'>").text(data);
 								$div.append($inDiv);
 								$div.append("<br>");
+								
+								$("#schoolName").val('');
+								$("#major").val('');
+								$("#status").val('');
 		
 							},
 							error : function(status) {
@@ -1478,6 +1511,25 @@
 				} else {
 					alert("학력/전공은 최대 3개까지만 입력 가능합니다.");
 				}
+			});
+			
+			//전체 삭제 버튼 클릭시
+			$("#schoolCancelBtn").click(function() {
+				$("#schoolDiv").children('div.inDiv').remove();
+				$("#schoolDiv").children('br').remove();
+				
+				$("#schoolName1").val('');
+				$("#major1").val('');
+				$("#status1").val('');
+				
+				$("#schoolName2").val('');
+				$("#major2").val('');
+				$("#status2").val('');
+				
+				$("#schoolName3").val('');
+				$("#major3").val('');
+				$("#status3").val('');
+				schoolIndex = 1;
 			});
 		});
 		$(function() {
@@ -1512,6 +1564,10 @@
 								var $inDiv = $("<div class='inDiv'>").text(data);
 								$div.append($inDiv);
 								$div.append("<br>");
+								
+								$("#reSchoolName").val('');
+								$("#reMajor").val('');
+								$("#reStatus").val('');
 		
 							},
 							error : function(status) {
@@ -1587,6 +1643,13 @@
 								var $inDiv = $("<div class='inDiv'>").text(data);
 								$div.append($inDiv);
 								$div.append("<br>");
+								
+								$("#officeName").val('');
+								$("#position").val('');
+								$("#workContent").val('');
+								$("#workYear").val('');
+								$("#workMonth").val('');
+								
 							},
 							error : function(status) {
 								console.log(status);
@@ -1598,6 +1661,31 @@
 				} else {
 					alert("경력은 최대 3개까지만 입력 가능합니다.");
 				}
+			});
+			
+			//전체 삭제 클릭시
+			$("#careerCancelBtn").click(function() {
+				$("#careerDiv").children('div.inDiv').remove();
+				$("#careerDiv").children('br').remove();
+				
+				$("#officeName1").val('');
+				$("#position1").val('');
+				$("#workContent1").val('');
+				$("#workYear1").val('');
+				$("#workMonth1").val('');
+				
+				$("#officeName2").val('');
+				$("#position2").val('');
+				$("#workContent2").val('');
+				$("#workYear2").val('');
+				$("#workMonth2").val('');
+				
+				$("#officeName3").val('');
+				$("#position3").val('');
+				$("#workContent3").val('');
+				$("#workYear3").val('');
+				$("#workMonth3").val('');
+				careerIndex = 1;
 			});
 		});
 		$(function() {
@@ -1638,6 +1726,12 @@
 								var $inDiv = $("<div class='inDiv'>").text(data);
 								$div.append($inDiv);
 								$div.append("<br>");
+								
+								$("#reOfficeName").val('');
+								$("#rePosition").val('');
+								$("#reWorkContent").val('');
+								$("#reWorkYear").val('');
+								$("#reWorkMonth").val('');
 							},
 							error : function(status) {
 								console.log(status);

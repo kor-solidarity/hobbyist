@@ -320,5 +320,151 @@ public class SuggestDao {
 		
 		return list;
 	}
+	
+	//마이페이지에서 쓰일 내가 등록한 건의 게시판 갯수 조회용 메소드
+	public int getMyListCount(Connection con, int memberCode) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		int listCount = 0;
+		
+		String query = prop.getProperty("myListCount");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, memberCode);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				listCount = rset.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		
+		return listCount;
+	}
+	
+	//마이페이지에 쓰일 내가 등록한 건의 게시판 리스트 조회용 메소드 (페이징 처리)
+	public ArrayList<Petition> selectMyList(Connection con, int memberCode, PageInfo pi) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<Petition> list = null;
+		
+		String query = prop.getProperty("selectMyListWithPaging");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			
+			int startRow = (pi.getCurrentPage() - 1) * pi.getLimit() + 1;
+			int endRow = startRow + pi.getLimit() - 1;
+			
+			pstmt.setInt(1, memberCode);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
+			
+			rset = pstmt.executeQuery();
+			
+			list = new ArrayList<Petition>();
+			
+			while(rset.next()) {
+				Petition p = new Petition();
+				p.setPetitionCode(rset.getInt("PETITION_PK"));
+				p.setNumOfStudents(rset.getString("NUM_OF_STUDENTS"));
+				p.setCost(rset.getInt("COST"));
+				p.setNumOfLessons(rset.getInt("NUM_OF_LESSONS"));
+				p.setLocation(rset.getString("LOCATION"));
+				p.setRequestedDate(rset.getDate("REQUESTED_DATE"));
+				p.setRequestedDays(rset.getString("REQUESTED_DAYS"));
+				p.setRequestTime(rset.getString("REQUESTED_TIME"));
+				p.setTitle(rset.getString("TITLE"));
+				p.setContents(rset.getString("CONTENTS"));
+				p.setPetitionedTime(rset.getDate("PETITIONED_TIME"));
+				p.setWishlisted(rset.getInt("WISHLISTED"));
+				p.setViews(rset.getInt("VIEWS"));
+				p.setPetitionedMember(rset.getInt("PETITIONED_MEMBER"));
+				p.setCategoryCode(rset.getInt("CATEGORY_PK"));
+				p.setMemberName(rset.getString("MEMBER_NAME"));
+				p.setCategoryParentCode(rset.getInt("PARENT_PK"));
+				
+				list.add(p);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+		return list;
+	}
+	
+	//마이페이지에서 쓰일 나의 댓글 갯수 조회용 메소드
+	public int getMyReplyList(Connection con, int memberCode) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		int listCount = 0;
+		
+		String query = prop.getProperty("myReplyListCount");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, memberCode);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				listCount = rset.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		
+		return listCount;
+	}
+	
+	//마이페이지에 쓰일 나의 댓글 리스트 조회용 메소드 (페이징 처리)
+	public ArrayList<Reply> selectMyReplyList(Connection con, int memberCode, PageInfo pi) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<Reply> list = null;
+		
+		String query = prop.getProperty("selectMyReplyListWithPaging");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			
+			int startRow = (pi.getCurrentPage() - 1) * pi.getLimit() + 1;
+			int endRow = startRow + pi.getLimit() - 1;
+			
+			pstmt.setInt(1, memberCode);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
+			
+			rset = pstmt.executeQuery();
+			
+			list = new ArrayList<Reply>();
+			
+			while(rset.next()) {
+				Reply r = new Reply();
+				//r.setReplyCode(replyCode);
+				
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
 
 }

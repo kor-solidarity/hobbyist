@@ -328,7 +328,7 @@
 		}
 		
 		function goMyComments() {
-			location.href = "<%= request.getContextPath()%>/views/member/myPage/myComments/commentsList.jsp";
+			location.href = "<%= request.getContextPath()%>/selectMyReplyList.sg";
 		}
 		
 		function goMyReports() {
