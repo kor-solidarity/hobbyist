@@ -2,7 +2,7 @@ package com.dh.hobbyist.lesson.model.vo;
 
 import java.sql.Date;
 
-public class Lesson {
+public class Lesson implements java.io.Serializable {
 	private int lessonCode;          //수업관리코드
 	private String lessonName;       //수업명      
 	private int minStudents;         //수업최소인원

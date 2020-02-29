@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.dh.hobbyist.lesson.model.service.LessonRelatedService;
 import com.dh.hobbyist.lesson.model.vo.Lesson;
+import com.dh.hobbyist.lesson.model.vo.LessonSchedule;
 import com.dh.hobbyist.member.model.vo.Member;
 
 /**
@@ -30,6 +31,7 @@ public class InsertLessonServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//수업 관련 변수
 		String lessonName = request.getParameter("lessonTitle");
 		int minStudents = Integer.parseInt(request.getParameter("min"));
 		int maxStudents = Integer.parseInt(request.getParameter("max"));
@@ -56,10 +58,28 @@ public class InsertLessonServlet extends HttpServlet {
 		lesson.setCategoryCode(categoryCode);
 		lesson.setArtistCode(artistCode);
 		
-		int result = new LessonRelatedService().insertLesson(lesson);	
+		//Lesson이 DB에 성공적으로 들어가면 lessonCode를 return
+		int lessonCode = new LessonRelatedService().insertLesson(lesson);	
+		
+		//수업일정 관련 변수
+		String region = request.getParameter("region");
+		String subRegion = request.getParameter("subRegion");
+		String address = "상세주소는 파악중입니다";
+		
+		LessonSchedule schedule = new LessonSchedule();
+		schedule.setLessonCode(lessonCode);
+		schedule.setRegion(region);
+		schedule.setSubRegion(subRegion);
+		schedule.setAddress(address);
+		
+		int scheduleResult = new LessonRelatedService().insertSchedule(schedule);
 		
 		String page = "";
-		if(result > 0) {
+		if(lessonCode > 0 && scheduleResult > 0) {
+			
+			//수업 DB에서 수업코드를 조회해와야 함. 그리고 수업일정 DB를 INSERT해야 함.
+			//내 아티스트 코드로 검색한 것 중에 가장 최신 것
+			
 			page = "views/common/successPage.jsp";
 			request.setAttribute("successCode", "insertLesson");
 		} else {
