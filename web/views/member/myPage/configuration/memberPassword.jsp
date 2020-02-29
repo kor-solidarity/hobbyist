@@ -213,6 +213,7 @@ center_td0 {
 		<button class="passclick" id="passclick" onclick="pwConfirm();">확인</button>
 	</div>
 	</div>
+	</form>
 	
 	<script>
 	function pwConfirm(){
