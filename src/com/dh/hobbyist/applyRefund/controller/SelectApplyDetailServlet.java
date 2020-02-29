@@ -25,11 +25,8 @@ public class SelectApplyDetailServlet extends HttpServlet {
 		
 		ApplyRefund arf = new ApplyRefundService().selectDetail(num);
 		
-		
-		
 		response.setContentType("application/json");
 		response.setCharacterEncoding("UTF-8");
-		
 		new Gson().toJson(arf, response.getWriter());
 	}
 

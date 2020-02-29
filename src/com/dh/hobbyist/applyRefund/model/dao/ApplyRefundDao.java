@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.util.Properties;
 
 import com.dh.hobbyist.applyRefund.model.vo.ApplyRefund;
+import static com.dh.hobbyist.common.JDBCTemplate.*;
 
 public class ApplyRefundDao {
 	private Properties prop = new Properties();
@@ -27,6 +28,7 @@ public class ApplyRefundDao {
 	public ApplyRefund selectDetail(Connection con, int num) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
+		ApplyRefund arf = null;
 		
 		String query = prop.getProperty("selectDetail");
 		
@@ -34,12 +36,28 @@ public class ApplyRefundDao {
 			pstmt = con.prepareStatement(query);
 			pstmt.setInt(1, num);
 			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				arf = new ApplyRefund();
+				arf.setImpNum(rset.getString("PAYMENT_IMP_NUM"));
+				arf.setLessonName(rset.getString("LESSON_NAME"));
+				arf.setPayCost(rset.getInt("PAYMENT_COSTS"));
+				arf.setUsingPoint(rset.getInt("POINTS_USED"));
+				arf.setTotalOrder(rset.getInt("TOTAL_ORDER"));
+				arf.setFinishOrder(rset.getInt("FINISH_ORDER"));
+				arf.setLeftOrder(rset.getInt("LEFT_ORDER"));
+				arf.setArtistCode(rset.getInt("ARTIST_PK"));
+			}
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}finally {
+			close(pstmt);
+			close(rset);
 		}
-		
-		return null;
+		System.out.println("arf : " + arf);
+		return arf;
 	}
 
 }
