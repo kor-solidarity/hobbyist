@@ -545,7 +545,7 @@ body {
 										</script>
 									</td>
 									<td>
-										<div>회차당 수업료</div> 
+										<div>회차당 수업료<label style="font-weight:normal; color:#A7A1A1;">&nbsp;(최소 1만원 이상)</label></div> 
 										<input id="cost" class="nanum" name="cost" type="number" style="width:100px">
 										<label style="font-weight:normal; color:black;">&nbsp;원</label>
 										<script>
@@ -874,12 +874,27 @@ body {
 			
 			// 모달 안의 다음 버튼에 이벤트를 건다.
 			$('#nextModalBtn').on('click', function() {
-
-				$("#show"+ num).hide();
-				console.log(num);
-				num++;
-				$("#show"+ num).show();
-				console.log(num);
+				
+				var lessonTitle = document.getElementById("lessonTitle").value;
+				var min = document.getElementById("min").value;
+				var max = document.getElementById("max").value;
+				var inputOrder = document.getElementById("inputOrder").value;
+				var cost = document.getElementById("cost").value;
+				var subCategory = document.getElementById("subCategory").value;
+				
+				console.log("subCategory : " + subCategory);
+				
+				//"01.기본정보"에서 모든 항목을 입력해야 다음으로 넘어갈 수 있는 메소드
+				if(lessonTitle == "" || min == "" || max == "" || inputOrder == "" || cost == "" || subCategory == "") {
+					alert("모든 항목을 입력해주세요");
+				} else {
+					$("#show"+ num).hide();
+					console.log(num);
+					num++;
+					$("#show"+ num).show();
+					console.log(num);
+				}
+				
 				
 				//"02. 자격/경력" 페이지로 가기 위한 "다음" 버튼 클릭 시
 				if(num == 2) {
