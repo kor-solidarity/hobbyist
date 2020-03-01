@@ -159,7 +159,7 @@ public class AddPlaceServlet extends HttpServlet {
                 // 위에 커밋된 대여업체 바로 불러온다
                 PlaceCompany company = new PlaceService().selectPlaceCompany(insert_company_result);
 
-                int insert_ads_result = new PlaceService().insertAds(company, inputAds);
+                int insert_ads_result = new PlaceService().insertAds(company.getCompany_pk(), inputAds);
 
                 System.out.println("insert_ads_result: " + insert_ads_result);
                 // 광고정보 넣는거 끝났으면 이제 이미지 추가

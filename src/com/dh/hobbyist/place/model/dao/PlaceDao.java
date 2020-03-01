@@ -110,7 +110,7 @@ public class PlaceDao {
         return company;
     }
 
-    public int insertAds(Connection con, PlaceCompany company, CompanyAds inputAds) {
+    public int insertAds(Connection con, int company_pk, CompanyAds inputAds) {
         PreparedStatement preparedStatement = null;
         int result = 0;
 
@@ -119,7 +119,7 @@ public class PlaceDao {
         try {
             preparedStatement = con.prepareStatement(query);
 
-            preparedStatement.setInt(1, company.getCompany_pk());
+            preparedStatement.setInt(1, company_pk);
             preparedStatement.setDate(2, inputAds.getStartDate());
             preparedStatement.setDate(3, inputAds.getEndDate());
 
@@ -269,7 +269,7 @@ public class PlaceDao {
         return imgList;
     }
 
-    public CompanyAds selectCompanyAds(Connection con, int pk) {
+    public CompanyAds selectCompanyAdsByDate(Connection con, int pk) {
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         CompanyAds companyAds = null;
@@ -301,5 +301,65 @@ public class PlaceDao {
         }
 
         return companyAds;
+    }
+
+    /**
+     * 공간대여 회사정보 수정 DAO
+     *
+     * @param editCompanyInfo {@link PlaceCompany}
+     * @param companyPk
+     * @return
+     */
+    public int updateCompany(Connection con, PlaceCompany editCompanyInfo, int companyPk) {
+        PreparedStatement preparedStatement = null;
+        int result = 0;
+
+        String query = prop.getProperty("updateCompany");
+
+        try {
+            preparedStatement = con.prepareStatement(query);
+
+            preparedStatement.setString(1, editCompanyInfo.getCompany_name());
+            preparedStatement.setString(2, editCompanyInfo.getPhone());
+            preparedStatement.setString(3, editCompanyInfo.getAddress());
+            preparedStatement.setString(4, editCompanyInfo.getWebsite());
+            preparedStatement.setString(5, editCompanyInfo.getIntro());
+            preparedStatement.setString(6, editCompanyInfo.getService_time());
+            preparedStatement.setString(7, editCompanyInfo.getRoom_size());
+            preparedStatement.setInt(8, companyPk);
+
+            result = preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            close(preparedStatement);
+        }
+
+        return result;
+    }
+
+    public int updateAds(Connection con, CompanyAds companyAds) {
+        PreparedStatement preparedStatement = null;
+        int result = 0;
+
+        String query = prop.getProperty("updateAds");
+
+        try {
+            preparedStatement = con.prepareStatement(query);
+
+            preparedStatement.setDate(1, companyAds.getStartDate());
+            preparedStatement.setDate(2, companyAds.getEndDate());
+            preparedStatement.setInt(3, companyAds.getAdPk());
+
+            result = preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            close(preparedStatement);
+        }
+
+        return result;
     }
 }

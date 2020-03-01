@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Enumeration;
 
@@ -74,23 +75,15 @@ public class UpdatePlaceCompanyServlet extends HttpServlet {
             }
             System.out.println("fileName: " + fileName);
 
-            // 최우선으로 이 파일에 필요한 모든걸
+            // 위에 목록 역순으로 들어간거 순서 재정렬
+            ArrayList<String > fileList = new ArrayList<>();
+
+
 
             // 우선 변환할 대상부터 집어온다.
             // 뽑아와야 하는 PK
             int companyPk = Integer.parseInt(multipartRequest.getParameter("companyPk"));
             System.out.println("companyPk: " + companyPk);
-
-            // 이제 관련된 모든 DB, 즉, PlaceCompany, CompanyAds, Image 전부 끄집어온다.
-            // 하나하나 대조해서 다른게 있으면 조치하는 방식.
-            PlaceService placeService = new PlaceService();
-            PlaceCompany company = placeService.selectPlaceCompany(companyPk);
-            CompanyAds companyAds = placeService.selectCompanyAds(companyPk);
-            ArrayList<Image> images = placeService.selectCompanyImage(companyPk);
-
-            System.out.println("company: "  + company);
-            System.out.println("companyAds: "  + companyAds);
-            System.out.println("images: "  + images);
 
             // 다 잘 나오는거 확인완료. 이제 하나하나 대조해가면서 바뀐게 있나 확인한다.
 
@@ -144,6 +137,43 @@ public class UpdatePlaceCompanyServlet extends HttpServlet {
             editCompanyInfo.setService_time(serviceTime);
             editCompanyInfo.setRoom_size(roomSize);
 
+            PlaceService placeService = new PlaceService();
+
+            // ... 그냥 통째로 다 update 처리.
+            int companyUpdateResult = placeService.updateCompany(editCompanyInfo, companyPk);
+
+            // COMPANY_ADS table
+            String startDateString = multipartRequest.getParameter("startDate");
+            String endDateString = multipartRequest.getParameter("endDate");
+            // System.out.println("endDateString: " + endDateString);
+            // System.out.println("startDateString: " + startDateString);
+            Date startDate = Date.valueOf(startDateString);
+            // 종료일
+            Date endDate = Date.valueOf(endDateString);
+
+            CompanyAds companyAds = new CompanyAds();
+
+            companyAds.setCompanyPk(companyPk);
+            companyAds.setStartDate(startDate);
+            companyAds.setEndDate(endDate);
+
+            int adsUpdateResult = 0;
+            // 회사홍보일정 중에 기한 남은게 있나 확인.
+            CompanyAds notDueCompanyAds = placeService.selectCompanyAdsByDate(companyPk);
+            // 여기서 하나 확인해야 할게 있음.
+            // 위에 notDueCompanyAds 가 널이 아닌 경우 업데이트, 널이면 새로 인서트임.
+            if (notDueCompanyAds != null) {
+                companyAds.setAdPk(notDueCompanyAds.getAdPk());
+                adsUpdateResult = placeService.updateAds(companyAds);
+            } else {
+                adsUpdateResult = placeService.insertAds(companyPk, companyAds);
+            }
+
+            // 다 넣었으면 이제 사진교체가 남아있다.
+            // 기존 사진 불러오기.
+            ArrayList<Image> imageArrayList = placeService.selectCompanyImage(companyPk);
+
+            // 각각 목록이랑 대조해야한다.
 
 
 

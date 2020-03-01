@@ -171,6 +171,9 @@
                                     <%-- 포문 돌려가면서 사진을 채운다--%>
                                     <% for (Image image : images) {%>
                                     <td>
+                                        <input type="button" id="delPic<%=counter%>"
+                                               onclick="delPic(<%=counter%>)">사진 삭제</input>
+                                        <br>
                                         <img src="<%=request.getContextPath()%>/<%=image.getImageRoute()%>/<%=image.getImageName()%>"
                                              id="pic<%=counter%>">
                                     </td>
@@ -219,6 +222,11 @@
                     </tr>
                 </table>
                 <div id="pic_files">
+<%--                    <input type="text" name="delFile1" value="0">--%>
+<%--                    <input type="text" name="delFile2" value="0">--%>
+<%--                    <input type="text" name="delFile3" value="0">--%>
+<%--                    <input type="text" name="delFile4" value="0">--%>
+<%--                    <input type="text" name="delFile5" value="0">--%>
                     <input type="file" name="file1" id="file1" onchange="changedPic(this, 1)">
                     <input type="file" name="file2" id="file2" onchange="changedPic(this, 2)">
                     <input type="file" name="file3" id="file3" onchange="changedPic(this, 3)">
@@ -230,7 +238,7 @@
             </div>
             <div class="" style="width :1100px;text-align : right; margin-left : 60px">
                 <input type="button" onclick="startEdit()" id="editBtn" value="수정"/>&nbsp;
-                <button type="reset" id="reset" hidden>수정취소</button>
+                <button type="reset" id="reset">수정취소</button>
                 <button type="submit" id="submitBtn" disabled>등록</button>
                 <%-- 목록으로 돌아가게끔 조정. --%>
                 <button onclick="">목록으로 돌아가기</button>
@@ -239,45 +247,49 @@
     </article>
 </section>
 <script>
+    var pic1 = $("#pic1").attr('src');
+    var pic2 = $("#pic2").attr('src');
+    var pic3 = $("#pic3").attr('src');
+    var pic4 = $("#pic4").attr('src');
+    var pic5 = $("#pic5").attr('src');
     // 이 기능은 수정버튼 누를때만 활성화됨
     $(function () {
-        // return;
-        // console.log(" not supposed to happen");
-        // 첫 시작일자 초기화 목적
-
-        // 날짜가 들어가는게 확인됨.
-        <%--var startDate = null;--%>
-        <%--var endDate = null;--%>
-        <%--<%--%>
-        <%--    // companyAds 가 존재하는가? 존재한다면 아직 기한이 있는거임.--%>
-        <%--    // 그렇다면 바로 채운다.--%>
-        <%--    if (companyAds!= null){%>--%>
-        <%--startDate = "<%=companyAds.getStartDate()%>";--%>
-        <%--endDate = "<%=companyAds.getEndDate()%>";--%>
-        <%--<% } %>--%>
-
-        <%--// 시작일자 초기화--%>
-        <%--if (startDate != null) {--%>
-        <%--    $("#startDate").val(startDate);--%>
-        <%--    $("#endDate").val(endDate);--%>
-        <%--}--%>
-
         // 이미지파일 들어갈 파일인풋 삭제
         $("#pic_files").hide();
-
+        $("#reset").hide();
     });
 
+    // 수정취소 할 시
     function resetClicked () {
+        console.log(pic1);
+        console.log(pic2);
+        console.log(pic3);
+        console.log(pic4);
+        console.log(pic5);
+
         // 취소를 누르면 모든걸 다 되돌린다
         $("#reset").hide();
+        $("#submitBtn").attr('disabled', true);
+        $("#pic1").attr('src', pic1);
+        $("#pic2").attr('src', pic2);
+        $("#pic3").attr('src', pic3);
+        $("#pic4").attr('src', pic4);
+        $("#pic5").attr('src', pic5);
+
+        // 온클릭 해제
+        $('#pic1').prop('onclick', null).off('click');
+        $('#pic2').prop('onclick', null).off('click');
+        $('#pic3').prop('onclick', null).off('click');
+        $('#pic4').prop('onclick', null).off('click');
+        $('#pic5').prop('onclick', null).off('click');
+
     }
 
     function startEdit () {
-        alert("start edit");
+        // alert("start edit");
         // disabled 뜬거 다 제거
         $("input, textarea, #submitBtn").removeAttr("disabled");
-        $("#reset").removeAttr("hidden");
-
+        $("#reset").show();
 
         // 각 사진 미리보기와 파일 인풋을 맞게 연동시켜준다.
         $('#pic1').click(function () {
