@@ -32,7 +32,11 @@ public class PlaceService {
         return result;
     }
 
-    // 업체 가져오기 (은석)
+    /**
+     * 업체 가져오기 (은석)
+     * @param pk: 가져올 관리번호
+     * @return PlaceCompany
+     */
     public PlaceCompany selectPlaceCompany(int pk) {
         Connection con = getConnection();
 
@@ -114,18 +118,26 @@ public class PlaceService {
         return companyArrayList;
     }
 
-    // 각 회사별 등록된 사진 목록
-    public ArrayList<Image> selectCompanyImage(int parseInt) {
+    /**
+     * 각 회사별 등록된 사진 목록 (은석)
+     * @param companyPk 이미지가 로딩될 회사 관리번호
+     * @return
+     */
+    public ArrayList<Image> selectCompanyImage(int companyPk) {
         Connection con = getConnection();
 
-        ArrayList<Image> images = new PlaceDao().selectImage(con, parseInt);
+        ArrayList<Image> images = new PlaceDao().selectImage(con, companyPk);
 
         close(con);
 
         return images;
     }
 
-    // 회사별 등록된 홍보가능 일정목록.
+    /**
+     * 회사별 등록된 홍보가능 일정목록.
+     * @param pk 홍보대상 회사의 관리번호.
+     * @return
+     */
     public CompanyAds selectCompanyAds(int pk) {
         Connection con = getConnection();
         CompanyAds ads = new PlaceDao().selectCompanyAds(con, pk);

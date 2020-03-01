@@ -234,17 +234,17 @@ public class PlaceDao {
     }
 
     // 공간대여업체에 엮여 등록된 이미지 사진목록 (은석)
-    public ArrayList<Image> selectImage(Connection con, int parseInt) {
+    public ArrayList<Image> selectImage(Connection con, int companyPk) {
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         ArrayList<Image> imgList = null;
 
-        String query = prop.getProperty("selectImageList");
+        String query = prop.getProperty("selectCompanyImageList");
 
         try {
             preparedStatement = con.prepareStatement(query);
 
-            preparedStatement.setInt(1, parseInt);
+            preparedStatement.setInt(1, companyPk);
 
             resultSet = preparedStatement.executeQuery();
             imgList = new ArrayList<>();
@@ -275,7 +275,7 @@ public class PlaceDao {
         CompanyAds companyAds = null;
 
         // 기한이 남은 경우에만 불러온다.
-        String query = prop.getProperty("selectCompanyAd");
+        String query = prop.getProperty("selectCompanyAdsByDate");
 
         try {
             preparedStatement = con.prepareStatement(query);
