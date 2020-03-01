@@ -16,6 +16,7 @@ import java.util.Properties;
 
 import com.dh.hobbyist.artist.model.vo.ApplyArtist;
 import com.dh.hobbyist.member.model.vo.Member;
+import com.dh.hobbyist.suggest.model.vo.PetitionWishList;
 
 public class MemberDao {
 	
@@ -340,21 +341,21 @@ public class MemberDao {
 		String query = prop.getProperty("insertCategory");
 		
 		//int 배열을 Integer 배열로 형변환 시키기
-		Integer[] cateCode = Arrays.stream(categoryCodes).boxed().toArray(Integer[]::new);
+		/*Integer[] cateCode = Arrays.stream(categoryCodes).boxed().toArray(Integer[]::new);*/
 		
 		try {
 			
 			for(int i = 0; i < categoryCodes.length; i ++) {
-				if(cateCode[i] != null) {       //int형은 null값으로 비교할 수 없으니 Integer로 형변환 뒤 비교 
+				if(categoryCodes[i] != 0) {       //int형은 null값으로 비교할 수 없으니 Integer로 형변환 뒤 비교 
 					
 					//Integer를 다시 int로 변환
-					int categoryCode = (int) cateCode[i].intValue();
+					/*int categoryCode = (int) cateCode[i].intValue();*/
 					
-					System.out.println(categoryCode);
+					System.out.println(categoryCodes[i]);
 					
 					pstmt = con.prepareStatement(query);
 					pstmt.setInt(1, memberCode);
-					pstmt.setInt(2, categoryCode);
+					pstmt.setInt(2, categoryCodes[i]);
 					
 					result = pstmt.executeUpdate();
 				}
@@ -452,6 +453,40 @@ public class MemberDao {
 	      
 	      return aa;
 	   }
+    //회원의 찜한 건의 목록 내역 조회 (지호)  
+	public ArrayList<PetitionWishList> selectPetitionWishList(Connection con, int memberCode) {
+		  PreparedStatement pstmt = null;
+	      ResultSet rset = null;
+	      ArrayList<PetitionWishList> list = null;
+	      
+	      String query = prop.getProperty("selectPetitionWishList");
+	      
+	      try {
+	         pstmt = con.prepareStatement(query);
+	         pstmt.setInt(1, memberCode);
+	         
+	         rset = pstmt.executeQuery();
+	         
+	         list = new ArrayList<PetitionWishList>();
+	         
+	         while(rset.next()) {
+	            PetitionWishList p = new PetitionWishList();
+	            p.setPetitionCode(rset.getInt("LESSON_PETITION_PK"));
+	            p.setMemberCode(rset.getInt("MEMBER_PK"));
+	            
+	            list.add(p);
+	         }
+	      } catch (SQLException e) {
+	         e.printStackTrace();
+	      } finally {
+	         close(rset);
+	         close(pstmt);
+	      }
+	      
+	      
+	      return list;
+
+	}
 	
 
 

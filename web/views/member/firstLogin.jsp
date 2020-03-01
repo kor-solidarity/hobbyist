@@ -188,13 +188,13 @@
 				</td>
 			</tr>	
 			<tr>
-				<td><input type="hidden" name="categoryCode1" id="selectCate1"></td>
+				<td><input type="hidden" name="categoryCode1" id="selectCate1" value="0"></td>
 			</tr>
 			<tr>
-				<td><input type="hidden" name="categoryCode2" id="selectCate2"></td>
+				<td><input type="hidden" name="categoryCode2" id="selectCate2" value="0"></td>
 			</tr>
 			<tr>
-				<td><input type="hidden" name="categoryCode3" id="selectCate3"></td>
+				<td><input type="hidden" name="categoryCode3" id="selectCate3" value="0"></td>
 			</tr>
 		</table>
 	</div>
@@ -231,14 +231,15 @@
 				var selectIndex = 1;
 				
 				$("#cCategory").change(function() {
-					var selectOp1 = $("#pCategory option:selected").val();
-					var selectOp2 = $("#cCategory option:selected").val();
+					var selectOp1 = $("#pCategory").val();
+					var selectOp2 = $("#cCategory").val();
 					
 					if(selectIndex <= 3) {
 						if(selectOp1 != '' && selectOp2 != '') {
 							
 							console.log('selectIndex : ' + selectIndex);
 							$("#selectCate" + selectIndex).val(selectOp2);
+							console.log($("#selectCate" + selectIndex).val());
 							selectIndex++;
 							
 							
@@ -258,7 +259,7 @@
 					}
 					
 					
-					console.log(selectOp2);
+					/* console.log(selectOp2); */
 				});
 			});
 			
