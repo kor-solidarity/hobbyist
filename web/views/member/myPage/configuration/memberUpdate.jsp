@@ -327,7 +327,7 @@ color: #FFFFFF;
 	<div class="divcenter4">
 		
 		<!-- 회원정보수정 서블릿으로전송 -->
-		<form id="updateForm" action="<%=request.getContextPath() %>/UpdateMemberM.me" method="post">
+		<form id="updateForm" action="<%=request.getContextPath() %>/updateMemberM.me" method="post">
 		
 			<table align="border" class="tablecenter4">
 		 	
@@ -411,7 +411,7 @@ color: #FFFFFF;
 					<td colspan="1" style="width: 100px; text-align: left;" color:><label
 						id="labelTel2">인증번호</label></td>
 					<td colspan="5" class="em" style="text-align: left;"><input style="width: 260px;" type="text" name="pwsame" id="pwsame" placeholder="인증번호를 입력해주세요"></td>
-					<td colspan="1"><button id="button4">인증확인</button></td>
+					<td colspan="1"><button id="button4" onclick="button4_on">인증확인</button></td>
 				</tr>
 			
 				<tr>
@@ -448,22 +448,31 @@ color: #FFFFFF;
 	
 	<script>
 	//패스워드 값일치하는지 확인
-	$(function(){
+	
+ 	function updateMember(){
 	var userPwd = $("userPwd").val();
 	var userPwd2 = $("userPwd2").val();	
 	
-	if(userPwd ==! null){}l
+	console.log("userPwd값은" + typeof(userPwd));
+	console.log("usrPwd2값은" + typeof(userPwd2));
+	
+	if(userPwd ==! null){
 	if(userPwd == userPwd2){
-	console.log("userPwd");
+		alert("패스워드가 일치합니다.");
 	}
+		alert("패스워드가 일치하지 않습니다.");
+	}
+		}
+	//
 	
 	
-	})
-	
-	
-	</script>
+	</script> 
 	
 	<script>
+
+
+
+	
 	//전화번호 인증하기 버튼 클릭시	
 		var randomVal = ""; //유저에게 보낸 문자의 랜덤 숫자를 저장하기 위한 전역변수
 		$(document).on('click', '#button1', function () {
@@ -475,17 +484,19 @@ color: #FFFFFF;
 					tel2: tel2,
 					tel3: tel3
 			};
-		
+		//ajax로 인증 번호를 넘긴다.
 		$.ajax({
 			url: "/hobbyist/phoneCheck.me",
 			type: "post",
 			data: phone,
 			async: false,
 			success: function(data) {
+				//data가 실패했을 경우, 경고창을 띄운다.
 				if(data == "fail") {
 					alert("이미 가입한 이력이 있는 번호입니다.\n확인 후 다시 진행해주세요.");
 					return false;
 				}else {
+					//data가 일치 할 때, 폰 서블릿으로 넘어간다. 
 					 $.ajax({
       		           url: "/hobbyist/phoneCertification.ph",
       		            type: "post",
@@ -494,15 +505,19 @@ color: #FFFFFF;
       		            success: function(data) {
       		            						
       		            randomVal = data; //유저에게 문자로 보낸 랜덤 값을 그대로 리턴 받아서 전역변수로 선언한 randomVal에 넣어줬음
-      		            console.log(data);
+      		            console.log(data); //data 출력
       		            						
       		            },
       		            error: function(error) {
-      		            console.log(error);
+      		           
       		            } 
       		         }); 
-					
+					 					
 					alert("인증번호가 발송되었습니다.");
+					console.log("pwsame타입은 :"+ typeof(pwsame));
+					console.log("랜덤바 타입은:" + typeof(randomVal));
+					
+					
 					return true;
 				}
 			},
@@ -513,22 +528,31 @@ color: #FFFFFF;
 
 	});
 </script>
-<script>
-$function(){
-var phone = $("#phone").val();
-var pwsame = %("#pwsame").val();
+
+ <script>
+//인증받은 번호와 텍스트에 다시쓴 인증번호가 일치하는 경우
+//on("click")이벤트를 사용하면 동적으로 이벤트를 바인딩 할 수있다.
+//동적으로 생성된 html태그는 일반적인 이벤트 처리가 불가능하다.
+//이떄문에 동적으로 생성된 태그는 별도의 이벤트 처리르 해줘야한다.
+$(document).on('click','#button4',function(){
+
+	var pwsame = $("#pwsame").val();
 	
-if(phone == pwsame){
+if(pwsame == randomVal){
+	console.log("pwsame타입은 :"+ typeof(pwsame));
+	console.log("랜덤바 타입은:" + typeof(randomVal));
+	
 	alert("인증이 확인되었습니다.");
+	
 	}else{
 		alert("다시 인증하세요.");
+		
 	}
-}
-}
-}
+});
 </script>	
-	
-	
+
+
+
 	
 	<br>
 	<br>
