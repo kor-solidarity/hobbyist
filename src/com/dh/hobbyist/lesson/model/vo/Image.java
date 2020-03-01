@@ -1,6 +1,6 @@
 package com.dh.hobbyist.lesson.model.vo;
 
-public class Image {
+public class Image implements java.io.Serializable{
 	private int imageCode;          //이미지 관리번호
 	private String imageRoute;      //이미지 경로
 	private String imageName;       //이미지 파일명

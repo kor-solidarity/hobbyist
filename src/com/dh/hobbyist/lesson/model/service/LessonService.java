@@ -88,11 +88,22 @@ public class LessonService {
 			return list;
 		}
 	
-	//카테고리별 페이지 리스트 메소드(유승)
+	/*//카테고리별 페이지 리스트 메소드(유승)
 	public ArrayList<HashMap<String, Object>> selectCategoryLessonList(int parentCode) {
 		Connection con = getConnection();
 		
 		ArrayList<HashMap<String, Object>> list = new LessonDao().selectCategoryLessonList(con, parentCode);
+		
+		close(con);
+		
+		return list;
+	}*/
+	
+	//관심 수업 리스트 메소드(유승)
+	public ArrayList<HashMap<String, Object>> selectInterest(int memberCode) {
+		Connection con = getConnection();
+		
+		ArrayList<HashMap<String, Object>> list = new LessonDao().selectInterest(con, memberCode);
 		
 		close(con);
 		

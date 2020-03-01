@@ -1,11 +1,14 @@
 package com.dh.hobbyist.member.model.service;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.dh.hobbyist.artist.model.vo.ApplyArtist;
 import com.dh.hobbyist.member.model.dao.MemberDao;
 import com.dh.hobbyist.member.model.vo.Member;
+import com.dh.hobbyist.suggest.model.vo.PetitionWishList;
+
 import static com.dh.hobbyist.common.JDBCTemplate.*;
 
 public class MemberService {
@@ -172,5 +175,16 @@ public class MemberService {
 	      
 	      return aa;
 	   }
+	   
+	//회원의 찜한 건의 목록 내역 조회 (지호)   
+	public ArrayList<PetitionWishList> selectPetitionWishList(int memberCode) {
+		Connection con = getConnection();
+        
+        ArrayList<PetitionWishList> list = new MemberDao().selectPetitionWishList(con, memberCode);
+        
+        close(con);
+        
+        return list;
+	}
 	      
 }

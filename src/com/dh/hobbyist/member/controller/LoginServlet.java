@@ -2,6 +2,7 @@ package com.dh.hobbyist.member.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import com.dh.hobbyist.member.model.service.MemberService;
 import com.dh.hobbyist.member.model.vo.Member;
+import com.dh.hobbyist.suggest.model.vo.PetitionWishList;
 
 
 @WebServlet("/login.me")
@@ -44,6 +46,12 @@ public class LoginServlet extends HttpServlet {
 		if(loginMember != null) {
 			HttpSession session = request.getSession();
 			session.setAttribute("loginMember", loginMember);
+			
+			ArrayList<PetitionWishList> list = new MemberService().selectPetitionWishList(loginMember.getMemberCode()); 
+		         
+		    System.out.println("list : " + list);
+		    session.setAttribute("petitionWishList", list);
+			
 			if(loginMember.getFirstLogin() == 0) {
 				response.sendRedirect("views/member/firstLogin.jsp");
 				

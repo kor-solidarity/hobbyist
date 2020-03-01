@@ -28,7 +28,7 @@ public class InsertCategoryServlet extends HttpServlet {
 		String cateCode1 = request.getParameter("categoryCode1");
 		String cateCode2 = request.getParameter("categoryCode2");
 		String cateCode3 = request.getParameter("categoryCode3");
-	
+		
 		int categoryCode1 = Integer.parseInt(cateCode1);
 		int categoryCode2 = Integer.parseInt(cateCode2);
 		int categoryCode3 = Integer.parseInt(cateCode3);

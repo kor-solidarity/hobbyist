@@ -164,7 +164,9 @@
 			font-weight:900;
 			margin-bottom:20px;
 		}
-     
+     #liked, #popular, #interested {
+     	cursor:pointer;
+     }
      
      
 </style>
@@ -222,7 +224,7 @@
    	<div class="aside"> | </div>
    	<div class="aside" id="popular">인기수업</div>
    	<div class="aside"> | </div>
-   	<div class="aside" id="recommended">관심수업</div>
+   	<div class="aside" id="interested">관심수업</div>
 	</div>
 	
 	
@@ -404,29 +406,36 @@
 				});
 				
 				
-				/* 
-				var $parent = $("#parentCode");
-				
-				
-				if($("#music").data('clicked')) {
-					$parent.val('1');
-				}else if($("#dance").data('clicked')) {
-					$parent.val('9');
-				}else if($("#video").data('clicked')) {
-					$parent.val('15');
-				}else if($("#life").data('clicked')) {
-					$parent.val('20');
-				}else if($("#beauty").data('clicked')) {
-					$parent.val('25');
-				}else if($("#design").data('clicked')) {
-					$parent.val('33');
-				}else if($("#sports").data('clicked')) {
-					$parent.val('37');
+				if(loginMember != null) {
+					
 				}
 				
+				$("#interested").click(function() {
+					var memberCode = <%= loginMember.getMemberCode()%>;
+					
+					if(loginMember != null) { 
+						$.ajax({
+							url: "/hobbyist/selectInterest.le",
+							type: "get",
+							data: {memberCode: memberCode},
+							success: function(data) {
+									console.log(data);
+							},
+							error: function(error) {
+								console.log(error);
+							}
+						});	
+					
+					
+					 }else { 
+						 alert("먼저 로그인을 해주세요.");
+					 }
+					
+					
+				});
 				
-				console.log($("#parentCode").val());
-				console.log(typeof $("#parentCode").val()); */
+				
+				
 			}); 
 		
 			

@@ -453,5 +453,38 @@ public class LessonDao {
 
 		return list;
 	}
+	//관심 수업 리스트 메소드(유승)
+	public ArrayList<HashMap<String, Object>> selectInterest(Connection con, int memberCode) {
+		ArrayList<HashMap<String, Object>> list = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		HashMap<String, Object> hmap = null;
+		
+		String query = prop.getProperty("selectInterest");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, memberCode);
+			
+			rset = pstmt.executeQuery();
+			
+			list = new ArrayList<HashMap<String, Object>>();
+			
+			while(rset.next()) {
+				hmap = new HashMap<String, Object>();
+				
+				
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+			close(rset);
+		}
+		
+		
+		return list;
+	}
 
 }
