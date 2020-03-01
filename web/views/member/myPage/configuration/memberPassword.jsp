@@ -209,8 +209,8 @@ center_td0 {
 	
 	<div class="divbottom3">
 	<!--  비밀번호 확인 텍스트 -->
-		<label class="label_bottom3">비밀번호:&nbsp; </label><input type="password" class="memberPwd" id="memberPwd" placeholder="비밀번호를 입력하세요.">
-		<button class="passclick" id="passclick" onclick="pwConfirm();">확인</button>
+		<label class="label_bottom3">비밀번호:&nbsp; </label><input type="password" class="memberPwd" name="memberPwd" id="memberPwd" placeholder="비밀번호를 입력하세요.">
+		<input type="button" id="passclick" onclick="pwConfirm();" value="확인">
 	</div>
 	</div>
 	</form>

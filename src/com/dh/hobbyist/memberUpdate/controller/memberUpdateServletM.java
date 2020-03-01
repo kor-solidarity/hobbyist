@@ -31,7 +31,7 @@ public class memberUpdateServletM extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	String userId = request.getParameter("userId");
 	String userPwd = request.getParameter("userPwd");
-	String name = request.getParameter("name");
+	String ncikName = request.getParameter("ncikName");
 	String email = request.getParameter("email");
 	String tel1 = request.getParameter("tel1");
 	String tel2 = request.getParameter("tel2");
@@ -42,7 +42,7 @@ public class memberUpdateServletM extends HttpServlet {
 
 	System.out.println("userId" + userId);
 	System.out.println("password1" + userPwd);
-	System.out.println("name" + name);
+	System.out.println("ncikName" + ncikName);
 	System.out.println("email" + email);
 	System.out.println("phone" + phone);
 	System.out.println("bank" + bankName);
@@ -51,7 +51,7 @@ public class memberUpdateServletM extends HttpServlet {
 	Member member = new Member();
 	member.setMemberId(userId);
 	member.setMemberPwd(userPwd);
-	member.setMemberName(name);
+	member.setMemberName(ncikName);
 	member.setEmail(email);
 	member.setPhone(phone);
 	member.setBankName(bankName);
