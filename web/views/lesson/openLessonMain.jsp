@@ -500,9 +500,15 @@ body {
 										<script>
 											$(function() {
 												$("#min").change(function() {
-													var min = $(this).val();
+													var min = Number($(this).val());
+													var max = Number($("#max").val());
+													
 													if (min < 0) {
 														alert("음수는 입력하실 수 없습니다.");
+														$(this).val("");
+													} else if (max > 0 && min > max) {
+														alert("최대인원은 최소인원보다 같거나 많아야 합니다.");
+														$(this).val("");
 													}
 												});
 											});
@@ -520,8 +526,10 @@ body {
 													
 													if (max < 0) {
 														alert("음수는 입력하실 수 없습니다.");
+														$(this).val("");
 													} else if (max < min) {
-														alert("최대인원은 최소인원보다 같거나 많아야 합니다.")
+														alert("최대인원은 최소인원보다 같거나 많아야 합니다.");
+														$(this).val("");
 													}
 												});
 											});
@@ -557,6 +565,7 @@ body {
 													
 													if (cost < 10000) {
 														alert("회차당 수업료는 최소 10000원 이상이어야 합니다.");
+														$(this).val("");
 													} 
 												});
 											});
@@ -586,6 +595,7 @@ body {
 								<input type="file" id="lessonImg3" name="lessonImg3" onchange="loadImg(this, 3);">
 								<input type="file" id="lessonImg4" name="lessonImg4" onchange="loadImg(this, 4);">
 							</div>
+							<!-- 이미지 전송을 위한 JavaScript -->
 							<script>
 								$(function() {
 									$("#fileArea").hide();
@@ -901,6 +911,8 @@ body {
 						alert("아티스트 소개를 입력해주세요");
 					} else if (num == 4 && lessonIntro == "") {
 						alert("수업소개를 입력해주세요");
+					} else if (num == 5 && orderNum != inputOrder) {
+						alert("모든 회차 일정을 입력해주세요");
 					} else {
 						$("#show"+ num).hide();
 						console.log(num);
@@ -1155,11 +1167,9 @@ body {
 		
 		//수업 회차 등록 메소드
 		function insertOrder() {
-			//console.log("startTime : " + $("#startTime").val());
-			//console.log("endTime : " + $("#endTime").val());
-			
 			//"01기본정보" 화면에서 사용자가 입력한 총 회차
 			var inputOrder = $("#inputOrder").val();
+				
 			//"05일정등록" 화면에서 보여지는 총 회차
 			var showOrder = $("#showOrder");
 			showOrder.text(inputOrder);
@@ -1167,12 +1177,17 @@ body {
 			//"05일정등록" 화면에서 현재입력 회차
 			var currOrder = $(".currOrder");
 			
-			
-			console.log("inputOrder : " + inputOrder);
-			console.log("typeof(inputOrder) : " + typeof(inputOrder));
-			
 			startTime = $("#startTime").val();
 			endTime = $("#endTime").val();
+			
+			//사용자에게 입력받은 날짜값을 Date 형식으로 변환
+			var st = startTime.split(/[-T:]/);
+			var sd = new Date(st[0], st[1]-1, st[2], st[3], st[4]);
+			var sl = sd.getTime();
+			
+			var et = endTime.split(/[:]/);
+			var ed = new Date(st[0], st[1]-1, st[2], et[0], et[1]);
+			var el = ed.getTime();
 			
 			var insertOrderBtn = document.getElementById('insertOrderBtn');
 			
@@ -1182,14 +1197,14 @@ body {
 				if(orderNum < inputOrder) {
 					$orderListArea = $("#orderListArea");
 					$orderListArea.append("<div id='order" + orderNum + "' class='item2'>" + orderNum + "회차 | " + startTime.substring(0, 10) + " | " + startTime.substring(11, 16) + "~" + endTime + "</div>");
-					$orderListArea.append("<input type='hidden' name='start" + orderNum + "' value='" + startTime + "'>");
-					$orderListArea.append("<input type='hidden' name='end" + orderNum + "' value='" + endTime + "'>");
+					$orderListArea.append("<input type='hidden' name='start" + orderNum + "' value='" + sl + "'>");
+					$orderListArea.append("<input type='hidden' name='end" + orderNum + "' value='" + el + "'>");
 					orderNum++;
 				} else {
 					$orderListArea = $("#orderListArea");
 					$orderListArea.append("<div id='order" + orderNum + "' class='item2'>" + orderNum + "회차 | " + startTime.substring(0, 10) + " | " + startTime.substring(11, 16) + "~" + endTime + "</div>");
-					$orderListArea.append("<input type='hidden' name='start" + orderNum + "' value='" + startTime + "'>");
-					$orderListArea.append("<input type='hidden' name='end" + orderNum + "' value='" + endTime + "'>");
+					$orderListArea.append("<input type='hidden' name='start" + orderNum + "' value='" + sl + "'>");
+					$orderListArea.append("<input type='hidden' name='end" + orderNum + "' value='" + el + "'>");
 					alert("모든 회차를 입력하셨습니다");
 					insertOrderBtn.disabled = 'disabled';
 				} 

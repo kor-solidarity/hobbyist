@@ -91,32 +91,15 @@ public class InsertLessonServlet extends HttpServlet {
 		int orderStart = 0;
 		int orderEnd = 0;
 		
-		ArrayList startList = new ArrayList();
-		ArrayList endList = new ArrayList();
-		for(int i = 1; i <= totalOrders; i++) {
-			startList.add(request.getParameter("start" + i));
-			endList.add(request.getParameter("end" + i));
-			
-			System.out.println("request.getParameter(\"start\" + i) : " + request.getParameter("start" + i));
-			System.out.println("request.getParameter(\"end\" + i) : " + request.getParameter("end" + i));
-		
-			//Time t = Time.valueOf(request.getParameter("end" + i));
-			
-			//System.out.println("t : " + t);
-		}
-		
 		ArrayList orderList = new ArrayList();
-		for(int i = 0; i < totalOrders; i++) {
+		for(int i = 1; i <= totalOrders; i++) {
+			Long start = Long.parseLong(request.getParameter("start" + i));
+			Long end = Long.parseLong(request.getParameter("end" + i));
+			
 			LessonOrder order = new LessonOrder();
-			//order.setOrderTime(i + 1);
-			//order.setOrderStart(Timestamp.valueOf((String) startList.get(i)));
-			//order.setOrderEnd(Time.valueOf();
-			
-			//Time t = Time.valueOf((String) endList.get(i));
-			
-			//System.out.println("order.getOrderStart() : " + order.getOrderStart());
-			//System.out.println("order.getOrderEnd() : " + order.getOrderEnd());
-			
+			order.setOrderTime(i);
+			order.setOrderStart(new Timestamp(start));
+			order.setOrderEnd(new Timestamp(end));
 			
 			orderList.add(order);
 		}
@@ -125,11 +108,12 @@ public class InsertLessonServlet extends HttpServlet {
 		HashMap lessonRelated = new HashMap();
 		lessonRelated.put("lesson", lesson);
 		lessonRelated.put("schedule", schedule);
+		lessonRelated.put("orderList", orderList);
 		
 		int result = new LessonRelatedService().insertLessonRelated(lessonRelated);
 		
 		String page = "";
-		if(result > 0) {
+		if(result == totalOrders) {
 			page = "views/common/successPage.jsp";
 			request.setAttribute("successCode", "insertLesson");
 		} else {
