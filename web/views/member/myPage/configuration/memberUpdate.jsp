@@ -334,7 +334,7 @@ color: #FFFFFF;
 			
 				<tr>
 		<td colspan="1" style="width: 70px; text-align: left;"><label id="labelId">아이디</label></td>	
-		<td colspan="5" class="id" style="text-align: left;"><input style="width: 260px;" type="text" name="userId" id="userId" max-length=15 value="<%=loginMember.getMemberId()%>" autofocus placeholder=""></td>
+		<td colspan="5" class="id" style="text-align: left;"><input style="width: 260px;" type="text" name="userId" id="userId" max-length=15 value="<%=loginMember.getMemberId()%>" readonly></td>
 					<td></td>
 				</tr>
 		  	 	
@@ -343,9 +343,8 @@ color: #FFFFFF;
 				</tr>		  	 	
 		  	 	
 				<tr>
-					<td colspan="1" style="width: 100px; text-align: left;"><label
-						id="labelPw">비밀번호</label></td>	
-					<td colspan="5" class="id" style="text-align: left;"><input style="width: 260px;" type="password" name="userPwd" value="" max-length=15 autofocus placeholder="패스워드를 입력하세요."></td>
+					<td colspan="1" style="width: 100px; text-align: left;"><label id="labelPw">비밀번호</label></td>	
+					<td colspan="5" class="id" style="text-align: left;"><input style="width: 260px;" type="password" name="userPwd" id="userPwd" value="" max-length=15 autofocus placeholder="패스워드를 입력하세요."></td>
 					<td></td>
 				</tr> 
 		
@@ -356,7 +355,7 @@ color: #FFFFFF;
 		  		<tr>
 					<td colspan="1" style="width: 100px; text-align: left;"><label
 						id="labelPw2">비밀번호확인</label></td>	
-					<td colspan="5" class="id2" style="text-align: left;"><input style="width: 260px;" type="password" name="userPwd2" value="" max-length=15 autofocus placeholder="패스워드를 입력하세요."></td>
+					<td colspan="5" class="id2" style="text-align: left;"><input style="width: 260px;" type="password" name="userPwd2" id="userPwd2" value="" max-length=15 autofocus placeholder="패스워드를 입력하세요."></td>
 					<td></td>
 				</tr>
 		  	
@@ -368,7 +367,7 @@ color: #FFFFFF;
 					<td colspan="1" style="width: 100px; text-align: left;"><label
 						id="labelName">이름</label></td>
 					<td colspan="5" class="nm" style="text-align: left;"><input
-						style="width: 260px;" type="name" name="name" max-length=5 placeholder="이름을 입력하세요." value="<%=loginMember.getMemberName()%>"></td>
+						style="width: 260px;" type="name" name="ncikName" id="ncikName" max-length=5 placeholder="이름을 입력하세요." value="<%=loginMember.getMemberName()%>"></td>
 					<td></td>
 				</tr>
 
@@ -380,7 +379,7 @@ color: #FFFFFF;
 					<td colspan="1" style="width: 100px; text-align: left;"><label
 						id="LabelEmail">이메일</label></td>
 					<td colspan="5" class="em" style="text-align: left;"><input
-						style="width: 260px;" type="email" name="email" placeholder="이메일을 입력하세요." value="<%=loginMember.getEmail() %>"></td>
+						style="width: 260px;" type="email" name="email" id="email" placeholder="이메일을 입력하세요." value="<%=loginMember.getEmail() %>"></td>
 					<td></td>
 				</tr>
 		
@@ -389,18 +388,13 @@ color: #FFFFFF;
 				</tr>
 		
 				<tr>
-					<td colspan="1" style="width: 100px; text-align: left;"><label
-						id="labelTell">전화번호</label></td>
-					<td colspan="1"><input type="tel" name="tel1" id="tel1" value="<%=phone[0]%>"
-						style="text-align: left; width: 70px;"></td>
+					<td colspan="1" style="width: 100px; text-align: left;"><label id="labelTell">전화번호</label></td>
+					<td colspan="1"><input type="tel" name="tel1" id="tel1" value="<%=phone[0]%>" style="text-align: left; width: 70px;"></td>
 					<td colspan="1" style="width: 3px;"><label id="labelHyphen1">-</label></td>
-					<td colspan="1"><input type="tel" name="tel2" id="tel2" value="<%=phone[1]%>"
-					
-						style="text-align: left; width: 70px;"></td>
+					<td colspan="1"><input type="tel" name="tel2" id="tel2" value="<%=phone[1]%>" style="text-align: left; width: 70px;"></td>
 					<td colspan="1" style="width: 3px;"><label id="labelHyphen2">-</label></td>
-					<td colspan="1"><input type="tel" name="tel3" id="tel3" value="<%=phone[2]%>" style="text-align: left; width: 75px;" value="<%=loginMember.getPhone() %>"></td>
-					
-					<td colspan="1"><button id="button1">인증하기</label></td>
+					<td colspan="1"><input type="tel" name="tel3" id="tel3" value="<%=phone[2]%>" style="text-align: left; width: 75px;" value="<%=loginMember.getPhone() %>"></td>	
+					<td colspan="1"><input type="button" id="button1" name="button1" value="인증하기"></td>
 				</tr>
 	
 				<tr>
@@ -408,10 +402,9 @@ color: #FFFFFF;
 				</tr>
 	
 				<tr>
-					<td colspan="1" style="width: 100px; text-align: left;" color:><label
-						id="labelTel2">인증번호</label></td>
+					<td colspan="1" style="width: 100px; text-align: left;" color:><label id="labelTel2">인증번호</label></td>
 					<td colspan="5" class="em" style="text-align: left;"><input style="width: 260px;" type="text" name="pwsame" id="pwsame" placeholder="인증번호를 입력해주세요"></td>
-					<td colspan="1"><button id="button4" onclick="button4_on">인증확인</button></td>
+					<td colspan="1"><input type="button" id="button4" name="button4" value="인증확인"></td>
 				</tr>
 			
 				<tr>
@@ -420,7 +413,7 @@ color: #FFFFFF;
 
 				<tr>
 					<td colspan="1" style="width: 90px; text-align: left;"><label id="labelAccount">계좌번호</label></td>
-					<td colspan="1" style="width: 30px;"><select name="bankName" style="width: 75px; value="<%=loginMember.getBankName() %>">
+					<td colspan="1" style="width: 30px;"><select name="bankName" id="bankName" style="width: 75px; value="<%=loginMember.getBankName() %>">
 							<option value="">신한</option>
 							<option value="">국민</option>
 							<option value="">하나</option>
@@ -428,18 +421,28 @@ color: #FFFFFF;
 							<option value="">케이뱅크</option>
 					</select></td>
 					<td colspan="1" style="width: 10px;"></td>
-					<td colspan="3" style="text-align: center;"><input type="text" name="bankNum" style="width: 165px;" value="<%=loginMember.getBankNum() %>"></td>
+					<td colspan="3" style="text-align: center;"><input type="text" name="bankNum" id="bankNum" style="width: 165px;" value="<%=loginMember.getBankNum() %>"></td>
 					<td colspan="1"><button id="button2">인증하기</button></td>
 				</tr>
 			</table>
 			<br>
 			<!--수정하기버튼  -->
-			<div id="updateBtn" onclick="updateMember();">수정하기</div>
+			<div> <input type="button" id="updateBtn" onclick="updateMember();" value="수정하기"></div>
 		</form>
 	</div>
 	
 	<script>
-	function updateMember(){
+	function updateMember() {
+		console.log("아이디" + userId);
+		console.log("아이디" + userPwd);
+		console.log("아이디" + ncikName);
+		console.log("아이디" + email);
+		console.log("아이디" + tel1);
+		console.log("아이디" + tel2);
+		console.log("아이디" + tel3);
+		console.log("아이디" + bankName);
+		console.log("아이디" + bankNum);
+
 		$("#updateForm").sumbit();
 	}
 	</script>	
@@ -463,7 +466,7 @@ color: #FFFFFF;
 		alert("패스워드가 일치하지 않습니다.");
 	}
 		}
-	//
+	
 	
 	
 	</script> 
