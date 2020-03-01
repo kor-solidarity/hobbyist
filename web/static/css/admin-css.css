@@ -115,6 +115,7 @@ th {
 
 .place-edit-img td{
     width: unset !important;
+    text-align: center;
 }
 .place-edit-img img{
     width: 195px;

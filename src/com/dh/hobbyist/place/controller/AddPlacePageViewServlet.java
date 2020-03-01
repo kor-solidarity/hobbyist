@@ -32,7 +32,7 @@ public class AddPlacePageViewServlet extends HttpServlet {
             // 있으면 이제 불러온다
             PlaceCompany placeCompany = new PlaceService().selectPlaceCompany(Integer.parseInt(pk));
             ArrayList<Image> images = new PlaceService().selectCompanyImage(Integer.parseInt(pk));
-            CompanyAds companyAds = new PlaceService().selectCompanyAds(Integer.parseInt(pk));
+            CompanyAds companyAds = new PlaceService().selectCompanyAdsByDate(Integer.parseInt(pk));
 
             request.setAttribute("placeCompany", placeCompany);
             request.setAttribute("images", images);

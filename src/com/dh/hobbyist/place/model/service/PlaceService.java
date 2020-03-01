@@ -34,6 +34,7 @@ public class PlaceService {
 
     /**
      * 업체 가져오기 (은석)
+     *
      * @param pk: 가져올 관리번호
      * @return PlaceCompany
      */
@@ -47,11 +48,11 @@ public class PlaceService {
     }
 
     // 광고일정 추가 (은석)
-    public int insertAds(PlaceCompany company, CompanyAds inputAds) {
+    public int insertAds(int companyPk, CompanyAds inputAds) {
         Connection con = getConnection();
         int result = 0;
 
-        result = new PlaceDao().insertAds(con, company, inputAds);
+        result = new PlaceDao().insertAds(con, companyPk, inputAds);
 
         if (result > 0) {
             commit(con);
@@ -120,6 +121,7 @@ public class PlaceService {
 
     /**
      * 각 회사별 등록된 사진 목록 (은석)
+     *
      * @param companyPk 이미지가 로딩될 회사 관리번호
      * @return
      */
@@ -135,15 +137,52 @@ public class PlaceService {
 
     /**
      * 회사별 등록된 홍보가능 일정목록.
+     *
      * @param pk 홍보대상 회사의 관리번호.
      * @return
      */
-    public CompanyAds selectCompanyAds(int pk) {
+    public CompanyAds selectCompanyAdsByDate(int pk) {
         Connection con = getConnection();
-        CompanyAds ads = new PlaceDao().selectCompanyAds(con, pk);
+        CompanyAds ads = new PlaceDao().selectCompanyAdsByDate(con, pk);
 
         close(con);
 
         return ads;
+    }
+
+    public int updateCompany(PlaceCompany editCompanyInfo, int companyPk) {
+        Connection con = getConnection();
+
+        int result = new PlaceDao().updateCompany(con, editCompanyInfo, companyPk);
+
+        if (result > 0) {
+            commit(con);
+        } else {
+            rollback(con);
+        }
+        close(con);
+
+        return result;
+    }
+
+    /**
+     * 공간대여업체 홍보기간 수정.
+     *
+     * @param companyAds
+     * @return
+     */
+    public int updateAds(CompanyAds companyAds) {
+        Connection con = getConnection();
+
+        int result = new PlaceDao().updateAds(con, companyAds);
+
+        if (result > 0) {
+            commit(con);
+        } else {
+            rollback(con);
+        }
+        close(con);
+
+        return result;
     }
 }
