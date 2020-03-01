@@ -73,6 +73,8 @@
 		width:500px;
 		height:400px;
 		border:1px solid darkolivegreen;
+		border-collapse: separate;
+		border-spacing: 10px;
 	}
 	
 	
@@ -83,19 +85,21 @@
 		height:35px;
 		color:white;
 		background:darkolivegreen;
-		border:1px solid darkolivegreen;
+		/* border:1px solid darkolivegreen; */
 		font-family: 'Nanum Gothic', sans-serif;
 		font-size:16px;
 		float:right;
+		text-align:center;	
 		margin-top:100px;
 		margin-right:50px;
+		line-height: 35px;
 		cursor: pointer;
 	}
 	
 	.myCategory-list {
-		max-width:230px;
+		max-width:270px;
 		height:33px;
-		border-radius:20px;
+		border-radius:15px;
 		background:darkolivegreen;
 		color:white;
 		font-family: 'Nanum Gothic', sans-serif;
@@ -103,9 +107,12 @@
 		font-size:17px;
 		text-align:center;
 		line-height:33px;
-		margin-top:20px;
+		margin-top:15px;
 		margin-left:20px;
 		display: inline-block;
+		padding: 4px;
+		padding-left: 10px;
+		padding-right:10px;
 	}
 	
 	
@@ -116,7 +123,7 @@
 	<% if(loginMember != null) { %>
 	<div id="main">
 	<h2 id="title">관심 카테고리 등록</h2>
-	<h3 id="content">관심 카테고리(3개 이하)를 설정하면 관심수업을 추천해드립니다!</h3>
+	<h3 id="content">관심 카테고리(최대 3개)를 설정하면 관심수업을 추천해드립니다!</h3>
 	<form action="<%=request.getContextPath() %>/category.me" method="post">
 	<div class="category-list" id="category-list1">
 		<p class="cTitle">카테고리</p>
@@ -181,17 +188,17 @@
 				</td>
 			</tr>	
 			<tr>
-				<td><input type="hidden" name="categoryCode1" id="selectCategory1"></td>
+				<td><input type="hidden" name="categoryCode1" id="selectCate1"></td>
 			</tr>
 			<tr>
-				<td><input type="hidden" name="categoryCode2" id="selectCategory2"></td>
+				<td><input type="hidden" name="categoryCode2" id="selectCate2"></td>
 			</tr>
 			<tr>
-				<td><input type="hidden" name="categoryCode3" id="selectCategory3"></td>
+				<td><input type="hidden" name="categoryCode3" id="selectCate3"></td>
 			</tr>
 		</table>
 	</div>
-	<button type="submit" id="btn">확인</button>
+	<div id="btn" onclick="insertCategory();">확인</div>
 	</form>
 	</div>
 	<script>
@@ -209,6 +216,17 @@
 					}
 			}); */
 			
+			ck = false;
+			
+			function insertCategory() {
+				if(ck == true) {
+					$('form').submit();
+				}else {
+					alert("관심 카테고리 1~3개를 선택해주세요.");
+				}
+					
+			}
+			
 			$(function() {
 				var selectIndex = 1;
 				
@@ -219,21 +237,26 @@
 					if(selectIndex <= 3) {
 						if(selectOp1 != '' && selectOp2 != '') {
 							
-							$("#selectCategory" + selectIndex).val(selectOp2);
+							console.log('selectIndex : ' + selectIndex);
+							$("#selectCate" + selectIndex).val(selectOp2);
 							selectIndex++;
 							
 							
 								$div = $("#myCategory");
-								var $inDiv = $("<div class='myCategory-list'>").text($("#cCategory option:selected").text());
+								var $inDiv = $("<div class='myCategory-list'>").text($("#pCategory option:selected").text() + " | " + $("#cCategory option:selected").text());
 								$div.append($inDiv);
-								$div.append("<br>");
-						
+								$div.append("<br><br>"); 
+								
+								ck = true;
 						}else {
 							alert("관심 카테고리를 설정해주세요.");
+							ck = false;
 						}
 					}else {
 						alert("관심 카테고리는 최대 3개까지만 입력 가능합니다.")
+						ck = false;
 					}
+					
 					
 					console.log(selectOp2);
 				});

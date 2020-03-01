@@ -238,10 +238,12 @@
 					<table id="lessonTable" align="center">
 						<tr>
 							<td colspan="2">
+							<div>
 							<%-- <% if(hmap.get("imageType").equals("PLACE_COMPANY")) { %>
 							<img src="<%=hmap.get("imageRoute") %>/<%=hmap.get("imageName") %>" id="lessonImg">
 							<% } %> --%>
 							<img src="/hobbyist/static/images/lessonImg1.jpg"  id="lessonImg">
+							</div>
 							</td>
 						</tr>
 						<tr>
@@ -254,10 +256,12 @@
 						<tr>
 							<td></td>
 							<td>
-							<%-- <% if(hmap.get("imageType").equals("profile")) { %>
+							<div>
+							<% if(hmap.get("imageType").equals("profile")) { %>
 							<img src="<%=hmap.get("imageRoute") %>/<%=hmap.get("imageName") %>" id="artistImg">
-							<% } %> --%>
-							<img src="/hobbyist/static/images/iu.jpg" id="artistImg">
+							<% } %>
+							<!-- <img src="/hobbyist/static/images/iu.jpg" id="artistImg"> -->
+							</div>
 							</td>
 						</tr>
 						<tr>
