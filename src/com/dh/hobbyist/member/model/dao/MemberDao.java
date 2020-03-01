@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
 
@@ -332,18 +333,33 @@ public class MemberDao {
 	}
 	
 	//첫 로그인 관심 카테고리 설정(유승)
-	public int insertCategory(Connection con, int memberCode, int categoryCode) {
+	public int insertCategory(Connection con, int memberCode, int[] categoryCodes) {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		
 		String query = prop.getProperty("insertCategory");
 		
+		//int 배열을 Integer 배열로 형변환 시키기
+		Integer[] cateCode = Arrays.stream(categoryCodes).boxed().toArray(Integer[]::new);
+		
 		try {
-			pstmt = con.prepareStatement(query);
-			pstmt.setInt(1, memberCode);
-			pstmt.setInt(2, categoryCode);
 			
-			result = pstmt.executeUpdate();
+			for(int i = 0; i < categoryCodes.length; i ++) {
+				if(cateCode[i] != null) {       //int형은 null값으로 비교할 수 없으니 Integer로 형변환 뒤 비교 
+					
+					//Integer를 다시 int로 변환
+					int categoryCode = (int) cateCode[i].intValue();
+					
+					System.out.println(categoryCode);
+					
+					pstmt = con.prepareStatement(query);
+					pstmt.setInt(1, memberCode);
+					pstmt.setInt(2, categoryCode);
+					
+					result = pstmt.executeUpdate();
+				}
+			}
+
 			
 		} catch (SQLException e) {
 			e.printStackTrace();

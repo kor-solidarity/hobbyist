@@ -62,11 +62,11 @@ public class LessonDao {
 				hmap.put("parentCode", rset.getInt("PARENT_PK"));
 				hmap.put("artistNick", rset.getString("ARTIST_NICK"));
 				hmap.put("memberName", rset.getString("MEMBER_NAME"));
-				/*hmap.put("imageCode", rset.getInt("IMAGE_PK"));
+				hmap.put("imageCode", rset.getInt("IMAGE_PK"));
 				hmap.put("imageRoute", rset.getString("IMAGE_ROUTE"));
 				hmap.put("imageName", rset.getString("IMAGE_NAME"));
 				hmap.put("imageType", rset.getString("IMAGE_TYPE"));
-				hmap.put("imageMain", rset.getInt("IMAGE_MAIN"));*/
+				hmap.put("imageMain", rset.getInt("IMAGE_MAIN"));
 				
 				list.add(hmap);
 			}
@@ -114,11 +114,11 @@ public class LessonDao {
 				hmap.put("parentCode", rset.getInt("PARENT_PK"));
 				hmap.put("artistNick", rset.getString("ARTIST_NICK"));
 				hmap.put("memberName", rset.getString("MEMBER_NAME"));
-				/*hmap.put("imageCode", rset.getInt("IMAGE_PK"));
+				hmap.put("imageCode", rset.getInt("IMAGE_PK"));
 				hmap.put("imageRoute", rset.getString("IMAGE_ROUTE"));
 				hmap.put("imageName", rset.getString("IMAGE_NAME"));
 				hmap.put("imageType", rset.getString("IMAGE_TYPE"));
-				hmap.put("imageMain", rset.getInt("IMAGE_MAIN"));*/
+				hmap.put("imageMain", rset.getInt("IMAGE_MAIN"));
 				
 				list.add(hmap);
 			}
@@ -165,11 +165,11 @@ public class LessonDao {
 				hmap.put("parentCode", rset.getInt("PARENT_PK"));
 				hmap.put("artistNick", rset.getString("ARTIST_NICK"));
 				hmap.put("memberName", rset.getString("MEMBER_NAME"));
-				/*hmap.put("imageCode", rset.getInt("IMAGE_PK"));
+				hmap.put("imageCode", rset.getInt("IMAGE_PK"));
 				hmap.put("imageRoute", rset.getString("IMAGE_ROUTE"));
 				hmap.put("imageName", rset.getString("IMAGE_NAME"));
 				hmap.put("imageType", rset.getString("IMAGE_TYPE"));
-				hmap.put("imageMain", rset.getInt("IMAGE_MAIN"));*/
+				hmap.put("imageMain", rset.getInt("IMAGE_MAIN"));
 				
 				list.add(hmap);
 			}
@@ -217,11 +217,11 @@ public class LessonDao {
 						hmap.put("parentCode", rset.getInt("PARENT_PK"));
 						hmap.put("artistNick", rset.getString("ARTIST_NICK"));
 						hmap.put("memberName", rset.getString("MEMBER_NAME"));
-						/*hmap.put("imageCode", rset.getInt("IMAGE_PK"));
+						hmap.put("imageCode", rset.getInt("IMAGE_PK"));
 						hmap.put("imageRoute", rset.getString("IMAGE_ROUTE"));
 						hmap.put("imageName", rset.getString("IMAGE_NAME"));
 						hmap.put("imageType", rset.getString("IMAGE_TYPE"));
-						hmap.put("imageMain", rset.getInt("IMAGE_MAIN"));*/
+						hmap.put("imageMain", rset.getInt("IMAGE_MAIN"));
 						
 						list.add(hmap);
 					}
@@ -271,11 +271,11 @@ public class LessonDao {
 					hmap.put("parentCode", rset.getInt("PARENT_PK"));
 					hmap.put("artistNick", rset.getString("ARTIST_NICK"));
 					hmap.put("memberName", rset.getString("MEMBER_NAME"));
-					/*hmap.put("imageCode", rset.getInt("IMAGE_PK"));
+					hmap.put("imageCode", rset.getInt("IMAGE_PK"));
 					hmap.put("imageRoute", rset.getString("IMAGE_ROUTE"));
 					hmap.put("imageName", rset.getString("IMAGE_NAME"));
 					hmap.put("imageType", rset.getString("IMAGE_TYPE"));
-					hmap.put("imageMain", rset.getInt("IMAGE_MAIN"));*/
+					hmap.put("imageMain", rset.getInt("IMAGE_MAIN"));
 					
 					list.add(hmap);
 				}
@@ -324,11 +324,11 @@ public class LessonDao {
 							hmap.put("parentCode", rset.getInt("PARENT_PK"));
 							hmap.put("artistNick", rset.getString("ARTIST_NICK"));
 							hmap.put("memberName", rset.getString("MEMBER_NAME"));
-							/*hmap.put("imageCode", rset.getInt("IMAGE_PK"));
+							hmap.put("imageCode", rset.getInt("IMAGE_PK"));
 							hmap.put("imageRoute", rset.getString("IMAGE_ROUTE"));
 							hmap.put("imageName", rset.getString("IMAGE_NAME"));
 							hmap.put("imageType", rset.getString("IMAGE_TYPE"));
-							hmap.put("imageMain", rset.getInt("IMAGE_MAIN"));*/
+							hmap.put("imageMain", rset.getInt("IMAGE_MAIN"));
 							
 							list.add(hmap);
 						}
@@ -378,11 +378,11 @@ public class LessonDao {
 							hmap.put("parentCode", rset.getInt("PARENT_PK"));
 							hmap.put("artistNick", rset.getString("ARTIST_NICK"));
 							hmap.put("memberName", rset.getString("MEMBER_NAME"));
-							/*hmap.put("imageCode", rset.getInt("IMAGE_PK"));
+							hmap.put("imageCode", rset.getInt("IMAGE_PK"));
 							hmap.put("imageRoute", rset.getString("IMAGE_ROUTE"));
 							hmap.put("imageName", rset.getString("IMAGE_NAME"));
 							hmap.put("imageType", rset.getString("IMAGE_TYPE"));
-							hmap.put("imageMain", rset.getInt("IMAGE_MAIN"));*/
+							hmap.put("imageMain", rset.getInt("IMAGE_MAIN"));
 							
 							list.add(hmap);
 						}

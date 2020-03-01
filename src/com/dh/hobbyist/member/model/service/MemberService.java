@@ -118,10 +118,10 @@ public class MemberService {
 	}
 	
 	//첫 로그인 관심 카테고리 설정(유승)
-	public int insertCategory(int memberCode, int categoryCode) {
+	public int insertCategory(int memberCode, int[] categoryCodes) {
 		Connection con = getConnection();
 		
-		int result = new MemberDao().insertCategory(con, memberCode, categoryCode);
+		int result = new MemberDao().insertCategory(con, memberCode, categoryCodes);
 		
 		if(result > 0) {
 			commit(con);

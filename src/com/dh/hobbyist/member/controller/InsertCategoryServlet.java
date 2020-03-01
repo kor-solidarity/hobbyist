@@ -12,11 +12,11 @@ import com.dh.hobbyist.member.model.vo.Member;
 
 
 @WebServlet("/category.me")
-public class MemberCategoryServlet extends HttpServlet {
+public class InsertCategoryServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     
-    public MemberCategoryServlet() {
+    public InsertCategoryServlet() {
         super();
     }
 
@@ -24,12 +24,24 @@ public class MemberCategoryServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		int memberCode = ((Member) request.getSession().getAttribute("loginMember")).getMemberCode();
-		int categoryCode = Integer.parseInt(request.getParameter("categoryCode"));
+		
+		String cateCode1 = request.getParameter("categoryCode1");
+		String cateCode2 = request.getParameter("categoryCode2");
+		String cateCode3 = request.getParameter("categoryCode3");
+	
+		int categoryCode1 = Integer.parseInt(cateCode1);
+		int categoryCode2 = Integer.parseInt(cateCode2);
+		int categoryCode3 = Integer.parseInt(cateCode3);
+		
+		int[] categoryCodes = {categoryCode1, categoryCode2, categoryCode3};
 		
 		System.out.println("membetCode : " + memberCode);
-		System.out.println("memberCategory : " + categoryCode);
+		/*System.out.println("categoryCode1 : " + categoryCode1);
+		System.out.println("categoryCode2 : " + categoryCode2);
+		System.out.println("categoryCode3 : " + categoryCode3);*/
+		System.out.println("memberCategory : " + categoryCodes);
 		
-		int result = new MemberService().insertCategory(memberCode, categoryCode);
+		int result = new MemberService().insertCategory(memberCode, categoryCodes);
 		
 		Member member = new Member();
 		member.setMemberCode(memberCode);

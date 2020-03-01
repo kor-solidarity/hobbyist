@@ -9,7 +9,7 @@
 <head>
 <meta charset="UTF-8">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<title>Insert title here</title>
+<title>hobbyist</title>
 <style>
 			#nav3 {
 			width:1024px;
@@ -27,61 +27,80 @@
 		
 		#section{
 			width:1024px;
-			height:750px;
+			height:900px;
 			margin:auto;
 			margin-top:30px;
 		}
 		
 		.lesson-list {
 			display:inline-block;
-			width:240px;
-			height:270px;
+			width:265px;
+			height:300px;
+			border:1px solid darkolivegreen;
 			margin:auto;
 			margin-right:85px;
 			margin-bottom:30px;
 		
 		}
 		#lessonTable {
-			border:1px solid darkolivegreen;
 			font-family: 'Nanum Gothic', sans-serif;
+			
 			font-size:12px;
 			border-collapse:separate;
 			border-spacing: 5px;
+			/* display:block;  */
+			table-layout:fixed;
 			
 		}
 		#lessonLabel {
+			width:250px;
 			font-family: 'Nanum Gothic', sans-serif;
 			font-size:14px;
 			font-weight:900;
-			margin-bottom:20px;
+			/* margin-bottom:10px; */
+			white-space: nomal;
+			 overflow: hidden;
+			text-overflow: ellipsis;
+			text-align: left;
+			display: -webkit-box;
+			-webkit-line-clamp: 2;
+			 -webkit-box-orient: vertical; 
+			word-wrap: break-all;
+			
 		}
 		
 		#lessonImg {
-			width:240px;
-			height:130px;
+			width:265px;
+			height:140px;
+			margin-left: -5px;
+			margin-top: -5px;
 		}
 		
 		#artistImg {
-			width:60px;
-			height:60px;
+			postion: absolute;
+			width:65px;
+			height:65px;
 			border-radius:50px 50px 50px 50px;
+			float:right;
+			 margin-right: 100px; 
 			
 			
 		}
 		#lessonTable td:nth-of-type(2n) {
 			float:right;
-			margin-right:10px;
+			/* margin-right:10px; */
+			/* margin-right: 100px;  */
 		}
 		
 		 #artistNick {
 	       		font-size: 15px;
 	       		color:darkolivegreen;
 	       		font-weight:900;
-	       		padding-right:3px;
+	       		 padding-right:100px; 
 	    }
 	       
 	       #artistName {
-	       		padding-right:12px;
+	       		 padding-right:100px; 
 	    }
 	    #lessonCount {
 	    	font-family: 'Nanum Gothic', sans-serif;
@@ -238,26 +257,29 @@
 					<table id="lessonTable" align="center">
 						<tr>
 							<td colspan="2">
+							<div>
 							<%-- <% if(hmap.get("imageType").equals("PLACE_COMPANY")) { %>
 							<img src="<%=hmap.get("imageRoute") %>/<%=hmap.get("imageName") %>" id="lessonImg">
-							<% } %> --%>
+							<% } %>  --%>
 							<img src="/hobbyist/static/images/lessonImg1.jpg"  id="lessonImg">
+							</div>
 							</td>
 						</tr>
 						<tr>
-							<td colspan="2" id="lessonLabel"><%=hmap.get("lessonName") %></td>
+							<td colspan="2" rowspan="3" id="lessonLabel" nowrap><%=hmap.get("lessonName") %></td>
 						</tr>
-						<tr>
-							<td></td>
-							<td></td>
+						 <tr>
+							<td colspan="2"><br></td>
 						</tr>
+
 						<tr>
-							<td></td>
-							<td>
-							<%-- <% if(hmap.get("imageType").equals("profile")) { %>
+							
+							<td colspan="2">
+							<div>
+							<% if(hmap.get("imageType").equals("profile")) { %>
 							<img src="<%=hmap.get("imageRoute") %>/<%=hmap.get("imageName") %>" id="artistImg">
-							<% } %> --%>
-							<img src="/hobbyist/static/images/iu.jpg" id="artistImg">
+							<% } %>
+							</div>
 							</td>
 						</tr>
 						<tr>
