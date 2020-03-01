@@ -49,6 +49,7 @@
 		margin-left: 15px;
 	}
 </style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <title>hobbyist</title>
 </head>
 <body>
@@ -107,7 +108,7 @@
 						</tr>
 						<tr>
 							<td><img src="/hobbyist/static/images/heart.png" style="width:20px; height:20px;"> (<%=p.getWishlisted() %>)</td>
-							<td><img src="/hobbyist/static/images/dialogicon.png" style="width:20px; height:20px"> (<%=p.getViews() %>)</td>
+							<td><img src="/hobbyist/static/images/dialogicon.png" style="width:20px; height:20px"> (<%=p.getReplyCount() %>)</td>
 						</tr>
 						<tr>
 							<td colspan="2"><%=p.getLocation() %>/<%=p.getNumOfStudents() %></td>
@@ -153,5 +154,14 @@
 	</div>
 	<br><br><br><br>
 	<%@ include file="/views/common/footer.jsp"%>
+	<script>
+		$(function() {
+			$(".regSubList").click(function() {
+				var num = $(this).children("input").val();
+				
+				location.href = "<%=request.getContextPath()%>/selectOne.sg?num=" + num;
+			});
+		});
+	</script>
 </body>
 </html>

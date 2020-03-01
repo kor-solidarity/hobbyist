@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.dh.hobbyist.member.model.vo.Member;
 import com.dh.hobbyist.suggest.model.service.SuggestService;
 import com.dh.hobbyist.suggest.model.vo.Petition;
 import com.dh.hobbyist.suggest.model.vo.Reply;
@@ -37,7 +38,6 @@ public class SelectOneSuggestServlet extends HttpServlet {
 		Petition p = new SuggestService().selectOne(num);
 		
 		//System.out.println("petition detail : " + p);
-		
 		List<Reply> replyList = new SuggestService().selectReplyList(num);
 		
 		String page = "";

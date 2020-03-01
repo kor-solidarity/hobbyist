@@ -74,6 +74,17 @@
 		height:100%;
 		object-fit: cover;
 	}
+	#goLessonBtn {
+		margin-left:50px;
+		width:100px; 
+		height:30px;
+		background-color:#BE9524;
+		font-family: 'Do Hyeon', sans-serif;
+		color:white;
+		padding: 5px;
+		border: 1px solid #BE9524;
+		background-color: #BE9524;
+	}
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <title>hobbyist</title>
@@ -182,8 +193,12 @@
 			</tr>
 			<tr>
 				<td colspan="2" style="font-size:20px;">건의 내용</td>
-				<td style="text-align:right;">
-					<img src="/hobbyist/static/images/emptyheart.png" style="width:30px; height:30px;">
+				<td style="text-align:right;" >
+					<% if(loginMember != null) { %>
+						<img id="heartImg" src="/hobbyist/static/images/emptyheart.png" style="width:30px; height:30px;">
+					<%} else {%>
+						<img id="notLogin" src="/hobbyist/static/images/emptyheart.png" style="width:30px; height:30px;">
+					<%} %>
 				</td>
 				<td style="color:#3c3c3c;">
 					수업 찜하기
@@ -280,6 +295,9 @@
    		<br><br><br>
    		<div style="text-align:center;">
    			<button id="goListBtn" onclick="goList();">목록보기</button>
+   			<% if(loginMember != null && loginMember.getIsArtist() == 1) { %>
+   				<button id="goLessonBtn">수업 개설하기</button>
+   			<%} %>
    		</div>
    		<script>
    			function goList() {
@@ -334,6 +352,18 @@
    						
    					});
    				});
+   			});
+   			
+   			$(function(){
+   				var index = 0;
+	   			$("#heartImg").click(function() {
+	   				if(index % 2 == 0) {
+		   				$(this).attr("src", "/hobbyist/static/images/fullheart.png");
+	   				} else {
+	   					$(this).attr("src", "/hobbyist/static/images/emptyheart.png");
+	   				}
+	   				index++;
+	   			});
    			});
    		</script>
 	</div>
