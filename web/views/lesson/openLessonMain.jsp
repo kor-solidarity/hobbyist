@@ -461,11 +461,11 @@ body {
 									<td>
 										<div>상세 카테고리</div> 
 										<select id="subCategory" class="nanum" name="subCategory" style="color: black;">
-											<option value="">--------</option>
 										</select>
 										<script>
 											$(function(){
 												$("#category").change(function(){
+													$("#subCategory").show();
 													var categoryName = $("#category").val();
 													
 													$.ajax({
@@ -515,8 +515,8 @@ body {
 										<script>
 											$(function() {
 												$("#max").change(function() {
-													var max = $(this).val();
-													var min = $("#min").val();
+													var max = Number($(this).val());
+													var min = Number($("#min").val());
 													
 													if (max < 0) {
 														alert("음수는 입력하실 수 없습니다.");
@@ -536,10 +536,10 @@ body {
 										<label style="font-weight:normal; color:black;">&nbsp;회</label>
 										<script>
 											$(function() {
-												$("#rounds").change(function() {
-													var rounds = $(this).val();
+												$("#inputOrder").change(function() {
+													var inputOrder = $(this).val();
 													
-													if (rounds <= 0) {
+													if (inputOrder <= 0) {
 														alert("1회 이상을 입력해주세요");
 													} 
 												});
@@ -755,8 +755,8 @@ body {
 								<tr>
 									<td style="width: 80px;">지역</td>
 									<td style="width: 130px;">상세지역</td>
-									<td colspan="2"><label class="curOrder">1</label>회차 시작시간</td>
-									<td style="width: 165px;"><label class="curOrder">1</label>회차 종료시간</td>
+									<td colspan="2"><label class="currOrder">1</label>회차 시작시간</td>
+									<td style="width: 165px;"><label class="currOrder">1</label>회차 종료시간</td>
 								</tr>
 								<tr>
 									<td>
@@ -852,6 +852,7 @@ body {
 				<% } else if (((Member) (request.getSession().getAttribute("loginMember"))).getArtistAccepted() == null) { %>
 				alert("아티스트 승인 이후에 가능합니다.")
 				<% } else { %>
+				$("#subCategory").hide();
 				$('#modalBox').modal('show');
 				<% } %>
 			});
@@ -1137,6 +1138,12 @@ body {
 				sel.options[i] = null;
 			}
 			
+			//세종시를 선택할 경우 subRegion 선택 못하도록 return
+			if(key=='261') {
+				$("#subRegion").hide();
+				return;
+			}
+			
 			sel.options[0] = new Option('-선택-', '', '', 'true');
 			for(i=0; i < name.length; i++) {
 				sel.options[i+1] = new Option(name[i], name[i]);
@@ -1158,7 +1165,7 @@ body {
 			showOrder.text(inputOrder);
 			
 			//"05일정등록" 화면에서 현재입력 회차
-			var curOrder = $(".curOrder");
+			var currOrder = $(".currOrder");
 			
 			
 			console.log("inputOrder : " + inputOrder);
@@ -1175,16 +1182,20 @@ body {
 				if(orderNum < inputOrder) {
 					$orderListArea = $("#orderListArea");
 					$orderListArea.append("<div id='order" + orderNum + "' class='item2'>" + orderNum + "회차 | " + startTime.substring(0, 10) + " | " + startTime.substring(11, 16) + "~" + endTime + "</div>");
+					$orderListArea.append("<input type='hidden' name='start" + orderNum + "' value='" + startTime + "'>");
+					$orderListArea.append("<input type='hidden' name='end" + orderNum + "' value='" + endTime + "'>");
 					orderNum++;
 				} else {
 					$orderListArea = $("#orderListArea");
 					$orderListArea.append("<div id='order" + orderNum + "' class='item2'>" + orderNum + "회차 | " + startTime.substring(0, 10) + " | " + startTime.substring(11, 16) + "~" + endTime + "</div>");
+					$orderListArea.append("<input type='hidden' name='start" + orderNum + "' value='" + startTime + "'>");
+					$orderListArea.append("<input type='hidden' name='end" + orderNum + "' value='" + endTime + "'>");
 					alert("모든 회차를 입력하셨습니다");
 					insertOrderBtn.disabled = 'disabled';
 				} 
 			}
 			
-			curOrder.text(orderNum);
+			currOrder.text(orderNum);
 			
 		};
 		
