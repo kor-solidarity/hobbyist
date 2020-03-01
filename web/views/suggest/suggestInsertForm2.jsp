@@ -98,7 +98,7 @@
 				</tr>
 				<tr>
 					<td colspan="2">
-						<input type="text" name="sugTitle" placeholder="제목을 입력해주세요 (15자 이내)" maxlength="15" style="width:600px; height:20px;">
+						<input type="text" name="sugTitle" placeholder="제목을 입력해주세요 (18자 이내)" maxlength="18" style="width:600px; height:20px;">
 					</td>
 				</tr>
 				<tr>

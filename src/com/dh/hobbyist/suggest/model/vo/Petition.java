@@ -21,13 +21,14 @@ public class Petition implements java.io.Serializable {
 	private String categoryName;
 	private String memberName;
 	private int categoryParentCode;
+	private int replyCount;
 	
 	public Petition() {}
 
 	public Petition(int petitionCode, String numOfStudents, int cost, int numOfLessons, String location,
 			Date requestedDate, String requestedDays, String requestTime, String title, String contents,
 			Date petitionedTime, int wishlisted, int views, int petitionedMember, int categoryCode, String categoryName,
-			String memberName, int categoryParentCode) {
+			String memberName, int categoryParentCode, int replyCount) {
 		super();
 		this.petitionCode = petitionCode;
 		this.numOfStudents = numOfStudents;
@@ -47,6 +48,7 @@ public class Petition implements java.io.Serializable {
 		this.categoryName = categoryName;
 		this.memberName = memberName;
 		this.categoryParentCode = categoryParentCode;
+		this.replyCount = replyCount;
 	}
 
 	public int getPetitionCode() {
@@ -193,6 +195,14 @@ public class Petition implements java.io.Serializable {
 		this.categoryParentCode = categoryParentCode;
 	}
 
+	public int getReplyCount() {
+		return replyCount;
+	}
+
+	public void setReplyCount(int replyCount) {
+		this.replyCount = replyCount;
+	}
+
 	@Override
 	public String toString() {
 		return "Petition [petitionCode=" + petitionCode + ", numOfStudents=" + numOfStudents + ", cost=" + cost
@@ -201,7 +211,7 @@ public class Petition implements java.io.Serializable {
 				+ ", contents=" + contents + ", petitionedTime=" + petitionedTime + ", wishlisted=" + wishlisted
 				+ ", views=" + views + ", petitionedMember=" + petitionedMember + ", categoryCode=" + categoryCode
 				+ ", categoryName=" + categoryName + ", memberName=" + memberName + ", categoryParentCode="
-				+ categoryParentCode + "]";
+				+ categoryParentCode + ", replyCount=" + replyCount + "]";
 	}
 
 	

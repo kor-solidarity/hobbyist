@@ -65,6 +65,19 @@ public class SelectMyReplyListServlet extends HttpServlet {
 		PageInfo pi = new PageInfo(currentPage, listCount, limit, maxPage, startPage, endPage);
 		
 		ArrayList<Reply> list = ss.selectMyReplyList(pi, memberCode);
+		
+		String page = "";
+		
+		if(list != null) {
+			page = "views/member/myPage/myComments/commentsList.jsp";
+			request.setAttribute("replyList", list);
+			request.setAttribute("pi", pi);
+		} else {
+			page = "views/common/errorPage.jsp";
+			request.setAttribute("msg", "나의 댓글/댓글내역 조회 실패");
+		}
+		
+		request.getRequestDispatcher(page).forward(request, response);
 	}
 
 	/**

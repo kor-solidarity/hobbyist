@@ -139,7 +139,7 @@
 				</tr>
 				<tr>
 					<td><img src="/hobbyist/static/images/heart.png" style="width:20px; height:20px;"> (<%=p.getWishlisted() %>)</td>
-					<td><img src="/hobbyist/static/images/dialogicon.png" style="width:20px; height:20px"> (<%=p.getViews() %>)</td>
+					<td><img src="/hobbyist/static/images/dialogicon.png" style="width:20px; height:20px"> (<%=p.getReplyCount() %>)</td>
 				</tr>
 				<tr>
 					<td colspan="2"><%=p.getLocation() %>/<%=p.getNumOfStudents() %></td>

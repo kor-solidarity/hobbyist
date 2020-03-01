@@ -69,6 +69,7 @@ public class SelectListServlet extends HttpServlet {
 		PageInfo pi = new PageInfo(currentPage, listCount, limit, maxPage, startPage, endPage);
 		
 		ArrayList<Petition> list = new SuggestService().selectList(pi);
+		
 		String page = "";
 		if(list != null) {
 			page = "views/suggest/suggestList.jsp";

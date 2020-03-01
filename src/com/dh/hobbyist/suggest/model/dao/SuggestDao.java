@@ -177,6 +177,7 @@ public class SuggestDao {
 				p.setCategoryCode(rset.getInt("CATEGORY_PK"));
 				p.setMemberName(rset.getString("MEMBER_NAME"));
 				p.setCategoryParentCode(rset.getInt("PARENT_PK"));
+				p.setReplyCount(rset.getInt("REPLY_COUNT"));
 				
 				list.add(p);
 			}
@@ -391,6 +392,7 @@ public class SuggestDao {
 				p.setCategoryCode(rset.getInt("CATEGORY_PK"));
 				p.setMemberName(rset.getString("MEMBER_NAME"));
 				p.setCategoryParentCode(rset.getInt("PARENT_PK"));
+				p.setReplyCount(rset.getInt("REPLY_COUNT"));
 				
 				list.add(p);
 			}
@@ -456,12 +458,22 @@ public class SuggestDao {
 			
 			while(rset.next()) {
 				Reply r = new Reply();
-				//r.setReplyCode(replyCode);
+				r.setRowNum(rset.getInt("RNUM"));
+				r.setReplyCode(rset.getInt("REPLY_PK"));
+				r.setLessonPetitionCode(rset.getInt("LESSON_PETITION_PK"));
+				r.setPetitionTitle(rset.getString("TITLE"));
+				r.setReplyDate(rset.getDate("REPLY_DATE"));
+				r.setReplyContent(rset.getString("REPLY_CONTENT"));
+				r.setMemberCode(rset.getInt("MEMBER_PK"));
 				
+				list.add(r);
 			}
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
 		}
 		
 		return list;
