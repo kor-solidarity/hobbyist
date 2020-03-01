@@ -1,6 +1,12 @@
 package com.dh.hobbyist.lesson.controller;
 
 import java.io.IOException;
+import java.sql.Date;
+import java.sql.Time;
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.HashMap;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -9,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.dh.hobbyist.lesson.model.service.LessonRelatedService;
 import com.dh.hobbyist.lesson.model.vo.Lesson;
+import com.dh.hobbyist.lesson.model.vo.LessonOrder;
 import com.dh.hobbyist.lesson.model.vo.LessonSchedule;
 import com.dh.hobbyist.member.model.vo.Member;
 
@@ -31,7 +38,7 @@ public class InsertLessonServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//수업 관련 변수
+		//수업 관련 사항
 		String lessonName = request.getParameter("lessonTitle");
 		int minStudents = Integer.parseInt(request.getParameter("min"));
 		int maxStudents = Integer.parseInt(request.getParameter("max"));
@@ -42,9 +49,6 @@ public class InsertLessonServlet extends HttpServlet {
 		String lessonIntro = request.getParameter("lessonIntro");
 		int categoryCode = Integer.parseInt(request.getParameter("subCategory"));
 		int artistCode = ((Member) (request.getSession().getAttribute("loginMember"))).getMemberCode();
-		
-		/*System.out.println("Servlet Test : " + lessonName + ", " + minStudents + ", " + maxStudents + ", " + totalOrders + ", " + costPerOrder + ", " + artistIntro + ", " +
-						lessonIntro + ", " + status + ", " + categoryCode + ", " + artistCode);*/
 		
 		Lesson lesson = new Lesson();
 		lesson.setLessonName(lessonName);
@@ -58,28 +62,74 @@ public class InsertLessonServlet extends HttpServlet {
 		lesson.setCategoryCode(categoryCode);
 		lesson.setArtistCode(artistCode);
 		
-		//Lesson이 DB에 성공적으로 들어가면 lessonCode를 return
-		int lessonCode = new LessonRelatedService().insertLesson(lesson);	
+		//수업일정 관련 사항
+		int region = Integer.parseInt(request.getParameter("region"));
+		System.out.println("region :  " + region);
 		
-		//수업일정 관련 변수
-		String region = request.getParameter("region");
-		String subRegion = request.getParameter("subRegion");
+		String[] cat_name = {"서울","부산","대구","인천","광주","대전","울산","강원","경기","경남","경북","전남","전북","제주","충남","충북"};
+		String koreanRegion = "";
+		String subRegion = "";
+		
+		if(region <= 16) {
+			koreanRegion = cat_name[region - 1];
+			subRegion = request.getParameter("subRegion");
+		} else if(region == 261){
+			koreanRegion = "세종";
+			subRegion = "_";
+		}
+		System.out.println("subRegion :  " + subRegion);
+		
 		String address = "상세주소는 파악중입니다";
 		
 		LessonSchedule schedule = new LessonSchedule();
-		schedule.setLessonCode(lessonCode);
-		schedule.setRegion(region);
+		schedule.setRegion(koreanRegion);
 		schedule.setSubRegion(subRegion);
 		schedule.setAddress(address);
 		
-		int scheduleResult = new LessonRelatedService().insertSchedule(schedule);
+		//수업회차 관련 사항
+		int orderTime = 0;
+		int orderStart = 0;
+		int orderEnd = 0;
+		
+		ArrayList startList = new ArrayList();
+		ArrayList endList = new ArrayList();
+		for(int i = 1; i <= totalOrders; i++) {
+			startList.add(request.getParameter("start" + i));
+			endList.add(request.getParameter("end" + i));
+			
+			System.out.println("request.getParameter(\"start\" + i) : " + request.getParameter("start" + i));
+			System.out.println("request.getParameter(\"end\" + i) : " + request.getParameter("end" + i));
+		
+			//Time t = Time.valueOf(request.getParameter("end" + i));
+			
+			//System.out.println("t : " + t);
+		}
+		
+		ArrayList orderList = new ArrayList();
+		for(int i = 0; i < totalOrders; i++) {
+			LessonOrder order = new LessonOrder();
+			//order.setOrderTime(i + 1);
+			//order.setOrderStart(Timestamp.valueOf((String) startList.get(i)));
+			//order.setOrderEnd(Time.valueOf();
+			
+			//Time t = Time.valueOf((String) endList.get(i));
+			
+			//System.out.println("order.getOrderStart() : " + order.getOrderStart());
+			//System.out.println("order.getOrderEnd() : " + order.getOrderEnd());
+			
+			
+			orderList.add(order);
+		}
+		
+		//각 vo들을 하나로 담을 HashMap 선언
+		HashMap lessonRelated = new HashMap();
+		lessonRelated.put("lesson", lesson);
+		lessonRelated.put("schedule", schedule);
+		
+		int result = new LessonRelatedService().insertLessonRelated(lessonRelated);
 		
 		String page = "";
-		if(lessonCode > 0 && scheduleResult > 0) {
-			
-			//수업 DB에서 수업코드를 조회해와야 함. 그리고 수업일정 DB를 INSERT해야 함.
-			//내 아티스트 코드로 검색한 것 중에 가장 최신 것
-			
+		if(result > 0) {
 			page = "views/common/successPage.jsp";
 			request.setAttribute("successCode", "insertLesson");
 		} else {
