@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="com.dh.hobbyist.suggest.model.vo.*, java.util.List"%>
+    pageEncoding="UTF-8" import="com.dh.hobbyist.suggest.model.vo.*, java.util.List, java.util.ArrayList"%>
 <%
 	Petition petition = (Petition) request.getAttribute("petition");
 	List<Reply> replyList = (List<Reply>) request.getAttribute("replyList");
-	
+	ArrayList<PetitionWishList> wishList = (ArrayList<PetitionWishList>) session.getAttribute("petitionWishList");
 %>
 <!DOCTYPE html>
 <html>
@@ -194,9 +194,21 @@
 			<tr>
 				<td colspan="2" style="font-size:20px;">건의 내용</td>
 				<td style="text-align:right;" >
-					<% if(loginMember != null) { %>
-						<img id="heartImg" src="/hobbyist/static/images/emptyheart.png" style="width:30px; height:30px;">
-					<%} else {%>
+					<% if(loginMember != null) { 
+						int check = 0;
+						 for(PetitionWishList p : wishList) {
+							 if(p.getPetitionCode() == petition.getPetitionCode()) {
+								  check = 1;
+								 %>
+								<img id="fullheartImg" src="/hobbyist/static/images/fullheart.png" style="width:30px; height:30px;"> 
+							 <% break; 
+							 }
+						 }
+						 if(check == 0) {
+						 %>
+						 	<img id="emptyheartImg" src="/hobbyist/static/images/emptyheart.png" style="width:30px; height:30px;">
+						 <%}
+					} else {%>
 						<img id="notLogin" src="/hobbyist/static/images/emptyheart.png" style="width:30px; height:30px;">
 					<%} %>
 				</td>
@@ -356,7 +368,23 @@
    			
    			$(function(){
    				var index = 0;
-	   			$("#heartImg").click(function() {
+	   			$("#emptyheartImg").click(function() {
+	   				var pid = <%=petition.getPetitionCode()%>
+	   				
+	   				$.ajax({
+	   					url: "/hobbyist/insertWishList.sg",
+	   					data : {
+	   						pid: pid,
+	   						index: index
+	   					},
+	   					type : "post",
+	   					success: function(data) {
+	   						//console.log("서버전송성공!");
+	   					},
+	   					error: function(error) {
+	   						console.log(error);
+	   					}
+	   				});
 	   				if(index % 2 == 0) {
 		   				$(this).attr("src", "/hobbyist/static/images/fullheart.png");
 	   				} else {
@@ -364,6 +392,34 @@
 	   				}
 	   				index++;
 	   			});
+   			});
+   			
+   			$(function() {
+   				var index = 1;
+   				$("#fullheartImg").click(function() {
+					var pid = <%=petition.getPetitionCode()%>
+	   				
+	   				$.ajax({
+	   					url: "/hobbyist/insertWishList.sg",
+	   					data : {
+	   						pid: pid,
+	   						index: index
+	   					},
+	   					type : "post",
+	   					success: function(data) {
+	   						//console.log("서버전송성공!");
+	   					},
+	   					error: function(error) {
+	   						console.log(error);
+	   					}
+	   				});
+	   				if(index % 2 == 0) {
+		   				$(this).attr("src", "/hobbyist/static/images/fullheart.png");
+	   				} else {
+	   					$(this).attr("src", "/hobbyist/static/images/emptyheart.png");
+	   				}
+	   				index++;
+   				});
    			});
    		</script>
 	</div>

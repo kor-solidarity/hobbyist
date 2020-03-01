@@ -153,4 +153,34 @@ public class SuggestService {
 		
 		return list;
 	}
+
+	//건의 찜했을 때 메소드
+	public int insertWishList(int petitionCode, int memberCode) {
+		Connection con = getConnection();
+		
+		int result = new SuggestDao().insertWishList(con, petitionCode, memberCode);
+		
+		if(result > 0) {
+			commit(con);
+		} else {
+			rollback(con);
+		}
+		
+		return result;
+	}
+
+	//찜한 건의 취소 했을 때 메소드
+	public int deleteWishList(int petitionCode, int memberCode) {
+		Connection con = getConnection();
+		
+		int result = new SuggestDao().deleteWishList(con, petitionCode, memberCode);
+		
+		if(result > 0) {
+			commit(con);
+		} else {
+			rollback(con);
+		}
+		
+		return result;
+	}
 }

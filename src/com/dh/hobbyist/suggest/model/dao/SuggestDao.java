@@ -478,5 +478,52 @@ public class SuggestDao {
 		
 		return list;
 	}
+	
+	//건의 찜했을 때 등록 메소드
+	public int insertWishList(Connection con, int petitionCode, int memberCode) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("insertWishList");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, petitionCode);
+			pstmt.setInt(2, memberCode);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
+	//찜한 건의 취소 했을 때 메소드
+	public int deleteWishList(Connection con, int petitionCode, int memberCode) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("deleteWishList");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, petitionCode);
+			pstmt.setInt(2, memberCode);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		
+		return result;
+	}
 
 }
