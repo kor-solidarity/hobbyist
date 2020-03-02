@@ -83,8 +83,8 @@ public class ApplyRefundDao {
 			while(rset.next()) {
 				ApplyRefund arf = new ApplyRefund();
 				arf.setRefundCode(rset.getInt("REFUND_PK"));
-				arf.setPaymentCode(rset.getInt("R.PAYMENT_PK"));
-				arf.setMemberCode(rset.getInt("M.MEMBER_PK"));
+				arf.setPaymentCode(rset.getInt("PAYMENT_PK"));
+				arf.setMemberCode(rset.getInt("MEMBER_PK"));
 				arf.setMemberName(rset.getString("MEMBER_NAME"));
 				arf.setPhone(rset.getString("MEMBER_PHONE"));
 				arf.setEmail(rset.getString("MEMBER_EMAIL"));

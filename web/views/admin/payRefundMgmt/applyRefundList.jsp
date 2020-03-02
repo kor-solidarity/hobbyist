@@ -182,28 +182,7 @@
 			<div id="infoArea">
 				<table id="infoT">
 					<!-- 테이블 첫번째 줄은 아이디, 비밀번호 등 조회할 내용 제목이다. background(#4E4E4E), font-color(white) 색 다르게 지정 -->
-					<tr>
-						<th style="width: 8%;">신청코드</th>
-						<th style="width: 11%;">결제코드</th>
-						<th style="width: 11%;">회원코드</th>
-						<th style="width: 7%;">이름</th>
-						<th style="width: 13%;">전화번호</th>
-						<th style="width: 11%;">아티스트 코드</th>
-						<th style="width: 11%;">환불 금액</th>
-						<th style="width: 17%;">신청일</th>
-						<th style="width: 14%;">상세보기</th>
-					</tr>
-					<tr>
-						<td style="width: 8%;">1</td>
-						<td style="width: 11%;">3</td>
-						<td style="width: 11%;">1</td>
-						<td style="width: 7%;">임찬영</td>
-						<td style="width: 13%;">01067471107</td>
-						<td style="width: 11%;">3</td>
-						<td style="width: 11%;">20000</td>
-						<td style="width: 17%;">2020-11-01</td>
-						<td style="width: 14%;"><button class="Btn">조회</button></td>
-					</tr>
+					
 				</table>
 			</div>
 		</article>
@@ -256,6 +235,7 @@
    	       		</tr>
    	       		<tr>
    	       			<td>환불 사유</td>
+   	       			<td id="reason">
    	       		</tr>
    	       		<tr>
    	       			<td colspan="2">
@@ -314,11 +294,11 @@
 				var $tr = $("<tr>");
 				
 				$tr.append('<th style="width: 8%;">신청코드</th>' +
-							'<th style="width: 11%;">결제코드</th>' +
-							'<th style="width: 11%;">회원코드</th>' +
+							'<th style="width: 10%;">결제코드</th>' +
+							'<th style="width: 10%;">회원코드</th>' +
 							'<th style="width: 7%;">이름</th>' +
-							'<th style="width: 13%;">전화번호</th>' +
-							'<th style="width: 11%;">아티스트 코드</th>' +
+							'<th style="width: 12%;">전화번호</th>' +
+							'<th style="width: 17%;">이메일</th>' +
 							'<th style="width: 11%;">환불 금액</th>' +
 							'<th style="width: 17%;">신청일</th>' +
 							'<th style="width: 14%;">상세보기</th>');
@@ -364,16 +344,15 @@
 					data: {num : num},
 					type: "post",
 					success: function(data) {
-						
 						$("#impNum").text(data.impNum);
 						$("#lessonName").text(data.lessonName);
 						$("#payCost").text(data.payCost);
 						$("#usingPoint").text(data.usingPoint);
-						/* 환불금액 */
+						$("#refundCost").text(data.payCost * (data.totalOrder / data.finishOrder);
 						$("#totalOrder").text(data.totalOrder);
 						$("#finishOrder").text(data.finishOrder);
 						$("#leftOrder").text(data.leftOrder);
-						/* 환불사유 modal reason */
+						$("#reason").text(data.leftOder);
 						
 						
 					},

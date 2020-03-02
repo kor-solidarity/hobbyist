@@ -21,13 +21,15 @@ public class ApplyRefund implements java.io.Serializable{
 	private int givePoint; 			//지금예정포인트
 	private int payCost;			//결제금액
 	private int resultCost;			//환불금액
+	private String reason;				//환불 사유
 	private String impNum;			//결제고유번호
 	
 	public ApplyRefund() {}
 
 	public ApplyRefund(int refundCode, int paymentCode, String lessonName, int memberCode, String memberName,
 			String phone, String email, int artistCode, int refundCost, Timestamp applyDate, int totalOrder,
-			int finishOrder, int leftOrder, int usingPoint, int givePoint, int payCost, int resultCost, String impNum) {
+			int finishOrder, int leftOrder, int usingPoint, int givePoint, int payCost, int resultCost, String reason,
+			String impNum) {
 		super();
 		this.refundCode = refundCode;
 		this.paymentCode = paymentCode;
@@ -46,6 +48,7 @@ public class ApplyRefund implements java.io.Serializable{
 		this.givePoint = givePoint;
 		this.payCost = payCost;
 		this.resultCost = resultCost;
+		this.reason = reason;
 		this.impNum = impNum;
 	}
 
@@ -185,6 +188,14 @@ public class ApplyRefund implements java.io.Serializable{
 		this.resultCost = resultCost;
 	}
 
+	public String getReason() {
+		return reason;
+	}
+
+	public void setReason(String reason) {
+		this.reason = reason;
+	}
+
 	public String getImpNum() {
 		return impNum;
 	}
@@ -200,6 +211,6 @@ public class ApplyRefund implements java.io.Serializable{
 				+ ", artistCode=" + artistCode + ", refundCost=" + refundCost + ", applyDate=" + applyDate
 				+ ", totalOrder=" + totalOrder + ", finishOrder=" + finishOrder + ", leftOrder=" + leftOrder
 				+ ", usingPoint=" + usingPoint + ", givePoint=" + givePoint + ", payCost=" + payCost + ", resultCost="
-				+ resultCost + ", impNum=" + impNum + "]";
+				+ resultCost + ", reason=" + reason + ", impNum=" + impNum + "]";
 	}
 }

@@ -23,7 +23,6 @@ public class SelectApplyListServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		List<ApplyRefund> applyList = new ApplyRefundService().selectList();
-		
 		response.setContentType("application/json");
 		response.setCharacterEncoding("UTF-8");
 		new Gson().toJson(applyList, response.getWriter());
