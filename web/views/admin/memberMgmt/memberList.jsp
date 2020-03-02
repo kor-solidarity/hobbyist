@@ -5,7 +5,14 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<link href="https://fonts.googleapis.com/css?family=ZCOOL+QingKe+HuangYou&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Do+Hyeon&display=swap" rel="stylesheet">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
  <style>
  
  	section {
@@ -88,12 +95,47 @@
  		background: #4E4E4E;
  		color: white;
  		height: 35px;
+ 		text-align: center;
  	}
  	
  	#infoArea td {
  		border: 1px solid black;
  		height: 45px;
  	}
+ 	
+ 	#artistDiv {
+    	width:500px;
+    }
+    
+    #artistTab {
+    	border-collapse:separate;
+    	border-spacing:0 10px;
+    }
+    
+    .box {
+    	width: 80px;
+    	height: 80px;
+    	border-radius: 70%;
+    	overflow: hidden;
+    }
+    
+    .profile {
+    	width: 100%;
+    	height: 100%;
+    	object-fit : cover;
+    }
+    
+    .emp {
+    	font-family: Do Hyeon;
+    	color:darkolivegreen;
+    	font-size:18px;
+    }
+
+    #downloadDiv {
+    	color:DodgerBlue;
+    	cursor:pointer;
+    	width:80px;
+    }
 </style>
 </head>
 
@@ -151,7 +193,7 @@
 		</article>
 	</section>
 	<!--  아티스트 신청 내역 상세 보기 모달 -->
-			<div class="modal fade" id="myModal2" role="dialog">
+			<div class="modal fade" id="myModal" role="dialog">
 				<div class="modal-dialog">
 
 					<!-- Modal content-->
@@ -431,30 +473,164 @@
 			});
 			
 			$(document).on("click", '.showArtist', function() {
-		    	var num = Number($(this).parent().parent().children("td:nth-child(2)").text());
-		    	console.log(num);
-		    	
-		    	$.ajax({
-		    		url: "/hobbyist/selectApplyDetail.re",
+				var num = Number($(this).parent().parent().children("td:nth-child(1)").text());
+				$.ajax({
+					url: "/hobbyist/applyInfo.ar",
 					data: {num : num},
 					type: "post",
 					success: function(data) {
-						$("#impNum").text(data.impNum);
-						$("#lessonName").text(data.lessonName);
-						$("#payCost").text(data.payCost);
-						$("#usingPoint").text(data.usingPoint);
-						$("#refundCost").text(data.payCost * (data.totalOrder / data.finishOrder));
-						$("#totalOrder").text(data.totalOrder);
-						$("#finishOrder").text(data.finishOrder);
-						$("#leftOrder").text(data.leftOrder);
-						$("#reason").text(data.reason);
-						$("#reasonDetail").text(data.reasonDetail);
+
+						for(var key in data) {
+							
+							if(key == 'member') {
+								var list = data[key];
+								var mem = list[0];
+								$("#arNick").text(mem.artistNick);
+								$("#arContent").text(mem.artistIntro);
+								
+								var bankName = "";
+								switch(mem.bankName) {
+								case "SH" : bankName = "신한"; break;
+								case "NH" : bankName = "농협"; break;
+								case "KB" : bankName = "국민"; break;
+								}
+								$("#arBank").text(bankName + " " + mem.bankOwner + " " + mem.bankNum);
+							}
+							
+							if(key == 'arCatList') {
+								var list = data[key];
+								var len = data[key].length;
+								
+								$("#cat1").text('');
+								$("#cat2").text('');
+								$("#cat3").text('');
+								$("#detailCat1").text('');
+								$("#detailCat2").text('');
+								$("#detailCat3").text('');
+								
+								for(var i = 0; i < len; i++) {
+									var category = list[i];
+									
+									var parentName = "";
+									
+									switch(category.categoryParentCode) {
+									case 1: parentName = "음악"; break;
+									case 9: parentName = "댄스"; break;
+									case 15: parentName = "영상/사진"; break;
+									case 20: parentName = "라이프스타일"; break;
+									case 25: parentName = "뷰티"; break;
+									case 33: parentName = "디자인"; break;
+									case 37: parentName = "스포츠"; break;
+									}
+									var catId = "#cat" + (i + 1);
+									var detailCatId = "#detailCat" + (i + 1);
+									$(catId).text(parentName);
+									$(detailCatId).text(category.categoryName);
+									
+								}
+								
+								
+							}
+							
+							if(key == 'arCertsList') {
+								var list = data[key];
+								var len = data[key].length;
+								
+								$("#certs1").text('');
+								$("#certs2").text('');
+								$("#certs3").text('');
+								$("#certsDetail1").text('');
+								$("#certsDetail2").text('');
+								$("#certsDetail3").text('');
+								
+								for(var i = 0; i < len; i++) {
+									var cert = list[i];
+									
+									var certsId = "#certs" + (i + 1);
+									var certsDetailId = "#certsDetail" + (i + 1);
+									
+									var str = "(" + cert.certDate + ", " + cert.certOrg + ")";
+									
+									$(certsId).text(cert.certName);
+									$(certsDetailId).text(str);
+									
+								}
+							}
+							
+							if(key == 'arCareerList') {
+								var list = data[key];
+								var len = data[key].length;
+								
+								$("#career1").text('');
+								$("#career2").text('');
+								$("#career3").text('');
+								
+								for(var i = 0; i < len; i++) {
+									var career = list[i];
+									
+									var careerId = "#career" + (i + 1);
+									
+									var str = career.orgName + "  " + career.rank + " / " + career.occupation + " / " + career.occupationTerm;
+									
+									$(careerId).text(str);
+								}
+							}
+							
+							if(key == 'arEduList') {
+								var list = data[key];
+								var len = data[key].length;
+								
+								$("#edu1").text('');
+								$("#edu2").text('');
+								$("#edu3").text('');
+								
+								for(var i = 0; i < len; i++) {
+									var edu = list[i];
+									
+									var eduId = "#edu" + (i + 1);
+									
+									var status = "";
+									
+									switch(edu.status) {
+									case 0 : status = "재학"; break;
+									case 1 : status = "졸업"; break;
+									}
+									
+									var str = edu.eduInsitituteName + " / " + edu.eduMajor + " / " + status;
+									
+									$(eduId).text(str);
+								}
+							}
+							
+							if(key == 'imgList') {
+								var list = data[key];
+								var len = data[key].length;
+								
+								for(var i = 0; i < len; i++) {
+									var img = list[i];
+									
+									var root = img.imageRoute + "/" + img.imageName;
+									
+									if(img.imageType == 'profile' && len == 1) {
+										$("#profileImg").attr("src", root);
+										$("#fileCode").val("");
+									} else if(img.imageType == 'profile' && len != 1) {
+										$("#profileImg").attr("src", root);
+									}
+									
+									if(img.imageType == 'artistproof') {
+										$("#proofFile").attr("src", root);
+										$("#fileCode").val(img.imageCode);
+									}
+								}
+							}
+							
+						}
 					},
 					error: function(error) {
 						console.log(error);
 					}
-		    		
-		    	});
+				});
 		    	
 	   	    	$("#myModal").modal();
 		});
