@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Properties;
 
+import com.dh.hobbyist.common.model.vo.PageInfo;
 import com.dh.hobbyist.suggest.model.vo.Category;
 
 import static com.dh.hobbyist.common.JDBCTemplate.*;
@@ -502,6 +503,45 @@ public class LessonDao {
 			close(pstmt);
 			close(rset);
 		}
+		
+		
+		return list;
+	}
+	//리스트 카운트 메소드(유승)
+	public int getListCount(Connection con) {
+		Statement stmt = null;
+		ResultSet rset = null;
+		
+		int listCount = 0;
+		
+		String query = prop.getProperty("listCount");
+		
+		try {
+			stmt = con.createStatement();
+			rset = stmt.executeQuery(query);
+			
+			if(rset.next()) {
+				listCount = rset.getInt(1);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(stmt);
+			close(rset);
+		}
+		
+		return listCount;
+	}
+	
+	//음악 카테고리 페이지 메소드(유승)
+	public ArrayList<HashMap<String, Object>> selectCategoryMusic(Connection con, PageInfo pi) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<HashMap<String, Object>> list = null;
+		HashMap<String, Object> hmap = null;
+		
+		String query =  prop.getProperty("selectListWithPaging");
 		
 		
 		return list;

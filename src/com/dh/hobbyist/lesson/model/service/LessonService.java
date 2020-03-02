@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import com.dh.hobbyist.common.model.vo.PageInfo;
 import com.dh.hobbyist.lesson.model.dao.LessonDao;
 import com.dh.hobbyist.suggest.model.vo.Category;
 
@@ -109,6 +110,28 @@ public class LessonService {
 		
 		return list;
 	}
+	// 페이지 카운트(유승)
+	public int getListCount() {
+		Connection con = getConnection();
+		
+		int listCount = new LessonDao().getListCount(con);
+		
+		close(con);
+		
+		return listCount;
+	}
+	
+	//음악 카테고리 페이지 메소드(유승)
+	public ArrayList<HashMap<String, Object>> selectCategoryMusic(PageInfo pi) {
+		Connection con = getConnection();
+		
+		ArrayList<HashMap<String, Object>> list = new LessonDao().selectCategoryMusic(con, pi);
+		
+		close(con);
+		
+		return list;
+	}
+	
 	
 
 }
