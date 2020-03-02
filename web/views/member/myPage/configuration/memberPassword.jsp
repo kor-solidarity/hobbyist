@@ -175,7 +175,7 @@ center_td0 {
 	 <%@ include file="/views/common/myPage.jsp"%> 
 	<%String passCheck = loginMember.getMemberPwd();%> 
 	
-	<form id="pwConfirmForm" action="<%=request.getContextPath() %>/pwConfirm.me" method="post"> 
+	<form id="pwConfirm" action="<%=request.getContextPath() %>/pwConfirm.me" method="post"> 
 	<div class="divcenter2">
 		<table align="border" class="tablecenter2">
 			<tr>
@@ -210,13 +210,13 @@ center_td0 {
 	<div class="divbottom3">
 	<!--  비밀번호 확인 텍스트 -->
 		<label class="label_bottom3">비밀번호:&nbsp; </label><input type="password" class="memberPwd" name="memberPwd" id="memberPwd" placeholder="비밀번호를 입력하세요.">
-		<input type="button" id="passclick" name="passclick" onclick="pwConfirm();" value="확인">
+		<input type="button" id="passclick" name="passclick" onclick="pwConfirmbt();" value="확인">
 	</div>
 	</div>
 	</form>
 	
 	<script>
-	function pwConfirm(){
+	function pwConfirmbt(){
 		console.log("패스워드전송");
 		$("pwConfirm").submit();
 	}
@@ -225,29 +225,26 @@ center_td0 {
 
  	 <script>
  	
- 	console.log("passCheck" + typeof(passCheck));
-    console.log(
+ 	console.log("passCheck 타입" + typeof($(#passCheck));
+    console.log("memberValue 타입" + typeof(passValue)));
 		 //비밀번호 동일 확인 기능
 	 	$(function(){
 	 		$("#passclick").click(function(){
 	 			var passValue = $("#memberPwd").val();
 				var passCheck = passCheck;
-	 			console.log( 'memberPwd값 : ' + passValue);
+	 			console.log("memberPwd값 : " + passValue);
 				console.log("passCheck" + passCheck);
+				
 				if(passValue == passCheck) {
-					
-			console.log("인증 성공시" + typeof(memberValue));
-					location.href = "<%=request.getContextPath()%>/views/member/myPage/configuration/memberUpdate.jsp";	
+				console.log("인증 성공시" + typeof(memberValue));
+				location.href = "<%=request.getContextPath()%>/views/member/myPage/configuration/memberUpdate.jsp";	
 				}else{
-			console.log( '실패시' + typeof(memberValue));
-					 
-					 $("#divtest").text("비밀번호가 정확하지 않습니다.").css("color","gray");
-					}
-				
-				
+				console.log( '실패시' + typeof(memberValue));			 
+				$("#divtest").text("비밀번호가 정확하지 않습니다.").css("color","gray");
+				}
 	 		});
 	 	})
-	</script>  
+</script>  
 
 
 <!-- 	<div class="divbottom4">
