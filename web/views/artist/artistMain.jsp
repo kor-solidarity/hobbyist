@@ -394,13 +394,16 @@
 										<% } %>
 									</td>
 									<td colspan="2">
-										<p>계좌번호&nbsp;<label style="font-size:13px; coLor:black;">(본인 명의 계좌로 이용해주세요.)</label></p> <select style="height: 32px" name="bankName">
+										<% if(loginMember != null) { %>
+											<input type="hidden" id="hideOwner" value="<%=loginMember.getMemberName()%>">
+										<%} %>
+										<p>계좌번호&nbsp;<label style="font-size:13px; coLor:black;">(본인 명의 계좌로 이용해주세요.)</label></p> <select style="height: 32px" name="bankName" id="bankName">
 											<option value="">은행명</option>
 											<option value="SH">신한은행</option>
 											<option value="KB">국민은행</option>
 											<option value="NH">농협은행</option>
-									</select> <input type="text" name="bankNum" style="height: 30px; width:150px;"  placeholder=" ' - ' 없이 입력해주세요">
-										<button style="height: 30px">계좌인증</button>
+									</select> <input type="text" name="bankNum" id="bankNum" style="height: 30px; width:150px;"  placeholder=" ' - ' 없이 입력해주세요">
+										<button type="button" id="bankBtn" style="height: 30px">계좌인증</button>
 									</td>
 								</tr>
 								<tr>
@@ -754,8 +757,9 @@
 									</td>
 									<td>
 										<% if(loginMember != null && loginMember.getArtistNick() != null)  {%>
+											<input type="hidden" id="hideNick" value="<%=loginMember.getArtistNick()%>">
 											<p>아티스트 닉네임</p> <input type="text" name="reNickName"
-												id=reNickName" style="height: 30px; width:150px;" value="<%=loginMember.getArtistNick()%>">
+												id="reNickName" style="height: 30px; width:150px;" value="<%=loginMember.getArtistNick()%>">
 											<button type="button" id="reCheckNick" style="height: 30px;">중복확인</button>
 											<input type="hidden" name="reLoginMemberPk" value="<%=loginMember.getMemberCode()%>">
 									</td>
@@ -766,8 +770,8 @@
 											<option value="SH">신한은행</option>
 											<option value="KB">국민은행</option>
 											<option value="NH">농협은행</option>
-									</select> <input type="text" name="reBankNum" style="height: 30px; width:150px;" placeholder=" ' - ' 없이 입력해주세요" value="<%=loginMember.getBankNum()%>">
-										<button style="height: 30px">계좌인증</button>
+									</select> <input type="text" name="reBankNum" id="reBankNum" style="height: 30px; width:150px;" placeholder=" ' - ' 없이 입력해주세요" value="<%=loginMember.getBankNum()%>">
+										<button type="button" id="reBankBtn" style="height: 30px">계좌인증</button>
 									</td>
 								</tr>
 								<tr>
@@ -1082,6 +1086,11 @@
 	</div>
 	
 	<script>
+		var ckNick = false;
+		var ckBank = false;
+		var reCkNick = false;
+		var reCkBank = false;
+		
 		$(function() {
 			//자기소개 부분 textarea에서 255자가 넘지 못하게
 			$("#introduce").keyup(
@@ -1120,11 +1129,12 @@
 						type : "post",
 						data : {nick : nick},
 						success : function(data) {
-							//console.log("서버 전송 성공");
 							if (data == "fail") {
 								alert("닉네임이 중복됩니다.");
+								ckNick = false;
 							} else {
 								alert("사용 가능한 닉네임입니다.");
+								ckNick = true;
 							}
 						},
 						error : function(error) {
@@ -1133,7 +1143,67 @@
 					});
 				}
 			});
-	
+			
+			$("#nickName").change(function() {
+				ckNick = false;
+			});
+			
+			//계좌 인증 버튼 클릭시
+			$("#bankBtn").click(function() {
+				var sentence = $("#bankName option:checked").text() + " " + $("#bankNum").val() + " (예금주 :" + $("#hideOwner").val() + ") 가 맞나요?";
+				if(confirm(sentence)) {
+					ckBank = true;
+				} else {
+					ckBank = false;
+				};
+			});
+			
+			$("#reCheckNick").click(function() {
+				var nick = $("#reNickName").val();
+				//console.log(nick);
+				if(nick == '') {
+					alert("닉네임을 적어주세요.");
+				} else {
+					if(nick == $("#hideNick").val()){
+						alert("사용 가능한 닉네임 입니다.");
+						reCkNick = true;
+					} else {
+						$.ajax({
+							url : "/hobbyist/checkNick.ar",
+							type : "post",
+							data : {nick : nick},
+							success : function(data) {
+								if (data == "fail") {
+									alert("닉네임이 중복됩니다.");
+									reCkNick = false;
+								} else {
+									alert("사용 가능한 닉네임입니다.");
+									reCkNick = true;
+								}
+							},
+							error : function(error) {
+								console.log(error);
+							}
+						});
+						
+					}
+				}
+			});
+			
+			$("#reNickName").change(function() {
+				reCkNick = false;
+			});
+			
+			//계좌 인증 버튼 클릭시
+			$("#reBankBtn").click(function() {
+				var sentence = $("#reBankName option:checked").text() + " " + $("#reBankNum").val() + " (예금주 :" + $("#hideOwner").val() + ") 가 맞나요?";
+				if(confirm(sentence)) {
+					reCkBank = true;
+				} else {
+					reCkBank = false;
+				};
+			});
+			
 			// file input 태그 숨기기 
 			$("#fileArea").hide();
 			$("#reFileArea").hide();
@@ -1841,10 +1911,19 @@
 
 			});
 			$('#saveModalBtn').on('click', function() {
-				if($("#artistImg1").val() == "") {
-					alert("필수사항을 모두 입력해주세요.");
-				} else {
-					$("#artistForm").submit();
+				if(ckNick == true){
+					if(ckBank == true){
+						if($("#artistImg1").val() == "" || $("#nickName").val() == "" || $("#bankName").val() == "" || $("#bankNum").val() == "" || $("#introduce").val() == "" || $("#detailCategory").val() == "") {
+							alert("필수사항을 모두 입력해주세요.");
+						} else {
+							$("#artistForm").submit();
+						}
+					}else {
+						alert("계좌 인증 후 진행해주세요.");
+					}
+					
+				}else {
+					alert("닉네임 중복확인 후 진행해주세요.");
 				}
 			});
 			
@@ -1874,8 +1953,20 @@
 
 			});
 			$('#reSaveModalBtn').on('click', function() {
-				
-					$("#reartistForm").submit();
+				if(reCkNick == true){
+					if(reCkBank == true){
+						if($("#reNickName").val() == "" || $("#reBankName").val() == "" || $("#reBankNum").val() == "" || $("#reIntroduce").val() == "" || $("#reDetailCategory1").val() == "") {
+							alert("필수사항을 모두 입력해주세요.");
+						} else {
+							$("#reartistForm").submit();
+						}
+					}else {
+						alert("계좌 인증 후 진행해주세요.");
+					}
+					
+				}else {
+					alert("닉네임 중복확인 후 진행해주세요.");
+				}
 				
 			});
 		});
