@@ -7,6 +7,7 @@ import java.util.List;
 import com.dh.hobbyist.suggest.model.dao.SuggestDao;
 import com.dh.hobbyist.suggest.model.vo.PageInfo;
 import com.dh.hobbyist.suggest.model.vo.Petition;
+import com.dh.hobbyist.suggest.model.vo.PetitionWishList;
 import com.dh.hobbyist.suggest.model.vo.Reply;
 
 import static com.dh.hobbyist.common.JDBCTemplate.*;
@@ -158,10 +159,14 @@ public class SuggestService {
 	public int insertWishList(int petitionCode, int memberCode) {
 		Connection con = getConnection();
 		
-		int result = new SuggestDao().insertWishList(con, petitionCode, memberCode);
+		int result1 = new SuggestDao().insertWishList(con, petitionCode, memberCode);
+		int result = 0;
 		
-		if(result > 0) {
-			commit(con);
+		if(result1 > 0) {
+			result = new SuggestDao().updateAddWishListed(con, petitionCode);
+			if(result > 0) {
+				commit(con);
+			}
 		} else {
 			rollback(con);
 		}
@@ -173,14 +178,40 @@ public class SuggestService {
 	public int deleteWishList(int petitionCode, int memberCode) {
 		Connection con = getConnection();
 		
-		int result = new SuggestDao().deleteWishList(con, petitionCode, memberCode);
+		int result1 = new SuggestDao().deleteWishList(con, petitionCode, memberCode);
+		int result = 0;
 		
-		if(result > 0) {
-			commit(con);
+		if(result1 > 0) {
+			result = new SuggestDao().updateSubWishListed(con, petitionCode);
+			if(result > 0) {
+				commit(con);
+			}
 		} else {
 			rollback(con);
 		}
 		
 		return result;
+	}
+
+	//마이페이지에서 쓰일 내가 찜한 건의 게시판 갯수 조회용 메소드
+	public int getMyWishListCount(int memberCode) {
+		Connection con = getConnection();
+		
+		int listCount = new SuggestDao().getMyWishListCount(con, memberCode);
+		
+		close(con);
+		
+		return listCount;
+	}
+
+	//마이페이지에서 쓰일 내가 찜한 건의 게시판 리스트 조회용 메소드 (페이징 처리)
+	public ArrayList<PetitionWishList> selectMyWishList(int memberCode, PageInfo pi) {
+		Connection con = getConnection();
+		
+		ArrayList<PetitionWishList> list = new SuggestDao().selectMyWishList(con, memberCode, pi);
+		
+		close(con);
+		
+		return list;
 	}
 }

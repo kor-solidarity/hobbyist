@@ -70,10 +70,10 @@
 		</table>
 		<script>
 			function goLikedSug() {
-				location.href = "<%=request.getContextPath()%>/views/member/myPage/myLesson/likedSuggestion.jsp";
+				location.href = "<%=request.getContextPath()%>/selectMyWishList.sg";
 			}
 			function goRegSug() {
-				location.href = "<%=request.getContextPath()%>/views/member/myPage/myLesson/registeredSuggestion.jsp";				
+				location.href = "<%=request.getContextPath()%>/selectMyList.sg";				
 			}
 		</script>
 		<br>
