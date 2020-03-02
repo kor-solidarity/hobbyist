@@ -362,4 +362,47 @@ public class PlaceDao {
 
         return result;
     }
+
+    public int updateImageName(Connection con, Image image, int pk) {
+        PreparedStatement preparedStatement = null;
+        int result = 0;
+
+        String query = prop.getProperty("updateImageName");
+
+        try {
+            preparedStatement = con.prepareStatement(query);
+
+            preparedStatement.setString(1, image.getImageName());
+            preparedStatement.setInt(2,pk);
+
+            result = preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally {
+            close(preparedStatement);
+        }
+
+        return result;
+    }
+
+    public int deleteImage(Connection con, int pk) {
+        PreparedStatement preparedStatement = null;
+        int result = 0;
+
+        String query = prop.getProperty("deleteImage");
+
+        try {
+            preparedStatement = con.prepareStatement(query);
+
+            preparedStatement.setInt(1, pk);
+
+            result = preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return result;
+    }
 }

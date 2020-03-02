@@ -159,20 +159,11 @@
                                         // 사진로딩
                                         int counter = 1;
                                     %>
-                                    <%--Image mainImage = null;--%>
-                                    <%--// 1차로 메인을 솎아낸다.--%>
-                                    <%--for (Image img : images) {--%>
-                                    <%--    if (img.getImageMain() == 1) {--%>
-                                    <%--        mainImage = img;--%>
-                                    <%--        break;--%>
-                                    <%--    }--%>
-                                    <%--}--%>
-
                                     <%-- 포문 돌려가면서 사진을 채운다--%>
                                     <% for (Image image : images) {%>
                                     <td>
-                                        <input type="button" id="delPic<%=counter%>"
-                                               onclick="delPic(<%=counter%>)">사진 삭제</input>
+                                        <input type="button" id="delPic<%=counter%>" class="picDelBtn"
+                                               onclick="delPic(<%=counter%>)" value="사진 삭제"/>
                                         <br>
                                         <img src="<%=request.getContextPath()%>/<%=image.getImageRoute()%>/<%=image.getImageName()%>"
                                              id="pic<%=counter%>">
@@ -222,11 +213,11 @@
                     </tr>
                 </table>
                 <div id="pic_files">
-<%--                    <input type="text" name="delFile1" value="0">--%>
-<%--                    <input type="text" name="delFile2" value="0">--%>
-<%--                    <input type="text" name="delFile3" value="0">--%>
-<%--                    <input type="text" name="delFile4" value="0">--%>
-<%--                    <input type="text" name="delFile5" value="0">--%>
+                    <input type="text" name="delFile1" id="delFile1" class="delFile" value="0">
+                    <input type="text" name="delFile2" id="delFile2" class="delFile" value="0">
+                    <input type="text" name="delFile3" id="delFile3" class="delFile" value="0">
+                    <input type="text" name="delFile4" id="delFile4" class="delFile" value="0">
+                    <input type="text" name="delFile5" id="delFile5" class="delFile" value="0">
                     <input type="file" name="file1" id="file1" onchange="changedPic(this, 1)">
                     <input type="file" name="file2" id="file2" onchange="changedPic(this, 2)">
                     <input type="file" name="file3" id="file3" onchange="changedPic(this, 3)">
@@ -252,21 +243,16 @@
     var pic3 = $("#pic3").attr('src');
     var pic4 = $("#pic4").attr('src');
     var pic5 = $("#pic5").attr('src');
-    // 이 기능은 수정버튼 누를때만 활성화됨
+
     $(function () {
         // 이미지파일 들어갈 파일인풋 삭제
         $("#pic_files").hide();
         $("#reset").hide();
+        $('.picDelBtn').hide();
     });
 
     // 수정취소 할 시
     function resetClicked () {
-        console.log(pic1);
-        console.log(pic2);
-        console.log(pic3);
-        console.log(pic4);
-        console.log(pic5);
-
         // 취소를 누르면 모든걸 다 되돌린다
         $("#reset").hide();
         $("#submitBtn").attr('disabled', true);
@@ -283,6 +269,12 @@
         $('#pic4').prop('onclick', null).off('click');
         $('#pic5').prop('onclick', null).off('click');
 
+        // 사진삭제로 설정된거 전부 해제.
+        $('.delFile').val('0');
+        $('.picDelBtn').hide();
+
+        $("input, textarea, #submitBtn").attr("disabled", true);
+        $("#editBtn").removeAttr("disabled");
     }
 
     function startEdit () {
@@ -290,6 +282,7 @@
         // disabled 뜬거 다 제거
         $("input, textarea, #submitBtn").removeAttr("disabled");
         $("#reset").show();
+        $('.picDelBtn').show();
 
         // 각 사진 미리보기와 파일 인풋을 맞게 연동시켜준다.
         $('#pic1').click(function () {
@@ -329,6 +322,20 @@
             // 뭐던간에 없으면 위에 onload 자체가 작동하질 않음
             reader.readAsDataURL(obj.files[0]);
         }
+    }
+
+    // 사진을 삭제하겠다고 표시하기.
+    function delPic (num) {
+        let delFile = "#delFile";
+        $(delFile + num).val('1');
+
+        // default 이미지로 변경
+        let pic = "#pic" + num;
+        $(pic).attr("src", '<%=request.getContextPath()%>/static/images/iphoneCameraW.png');
+
+        // 누른 해당 버튼 숨기기.
+        $("#delPic" + num).hide();
+
     }
 </script>
 </body>

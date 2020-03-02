@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
 import java.sql.Date;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Enumeration;
 
@@ -28,6 +29,7 @@ public class UpdatePlaceCompanyServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         System.out.println("UpdatePlaceCompanyServlet");
+
 
         // 여기서 개인적으로 가장 많이 고민했던 점은 지금 사진이 먼져 올라간 다음에야 들어가지는데,
         // 사진을 수정하거나 할 때 이걸 조치할 수 있는거지??
@@ -75,10 +77,33 @@ public class UpdatePlaceCompanyServlet extends HttpServlet {
             }
             System.out.println("fileName: " + fileName);
 
-            // 위에 목록 역순으로 들어간거 순서 재정렬
-            ArrayList<String > fileList = new ArrayList<>();
-
-
+            //
+            // int currentPage = 15;
+            // try {
+            //     currentPage = Integer.parseInt(request.getParameter("currentPage"));
+            // }catch (NumberFormatException ignored){
+            //
+            // }
+            // System.out.println("currentPage: " + currentPage);
+            //
+            // // DEBUG: 현재는 파일을 저장할 필요가 없음. 고로 바로바로 삭제
+            // System.out.println("DEBUG: deleting files...");
+            // for (int i = 0; i < fileName.size(); i++) {
+            //     File file = new File(root + savePath + "/" + fileName.get(i));
+            //     if (file.exists()) {
+            //         System.out.println("deleting added file: " + file.getName());
+            //         System.out.println(file.delete());
+            //     } else {
+            //         System.out.println("wut no file " + file.getName());
+            //     }
+            // }
+            //
+            // Boolean y = true;
+            //
+            // if (y) {
+            //     System.out.println("return");
+            //     return;
+            // }
 
             // 우선 변환할 대상부터 집어온다.
             // 뽑아와야 하는 PK
@@ -124,6 +149,25 @@ public class UpdatePlaceCompanyServlet extends HttpServlet {
                     roomSize += "3";
                 }
             }
+
+            // 사진 확인용
+
+
+            // 위에 파일목록 역순으로 들어간거 순서 재정렬
+            ArrayList<Image> fileList = new ArrayList<>();
+            for (int i = fileName.size() - 1; i >= 0; i--) {
+                System.out.println(i);
+                Image image = null;
+                if (fileName.get(i) != null) {
+                    image = new Image();
+                    image.setImageRoute(savePath);
+                    image.setImageName(fileName.get(i));
+                    image.setImageType("PLACE_COMPANY");
+                    image.setImageFkPk(companyPk);
+                }
+                fileList.add(image);
+            }
+
 
             // 로딩한 회사와 인풋값 이제 하나하나 대조해본다.
             // 조금이라도 다른게 있으면 교체
@@ -173,21 +217,90 @@ public class UpdatePlaceCompanyServlet extends HttpServlet {
             // 기존 사진 불러오기.
             ArrayList<Image> imageArrayList = placeService.selectCompanyImage(companyPk);
 
-            // 각각 목록이랑 대조해야한다.
+            /*
+             * 확인절차:
+             * 0. 메인용 사진인지 확인(첫번째 사진인가?)
+             * 1. 첫번째 사진에 업로드된게 있는지 확인한다.
+             *   - 있으면 그 위치에 원래 등록된 다른 사진이 있었는지 확인한다.
+             *   - 그럼 원래 업데이트 조치하고 사진을 삭제.
+             *   - 업로드된게 있지만 사진이 없으면 그냥 추가하면 됨.
+             * 2. 없으면 사진 index 에 삭제명령이 있었는지 확인한다.
+             *   - 있으면 삭제조치만 한다.
+             *   - 이때 메인사진인지 꼭 확인할것! 메인이면 그다음꺼로 메인 넘겨야함.
+             * 3. 그럼 그냥 기존 사진이 존재하는가?
+             *   - 아무것도 없이 사진만 달랑 존재하면 패스
+             * */
 
+            // 0. 메인용 사진인지 확인(첫번째 사진인가?)
+            Boolean mainImageBool = true;
+
+            // 삭제명령 목록
+            ArrayList<String> picOpt = new ArrayList<>();
+            picOpt.add(multipartRequest.getParameter("delFile1"));
+            picOpt.add(multipartRequest.getParameter("delFile2"));
+            picOpt.add(multipartRequest.getParameter("delFile3"));
+            picOpt.add(multipartRequest.getParameter("delFile4"));
+            picOpt.add(multipartRequest.getParameter("delFile5"));
+
+            // 업로드된 파일목록과 대조해야 한다.
+            int registeredFileSize = imageArrayList.size() - 1;
+            for (int i = 0; i < fileList.size(); i++) {
+                int isMain = 0;
+                // 메인사진인지 확인하기 위한 용도
+                if (mainImageBool) {
+                    isMain = 1;
+                }
+                // 1. 사진에 업로드된게 있는지 확인한다.
+                if (fileList.get(i) != null) {
+                    // 있으면 그 위치에 원래 등록된 다른 사진이 있었는지 확인한다.
+                    if (registeredFileSize >= i) {
+                        // 그럼 원래 업데이트 조치하고 사진을 삭제.
+                        int result = placeService.updateImageName(fileList.get(i), imageArrayList.get(i).getImageCode());
+                        if (result > 0) {
+                            File leFile = new File(root + savePath + "/" + imageArrayList.get(i).getImageName());
+                            leFile.delete();
+                        }
+                    } else {
+                        // 업로드된게 있지만 사진이 없으면 그냥 추가하면 됨.
+
+                        // 단, 이때 메인사진인지 확인을 해야함. 메인이면 그다음꺼로 메인 넘겨야함.
+                        // ^ 이건 포문 첫시작에 이미 확인함
+                        int result = placeService.insertImage(fileList.get(i), isMain);
+                        mainImageBool = false;
+                    }
+                    continue;
+                } else if (picOpt.get(i).equals("1")) {
+                    // 2. 없으면 사진에 삭제명령이 있었는지 확인한다.
+                    // 있으면 삭제조치한다.
+                    int result = placeService.deleteImage(imageArrayList.get(i));
+
+                    // 이때 메인사진인지 꼭 확인할것! 메인이면 그다음꺼로 메인 넘겨야함.
+                    if (result > 0 && mainImageBool) {
+                        continue;
+                    }
+                }
+                // 3. 그럼 그냥 기존 사진이 존재하는가?
+                // 아무것도 없이 사진만 달랑 존재하면 패스
+                // 여기까지 컨티뉴 없이 걸렸으면 메인사진이 어딘가에 걸린거니 고이 쉬게끔.
+                if (mainImageBool) {
+                    mainImageBool = false;
+                }
+            }
 
 
             // DEBUG: 현재는 파일을 저장할 필요가 없음. 고로 바로바로 삭제
-            System.out.println("DEBUG: deleting files...");
-            for (int i = 0; i < fileName.size(); i++) {
-                File file = new File(root + savePath + "/" + fileName.get(i));
-                if (file.exists()) {
-                    System.out.println("deleting added file: " + file.getName());
-                    System.out.println(file.delete());
-                } else {
-                    System.out.println("wut no file " + file.getName());
-                }
-            }
+            // System.out.println("DEBUG: deleting files...");
+            // for (int i = 0; i < fileName.size(); i++) {
+            //     File file = new File(root + savePath + "/" + fileName.get(i));
+            //     if (file.exists()) {
+            //         System.out.println("deleting added file: " + file.getName());
+            //         System.out.println(file.delete());
+            //     } else {
+            //         System.out.println("wut no file " + file.getName());
+            //     }
+            // }
+
+
 
 
         }
