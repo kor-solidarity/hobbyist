@@ -1781,7 +1781,7 @@
 			});
 			
 			$('#isArtistBtn').on('click', function() {
-				alert("이미 아티스트 권한입니다.");
+				alert("이미 아티스트 승인이 완료되셨습니다!");
 			});
 			
 			$('#openModalBtn').on('click', function() {

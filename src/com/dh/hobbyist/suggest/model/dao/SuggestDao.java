@@ -13,6 +13,7 @@ import java.util.Properties;
 
 import com.dh.hobbyist.suggest.model.vo.PageInfo;
 import com.dh.hobbyist.suggest.model.vo.Petition;
+import com.dh.hobbyist.suggest.model.vo.PetitionWishList;
 import com.dh.hobbyist.suggest.model.vo.Reply;
 
 import static com.dh.hobbyist.common.JDBCTemplate.*;
@@ -524,6 +525,122 @@ public class SuggestDao {
 		
 		
 		return result;
+	}
+	
+	//건의 하트 수 추가 업데이트 메소드
+	public int updateAddWishListed(Connection con, int petitionCode) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("updateAddwishListed");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, petitionCode);
+			pstmt.setInt(2, petitionCode);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		
+		return result;
+	}
+	
+	//건의 하트 수 차감 업데이트 메소드
+	public int updateSubWishListed(Connection con, int petitionCode) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("updateSubwishListed");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, petitionCode);
+			pstmt.setInt(2, petitionCode);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		
+		return result;
+	}
+	
+	//마이페이지에서 쓰일 내가 찜한 건의 게시판 갯수 조회용 메소드
+	public int getMyWishListCount(Connection con, int memberCode) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		int listCount = 0;
+		
+		String query = prop.getProperty("myWishListCount");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, memberCode);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				listCount = rset.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return listCount;
+	}
+	
+	//마이페이지에서 쓰일 내가 찜한 건의 게시판 리스트 조회용 메소드 (페이징 처리)
+	public ArrayList<PetitionWishList> selectMyWishList(Connection con, int memberCode, PageInfo pi) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<PetitionWishList> list = null;
+		
+		String query = prop.getProperty("selectMyWishListWithPaging");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			
+			int startRow = (pi.getCurrentPage() - 1) * pi.getLimit() + 1;
+			int endRow = startRow + pi.getLimit() - 1;
+			
+			pstmt.setInt(1, memberCode);
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			
+			rset = pstmt.executeQuery();
+			
+			list = new ArrayList<PetitionWishList>();
+			
+			while(rset.next()) {
+				PetitionWishList p = new PetitionWishList();
+				p.setPetitionCode(rset.getInt("LESSON_PETITION_PK"));
+				p.setMemberCode(rset.getInt("MEMBER_PK"));
+				
+				list.add(p);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+		
+		
+		return list;
 	}
 
 }
