@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Properties;
 
+import com.dh.hobbyist.lesson.model.vo.Image;
 import com.dh.hobbyist.lesson.model.vo.Lesson;
 import com.dh.hobbyist.lesson.model.vo.LessonOrder;
 import com.dh.hobbyist.lesson.model.vo.LessonSchedule;
@@ -147,6 +148,30 @@ public class LessonRelatedDao {
 			pstmt.setInt(2, order.getOrderTime());
 			pstmt.setTimestamp(3, order.getOrderStart());
 			pstmt.setTimestamp(4, order.getOrderEnd());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int insertImage(Connection con, Image image) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("insertImage");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, image.getImageRoute());
+			pstmt.setString(2, image.getImageName());
+			pstmt.setInt(3, image.getImageFkPk());
+			pstmt.setInt(4, image.getImageMain());
 			
 			result = pstmt.executeUpdate();
 			

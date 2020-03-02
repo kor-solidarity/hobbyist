@@ -574,9 +574,6 @@ body {
 								</tr>
 								<tr>
 									<td colspan="3">
-										<span id="titleImgArea" style="margin:0 5px">
-											<img id="titleImg" width="120" height="80" src="<%= request.getContextPath() %>/static/images/iphoneCameraW.png">
-										</span>
 										<span id="contentImgArea1" style="margin:0 5px">
 											<img id="contentImg1" width="120" height="80" src="<%= request.getContextPath() %>/static/images/iphoneCameraW.png">
 										</span>
@@ -586,7 +583,13 @@ body {
 										<span id="contentImgArea3" style="margin:0 5px">
 											<img id="contentImg3" width="120" height="80" src="<%= request.getContextPath() %>/static/images/iphoneCameraW.png">
 										</span>
+										<span id="contentImgArea4" style="margin:0 5px">
+											<img id="contentImg4" width="120" height="80" src="<%= request.getContextPath() %>/static/images/iphoneCameraW.png">
+										</span>
 									</td>
+								</tr>
+								<tr>
+									<td><div align="left" style="color:#A7A1A1; margin-left:39px;">대표사진</div></td>
 								</tr>
 							</table>
 							<div id="fileArea">
@@ -600,17 +603,16 @@ body {
 								$(function() {
 									$("#fileArea").hide();
 									
-									$("#titleImgArea").click(function(){
-										/* console.log("click이 작동하는지 여부"); */
+									$("#contentImgArea1").click(function(){
 										$("#lessonImg1").click();
 									})
-									$("#contentImgArea1").click(function(){
+									$("#contentImgArea2").click(function(){
 										$("#lessonImg2").click();
 									})
-									$("#contentImgArea2").click(function(){
+									$("#contentImgArea3").click(function(){
 										$("#lessonImg3").click();
 									})
-									$("#contentImgArea3").click(function(){
+									$("#contentImgArea4").click(function(){
 										$("#lessonImg4").click();
 									})
 								});
@@ -698,8 +700,14 @@ body {
 										<div><span id="artIntroCtn">0</span><span>/255</span></div>
 										<script>
 											$(function(){
+												
+												inputLength = $("#artIntro").val().length;
+												
+												$("#artIntroCtn").html(inputLength); 
+												
 												//글자수 제한 메소드
 												$("#artIntro").keyup(function(){
+													
 													var inputLength = $(this).val().length;
 													
 													if(inputLength > 255) {
@@ -708,7 +716,7 @@ body {
 														$("#artIntroCtn").html(inputLength);
 													}
 													
-												})
+												});
 											});
 										</script>
 									</td>

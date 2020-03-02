@@ -1,5 +1,6 @@
 package com.dh.hobbyist.lesson.controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.sql.Date;
 import java.sql.Time;
@@ -18,6 +19,7 @@ import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 
 import com.dh.hobbyist.common.MyFileRenamePolicy;
 import com.dh.hobbyist.lesson.model.service.LessonRelatedService;
+import com.dh.hobbyist.lesson.model.vo.Image;
 import com.dh.hobbyist.lesson.model.vo.Lesson;
 import com.dh.hobbyist.lesson.model.vo.LessonOrder;
 import com.dh.hobbyist.lesson.model.vo.LessonSchedule;
@@ -49,14 +51,14 @@ public class InsertLessonServlet extends HttpServlet {
 			int maxSize = 1024 * 1024 * 10;
 			
 			String root = request.getSession().getServletContext().getRealPath("/");
-			//카데고리별로 폴더를 구분하는 것도 고려
+			//카데고리별로 폴더를 구분하는 것도 향후 고려
 			String savePath = root + "static/upload/lesson";
 			
 			MultipartRequest multiRequest = new MultipartRequest(request, savePath, maxSize, "UTF-8", new MyFileRenamePolicy());
 			
 			//수업 이미지 관련 사항
 			ArrayList<String> saveFiles = new ArrayList<String>();
-			ArrayList<String> originFiles = new ArrayList<String>();
+			//ArrayList<String> originFiles = new ArrayList<String>();
 			
 			Enumeration<String> files = multiRequest.getFileNames();
 			
@@ -66,7 +68,24 @@ public class InsertLessonServlet extends HttpServlet {
 				System.out.println("name : " + name);
 				
 				saveFiles.add(multiRequest.getFilesystemName(name));
-				originFiles.add(multiRequest.getOriginalFileName(name));
+				//originFiles.add(multiRequest.getOriginalFileName(name));
+			}
+			
+			ArrayList<Image> fileList = new ArrayList<Image>();
+			
+			for(int i = saveFiles.size() - 1; i >= 0; i--) {
+				Image img = new Image();
+				img.setImageRoute("static/upload/lesson");
+				img.setImageName(saveFiles.get(i));
+				
+				if(i == saveFiles.size() - 1) {
+					//대표사진
+					img.setImageMain(0);
+				} else {
+					img.setImageMain(1);
+				}
+				
+				fileList.add(img);
 			}
 			
 			//수업 관련 사항
@@ -140,6 +159,7 @@ public class InsertLessonServlet extends HttpServlet {
 			lessonRelated.put("lesson", lesson);
 			lessonRelated.put("schedule", schedule);
 			lessonRelated.put("orderList", orderList);
+			lessonRelated.put("fileList", fileList);
 			
 			int result = new LessonRelatedService().insertLessonRelated(lessonRelated);
 			
@@ -148,6 +168,13 @@ public class InsertLessonServlet extends HttpServlet {
 				page = "views/common/successPage.jsp";
 				request.setAttribute("successCode", "insertLesson");
 			} else {
+				
+				//실패시 저장된 사진 삭제
+				for(int i = 0; i < saveFiles.size(); i++) {
+					File failedFile = new File(savePath + saveFiles.get(i));
+					failedFile.delete();
+				}
+				
 				page = "views/common/errorPage.jsp";
 				request.setAttribute("msg", "수업 등록에 실패하였습니다");
 			}
