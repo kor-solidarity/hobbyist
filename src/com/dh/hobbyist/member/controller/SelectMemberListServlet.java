@@ -46,12 +46,8 @@ public class SelectMemberListServlet extends HttpServlet {
 				memberInfo.put("warning", member.getWarnings());
 				memberInfo.put("regDate", member.getRegDate().toString());
 				
-				System.out.println(member.getRegDate());
-				
-				System.out.println(memberInfo);
 				result.add(memberInfo);
 			}
-			System.out.println(result);
 			response.setContentType("application/json");
 			PrintWriter out = response.getWriter();
 			

@@ -104,7 +104,8 @@
  	}
  	
  	#modalT {
-  		width: 465px;
+  		width: 420px;
+  		margin: 0 auto;
  		
  	}
  	#modalT tr td:nth-child(1){
@@ -113,11 +114,19 @@
  		line-height: 40px;
  	}
  	
- 	#modalReason {
+ 	#modalT tr td:nth-child(2){
+		text-align: right; 	
+		font-size: 15px;
+ 	}
+ 	
+ 	#reasonDetail {
  		height: 80px;
  		border: 1px solid black;
  		overflow-x: hidden;
         overflow-y: auto;
+        font-weight: normal;
+        font-size: 15px;
+        line-height: 20px;
  	}
  	
  	#refuseArea {
@@ -235,11 +244,11 @@
    	       		</tr>
    	       		<tr>
    	       			<td>환불 사유</td>
-   	       			<td id="reason">
+   	       			<td id="reason"></td>
    	       		</tr>
    	       		<tr>
-   	       			<td colspan="2">
-   	       				<div id="modalReason">
+   	       			<td colspan="2" style="padding-top: 20px;">
+   	       				<div id="reasonDetail">
    	       				</div>
    	       			</td>
    	       		</tr>
@@ -255,6 +264,8 @@
   		</div>
   		
   		<!-- 반려시 뜨는 모달 -->
+  		
+  		
   		<div class="modal fade" id="myModal1" role="dialog" style="display: none;">
    	 <div class="modal-dialog">
     
@@ -315,7 +326,7 @@
 					var $email = $("<td>").text(data[key].email);
 					var $acode = $("<td>").text(data[key].artistCode);
 					var $rDate = $("<td>").text(data[key].applyDate);
-					var $btn = $("<td>").html('<button class="Btn">조회</button>');
+					var $btn = $("<td>").html("<button class='Btn'>조회</button>");
 					
 					$tr.append($rcode);
 					$tr.append($pcode);
@@ -327,6 +338,7 @@
 					$tr.append($rDate);
 					$tr.append($btn);
 					$table.append($tr);
+					
 				}
 			},
 			error: function(status) {
@@ -334,8 +346,7 @@
 			}
 		});
 		
-		$(document).ready(function() {
-		    $(".Btn").click(function(){
+		$(document).on("click", '.Btn', function() {
 		    	var num = Number($(this).parent().parent().children("td:nth-child(2)").text());
 		    	console.log(num);
 		    	
@@ -348,13 +359,12 @@
 						$("#lessonName").text(data.lessonName);
 						$("#payCost").text(data.payCost);
 						$("#usingPoint").text(data.usingPoint);
-						$("#refundCost").text(data.payCost * (data.totalOrder / data.finishOrder);
+						$("#refundCost").text(Math.floor(data.payCost * (data.finishOrder / data.totalOrder)));
 						$("#totalOrder").text(data.totalOrder);
 						$("#finishOrder").text(data.finishOrder);
 						$("#leftOrder").text(data.leftOrder);
-						$("#reason").text(data.leftOder);
-						
-						
+						$("#reason").text(data.reason);
+						$("#reasonDetail").text(data.reasonDetail);
 					},
 					error: function(error) {
 						console.log(error);
@@ -363,7 +373,6 @@
 		    	});
 		    	
 	   	    	$("#myModal").modal();
-		    });
 		});
 		
 		function approve() {

@@ -120,7 +120,6 @@
 		<!-- 관리자 본문 들어갈 공간 -->
 		<article id="contents">
 			<!-- hr 상단에 들어갈 상세 페이지, 정렬이나 검색등 보기들. 기본적으로 회원검색이 있다. -->
-			<form action="/hobbyist/index2.jsp" method="post">
 			<div id="searchDetailArea">
 				
 				<!-- 상세페이지, 정렬, 검색 테이블 -->
@@ -145,21 +144,131 @@
 			<div id="infoArea">
 				<table id="infoT" style="width: 100%; border-collapse: collapse; text-align: center;">
 					<!-- 테이블 첫번째 줄은 아이디, 비밀번호 등 조회할 내용 제목이다. background(#4E4E4E), font-color(white) 색 다르게 지정 -->
-					<tr>
-						<th style="width: 8%;">회원코드</th>
-						<th style="width: 15%;">아이디</th>
-						<th style="width: 10%;">이름</th>
-						<th style="width: 15%;">전화번호</th>
-						<th style="width: 20%;">이메일</th>
-						<th style="width: 8%;">아티스트 </th>
-						<th style="width: 7%;">경고</th>
-						<th style="width: 17%;">가입일</th>
-					</tr>
 				</table>
 			</div>
-			</form>
+			
+			
 		</article>
 	</section>
+	<!--  아티스트 신청 내역 상세 보기 모달 -->
+			<div class="modal fade" id="myModal2" role="dialog">
+				<div class="modal-dialog">
+
+					<!-- Modal content-->
+					<div class="modal-content">
+						<div class="modal-header" style="background-color:#4E4E4E; height:42px;">
+							<label style="font-size:18px; color:white;">hobbyist</label>
+							<button type="button" class="close" data-dismiss="modal" style="color:white">×</button>
+							<h4 class="modal-title"></h4>
+						</div>
+						<div class="modal-body">
+							<br>
+							<div id="artistDiv">
+								<table id="artistTab">
+									<tr>
+										<td colspan="2" class="emp">아티스트 소개</td>
+									</tr>
+									<tr>
+										<td>
+											<div class="box" style="background: #BDBDBD;">
+												<img class="profile" id="profileImg" src="/hobbyist/static/images/user.png">
+											</div>
+										</td>
+										<td id="arNick"></td>
+									</tr>
+									<tr>
+										<td id="arContent" colspan="2"></td>
+									</tr>
+									<tr>
+										<td>계좌번호</td>
+										<td id="arBank"></td>
+									</tr>
+									<tr>
+										<td colspan="2"><hr></td>
+									</tr>
+									<tr>
+										<td colspan="2" class="emp">전문분야 및 상세분야</td>
+									</tr>
+									<tr>
+										<td id="cat1"></td>
+										<td id="detailCat1"></td>
+									</tr>
+									<tr>
+										<td id="cat2"></td>
+										<td id="detailCat2"></td>
+									</tr>
+									<tr>
+										<td id="cat3"></td>
+										<td id="detailCat3"></td>
+									</tr>
+									<tr>
+										<td colspan="2"><hr></td>
+									</tr>
+									<tr>
+										<td colspan="2" class="emp">보유 자격증</td>
+									</tr>
+									<tr>
+										<td colspan="2"><label id="certs1"></label><br><p id="certsDetail1"></p>
+										</td>
+									</tr>
+									<tr>
+										<td colspan="2"><label id="certs2"></label><br><p id="certsDetail2"></p>
+										</td>
+									</tr>
+									<tr>
+										<td colspan="2"><label id="certs3"></label><br><p id="certsDetail3"></p>
+										</td>
+									</tr>
+									<tr>
+										<td>첨부파일</td>
+										<td><div id="downloadDiv">[다운로드]</div></td>
+									</tr>
+									<tr style="display:none;">
+										<td><img id="proofFile" src=""></td>
+										<td><input type="hidden" id="fileCode" name="fileCode"></td>
+									</tr>
+									<tr>
+										<td colspan="2"><hr></td>
+									</tr>
+									<tr>
+										<td colspan="2" class="emp">학력/전공</td>
+									</tr>
+									<tr>
+										<td colspan="2" id="edu1"></td>
+									</tr>
+									<tr>
+										<td colspan="2" id="edu2"></td>
+									</tr>
+									<tr>
+										<td colspan="2" id="edu3"></td>
+									</tr>
+									<tr>
+										<td colspan="2"><hr></td>
+									</tr>
+									<tr>
+										<td colspan="2" class="emp">경력</td>
+									</tr>
+									<tr>
+										<td colspan="2" id="career1"></td>
+									</tr>
+									<tr>
+										<td colspan="2" id="career2"></td>
+									</tr>
+									<tr>
+										<td colspan="2" id="career3"></td>
+									</tr>
+								</table>
+							</div>
+
+						</div>
+						<div class="modal-footer">
+							<button type="button" data-dismiss="modal"class="btn btn-primary" id="checkArtistBtn">확인</button>
+						</div>
+					</div>
+				</div>
+			</div>
+	
+	
 	<script>
 		$(function() {
 			$.ajax({
@@ -290,8 +399,6 @@
 						
 						$table.append($tr);
 						
-						//$each(data, function(index, value){
-							
 						for(var key in data) {
 							
 							$tr = $("<tr>");
@@ -303,7 +410,7 @@
 							var $email = $("<td>").text(data[key].email);
 							var $bank = $("<td>").text(data[key].bankName + " " + data[key].bankOwner + "\n" + data[key].bankNum);
 							var $accept = $("<td>").text(data[key].artistAccepted);
-							var $profile = $("<td>").html("<button id='showArtist'>조회</button>");
+							var $profile = $("<td>").html("<button class='showArtist'>조회</button>");
 							
 							$tr.append($acode);
 							$tr.append($aId);
@@ -315,16 +422,42 @@
 							$tr.append($accept);
 							$tr.append($profile);
 							$table.append($tr);
-						
 						}
-							
-						//});
 					},
 					error: function(status) {
 						console.log(status);
 					}
 				});
 			});
+			
+			$(document).on("click", '.showArtist', function() {
+		    	var num = Number($(this).parent().parent().children("td:nth-child(2)").text());
+		    	console.log(num);
+		    	
+		    	$.ajax({
+		    		url: "/hobbyist/selectApplyDetail.re",
+					data: {num : num},
+					type: "post",
+					success: function(data) {
+						$("#impNum").text(data.impNum);
+						$("#lessonName").text(data.lessonName);
+						$("#payCost").text(data.payCost);
+						$("#usingPoint").text(data.usingPoint);
+						$("#refundCost").text(data.payCost * (data.totalOrder / data.finishOrder));
+						$("#totalOrder").text(data.totalOrder);
+						$("#finishOrder").text(data.finishOrder);
+						$("#leftOrder").text(data.leftOrder);
+						$("#reason").text(data.reason);
+						$("#reasonDetail").text(data.reasonDetail);
+					},
+					error: function(error) {
+						console.log(error);
+					}
+		    		
+		    	});
+		    	
+	   	    	$("#myModal").modal();
+		});
 		});
 		
 		function goArtistApproval() {
