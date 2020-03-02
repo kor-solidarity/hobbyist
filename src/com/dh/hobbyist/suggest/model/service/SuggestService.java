@@ -205,10 +205,10 @@ public class SuggestService {
 	}
 
 	//마이페이지에서 쓰일 내가 찜한 건의 게시판 리스트 조회용 메소드 (페이징 처리)
-	public ArrayList<PetitionWishList> selectMyWishList(int memberCode, PageInfo pi) {
+	public ArrayList<Petition> selectMyWishList(int memberCode, PageInfo pi) {
 		Connection con = getConnection();
 		
-		ArrayList<PetitionWishList> list = new SuggestDao().selectMyWishList(con, memberCode, pi);
+		ArrayList<Petition> list = new SuggestDao().selectMyWishList(con, memberCode, pi);
 		
 		close(con);
 		

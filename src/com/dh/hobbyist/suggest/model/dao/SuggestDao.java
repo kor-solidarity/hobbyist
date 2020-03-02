@@ -604,10 +604,10 @@ public class SuggestDao {
 	}
 	
 	//마이페이지에서 쓰일 내가 찜한 건의 게시판 리스트 조회용 메소드 (페이징 처리)
-	public ArrayList<PetitionWishList> selectMyWishList(Connection con, int memberCode, PageInfo pi) {
+	public ArrayList<Petition> selectMyWishList(Connection con, int memberCode, PageInfo pi) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		ArrayList<PetitionWishList> list = null;
+		ArrayList<Petition> list = null;
 		
 		String query = prop.getProperty("selectMyWishListWithPaging");
 		
@@ -618,17 +618,33 @@ public class SuggestDao {
 			int endRow = startRow + pi.getLimit() - 1;
 			
 			pstmt.setInt(1, memberCode);
-			pstmt.setInt(1, startRow);
-			pstmt.setInt(2, endRow);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
 			
 			rset = pstmt.executeQuery();
 			
-			list = new ArrayList<PetitionWishList>();
+			list = new ArrayList<Petition>();
 			
 			while(rset.next()) {
-				PetitionWishList p = new PetitionWishList();
-				p.setPetitionCode(rset.getInt("LESSON_PETITION_PK"));
-				p.setMemberCode(rset.getInt("MEMBER_PK"));
+				Petition p = new Petition();
+				p.setPetitionCode(rset.getInt("PETITION_PK"));
+				p.setNumOfStudents(rset.getString("NUM_OF_STUDENTS"));
+				p.setCost(rset.getInt("COST"));
+				p.setNumOfLessons(rset.getInt("NUM_OF_LESSONS"));
+				p.setLocation(rset.getString("LOCATION"));
+				p.setRequestedDate(rset.getDate("REQUESTED_DATE"));
+				p.setRequestedDays(rset.getString("REQUESTED_DAYS"));
+				p.setRequestTime(rset.getString("REQUESTED_TIME"));
+				p.setTitle(rset.getString("TITLE"));
+				p.setContents(rset.getString("CONTENTS"));
+				p.setPetitionedTime(rset.getDate("PETITIONED_TIME"));
+				p.setWishlisted(rset.getInt("WISHLISTED"));
+				p.setViews(rset.getInt("VIEWS"));
+				p.setPetitionedMember(rset.getInt("PETITIONED_MEMBER"));
+				p.setCategoryCode(rset.getInt("CATEGORY_PK"));
+				p.setMemberName(rset.getString("MEMBER_NAME"));
+				p.setCategoryParentCode(rset.getInt("PARENT_PK"));
+				p.setReplyCount(rset.getInt("REPLY_COUNT"));
 				
 				list.add(p);
 			}

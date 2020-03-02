@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.dh.hobbyist.member.model.vo.Member;
 import com.dh.hobbyist.suggest.model.service.SuggestService;
 import com.dh.hobbyist.suggest.model.vo.PageInfo;
-import com.dh.hobbyist.suggest.model.vo.PetitionWishList;
+import com.dh.hobbyist.suggest.model.vo.Petition;
 
 /**
  * Servlet implementation class SelectMyWishListServlet
@@ -64,19 +64,20 @@ public class SelectMyWishListServlet extends HttpServlet {
 		
 		PageInfo pi = new PageInfo(currentPage, listCount, limit, maxPage, startPage, endPage);
 		
-		//ArrayList<PetitionWishList> list = ss.selectMyWishList(memberCode, pi);
+		ArrayList<Petition> list = ss.selectMyWishList(memberCode, pi);
 		
-//		String page = "";
-//		if(list != null) {
-//			page = "views/member/myPage/myLesson/likedSuggestion.jsp";
-//			request.setAttribute("myWishList", list);
-//			request.setAttribute("pi", pi);
-//		} else {
-//			page = "views/common/errorPage.jsp";
-//			request.setAttribute("msg", "마이페이지 찜한 건의 조회 실패");
-//		}
-//		
-//		request.getRequestDispatcher(page).forward(request, response);
+		String page = "";
+		
+		if(list != null) {
+			page = "views/member/myPage/myLesson/likedSuggestion.jsp";
+			request.setAttribute("myWishList", list);
+			request.setAttribute("pi", pi);
+		} else {
+			page = "views/common/errorPage.jsp";
+			request.setAttribute("msg", "마이페이지 찜한 건의 조회 실패");
+		}
+		
+		request.getRequestDispatcher(page).forward(request, response);
 		
 	}
 
