@@ -30,41 +30,6 @@ public class ApplyRefundDao {
 	}
 	
 
-	public ApplyRefund selectDetail(Connection con, int num) {
-		PreparedStatement pstmt = null;
-		ResultSet rset = null;
-		ApplyRefund arf = null;
-		
-		String query = prop.getProperty("selectDetail");
-		
-		try {
-			pstmt = con.prepareStatement(query);
-			pstmt.setInt(1, num);
-			
-			rset = pstmt.executeQuery();
-			
-			if(rset.next()) {
-				arf = new ApplyRefund();
-				arf.setImpNum(rset.getString("PAYMENT_IMP_NUM"));
-				arf.setLessonName(rset.getString("LESSON_NAME"));
-				arf.setPayCost(rset.getInt("PAYMENT_COSTS"));
-				arf.setUsingPoint(rset.getInt("POINTS_USED"));
-				arf.setTotalOrder(rset.getInt("TOTAL_ORDER"));
-				arf.setFinishOrder(rset.getInt("FINISH_ORDER"));
-				arf.setLeftOrder(rset.getInt("LEFT_ORDER"));
-				arf.setArtistCode(rset.getInt("ARTIST_PK"));
-				
-			}
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}finally {
-			close(pstmt);
-			close(rset);
-		}
-		System.out.println("arf : " + arf);
-		return arf;
-	}
 
 
 	public List<ApplyRefund> selectList(Connection con) {
@@ -103,4 +68,39 @@ public class ApplyRefundDao {
 		return applyList;
 	}
 
+	public ApplyRefund selectDetail(Connection con, int num) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ApplyRefund arf = null;
+		
+		String query = prop.getProperty("selectDetail");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, num);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				arf = new ApplyRefund();
+				arf.setImpNum(rset.getString("PAYMENT_IMP_NUM"));
+				arf.setLessonName(rset.getString("LESSON_NAME"));
+				arf.setPayCost(rset.getInt("PAYMENT_COSTS"));
+				arf.setUsingPoint(rset.getInt("POINTS_USED"));
+				arf.setTotalOrder(rset.getInt("TOTAL_ORDER"));
+				arf.setFinishOrder(rset.getInt("FINISH_ORDER"));
+				arf.setLeftOrder(rset.getInt("LEFT_ORDER"));
+				arf.setArtistCode(rset.getInt("ARTIST_PK"));
+				arf.setReason(rset.getString("REASON"));
+				arf.setReasonDetail(rset.getString("REASON_DETAIL"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+			close(rset);
+		}
+		return arf;
+	}
 }
