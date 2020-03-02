@@ -40,7 +40,7 @@ public class LoginServlet extends HttpServlet {
 		
 		Member loginMember = new MemberService().loginCheck(member);
 		
-		System.out.println("loginMember : " + loginMember);
+		/*System.out.println("loginMember : " + loginMember);*/
 
 		
 		if(loginMember != null) {

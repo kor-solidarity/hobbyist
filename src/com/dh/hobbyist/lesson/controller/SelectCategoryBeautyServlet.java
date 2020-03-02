@@ -27,7 +27,7 @@ public class SelectCategoryBeautyServlet extends HttpServlet {
 		
 		ArrayList<HashMap<String, Object>> list = new LessonService().selectCategoryBeauty();
 		
-		System.out.println(list);
+		/*System.out.println(list);*/
 		
 		String page = "";
 		if(list != null) {

@@ -24,11 +24,9 @@
 			margin-right:15px;
 			font-family: 'Nanum Gothic', sans-serif;
 		}
-		
 		#area2 {
 			width:110px;
 		}
-		
 		
 		#section{
 			width:1024px;
@@ -40,12 +38,13 @@
 		.lesson-list {
 			display:inline-block;
 			width:265px;
-			height:310px;
+			height:315px;
 			border:1px solid darkolivegreen;
 			margin:auto;
 			margin-right:70px;
 			margin-bottom:60px;
 			margin-top:5px;
+			
 		
 		}
 		#lessonTable {
@@ -93,8 +92,8 @@
 		
 		#artistImg {
 			postion: absolute;
-			width:70px;
-			height:70px;
+			width:65px;
+			height:65px;
 			border-radius:50px 50px 50px 50px;
 			float:right;
 			 margin-left: -300px; 
@@ -110,16 +109,16 @@
 		
 		 #artistNick {
 				
-	       		font-size: 15px;
+	       		font-size: 15.5px;
 	       		color:darkolivegreen;
 	       		font-weight:900;
-	       		 padding-right:25px; 
+	       		margin-right:20px; 
 	    }
 	       
 	       #artistName {
 	       	
 	       		padding-bottom:5px;
-	       		 padding-right:25px; 
+	       		margin-right:20px;  
 	    }
 	    
 	    #artistNick, #artistName {
@@ -135,7 +134,7 @@
 	    }
 	    #artistImgArea {
 	    	display:block; 
-			 margin-top: 20px;
+			 margin-top: 20px; 
 			 margin-left:-100px;
 	    	
 	    }  
@@ -146,6 +145,10 @@
 	    }
 	    #lessonArea {
 	    	padding-bottom:5px;
+	    }
+	    
+	    #lessonTable tr:eq(5) {
+	    	padding-top: -5px;
 	    }
 	   
 	   
