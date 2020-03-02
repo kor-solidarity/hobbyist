@@ -407,7 +407,7 @@ body {
 				</div>
 				<div class="modal-body">
 					<form id="LessonForm"
-						action="<%= request.getContextPath() %>/insert.le" method="post">
+						action="<%= request.getContextPath() %>/insert.le" method="post" encType="multipart/form-data">
 						<div id="show1">
 							<table id="LessonTable1">
 								<tr>
@@ -574,6 +574,9 @@ body {
 								</tr>
 								<tr>
 									<td colspan="3">
+										<span id="titleImgArea" style="margin:0 5px">
+											<img id="titleImg" width="120" height="80" src="<%= request.getContextPath() %>/static/images/iphoneCameraW.png">
+										</span>
 										<span id="contentImgArea1" style="margin:0 5px">
 											<img id="contentImg1" width="120" height="80" src="<%= request.getContextPath() %>/static/images/iphoneCameraW.png">
 										</span>
@@ -582,9 +585,6 @@ body {
 										</span>
 										<span id="contentImgArea3" style="margin:0 5px">
 											<img id="contentImg3" width="120" height="80" src="<%= request.getContextPath() %>/static/images/iphoneCameraW.png">
-										</span>
-										<span id="contentImgArea4" style="margin:0 5px">
-											<img id="contentImg4" width="120" height="80" src="<%= request.getContextPath() %>/static/images/iphoneCameraW.png">
 										</span>
 									</td>
 								</tr>
@@ -600,17 +600,17 @@ body {
 								$(function() {
 									$("#fileArea").hide();
 									
-									$("#contentImgArea1").click(function(){
+									$("#titleImgArea").click(function(){
 										/* console.log("click이 작동하는지 여부"); */
 										$("#lessonImg1").click();
 									})
-									$("#contentImgArea2").click(function(){
+									$("#contentImgArea1").click(function(){
 										$("#lessonImg2").click();
 									})
-									$("#contentImgArea3").click(function(){
+									$("#contentImgArea2").click(function(){
 										$("#lessonImg3").click();
 									})
-									$("#contentImgArea4").click(function(){
+									$("#contentImgArea3").click(function(){
 										$("#lessonImg4").click();
 									})
 								});
@@ -691,11 +691,14 @@ body {
 								</tr>
 								<tr>
 									<td>
+										
 										<textarea id="artIntro" name="artIntro" rows="4" cols="40"
-												style="width: 600px; height: 250px; text-align: left; font-family: 'Nanum Gothic', sans-serif; font-size: 18px; color: rgb(49, 49, 49); resize:none;"></textarea>
+												style="width: 600px; height: 250px; text-align: left; font-family: 'Nanum Gothic', sans-serif; font-size: 18px; color: rgb(49, 49, 49); 
+												resize:none;"><%if(loginMember != null) {%><%= loginMember.getArtistIntro() %><% }%></textarea>
 										<div><span id="artIntroCtn">0</span><span>/255</span></div>
 										<script>
 											$(function(){
+												//글자수 제한 메소드
 												$("#artIntro").keyup(function(){
 													var inputLength = $(this).val().length;
 													
@@ -968,8 +971,6 @@ body {
 						}
 						
 					});
-					
-					
 				}
 				
 				if(num == 6) {
