@@ -406,33 +406,6 @@
 				});
 				
 				
-				if(loginMember != null) {
-					
-				}
-				
-				$("#interested").click(function() {
-					var memberCode = <%= loginMember.getMemberCode()%>;
-					
-					if(loginMember != null) { 
-						$.ajax({
-							url: "/hobbyist/selectInterest.le",
-							type: "get",
-							data: {memberCode: memberCode},
-							success: function(data) {
-									console.log(data);
-							},
-							error: function(error) {
-								console.log(error);
-							}
-						});	
-					
-					
-					 }else { 
-						 alert("먼저 로그인을 해주세요.");
-					 }
-					
-					
-				});
 				
 				
 				

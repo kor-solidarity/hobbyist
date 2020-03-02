@@ -3,6 +3,7 @@ package com.dh.hobbyist.lesson.controller;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map.Entry;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,32 +12,32 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.dh.hobbyist.lesson.model.service.LessonService;
-import com.dh.hobbyist.member.model.vo.Member;
-import com.google.gson.Gson;
+import com.dh.hobbyist.suggest.model.vo.Category;
 
 
-@WebServlet("/selectInterest.le")
-public class SelectInterestedLessonServlet extends HttpServlet {
+@WebServlet("/selectPopular.le")
+public class SelectPopularLessonListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
    
-    public SelectInterestedLessonServlet() {
+    public SelectPopularLessonListServlet() {
         super();
     }
 
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		int memberCode = ((Member) request.getSession().getAttribute("loginMember")).getMemberCode();
+		ArrayList<HashMap<String, Object>> list = new LessonService().selectPopularLessonList();
 		
-		ArrayList<HashMap<String, Object>> list = new LessonService().selectInterest(memberCode);
+		String page = "";
+		if(list != null) {
+			page = "/index.jsp";
+		}else {
+			page = "views/common/errorPage.jsp";
+			request.setAttribute("msg", "카테고리별 수업 리스트 조회 실패 ");
+		}
 		
-		System.out.println(list);
-		
-		response.setContentType("application/json");
-		response.setCharacterEncoding("UTF-8");
-		
-		new Gson().toJson(list, response.getWriter());
+		request.getRequestDispatcher(page).forward(request, response);
 		
 	}
 
