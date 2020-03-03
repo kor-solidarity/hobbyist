@@ -5,6 +5,13 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link
+	href="https://fonts.googleapis.com/css?family=Do+Hyeon|ZCOOL+QingKe+HuangYou&display=swap"
+	rel="stylesheet">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <style>
 	#lessonInfo {
 		margin: 0 auto;
@@ -60,6 +67,73 @@
 		color: white;
 		font-size: 25px;
 	}
+	.lessonArea {
+		margin-top: 10px;
+		width: 100%;
+	}
+	.lessonArea tr {
+		height: 160px;
+	}
+	.lessonArea td {
+		width: 100px;
+		/* background: grey; */
+		/* padding: 5px 10px; */
+	}
+	.eachWrap {
+		width: 1024px;
+		height: 180px;
+		background: #EDEDED;
+		margin: auto;
+	}
+	.eachLesson td {
+		padding: 10px 15px;
+	}
+	.lessonImg {
+		height: 160px;
+		width: 230px;
+	}
+	p {
+		margin: 0;
+		font-size: 18px;
+	}
+	.profile {
+		width: 50px;
+		padding: 0;
+	}
+	.profileTable {
+		height: 30%;
+		margin: 0 auto;
+	}
+	.profileTable tr:nth-of-type(1) {
+		width: 100%;
+		height: 15%;
+	}
+	.profileTable tr:nth-of-type(2) {
+		width: 100%;
+		height: 15%;
+	}
+	.profileTable td {
+		padding: 0;
+	}
+	.profileImgArea {
+		height: 50px;
+	}
+	.profileImg {
+		width: 80px;
+		height: 80px;
+		border-radius: 50px;
+		align: center;
+	}
+	.nickName {
+		font-size: 20px;
+		font-weight: bold;
+		color:darkolivegreen;
+		text-align: center;
+	}
+	.realName {
+		font-size: 14px;
+		text-align: center;
+	}
 </style>
 </head>
 <body>
@@ -72,11 +146,41 @@
  
  <br clear="both">
  
- <div id="lessonInfo">
+ <table class="lessonArea" align="center">
+			<tr>
+				<td>
+					<div class="eachWrap">
+						<table class="eachLesson" style="width:100%; height:100%;">
+							<tr style="height:100%">
+								<td style="width:27%;"><img class="lessonImg" src="<%= request.getContextPath() %>/static/upload/lesson/beauty/beauty02.jpg"></td>
+								<td class="lessonText" style="width:50%;">
+												<p style="font-weight: bold;">[1:1_청담샵 경력] #선.착.순.이.벤.트 #자존감이 두배 올라가는 메이크업 배우기!</p><br>
+												<p>수업시작일 : 2020-02-03 19:00 / 당산</p>
+												<p>결제일 : 2020-01-30 12:11:31</p> 
+								</td>
+								<td class="profile" style="width:15%; padding:0;">
+									<div align="center"><img class="profileImg" src="<%= request.getContextPath() %>/static/images/iu.jpg"></div>
+									<table class="profileTable">
+										<tr>
+											<td>
+												<div class="nickName">피치핑크</div>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<div class="realName">아이유</div>
+											</td>
+										</tr>
+									</table>							
+								</td>
+							</tr>
+						</table>
+					</div>
+				</td>
+			</tr>
+		</table>
  
- </div>
- 
- <form name="goRefund" action="/hobbyist/index.jsp" method="post">
+ <form name="goRefund" action="/hobbyist/index.jsp" method="post" style="margin-bottom: 200px;">
  <div id="refundArea">
  	<table id="payInfoT1">
  		<tr>
@@ -97,6 +201,10 @@
  			<td>환불예정 금액 : </td><td>원</td>
  		</tr>
  		<tr>
+ 			<td>환불예정 포인트 : </td><td>point</td>
+ 		</tr>
+ 		<tr>
+ 			<td>환불 사유 : </td>
  			<td>
  				<select>
  					<option value="me">개인 사유</option>
@@ -106,12 +214,13 @@
  				</select>
  			</td>
  		</tr>
- 		<tr>
- 			<td><button type="button">계좌인증</button></td>
- 		</tr>
- 	</table>
+ 	</table><br><br>
+ 	<div style="text-align: center;">
+ 		<label style="font-weight: bold; font-size: 17px;">상세 사유</label><br>
+	 	<textarea id="refundDetail" rows="7" cols="20" style="width: 40%; height: 80px; text-align: center; font-size: 17px;" placeholder="상세사유를 입력하세요 (선택)";></textarea>
+	 	<div><span id="refundDetailCtn">0</span>/100</div>
+ 	</div>
  	
- 	<br clear="both">
  
  	<hr style="width: 1024px; height: 1px; background: darkolivegreen; margin-top: 60px;">
  	
@@ -123,10 +232,23 @@
  	</div>
  </div>
  </form>
+ 	<br clear="both">
 	<%@ include file="/views/common/footer.jsp" %>
 <script>
+	$(function(){
+		$("#refundDetail").keyup(function(){
+			var inputLength = $(this).val().length;
+			$("#refundDetailCtn").html(inputLength);
+			
+			if(inputLength > 100) {
+				$(this).val($(this).val().substring(0, 100));
+			} else {
+				$("#refundDetailCtn").html(inputLength);
+			}
+		});
+	});
 	function go() {
-		var submit = confirm('정말로 환불 하시겠습니까?');
+		var submit = confirm('정말로 환불신청 하시겠습니까?');
 		
 		if(submit == true) {
 			alert("환불신청이 완료되었습니다.");

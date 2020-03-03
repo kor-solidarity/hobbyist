@@ -272,7 +272,7 @@
    	   <!-- Modal refuse-->
    	   <div class="modal-content">
    	     <div class="modal-header" style="background: #4E4E4E ; color: white;">
-   	       <h4 class="modal-title">신청내역 조회</h4>
+   	        <h4 class="modal-title" style="font-family: 'ZCOOL QingKe HuangYou', cursive; font-size: 30px;">hobbyist</h4>
    	       <button type="button" class="close" data-dismiss="modal" style="color: white;">x</button>
    	     </div>
    	     <div class="modal-body">
@@ -375,21 +375,21 @@
 	   	    	$("#myModal").modal();
 		});
 		
-		function approve() {
-			
-			alert("환불 승인 하시겠습니까?");
-		}
-		
-		function refuse() {
-			$("#myModal1").modal();
-			$("#myModal1").show();
-		}
-		
-		function goPayList() {
-			location.href = "<%=request.getContextPath()%>/calculate.cp";
-		}
-		
 	});
+	function approve() {
+			
+		alert("환불 승인 하시겠습니까?");
+	}
+		
+	function refuse() {
+		$("#myModal1").modal();
+		$("#myModal1").show();
+	}
+		
+	function goPayList() {
+		location.href = "<%=request.getContextPath()%>/calculate.cp";
+	}
+		
 	</script>
 	
 </body>
