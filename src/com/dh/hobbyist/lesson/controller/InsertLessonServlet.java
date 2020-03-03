@@ -66,9 +66,14 @@ public class InsertLessonServlet extends HttpServlet {
 				String name = files.nextElement();
 				
 				System.out.println("name : " + name);
+				System.out.println("multiRequest.getFilesystemName(name) : " + multiRequest.getFilesystemName(name));
 				
-				saveFiles.add(multiRequest.getFilesystemName(name));
-				//originFiles.add(multiRequest.getOriginalFileName(name));
+				//사진 입력을 4개 모두 하지 않아도 에러가 나지 않도록 검사하는 조건문
+				if(multiRequest.getFilesystemName(name) != null) {
+					saveFiles.add(multiRequest.getFilesystemName(name));
+					//originFiles.add(multiRequest.getOriginalFileName(name));
+				}
+				
 			}
 			
 			System.out.println("saveFiles.size() : " + saveFiles.size());
