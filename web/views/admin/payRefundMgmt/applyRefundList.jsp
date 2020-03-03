@@ -159,7 +159,7 @@
 			<div id="smallMenu">
 				<label>내역 조회</label><br>
 				<label style="color: #DED842;">환불 신청</label><br>
-				<label>금액 정산</label>
+				<label onclick="goPayList();">금액 정산</label>
 			</div>
 		</article>
 		
@@ -384,6 +384,11 @@
 			$("#myModal1").modal();
 			$("#myModal1").show();
 		}
+		
+		function goPayList() {
+			location.href = "<%=request.getContextPath()%>/calculate.cp";
+		}
+		
 	});
 	</script>
 	
