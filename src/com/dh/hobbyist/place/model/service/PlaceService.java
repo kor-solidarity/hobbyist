@@ -66,6 +66,7 @@ public class PlaceService {
     }
 
     // 공간대여업체의 관련사진 추가 (은석)
+    // 초기 등록할때만 사용
     public int insertImageList(ArrayList<Image> fileList) {
         Connection con = getConnection();
         int result = 0;
@@ -181,6 +182,62 @@ public class PlaceService {
         } else {
             rollback(con);
         }
+        close(con);
+
+        return result;
+    }
+
+    /**
+     * 등록된 이미지 테이블에 파일명 수정
+     *
+     * @param image {@link Image}
+     * @param pk    int
+     * @return int
+     */
+    public int updateImageName(Image image, int pk) {
+        Connection con = getConnection();
+
+        int result = new PlaceDao().updateImageName(con, image, pk);
+
+        if (result > 0) {
+            commit(con);
+        } else {
+            rollback(con);
+        }
+        close(con);
+
+        return result;
+    }
+
+    public int insertImage(Image image, int isMain) {
+        Connection con = getConnection();
+
+        int result = new PlaceDao().insertImage(con, image, isMain);
+
+        if (result > 0) {
+            commit(con);
+        } else {
+            rollback(con);
+        }
+
+        close(con);
+
+        return result;
+    }
+
+    public int deleteImage(Image image) {
+        Connection con = getConnection();
+
+        int pk = image.getImageCode();
+
+        int result = new PlaceDao().deleteImage(con, pk);
+
+        if (result > 0) {
+            commit(con);
+        } else {
+            rollback(con);
+        }
+
         close(con);
 
         return result;
