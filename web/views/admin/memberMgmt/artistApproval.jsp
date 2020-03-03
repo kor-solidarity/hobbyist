@@ -477,9 +477,6 @@
 
 							for(var key in data) {
 								
-								//console.log(key + ": " + data[key]);
-								//console.log(data[key].length);
-								
 								if(key == 'member') {
 									var list = data[key];
 									var mem = list[0];
