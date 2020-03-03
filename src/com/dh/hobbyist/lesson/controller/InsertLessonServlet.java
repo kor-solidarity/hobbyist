@@ -71,6 +71,8 @@ public class InsertLessonServlet extends HttpServlet {
 				//originFiles.add(multiRequest.getOriginalFileName(name));
 			}
 			
+			System.out.println("saveFiles.size() : " + saveFiles.size());
+			
 			ArrayList<Image> fileList = new ArrayList<Image>();
 			
 			for(int i = saveFiles.size() - 1; i >= 0; i--) {
@@ -164,7 +166,7 @@ public class InsertLessonServlet extends HttpServlet {
 			int result = new LessonRelatedService().insertLessonRelated(lessonRelated);
 			
 			String page = "";
-			if(result == totalOrders) {
+			if(result == saveFiles.size()) {
 				page = "views/common/successPage.jsp";
 				request.setAttribute("successCode", "insertLesson");
 			} else {
