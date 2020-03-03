@@ -184,6 +184,78 @@ public class LessonRelatedDao {
 		return result;
 	}
 
+	public Image selectProfileImage(Connection con, int memberCode) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		Image p = null;
+		
+		String query = prop.getProperty("selectProfileImage");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, memberCode);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				p = new Image();
+				p.setImageCode(rset.getInt("IMAGE_PK"));
+				p.setImageRoute(rset.getString("IMAGE_ROUTE"));
+				p.setImageName(rset.getString("IMAGE_NAME"));
+				p.setImageMain(rset.getInt("IMAGE_MAIN"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return p;
+	}
+
+	public Lesson selectOneLesson(Connection con, int lessonCode) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		Lesson l = null;
+		
+		String query = prop.getProperty("selectOneLesson");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, lessonCode);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				l = new Lesson();
+				l.setLessonCode(rset.getInt("LESSON_PK"));
+				l.setLessonName(rset.getString("LESSON_NAME"));
+				l.setMinStudents(rset.getInt("MIN_STUDENTS"));
+				l.setMaxStudents(rset.getInt("MAX_STUDENTS"));
+				l.setTotalOrders(rset.getInt("TOTAL_ORDERS"));
+				l.setCostPerOrder(rset.getInt("COST_PER_ORDER"));
+				l.setTotalCosts(rset.getInt("TOTAL_COSTS"));
+				l.setArtistIntro(rset.getString("ARTIST_INTRO"));
+				l.setLessonIntro(rset.getString("LESSON_INTRO"));
+				l.setPetitionCode(rset.getInt("PETITION_PK"));
+				l.setRegisteredDate(rset.getDate("REGISTERED_DATE"));
+				l.setStatus(rset.getInt("STATUS"));
+				l.setCategoryCode(rset.getInt("CATEGORY_PK"));
+				l.setArtistCode(rset.getInt("ARTIST_PK"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return l;
+	}
+
 
 }
 

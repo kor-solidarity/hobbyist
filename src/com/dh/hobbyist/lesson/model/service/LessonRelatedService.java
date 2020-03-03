@@ -87,6 +87,34 @@ public class LessonRelatedService {
 		return fileResult;
 	}
 
+	public Image selectProfileImage(int memberCode) {
+		Connection con = getConnection();
+		
+		Image profileImg = new LessonRelatedDao().selectProfileImage(con, memberCode);
+		
+		if(profileImg != null) {
+			commit(con);
+		} else {
+			rollback(con);
+		}
+		
+		return profileImg;
+	}
+
+	public Lesson selectOneLesson(int lessonCode) {
+		Connection con = getConnection();
+		
+		Lesson lesson = new LessonRelatedDao().selectOneLesson(con, lessonCode);
+		
+		if(lesson != null) {
+			commit(con);
+		} else {
+			rollback(con);
+		}
+		
+		return lesson;
+	}
+
 }
 
 

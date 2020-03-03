@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="com.dh.hobbyist.lesson.model.vo.Image" %>
+<%@ page import="com.dh.hobbyist.lesson.model.vo.Lesson" %>
+<%
+	Image pImg = (Image) request.getAttribute("profileImg");
+	Lesson lesson = (Lesson) request.getAttribute("lesson");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -284,13 +290,14 @@
 					</tr>
 					<tr>
 						<td class="nanum" colspan="2" style="font-weight:bold;">
-							<div style="margin: 15px 0px;">[원데이] 겉바속촉 쉽게 만드는 까눌레 다같이 만들어 보아요 :)</div>
+							<div style="margin: 15px 0px;"><%= lesson.getLessonName() %></div>
 						</td>
 						<td></td>
 						<td colspan="2" style="text-align:center;"><button id="registerBtn" type="button">수업 신청</button></td>
 					<tr>
 						<td id="profileImgArea" rowspan="3">
-							<img src="<%= request.getContextPath() %>/static/images/seolhyun.png" id="profileImg">
+							<img src="<%= pImg.getImageRoute() %>/<%= pImg.getImageName() %>" id="profileImg">	
+							<%-- <img src="<%= request.getContextPath() %>/static/upload/artist/<%= pImg.getImageName() %>" id="profileImg"> --%>
 						</td>
 						<td style="width:380px; color:darkolivegreen;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;★★★★☆ <label style="color:black; font-weight:normal;">(3)</label></td>
 						<td></td>
