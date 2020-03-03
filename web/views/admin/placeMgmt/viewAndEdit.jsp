@@ -28,6 +28,13 @@
     ArrayList<Image> images = (ArrayList<Image>) request.getAttribute("images");
     System.out.println("images: " + images.size());
     CompanyAds companyAds = (CompanyAds) request.getAttribute("companyAds");
+    int currentPage = 1;
+    try {
+        currentPage = Integer.parseInt(request.getParameter("currentPage"));
+    } catch (NumberFormatException ignored) {
+
+    }
+
     // 수정모드인지 확인
     Boolean onEdit = false;
 %>
@@ -213,6 +220,7 @@
                     </tr>
                 </table>
                 <div id="pic_files">
+                    <input type="text" name="currentPage" value="<%=currentPage%>" hidden>
                     <input type="text" name="delFile1" id="delFile1" class="delFile" value="0">
                     <input type="text" name="delFile2" id="delFile2" class="delFile" value="0">
                     <input type="text" name="delFile3" id="delFile3" class="delFile" value="0">

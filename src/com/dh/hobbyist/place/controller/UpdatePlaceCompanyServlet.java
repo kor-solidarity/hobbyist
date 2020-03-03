@@ -77,34 +77,6 @@ public class UpdatePlaceCompanyServlet extends HttpServlet {
             }
             System.out.println("fileName: " + fileName);
 
-            //
-            // int currentPage = 15;
-            // try {
-            //     currentPage = Integer.parseInt(request.getParameter("currentPage"));
-            // }catch (NumberFormatException ignored){
-            //
-            // }
-            // System.out.println("currentPage: " + currentPage);
-            //
-            // // DEBUG: 현재는 파일을 저장할 필요가 없음. 고로 바로바로 삭제
-            // System.out.println("DEBUG: deleting files...");
-            // for (int i = 0; i < fileName.size(); i++) {
-            //     File file = new File(root + savePath + "/" + fileName.get(i));
-            //     if (file.exists()) {
-            //         System.out.println("deleting added file: " + file.getName());
-            //         System.out.println(file.delete());
-            //     } else {
-            //         System.out.println("wut no file " + file.getName());
-            //     }
-            // }
-            //
-            // Boolean y = true;
-            //
-            // if (y) {
-            //     System.out.println("return");
-            //     return;
-            // }
-
             // 우선 변환할 대상부터 집어온다.
             // 뽑아와야 하는 PK
             int companyPk = Integer.parseInt(multipartRequest.getParameter("companyPk"));
@@ -286,6 +258,16 @@ public class UpdatePlaceCompanyServlet extends HttpServlet {
                     mainImageBool = false;
                 }
             }
+            // 이제 필요한건 기존 목록에 페이지 찾아오고 거기로 반환시키기.
+
+            int currentPage = 1;
+            try {
+                currentPage = Integer.parseInt(multipartRequest.getParameter("currentPage"));
+            } catch (NumberFormatException ignored) {
+
+            }
+            String page = request.getContextPath() + "/adminPlaceList.ad?" + "currentPage=" + currentPage;
+            response.sendRedirect(page);
 
 
             // DEBUG: 현재는 파일을 저장할 필요가 없음. 고로 바로바로 삭제
@@ -299,8 +281,6 @@ public class UpdatePlaceCompanyServlet extends HttpServlet {
             //         System.out.println("wut no file " + file.getName());
             //     }
             // }
-
-
 
 
         }
