@@ -1,11 +1,16 @@
 package com.dh.hobbyist.calculatePay.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.dh.hobbyist.calculatePay.model.service.CalculatePayService;
+import com.dh.hobbyist.calculatePay.model.vo.Accounts;
 
 /**
  * Servlet implementation class CaculatePayServlet
@@ -26,7 +31,8 @@ public class CaculatePayServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("오케....");
+		//ArrayList<Accounts> list = new CalculatePayService().selectPayList();
+		
 	}
 
 	/**
