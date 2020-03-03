@@ -64,7 +64,7 @@ public class LessonRelatedService {
 					}
 					
 					if(fileResult == fileList.size()) {
-							commit(con);
+						commit(con);
 					} else {
 						rollback(con);
 					}
@@ -83,7 +83,8 @@ public class LessonRelatedService {
 		
 		close(con);
 
-		return orderResult;
+		System.out.println("fileResult : " + fileResult);
+		return fileResult;
 	}
 
 }
