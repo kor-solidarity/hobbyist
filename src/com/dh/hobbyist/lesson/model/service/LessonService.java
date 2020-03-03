@@ -121,7 +121,7 @@ public class LessonService {
 		return listCount;
 	}
 	
-	//음악 카테고리 페이지 메소드(유승)
+	//음악 카테고리 페이징 처리 된 페이지 메소드(유승)
 	public ArrayList<HashMap<String, Object>> selectCategoryMusic(PageInfo pi) {
 		Connection con = getConnection();
 		

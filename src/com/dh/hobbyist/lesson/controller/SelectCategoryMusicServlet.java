@@ -26,10 +26,10 @@ public class SelectCategoryMusicServlet extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		ArrayList<HashMap<String, Object>> list = new LessonService().selectCategoryMusic();
+		/*ArrayList<HashMap<String, Object>> list = new LessonService().selectCategoryMusic();*/
 		
-		/*System.out.println(list);*/
-		/*
+		
+		
 		int currentPage;
 		int limit;
 		int maxPage;
@@ -61,12 +61,15 @@ public class SelectCategoryMusicServlet extends HttpServlet {
 		
 		PageInfo pi = new PageInfo(currentPage, listCount, limit, maxPage, startPage, endPage);
 		
-		ArrayList<HashMap<String, Object>> list = new LessonService().selectCategoryMusic(pi);*/
+		ArrayList<HashMap<String, Object>> list = new LessonService().selectCategoryMusic(pi);
+		
+		System.out.println("list : " + list);
 		
 		String page = "";
 		if(list != null) {
 			page = "views/lesson/categoryMusicPage.jsp";
 			request.setAttribute("list", list);
+			request.setAttribute("pi", pi);
 		} else {
 			page = "views/common/errorPage.jsp";
 			request.setAttribute("msg", "음악 카테고리 페이지 조회 실패");
