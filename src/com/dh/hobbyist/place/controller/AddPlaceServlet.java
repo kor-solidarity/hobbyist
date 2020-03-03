@@ -193,7 +193,8 @@ public class AddPlaceServlet extends HttpServlet {
                     request.setAttribute("msg", "추가중 오류가 났습니다");
                     page = "/views/common/errorPage.jsp";
                 }
-                request.getRequestDispatcher(page).forward(request, response);
+                // request.getRequestDispatcher(page).forward(request, response);
+                response.sendRedirect(request.getContextPath() + page);
 
             }
         }

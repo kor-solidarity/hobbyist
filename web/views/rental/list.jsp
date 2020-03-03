@@ -4,8 +4,19 @@
   Date: 2020-02-08
   Time: 오후 5:35
   To change this template use File | Settings | File Templates.
+
+  사용자 단 공간대여목록 조회페이지
 --%>
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
+<%
+    int pageNum = 1;
+    try {
+        pageNum = Integer.parseInt(request.getParameter("pageNum"));
+    } catch (Exception e) {
+        System.out.println("error on front list");
+    }
+    System.out.println("pageNum: " + pageNum);
+%>
 <%-- 학생이  --%>
 <html>
 <head>
@@ -14,7 +25,7 @@
 </head>
 <body>
 <%@include file="/views/common/menubar.jsp" %>
-<%@include file="category.jsp"%>
+<%@include file="category.jsp" %>
 <div>
     <table border="0" class="do-hyun-font standard-width" style=" margin: 0 auto">
         <tr>
@@ -34,7 +45,8 @@
 </div>
 <div class="standard-width" style="margin: auto">
     <div class="room-card">
-        <img src="<%=request.getContextPath()%>/static/images/studyRoom3.png" style="width: 100%; height: 150px;" alt="">
+        <img src="<%=request.getContextPath()%>/static/images/studyRoom3.png" style="width: 100%; height: 150px;"
+             alt="">
         <div style="margin: 10px">
             <div class="room-card-title" style="margin-bottom: 10px">ABC스터디</div>
             <div class="room-card-content">서울 서대문구 신촌로 59 하모니마트 3층</div>
@@ -43,7 +55,8 @@
         </div>
     </div>
     <div class="room-card">
-        <img src="<%=request.getContextPath()%>/static/images/studyRoom3.png" style="width: 100%; height: 150px;" alt="">
+        <img src="<%=request.getContextPath()%>/static/images/studyRoom3.png" style="width: 100%; height: 150px;"
+             alt="">
         <div style="margin: 10px">
             <div class="room-card-title" style="margin-bottom: 10px">ABC스터디</div>
             <div class="room-card-content">서울 서대문구 신촌로 59 하모니마트 3층</div>
@@ -52,7 +65,8 @@
         </div>
     </div>
     <div class="room-card">
-        <img src="<%=request.getContextPath()%>/static/images/studyRoom3.png" style="width: 100%; height: 150px;" alt="">
+        <img src="<%=request.getContextPath()%>/static/images/studyRoom3.png" style="width: 100%; height: 150px;"
+             alt="">
         <div style="margin: 10px">
             <div class="room-card-title" style="margin-bottom: 10px">ABC스터디</div>
             <div class="room-card-content">서울 서대문구 신촌로 59 하모니마트 3층</div>
@@ -61,7 +75,8 @@
         </div>
     </div>
     <div class="room-card">
-        <img src="<%=request.getContextPath()%>/static/images/studyRoom3.png" style="width: 100%; height: 150px;" alt="">
+        <img src="<%=request.getContextPath()%>/static/images/studyRoom3.png" style="width: 100%; height: 150px;"
+             alt="">
         <div style="margin: 10px">
             <div class="room-card-title" style="margin-bottom: 10px">ABC스터디</div>
             <div class="room-card-content">서울 서대문구 신촌로 59 하모니마트 3층</div>
@@ -70,7 +85,8 @@
         </div>
     </div>
     <div class="room-card">
-        <img src="<%=request.getContextPath()%>/static/images/studyRoom3.png" style="width: 100%; height: 150px;" alt="">
+        <img src="<%=request.getContextPath()%>/static/images/studyRoom3.png" style="width: 100%; height: 150px;"
+             alt="">
         <div style="margin: 10px">
             <div class="room-card-title" style="margin-bottom: 10px">ABC스터디</div>
             <div class="room-card-content">서울 서대문구 신촌로 59 하모니마트 3층</div>
@@ -79,7 +95,8 @@
         </div>
     </div>
     <div class="room-card">
-        <img src="<%=request.getContextPath()%>/static/images/studyRoom3.png" style="width: 100%; height: 150px;" alt="">
+        <img src="<%=request.getContextPath()%>/static/images/studyRoom3.png" style="width: 100%; height: 150px;"
+             alt="">
         <div style="margin: 10px">
             <div class="room-card-title" style="margin-bottom: 10px">ABC스터디</div>
             <div class="room-card-content">서울 서대문구 신촌로 59 하모니마트 3층</div>
@@ -88,7 +105,8 @@
         </div>
     </div>
     <div class="room-card">
-        <img src="<%=request.getContextPath()%>/static/images/studyRoom3.png" style="width: 100%; height: 150px;" alt="">
+        <img src="<%=request.getContextPath()%>/static/images/studyRoom3.png" style="width: 100%; height: 150px;"
+             alt="">
         <div style="margin: 10px">
             <div class="room-card-title" style="margin-bottom: 10px">ABC스터디</div>
             <div class="room-card-content">서울 서대문구 신촌로 59 하모니마트 3층</div>
@@ -97,7 +115,8 @@
         </div>
     </div>
     <div class="room-card">
-        <img src="<%=request.getContextPath()%>/static/images/studyRoom3.png" style="width: 100%; height: 150px;" alt="">
+        <img src="<%=request.getContextPath()%>/static/images/studyRoom3.png" style="width: 100%; height: 150px;"
+             alt="">
         <div style="margin: 10px">
             <div class="room-card-title" style="margin-bottom: 10px">ABC스터디</div>
             <div class="room-card-content">서울 서대문구 신촌로 59 하모니마트 3층</div>
@@ -106,7 +125,8 @@
         </div>
     </div>
     <div class="room-card">
-        <img src="<%=request.getContextPath()%>/static/images/studyRoom3.png" style="width: 100%; height: 150px;" alt="">
+        <img src="<%=request.getContextPath()%>/static/images/studyRoom3.png" style="width: 100%; height: 150px;"
+             alt="">
         <div style="margin: 10px">
             <div class="room-card-title" style="margin-bottom: 10px">ABC스터디</div>
             <div class="room-card-content">서울 서대문구 신촌로 59 하모니마트 3층</div>

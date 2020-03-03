@@ -14,8 +14,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 // 관리자 공간대여업체 목록조회 (은석)
-@WebServlet(name = "SelectPlaceListServlet", urlPatterns = "/adminPlaceList.ad")
-public class SelectPlaceListServlet extends HttpServlet {
+@WebServlet(name = "AdminSelectPlaceListServlet", urlPatterns = "/adminPlaceList.ad")
+public class AdminSelectPlaceListServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doGet(request, response);
     }
@@ -74,7 +74,7 @@ public class SelectPlaceListServlet extends HttpServlet {
         // for (int i = 0; i < companyArrayList.size(); i++) {
         //     System.out.println(companyArrayList.indexOf(i));
         // }
-        for (PlaceCompanyForList p: companyArrayList) {
+        for (PlaceCompanyForList p : companyArrayList) {
             System.out.println(p);
         }
 
