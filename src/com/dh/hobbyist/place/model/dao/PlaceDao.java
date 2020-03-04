@@ -4,7 +4,7 @@ import com.dh.hobbyist.common.model.vo.Image;
 import com.dh.hobbyist.common.model.vo.PageInfo;
 import com.dh.hobbyist.place.model.vo.CompanyAds;
 import com.dh.hobbyist.place.model.vo.PlaceCompany;
-import com.dh.hobbyist.place.model.vo.PlaceCompanyForList;
+import com.dh.hobbyist.place.model.vo.PlaceCompanyAndAdsList;
 
 import static com.dh.hobbyist.common.JDBCTemplate.*;
 
@@ -71,7 +71,7 @@ public class PlaceDao {
         return result;
     }
 
-    // 마지막 기입된 회사 불러오기
+    // 마지막 기입된 회사 불러오기 (은석)
     public PlaceCompany selectPlaceCompany(Connection con, int pk) {
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
@@ -187,10 +187,10 @@ public class PlaceDao {
         return list;
     }
 
-    public ArrayList<PlaceCompanyForList> selectList(Connection con, PageInfo pageInfo) {
+    public ArrayList<PlaceCompanyAndAdsList> selectList(Connection con, PageInfo pageInfo) {
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
-        ArrayList<PlaceCompanyForList> companyArrayList = null;
+        ArrayList<PlaceCompanyAndAdsList> companyArrayList = null;
 
         String query = prop.getProperty("selectPagedPlaceCompanyList");
 
@@ -210,7 +210,7 @@ public class PlaceDao {
             companyArrayList = new ArrayList<>();
 
             while (resultSet.next()) {
-                PlaceCompanyForList pc = new PlaceCompanyForList();
+                PlaceCompanyAndAdsList pc = new PlaceCompanyAndAdsList();
                 // 번호 이름 전번 시작일 종료일
                 pc.setCompany_pk(resultSet.getInt("company_pk"));
                 pc.setCompany_name(resultSet.getString("company_name"));
@@ -373,13 +373,13 @@ public class PlaceDao {
             preparedStatement = con.prepareStatement(query);
 
             preparedStatement.setString(1, image.getImageName());
-            preparedStatement.setInt(2,pk);
+            preparedStatement.setInt(2, pk);
 
             result = preparedStatement.executeUpdate();
 
         } catch (SQLException e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             close(preparedStatement);
         }
 
@@ -429,5 +429,60 @@ public class PlaceDao {
         }
 
         return list;
+    }
+
+    /**
+     * 사용자단 공간대여업체 목록 조회
+     *
+     * @param con
+     * @param pi
+     * @return
+     */
+    public ArrayList<PlaceCompany> selectCompanyList(Connection con, PageInfo pi) {
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        ArrayList<PlaceCompany> companyArrayList = null;
+
+        String query = prop.getProperty("memberPlaceListByPage");
+
+        // 첫 페이지인 경우 1-9번 글을 뽑아와야 함.
+
+        // 설명: 현재 페이지에서 1을 뺀 값을
+        //  한 페이지에 보여야 하는 글 수만큼 곱한 후 1을 더한다.
+        int startPk = ((pi.getCurrentPage() - 1) * pi.getLimit() + 1);
+        // 마지막 끌어와야 하는 값은
+        //  현재 시작번호에서 보여야 하는 글 수 값에서 1을 뺌.
+        //  하나 빼는 이유는 startPk 의 값을 포함해서 보여야 하는 글 수까지기 때문.
+        int endPk = startPk + pi.getLimit() - 1;
+
+        try {
+            preparedStatement = con.prepareStatement(query);
+
+            preparedStatement.setInt(1, startPk);
+            preparedStatement.setInt(2, endPk);
+
+            resultSet = preparedStatement.executeQuery();
+
+            companyArrayList = new ArrayList<>();
+
+            while (resultSet.next()) {
+                PlaceCompany company = new PlaceCompany();
+
+                company.setCompany_pk(resultSet.getInt("COMPANY_PK"));
+                company.setCompany_name(resultSet.getString("COMPANY_NAME"));
+                company.setAddress(resultSet.getString("ADDRESS"));
+                company.setRoom_size(resultSet.getString("ROOM_SIZE"));
+                company.setMain_image_name(resultSet.getString("IMAGE_NAME"));
+
+                companyArrayList.add(company);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            close(resultSet);
+            close(preparedStatement);
+        }
+        return companyArrayList;
     }
 }

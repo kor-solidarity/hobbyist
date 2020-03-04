@@ -1,6 +1,6 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="com.dh.hobbyist.place.model.vo.PlaceCompany" %>
-<%@ page import="com.dh.hobbyist.place.model.vo.PlaceCompanyForList" %>
+<%@ page import="com.dh.hobbyist.place.model.vo.PlaceCompanyAndAdsList" %>
 <%@ page import="com.dh.hobbyist.common.model.vo.PageInfo" %>
 <%@ page import="java.sql.Date" %><%--
   Created by IntelliJ IDEA.
@@ -24,7 +24,7 @@
 <body>
 <%@ include file="/views/common/adminMenubar.jsp" %>
 <%
-    ArrayList<PlaceCompanyForList> list = (ArrayList<PlaceCompanyForList>) request.getAttribute("list");
+    ArrayList<PlaceCompanyAndAdsList> list = (ArrayList<PlaceCompanyAndAdsList>) request.getAttribute("list");
     PageInfo pi = (PageInfo) request.getAttribute("pi");
     int listCount = pi.getListCount();
     int currentPage = pi.getCurrentPage();
@@ -81,7 +81,7 @@
                     <th style="">비고</th>
                 </tr>
                 <%
-                    for (PlaceCompanyForList l : list) { %>
+                    for (PlaceCompanyAndAdsList l : list) { %>
 
                 <tr>
                     <td><%=l.getCompany_pk()%>

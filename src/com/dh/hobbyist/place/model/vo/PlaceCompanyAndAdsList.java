@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.sql.Date;
 
 // 관리자 목록조회용 회사목록 (은석)
-public class PlaceCompanyForList implements Serializable {
+public class PlaceCompanyAndAdsList implements Serializable {
     int company_pk;
     String company_name;
     String phone;
@@ -16,12 +16,12 @@ public class PlaceCompanyForList implements Serializable {
     Date startDate;
     Date endDate;
 
-    public PlaceCompanyForList() {
+    public PlaceCompanyAndAdsList() {
     }
 
-    public PlaceCompanyForList(int company_pk, String company_name, String phone, String address,
-                               String website, String intro, String service_time, String room_size,
-                               Date startDate, Date endDate) {
+    public PlaceCompanyAndAdsList(int company_pk, String company_name, String phone, String address,
+                                  String website, String intro, String service_time, String room_size,
+                                  Date startDate, Date endDate) {
         this.company_pk = company_pk;
         this.company_name = company_name;
         this.phone = phone;
