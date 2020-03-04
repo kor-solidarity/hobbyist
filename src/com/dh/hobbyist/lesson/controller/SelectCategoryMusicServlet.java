@@ -51,7 +51,7 @@ public class SelectCategoryMusicServlet extends HttpServlet {
 		
 		maxPage = (int) ((double) listCount / limit + 0.9);
 		
-		startPage = (((int) ((double) currentPage / limit + 0.9)) - 1) * 10 + 1;
+		startPage = (((int) ((double) currentPage / 10 + 0.9)) - 1) * 10 + 1;
 		
 		endPage = startPage + 10 - 1;
 		

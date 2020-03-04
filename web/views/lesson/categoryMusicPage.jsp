@@ -37,7 +37,7 @@
 		
 		#section{
 			width:1024px;
-			height:1100px;
+			height:1250px;
 			margin:auto;
 			margin-top:30px;
 		}
@@ -108,28 +108,31 @@
 			
 			
 		}
-		#lessonTable td:nth-of-type(2n) {
-			float:right; 
-			/* margin-right:10px; */
-			/* margin-right: 100px;  */
-		}
+		/*#lessonTable td:nth-of-type(2n) {
+			 float:right;  
+			
+		}*/
 		
 		 #artistNick {
 				
 	       		font-size: 15.5px;
 	       		color:darkolivegreen;
 	       		font-weight:900;
-	       		margin-right:20px; 
+	       		
 	    }
 	       
 	       #artistName {
 	       	
 	       		padding-bottom:5px;
-	       		margin-right:20px;  
+	       		
 	    }
 	    
 	    #artistNick, #artistName {
+	    	
+	    	display:block;
 	    	text-align:center;
+	    	width:100px;
+	    	margin-left: 60px;
 	    }
 	    
 	    #lessonCount {
@@ -142,18 +145,20 @@
 	    #artistImgArea {
 	    	display:block; 
 			 margin-top: 20px; 
-			 margin-left:-100px;
+			 margin-left:-110px;
 	    	
 	    }  
 	    
 	    #star {
 	    	color:darkolivegreen;
-	    	font-size:16px;
+	    	font-size:17px;
 	    }
 	    
 	    #star, #lessonArea {
+	    	display: block;
 	    	text-align:center;
-	    	margin-left: -23px; 
+	    	width:90px;
+	    	 
 	    }
 	    #lessonArea {
 	    	margin-bottom:5px;
@@ -323,12 +328,12 @@
 							</td>
 						</tr>
 						<tr>
-							<td><div id="star">★★★★☆</div></td>
-							<td><div id="artistNick"><%= hmap.get("artistNick") %></div></td>
+							<td style="word-break:break-all"><div id="star">★★★★☆</div></td>
+							<td style="word-break:break-all"><div id="artistNick"><%= hmap.get("artistNick") %></div></td>
 						</tr>
 						<tr>
-							<td><div id="lessonArea"><%= hmap.get("region") %></div></td>
-							<td><div id="artistName"><%=hmap.get("memberName") %></div></td>
+							<td style="word-break:break-all"><div id="lessonArea"><%= hmap.get("region") %></div></td>
+							<td style="word-break:break-all"><div id="artistName"><%=hmap.get("memberName") %></div></td>
 						</tr>
 					</table>
 				</div>
@@ -367,7 +372,7 @@
 		$(function() {
 			$("#cMusic").css({'color':'darkolivegreen'});
 			$("#music").show();
-		});
+			
 	</script>
 	<%@ include file="/views/common/footer.jsp" %>
 </body>

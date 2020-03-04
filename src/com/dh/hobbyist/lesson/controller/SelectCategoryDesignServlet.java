@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.dh.hobbyist.common.model.vo.PageInfo;
 import com.dh.hobbyist.lesson.model.service.LessonService;
 
 
@@ -25,14 +26,46 @@ public class SelectCategoryDesignServlet extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		ArrayList<HashMap<String, Object>> list = new LessonService().selectCategoryDesign();
+		int currentPage;
+		int limit;
+		int maxPage;
+		int startPage;
+		int endPage;
 		
-		/*System.out.println(list);*/
+		currentPage = 1;
+		
+		if(request.getParameter("currentPage") != null) {
+			currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		}
+		
+		limit = 9;
+		
+		LessonService ls = new LessonService();
+		int listCount = ls.getListCount();
+		
+		System.out.println("list Count: " + listCount);
+		
+		maxPage = (int) ((double) listCount / limit + 0.9);
+		
+		startPage = (((int) ((double) currentPage / 10 + 0.9)) - 1) * 10 + 1;
+		
+		endPage = startPage + 10 - 1;
+		
+		if(maxPage < endPage) {
+			endPage = maxPage;
+		}
+		
+		PageInfo pi = new PageInfo(currentPage, listCount, limit, maxPage, startPage, endPage);
+		
+		ArrayList<HashMap<String, Object>> list = new LessonService().selectCategoryDesign(pi);
+		
+		System.out.println("list : " + list);
 		
 		String page = "";
 		if(list != null) {
 			page = "views/lesson/categoryDesignPage.jsp";
 			request.setAttribute("list", list);
+			request.setAttribute("pi", pi);
 		} else {
 			page = "views/common/errorPage.jsp";
 			request.setAttribute("msg", "디자인 카테고리 페이지 조회 실패");
