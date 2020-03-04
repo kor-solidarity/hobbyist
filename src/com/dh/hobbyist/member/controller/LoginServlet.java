@@ -49,7 +49,7 @@ public class LoginServlet extends HttpServlet {
 			
 			ArrayList<PetitionWishList> list = new MemberService().selectPetitionWishList(loginMember.getMemberCode()); 
 		         
-		    System.out.println("list : " + list);
+//		    System.out.println("list : " + list);
 		    session.setAttribute("petitionWishList", list);
 			
 			if(loginMember.getFirstLogin() == 0) {

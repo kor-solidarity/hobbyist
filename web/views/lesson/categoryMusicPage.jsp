@@ -46,12 +46,12 @@
 			display:inline-block;
 			width:265px;
 			height:315px;
-			border:1px solid darkolivegreen;
+			border:1px solid black;
 			margin:auto;
 			margin-right:70px;
 			margin-bottom:60px;
 			margin-top:5px;
-			
+
 		
 		}
 		#lessonTable {
@@ -59,11 +59,13 @@
 			width:265px;
 			height:315px;
 			display: block;
-			font-size:12.5px;
+			font-size:13px;
 			border-collapse:separate;
 			border-spacing: 5px;
 			/* display:block;  */
 			table-layout:fixed;
+			cursor:pointer;
+			
 			
 		}
 		#lessonName {
@@ -82,7 +84,8 @@
 			word-wrap: break-all;
 			word-wrap:break-word;
 			/* height:3.6em; */
-			margin-bottom: 80px;
+			margin-bottom: 75px;
+			margin-top:5px;
 			
 		}
 		
@@ -298,7 +301,7 @@
 				HashMap<String, Object> hmap = list.get(i);
 		%>
 				<div class="lesson-list">
-				<input type="hidden" value="<%= hmap.get("lessonCode")%>">
+				<form action="<%=request.getContextPath()%>/selectOne.le" method="get">
 					<table id="lessonTable" align="center">
 						<tr>
 							<td colspan="2">
@@ -314,7 +317,8 @@
 							<td colspan="2" rowspan="3"><div id="lessonName"><%=hmap.get("lessonName") %></div></td>
 						</tr>
 						 <tr>
-							<td colspan="2"><br></td>
+							<td><br></td>
+							<td><input type="hidden" name="lessonCode" value="<%=hmap.get("lessonCode")%>"></td>
 						</tr>
 
 						<tr>
@@ -336,8 +340,10 @@
 							<td style="word-break:break-all"><div id="artistName"><%=hmap.get("memberName") %></div></td>
 						</tr>
 					</table>
+				 </form>
 				</div>
 		<% } %>
+		
 		</div>
 
 	 </div>
@@ -371,8 +377,15 @@
 	<script>
 		$(function() {
 			$("#cMusic").css({'color':'darkolivegreen'});
-			$("#music").show();
+			$("#music").show();	
 			
+			
+			$(".lesson-list").click(function() {
+				$(this).find($('form')).submit();
+			});
+		});
+		
+		
 	</script>
 	<%@ include file="/views/common/footer.jsp" %>
 </body>
