@@ -242,4 +242,16 @@ public class PlaceService {
 
         return result;
     }
+
+    // 사용자가 볼 공간대여업체 목록 조회
+    public int getMemberPlaceListCount() {
+        Connection con = getConnection();
+        int result = 0;
+
+        result = new PlaceDao().getMemberPlaceListCount(con);
+
+
+        close(con);
+        return result;
+    }
 }

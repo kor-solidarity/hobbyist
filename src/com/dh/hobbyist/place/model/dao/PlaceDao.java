@@ -405,4 +405,29 @@ public class PlaceDao {
 
         return result;
     }
+
+    public int getMemberPlaceListCount(Connection con) {
+        Statement statement = null;
+        ResultSet resultSet = null;
+
+        int list = 0;
+
+        String query = prop.getProperty("memberPlaceListCount");
+
+        try {
+            statement = con.createStatement();
+            resultSet = statement.executeQuery(query);
+
+            if (resultSet.next()) {
+                list = resultSet.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            close(resultSet);
+            close(statement);
+        }
+
+        return list;
+    }
 }

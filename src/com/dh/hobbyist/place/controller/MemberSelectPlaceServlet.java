@@ -1,5 +1,7 @@
 package com.dh.hobbyist.place.controller;
 
+import com.dh.hobbyist.place.model.service.PlaceService;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -7,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+// 사용자단에서 공간대여목록 조회 (은석)
 @WebServlet(name = "MemberSelectPlaceServlet", urlPatterns = "/place/list.me")
 public class MemberSelectPlaceServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -20,10 +23,10 @@ public class MemberSelectPlaceServlet extends HttpServlet {
         // 문제점 1: 지역분류 안돼있음.... 이거 하려면 주소에서 이름 뽑아내던가 해야함. 아니면 디비에 칼럼 새로 넣던지.
 
         // 현 페이지, 또는 가야하는 페이지.
-        int pageNum = 1;
+        int currentPage = 1;
         try {
             // 매개변수로 받아왔으면 뽑아오고, 안뽑히면 오류나는걸테니 기본값으로.
-            pageNum = Integer.parseInt(request.getParameter("page"));
+            currentPage = Integer.parseInt(request.getParameter("page"));
         } catch (Exception e) {
             System.out.println("parseError prolly. set to default of 1.");
         }
@@ -39,8 +42,32 @@ public class MemberSelectPlaceServlet extends HttpServlet {
         int startPage;
         // 위와 반대로 마지막 페이지. 위로 예를들면 5페이지.
         int endPage;
-
         // 기본값으로 가나다순 어떪.
+
+        PlaceService ps = new PlaceService();
+        int listCount = ps.getMemberPlaceListCount();
+
+        // 페이지수(maxPage) 계산방법:
+        // 총 게시글 수(listCount) / 한 페이지당 보여질 수 (limit) + 소수점 올림처리
+        maxPage = (int)Math.ceil((double) listCount / (double) limit);
+
+        // 현 페이지에서 노출시킬 첫 페이지 (startPage)
+        // e.g. 현재 15 페이지면 startPage 는 11
+        // startPage = ((double) currentPage/limit)
+        // TODO: 2020-03-04 우선은 시간상 jsp 에제에 써있는 대로 넣는다. 근데 무조건 추후 찾아볼것.
+        startPage = (((int)((double) currentPage / limit + 0.9)) - 1) * 10 + 1;
+
+        //아래 쪽에 보여질 마지막 페이지 수(10, 20, 30, ...)
+        endPage = startPage + 10 - 1;
+
+        if(maxPage < endPage) {
+            endPage = maxPage;
+        }
+
+
+
+
+
 
 
         String page = "/views/rental/list.jsp";
