@@ -15,6 +15,7 @@ public class PaymentService {
 		int result = new PaymentDao().insertPayment(con, p);
 		
 		if(result > 0) {
+			result = new PaymentDao().updateMemberCtn(con, p);
 			commit(con);
 		} else {
 			rollback(con);

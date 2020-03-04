@@ -96,4 +96,15 @@ public class PaymentDao {
 		System.out.println(payList);
 		return payList;
 	}
+
+	public int updateMemberCtn(Connection con, Payment p) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("updateCount");
+		
+		
+		
+		return result;
+	}
 }
