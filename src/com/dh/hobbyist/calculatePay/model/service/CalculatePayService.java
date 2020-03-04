@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import com.dh.hobbyist.calculatePay.model.dao.CalculatePayDao;
 import com.dh.hobbyist.calculatePay.model.vo.Accounts;
+import com.dh.hobbyist.calculatePay.model.vo.PaySettlement;
 import com.dh.hobbyist.calculatePay.model.vo.Settlement;
 
 import static com.dh.hobbyist.common.JDBCTemplate.*;
@@ -38,12 +39,13 @@ public class CalculatePayService {
 		Connection con = getConnection();
 		int result = 0;
 		
-		for(int i = 0; i < list.size(); i++) {
-			for(int j = 0; j < list.size(); j++) {
-				if(list.get(i).getLessonOrderCode() != settleList.get(j).getLessonOrderCode()) {
-					result += new CalculatePayDao().insertPayment(con, list.get(i));
+		exit_For:for(int i = 0; i < list.size(); i++) {
+			for(int j = 0; j < settleList.size(); j++) {
+				if(list.get(i).getLessonOrderCode() == settleList.get(j).getLessonOrderCode()) {
+					break exit_For;
 				}
 			}
+			result += new CalculatePayDao().insertPayment(con, list.get(i));
 		}
 		
 		if(result > 0) {
@@ -55,6 +57,17 @@ public class CalculatePayService {
 		close(con);
 		
 		return result;
+	}
+
+	//정산내역 뷰에서 보여질 VO 조회 메소드 
+	public ArrayList<PaySettlement> selectPaySettlementList() {
+		Connection con = getConnection();
+		
+		ArrayList<PaySettlement> list = new CalculatePayDao().selectPaySettlementList(con);
+		
+		close(con);
+		
+		return list;
 	}
 
 	

@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import com.dh.hobbyist.calculatePay.model.vo.Accounts;
+import com.dh.hobbyist.calculatePay.model.vo.PaySettlement;
 import com.dh.hobbyist.calculatePay.model.vo.Settlement;
 
 import static com.dh.hobbyist.common.JDBCTemplate.*;
@@ -127,6 +128,53 @@ public class CalculatePayDao {
 		}
 		
 		return result;
+	}
+
+	//정산내역 뷰에서 보여질 VO 조회 메소드
+	public ArrayList<PaySettlement> selectPaySettlementList(Connection con) {
+		ArrayList<PaySettlement> list = null;
+		Statement stmt = null;
+		ResultSet rset = null;
+		
+		String query = prop.getProperty("selectPaySettlementList");
+		
+		try {
+			stmt = con.createStatement();
+			rset = stmt.executeQuery(query);
+			
+			list = new ArrayList<PaySettlement>();
+			
+			while(rset.next()) {
+				PaySettlement ps = new PaySettlement();
+				ps.setSettleCode(rset.getInt("SETTLE_PK"));
+				ps.setLessonOrderCode(rset.getInt("LESSON_ORDER_PK"));
+				ps.setLessonOrderTime(rset.getInt("LESSON_ORDER_TIME"));
+				ps.setMemberCode(rset.getInt("MEMBER_PK"));
+				ps.setMemberId(rset.getString("MEMBER_ID"));
+				ps.setMemberName(rset.getString("MEMBER_NAME"));
+				ps.setCostPerOrder(rset.getInt("COST_PER_ORDER"));
+				ps.setListeners(rset.getInt("LISTENERS"));
+				ps.setTotalCost(rset.getInt("TOTAL_COST"));
+				ps.setSettleFee(rset.getInt("SETTLE_FEE"));
+				ps.setTotalPayGiven(rset.getInt("TOTAL_PAY_GIVEN"));
+				ps.setBankName(rset.getString("MEMBER_BANK_NAME"));
+				ps.setBankOwner(rset.getString("MEMBER_BANK_OWNER"));
+				ps.setBankNum(rset.getString("MEMBER_BANK_NUM"));
+				ps.setStatus(rset.getInt("STATUS"));
+				ps.setLessonName(rset.getString("LESSON_NAME"));
+				ps.setLessonOrderEnd(rset.getTimestamp("LESSON_ORDER_END"));
+				ps.setLessonCode(rset.getInt("LESSON_PK"));
+				
+				list.add(ps);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(stmt);
+		}
+		
+		return list;
 	}
 
 }

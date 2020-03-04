@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.dh.hobbyist.calculatePay.model.service.CalculatePayService;
 import com.dh.hobbyist.calculatePay.model.vo.Accounts;
+import com.dh.hobbyist.calculatePay.model.vo.PaySettlement;
 import com.dh.hobbyist.calculatePay.model.vo.Settlement;
 
 /**
@@ -34,15 +35,33 @@ public class CalculatePayServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ArrayList<Accounts> list = new CalculatePayService().selectPayList();
 		
-		for(int i = 0; i < list.size(); i++) {
-			System.out.println(list.get(i));
-		}
+//		for(int i = 0; i < list.size(); i++) {
+//			System.out.println(list.get(i));
+//		}
 		
 		ArrayList<Settlement> settleList = new CalculatePayService().selectSettlementList();
 		
-		System.out.println("settleList : " + settleList);
+		//System.out.println("settleList : " + settleList);
 		
-		//int result = new CalculatePayService().insertPayment(list, settleList);
+		int result = new CalculatePayService().insertPayment(list, settleList);
+		
+		System.out.println("result : " + result);
+		
+		String page = "";
+		
+		if(result >= 0) {
+			page = "views/admin/payRefundMgmt/calculatePayList.jsp";
+			ArrayList<PaySettlement> payList = new CalculatePayService().selectPaySettlementList(); 
+//			for(int i = 0; i < payList.size(); i++) {
+//				System.out.println(payList.get(i));
+//			}
+			request.setAttribute("payList", payList);
+		} else {
+			page = "views/common/errorPage.jsp";
+			request.setAttribute("msg", "정산내역 조회 실패!");
+		}
+		
+		request.getRequestDispatcher(page).forward(request, response);
 	}
 
 	/**
