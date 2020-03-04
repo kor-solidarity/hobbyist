@@ -1,11 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.util.ArrayList" %>
 <%@ page import="com.dh.hobbyist.lesson.model.vo.Image" %>
 <%@ page import="com.dh.hobbyist.lesson.model.vo.Lesson" %>
+<%@ page import="com.dh.hobbyist.lesson.model.vo.LessonSchedule" %>
 <%
 	Image pImg = (Image) request.getAttribute("profileImg");
 	Lesson lesson = (Lesson) request.getAttribute("lesson");
 	String lessonIntro = lesson.getLessonIntro();
+	Member artist = (Member) request.getAttribute("artist");
+	ArrayList sList = (ArrayList) request.getAttribute("scheduleList");
+	
+	
+	System.out.println("ArrayList : " + sList.get(0));
 %>
 <!DOCTYPE html>
 <html>
@@ -258,10 +265,16 @@
 						<td style="width:193px;"><span class="stNum">최대 <%= lesson.getMaxStudents() %>명</span></td>
 					</tr>
 					<tr style="height:45%;">
-						<td colspan="2">
-							<div><img src="<%= request.getContextPath() %>/static/images/map.png" id="mapImg">강남 | 1회차 | 02.03(월) 19:00-21:00▼</div>
+						<td colspan="2" id="scheduleArea">
+							<% for(int i = 0; i < sList.size(); i++) { %>
+							<div>
+							<img src="<%= request.getContextPath() %>/static/images/map.png" id="mapImg">
+							<%= ((LessonSchedule) sList.get(i)).getRegion() %> | 
+							</div>
+							<% } %>
+							<%-- <div><img src="<%= request.getContextPath() %>/static/images/map.png" id="mapImg">강남 | 1회차 | 02.03(월) 19:00-21:00▼</div>
 							<div><img src="<%= request.getContextPath() %>/static/images/map.png" id="mapImg">강남 | 1회차 | 02.10(월) 19:00-21:00▼</div>
-							<div><img src="<%= request.getContextPath() %>/static/images/map.png" id="mapImg">강남 | 1회차 | 02.17(월) 19:00-21:00▼</div>			
+							<div><img src="<%= request.getContextPath() %>/static/images/map.png" id="mapImg">강남 | 1회차 | 02.17(월) 19:00-21:00▼</div> --%>			
 						</td>
 					</tr>
 					<tr style="height:20%;">
@@ -315,9 +328,15 @@
 						<td colspan="2" style="width:37.5%; text-align:center;">
 							<select id="scheduleSelect" >
 								<option>수업 일정 선택</option>
-								<option>강남 | 1회차 | 02.03(월) 19:00-21:00</option>
+								<% for(int i = 0; i < sList.size(); i++) { %>
+								<option value="<%= ((LessonSchedule) sList.get(i)).getScheduleCode() %>">
+								<%= ((LessonSchedule) sList.get(i)).getRegion() %> |
+								</option>
+								<% } %>
+								
+								<!-- <option>강남 | 1회차 | 02.03(월) 19:00-21:00</option>
 								<option>강남 | 1회차 | 02.10(월) 19:00-21:00</option>
-								<option>강남 | 1회차 | 02.17(월) 19:00-21:00</option>
+								<option>강남 | 1회차 | 02.17(월) 19:00-21:00</option> -->
 							</select>
 						</td>
 					</tr>
@@ -326,11 +345,16 @@
 							<div style="margin: 15px 0px;"><%= lesson.getLessonName() %></div>
 						</td>
 						<td></td>
-						<td colspan="2" style="text-align:center;"><button id="registerBtn" type="button">수업 신청</button></td>
+						<td colspan="2" style="text-align:center;"><button id="registerBtn" type="button" onclick="openLesson();">수업 신청</button></td>
+						<script>
+							function openLesson() {
+								console.log("$('#scheduleSelect').val() : " + $("#scheduleSelect").val());
+								location.href = "<%= request.getContextPath() %>/readyToInsert.pa?scheduleCode=" + $("#scheduleSelect").val();
+							}
+						</script>
 					<tr>
 						<td id="profileImgArea" rowspan="3">
 							<img src="<%= pImg.getImageRoute() %>/<%= pImg.getImageName() %>" id="profileImg">	
-							<%-- <img src="<%= request.getContextPath() %>/static/upload/artist/<%= pImg.getImageName() %>" id="profileImg"> --%>
 						</td>
 						<td style="width:380px; color:darkolivegreen;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;★★★★☆ <label style="color:black; font-weight:normal;">(3)</label></td>
 						<td></td>
@@ -346,7 +370,6 @@
 								
 								var total = <%= lesson.getTotalCosts() %>;
 								var totalM = total.toLocaleString();
-								console.log("total : " + total.toLocaleString());
 								
 								$("#perCost").text(perM);
 								$("#totalCosts").text(totalM);
@@ -366,7 +389,7 @@
 						</td>
 					</tr>
 					<tr>
-						<td id="nickname">hyeon</td>
+						<td id="nickname"><%= artist.getArtistNick() %></td>
 						<td></td>
 						<td></td>
 						<td colspan="2" style="text-align:right;">
@@ -374,10 +397,11 @@
 						</td>
 					</tr>
 					<tr>
-						<td style="text-align:center;">김설현</td>
+						<td style="text-align:center;"><%= artist.getMemberName() %></td>
 						<td></td>
 						<td></td>
 						<td rowspan="4" colspan="2">
+							<% if(lesson.getPetitionCode() != 0) { %>
 							<table id="suggestTable" align="center">
 								<tr>
 									<td style="color:#DAB554">건의된 학생 정원</td>
@@ -406,6 +430,7 @@
 								
 							</table>
 							<div align="center">건의 게시물 바로가기</div>
+							<% } %>
 						</td>
 					</tr>
 					<tr>

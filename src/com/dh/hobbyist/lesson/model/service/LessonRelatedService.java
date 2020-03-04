@@ -19,7 +19,8 @@ import com.dh.hobbyist.lesson.model.vo.LessonSchedule;
 import com.dh.hobbyist.member.model.vo.Member;
 
 public class LessonRelatedService {
-
+	
+	//수업 개설시 입력 처리를 위한 메소드
 	public int insertLessonRelated(HashMap lessonRelated) {
 		Connection con = getConnection();
 		
@@ -128,6 +129,34 @@ public class LessonRelatedService {
 		}
 		
 		return artist;
+	}
+
+	public ArrayList<LessonSchedule> selectScheduleList(int lessonCode) {
+		Connection con = getConnection();
+		
+		ArrayList<LessonSchedule> scheduleList = new LessonRelatedDao().selectScheduleList(con, lessonCode);
+		
+		if(scheduleList != null) {
+			commit(con);
+		} else {
+			rollback(con);
+		}
+		
+		return scheduleList;
+	}
+
+	public ArrayList<Image> selectLessonImageList(int lessonCode) {
+		Connection con = getConnection();
+		
+		ArrayList<Image> lessonImageList = new LessonRelatedDao().selectLessonImageList(con, lessonCode);
+		
+		if(lessonImageList != null) {
+			commit(con);
+		} else {
+			rollback(con);
+		}
+		
+		return lessonImageList;
 	}
 
 }
