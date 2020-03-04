@@ -153,11 +153,19 @@ section {
 
 			<!-- 큰 메뉴안의 상세 메뉴 여러개 -->
 			<div id="smallMenu">
-				<label>내역조회</label><br> <label>환불신청</label><br> <label
-					style="color: #DED842;">금액정산</label>
+				<label onclick="goPayList();">내역 조회</label><br> 
+				<label onclick="goApplyRefund();">환불 신청</label><br> 
+				<label style="color: #DED842;">금액 정산</label>
 			</div>
 		</article>
-
+		<script>
+			function goPayList() {
+				location.href = "<%=request.getContextPath()%>/views/admin/payRefundMgmt/payList.jsp";
+			}
+			function goApplyRefund() {
+				location.href = "<%=request.getContextPath()%>/views/admin/payRefundMgmt/applyRefundList.jsp";
+			}
+		</script>
 		<!-- 관리자 본문 들어갈 공간 -->
 		<article id="contents">
 
@@ -227,8 +235,12 @@ section {
 							<td>
 								<% if(ps.getStatus() == 0) { %>
 									<label class="modalLab" style="color:dimgrey">확인 대기중</label>
-								<%} else { %>
-									<label class="modalLab" style="color:red">이의 제기</label>
+								<%} else if(ps.getStatus() == 1){ %>
+									<label class="modalLab" style="color:red">수정 요청</label>
+								<%} else if(ps.getStatus() == 2) { %>
+									<label class="modalLab" style="color:DodgerBlue">정산 대기중</label>
+								<%} else if(ps.getStatus() == 3) { %>
+									<label class="modalLab" style="color:dimgrey">정산 완료</label>
 								<%} %>
 							</td>
 						</tr>
@@ -246,7 +258,7 @@ section {
 			<div class="modal-content">
 				<div class="modal-header" style="background-color:#4E4E4E; height:42px;">
 					<button type="button" class="close" data-dismiss="modal" style="color:white;">×</button>
-					<h4 class="modal-title"style="color:white; font-family: Do Hyeon;">이의제기 조회</h4>
+					<h4 class="modal-title"style="color:white; font-family: Do Hyeon;">수정요청 조회</h4>
 				</div>
 				<div class="modal-body">
 					<table style="margin:auto; border-spacing:15px; border-collapse:separate;">
