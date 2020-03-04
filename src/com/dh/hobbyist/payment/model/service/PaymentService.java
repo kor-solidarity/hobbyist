@@ -9,6 +9,7 @@ import static com.dh.hobbyist.common.JDBCTemplate.*;
 
 public class PaymentService {
 
+	//결제 시 실행 되는 메소드 3개
 	public int insertPayment(Payment p) {
 		Connection con = getConnection();
 		
