@@ -1,11 +1,18 @@
 package com.dh.hobbyist.calculatePay.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.dh.hobbyist.calculatePay.model.service.CalculatePayService;
+import com.dh.hobbyist.calculatePay.model.vo.PaySettlement;
+import com.dh.hobbyist.member.model.vo.Member;
+import com.dh.hobbyist.suggest.model.vo.PageInfo;
 
 /**
  * Servlet implementation class SelectMyCalListServlet
@@ -26,7 +33,52 @@ public class SelectMyCalListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("마이페이지 - 나의 정산");
+		int memberCode = ((Member) request.getSession().getAttribute("loginMember")).getMemberCode();
+		
+		int currentPage;
+		int limit;
+		int maxPage;
+		int startPage;
+		int endPage;
+		
+		currentPage = 1;
+		
+		if(request.getParameter("currentPage") != null) {
+			currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		}
+		
+		limit = 10;
+		
+		CalculatePayService cps = new CalculatePayService();
+		int listCount = cps.getMyPayList(memberCode);
+		
+		maxPage = (int) ((double) listCount / limit + 0.9);
+		
+		startPage = (((int) ((double) currentPage / limit + 0.9)) - 1) * 10 + 1;
+		
+		endPage = startPage + 10 - 1;
+		
+		if(maxPage < endPage) {
+			endPage = maxPage;
+		}
+		
+		PageInfo pi = new PageInfo(currentPage, listCount, limit, maxPage, startPage, endPage);
+		
+		ArrayList<PaySettlement> myPayList = cps.selectMyPaySettlementList(pi, memberCode);
+		
+		String page = "";
+		
+		if(myPayList != null) {
+			page = "views/member/myPage/myCalculations/calculationsList.jsp";
+			request.setAttribute("myPayList", myPayList);
+			request.setAttribute("pi", pi);
+		} else {
+			page = "views/common/errorPage.jsp";
+			request.setAttribute("msg", "나의 정산/정산내역 조회 실패");
+		}
+		
+		request.getRequestDispatcher(page).forward(request, response);
+		
 	}
 
 	/**

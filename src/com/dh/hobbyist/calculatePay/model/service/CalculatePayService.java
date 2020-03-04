@@ -7,6 +7,7 @@ import com.dh.hobbyist.calculatePay.model.dao.CalculatePayDao;
 import com.dh.hobbyist.calculatePay.model.vo.Accounts;
 import com.dh.hobbyist.calculatePay.model.vo.PaySettlement;
 import com.dh.hobbyist.calculatePay.model.vo.Settlement;
+import com.dh.hobbyist.suggest.model.vo.PageInfo;
 
 import static com.dh.hobbyist.common.JDBCTemplate.*;
 
@@ -70,5 +71,80 @@ public class CalculatePayService {
 		return list;
 	}
 
+	//마이페이지 - 나의 정산에서 쓰일 나의 정산 갯수 조회용 메소드
+	public int getMyPayList(int memberCode) {
+		Connection con = getConnection();
+		
+		int listCount = new CalculatePayDao().getMyPayList(con, memberCode);
+		
+		close(con);
+		
+		return listCount;
+	}
+
+	//마이페이지 - 나의 정산에서 쓰일 나의 정산 전체 조회용 메소드 (페이징 처리)
+	public ArrayList<PaySettlement> selectMyPaySettlementList(PageInfo pi, int memberCode) {
+		Connection con = getConnection();
+		
+		ArrayList<PaySettlement> list = new CalculatePayDao().selectMyPaySettlementList(con, memberCode, pi);
+		
+		close(con);
+		
+		return list;
+	}
+
+	//정산pk를 이용해 정산DB 한개 조회용 메소드
+	public PaySettlement selectOneCalculation(int orderCode) {
+		Connection con = getConnection();
+		
+		PaySettlement ps = new CalculatePayDao().selectOneCalculation(con, orderCode);
+		
+		close(con);
+		
+		return ps;
+	}
+
+	//"정산 확정" 클릭 시 정산 DB에서 상태(STATUS) 값 변경용 메소드
+	public int updateConfirmStatus(int settleCode) {
+		Connection con = getConnection();
+		
+		int result = new CalculatePayDao().updateConfirmStatus(con, settleCode);
+		
+		if(result > 0) {
+			commit(con);
+		} else {
+			rollback(con);
+		}
+		
+		return result;
+	}
+
+	//"수정 요청" 클릭 시 정산 DB에서 상태(STATUS) 값 변경 후 정산문답 DB에 등록용 메소드
+	public int insertSettlementReply(int settleCode, String modifyText) {
+		Connection con = getConnection();
+		
+		int result1 = new CalculatePayDao().updateModifyStatus(con, settleCode);
+		int result2 = 0;
+		int result = 0;
+		
+		if(result1 > 0) {
+			result2 = new CalculatePayDao().insertSettlementReply(con, settleCode, modifyText);
+		}
+		
+		if(result2 > 0) {
+			result = 1;
+			commit(con);
+		} else {
+			result = 0;
+			rollback(con);
+		}
+		
+		return result;
+	}
+	
+	
+	
+
+	
 	
 }
