@@ -16,6 +16,7 @@ import com.dh.hobbyist.lesson.model.vo.Image;
 import com.dh.hobbyist.lesson.model.vo.Lesson;
 import com.dh.hobbyist.lesson.model.vo.LessonOrder;
 import com.dh.hobbyist.lesson.model.vo.LessonSchedule;
+import com.dh.hobbyist.member.model.vo.Member;
 
 public class LessonRelatedService {
 
@@ -113,6 +114,20 @@ public class LessonRelatedService {
 		}
 		
 		return lesson;
+	}
+
+	public Member selectOneArtist(int artistCode) {
+		Connection con = getConnection();
+		
+		Member artist = new LessonRelatedDao().selectOneArtist(con, artistCode);
+		
+		if(artist != null) {
+			commit(con);
+		} else {
+			rollback(con);
+		}
+		
+		return artist;
 	}
 
 }
