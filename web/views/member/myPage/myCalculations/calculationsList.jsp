@@ -95,7 +95,7 @@
 				</select></td>
 			</tr>
 			<tr>
-				<th>수업코드</th>
+				<th>회차코드</th>
 				<th>수업명</th>
 				<th>수업일자</th>
 				<th>회차당 수업료</th>

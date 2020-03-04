@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="java.util.ArrayList, com.dh.hobbyist.calculatePay.model.vo.*"%>
+<%
+	ArrayList<PaySettlement> payList = (ArrayList<PaySettlement>) request.getAttribute("payList");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -194,32 +197,43 @@ section {
 						<th style="width: 100px;">계좌번호</th>
 						<th style="width: 120px;">상태</th>
 					</tr>
-					<tr>
-						<td>1159-2</td>
-						<td>1</td>
-						<td>dreamhigh</td>
-						<td>임찬영</td>
-						<td>20000</td>
-						<td>5</td>
-						<td>100000</td>
-						<td>10%</td>
-						<td>90000</td>
-						<td>국민 임찬영 1002834795530</td>
-						<td>확인대기중</td>
-					</tr>
-					<tr>
-						<td>1160-3</td>
-						<td>3</td>
-						<td>hyeon0705</td>
-						<td>김설현</td>
-						<td>20000</td>
-						<td>5</td>
-						<td>100000</td>
-						<td>10%</td>
-						<td>90000</td>
-						<td>우리 김설현 1002834795530</td>
-						<td style="color: red;" id="modalTd">이의제기</td>
-					</tr>
+					<%  int index = 0;
+						for(PaySettlement ps : payList) { %>
+						<tr>
+							<td><%=ps.getLessonOrderCode() %></td>
+							<td><%=ps.getLessonOrderTime() %></td>
+							<td><%=ps.getMemberId() %></td>
+							<td><%=ps.getMemberName() %></td>
+							<td><%=ps.getCostPerOrder() %></td>
+							<td><%=ps.getListeners() %></td>
+							<td><%=ps.getTotalCost() %></td>
+							<td><%=ps.getSettleFee() %>%</td>
+							<td><%=ps.getTotalPayGiven() %></td>
+							<td>
+								<%
+								index++;
+								String sentence = "";
+								switch(ps.getBankName()) {
+								case "SH" : sentence = "신한"; break;
+								case "KB" : sentence = "국민"; break;
+								case "NH" : sentence = "농협"; break;
+								default: sentence = ps.getBankName(); break;
+								}
+								sentence += ps.getBankOwner();
+								sentence += ps.getBankNum();
+								%>
+								<%=sentence %>
+							</td>
+							<td>
+								<% if(ps.getStatus() == 0) { %>
+									<label class="modalLab" style="color:dimgrey">확인 대기중</label>
+								<%} else { %>
+									<label class="modalLab" style="color:red">이의 제기</label>
+								<%} %>
+							</td>
+						</tr>
+					
+					<%} %>
 				</table>
 			</div>
 		</article>
@@ -230,7 +244,7 @@ section {
 
 			<!-- Modal content-->
 			<div class="modal-content">
-				<div class="modal-header" style="background-color:darkolivegreen; height:42px;">
+				<div class="modal-header" style="background-color:#4E4E4E; height:42px;">
 					<button type="button" class="close" data-dismiss="modal" style="color:white;">×</button>
 					<h4 class="modal-title"style="color:white; font-family: Do Hyeon;">이의제기 조회</h4>
 				</div>
@@ -258,7 +272,7 @@ section {
 					<div id="artistResponse">
 						<table style="border-spacing:10px; border-collapse:separate; width:100%;">
 							<tr>
-								<td style="font-weight:bold; color:darkolivegreen;">김설현</td>
+								<td style="font-weight:bold; color:#4E4E4E;">김설현</td>
 								<td style="text-align:right;">2020-01-23</td>
 							</tr>
 							<tr>
@@ -280,7 +294,7 @@ section {
 									<div id="adminResDiv">
 										<table>
 											<tr>
-												<td style="font-weight:bold; color:darkolivegreen;">관리자1</td>
+												<td style="font-weight:bold; color:#4E4E4E;">관리자1</td>
 												<td style="text-align:right;">2020-01-23</td>
 											</tr>
 											<tr>
@@ -301,8 +315,8 @@ section {
 					</div>
 				</div>
 				<div class="modal-footer" style="text-align:center;">
-					<button type="button" id="adminResponse" class="btn btn-primary" style="background-color:darkolivegreen; width:150px;">답변하기</button>
-					<button type="button" id="adminSend" class="btn btn-primary" style="background-color:darkolivegreen; display:none;">보내기</button>
+					<button type="button" id="adminResponse" class="btn btn-primary" style="background-color:#4E4E4E; width:150px;">답변하기</button>
+					<button type="button" id="adminSend" class="btn btn-primary" style="background-color:#4E4E4E; display:none;">보내기</button>
 				</div>
 			</div>
 
@@ -310,7 +324,7 @@ section {
 	</div>
 	<script>
 	$(document).ready(function(){
-    	$("#modalTd").click(function(){
+    	$(".modalLab").click(function(){
         	$("#myModal").modal();
     	});
 	});
