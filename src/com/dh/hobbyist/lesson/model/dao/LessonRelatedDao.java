@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Properties;
 
 import com.dh.hobbyist.lesson.model.vo.Image;
@@ -284,6 +285,78 @@ public class LessonRelatedDao {
 		}
 		
 		return a;
+	}
+
+	public ArrayList<LessonSchedule> selectScheduleList(Connection con, int lessonCode) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<LessonSchedule> list = null;
+		LessonSchedule s = null;
+		
+		String query = prop.getProperty("selectScheduleList");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, lessonCode);
+			
+			rset = pstmt.executeQuery();
+			
+			list = new ArrayList<LessonSchedule>();
+			
+			while(rset.next()) {
+				s = new LessonSchedule();
+				s.setScheduleCode(rset.getInt("SCHEDULE_PK"));
+				s.setRegion(rset.getString("REGION"));
+				s.setSubRegion(rset.getString("SUB_REGION"));
+				s.setAddress(rset.getString("ADDRESS"));
+				
+				list.add(s);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+	}
+
+	public ArrayList<Image> selectLessonImageList(Connection con, int lessonCode) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<Image> list = null;
+		Image i = null;
+		
+		String query = prop.getProperty("selectLessonImageList");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, lessonCode);
+			
+			rset = pstmt.executeQuery();
+			
+			list = new ArrayList<Image>();
+			
+			while(rset.next()) {
+				i = new Image();
+				i.setImageCode(rset.getInt("IMAGE_PK"));
+				i.setImageRoute(rset.getString("IMAGE_ROUTE"));
+				i.setImageName(rset.getString("IMAGE_NAME"));
+				i.setImageMain(rset.getInt("IMAGE_MAIN"));
+				
+				list.add(i);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
 	}
 
 
