@@ -13,92 +13,6 @@ import static com.dh.hobbyist.common.JDBCTemplate.*;
 
 public class LessonService {
 	
-	//음악 카테고리 페이지 메소드(유승)
-	public ArrayList<HashMap<String, Object>> selectCategoryMusic() {
-		Connection con = getConnection();
-		
-		ArrayList<HashMap<String, Object>> list = new LessonDao().selectCategoryMusic(con);
-		
-		close(con);
-		
-		return list;
-	}
-	//댄스 카테고리 페이지 메소드(유승)
-	public ArrayList<HashMap<String, Object>> selectCategoryDance() {
-		Connection con = getConnection();
-		
-		ArrayList<HashMap<String, Object>> list = new LessonDao().selectCategoryDance(con);
-		
-		close(con);
-		
-		return list;
-	}
-	
-	//영상/사진 카테고리 페이지 메소드(유승)
-	public ArrayList<HashMap<String, Object>> selectCategoryVideo() {
-		Connection con = getConnection();
-		
-		ArrayList<HashMap<String, Object>> list = new LessonDao().selectCategoryVideo(con);
-		
-		close(con);
-		
-		return list;
-	}
-	
-		//라이프스타일 카테고리 페이지 메소드(유승)
-		public ArrayList<HashMap<String, Object>> selectCategoryLife() {
-			Connection con = getConnection();
-			
-			ArrayList<HashMap<String, Object>> list = new LessonDao().selectCategoryLife(con);
-			
-			close(con);
-			
-			return list;
-		}
-	
-		//뷰티 카테고리 페이지 메소드(유승)
-		public ArrayList<HashMap<String, Object>> selectCategoryBeauty() {
-			Connection con = getConnection();
-		
-			ArrayList<HashMap<String, Object>> list = new LessonDao().selectCategoryBeauty(con);
-		
-			close(con);
-		
-			return list;
-	}
-	
-		//디자인 카테고리 페이지 메소드(유승)
-		public ArrayList<HashMap<String, Object>> selectCategoryDesign() {
-			Connection con = getConnection();
-			
-			ArrayList<HashMap<String, Object>> list = new LessonDao().selectCategoryDesign(con);
-			
-			close(con);
-			
-			return list;
-		}
-		
-		//스포츠 카테고리 페이지 메소드(유승)
-		public ArrayList<HashMap<String, Object>> selectCategorySports() {
-			Connection con = getConnection();
-			
-			ArrayList<HashMap<String, Object>> list = new LessonDao().selectCategorySports(con);
-			
-			close(con);
-			
-			return list;
-		}
-	
-	//카테고리별 페이지 리스트 메소드(유승)
-	public ArrayList<HashMap<String, Object>> selectPopularLessonList() {
-		Connection con = getConnection();
-		
-		ArrayList<HashMap<String, Object>> list = new LessonDao().selectPopularLessonList(con);
-		
-		close(con);
-		
-		return list;
-	}
 	
 	//관심 수업 리스트 메소드(유승)
 	public ArrayList<HashMap<String, Object>> selectInterest(int memberCode) {
@@ -121,7 +35,7 @@ public class LessonService {
 		return listCount;
 	}
 	
-	//음악 카테고리 페이징 처리 된 페이지 메소드(유승)
+	//음악 카테고리 페이징 메소드(유승)
 	public ArrayList<HashMap<String, Object>> selectCategoryMusic(PageInfo pi) {
 		Connection con = getConnection();
 		
@@ -131,6 +45,95 @@ public class LessonService {
 		
 		return list;
 	}
+	
+	//댄스 카테고리 페이징 메소드(유승)
+	public ArrayList<HashMap<String, Object>> selectCategoryDance(PageInfo pi) {
+		Connection con = getConnection();
+		
+		ArrayList<HashMap<String, Object>> list = new LessonDao().selectCategoryDance(con, pi);
+		
+		close(con);
+		
+		return list;
+	}
+	
+	//영상/사진 카테고리 페이징 메소드(유승)
+	public ArrayList<HashMap<String, Object>> selectCategoryVideo(PageInfo pi) {
+		Connection con = getConnection();
+		
+		ArrayList<HashMap<String, Object>> list = new LessonDao().selectCategoryVideo(con, pi);
+		
+		close(con);
+		
+		return list;
+	}
+	
+	//라이프스타일 카테고리 페이징 메소드(유승)
+	public ArrayList<HashMap<String, Object>> selectCategoryLife(PageInfo pi) {
+		Connection con = getConnection();
+		
+		ArrayList<HashMap<String, Object>> list = new LessonDao().selectCategoryLife(con, pi);
+		
+		close(con);
+		
+		return list;
+	}
+	
+	//뷰티 카테고리 페이징 메소드(유승)
+	public ArrayList<HashMap<String, Object>> selectCategoryBeauty(PageInfo pi) {
+		Connection con = getConnection();
+		
+		ArrayList<HashMap<String, Object>> list = new LessonDao().selectCategoryBeauty(con, pi);
+		
+		close(con);
+		
+		return list;
+	}
+	
+	//디자인 카테고리 페이징 메소드(유승)
+	public ArrayList<HashMap<String, Object>> selectCategoryDesign(PageInfo pi) {
+		Connection con = getConnection();
+		
+		ArrayList<HashMap<String, Object>> list = new LessonDao().selectCategoryDesign(con, pi);
+		
+		close(con);
+		
+		return list;
+	}
+	
+	//스포츠 카테고리 페이징 메소드(유승)
+	public ArrayList<HashMap<String, Object>> selectCategorySports(PageInfo pi) {
+		Connection con = getConnection();
+		
+		ArrayList<HashMap<String, Object>> list = new LessonDao().selectCategorySports(con, pi);
+		
+		close(con);
+		
+		return list;
+	}
+	
+	//메인 페이지 인기수업 페이징 메소드(유승)
+	public ArrayList<HashMap<String, Object>> selectMainPopular(PageInfo pi) {
+		Connection con = getConnection();
+		
+		ArrayList<HashMap<String, Object>> list = new LessonDao().selectMainPopular(con, pi);
+		
+		close(con);
+		
+		return list;
+	}
+	
+	//메인페이지 관심수업 페이징 메소드(유승)
+	public ArrayList<HashMap<String, Object>> selectMainInterest(PageInfo pi, int memberCode) {
+		Connection con = getConnection();
+		
+		ArrayList<HashMap<String, Object>> list = new LessonDao().selectMainInterest(con, pi, memberCode);
+		
+		close(con);
+		
+		return list;
+	}
+	
 	
 	
 

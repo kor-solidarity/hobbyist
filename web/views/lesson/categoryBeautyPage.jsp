@@ -1,8 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="java.util.ArrayList, java.util.HashMap"%>
+    pageEncoding="UTF-8" import="java.util.ArrayList, java.util.HashMap, com.dh.hobbyist.common.model.vo.PageInfo"%>
 <%
 	ArrayList<HashMap<String, Object>> list
 			= (ArrayList<HashMap<String, Object>>) request.getAttribute("list");
+	
+	PageInfo pi = (PageInfo) request.getAttribute("pi");
+	int listCount = pi.getListCount();
+	int currentPage = pi.getCurrentPage();
+	int maxPage = pi.getMaxPage();
+	int startPage = pi.getStartPage();
+	int endPage = pi.getEndPage();
 %>
 <!DOCTYPE html>
 <html>
@@ -30,7 +37,7 @@
 		
 		#section{
 			width:1024px;
-			height:900px;
+			height:1250px;
 			margin:auto;
 			margin-top:30px;
 		}
@@ -101,28 +108,31 @@
 			
 			
 		}
-		#lessonTable td:nth-of-type(2n) {
-			float:right; 
-			/* margin-right:10px; */
-			/* margin-right: 100px;  */
-		}
+		/*#lessonTable td:nth-of-type(2n) {
+			 float:right;  
+			
+		}*/
 		
 		 #artistNick {
 				
 	       		font-size: 15.5px;
 	       		color:darkolivegreen;
 	       		font-weight:900;
-	       		margin-right:20px; 
+	       		
 	    }
 	       
 	       #artistName {
 	       	
 	       		padding-bottom:5px;
-	       		margin-right:20px;  
+	       		
 	    }
 	    
 	    #artistNick, #artistName {
+	    	
+	    	display:block;
 	    	text-align:center;
+	    	width:100px;
+	    	margin-left: 60px;
 	    }
 	    
 	    #lessonCount {
@@ -135,20 +145,31 @@
 	    #artistImgArea {
 	    	display:block; 
 			 margin-top: 20px; 
-			 margin-left:-100px;
+			 margin-left:-110px;
 	    	
 	    }  
 	    
+	    #star {
+	    	color:darkolivegreen;
+	    	font-size:17px;
+	    }
+	    
 	    #star, #lessonArea {
+	    	display: block;
 	    	text-align:center;
-	    	margin-left: -10px; 
+	    	width:90px;
+	    	 
 	    }
 	    #lessonArea {
-	    	padding-bottom:5px;
+	    	margin-bottom:5px;
 	    }
 	    
 	    #lessonTable tr:eq(5) {
 	    	padding-top: -5px;
+	    }
+	    
+	    .pagingArea {
+	    	margin-bottom: 30px;
 	    }
 	   
 	   
@@ -282,10 +303,10 @@
 						<tr>
 							<td colspan="2">
 							<div>
-							<%-- <% if(hmap.get("imageType").equals("PLACE_COMPANY")) { %>
-							<img src="<%=hmap.get("imageRoute") %>/<%=hmap.get("imageName") %>" id="lessonImg">
-							<% } %>  --%>
-							<img src="/hobbyist/static/images/lessonImg1.jpg"  id="lessonImg">
+							 <% if(hmap.get("imageType").equals("lesson")) { %>
+							<img src="<%=hmap.get("imageRoute") %>/<%=hmap.get("imageName") %>" id="lessonImg"> 
+							<% } %> 
+							<!-- <img src="/hobbyist/static/images/lessonImg1.jpg"  id="lessonImg"> -->
 							</div>
 							</td>
 						</tr>
@@ -300,24 +321,52 @@
 							<td></td>
 							<td>
 							<div id="artistImgArea" style="width:75px;">
-							<% if(hmap.get("imageType").equals("profile")) { %>
-							<img src="<%=hmap.get("imageRoute") %>/<%=hmap.get("imageName") %>" id="artistImg">
+							<% if(hmap.get("imageType2").equals("profile")) { %>
+							<img src="<%=hmap.get("imageRoute2") %>/<%=hmap.get("imageName2") %>" id="artistImg">
 							<% } %>
 							</div>
 							</td>
 						</tr>
 						<tr>
-							<td><div id="star">별(15)</div></td>
-							<td><div id="artistNick"><%= hmap.get("artistNick") %></div></td>
+							<td style="word-break:break-all"><div id="star">★★★★☆</div></td>
+							<td style="word-break:break-all"><div id="artistNick"><%= hmap.get("artistNick") %></div></td>
 						</tr>
 						<tr>
-							<td><div id="lessonArea">강남</div></td>
-							<td><div id="artistName"><%=hmap.get("memberName") %></div></td>
+							<td style="word-break:break-all"><div id="lessonArea"><%= hmap.get("region") %></div></td>
+							<td style="word-break:break-all"><div id="artistName"><%=hmap.get("memberName") %></div></td>
 						</tr>
 					</table>
 				</div>
 		<% } %>
 		</div>
+
+	 </div>
+	 <div class="pagingArea" align="center">
+			<button onclick="location.href='<%= request.getContextPath()%>/selectMusic.le?currentPage=1'"><<</button>	
+			<% if(currentPage <= 1) { %>
+				<button disabled><</button>	
+			<% }else { %>
+				<button onclick="location.href='<%= request.getContextPath()%>/selectMusic.le?currentPage=<%=currentPage - 1%>'"><</button>	
+			<% } %>
+			
+			<% for(int p = startPage; p <= endPage; p++) {
+				if(p == currentPage) {	
+			%>
+					<button disabled><%= p %></button>
+			<%
+				}else {
+			%>	
+					<button onclick="location.href='<%= request.getContextPath()%>/selectMusic.le?currentPage=<%=p%>'"><%= p %></button>
+			<%	}
+			  }	
+			%>		
+			
+			<% if(currentPage >= maxPage) { %>
+				<button disabled>></button>
+			<% }else { %>
+				<button onclick="location.href='<%= request.getContextPath()%>/selectMusic.le?currentPage=<%=currentPage + 1%>'">></button>
+			<% } %>
+			<button onclick="location.href='<%= request.getContextPath()%>/selectMusic.le?currentPage=<%=maxPage%>'">>></button>	
 		</div>
 		
 	<script>
