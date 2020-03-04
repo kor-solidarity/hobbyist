@@ -112,8 +112,8 @@
 			<!-- 큰 메뉴안의 상세 메뉴 여러개 -->
 			<div id="smallMenu">
 				<label style="color: #DED842;">내역 조회</label><br>
-				<label>환불 신청</label><br>
-				<label>금액 정산</label>
+				<label onclick="goRefundList();">환불 신청</label><br>
+				<label onclick="goPayCal();">금액 정산</label>
 			</div>
 		</article>
 		
@@ -265,6 +265,16 @@
 				});
 			});
 		})
+		
+		//환불 신청
+		function goRefundList() {
+			location.href = "<%=request.getContextPath()%>/views/admin/payRefundMgmt/applyRefundList.jsp";
+		}
+		
+		//금액 정산
+		function goPayCal() {
+			location.href = "<%=request.getContextPath()%>/calculate.cp";
+		}
 	</script>
 </body>
 </html>

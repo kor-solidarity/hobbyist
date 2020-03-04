@@ -15,8 +15,22 @@ public class PaymentService {
 		int result = new PaymentDao().insertPayment(con, p);
 		
 		if(result > 0) {
+			
+			//결제시 회원수 증가용 메소드
 			result = new PaymentDao().updateMemberCtn(con, p);
-			commit(con);
+			if(result > 0) {
+				
+				result = new PaymentDao().insertRegister(con, p);
+				if(result > 0) {
+					commit(con);
+					
+				} else {
+					rollback(con);
+				}
+			}else {
+				rollback(con);
+			}
+			
 		} else {
 			rollback(con);
 		}
@@ -25,7 +39,7 @@ public class PaymentService {
 		
 		return result;
 	}
-
+	
 	public List<Payment> selectList() {
 		Connection con = getConnection();
 		

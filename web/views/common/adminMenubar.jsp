@@ -69,11 +69,11 @@
 		<table id="topAreaT">
 			<tr style="text-align: right;">
 				<td style="text-align: left;">hobbyist</td>
-				<td>회원관리</td>
-				<td>게시판관리</td>
+				<td id="adminMember">회원관리</td>
+				<td id="adminBoard">게시판관리</td>
 				<td>수업관리</td>
 				<td>신고/문의</td>
-				<td>결제/환불</td>
+				<td id="adminPayment">결제/환불</td>
 				<td style="width: 90px;">통계</td>
 			</tr>
 		</table>
@@ -88,6 +88,19 @@
 
 			location.href = "<%=request.getContextPath()%>/logout.ad";
 		};
+		
+		$("#adminMember").click(function() {
+			location.href = "<%=request.getContextPath()%>/views/admin/memberMgmt/memberList.jsp";
+		});
+		
+		$("#adminBoard").click(function() {
+			location.href = "<%=request.getContextPath()%>/adminPlaceList.ad";
+		});
+		
+		$("#adminPayment").click(function() {
+			location.href = "<%=request.getContextPath()%>/views/admin/payRefundMgmt/payList.jsp";
+		});
+		
 	</script>
 </body>
 </html>

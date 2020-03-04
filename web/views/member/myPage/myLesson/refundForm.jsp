@@ -206,17 +206,18 @@
  		<tr>
  			<td>환불 사유 : </td>
  			<td>
- 				<select>
- 					<option value="me">개인 사유</option>
- 					<option value="artist">신청 실수</option>
- 					<option value="artist">수업 불만족</option>
- 					<option value="artist">수업 폐강</option>
+ 				<select id="selectReason">
+ 					<option>선택</option>
+ 					<option value="reason">개인 사유</option>
+ 					<option value="reason">신청 실수</option>
+ 					<option value="reason">수업 불만족</option>
+ 					<option value="reason">수업 폐강</option>
+ 					<option value="reason">기타</option>
  				</select>
  			</td>
  		</tr>
  	</table><br><br>
- 	<div style="text-align: center;">
- 		<label style="font-weight: bold; font-size: 17px;">상세 사유</label><br>
+ 	<div id="refundDetailDiv" style="text-align: center; display: none;">
 	 	<textarea id="refundDetail" rows="7" cols="20" style="width: 40%; height: 80px; text-align: center; font-size: 17px;" placeholder="상세사유를 입력하세요 (선택)";></textarea>
 	 	<div><span id="refundDetailCtn">0</span>/100</div>
  	</div>
@@ -247,6 +248,7 @@
 			}
 		});
 	});
+	
 	function go() {
 		var submit = confirm('정말로 환불신청 하시겠습니까?');
 		
@@ -255,6 +257,17 @@
 			goRefund.submit();
 		}
 	}
+		
+	$("#selectReason").change(function() {
+		var state = $("#selectReason option:selected").val();
+		
+		if(state == "reason") {
+			
+			$("#refundDetailDiv").show();
+		}else {
+			$("#refundDetailDiv").hide();
+		}
+	});
 </script>
 </body>
 </html>

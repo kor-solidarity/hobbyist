@@ -157,7 +157,7 @@
 			
 			<!-- 큰 메뉴안의 상세 메뉴 여러개 -->
 			<div id="smallMenu">
-				<label>내역 조회</label><br>
+				<label onclick="goList();">내역 조회</label><br>
 				<label style="color: #DED842;">환불 신청</label><br>
 				<label onclick="goPayList();">금액 정산</label>
 			</div>
@@ -197,7 +197,8 @@
 		</article>
 	</section>
 	
-    <form>
+	<!-- modal 안의 내용 폼형식을 전송하기 -->
+    <form action="">
 	
 	 <div class="modal fade" id="myModal" role="dialog">
    	 <div class="modal-dialog">
@@ -378,16 +379,23 @@
 	});
 	function approve() {
 			
-		alert("환불 승인 하시겠습니까?");
+		confirm("환불 승인 하시겠습니까?");
 	}
 		
 	function refuse() {
 		$("#myModal1").modal();
-		$("#myModal1").show();
+	}
+	
+	function realRefuse() {
+		confirm("반려 처리 하시겠습니까?");
 	}
 		
 	function goPayList() {
 		location.href = "<%=request.getContextPath()%>/calculate.cp";
+	}
+	
+	function goList() {
+		location.href = "<%=request.getContextPath()%>/views/admin/payRefundMgmt/payList.jsp";
 	}
 		
 	</script>

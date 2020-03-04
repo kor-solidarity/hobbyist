@@ -97,13 +97,48 @@ public class PaymentDao {
 		return payList;
 	}
 
+	//결제 시 회원수 증가용 메소드
 	public int updateMemberCtn(Connection con, Payment p) {
 		PreparedStatement pstmt = null;
 		int result = 0;
 		
 		String query = prop.getProperty("updateCount");
 		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, p.getPaymentCode());
+			pstmt.setInt(2, p.getPaymentCode());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
 		
+		return result;
+	}
+
+	//결제 시 회원 수업 진행 상태 표시 및 추가
+	public int insertRegister(Connection con, Payment p) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("insertRegister");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, p.getPaymentCode());
+			pstmt.setInt(2, p.getPaymentCode());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
 		
 		return result;
 	}
