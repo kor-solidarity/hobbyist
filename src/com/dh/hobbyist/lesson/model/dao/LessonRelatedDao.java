@@ -15,6 +15,7 @@ import com.dh.hobbyist.lesson.model.vo.Image;
 import com.dh.hobbyist.lesson.model.vo.Lesson;
 import com.dh.hobbyist.lesson.model.vo.LessonOrder;
 import com.dh.hobbyist.lesson.model.vo.LessonSchedule;
+import com.dh.hobbyist.member.model.vo.Member;
 
 public class LessonRelatedDao {
 	private Properties prop = new Properties();
@@ -254,6 +255,35 @@ public class LessonRelatedDao {
 		}
 		
 		return l;
+	}
+
+	public Member selectOneArtist(Connection con, int artistCode) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		Member a = null;
+		
+		String query = prop.getProperty("selectOneArtist");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, artistCode);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				a = new Member();
+				a.setMemberName(rset.getString("MEMBER_NAME"));
+				a.setArtistNick(rset.getString("ARTIST_NICK"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return a;
 	}
 
 

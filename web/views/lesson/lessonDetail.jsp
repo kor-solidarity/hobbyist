@@ -5,6 +5,7 @@
 <%
 	Image pImg = (Image) request.getAttribute("profileImg");
 	Lesson lesson = (Lesson) request.getAttribute("lesson");
+	String lessonIntro = lesson.getLessonIntro();
 %>
 <!DOCTYPE html>
 <html>
@@ -111,6 +112,15 @@
 		color: darkolivegreen;
 	}
 	
+	#detailMenu td {
+		text-align: center;
+	}
+	
+	#detailMenu span {
+		margin-left: 10px;
+		cursor: pointer;
+	}
+	
 	#scheduleSelect {
 		height: 30px;
 		font-family: 'Helvetica Neue', Hevetica, Arial, sans-serif; 
@@ -135,6 +145,8 @@
 	}
 	
 	#detailTitle {
+		height: 100px;
+		vertical-align: bottom;
 		font-size: 35px;
 		color: darkolivegreen;
 	}
@@ -242,8 +254,8 @@
 							<!-- carousle 영영 끝 -->
 							
 						</td>
-						<td style="width:193px;"><span class="stNum">최소 2명</span></td>
-						<td style="width:193px;"><span class="stNum">최대 2명</span></td>
+						<td style="width:193px;"><span class="stNum">최소 <%= lesson.getMinStudents() %>명</span></td>
+						<td style="width:193px;"><span class="stNum">최대 <%= lesson.getMaxStudents() %>명</span></td>
 					</tr>
 					<tr style="height:45%;">
 						<td colspan="2">
@@ -271,11 +283,32 @@
 						<td colspan="2">
 							<table id="detailMenu">
 								<tr>
-									<td>아티스트</td>
-									<td>수업소개</td>
-									<td>리뷰</td>
-									<td>문의</td>
+									<td><span id="dMenu1">아티스트</span></td>
+									<td><span id="dMenu2">수업소개</span></td>
+									<td><span id="dMenu3">리뷰</span></td>
+									<td><span id="dMenu4">문의</span></td>
 								</tr>
+								<script>
+									$(function(){
+										//처음 로딩 시에는 수업소개는 숨기기
+										$("#lessonIntroArea").hide();
+										
+										$("#dMenu1").click(function(){
+											$("#detailTitle").text("아티스트 소개");
+											$("#certsCareer").show();
+											$("#artistIntroArea").show();
+											$("#lessonIntroArea").hide();
+										});
+																				
+										$("#dMenu2").click(function(){
+											$("#detailTitle").text("수업 소개");
+											/* $("#certsCareer").text(""); */
+											$("#certsCareer").hide();
+											$("#artistIntroArea").hide();
+											$("#lessonIntroArea").show();
+										});
+									});
+								</script>
 							</table>
 						</td>
 						<td></td>
@@ -302,9 +335,23 @@
 						<td style="width:380px; color:darkolivegreen;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;★★★★☆ <label style="color:black; font-weight:normal;">(3)</label></td>
 						<td></td>
 						<td colspan="2" style="text-align:right;">
-							25,000원 / 회<br>
-							100,000원 / 총 5회
+							<label id="perCost" style="font-weight: normal; color: grey;"></label><label style="font-weight: normal; color: grey;">원 / 회</label><br>
+							<label id="totalCosts" style="font-weight: normal;"></label>원 / 총 <%= lesson.getTotalOrders() %>회
 						</td>
+						<script>
+							//천 단위 , 표시 위한 메소드
+							$(function(){
+								var per = <%= lesson.getCostPerOrder() %>;
+								var perM = per.toLocaleString();								
+								
+								var total = <%= lesson.getTotalCosts() %>;
+								var totalM = total.toLocaleString();
+								console.log("total : " + total.toLocaleString());
+								
+								$("#perCost").text(perM);
+								$("#totalCosts").text(totalM);
+							});
+						</script>
 					</tr>
 					<tr>
 						<td></td>
@@ -330,7 +377,7 @@
 						<td style="text-align:center;">김설현</td>
 						<td></td>
 						<td></td>
-						<td rowspan="3" colspan="2">
+						<td rowspan="4" colspan="2">
 							<table id="suggestTable" align="center">
 								<tr>
 									<td style="color:#DAB554">건의된 학생 정원</td>
@@ -356,7 +403,9 @@
 									<td style="color:#DAB554">건의된 수업 회차</td>
 									<td class="nanum" style="font-size:20px;">1회</td>
 								</tr>
+								
 							</table>
+							<div align="center">건의 게시물 바로가기</div>
 						</td>
 					</tr>
 					<tr>
@@ -364,7 +413,7 @@
 						<td></td>
 					</tr>
 					<tr>
-						<td colspan="2"><br>
+						<td id="certsCareer" colspan="2"><br>
 							[자격 & 경력 사항]<br>
 							커피 바리스타 자격증 1급 보유<br>
 							스타벅스 매니저 3년 2개월 경력
@@ -373,12 +422,11 @@
 					</tr>
 					<tr>
 						<td class="nanum" colspan="2" style="width:50%; font-size:20px;"><br>
-							안녕하세요 현직 바리스타 hyeon입니다~!! :D
-				사실 저는 처음부터 바리스타는 아니었습니다.
-				주말에 친척 카페에 일손을 도와 드리러 몇 번 간 것이 회사에서는 느껴보지 못했던 에너지와 활력이 들정도로 매력적이었습니다. 그렇게 시작했고 남들보다 늦었다는 생각에 초반에는 실무를 배우면서도 따로 공부를 많이 했습니다. 기회가 된다면 이런 것들을 더 많은 분들과 나누고 싶다는 생각에 등록하게 되었습니다~
+						<label id="artistIntroArea" style="font-weight: normal;"><%= lesson.getArtistIntro() %></label>
+						<label id="lessonIntroArea" style="font-weight: normal;"><%= lesson.getLessonIntro() %></label>
 						</td>
 						<td></td>
-						<td colspan="2" style="text-align:center; vertical-align:top;">건의 게시물 바로가기</td>
+						<!-- <td colspan="2" style="text-align:center; vertical-align:top;">건의 게시물 바로가기</td> -->
 					</tr>
 				</table>
 

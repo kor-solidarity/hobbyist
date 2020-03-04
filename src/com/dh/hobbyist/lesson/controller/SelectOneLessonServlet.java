@@ -39,13 +39,16 @@ public class SelectOneLessonServlet extends HttpServlet {
 		
 		//해당 수업의 회원코드를 불러와 그 회원의 프로필 사진을 조회
 		int artistCode = lesson.getArtistCode();
+		
 		Image profileImg = new LessonRelatedService().selectProfileImage(artistCode);
+		Member artist = new LessonRelatedService().selectOneArtist(artistCode);
 		
 		String page = "";
 		if(profileImg != null) {
 			page = "views/lesson/lessonDetail.jsp";
-			request.setAttribute("profileImg", profileImg);
 			request.setAttribute("lesson", lesson);
+			request.setAttribute("profileImg", profileImg);
+			request.setAttribute("artist", artist);
 		} else {
 			page = "views/common/errorPage.jsp";
 			request.setAttribute("msg", "수업 상세보기 실패");
