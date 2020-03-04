@@ -453,8 +453,8 @@ color: #FFFFFF;
 	//패스워드 값일치하는지 확인
 	
  	function updateMember(){
-	var userPwd = $("userPwd").val();
-	var userPwd2 = $("userPwd2").val();	
+	var userPwd = $("#userPwd").val();
+	var userPwd2 = $("#userPwd2").val();	
 	
 	console.log("userPwd값은" + typeof(userPwd));
 	console.log("usrPwd2값은" + typeof(userPwd2));
@@ -466,16 +466,9 @@ color: #FFFFFF;
 		alert("패스워드가 일치하지 않습니다.");
 	}
 		}
-	
-	
-	
 	</script> 
 	
-	<script>
-
-
-
-	
+	<script>	
 	//전화번호 인증하기 버튼 클릭시	
 		var randomVal = ""; //유저에게 보낸 문자의 랜덤 숫자를 저장하기 위한 전역변수
 		$(document).on('click', '#button1', function () {
@@ -517,10 +510,7 @@ color: #FFFFFF;
       		         }); 
 					 					
 					alert("인증번호가 발송되었습니다.");
-					console.log("pwsame타입은 :"+ typeof(pwsame));
-					console.log("랜덤바 타입은:" + typeof(randomVal));
-					
-					
+	
 					return true;
 				}
 			},
@@ -528,7 +518,6 @@ color: #FFFFFF;
 				console.log(error);
 			}
 		});
-
 	});
 </script>
 
@@ -537,22 +526,20 @@ color: #FFFFFF;
 //on("click")이벤트를 사용하면 동적으로 이벤트를 바인딩 할 수있다.
 //동적으로 생성된 html태그는 일반적인 이벤트 처리가 불가능하다.
 //이떄문에 동적으로 생성된 태그는 별도의 이벤트 처리르 해줘야한다.
-$(document).on('click','#button4',function(){
+$(document).on('click','#button4', function(){
 
 	var pwsame = $("#pwsame").val();
 	
-if(pwsame == randomVal){
 	console.log("pwsame타입은 :"+ typeof(pwsame));
 	console.log("랜덤바 타입은:" + typeof(randomVal));
-	
+	if(pwsame == randomVal){
 	alert("인증이 확인되었습니다.");
-	
 	}else{
 		alert("다시 인증하세요.");
-		
 	}
 });
 </script>	
+
 
 
 

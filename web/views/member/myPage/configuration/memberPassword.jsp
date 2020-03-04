@@ -174,7 +174,7 @@ center_td0 {
 <body>
 	 <%@ include file="/views/common/myPage.jsp"%> 
 	<%String passCheck = loginMember.getMemberPwd();%> 
-	
+	<%String passId = loginMember.getMemberId();%>
 	<form id="pwConfirm" action="<%=request.getContextPath() %>/pwConfirm.me" method="post"> 
 	<div class="divcenter2">
 		<table align="border" class="tablecenter2">
@@ -209,31 +209,62 @@ center_td0 {
 	
 	<div class="divbottom3">
 	<!--  비밀번호 확인 텍스트 -->
+		<!-- <label class="label_bottom4">아이디:&nbsp; </label><input type="text" class="memberId" name="memberId" id="memberId" placeholder="아이디를 입력하세요"> -->
 		<label class="label_bottom3">비밀번호:&nbsp; </label><input type="password" class="memberPwd" name="memberPwd" id="memberPwd" placeholder="비밀번호를 입력하세요.">
 		<input type="button" id="passclick" name="passclick" onclick="pwConfirmbt();" value="확인">
 	</div>
 	</div>
 	</form>
 	
+	
 	<script>
-	function pwConfirmbt(){
-		console.log("패스워드전송");
+		var passClick = $("#passclick").val();
+		var passCheck = $("#passCheck").val();
+		var passId = $("#passId").val();
+		
+		function pwConfirmbt(){
+		console.log("패스워드전송"+ $("#pwConfirm").val();
 		$("pwConfirm").submit();
-	}
+		}
+		$(function (){
+			$.ajx({
+				url: "/hobbyist/UpdateMemberM.me",
+				type: "post",
+				data: {passwordclick: passwordclick},
+				success: function(data) {
+					if(data === "Sucess") {
+						alert("패스워드가 동일합니다.");
+					}else{
+						alert("패스워드가 틀립니다");
+					}
+					},
+					error: function(error){
+						console.log(error);
+					}
+					
+				});
+			})
+		});
+		
+		
 
-	</script>
+ 		console.log("버큰클릭 시 패스워드값 일치여부" + memberPwd);
+ 		console.log("버튼클릭 시 아이디 값 확인" + memberId);
 
- 	 <script>
- 	
- 	console.log("passCheck 타입" + typeof($(#passCheck));
-    console.log("memberValue 타입" + typeof(passValue)));
-		 //비밀번호 동일 확인 기능
-	 	$(function(){
+ 		//비밀번호 동일 확인 기능
+		 
+		 
+		 
+		 
+		 
+		 
+	 <%-- 	$(function(){
 	 		$("#passclick").click(function(){
+	 			
 	 			var passValue = $("#memberPwd").val();
 				var passCheck = passCheck;
-	 			console.log("memberPwd값 : " + passValue);
-				console.log("passCheck" + passCheck);
+	 			console.log("memberPwd값 :" + passValue);
+				console.log("passCheck값:" + passCheck);
 				
 				if(passValue == passCheck) {
 				console.log("인증 성공시" + typeof(memberValue));
@@ -241,9 +272,8 @@ center_td0 {
 				}else{
 				console.log( '실패시' + typeof(memberValue));			 
 				$("#divtest").text("비밀번호가 정확하지 않습니다.").css("color","gray");
-				}
-	 		});
-	 	})
+				} --%>
+	 
 </script>  
 
 

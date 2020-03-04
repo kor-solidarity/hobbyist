@@ -31,9 +31,12 @@ public class pwConfirmServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	String memberPwd = request.getParameter("memberPwd");
-		
+	String memberId = request.getParameter("memberId");
+	
+	
 	Member member = new Member();
-	member.setMemberPwd(memberPwd);	
+	System.out.println("pwConfirm 서블릿" + memberPwd);
+	System.out.println("pwConfirm 서블릿" + memberId);	
 	
 	Member loginMember = new MemberService().pwCheck(member);
 	
@@ -41,7 +44,11 @@ public class pwConfirmServlet extends HttpServlet {
 	
 	if(loginMember != null) {
 		HttpSession session = request.getSession();
+		System.out.println("세션후 로그인시" + memberPwd);
+		System.out.println("세션후 로그인시" + memberId);	
+		
 		session.setAttribute("pwCheck", loginMember);
+		
 		response.sendRedirect("views/member/myPage/configuration/memberPassword.jsp");
 	}		
 	
