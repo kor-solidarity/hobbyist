@@ -20,8 +20,8 @@ public class MemberDao {
 	private Properties prop = new Properties();
 	
 	public MemberDao() {
-		String fileName = MemberDao.class.getResource("/sql/member/member-query.properties").getPath();
-		
+		String fileName = MemberDao.class.getResource("/sql/member/memberUpdate-query.properties").getPath();
+		System.out.println(fileName);
 		try {
 			prop.load(new FileReader(fileName));
 			
@@ -42,8 +42,15 @@ public class MemberDao {
 		   ResultSet rset = null;
 		   
 		   int memberUpdate = 0;
-		
+		   
 		   String query = prop.getProperty("memberUpdate");
+		   
+		   System.out.println(member.getMemberId());
+		   System.out.println(member.getMemberPwd());
+		   System.out.println(member.getEmail());
+		   System.out.println(member.getPhone());
+		   System.out.println(member.getBankName());
+		   System.out.println(member.getBankNum());
 		   
 		   try {
 			pstmt = con.prepareStatement(query);
@@ -58,7 +65,7 @@ public class MemberDao {
 			
 			memberUpdate = pstmt.executeUpdate();
 			
-			
+				
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -69,6 +76,9 @@ public class MemberDao {
 		}  
 		   return memberUpdate;  
 	   }
+
+	   
+	   
 	public Member pwCheck(Connection con, Member member) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -76,11 +86,17 @@ public class MemberDao {
 		
 		String query = prop.getProperty("loginSelect");
 		
+		
+		
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, member.getMemberPwd());
+			pstmt.setString(2, member.getMemberId());
 			
 			rset = pstmt.executeQuery();
+			
+			System.out.println(member.getMemberId());
+			System.out.println(member.getMemberPwd());
 			
 			if(rset.next()) {
 				loginMember = new Member();
@@ -111,8 +127,8 @@ public class MemberDao {
 		close(pstmt);
 		}
 		return loginMember;
+		
 	}
-
 
 
 

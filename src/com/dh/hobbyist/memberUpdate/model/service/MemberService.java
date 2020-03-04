@@ -20,7 +20,7 @@ public class MemberService {
 		Connection con = getConnection();
 		
 		int memberUpdate = new MemberDao().memberUpdate(con, member);
-		
+		System.out.println("서비스쪽의" + memberUpdate);
 		
 		if(memberUpdate > 0) {
 			commit(con);
@@ -35,7 +35,7 @@ public class MemberService {
 	//패스워드 확인 목록
 	public Member pwCheck(Member member) {
 		Connection con = getConnection();
-		
+		System.out.println("서비스쪽의" + pwCheck(member));
 		Member loginMember = new MemberDao().pwCheck(con, member);
 		
 		close(con);
