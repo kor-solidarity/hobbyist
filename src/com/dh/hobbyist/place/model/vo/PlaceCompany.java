@@ -14,6 +14,9 @@ public class PlaceCompany implements Serializable {
     String intro;
     String service_time;
     String room_size;
+    // PLACE_TABLE 에 존재하지 않음! IMAGE 테이블에 속한거.
+    // 사용자 공간대여 목록조회를 위해 생성됨.
+    String main_image_name;
 
     public PlaceCompany() {
     }
@@ -42,6 +45,14 @@ public class PlaceCompany implements Serializable {
                 ", service_time='" + service_time + '\'' +
                 ", room_size='" + room_size + '\'' +
                 '}';
+    }
+
+    public String getMain_image_name() {
+        return main_image_name;
+    }
+
+    public void setMain_image_name(String main_image_name) {
+        this.main_image_name = main_image_name;
     }
 
     public int getCompany_pk() {

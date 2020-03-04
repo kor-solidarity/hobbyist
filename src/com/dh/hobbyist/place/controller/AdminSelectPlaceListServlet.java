@@ -2,8 +2,7 @@ package com.dh.hobbyist.place.controller;
 
 import com.dh.hobbyist.common.model.vo.PageInfo;
 import com.dh.hobbyist.place.model.service.PlaceService;
-import com.dh.hobbyist.place.model.vo.PlaceCompany;
-import com.dh.hobbyist.place.model.vo.PlaceCompanyForList;
+import com.dh.hobbyist.place.model.vo.PlaceCompanyAndAdsList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -69,12 +68,12 @@ public class AdminSelectPlaceListServlet extends HttpServlet {
         PageInfo pageInfo = new PageInfo(currentPage, listCount,
                 listPerPage, maxPage, startPage, endPage);
 
-        ArrayList<PlaceCompanyForList> companyArrayList = ps.selectList(pageInfo);
+        ArrayList<PlaceCompanyAndAdsList> companyArrayList = ps.selectCompanyAndAdsList(pageInfo);
 
         // for (int i = 0; i < companyArrayList.size(); i++) {
         //     System.out.println(companyArrayList.indexOf(i));
         // }
-        for (PlaceCompanyForList p : companyArrayList) {
+        for (PlaceCompanyAndAdsList p : companyArrayList) {
             System.out.println(p);
         }
 

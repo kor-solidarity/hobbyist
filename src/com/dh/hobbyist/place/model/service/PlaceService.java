@@ -5,7 +5,7 @@ import com.dh.hobbyist.common.model.vo.PageInfo;
 import com.dh.hobbyist.place.model.dao.PlaceDao;
 import com.dh.hobbyist.place.model.vo.CompanyAds;
 import com.dh.hobbyist.place.model.vo.PlaceCompany;
-import com.dh.hobbyist.place.model.vo.PlaceCompanyForList;
+import com.dh.hobbyist.place.model.vo.PlaceCompanyAndAdsList;
 
 import static com.dh.hobbyist.common.JDBCTemplate.*;
 
@@ -109,11 +109,12 @@ public class PlaceService {
         return result;
     }
 
-    // 목록조회에 쓸 명단들.
-    public ArrayList<PlaceCompanyForList> selectList(PageInfo pageInfo) {
+    // 목록조회에 쓸 명단들. (은석)
+    public ArrayList<PlaceCompanyAndAdsList> selectCompanyAndAdsList(PageInfo pageInfo) {
         Connection con = getConnection();
 
-        ArrayList<PlaceCompanyForList> companyArrayList = new PlaceDao().selectList(con, pageInfo);
+        ArrayList<PlaceCompanyAndAdsList> companyArrayList =
+                new PlaceDao().selectList(con, pageInfo);
 
         close(con);
 
@@ -243,7 +244,7 @@ public class PlaceService {
         return result;
     }
 
-    // 사용자가 볼 공간대여업체 목록 조회
+    // 사용자에게 보일 수 있는 공간대여업체 총 수 조회
     public int getMemberPlaceListCount() {
         Connection con = getConnection();
         int result = 0;
@@ -253,5 +254,18 @@ public class PlaceService {
 
         close(con);
         return result;
+    }
+
+    // 사용자가 볼 공간대여업체 페이지별 목록 조회.
+    public ArrayList<PlaceCompany> selectCompanyList(PageInfo pi) {
+
+        Connection con = getConnection();
+
+
+        ArrayList<PlaceCompany> companyArrayList = new PlaceDao().selectCompanyList(con, pi);
+
+
+        close(con);
+        return companyArrayList;
     }
 }

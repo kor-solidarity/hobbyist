@@ -1,6 +1,8 @@
 package com.dh.hobbyist.place.controller;
 
+import com.dh.hobbyist.common.model.vo.PageInfo;
 import com.dh.hobbyist.place.model.service.PlaceService;
+import com.dh.hobbyist.place.model.vo.PlaceCompany;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -8,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
 
 // 사용자단에서 공간대여목록 조회 (은석)
 @WebServlet(name = "MemberSelectPlaceServlet", urlPatterns = "/place/list.me")
@@ -49,25 +52,28 @@ public class MemberSelectPlaceServlet extends HttpServlet {
 
         // 페이지수(maxPage) 계산방법:
         // 총 게시글 수(listCount) / 한 페이지당 보여질 수 (limit) + 소수점 올림처리
-        maxPage = (int)Math.ceil((double) listCount / (double) limit);
+        maxPage = (int) Math.ceil((double) listCount / (double) limit);
 
         // 현 페이지에서 노출시킬 첫 페이지 (startPage)
         // e.g. 현재 15 페이지면 startPage 는 11
         // startPage = ((double) currentPage/limit)
         // TODO: 2020-03-04 우선은 시간상 jsp 에제에 써있는 대로 넣는다. 근데 무조건 추후 찾아볼것.
-        startPage = (((int)((double) currentPage / limit + 0.9)) - 1) * 10 + 1;
+        //  우선 여기에 서술해두기
+        startPage = (((int) ((double) currentPage / limit + 0.9)) - 1) * 10 + 1;
 
         //아래 쪽에 보여질 마지막 페이지 수(10, 20, 30, ...)
         endPage = startPage + 10 - 1;
 
-        if(maxPage < endPage) {
+        // maxPage 보다 클 수 없음
+        if (maxPage < endPage) {
             endPage = maxPage;
         }
 
+        PageInfo pi =
+                new PageInfo(currentPage, listCount, limit,
+                        maxPage, startPage, endPage);
 
-
-
-
+        ArrayList<PlaceCompany> companyArrayList = ps.selectCompanyList(pi);
 
 
         String page = "/views/rental/list.jsp";
