@@ -88,8 +88,8 @@ public class LessonDao {
 		return list;
 	}
 	//리스트 카운트 메소드(유승)
-	public int getListCount(Connection con) {
-		Statement stmt = null;
+	public int getListCount(Connection con, int parentCode) {
+		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
 		int listCount = 0;
@@ -97,8 +97,9 @@ public class LessonDao {
 		String query = prop.getProperty("listCount");
 		
 		try {
-			stmt = con.createStatement();
-			rset = stmt.executeQuery(query);
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, parentCode);
+			rset = pstmt.executeQuery();
 			
 			if(rset.next()) {
 				listCount = rset.getInt(1);
@@ -107,7 +108,7 @@ public class LessonDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
-			close(stmt);
+			close(pstmt);
 			close(rset);
 		}
 		
@@ -630,6 +631,34 @@ public class LessonDao {
 			}
 		
 			return list;
+	}
+	
+	
+	//메인페이지 리스트 카운트 메소드(유승)
+	public int getListCount(Connection con) {
+		Statement stmt = null;
+		ResultSet rset = null;
+		
+		int listCount = 0;
+		
+		String query = prop.getProperty("mainListCount");
+		
+		try {
+			stmt = con.createStatement();
+			rset = stmt.executeQuery(query);
+			
+			if(rset.next()) {
+				listCount = rset.getInt(1);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(stmt);
+			close(rset);
+		}
+		
+		return listCount;
 	}
 
 }

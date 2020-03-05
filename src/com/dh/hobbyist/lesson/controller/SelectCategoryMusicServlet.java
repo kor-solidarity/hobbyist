@@ -28,7 +28,7 @@ public class SelectCategoryMusicServlet extends HttpServlet {
 		
 		/*ArrayList<HashMap<String, Object>> list = new LessonService().selectCategoryMusic();*/
 		
-		
+		int parentCode = 1;
 		
 		int currentPage;
 		int limit;
@@ -45,7 +45,7 @@ public class SelectCategoryMusicServlet extends HttpServlet {
 		limit = 9;
 		
 		LessonService ls = new LessonService();
-		int listCount = ls.getListCount();
+		int listCount = ls.getListCount(parentCode);
 		
 		System.out.println("list Count: " + listCount);
 		

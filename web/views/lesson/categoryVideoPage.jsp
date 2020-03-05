@@ -348,11 +348,11 @@
 
 	 </div>
 	 <div class="pagingArea" align="center">
-			<button onclick="location.href='<%= request.getContextPath()%>/selectMusic.le?currentPage=1'"><<</button>	
+			<button onclick="location.href='<%= request.getContextPath()%>/selectVideo.le?currentPage=1'"><<</button>	
 			<% if(currentPage <= 1) { %>
 				<button disabled><</button>	
 			<% }else { %>
-				<button onclick="location.href='<%= request.getContextPath()%>/selectMusic.le?currentPage=<%=currentPage - 1%>'"><</button>	
+				<button onclick="location.href='<%= request.getContextPath()%>/selectVideo.le?currentPage=<%=currentPage - 1%>'"><</button>	
 			<% } %>
 			
 			<% for(int p = startPage; p <= endPage; p++) {
@@ -362,7 +362,7 @@
 			<%
 				}else {
 			%>	
-					<button onclick="location.href='<%= request.getContextPath()%>/selectMusic.le?currentPage=<%=p%>'"><%= p %></button>
+					<button onclick="location.href='<%= request.getContextPath()%>/selectVideo.le?currentPage=<%=p%>'"><%= p %></button>
 			<%	}
 			  }	
 			%>		
@@ -370,9 +370,9 @@
 			<% if(currentPage >= maxPage) { %>
 				<button disabled>></button>
 			<% }else { %>
-				<button onclick="location.href='<%= request.getContextPath()%>/selectMusic.le?currentPage=<%=currentPage + 1%>'">></button>
+				<button onclick="location.href='<%= request.getContextPath()%>/selectVideo.le?currentPage=<%=currentPage + 1%>'">></button>
 			<% } %>
-			<button onclick="location.href='<%= request.getContextPath()%>/selectMusic.le?currentPage=<%=maxPage%>'">>></button>	
+			<button onclick="location.href='<%= request.getContextPath()%>/selectVideo.le?currentPage=<%=maxPage%>'">>></button>	
 		</div>
 	<script>
 		$(function() {

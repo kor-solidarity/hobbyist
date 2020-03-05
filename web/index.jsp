@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -102,84 +102,25 @@
        		font-weight:900;
        		
        }
-      	.lesson-list {
-      		display:inline-block;
-      		width:240px;
-       		height:270px;
-       		margin:auto;
-       		margin-right: 65px;
-       		margin-bottom:30px;
-       		margin-left:20px;
-      	}
        
-       #lessonTable {
-       		font-family: 'Nanum Gothic', sans-serif;
-       		font-size:12px;
-       		border:1px solid darkolivegreen;
-       		border-collapse:separate;
-			border-spacing: 5px;
-       		
-       }
-       
-       
-       #lessonTable td:nth-of-type(2n) {
-       		float:right;	
-       		margin-right:10px;
-       }
-       
-       #artistNick {
-       		font-size: 15px;
-       		color:darkolivegreen;
-       		font-weight:900;
-       		padding-right:11px;
-       }
-       
-       #artistName {
-       		padding-right:20px;
-       }
-       
-       #lLabel {
-       		margin-top:500px;
-       		margin-left:550px;
-       		font-family: 'Do Hyeon', sans-serif;
-       		/* font-weight:900; */
-       		font-size:25px;
-       		color:darkolivegreen;
-       		align:center;
-       }
-       
-       #lessonImg {
-       		width:240px;
-       		height:130px;
-       }
-       #artistImg {
-       		width:60px;
-       		height:60px;
-       		border-radius:50px 50px 50px 50px;
-       }
-       
-       #lessonLabel {
-			font-family: 'Nanum Gothic', sans-serif;
-			font-size:14px;
-			font-weight:900;
-			margin-bottom:20px;
-		}
-     #liked, #popular, #interested {
+       #liked, #popular, #interested {
      	cursor:pointer;
-     }
+       }
+       
+      	
      
      
 </style>
 </head>
 <body>
 	<%@ include file="views/common/menubar.jsp" %>
-	<div id="main">
+
 	 <div id="contents">
     	<p>2020년 첫 시작,<br>
     	취미는 <label style="color:darkolivegreen; font-family: 'ZCOOL QingKe HuangYou', cursive; font-weight:900">hobbyist  </label> 에서!</p>
     </div>
    
-  <%--  <form action="<%=request.getContextPath() %>/selectCategory.le" method="post"> --%>
+
    <div id="nav">
 	<table align="center">
    	<tr>
@@ -208,14 +149,7 @@
    
    <div id="line"></div>
    <div id="section">
-  <!--  <label id="lLabel">인기수업</label>
-   	<div id="aside">
-   		<ul style="list-style:none; line-height:300%; font-family: 'Do Hyeon', sans-serif; font-size:18px; color:darkolivegreen; padding-top:20px;">
-   			<li>관심수업</li>
-   			<li>인기수업</li>
-   			<li>신규아티스트수업</li>
-   		</ul>
-   	</div> -->
+
    	
   
 	<div id="aside">
@@ -226,193 +160,18 @@
    	<div class="aside"> | </div>
    	<div class="aside" id="interested">관심수업</div>
 	</div>
-	
-	
-   
-    <div class="lesson-list">
-   <table id="lessonTable">
-   <tr>
-   		<td colspan="2"><img src="static/images/coffee.jpg" id="lessonImg"></td>
-   </tr>
-   	<tr>
-   		<td colspan="2" id="lessonLabel">[카페,커피] 2시간이면 나도 바리스타!</td>
-   	</tr>
-   	<tr>
-   		<td></td>
-   		<td><img src="static/images/jae.png" id="artistImg"></td>
-   	</tr>
-   	<tr>
-   		<td>(15)</td>
-   		<td id="artistNick">재현쌤</td>
-   	</tr>
-   	<tr>
-   		<td>평택</td>
-   		<td id="artistName">재현</td>
-   	</tr>
-   </table>    
-   </div> 
-    <div class="lesson-list">
-   <table id="lessonTable">
-   <tr>
-   		<td colspan="2"><img src="static/images/coffee.jpg" id="lessonImg"></td>
-   </tr>
-   	<tr>
-   		<td colspan="2">[카페,커피] 2시간이면 나도 바리스타!</td>
-   	</tr>
-   	<tr>
-   		<td></td>
-   		<td><img src="static/images/jae.png" id="artistImg"></td>
-   	</tr>
-   	<tr>
-   		<td>(15)</td>
-   		<td id="artistNick">재현쌤</td>
-   	</tr>
-   	<tr>
-   		<td>평택</td>
-   		<td id="artistName">재현</td>
-   	</tr>
-   </table>    
-   </div> 
-    <div class="lesson-list">
-   <table id="lessonTable">
-   <tr>
-   		<td colspan="2"><img src="static/images/coffee.jpg" id="lessonImg"></td>
-   </tr>
-   	<tr>
-   		<td colspan="2">[카페,커피] 2시간이면 나도 바리스타!</td>
-   	</tr>
-   	<tr>
-   		<td></td>
-   		<td><img src="static/images/jae.png" id="artistImg"></td>
-   	</tr>
-   	<tr>
-   		<td>(15)</td>
-   		<td id="artistNick">재현쌤</td>
-   	</tr>
-   	<tr>
-   		<td>평택</td>
-   		<td id="artistName">재현</td>
-   	</tr>
-   </table>    
-   </div> 
-    <div class="lesson-list">
-   <table id="lessonTable">
-   <tr>
-   		<td colspan="2"><img src="static/images/coffee.jpg" id="lessonImg"></td>
-   </tr>
-   	<tr>
-   		<td colspan="2">[카페,커피] 2시간이면 나도 바리스타!</td>
-   	</tr>
-   	<tr>
-   		<td></td>
-   		<td><img src="static/images/jae.png" id="artistImg"></td>
-   	</tr>
-   	<tr>
-   		<td>(15)</td>
-   		<td id="artistNick">재현쌤</td>
-   	</tr>
-   	<tr>
-   		<td>평택</td>
-   		<td id="artistName">재현</td>
-   	</tr>
-   </table>    
-   </div> 
-    <div class="lesson-list">
-   <table id="lessonTable">
-   <tr>
-   		<td colspan="2"><img src="static/images/coffee.jpg" id="lessonImg"></td>
-   </tr>
-   	<tr>
-   		<td colspan="2">[카페,커피] 2시간이면 나도 바리스타!</td>
-   	</tr>
-   	<tr>
-   		<td></td>
-   		<td><img src="static/images/jae.png" id="artistImg"></td>
-   	</tr>
-   	<tr>
-   		<td>(15)</td>
-   		<td id="artistNick">재현쌤</td>
-   	</tr>
-   	<tr>
-   		<td>평택</td>
-   		<td id="artistName">재현</td>
-   	</tr>
-   </table>    
-   </div> 
-    <div class="lesson-list">
-   <table id="lessonTable">
-   <tr>
-   		<td colspan="2"><img src="static/images/coffee.jpg" id="lessonImg"></td>
-   </tr>
-   	<tr>
-   		<td colspan="2">[카페,커피] 2시간이면 나도 바리스타!</td>
-   	</tr>
-   	<tr>
-   		<td></td>
-   		<td><img src="static/images/jae.png" id="artistImg"></td>
-   	</tr>
-   	<tr>
-   		<td>(15)</td>
-   		<td id="artistNick">재현쌤</td>
-   	</tr>
-   	<tr>
-   		<td>평택</td>
-   		<td id="artistName">재현</td>
-   	</tr>
-   </table>    
-   </div> 
-   
-   
-   </div>
-   </div>
+	</div>
+
   
 	<%@ include file="views/common/footer.jsp" %>
 	
 	<script>
-		<%-- function category() {
-			location.href = "<%=request.getContextPath()%>/views/lesson/categoryMenu.jsp";
-			
-		} --%>
 		
+			$(document).ready(function() {
+			location.href = "<%= request.getContextPath()%>/selectPopular.le";
+				
+			});
 
-			 $(function() {
-				
-				$("#music").click(function() {
-					location.href = "<%= request.getContextPath()%>/selectMusic.le";
-				});
-				
-				$("#dance").click(function() {
-					location.href = "<%= request.getContextPath()%>/selectDance.le";
-				});
-				
-				$("#video").click(function() {
-					location.href = "<%= request.getContextPath()%>/selectVideo.le";
-				});
-				
-				$("#life").click(function() {
-					location.href = "<%= request.getContextPath()%>/selectLife.le";
-				});
-				
-				$("#beauty").click(function() {
-					location.href = "<%= request.getContextPath()%>/selectBeauty.le";
-				});
-				
-				$("#design").click(function() {
-					location.href = "<%= request.getContextPath()%>/selectDesign.le";
-				});
-				
-				$("#sports").click(function() {
-					location.href = "<%= request.getContextPath()%>/selectSports.le";
-				});
-				
-				
-				
-				
-				
-			}); 
-		
-			
-	
 	</script>
 </body>
 </html>

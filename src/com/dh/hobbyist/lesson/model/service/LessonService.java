@@ -24,11 +24,11 @@ public class LessonService {
 		
 		return list;
 	}
-	// 페이지 카운트(유승)
-	public int getListCount() {
+	// 리스트 카운트(유승)
+	public int getListCount(int parentCode) {
 		Connection con = getConnection();
 		
-		int listCount = new LessonDao().getListCount(con);
+		int listCount = new LessonDao().getListCount(con, parentCode);
 		
 		close(con);
 		
@@ -133,6 +133,18 @@ public class LessonService {
 		
 		return list;
 	}
+	
+	//메인페이지 리스트 카운트(유승)
+	public int getListCount() {
+		Connection con = getConnection();
+		
+		int listCount = new LessonDao().getListCount(con);
+		
+		close(con);
+		
+		return listCount;
+	}
+	
 	
 	
 	
