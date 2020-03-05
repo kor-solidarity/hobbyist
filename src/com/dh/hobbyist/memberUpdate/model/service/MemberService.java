@@ -7,6 +7,8 @@ import static com.dh.hobbyist.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
 
+import javax.rmi.ssl.SslRMIClientSocketFactory;
+
 import com.dh.hobbyist.memberUpdate.model.dao.MemberDao;
 import com.dh.hobbyist.memberUpdate.model.vo.Member;
 
@@ -32,16 +34,39 @@ public class MemberService {
 		return memberUpdate;
 	}
 
-	//패스워드 확인 목록
-	public Member pwCheck(Member member) {
+	//패스워드 확인 여부
+	public int pwConfirm(String member) {
 		Connection con = getConnection();
-		System.out.println("서비스쪽의" + pwCheck(member));
-		Member loginMember = new MemberDao().pwCheck(con, member);
+		System.out.println("서비스쪽의" + pwConfirm(member));
+		int result = new MemberDao().pwConfirm(con, member);
 		
 		close(con);
 		
-		return loginMember;
+		return result;
 	}
+
+	//패스워드 변경시 일치여부확인
+	public int pwCheck(String userPw) {
+		Connection con = getConnection();
+		
+		int result = new MemberDao().pwCheck(con, userPw);
+		
+		close(con);
+		
+		return result;
+	}
+	
+	//전화번호 확인
+	public int telCheck(String userTel) {
+		Connection con = getConnection();
+		int result = new MemberDao().telCheck(con, userTel);
+		
+		close(con);
+		
+		return result;
+	}
+
+
 
 	
 	   

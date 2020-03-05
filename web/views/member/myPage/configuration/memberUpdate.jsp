@@ -1,5 +1,3 @@
-<%@page import="com.dh.hobbyist.memberUpdate.controller.memberUpdateServletM"%>
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" import="java.util.*, com.dh.hobbyist.memberUpdate.*"%>
 	
@@ -326,7 +324,7 @@ color: #FFFFFF;
 	<div class="divcenter4">
 		
 		<!-- 회원정보수정 서블릿으로전송 -->
-		<form id="updateForm" action="<%=request.getContextPath() %>/updateMemberM.me" method="post">
+		<form id="updateForm" action="<%=request.getContextPath() %>"/updateMemberM.me" method="post">
 		
 			<table align="border" class="tablecenter4">
 		 	
@@ -430,33 +428,19 @@ color: #FFFFFF;
 		</form>
 	</div>
 	
-	<script>
-	function updateMember() {
-		console.log("아이디" + userId);
-		console.log("아이디" + userPwd);
-		console.log("아이디" + ncikName);
-		console.log("아이디" + email);
-		console.log("아이디" + tel1);
-		console.log("아이디" + tel2);
-		console.log("아이디" + tel3);
-		console.log("아이디" + bankName);
-		console.log("아이디" + bankNum);
 
-		$("#updateForm").sumbit();
-	}
-	</script>	
 	
 	
 	
 	<script>
 	//패스워드 값일치하는지 확인
 	
- 	function updateMember(){
+/*  	function pwUpdate(){
 	var userPwd = $("#userPwd").val();
 	var userPwd2 = $("#userPwd2").val();	
 	
-	console.log("userPwd값은" + typeof(userPwd));
-	console.log("usrPwd2값은" + typeof(userPwd2));
+	console.log("userPwd값은" + userPwd);
+	console.log("usrPwd2값은" + userPwd2);
 	
 	if(userPwd ==! null){
 	if(userPwd == userPwd2){
@@ -464,10 +448,8 @@ color: #FFFFFF;
 	}
 		alert("패스워드가 일치하지 않습니다.");
 	}
-		}
-	</script> 
-	
-	<script>	
+		} */
+
 	//전화번호 인증하기 버튼 클릭시	
 		var randomVal = ""; //유저에게 보낸 문자의 랜덤 숫자를 저장하기 위한 전역변수
 		$(document).on('click', '#button1', function () {
@@ -518,9 +500,7 @@ color: #FFFFFF;
 			}
 		});
 	});
-</script>
 
- <script>
 //인증받은 번호와 텍스트에 다시쓴 인증번호가 일치하는 경우
 //on("click")이벤트를 사용하면 동적으로 이벤트를 바인딩 할 수있다.
 //동적으로 생성된 html태그는 일반적인 이벤트 처리가 불가능하다.
@@ -537,9 +517,22 @@ $(document).on('click','#button4', function(){
 		alert("다시 인증하세요.");
 	}
 });
-</script>	
 
 
+	function updateMember()  {
+		console.log("아이디" + userId);
+		console.log("아이디" + userPwd);
+		console.log("아이디" + ncikName);
+		console.log("아이디" + email);
+		console.log("아이디" + tel1);
+		console.log("아이디" + tel2);
+		console.log("아이디" + tel3);
+		console.log("아이디" + bankName);
+		console.log("아이디" + bankNum);
+
+		$("#updateForm").submit();
+	}
+	</script>	
 
 
 	

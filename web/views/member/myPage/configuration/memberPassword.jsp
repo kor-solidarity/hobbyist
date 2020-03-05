@@ -174,7 +174,7 @@ center_td0 {
 	 <%@ include file="/views/common/myPage.jsp"%> 
 	<%String passCheck = loginMember.getMemberPwd();%> 
 	<%String passId = loginMember.getMemberId();%>
-	<form id="pwConfirm" action="<%=request.getContextPath() %>/pwConfirm.me" method="post"> 
+	<form id="pwConfirm" action="<%=request.getContextPath() %>"/pwConfirm.me" method="post"> 
 	<div class="divcenter2">
 		<table align="border" class="tablecenter2">
 			<tr>
@@ -217,29 +217,38 @@ center_td0 {
 	
 	
 	<script>
-		var passClick = $("#passclick").val();
+	
+	
+	
+	
+	
+	
+		var passclick = $("#passclick").val();
 		var passCheck = $("#passCheck").val();
 		var passId = $("#passId").val();
 		
 		function pwConfirmbt(){
 			var pwConfirm = $("#pwConfirm").val();
-		console.log("패스워드전송"+ pwConfirm);
+			console.log("패스워드전송"+ pwConfirm);
 		$("#pwConfirm").submit();
 		} 
 		$(function (){
 		$("#idCheck").click(function(){
 			var passclick = $ ("#passclick").val();
-		
+	
 			$.ajx({
-				url: "/hobbyist/UpdateMemberM.me",
+				url: "/hobbyist/pwConfirm.me",
 				type: "post",
 				data: {passclick: passclick},
 				success: function(data) {
-					if(data === "Sucess") {
-						location.href = "<%=request.getContextPath()%>/views/member/registerForm.jsp";	
-					}else{
-						alert("패스워드가 틀립니다");
-					}
+					if(passclick === passCheck) {
+						console.log("패스워드 일치 passclick"+ typeof(passclick));
+						
+						location.href = "<%=request.getContextPath()%>/views/member/myPage/configuration/memberUpdate.jsp";	
+						}else{
+							console.log("패스워드 불일치 passclick"+ typeof(passclick));
+						$("#divtest").text("비밀번호가 정확하지 않습니다.").css("color","gray");
+						} 
 					},
 					error: function(error){
 						console.log(error);
@@ -262,7 +271,7 @@ center_td0 {
 		 
 		 
 		 
-	 <%-- 	$(function(){
+	<%--  	$(function(){
 	 		$("#passclick").click(function(){
 	 			
 	 			var passValue = $("#memberPwd").val();
@@ -276,7 +285,7 @@ center_td0 {
 				}else{
 				console.log( '실패시' + typeof(memberValue));			 
 				$("#divtest").text("비밀번호가 정확하지 않습니다.").css("color","gray");
-				} --%>
+				}  --%>
 	 
 </script>  
 
