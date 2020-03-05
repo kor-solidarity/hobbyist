@@ -2,11 +2,13 @@ package com.dh.hobbyist.calculatePay.model.service;
 
 import java.sql.Connection;
 import java.util.ArrayList;
+import java.util.List;
 
 import com.dh.hobbyist.calculatePay.model.dao.CalculatePayDao;
 import com.dh.hobbyist.calculatePay.model.vo.Accounts;
 import com.dh.hobbyist.calculatePay.model.vo.PaySettlement;
 import com.dh.hobbyist.calculatePay.model.vo.Settlement;
+import com.dh.hobbyist.calculatePay.model.vo.SettlementInquiry;
 import com.dh.hobbyist.suggest.model.vo.PageInfo;
 
 import static com.dh.hobbyist.common.JDBCTemplate.*;
@@ -140,6 +142,39 @@ public class CalculatePayService {
 		}
 		
 		return result;
+	}
+
+	//관리자 - 금액 정산 부분에서 상태 정렬하여 조회하는 메소드
+	public ArrayList<PaySettlement> sortStatus(int value) {
+		Connection con = getConnection();
+		
+		ArrayList<PaySettlement> list = new CalculatePayDao().sortStatus(con, value);
+		
+		close(con);
+		
+		return list;
+	}
+
+	//관리자 - 금액 정산 부분에서 "수정 요청" 클릭 시 회원의 문의 댓글 조회용 메소드
+	public List<SettlementInquiry> selectSettlementInquiryList(int settleCode) {
+		Connection con = getConnection();
+		
+		List<SettlementInquiry> inquiryList = new CalculatePayDao().selectSettlementInquiryList(con, settleCode);
+		
+		close(con);
+		
+		return inquiryList;
+	}
+
+	//관리자 - 금액 정산 부분에서 "수정 요청" 클릭 시 회차정보 조회용 메소드
+	public PaySettlement selectOnePaySettlement(int settleCode) {
+		Connection con = getConnection();
+		
+		PaySettlement ps = new CalculatePayDao().selectOnePaySettlement(con, settleCode);
+		
+		close(con);
+		
+		return ps;
 	}
 	
 	

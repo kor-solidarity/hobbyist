@@ -82,7 +82,7 @@ section {
 }
 
 #infoArea {
-	margin-top: 50px;
+	margin-top: 20px;
 	margin-left: 60px;
 	width: 1100px;
 	height: 500px;
@@ -134,6 +134,23 @@ section {
 	background-color:transparent; 
 	border:none;
 
+}
+#sortDiv {
+	margin-top:20px;
+	text-align:right;
+	margin-right:50px;
+}
+#sortSelect {
+	width: 100px;
+	height: 25px;
+}
+#completeDiv {
+	margin-top:20px;
+	text-align:right;
+	margin-right:60px;
+}
+.modalLab {
+	cursor:pointer;
 }
 </style>
 <title>Insert title here</title>
@@ -189,11 +206,20 @@ section {
 			<hr id="firstLine">
 
 			<!-- 정보 추가되는 본문 테이블 -->
+			<div id="sortDiv">
+				<select id="sortSelect">
+					<option value="none" selected>--선택--</option>
+					<option value="0">확인 대기중</option>
+					<option value="1">수정 요청</option>
+					<option value="2">정산 대기중</option>
+					<option value="3">정산 완료</option>
+				</select>
+			</div>
 			<div id="infoArea">
 				<table id="calPayTab">
 					<!-- 테이블 첫번째 줄은 아이디, 비밀번호 등 조회할 내용 제목이다. background(#4E4E4E), font-color(white) 색 다르게 지정 -->
 					<tr>
-						<th style="width: 130px;">수업회차코드</th>
+						<th style="width: 110px;">회차코드</th>
 						<th style="width: 50px;">회차</th>
 						<th style="width: 150px;">아티스트 아이디</th>
 						<th style="width: 150px;">아티스트 이름</th>
@@ -204,22 +230,22 @@ section {
 						<th style="width: 100px;">총 지급액</th>
 						<th style="width: 100px;">계좌번호</th>
 						<th style="width: 120px;">상태</th>
+						<th style="width:50px;"><input type="checkbox"></th>
 					</tr>
-					<%  int index = 0;
+					<% 
 						for(PaySettlement ps : payList) { %>
 						<tr>
 							<td><%=ps.getLessonOrderCode() %></td>
 							<td><%=ps.getLessonOrderTime() %></td>
 							<td><%=ps.getMemberId() %></td>
 							<td><%=ps.getMemberName() %></td>
-							<td><%=ps.getCostPerOrder() %></td>
+							<td><%=ps.getCostPerOrder() %>원</td>
 							<td><%=ps.getListeners() %></td>
-							<td><%=ps.getTotalCost() %></td>
+							<td><%=ps.getTotalCost() %>원</td>
 							<td><%=ps.getSettleFee() %>%</td>
-							<td><%=ps.getTotalPayGiven() %></td>
+							<td><%=ps.getTotalPayGiven() %>원</td>
 							<td>
 								<%
-								index++;
 								String sentence = "";
 								switch(ps.getBankName()) {
 								case "SH" : sentence = "신한"; break;
@@ -234,19 +260,26 @@ section {
 							</td>
 							<td>
 								<% if(ps.getStatus() == 0) { %>
-									<label class="modalLab" style="color:dimgrey">확인 대기중</label>
+									<label style="color:dimgrey">확인 대기중</label>
 								<%} else if(ps.getStatus() == 1){ %>
 									<label class="modalLab" style="color:red">수정 요청</label>
 								<%} else if(ps.getStatus() == 2) { %>
-									<label class="modalLab" style="color:DodgerBlue">정산 대기중</label>
+									<label style="color:DodgerBlue">정산 대기중</label>
 								<%} else if(ps.getStatus() == 3) { %>
-									<label class="modalLab" style="color:dimgrey">정산 완료</label>
+									<label style="color:dimgrey">정산 완료</label>
 								<%} %>
 							</td>
+							<td>
+								<input type="checkbox">
+							</td>
+							<input type="hidden" value="<%=ps.getSettleCode() %>">
 						</tr>
 					
 					<%} %>
 				</table>
+			</div>
+			<div id="completeDiv">
+				<button type="button">정산 완료</button>
 			</div>
 		</article>
 	</section>
@@ -284,15 +317,15 @@ section {
 					<div id="artistResponse">
 						<table style="border-spacing:10px; border-collapse:separate; width:100%;">
 							<tr>
-								<td style="font-weight:bold; color:#4E4E4E;">김설현</td>
-								<td style="text-align:right;">2020-01-23</td>
+								<td style="font-weight:bold; color:#4E4E4E;" id="artistName"></td>
+								<td style="text-align:right;"></td>
 							</tr>
 							<tr>
 								<td></td>
 								<td></td>
 							</tr>
 							<tr>
-								<td colspan="2" style="font-size:15px;">수강학생이 6명이었는데 총액이 120000원 아닌가요?</td>
+								<td colspan="2" style="font-size:15px;" id="content"></td>
 							</tr>
 						</table>
 						
@@ -306,8 +339,8 @@ section {
 									<div id="adminResDiv">
 										<table>
 											<tr>
-												<td style="font-weight:bold; color:#4E4E4E;">관리자1</td>
-												<td style="text-align:right;">2020-01-23</td>
+												<td style="font-weight:bold; color:#4E4E4E;" id="adminName"><%=loginAdmin.getAdminName() %></td>
+												<td style="text-align:right;"></td>
 											</tr>
 											<tr>
 												<td></td>
@@ -335,10 +368,125 @@ section {
 		</div>
 	</div>
 	<script>
-	$(document).ready(function(){
-    	$(".modalLab").click(function(){
-        	$("#myModal").modal();
+	$(function(){
+    	
+    	$("#sortSelect").change(function(){
+    		var val = $("#sortSelect").val();
+    		if(val != "none"){
+    			$.ajax({
+    				url: "/hobbyist/sortStatus.cp",
+    				data: {val:val},
+    				type: "post",
+    				success: function(data){
+    					
+    					$table = $("#calPayTab");
+    					$table.html('');
+    					
+    					var $tr = $("<tr>");
+    					
+    					$tr.append('<th style="width: 110px;">회차코드</th>' + 
+    					'<th style="width: 50px;">회차</th>' + 
+    					'<th style="width: 150px;">아티스트 아이디</th>' + 
+    					'<th style="width: 150px;">아티스트 이름</th>' +
+    					'<th style="width: 150px;">회차당 수업료</th>'+
+    					'<th style="width: 90px;">수강인원</th>' + 
+    					'<th style="width: 100px;">총 수업료</th>' + 
+    					'<th style="width: 90px;">수수료</th>' + 
+    					'<th style="width: 100px;">총 지급액</th>' + 
+    					'<th style="width: 100px;">계좌번호</th>' + 
+    					'<th style="width: 120px;">상태</th>' + 
+    					'<th style="width:50px;"><input type="checkbox"></th>');  
+    					
+    					$table.append($tr);
+    					
+    					for(var key in data) {
+    						$tr = $("<tr>");
+    						var $oCode = $("<td>").text(data[key].lessonOrderCode);
+    						var $oTime = $("<td>").text(data[key].lessonOrderTime);
+    						var $mId = $("<td>").text(data[key].memberId);
+    						var $mName = $("<td>").text(data[key].memberName);
+    						var $pOrder = $("<td>").text(data[key].costPerOrder +"원");
+    						var $listeners = $("<td>").text(data[key].listeners);
+    						var $tCost = $("<td>").text(data[key].totalCost +"원");
+    						var $sfee = $("<td>").text(data[key].settleFee + "%");
+    						var $payGiven = $("<td>").text(data[key].totalPayGiven + "원");
+    						var bankName = "";
+    						switch(data[key].bankName) {
+    						case "SH" : bankName = "신한"; break;
+    						case "NH" : bankName = "농협"; break;
+    						case "KB" : bankName = "국민"; break;
+    						default: bankName = data[key].bankName; break;
+    						}
+    						var $bank = $("<td>").text(bankName + data[key].bankOwner + data[key].bankNum);
+    						var $status;
+    						if(data[key].status == 0) {
+    							$status = $("<td>").html("<label style='color:dimgrey'>확인 대기중</label>");
+    						} else if(data[key].status == 1) {
+    							$status = $("<td>").html("<label class='modalLab' style='color:red'>수정 요청</label>");
+    						} else if(data[key].status == 2) {
+    							$status = $("<td>").html("<label style='color:DodgerBlue'>정산 대기중</label>");
+    						} else if(data[key].status == 3) {
+    							$status = $("<td>").html("<label style='color:dimgrey'>정산 완료</label>");
+    						}
+    						var $checkbox = $("<td>").html("<input type='checkbox'>");
+    						var hideIn = '<input type="hidden" value=' + data[key].settleCode + '>';
+    						
+    						$tr.append($oCode);
+    						$tr.append($oTime);
+    						$tr.append($mId);
+    						$tr.append($mName);
+    						$tr.append($pOrder);
+    						$tr.append($listeners);
+    						$tr.append($tCost);
+    						$tr.append($sfee);
+    						$tr.append($payGiven);
+    						$tr.append($bank);
+    						$tr.append($status);
+    						$tr.append($checkbox);
+    						$tr.append(hideIn);
+    						
+    						$table.append($tr);
+    					}
+    					
+    				
+    				},
+    				error : function(error) {
+    					console.log(error);
+    				}
+    			});
+    		}
     	});
+	});
+	
+	$(document).on("click", '.modalLab', function() {
+    	var code = $(this).parent().parent().children("input[type='hidden']").val();
+    	
+    	$.ajax ({
+    		url: "selectSettlementReply.cp",
+    		data: {code:code},
+    		type: "post",
+    		success: function(data) {
+    			
+    			for(var key in data) {
+    				if(key == 'paySettlement') {
+    					var ps = data[key];
+    				}
+    				
+    				if(key == 'inquiryList') {
+    					var list = data[key];
+    					
+    					$("#content").text(list[0].content);
+    					$("#artistName").text(list[0].artistName);
+    				}
+    			}
+    			
+    		},
+    		error: function(error) {
+    			console.log(error);
+    		}
+    	});
+    	
+	    $("#myModal").modal();
 	});
 	</script>
 

@@ -1,7 +1,9 @@
 package com.dh.hobbyist.calculatePay.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,21 +12,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.dh.hobbyist.calculatePay.model.service.CalculatePayService;
-import com.dh.hobbyist.calculatePay.model.vo.Accounts;
 import com.dh.hobbyist.calculatePay.model.vo.PaySettlement;
-import com.dh.hobbyist.calculatePay.model.vo.Settlement;
+import com.dh.hobbyist.calculatePay.model.vo.SettlementInquiry;
+import com.google.gson.Gson;
 
 /**
- * Servlet implementation class CalculatePayServlet
+ * Servlet implementation class SelectSettlementReplyServlet
  */
-@WebServlet("/calculate.cp")
-public class CalculatePayServlet extends HttpServlet {
+@WebServlet("/selectSettlementReply.cp")
+public class SelectSettlementReplyServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CalculatePayServlet() {
+    public SelectSettlementReplyServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,33 +35,21 @@ public class CalculatePayServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ArrayList<Accounts> list = new CalculatePayService().selectPayList();
+		int settleCode = Integer.parseInt(request.getParameter("code"));
 		
-//		for(int i = 0; i < list.size(); i++) {
-//			System.out.println(list.get(i));
-//		}
+		List<SettlementInquiry> inquiryList = new CalculatePayService().selectSettlementInquiryList(settleCode);
 		
-		ArrayList<Settlement> settleList = new CalculatePayService().selectSettlementList();
+		PaySettlement ps = new CalculatePayService().selectOnePaySettlement(settleCode);
 		
-		//System.out.println("settleList : " + settleList);
+		Map<String, Object> calculationInfo = new HashMap<>();
 		
-		int result = new CalculatePayService().insertPayment(list, settleList);
+		calculationInfo.put("paySettlement", ps);
+		calculationInfo.put("inquiryList", inquiryList);
 		
-		System.out.println("result : " + result);
+		response.setContentType("application/json");
+		response.setCharacterEncoding("UTF-8");
 		
-		String page = "";
-		
-		if(result >= 0) {
-			page = "views/admin/payRefundMgmt/calculatePayList.jsp";
-			ArrayList<PaySettlement> payList = new CalculatePayService().selectPaySettlementList(); 
-
-			request.setAttribute("payList", payList);
-		} else {
-			page = "views/common/errorPage.jsp";
-			request.setAttribute("msg", "정산내역 조회 실패!");
-		}
-		
-		request.getRequestDispatcher(page).forward(request, response);
+		new Gson().toJson(calculationInfo, response.getWriter());
 	}
 
 	/**

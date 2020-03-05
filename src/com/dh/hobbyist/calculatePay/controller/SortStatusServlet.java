@@ -10,21 +10,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.dh.hobbyist.calculatePay.model.service.CalculatePayService;
-import com.dh.hobbyist.calculatePay.model.vo.Accounts;
 import com.dh.hobbyist.calculatePay.model.vo.PaySettlement;
-import com.dh.hobbyist.calculatePay.model.vo.Settlement;
+import com.google.gson.Gson;
 
 /**
- * Servlet implementation class CalculatePayServlet
+ * Servlet implementation class SortStatusServlet
  */
-@WebServlet("/calculate.cp")
-public class CalculatePayServlet extends HttpServlet {
+@WebServlet("/sortStatus.cp")
+public class SortStatusServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CalculatePayServlet() {
+    public SortStatusServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,33 +32,15 @@ public class CalculatePayServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ArrayList<Accounts> list = new CalculatePayService().selectPayList();
+		int value = Integer.parseInt(request.getParameter("val"));
 		
-//		for(int i = 0; i < list.size(); i++) {
-//			System.out.println(list.get(i));
-//		}
+		ArrayList<PaySettlement> list = new CalculatePayService().sortStatus(value);
 		
-		ArrayList<Settlement> settleList = new CalculatePayService().selectSettlementList();
+		response.setContentType("application/json");
+		response.setCharacterEncoding("UTF-8");
 		
-		//System.out.println("settleList : " + settleList);
-		
-		int result = new CalculatePayService().insertPayment(list, settleList);
-		
-		System.out.println("result : " + result);
-		
-		String page = "";
-		
-		if(result >= 0) {
-			page = "views/admin/payRefundMgmt/calculatePayList.jsp";
-			ArrayList<PaySettlement> payList = new CalculatePayService().selectPaySettlementList(); 
-
-			request.setAttribute("payList", payList);
-		} else {
-			page = "views/common/errorPage.jsp";
-			request.setAttribute("msg", "정산내역 조회 실패!");
-		}
-		
-		request.getRequestDispatcher(page).forward(request, response);
+		new Gson().toJson(list, response.getWriter());
+	
 	}
 
 	/**
