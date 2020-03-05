@@ -16,6 +16,7 @@ import com.dh.hobbyist.lesson.model.vo.Image;
 import com.dh.hobbyist.lesson.model.vo.Lesson;
 import com.dh.hobbyist.lesson.model.vo.LessonOrder;
 import com.dh.hobbyist.lesson.model.vo.LessonSchedule;
+import com.dh.hobbyist.lesson.model.vo.MyRegiLesson;
 import com.dh.hobbyist.member.model.vo.Member;
 
 public class LessonRelatedService {
@@ -157,6 +158,68 @@ public class LessonRelatedService {
 		}
 		
 		return lessonImageList;
+	}
+
+	//마이페이지 - 등록한 수업의 수업코드를 불러오는 메소드
+	public ArrayList selectLessonCodeList(int memberCode) {
+		Connection con = getConnection();
+		
+		ArrayList lessonCodeList = new LessonRelatedDao().selectRegisteredLesson(con, memberCode);
+		
+		if(lessonCodeList != null) {
+			commit(con);
+		} else {
+			rollback(con);
+		}
+		
+		return lessonCodeList;
+	}
+	
+	//마이페이지 - 등록한 수업의 제반 정보 리스트 출력을 위한 메소드
+	public ArrayList selectRegisteredLesson(int memberCode, ArrayList lessonCodeList) {
+		Connection con = getConnection();
+		
+		ArrayList<MyRegiLesson> myList = null;
+		MyRegiLesson myLesson = null;
+		
+		Lesson lesson = null;
+		Image lessonImg = null;
+		Image profileImg = null;
+		
+		if(lessonCodeList != null) {
+			
+			myList = new ArrayList<MyRegiLesson>();
+			
+			for(int i = 0; i < lessonCodeList.size(); i++) {
+				myLesson = new MyRegiLesson();
+				
+				int lessonCode = (Integer) lessonCodeList.get(i);
+				
+				lesson = new LessonRelatedDao().selectOneLesson(con, lessonCode);
+				lessonImg = new LessonRelatedDao().selectOneLessonImage(con, lessonCode);
+				
+				int artistCode = lesson.getArtistCode();
+				
+				profileImg = new LessonRelatedDao().selectOneProfileImage(con, artistCode);
+				
+				myLesson.setLessonName(lesson.getLessonName());
+				myLesson.setLessonImgRoute(lessonImg.getImageRoute());
+				myLesson.setLessonImgName(lessonImg.getImageName());
+				
+				myList.add(myLesson);
+			}
+			
+			if(myList.size() == lessonCodeList.size()) {
+				commit(con);
+			} else {
+				rollback(con);
+			}
+
+		} else {
+			rollback(con);
+		}
+		
+		return myList;
 	}
 
 }

@@ -10,7 +10,7 @@
 	String lessonIntro = lesson.getLessonIntro();
 	Member artist = (Member) request.getAttribute("artist");
 	ArrayList sList = (ArrayList) request.getAttribute("scheduleList");
-	
+	ArrayList iList = (ArrayList) request.getAttribute("lessonImageList");
 	
 	System.out.println("ArrayList : " + sList.get(0));
 %>
@@ -216,21 +216,51 @@
 							  <div id="myCarousel" class="carousel slide" data-ride="carousel">
 							    <!-- Indicators -->
 							    <ol class="carousel-indicators">
-							      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+							    	<!-- 사진이 없어도 수업개설이 되는 상태라 null 별도 처리 -->
+							    	<% if(iList != null) {
+							    		for(int i = 0; i < iList.size(); i++) {
+							    			if(i == 0) {
+							    	%>
+							    				<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+							    	<%
+							    			} else {
+							    	%>
+							    				<li data-target="#myCarousel" data-slide-to="<%= i %>"></li>
+							    	<%			
+							    			}
+							    		}
+							    	} 
+							    	%>
+							     <!--  <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
 							      <li data-target="#myCarousel" data-slide-to="1"></li>
 							      <li data-target="#myCarousel" data-slide-to="2"></li>
-							      <li data-target="#myCarousel" data-slide-to="3"></li>
+							      <li data-target="#myCarousel" data-slide-to="3"></li> -->
 							    </ol>
 							
 							    <!-- Wrapper for slides -->
 							    <div class="carousel-inner" role="listbox">
 							
-							      <div class="item active">
+									<% if(iList != null) {
+										for(int i = 0; i < iList.size(); i++) {
+											if(i == 0) {
+									%>
+												<div class="item active">
+										      		<img src="<%=request.getContextPath() %>/<%= ((Image) iList.get(i)).getImageRoute() %>/<%= ((Image) iList.get(i)).getImageName() %>" width="460" height="345">
+										     	</div>
+									<%			
+											} else {
+									%>
+												<div class="item">
+							        				<img src="<%=request.getContextPath() %>/<%= ((Image) iList.get(i)).getImageRoute() %>/<%= ((Image) iList.get(i)).getImageName() %>" width="460" height="345">
+							     				 </div>
+									<% 	
+											}
+										}
+									}
+									%>
+							
+							      <%-- <div class="item active">
 							        <img src="<%=request.getContextPath() %>/static/images/beauty02.jpg" alt="Chania" width="460" height="345">
-							        <!-- <div class="carousel-caption">
-							          <h3>Chania</h3>
-							          <p>The atmosphere in Chania has a touch of Florence and Venice.</p>
-							        </div> -->
 							      </div>
 							
 							      <div class="item">
@@ -243,7 +273,7 @@
 							
 							      <div class="item">
 							        <img src="<%=request.getContextPath() %>/static/images/beauty05.PNG" alt="Flower" width="460" height="345">
-							      </div>
+							      </div> --%>
 							  
 							    </div>
 							
