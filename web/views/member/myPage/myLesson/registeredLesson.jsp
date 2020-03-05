@@ -1,5 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="com.dh.hobbyist.lesson.model.vo.MyRegiLesson" %>
+<% 
+	ArrayList<MyRegiLesson> myList = (ArrayList) request.getAttribute("myList");
+
+	System.out.println("regiList : " + myList.size());
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -155,7 +162,42 @@
 		
 		<!-- 수업 목록 영역 -->
 		<table class="lessonArea" align="center">
+			<% for(int i = 0; i < myList.size(); i++) { %>
 			<tr>
+				<td>
+					<div class="eachWrap">
+						<table class="eachLesson" style="width:100%; height:100%;">
+							<tr style="height:100%">
+								<td style="width:27%;"><img class="lessonImg" src="<%= request.getContextPath() %>/<%= ((MyRegiLesson) myList.get(i)).getLessonImgRoute() %>/<%= ((MyRegiLesson) myList.get(i)).getLessonImgName() %>"></td>
+								<td class="lessonText" style="width:58%;">
+												<p><%= ((MyRegiLesson) myList.get(i)).getLessonName() %></p>
+												<p>수업시작일 : 2020-02-03 19:00 / 당산</p>
+												<p>결제일 : 2020-01-30 12:11:31</p> 
+												<img class="refundImg" src="<%=request.getContextPath() %>/static/images/refund.png">
+												<span class="refundMsg">환불신청</span>
+								</td>
+								<td class="profile" style="width:15%; padding:0;">
+									<div align="center"><img class="profileImg" src="<%= request.getContextPath() %>/static/images/iu.jpg"></div>
+									<table class="profileTable">
+										<tr>
+											<td>
+												<div class="nickName">피치핑크</div>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<div class="realName">아이유</div>
+											</td>
+										</tr>
+									</table>							
+								</td>
+							</tr>
+						</table>
+					</div>
+				</td>
+			</tr>
+			<% } %>
+			<%-- <tr>
 				<td>
 					<div class="eachWrap">
 						<table class="eachLesson" style="width:100%; height:100%;">
@@ -220,40 +262,7 @@
 						</table>
 					</div>
 				</td>
-			</tr>
-			<tr>
-				<td>
-					<div class="eachWrap">
-						<table class="eachLesson" style="width:100%; height:100%;">
-							<tr style="height:100%">
-								<td style="width:27%;"><img class="lessonImg" src="<%= request.getContextPath() %>/static/upload/lesson/beauty/beauty02.jpg"></td>
-								<td class="lessonText" style="width:58%;">
-												<p>[1:1_청담샵 경력] #선.착.순.이.벤.트 #자존감이 두배 올라가는 메이크업 배우기!</p>
-												<p>수업시작일 : 2020-02-03 19:00 / 당산</p>
-												<p>결제일 : 2020-01-30 12:11:31</p> 
-												<img class="refundImg" src="<%=request.getContextPath() %>/static/images/refund.png">
-												<span class="refundMsg">환불신청</span>
-								</td>
-								<td class="profile" style="width:15%; padding:0;">
-									<div align="center"><img class="profileImg" src="<%= request.getContextPath() %>/static/images/iu.jpg"></div>
-									<table class="profileTable">
-										<tr>
-											<td>
-												<div class="nickName">피치핑크</div>
-											</td>
-										</tr>
-										<tr>
-											<td>
-												<div class="realName">아이유</div>
-											</td>
-										</tr>
-									</table>							
-								</td>
-							</tr>
-						</table>
-					</div>
-				</td>
-			</tr>
+			</tr> --%>
 		</table>
 		<!-- 페이징 처리 -->
 		<div class="pagingArea" align="center">

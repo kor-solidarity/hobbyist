@@ -59,6 +59,7 @@ public class SelectOneLessonServlet extends HttpServlet {
 			request.setAttribute("profileImg", profileImg);
 			request.setAttribute("artist", artist);
 			request.setAttribute("scheduleList", scheduleList);
+			request.setAttribute("lessonImageList", lessonImageList);
 		} else {
 			page = "views/common/errorPage.jsp";
 			request.setAttribute("msg", "수업 상세보기 실패");

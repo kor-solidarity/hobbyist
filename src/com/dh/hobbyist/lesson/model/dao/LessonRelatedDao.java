@@ -358,6 +358,71 @@ public class LessonRelatedDao {
 		
 		return list;
 	}
+	
+	//등록한 수업의 수업코드 조회용 메소드
+	public ArrayList selectRegisteredLesson(Connection con, int memberCode) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList list = null;
+		
+		String query = prop.getProperty("selectRegisteredLesson");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, memberCode);
+			
+			rset = pstmt.executeQuery();
+			
+			list = new ArrayList();
+			
+			while(rset.next()) {
+				int lessonCode = rset.getInt("LESSON_SCHEDULE_PK");
+				
+				list.add(lessonCode);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+	}
+
+	public Image selectOneLessonImage(Connection con, int lessonCode) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		Image i = null;
+		
+		String query = prop.getProperty("selectOneLessonImage");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, lessonCode);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				i = new Image();
+				i.setImageRoute(rset.getString("IMAGE_ROUTE"));
+				i.setImageName(rset.getString("IMAGE_NAME"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return i;
+	}
+
+	public Image selectOneProfileImage(Connection con, int artistCode) {
+		return null;
+	}
 
 
 }

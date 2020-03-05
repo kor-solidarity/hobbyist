@@ -322,7 +322,7 @@
 		}
 		
 		function goMyLesson() {
-			location.href = "<%= request.getContextPath()%>/views/member/myPage/myLesson/registeredLesson.jsp";
+			location.href = "<%= request.getContextPath()%>/selectMyRegi.le";
 		}
 		
 		function goMyCal() {
