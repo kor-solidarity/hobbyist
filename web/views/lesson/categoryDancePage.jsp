@@ -89,6 +89,14 @@
 			
 		}
 		
+		#lessonImgArea {
+			width:265px;
+			height:140px;
+			display:block;
+		}
+		
+		
+		
 		#lessonImg {
 			width:265px;
 			height:140px;
@@ -294,7 +302,7 @@
 	
 	
 	<div id="section">
-	<p id="lessonCount">등록된 수업 <%=list.size() %>개</p>
+	<p id="lessonCount">등록된 수업 <%=listCount %>개</p>
 		
 		<div class="lesson-area">
 		<% for(int i = 0; i < list.size(); i++) {
@@ -305,7 +313,7 @@
 					<table id="lessonTable" align="center">
 						<tr>
 							<td colspan="2">
-							<div>
+							<div id="lessonImgArea">
 							 <% if(hmap.get("imageType").equals("lesson")) { %>
 							<img src="<%=hmap.get("imageRoute") %>/<%=hmap.get("imageName") %>" id="lessonImg"> 
 							<% } %> 

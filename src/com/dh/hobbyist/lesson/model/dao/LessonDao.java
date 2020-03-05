@@ -39,7 +39,7 @@ public class LessonDao {
 		ResultSet rset = null;
 		HashMap<String, Object> hmap = null;
 		
-		String query = prop.getProperty("selectInterest");
+		String query = prop.getProperty("selectInterestList");
 		
 		try {
 			pstmt = con.prepareStatement(query);
@@ -54,25 +54,18 @@ public class LessonDao {
 				
 				hmap.put("lessonCode", rset.getInt("LESSON_PK"));
 				hmap.put("lessonName", rset.getString("LESSON_NAME"));
-				hmap.put("minStudents", rset.getInt("MIN_STUDENTS"));
-				hmap.put("maxStudents", rset.getInt("MAX_STUDENTS"));
-				hmap.put("totalOrders", rset.getInt("TOTAL_ORDERS"));
-				hmap.put("costPerOrder", rset.getInt("COST_PER_ORDER"));
-				hmap.put("totalCosts", rset.getInt("TOTAL_COSTS"));
-				hmap.put("artistIntro", rset.getString("ARTIST_INTRO"));
-				hmap.put("lessonIntro", rset.getString("LESSON_INTRO"));
-				hmap.put("petitionCode", rset.getInt("PETITION_PK"));
-				hmap.put("registeredDate", rset.getDate("REGISTERED_DATE"));
 				hmap.put("status", rset.getInt("STATUS"));
-				hmap.put("categoryCode", rset.getInt("CATEGORY_PK"));
-				hmap.put("parentCode", rset.getInt("PARENT_PK"));
 				hmap.put("artistNick", rset.getString("ARTIST_NICK"));
 				hmap.put("memberName", rset.getString("MEMBER_NAME"));
 				hmap.put("imageCode", rset.getInt("IMAGE_PK"));
 				hmap.put("imageRoute", rset.getString("IMAGE_ROUTE"));
 				hmap.put("imageName", rset.getString("IMAGE_NAME"));
 				hmap.put("imageType", rset.getString("IMAGE_TYPE"));
-				hmap.put("imageMain", rset.getInt("IMAGE_MAIN"));
+				hmap.put("imageCode2", rset.getInt("img2_pk"));
+				hmap.put("imageRoute2", rset.getString("img2_route"));
+				hmap.put("imageName2", rset.getString("img2_name"));
+				hmap.put("imageType2", rset.getString("img2_type"));
+				hmap.put("region", rset.getString("REGION"));
 				
 				list.add(hmap);
 			}
@@ -521,28 +514,24 @@ public class LessonDao {
 		return list;
 	}
 	
-	//메인 페이지 인기수업 페이징 메소드(유승)
-	public ArrayList<HashMap<String, Object>> selectMainPopular(Connection con, PageInfo pi) {
-		PreparedStatement pstmt = null;
-		ResultSet rset = null;
+
+	
+	
+	
+	//메인페이지 인기수업 메소드(유승)
+	public ArrayList<HashMap<String, Object>> selectMainPopular(Connection con) {
 		ArrayList<HashMap<String, Object>> list = null;
+		Statement stmt = null;
+		ResultSet rset = null;
 		HashMap<String, Object> hmap = null;
 		
-		String query =  prop.getProperty("selectPopularListWithPaging");
+		String query = prop.getProperty("selectPopularList");
 		
 		try {
-			pstmt = con.prepareStatement(query);
-			
-			int startRow = (pi.getCurrentPage() - 1) * pi.getLimit() + 1;
-			int endRow = startRow + pi.getLimit() - 1;
-			
-			pstmt.setInt(1, startRow);
-			pstmt.setInt(2, endRow);
-			
-			rset = pstmt.executeQuery();
+			stmt = con.createStatement();
+			rset = stmt.executeQuery(query);
 			
 			list = new ArrayList<HashMap<String, Object>>();
-			
 			
 			while(rset.next()) {
 				hmap = new HashMap<String, Object>();
@@ -565,92 +554,6 @@ public class LessonDao {
 				list.add(hmap);
 			}
 			
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}finally {
-			close(pstmt);
-			close(rset);
-		}
-	
-		return list;
-	}
-	
-	//
-	public ArrayList<HashMap<String, Object>> selectMainInterest(Connection con, PageInfo pi, int memberCode) {
-			PreparedStatement pstmt = null;
-			ResultSet rset = null;
-			ArrayList<HashMap<String, Object>> list = null;
-			HashMap<String, Object> hmap = null;
-			
-			String query =  prop.getProperty("selectInterestListWithPaging");
-			
-			try {
-				pstmt = con.prepareStatement(query);
-				
-				int startRow = (pi.getCurrentPage() - 1) * pi.getLimit() + 1;
-				int endRow = startRow + pi.getLimit() - 1;
-				
-				pstmt.setInt(1, memberCode);
-				pstmt.setInt(2, startRow);
-				pstmt.setInt(3, endRow);
-				
-				rset = pstmt.executeQuery();
-				
-				list = new ArrayList<HashMap<String, Object>>();
-				
-				
-				while(rset.next()) {
-					hmap = new HashMap<String, Object>();
-					
-					hmap.put("lessonCode", rset.getInt("LESSON_PK"));
-					hmap.put("lessonName", rset.getString("LESSON_NAME"));
-					hmap.put("status", rset.getInt("STATUS"));
-					hmap.put("categoryCode", rset.getInt("CATEGORY_PK"));
-					hmap.put("artistNick", rset.getString("ARTIST_NICK"));
-					hmap.put("memberName", rset.getString("MEMBER_NAME"));
-					hmap.put("imageCode", rset.getInt("IMAGE_PK"));
-					hmap.put("imageRoute", rset.getString("IMAGE_ROUTE"));
-					hmap.put("imageName", rset.getString("IMAGE_NAME"));
-					hmap.put("imageType", rset.getString("IMAGE_TYPE"));
-					hmap.put("imageCode2", rset.getInt("img2_pk"));
-					hmap.put("imageRoute2", rset.getString("img2_route"));
-					hmap.put("imageName2", rset.getString("img2_name"));
-					hmap.put("imageType2", rset.getString("img2_type"));
-					hmap.put("region", rset.getString("REGION"));
-					
-					list.add(hmap);
-				}
-				
-				
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}finally {
-				close(pstmt);
-				close(rset);
-			}
-		
-			return list;
-	}
-	
-	
-	//메인페이지 리스트 카운트 메소드(유승)
-	public int getListCount(Connection con) {
-		Statement stmt = null;
-		ResultSet rset = null;
-		
-		int listCount = 0;
-		
-		String query = prop.getProperty("mainListCount");
-		
-		try {
-			stmt = con.createStatement();
-			rset = stmt.executeQuery(query);
-			
-			if(rset.next()) {
-				listCount = rset.getInt(1);
-			}
-			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
@@ -658,7 +561,8 @@ public class LessonDao {
 			close(rset);
 		}
 		
-		return listCount;
+		
+		return list;
 	}
 
 }
