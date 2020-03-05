@@ -62,6 +62,8 @@ public class InsertLessonServlet extends HttpServlet {
 			
 			Enumeration<String> files = multiRequest.getFileNames();
 			
+			System.out.println("files : " + files);
+			
 			while(files.hasMoreElements()) {
 				String name = files.nextElement();
 				
