@@ -467,12 +467,13 @@ public class PlaceDao {
 
             while (resultSet.next()) {
                 PlaceCompany company = new PlaceCompany();
-
+                System.out.println("COMPANY_PK: " + resultSet.getInt("COMPANY_PK"));
+                System.out.println("index10: " + resultSet.getString(10));
                 company.setCompany_pk(resultSet.getInt("COMPANY_PK"));
                 company.setCompany_name(resultSet.getString("COMPANY_NAME"));
                 company.setAddress(resultSet.getString("ADDRESS"));
                 company.setRoom_size(resultSet.getString("ROOM_SIZE"));
-                company.setMain_image_name(resultSet.getString("IMAGE_NAME"));
+                company.setMain_image_name(resultSet.getString(10));
 
                 companyArrayList.add(company);
             }
@@ -483,6 +484,7 @@ public class PlaceDao {
             close(resultSet);
             close(preparedStatement);
         }
+
         return companyArrayList;
     }
 }

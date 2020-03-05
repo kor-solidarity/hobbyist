@@ -75,6 +75,8 @@ public class MemberSelectPlaceServlet extends HttpServlet {
 
         ArrayList<PlaceCompany> companyArrayList = ps.selectCompanyList(pi);
 
+        request.setAttribute("companyArrayList", companyArrayList);
+        request.setAttribute("pi", pi);
 
         String page = "/views/rental/list.jsp";
 
