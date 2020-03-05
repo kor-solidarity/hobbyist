@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	
 <!DOCTYPE html>
 <html>
 <head>
@@ -223,17 +222,21 @@ center_td0 {
 		var passId = $("#passId").val();
 		
 		function pwConfirmbt(){
-		console.log("패스워드전송"+ $("#pwConfirm").val();
-		$("pwConfirm").submit();
-		}
+			var pwConfirm = $("#pwConfirm").val();
+		console.log("패스워드전송"+ pwConfirm);
+		$("#pwConfirm").submit();
+		} 
 		$(function (){
+		$("#idCheck").click(function(){
+			var passclick = $ ("#passclick").val();
+		
 			$.ajx({
 				url: "/hobbyist/UpdateMemberM.me",
 				type: "post",
-				data: {passwordclick: passwordclick},
+				data: {passclick: passclick},
 				success: function(data) {
 					if(data === "Sucess") {
-						alert("패스워드가 동일합니다.");
+						location.href = "<%=request.getContextPath()%>/views/member/registerForm.jsp";	
 					}else{
 						alert("패스워드가 틀립니다");
 					}
@@ -244,12 +247,13 @@ center_td0 {
 					
 				});
 			})
-		});
+			});
+		
 		
 		
 
- 		console.log("버큰클릭 시 패스워드값 일치여부" + memberPwd);
- 		console.log("버튼클릭 시 아이디 값 확인" + memberId);
+/*  		console.log("버큰클릭 시 패스워드값 일치여부" + memberPwd);
+ 		console.log("버튼클릭 시 아이디 값 확인" + memberId); */
 
  		//비밀번호 동일 확인 기능
 		 
