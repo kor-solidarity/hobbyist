@@ -30,7 +30,7 @@ public class SelectInterestedLessonServlet extends HttpServlet {
 		
 		int memberCode = ((Member) request.getSession().getAttribute("loginMember")).getMemberCode();
 		
-		int currentPage;
+		/*int currentPage;
 		int limit;
 		int maxPage;
 		int startPage;
@@ -59,9 +59,9 @@ public class SelectInterestedLessonServlet extends HttpServlet {
 			endPage = maxPage;
 		}
 		
-		PageInfo pi = new PageInfo(currentPage, listCount, limit, maxPage, startPage, endPage);
+		PageInfo pi = new PageInfo(currentPage, listCount, limit, maxPage, startPage, endPage);*/
 		
-		ArrayList<HashMap<String, Object>> list = new LessonService().selectMainInterest(pi, memberCode);
+		ArrayList<HashMap<String, Object>> list = new LessonService().selectInterest(memberCode);
 		
 		System.out.println("list : " + list);
 		

@@ -3,19 +3,13 @@
 <%
 	ArrayList<HashMap<String, Object>> list
 			= (ArrayList<HashMap<String, Object>>) request.getAttribute("list");
-	
-	PageInfo pi = (PageInfo) request.getAttribute("pi");
-	int listCount = pi.getListCount();
-	int currentPage = pi.getCurrentPage();
-	int maxPage = pi.getMaxPage();
-	int startPage = pi.getStartPage();
-	int endPage = pi.getEndPage();
+
 %> 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>hobbyist</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
 <style>
@@ -158,12 +152,21 @@
 			margin-top:5px;
 			
 		}
-		
-		#lessonImg {
+		#lessonImgArea {
+			display:block;
 			width:265px;
 			height:140px;
 			margin-left: -5.5px; 
 			margin-top: -5px; 
+		}
+		
+		
+		
+		
+		#lessonImg {
+			width:265px;
+			height:140px;
+			
 		}
 		
 		.lesson-list:eq(0) #lessonImg {
@@ -312,7 +315,7 @@
 					<table id="lessonTable" align="center">
 						<tr>
 							<td colspan="2">
-							<div>
+							<div id="lessonImgArea">
 							 <% if(hmap.get("imageType").equals("lesson")) { %>
 							<img src="<%=hmap.get("imageRoute") %>/<%=hmap.get("imageName") %>" id="lessonImg"> 
 							<% } %> 
@@ -353,7 +356,7 @@
 		</div>
    </div>
    
-   	<div class="pagingArea" align="center">
+   <%-- 	<div class="pagingArea" align="center">
 			<button onclick="location.href='<%= request.getContextPath()%>/selectPopular.le?currentPage=1'"><<</button>	
 			<% if(currentPage <= 1) { %>
 				<button disabled><</button>	
@@ -379,7 +382,7 @@
 				<button onclick="location.href='<%= request.getContextPath()%>/selectPopular.le?currentPage=<%=currentPage + 1%>'">></button>
 			<% } %>
 			<button onclick="location.href='<%= request.getContextPath()%>/selectPopular.le?currentPage=<%=maxPage%>'">>></button>	
-		</div>
+		</div> --%>
 
   
 	<%@ include file="/views/common/footer.jsp" %>
@@ -425,27 +428,57 @@
 				
 				
 				
-				/* $("#interested").click(function() {
+				 $("#interested").click(function() {
 					
-					
-					$.ajax({
-						url: "/hobbyist/selectInterest.le",
-						type: "get", 
-						success: function(data) {
-							var $table = $("#lessonTable");
-							$table.find($("lesson"))
-							
-							for(var key in data) {
+						$.ajax({
+							url: "/hobbyist/selectInterest.le",
+							type: "get", 
+							success: function(data) {
 								
+									if(data != null) {
+										var $table = $("#lessonTable");
+										var $list = $(".lesson-list");
+										$list.remove();
+										
+										for(var key in data) {
+											var $lessonName = $("#lessonName");
+											var $lessonImgArea = $("#lessonImgArea");
+											var $lessonCode = $("#lessonCode");
+											var $artistImgArea = $("#artistImg");
+											var $artistNick = $("#artistNick");
+											var $artistName = $("#artistName");
+											var $lessonArea = $("#lessonArea");
+											var $star = $("#star");
+											
+											
+											$table.append($lessonImgArea.append('<img src="data[key].imageRoute/data[key].imageName" id="lessonImg" />'));
+											$table.append($lessonName.text(data[key].lessonName));
+											$table.append($lessonCode.val(data[key].lessonCode));
+											$table.append($artistImgArea.append('<img src="data[key].imageRoute2/data[key].imageName2" id="artistImg" />'));
+											$table.append($star.text("★★★★☆"));
+											$table.append($artistNick.text(data[key].artistNick));
+											$table.append($lessonArea.text(data[key].lessonArea));
+											$table.append($artistName.text(data[key].artistName));
+											
+											$(".lesson-list").append($table);
+											$(".lesson-area").append($(".lesson-list"));
+											
+											console.log(data[key].artistNick);
+											console.log(data[key].imageRoute + "/" + data[key].imageName);
+											console.log(data[key].imageRoute2 + "/" + data[key].imageName2);
+											console.log(data[key].lessonName);
+										}
+									}
+								
+								
+							},
+							error: function(error) {
+								conosole.log(error);
 							}
-							
-						},
-						error: function(error) {
-							conosole.log(error);
-						}
-					});
+						});
 					
-				}); */
+					
+				}); 
 				
 				
 			}); 

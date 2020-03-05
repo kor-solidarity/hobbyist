@@ -24,6 +24,8 @@ public class LessonService {
 		
 		return list;
 	}
+	
+	
 	// 리스트 카운트(유승)
 	public int getListCount(int parentCode) {
 		Connection con = getConnection();
@@ -112,37 +114,18 @@ public class LessonService {
 		return list;
 	}
 	
-	//메인 페이지 인기수업 페이징 메소드(유승)
-	public ArrayList<HashMap<String, Object>> selectMainPopular(PageInfo pi) {
+	
+	
+	
+	//메인페이지 인기수업 메소드(유승)
+	public ArrayList<HashMap<String, Object>> selectMainPopular() {
 		Connection con = getConnection();
 		
-		ArrayList<HashMap<String, Object>> list = new LessonDao().selectMainPopular(con, pi);
+		ArrayList<HashMap<String, Object>> list = new LessonDao().selectMainPopular(con);
 		
 		close(con);
 		
 		return list;
-	}
-	
-	//메인페이지 관심수업 페이징 메소드(유승)
-	public ArrayList<HashMap<String, Object>> selectMainInterest(PageInfo pi, int memberCode) {
-		Connection con = getConnection();
-		
-		ArrayList<HashMap<String, Object>> list = new LessonDao().selectMainInterest(con, pi, memberCode);
-		
-		close(con);
-		
-		return list;
-	}
-	
-	//메인페이지 리스트 카운트(유승)
-	public int getListCount() {
-		Connection con = getConnection();
-		
-		int listCount = new LessonDao().getListCount(con);
-		
-		close(con);
-		
-		return listCount;
 	}
 	
 	

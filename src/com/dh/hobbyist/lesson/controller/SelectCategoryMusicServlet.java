@@ -47,7 +47,6 @@ public class SelectCategoryMusicServlet extends HttpServlet {
 		LessonService ls = new LessonService();
 		int listCount = ls.getListCount(parentCode);
 		
-		System.out.println("list Count: " + listCount);
 		
 		maxPage = (int) ((double) listCount / limit + 0.9);
 		
@@ -63,7 +62,6 @@ public class SelectCategoryMusicServlet extends HttpServlet {
 		
 		ArrayList<HashMap<String, Object>> list = new LessonService().selectCategoryMusic(pi);
 		
-		System.out.println("list : " + list);
 		
 		String page = "";
 		if(list != null) {
