@@ -70,6 +70,7 @@ public class SelectInterestedLessonServlet extends HttpServlet {
 		response.setCharacterEncoding("UTF-8");
 		
 		new Gson().toJson(list, response.getWriter());
+		/*new Gson().toJson(pi, response.getWriter());*/
 		
 	}
 

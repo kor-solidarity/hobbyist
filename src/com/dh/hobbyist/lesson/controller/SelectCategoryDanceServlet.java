@@ -26,6 +26,7 @@ public class SelectCategoryDanceServlet extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		int parentCode = 9;
 
 		int currentPage;
 		int limit;
@@ -42,7 +43,7 @@ public class SelectCategoryDanceServlet extends HttpServlet {
 		limit = 9;
 		
 		LessonService ls = new LessonService();
-		int listCount = ls.getListCount();
+		int listCount = ls.getListCount(parentCode);
 		
 		System.out.println("list Count: " + listCount);
 		
