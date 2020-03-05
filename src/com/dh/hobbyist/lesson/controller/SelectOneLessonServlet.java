@@ -35,8 +35,8 @@ public class SelectOneLessonServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//view 페이지에서 넘겨준 lessonCode를 담는다.
-		//int lessonCode = Integer.parseInt(request.getParameter("lessonCode"));
-		int lessonCode = 53;		//유승이가 카데고리 페이지에서 수업코드를 넘겨주기 전 테스트를 위한 특정 값
+		int lessonCode = Integer.parseInt(request.getParameter("lessonCode"));
+		//int lessonCode = 53;		//유승이가 카데고리 페이지에서 수업코드를 넘겨주기 전 테스트를 위한 특정 값
 		
 		Lesson lesson = new LessonRelatedService().selectOneLesson(lessonCode);
 		

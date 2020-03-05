@@ -574,6 +574,12 @@ body {
 								</tr>
 								<tr>
 									<td colspan="3">
+										<%-- <span id="contentImgArea1" style="margin:0 5px">
+											<img id="contentImg1" width="120" height="80" src="<%= request.getContextPath() %>/static/images/iphoneCameraW.png">
+										</span>
+										<span id="contentImgArea2" style="margin:0 5px">
+											<img id="contentImg2" width="120" height="80" src="<%= request.getContextPath() %>/static/images/iphoneCameraW.png">
+										</span> --%>
 										<span id="contentImgArea1" style="margin:0 5px">
 											<img id="contentImg1" width="120" height="80" src="<%= request.getContextPath() %>/static/images/iphoneCameraW.png">
 										</span>
@@ -583,9 +589,6 @@ body {
 										<span id="contentImgArea3" style="margin:0 5px">
 											<img id="contentImg3" width="120" height="80" src="<%= request.getContextPath() %>/static/images/iphoneCameraW.png">
 										</span>
-										<span id="contentImgArea4" style="margin:0 5px">
-											<img id="contentImg4" width="120" height="80" src="<%= request.getContextPath() %>/static/images/iphoneCameraW.png">
-										</span>
 									</td>
 								</tr>
 								<tr>
@@ -593,27 +596,31 @@ body {
 								</tr>
 							</table>
 							<div id="fileArea">
+								<!-- <input type="file" id="lessonImg1" name="lessonImg1" onchange="loadImg(this, 1);">
+								<input type="file" id="lessonImg2" name="lessonImg2" onchange="loadImg(this, 2);"> -->
 								<input type="file" id="lessonImg1" name="lessonImg1" onchange="loadImg(this, 1);">
 								<input type="file" id="lessonImg2" name="lessonImg2" onchange="loadImg(this, 2);">
 								<input type="file" id="lessonImg3" name="lessonImg3" onchange="loadImg(this, 3);">
-								<input type="file" id="lessonImg4" name="lessonImg4" onchange="loadImg(this, 4);">
 							</div>
 							<!-- 이미지 전송을 위한 JavaScript -->
 							<script>
 								$(function() {
 									$("#fileArea").hide();
 									
-									$("#contentImgArea1").click(function(){
+									/* $("#contentImgArea1").click(function(){
 										$("#lessonImg1").click();
 									})
 									$("#contentImgArea2").click(function(){
 										$("#lessonImg2").click();
+									}) */
+									$("#contentImgArea1").click(function(){
+										$("#lessonImg1").click();
+									})
+									$("#contentImgArea2").click(function(){
+										$("#lessonImg2").click(); 
 									})
 									$("#contentImgArea3").click(function(){
 										$("#lessonImg3").click();
-									})
-									$("#contentImgArea4").click(function(){
-										$("#lessonImg4").click();
 									})
 								});
 								
@@ -625,10 +632,11 @@ body {
 											console.log(e.target.result);
 											
 											switch(num) {
+											/* case 1 : $("#contentImg1").attr("src", e.target.result); break;
+											case 2 : $("#contentImg2").attr("src", e.target.result); break; */
 											case 1 : $("#contentImg1").attr("src", e.target.result); break;
 											case 2 : $("#contentImg2").attr("src", e.target.result); break;
 											case 3 : $("#contentImg3").attr("src", e.target.result); break;
-											case 4 : $("#contentImg4").attr("src", e.target.result); break;
 											}
 										}
 									}
