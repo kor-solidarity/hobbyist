@@ -1,4 +1,6 @@
-<%--
+<%@ page import="com.dh.hobbyist.place.model.vo.PlaceCompany" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="com.dh.hobbyist.common.model.vo.Image" %><%--
   Created by IntelliJ IDEA.
   User: SOY
   Date: 2020-02-13
@@ -14,6 +16,12 @@
 <body>
 <%@include file="/views/common/menubar.jsp" %>
 <%@include file="category.jsp" %>
+<%
+    PlaceCompany company = (PlaceCompany)request.getAttribute("company");
+    ArrayList<Image> images =(ArrayList<Image>)request.getAttribute("images");
+
+
+%>
 <br clear="both">
 <div>
     <table class="standard-width " style="margin: 0 auto">
