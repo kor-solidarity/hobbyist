@@ -510,5 +510,51 @@ public class CalculatePayDao {
 		
 		return ps;
 	}
+	
+	//관리자 - 금액 정산 부분에서 답변 입력 후 "답변하기" 클릭시 답변 등록용 메소드
+	public int insertAdminReply(Connection con, SettlementInquiry si) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("insertAdminReply");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, si.getSettlementCode());
+			pstmt.setString(2, si.getContent());
+			pstmt.setInt(3, si.getAdminCode());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	//관리자 - 금액 정산 부분에서 "답변하기" 클릭 시 정산 DB 상태(STATUS) 변경용 메소드 
+	public int updateReplyStatus(Connection con, int settlementCode) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("updateReplyStatus");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, settlementCode);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
 
 }

@@ -94,6 +94,27 @@
 	.notConfirm {
 		cursor:pointer;
 	}
+	.adminAnswer {
+		cursor:pointer;
+	}
+	#artistResponse {
+		width:80%;
+		background-color:#F0F0F0;
+		margin:auto;
+		height:100px;
+		border-radius:5%;
+	}
+	#adminResponse {
+		width:80%;
+		margin:auto;
+	}
+	#adminResDiv {
+		background-color:#F0F0F0;
+		margin:auto;
+		height:100px;
+		border-radius:5%;
+		width:405px;
+	}
 </style>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -161,8 +182,11 @@
 						<p style="font-weight:bold; color:DodgerBlue">정산 대기중</p>
 					<%} else if(ps.getStatus() == 3) {%>
 						<p style="font-weight:bold; color:dimgrey">정산 완료</p>
+					<%} else if(ps.getStatus() == 4) {%>
+						<p class="adminAnswer" style="font-weight:bold; color:steelBlue">답변 완료</p>
 					<%} %>
 				</td>
+				<input type="hidden" value="<%=ps.getSettleCode()%>"> 
 			</tr>
 			<%} %>
 		</table>
@@ -242,10 +266,97 @@
 
 		</div>
 	</div>
+	
+	<!-- 답변 완료 시 모달 -->
+	<div class="modal fade" id="reMyModal" role="dialog">
+		<div class="modal-dialog">
+			<!-- Modal content-->
+				<div class="modal-content">
+					<div class="modal-header" style="background-color:darkolivegreen; height:42px;">
+						<button type="button" class="close" data-dismiss="modal" style="color:white;">×</button>
+						<h4 class="modal-title" style="color:white; font-family: Do Hyeon;">정산확인</h4>
+					</div>
+						<input type="hidden" id="reHideSetCode">
+						<div class="modal-body">
+							<table style="margin:auto; border-spacing:15px; border-collapse:separate;">
+								<tr>
+									<td colspan="3" style="font-weight:bold; font-size:18px;" id="lessonName"></td>
+								</tr>
+								<tr>
+									<td id="costPer"></td>
+									<td></td>
+									<td id="totCost"></td>
+								</tr>
+								<tr>
+									<td>수수료 : 10%</td>
+									<td></td>
+									<td id="artBank"></td>
+								</tr>
+								<tr>
+									<td style="font-size:17px; font-weight:bold;" id="totGiven"></td>
+									<td></td>
+									<td></td>
+								</tr>
+							</table>
+						<div id="artistResponse">
+						<table style="border-spacing:10px; border-collapse:separate; width:100%;">
+							<tr>
+								<td style="font-weight:bold; color:#4E4E4E;" id="artistName"></td>
+								<td style="text-align:right;"></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td colspan="2" style="font-size:15px;" id="artistContent"></td>
+							</tr>
+						</table>
+					</div>
+					<br>
+					<div id="adminResponse">
+						<table>
+							<tr>
+								<td><img src="/hobbyist/static/images/arrow.png" style="width:50px;"></td>
+								<td rowspan="2">
+									<div id="adminResDiv">
+										<table style="margin-left:10px;">
+											<tr>
+												<td style="font-weight:bold; color:#4E4E4E;" id="adminName"></td>
+												<td style="text-align:right;"></td>
+											</tr>
+											<tr>
+												<td></td>
+												<td></td>
+											</tr>
+											<tr>
+												<td colspan="2" style="font-size:15px;" id="adminContent"></td>
+											</tr>
+										</table>
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<td></td>
+							</tr>
+						</table>
+					</div>
+					<div style="text-align:center;">
+						<br>
+						<p style="font-weight:bold;"> 이 후의 수정요청은 운영시간 내의 전화로 문의해주세요.</p>
+					</div>
+				</div>
+				<div class="modal-footer" style="text-align:center;">
+					<button type="button" id="reConfirm" class="btn btn-primary" style="background-color:darkolivegreen;">정산확정</button>
+				</div>
+			</div>
+
+		</div>
+	</div>
 	<script>
 		$(document).ready(function(){
 	    	$(".notConfirm").click(function(){
-	    		var code = $(this).parent().parent().children("td:first-child").text();
+	    		var code = $(this).parent().parent().children("input").val();
 	    		
 				$.ajax({
 					url: "/hobbyist/selectOneCalculation.cp",
@@ -304,6 +415,67 @@
 	    		} else {
 	    			$("#settlementForm").submit();
 	    		}
+	    	});
+	    	
+	    	$(".adminAnswer").click(function() {
+	    		var code = $(this).parent().parent().children("input").val();
+	    		
+	    		$.ajax({
+	    			url: "/hobbyist/selectMyInquiryList.cp",
+	    			data: {code : code},
+	    			type: "post",
+	    			success: function(data) {
+
+						for(var key in data) {
+							if(key == 'paySettlement') {
+								var ps = data[key];
+		    					
+		    					$("#lessonName").text(ps.lessonName + " (" + ps.lessonOrderTime + "회차)");
+		    					$("#costPer").text("금액(인당) : " + ps.costPerOrder + "원");
+		    					$("#totCost").text("총액 : " + ps.totalCost + "원");
+		    					var bankName = "";
+		    					switch(ps.bankName) {
+		    					case "SH" : bankName = "신한"; break;
+		    					case "NH" : bankName = "농협"; break;
+		    					case "KB" : bankName = "국민"; break;
+		    					default : bankName = ps.bankName; break;
+		    					}
+		    					$("#artBank").text("계좌번호 : " + bankName + " " +ps.bankOwner + " " + ps.bankNum);
+		    					
+		    					$("#totGiven").text("총 지급액 : " + ps.totalPayGiven +"원");
+		    					
+		    					$("#reHideSetCode").val(ps.settleCode);
+							}
+							
+							if(key == 'inquiryList') {
+								var list = data[key];
+								var len = data[key].length;
+								
+								for(var i = 0; i < len; i++) {
+									if(list[i].LVL == 0) {
+										$("#artistName").text(list[i].artistName);
+										$("#artistContent").text(list[i].content);
+									} else if(list[i].LVL == 1) {
+										$("#adminName").text(list[i].adminName);
+										$("#adminContent").text(list[i].content);
+									}
+								}
+							}
+						}
+	    			},
+	    			error: function(error) {
+	    				console.log(error);
+	    			}
+	    		});
+	    		
+	    		$("#reMyModal").modal();
+	    	});
+	    	
+	    	$("#reConfirm").click(function(){
+	    		var code = $("#reHideSetCode").val();
+				if(confirm("정산 확정 하시겠습니까?")){
+		    		location.href = "<%=request.getContextPath()%>/updateConfirmStatus.cp?code=" + code;
+				}
 	    	});
 		});
 	</script>

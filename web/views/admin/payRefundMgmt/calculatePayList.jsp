@@ -152,6 +152,16 @@ section {
 .modalLab {
 	cursor:pointer;
 }
+#completeSettlement {
+	color: white;
+	background-color: #4E4E4E;
+	height:35px;
+	border-radius:5px;
+	font-size:15px;
+	font-weight:bold;
+	padding:5px;
+	border: 1px solid #4E4E4E;
+}
 </style>
 <title>Insert title here</title>
 </head>
@@ -213,6 +223,7 @@ section {
 					<option value="1">수정 요청</option>
 					<option value="2">정산 대기중</option>
 					<option value="3">정산 완료</option>
+					<option value="4">답변 완료</option>
 				</select>
 			</div>
 			<div id="infoArea">
@@ -230,7 +241,7 @@ section {
 						<th style="width: 100px;">총 지급액</th>
 						<th style="width: 100px;">계좌번호</th>
 						<th style="width: 120px;">상태</th>
-						<th style="width:50px;"><input type="checkbox"></th>
+						<th style="width:50px;"><input type="checkbox" id="allCheck"></th>
 					</tr>
 					<% 
 						for(PaySettlement ps : payList) { %>
@@ -267,6 +278,8 @@ section {
 									<label style="color:DodgerBlue">정산 대기중</label>
 								<%} else if(ps.getStatus() == 3) { %>
 									<label style="color:dimgrey">정산 완료</label>
+								<%} else if(ps.getStatus() == 4) { %>
+									<label style="color:steelBlue">답변 완료</label>
 								<%} %>
 							</td>
 							<td>
@@ -279,7 +292,7 @@ section {
 				</table>
 			</div>
 			<div id="completeDiv">
-				<button type="button">정산 완료</button>
+				<button type="button" id="completeSettlement">정산 완료</button>
 			</div>
 		</article>
 	</section>
@@ -296,20 +309,25 @@ section {
 				<div class="modal-body">
 					<table style="margin:auto; border-spacing:15px; border-collapse:separate;">
 						<tr>
-							<td colspan="3">[2주 과정]내 손으로 만드는 커피 에스프레소, 라떼아트 (수업코드 1159)</td>
+							<td colspan="3" style="font-weight:bold; font-size:18px;" id="lessonName"></td>
 						</tr>
 						<tr>
-							<td>금액(인당) : 20000원</td>
+							<td id="costPer"></td>
 							<td></td>
-							<td>총액 : 100000원</td>
+							<td id="totCost"></td>
 						</tr>
 						<tr>
-							<td>수수료 : 10%</td>
+							<td id="setFee"></td>
 							<td></td>
-							<td>계좌번호 : 우리 김설현 1002834795530</td>
+							<td id="artBank"></td>
 						</tr>
 						<tr>
-							<td style="font-size:17px; font-weight:bold;">총 지급액 : 90000원</td>
+							<td id="endTime"></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td style="font-size:17px; font-weight:bold;" id="totGiven"></td>
 							<td></td>
 							<td></td>
 						</tr>
@@ -332,36 +350,38 @@ section {
 					</div>
 					<br>
 					<div id="adminResponse">
-						<table>
-							<tr>
-								<td><img src="/hobbyist/static/images/arrow.png" style="width:50px;"></td>
-								<td rowspan="2">
-									<div id="adminResDiv">
-										<table>
-											<tr>
-												<td style="font-weight:bold; color:#4E4E4E;" id="adminName"><%=loginAdmin.getAdminName() %></td>
-												<td style="text-align:right;"></td>
-											</tr>
-											<tr>
-												<td></td>
-												<td></td>
-											</tr>
-											<tr>
-												<td colspan="2" style="font-size:15px; width:600px;"><textarea id="adminText" placeholder="답변할 내용을 적어주세요."></textarea></td>
-											</tr>
-										</table>
-									</div>
-								</td>
-							</tr>
-							<tr>
-								<td></td>
-							</tr>
-						</table>
+						<form id="adminForm" action="<%=request.getContextPath()%>/insertAdminReply.cp" method="post">
+							<table>
+								<tr>
+									<td><img src="/hobbyist/static/images/arrow.png" style="width:50px;"></td>
+									<td rowspan="2">
+										<div id="adminResDiv">
+											<table>
+												<tr>
+													<td style="font-weight:bold; color:#4E4E4E;" id="adminName"><%=loginAdmin.getAdminName() %></td>
+													<td style="text-align:right;"></td>
+												</tr>
+												<tr>
+													<td></td>
+													<td></td>
+												</tr>
+												<tr>
+													<td colspan="2" style="font-size:15px; width:600px;"><textarea id="adminText" name="adminText" placeholder="답변할 내용을 적어주세요."></textarea></td>
+												</tr>
+												<input type="hidden" id="hideSetCode" name="hideSetCode">
+											</table>
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<td></td>
+								</tr>
+							</table>
+						</form>
 					</div>
 				</div>
 				<div class="modal-footer" style="text-align:center;">
-					<button type="button" id="adminResponse" class="btn btn-primary" style="background-color:#4E4E4E; width:150px;">답변하기</button>
-					<button type="button" id="adminSend" class="btn btn-primary" style="background-color:#4E4E4E; display:none;">보내기</button>
+					<button type="button" id="adminSend" class="btn btn-primary" style="background-color:#4E4E4E; width:150px;">답변하기</button>
 				</div>
 			</div>
 
@@ -395,7 +415,7 @@ section {
     					'<th style="width: 100px;">총 지급액</th>' + 
     					'<th style="width: 100px;">계좌번호</th>' + 
     					'<th style="width: 120px;">상태</th>' + 
-    					'<th style="width:50px;"><input type="checkbox"></th>');  
+    					'<th style="width:50px;"><input type="checkbox" id="allCheck"></th>');  
     					
     					$table.append($tr);
     					
@@ -427,6 +447,8 @@ section {
     							$status = $("<td>").html("<label style='color:DodgerBlue'>정산 대기중</label>");
     						} else if(data[key].status == 3) {
     							$status = $("<td>").html("<label style='color:dimgrey'>정산 완료</label>");
+    						} else if(data[key].status == 4) {
+    							$status = $("<td>").html("<label style='color:steelBlue'>답변 완료</label>");
     						}
     						var $checkbox = $("<td>").html("<input type='checkbox'>");
     						var hideIn = '<input type="hidden" value=' + data[key].settleCode + '>';
@@ -470,6 +492,24 @@ section {
     			for(var key in data) {
     				if(key == 'paySettlement') {
     					var ps = data[key];
+    					
+    					$("#lessonName").text(ps.lessonName + " (" + ps.lessonOrderTime + "회차)");
+    					$("#costPer").text("금액(인당) : " + ps.costPerOrder + "원");
+    					$("#totCost").text("총액 : " + ps.totalCost + "원");
+    					$("#setFee").text("수수료 : " + ps.settleFee + "%");
+    					var bankName = "";
+    					switch(ps.bankName) {
+    					case "SH" : bankName = "신한"; break;
+    					case "NH" : bankName = "농협"; break;
+    					case "KB" : bankName = "국민"; break;
+    					default : bankName = ps.bankName; break;
+    					}
+    					$("#artBank").text("계좌번호 : " + bankName + " " +ps.bankOwner + " " + ps.bankNum);
+    					
+    					$("#endTime").text("회차 종료 시간 : " + ps.lessonOrderEnd);
+    					$("#totGiven").text("총 지급액 : " + ps.totalPayGiven +"원");
+    					
+    					$("#hideSetCode").val(ps.settleCode);
     				}
     				
     				if(key == 'inquiryList') {
@@ -487,6 +527,23 @@ section {
     	});
     	
 	    $("#myModal").modal();
+	});
+	
+	$(document).on("click", '#adminSend', function(){
+		if($("#adminText").val() == '') {
+			alert("답변할 내용을 적어주세요.");
+		} else {
+			$("#adminForm").submit();
+		}
+	});
+	
+	
+	$(document).on("click", "#allCheck", function(){
+		if($("#allCheck").prop("checked")){
+			$("input[type=checkbox]").prop("checked", true);
+		} else {
+			$("input[type=checkbox]").prop("checked", false);
+		}
 	});
 	</script>
 

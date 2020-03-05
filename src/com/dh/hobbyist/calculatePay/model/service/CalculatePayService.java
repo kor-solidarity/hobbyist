@@ -141,6 +141,8 @@ public class CalculatePayService {
 			rollback(con);
 		}
 		
+		close(con);
+		
 		return result;
 	}
 
@@ -175,6 +177,30 @@ public class CalculatePayService {
 		close(con);
 		
 		return ps;
+	}
+
+	//관리자 - 금액 정산 부분에서 답변 입력 후 "답변하기" 클릭시 답변 등록용 메소드
+	public int insertAdminReply(SettlementInquiry si) {
+		Connection con = getConnection();
+		
+		int result1 = new CalculatePayDao().updateReplyStatus(con, si.getSettlementCode());
+		int result2 = 0;
+		int result = 0;
+		
+		if(result1 > 0) {
+			result2 = new CalculatePayDao().insertAdminReply(con, si);
+		}
+		if(result2 > 0) {
+			result = 1;
+			commit(con);
+		} else {
+			result = 0;
+			rollback(con);
+		}
+		
+		close(con);
+		
+		return result;
 	}
 	
 	
