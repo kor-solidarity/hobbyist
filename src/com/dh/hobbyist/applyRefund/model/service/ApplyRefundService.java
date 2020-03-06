@@ -33,4 +33,20 @@ public class ApplyRefundService {
 		
 	}
 
+	public int refuseRefund(int num, String reasonDetail) {
+		Connection con = getConnection();
+		
+		int result = new ApplyRefundDao().refuseRefund(con, num, reasonDetail);
+		
+		if(result > 0) {
+			commit(con);
+		} else {
+			rollback(con);
+		}
+		
+		close(con);
+		
+		return result;
+	}
+
 }

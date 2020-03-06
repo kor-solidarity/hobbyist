@@ -197,26 +197,23 @@
 		</article>
 	</section>
 	
-	<!-- modal 안의 내용 폼형식을 전송하기 -->
-    <form action="">
-	
 	 <div class="modal fade" id="myModal" role="dialog">
    	 <div class="modal-dialog">
     
    	   <!-- Modal content-->
    	   <div class="modal-content">
-   	     <div class="modal-header" style="background: #4E4E4E ; color: white; height: 80px;">
+   	     <div class="modal-header" style="background: #4E4E4E; color: white; height: 80px;">
    	       <button type="button" class="close" data-dismiss="modal" style="color: white;">x</button>
    	       <h4 class="modal-title" style="font-family: 'ZCOOL QingKe HuangYou', cursive; font-size: 30px;">hobbyist</h4>
    	     </div>
    	     <div class="modal-body">
    	       <table id="modalT">
    	       		<tr>
-   	       			<td id="imp">결제 고유번호</td>
+   	       			<td>결제 고유번호</td>
    	       			<td id="impNum"></td>
    	       		</tr>
    	       		<tr>
-   	       			<td id="">수업 제목</td>
+   	       			<td>수업 제목</td>
    	       			<td id="lessonName"></td>
    	       		</tr>
    	       		<tr>
@@ -286,14 +283,12 @@
   		</div>
   		<div class="modal-footer">
    	       <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
-   	       <button type="button" class="btn btn-default" onclick="realRefuse()">반려</button>
+   	       <button id="realRefuse" type="button" class="btn btn-default">반려</button>
    	     </div>
    	  	 </div>
    		 </div>
   		</div>
   		
-  	</form>
-  
 	<script>
 	$(function() {
 		$.ajax({
@@ -366,6 +361,7 @@
 						$("#leftOrder").text(data.leftOrder);
 						$("#reason").text(data.reason);
 						$("#reasonDetail").text(data.reasonDetail);
+						
 					},
 					error: function(error) {
 						console.log(error);
@@ -374,9 +370,23 @@
 		    	});
 		    	
 	   	    	$("#myModal").modal();
+						//최종 반려 버튼 클릭시
+						$(document).on("click", '#realRefuse', function() {
+							var refundCode = Number($('.Btn').parent().parent().children("td:nth-child(1)").text());
+							var reasonDetail = $("#refuseArea").val();
+							console.log(refundCode);
+							console.log(reasonDetail);
+							var result = confirm("반려 처리 하시겠습니까?");
+							
+							if(result) {
+								location.href = "<%=request.getContextPath()%>/refuseRefund.re?refundCode=" + refundCode + "&reasonDetail=" + reasonDetail;
+								
+							}
+						});
 		});
 		
 	});
+	
 	function approve() {
 			
 		confirm("환불 승인 하시겠습니까?");
@@ -384,10 +394,6 @@
 		
 	function refuse() {
 		$("#myModal1").modal();
-	}
-	
-	function realRefuse() {
-		confirm("반려 처리 하시겠습니까?");
 	}
 		
 	function goPayList() {
