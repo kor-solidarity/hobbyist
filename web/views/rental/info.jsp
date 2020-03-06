@@ -13,7 +13,21 @@
     <title>Room info</title>
     <link rel="stylesheet" href="<%=request.getContextPath()%>/static/css/eun-css.css">
     <style>
+        .w3-animate-top {
+            position: relative;
+            animation: animatetop 0.5s
+        }
 
+        @keyframes animatetop {
+            from {
+                top: -300px;
+                opacity: 0
+            }
+            to {
+                top: 0;
+                opacity: 1
+            }
+        }
     </style>
 </head>
 <body>
@@ -55,12 +69,19 @@
         </tr>
         <tr>
             <%--사진 목록보기.  --%>
-            <td rowspan="">◀</td>
+            <td rowspan="" id="picBack" onclick="changePic(0)">◀</td>
             <td style="width: 90%; ">
-                <img src="<%=request.getContextPath()%>/static/images/studyRoom3.png"
-                     style="width: 100%;" alt="">
+                <%
+                    for (Image i : images) {%>
+                <img src="<%=request.getContextPath()%>/static/upload/place/<%=i.getImageName()%>"
+                     style="width: 100%;" class="placePics w3-animate-top" alt="">
+                <%
+                    }
+                %>
+                <%--                <img src="<%=request.getContextPath()%>/static/images/studyRoom3.png"--%>
+                <%--                     style="width: 100%;" alt="">--%>
             </td>
-            <td rowspan="">▶</td>
+            <td rowspan="" id="picFront" onclick="changePic(1)">▶</td>
         </tr>
         <tr>
             <td></td>
@@ -126,5 +147,32 @@
         </tr>
     </table>
 </div>
+<script>
+    var index = -1;
+    var imageDomList = $(".placePics");
+    $(function () {
+        changePic(1);
+    });
+
+    function changePic (num) {
+        // num 이 0이면 뒤로, 1이면 앞으로.
+        for (let i = 0; i < imageDomList.length; i++) {
+            // imageDomList[i].style('display', 'none');
+            imageDomList[i].style.display = 'none';
+        }
+        if (num == 1) {
+            index++;
+        } else {
+            index--;
+        }
+        if (index < 0 || index >= imageDomList.length){
+            // } if (-1 > index > imageDomList.length) {
+            index = 0;
+        }
+        console.log("index " + index);
+        // imageDomList[index].style('display', 'block');
+        imageDomList[index].style.display = 'block';
+    }
+</script>
 </body>
 </html>
