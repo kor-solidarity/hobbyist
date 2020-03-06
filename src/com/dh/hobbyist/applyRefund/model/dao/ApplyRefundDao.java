@@ -103,4 +103,31 @@ public class ApplyRefundDao {
 		}
 		return arf;
 	}
+
+
+
+	//환불 신청 반려시 상태 거부하는 메소드
+	public int refuseRefund(Connection con, int num, String reasonDetail) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("refuseRefund");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, reasonDetail);
+			pstmt.setInt(2, num);
+
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
 }
