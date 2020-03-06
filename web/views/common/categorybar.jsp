@@ -1107,6 +1107,13 @@
 				$("#sports tr:eq(0) td:eq(3)").css({'background':'lightgray', 'color':'black'});
 				$("#sports tr:eq(0) td:eq(4)").css({'background':'lightgray', 'color':'black'});
 		}); 
+		 	
+		 	$("#cSpace").mouseenter(function() {
+		 		$(this).css({'color':'darkolivegreen'});
+		 	}).click(function() {
+		 		$(this).css({'color':'darkolivegreen'});
+		 		location.href = "<%= request.getContextPath()%>/place/list.me";
+		 	});
 	}); 
 	</script>
 </body>

@@ -295,16 +295,23 @@
    		</ul>
    	</div> -->
    	
-  
+  <% if(loginMember != null) { %>
+	<div id="aside">
+	<div id="lTitle">인기수업</div>
+   	<div class="aside" id="liked">추천수업</div>
+   	<div class="aside"> | </div>
+   	<div class="aside" id="interested">관심수업</div>
+   	<div class="aside"> | </div>
+   	<div class="aside" id="popular">인기수업</div>
+	</div>
+	<% }else { %>
 	<div id="aside">
 	<div id="lTitle">인기수업</div>
    	<div class="aside" id="liked">추천수업</div>
    	<div class="aside"> | </div>
    	<div class="aside" id="popular">인기수업</div>
-   	<div class="aside"> | </div>
-   	<div class="aside" id="interested">관심수업</div>
 	</div>
-	<%-- <p id="lessonCount">등록된 수업 <%=list.size() %>개</p> --%>
+	<% } %>
 		
 		<div class="lesson-area">
 		<% for(int i = 0; i < list.size(); i++) {
@@ -355,35 +362,6 @@
 		<% } %>
 		</div>
    </div>
-   
-   <%-- 	<div class="pagingArea" align="center">
-			<button onclick="location.href='<%= request.getContextPath()%>/selectPopular.le?currentPage=1'"><<</button>	
-			<% if(currentPage <= 1) { %>
-				<button disabled><</button>	
-			<% }else { %>
-				<button onclick="location.href='<%= request.getContextPath()%>/selectPopular.le?currentPage=<%=currentPage - 1%>'"><</button>	
-			<% } %>
-			
-			<% for(int p = startPage; p <= endPage; p++) {
-				if(p == currentPage) {	
-			%>
-					<button disabled><%= p %></button>
-			<%
-				}else {
-			%>	
-					<button onclick="location.href='<%= request.getContextPath()%>/selectPopular.le?currentPage=<%=p%>'"><%= p %></button>
-			<%	}
-			  }	
-			%>		
-			
-			<% if(currentPage >= maxPage) { %>
-				<button disabled>></button>
-			<% }else { %>
-				<button onclick="location.href='<%= request.getContextPath()%>/selectPopular.le?currentPage=<%=currentPage + 1%>'">></button>
-			<% } %>
-			<button onclick="location.href='<%= request.getContextPath()%>/selectPopular.le?currentPage=<%=maxPage%>'">>></button>	
-		</div> --%>
-
   
 	<%@ include file="/views/common/footer.jsp" %>
 	
@@ -392,12 +370,7 @@
 
 			 $(function() {
 				 
-				 
-				 $(".lesson-list").click(function() {
-					$(this).find($('form')).submit(); 
-				 });
-				 
-				
+
 				$("#music").click(function() {
 					location.href = "<%= request.getContextPath()%>/selectMusic.le";
 				});
@@ -426,48 +399,63 @@
 					location.href = "<%= request.getContextPath()%>/selectSports.le";
 				});
 				
+				$("#space").click(function() {
+			 		location.href = "<%= request.getContextPath()%>/place/list.me";
+			 	});
+				
 				
 				
 				 $("#interested").click(function() {
 					
+						
 						$.ajax({
 							url: "/hobbyist/selectInterest.le",
 							type: "get", 
 							success: function(data) {
-								
-									if(data != null) {
-										var $table = $("#lessonTable");
+									$("#lTitle").text("관심수업");
+									
+										
+									if(data[0] != null) {
+										
 										var $list = $(".lesson-list");
 										$list.remove();
 										
 										for(var key in data) {
-											var $lessonName = $("#lessonName");
-											var $lessonImgArea = $("#lessonImgArea");
-											var $lessonCode = $("#lessonCode");
-											var $artistImgArea = $("#artistImg");
-											var $artistNick = $("#artistNick");
-											var $artistName = $("#artistName");
-											var $lessonArea = $("#lessonArea");
-											var $star = $("#star");
 											
 											
-											$table.append($lessonImgArea.append('<img src="data[key].imageRoute/data[key].imageName" id="lessonImg" />'));
-											$table.append($lessonName.text(data[key].lessonName));
-											$table.append($lessonCode.val(data[key].lessonCode));
-											$table.append($artistImgArea.append('<img src="data[key].imageRoute2/data[key].imageName2" id="artistImg" />'));
-											$table.append($star.text("★★★★☆"));
-											$table.append($artistNick.text(data[key].artistNick));
-											$table.append($lessonArea.text(data[key].lessonArea));
-											$table.append($artistName.text(data[key].artistName));
+											var str = "";
 											
-											$(".lesson-list").append($table);
-											$(".lesson-area").append($(".lesson-list"));
+											str += '<tr><td colspan="2"><div id="lessonImgArea"><img src="' + data[key].imageRoute + '/' + data[key].imageName + '"' + 'id="lessonImg" /></div></td></tr>';
+											str += '<tr><td colspan="2" rowspan="3"><div id="lessonName">' + data[key].lessonName + '</div></td></tr>';
+											str += '<tr><td><br></td><td><input type="hidden" name="lessonCode" value="' + data[key].lessonCode + '"</td></tr>';
+											str += '<tr><td></td><td><div id="artistImgArea" style="width:75px;"><img src="' + data[key].imageRoute2 + '/' + data[key].imageName2 + '"' + 'id="artistImg" /><div></td></tr>';
+											str += '<tr><td style="word-break:break-all"><div id="star">★★★★☆</div></td>';
+											str += '<td style="word-break:break-all"><div id="artistNick">' + data[key].artistNick + '</div></td></tr>';
+											str += '<tr><td style="word-break:break-all"><div id="lessonArea">' + data[key].region + '</div></td>';
+											str += '<td style="word-break:break-all"><div id="artistName">' + data[key].memberName + '</div></td></tr>';
+								
 											
-											console.log(data[key].artistNick);
-											console.log(data[key].imageRoute + "/" + data[key].imageName);
-											console.log(data[key].imageRoute2 + "/" + data[key].imageName2);
-											console.log(data[key].lessonName);
+											$(".lesson-area").append('<div class="lesson-list"><form action="/hobbyist/selectOne.le" method="get"><table id="lessonTable">' + str + '</table></form></div>');
+											
+										
+											
+											/* var lessonForm = $('<form></form>');
+											
+											lessonForm.attr("action", "/hobbyist/selectOne.le");
+											lessonForm.attr("method", "get");
+											
+											lessonForm.appendTo($(".lesson-list")); 
+											
+											console.log(lessonForm);*/
+											
+											
+											$(".lesson-list").click(function() {
+												$(this).find($('form')).submit(); 
+											 });
 										}
+									}else {
+										alert("먼저 관심 카테고리를 설정해주세요.");
+										location.href="<%=request.getContextPath()%>/views/member/firstLogin.jsp"; 
 									}
 								
 								
@@ -477,9 +465,19 @@
 							}
 						});
 					
+						
+					
 					
 				}); 
-				
+				 
+				 $("#popular").click(function() {
+					 location.href = "<%= request.getContextPath()%>/selectPopular.le";
+				 }); 
+				 
+				 $(".lesson-list").click(function() {
+						$(this).find($('form')).submit(); 
+					 });
+
 				
 			}); 
 		
