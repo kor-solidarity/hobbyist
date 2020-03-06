@@ -1,8 +1,6 @@
 package com.dh.hobbyist.calculatePay.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,20 +8,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.dh.hobbyist.calculatePay.model.service.CalculatePayService;
-import com.dh.hobbyist.calculatePay.model.vo.PaySettlement;
-import com.google.gson.Gson;
 
 /**
- * Servlet implementation class SortStatusServlet
+ * Servlet implementation class UpdateCompleteSettlementServlet
  */
-@WebServlet("/sortStatus.cp")
-public class SortStatusServlet extends HttpServlet {
+@WebServlet("/updateCompleteSettlement.cp")
+public class UpdateCompleteSettlementServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SortStatusServlet() {
+    public UpdateCompleteSettlementServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,19 +28,16 @@ public class SortStatusServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int value = Integer.parseInt(request.getParameter("val"));
-		ArrayList<PaySettlement> list = null;
+		String[] checkArr =request.getParameterValues("chk");
 		
-		if(value != 9) {
-			list = new CalculatePayService().sortStatus(value);
+		int result = new CalculatePayService().updateCompleteSettlement(checkArr);
+		
+		if(result > 0) {
+			response.sendRedirect("/hobbyist/calculate.cp");
 		} else {
-			list = new CalculatePayService().selectPaySettlementList();
+			request.setAttribute("msg", "정산 완료 실패");
+			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
 		}
-		response.setContentType("application/json");
-		response.setCharacterEncoding("UTF-8");
-		
-		new Gson().toJson(list, response.getWriter());
-	
 	}
 
 	/**
