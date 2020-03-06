@@ -54,17 +54,15 @@ public class pwConfirmServlet extends HttpServlet {
 	}		*/
 	
 	
-	String text ="";
 	if(loginMember >0) {
 		response.sendRedirect("views/member/myPage/configuration/memberUpdate.jsp");
 	
 	}else {
-		text= "success";
+		
+		response.sendRedirect("views/member/myPage/configuration/memberPassword.jsp");
+		
 	}
-	PrintWriter out =response.getWriter();
-	out.print(text);
-	out.flush();
-	out.close();
+	
 	
 	}
 

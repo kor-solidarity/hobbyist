@@ -8,15 +8,7 @@
 <title>Insert title here</title>
 <style>
 
-#divtest{
-	width: 1024px;
-	height: 120px;
-	margin-top: auto;
-	margin-left: auto;
-	margin-right: auto;
-	text-align: center;
-	line-height:100px;
-}
+
 
 .divcenter2 {
 	margin-left: auto;
@@ -25,6 +17,7 @@
 	border-bottom: 1px solid black;
 	width: 1024px;
 	height: 50px;
+
 }
 
 .tablecenter2 {
@@ -108,11 +101,11 @@ center_td0 {
 	height: 70px;
 }
 
-.divbottom4 {
+.divbottom5 {
 	width: 1024px;
 	margin: auto;
 	text-align: center;
-	hieght: 40px;
+	hieght: 10px;
 }
 
 .label_bottom1 {
@@ -122,6 +115,7 @@ center_td0 {
 	font-size: 30px;
 	line-height: 37px;
 	color: #000000;
+	
 }
 
 .label_bottom2 {
@@ -140,6 +134,7 @@ center_td0 {
 	font-size: 22px;
 	line-height: 26px;
 	color: #000000;
+
 }
 
 .password {
@@ -164,6 +159,12 @@ center_td0 {
 	color: #556B2F;
 }
 
+.tablePwd{
+
+text-aglin: center;
+margin : auto;
+
+}
 
 </style>
 <link
@@ -173,8 +174,9 @@ center_td0 {
 <body>
 	 <%@ include file="/views/common/myPage.jsp"%> 
 	<%String passCheck = loginMember.getMemberPwd();%> 
-	<%String passId = loginMember.getMemberId();%>
-	<form id="pwConfirm" action="<%=request.getContextPath() %>"/pwConfirm.me" method="post"> 
+	<%System.out.println(passCheck);%>
+	
+	<form id="pwConfirm" action="<%=request.getContextPath() %>/pwConfirm.me" method="post"> 
 	<div class="divcenter2">
 		<table align="border" class="tablecenter2">
 			<tr>
@@ -208,31 +210,54 @@ center_td0 {
 	
 	<div class="divbottom3">
 	<!--  비밀번호 확인 텍스트 -->
-		<!-- <label class="label_bottom4">아이디:&nbsp; </label><input type="text" class="memberId" name="memberId" id="memberId" placeholder="아이디를 입력하세요"> -->
-		<label class="label_bottom3">비밀번호:&nbsp; </label><input type="password" class="memberPwd" name="memberPwd" id="memberPwd" placeholder="비밀번호를 입력하세요.">
-		<input type="button" id="passclick" name="passclick" onclick="pwConfirmbt();" value="확인">
+	<table align="border" class="tablePwd">
+		<tr><td><label class="label_bottom3">비밀번호:&nbsp; </label></td><td><input type="password" class="memberPwd" name="memberPwd" id="memberPwd" placeholder="비밀번호를 입력하세요."></td>
+		<td><input type="button" id="passclick" name="passclick" onclick="pwConfirmbt();" value="확인" ></td>
+		</tr>
+		<tr>
+		<td><label id="pwdResult" name="pwdResult" value="" ></label></td>
+		</tr>
+		</table>
 	</div>
-	</div>
+	
+	
 	</form>
 	
 	
 	<script>
-	
-	
-	
-	
-	
-	
-		var passclick = $("#passclick").val();
-		var passCheck = $("#passCheck").val();
-		var passId = $("#passId").val();
 		
-		function pwConfirmbt(){
-			var pwConfirm = $("#pwConfirm").val();
-			console.log("패스워드전송"+ pwConfirm);
-		$("#pwConfirm").submit();
-		} 
-		$(function (){
+		
+		console.log("passCheck타입은"+ typeof(passCheck));
+		console.log("memberPwd타입은"+ typeof(passValue));
+		
+ 	function pwConfirmbt(){
+			
+			if($("#memberPwd").val() != $("#passCheck").val()){
+				console.log("패스워드전송"+ pwConfirm);
+				$("#pwConfirm").submit();
+				}else{
+				$("#pwdResult").html("비밀번호가 정확하지 않습니다.").css("color","gray");
+				}  
+
+				}  
+/* 		$("#memberPwd").change(function pwConfirmbt(){
+			if($("passCheck").val() != $(this).val()) {
+				$("#pwdResult").html("비밀번호가 일치하지 않습니다.").css("color","gray");
+				$("#memberPwd").val('');	
+				$(this).select();		
+			}else{
+				$("#pwConfirm").submit();
+			}
+	
+		}); */
+		
+		
+		
+		
+		
+		
+		
+		/*  $(function (){
 		$("#idCheck").click(function(){
 			var passclick = $ ("#passclick").val();
 	
@@ -241,15 +266,8 @@ center_td0 {
 				type: "post",
 				data: {passclick: passclick},
 				success: function(data) {
-					if(passclick === passCheck) {
-						console.log("패스워드 일치 passclick"+ typeof(passclick));
-						
-						location.href = "<%=request.getContextPath()%>/views/member/myPage/configuration/memberUpdate.jsp";	
-						}else{
-							console.log("패스워드 불일치 passclick"+ typeof(passclick));
-						$("#divtest").text("비밀번호가 정확하지 않습니다.").css("color","gray");
-						} 
-					},
+					console.log(data);	   
+				},
 					error: function(error){
 						console.log(error);
 					}
@@ -257,7 +275,7 @@ center_td0 {
 				});
 			})
 			});
-		
+		 */
 		
 		
 
@@ -265,13 +283,13 @@ center_td0 {
  		console.log("버튼클릭 시 아이디 값 확인" + memberId); */
 
  		//비밀번호 동일 확인 기능
+		 <%--
 		 
 		 
 		 
 		 
 		 
-		 
-	<%--  	$(function(){
+	  	$(function(){
 	 		$("#passclick").click(function(){
 	 			
 	 			var passValue = $("#memberPwd").val();
@@ -285,9 +303,9 @@ center_td0 {
 				}else{
 				console.log( '실패시' + typeof(memberValue));			 
 				$("#divtest").text("비밀번호가 정확하지 않습니다.").css("color","gray");
-				}  --%>
-	 
-</script>  
+<%-- 				}   --%>
+
+ </script>   
 
 
 <!-- 	<div class="divbottom4">
