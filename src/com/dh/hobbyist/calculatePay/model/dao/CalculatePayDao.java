@@ -3,6 +3,7 @@ package com.dh.hobbyist.calculatePay.model.dao;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -577,6 +578,34 @@ public class CalculatePayDao {
 		}
 			
 		return result;
+	}
+
+	//정산 완료 날짜 조회용 메소드
+	public Date selectSettleDate(Connection con, int settleCode) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		Date settleDate = null;
+		
+		String query = prop.getProperty("selectSettleDate");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, settleCode);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				settleDate = rset.getDate("SETTLED_DATE");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return settleDate;
 	}
 
 }

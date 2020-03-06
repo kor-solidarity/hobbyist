@@ -239,6 +239,9 @@
 				<td colspan="4" style="font-size:20px;">이 건의로 개설된 수업</td>
 			</tr>
 			<tr>
+				<td colspan="4"></td>
+			</tr>
+			<!-- <tr>
 				<td colspan="4" style="font-family:initial; color:black;">
 					- 아티스트 : 김혜원 / 제목 : 진짜 야구를 알려줄께요
 				</td>
@@ -247,7 +250,7 @@
 				<td colspan="4" style="font-family:initial; color:black;">
 					- 아티스트: 이지호 / 제목 : 한방에 홈런
 				</td>
-			</tr>
+			</tr> -->
 			<tr>
 				<td colspan="4"><hr style="border: solid 1.15px darkolivegreen;"></td>
 			</tr>

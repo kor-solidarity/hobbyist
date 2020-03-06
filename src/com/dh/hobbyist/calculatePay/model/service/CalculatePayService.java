@@ -1,6 +1,7 @@
 package com.dh.hobbyist.calculatePay.model.service;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,10 +43,10 @@ public class CalculatePayService {
 		Connection con = getConnection();
 		int result = 0;
 		
-		exit_For:for(int i = 0; i < list.size(); i++) {
+		con_For:for(int i = 0; i < list.size(); i++) {
 			for(int j = 0; j < settleList.size(); j++) {
 				if(list.get(i).getLessonOrderCode() == settleList.get(j).getLessonOrderCode()) {
-					break exit_For;
+					continue con_For;
 				}
 			}
 			result += new CalculatePayDao().insertPayment(con, list.get(i));
@@ -221,6 +222,17 @@ public class CalculatePayService {
 		close(con);
 		
 		return result;
+	}
+
+	//정산 완료 날짜 조회용 메소드
+	public Date selectSettleDate(int settleCode) {
+		Connection con = getConnection();
+		
+		Date settleDate = new CalculatePayDao().selectSettleDate(con, settleCode);
+		
+		close(con);
+		
+		return settleDate;
 	}
 	
 	
