@@ -160,11 +160,11 @@ public class LessonRelatedService {
 		return lessonImageList;
 	}
 
-	//마이페이지 - 등록한 수업의 수업코드를 불러오는 메소드
-	public ArrayList selectLessonCodeList(int memberCode) {
+	//마이페이지 - 등록한 수업의 수업일정코드를 불러오는 메소드
+	public ArrayList selectScheduleCodeList(int memberCode) {
 		Connection con = getConnection();
 		
-		ArrayList lessonCodeList = new LessonRelatedDao().selectRegisteredLesson(con, memberCode);
+		ArrayList lessonCodeList = new LessonRelatedDao().selectScheduleCodeList(con, memberCode);
 		
 		if(lessonCodeList != null) {
 			commit(con);
@@ -176,50 +176,76 @@ public class LessonRelatedService {
 	}
 	
 	//마이페이지 - 등록한 수업의 제반 정보 리스트 출력을 위한 메소드
-	public ArrayList selectRegisteredLesson(int memberCode, ArrayList lessonCodeList) {
+	public ArrayList selectRegisteredLesson(int memberCode, ArrayList scheduleCodeList) {
 		Connection con = getConnection();
-		
 		ArrayList<MyRegiLesson> myList = null;
 		MyRegiLesson myLesson = null;
-		
 		Lesson lesson = null;
+		LessonSchedule schedule = null;
 		Image lessonImg = null;
 		Image profileImg = null;
+		Member artist = null;
 		
-		if(lessonCodeList != null) {
+		ArrayList lessonCodeList = new ArrayList();
+		
+		for(int i = 0; i < scheduleCodeList.size(); i++) {
+			int lessonCode = new LessonRelatedDao().selectLessonCode(con, (Integer) scheduleCodeList.get(i));
 			
-			myList = new ArrayList<MyRegiLesson>();
+			lessonCodeList.add(lessonCode);
+		}
+		
 			
-			for(int i = 0; i < lessonCodeList.size(); i++) {
-				myLesson = new MyRegiLesson();
-				
-				int lessonCode = (Integer) lessonCodeList.get(i);
-				
-				lesson = new LessonRelatedDao().selectOneLesson(con, lessonCode);
-				lessonImg = new LessonRelatedDao().selectOneLessonImage(con, lessonCode);
-				
-				int artistCode = lesson.getArtistCode();
-				
-				profileImg = new LessonRelatedDao().selectOneProfileImage(con, artistCode);
-				
-				myLesson.setLessonName(lesson.getLessonName());
-				myLesson.setLessonImgRoute(lessonImg.getImageRoute());
-				myLesson.setLessonImgName(lessonImg.getImageName());
-				
-				myList.add(myLesson);
-			}
-			
-			if(myList.size() == lessonCodeList.size()) {
-				commit(con);
-			} else {
-				rollback(con);
-			}
+		myList = new ArrayList<MyRegiLesson>();
 
+		for(int i = 0; i < lessonCodeList.size(); i++) {
+			myLesson = new MyRegiLesson();
+
+			int lessonCode = (Integer) lessonCodeList.get(i);
+
+			lesson = new LessonRelatedDao().selectOneLesson(con, lessonCode);
+			lessonImg = new LessonRelatedDao().selectOneLessonImage(con, lessonCode);
+			schedule = new LessonRelatedDao().selectOneSchedule(con, (Integer) scheduleCodeList.get(i));
+
+			int artistCode = lesson.getArtistCode();
+
+			profileImg = new LessonRelatedDao().selectProfileImage(con, artistCode);
+			artist = new LessonRelatedDao().selectOneArtist(con, artistCode);
+
+			myLesson.setScheduleCode((Integer) scheduleCodeList.get(i));
+			myLesson.setLessonImgRoute(lessonImg.getImageRoute());
+			myLesson.setLessonImgName(lessonImg.getImageName());
+			myLesson.setLessonName(lesson.getLessonName());
+			myLesson.setRegion(schedule.getRegion());
+			myLesson.setProfileImgRoute(profileImg.getImageRoute());
+			myLesson.setProfileImgName(profileImg.getImageName());
+			myLesson.setArtistNick(artist.getArtistNick());
+			myLesson.setArtistName(artist.getMemberName());
+
+			myList.add(myLesson);
+		}
+
+		if(myList.size() == lessonCodeList.size()) {
+			commit(con);
+		} else {
+			rollback(con);
+		}
+
+		
+		return myList;
+	}
+
+	public ArrayList<LessonOrder> selectOrderList(Integer scheduleCode) {
+		Connection con = getConnection();
+		
+		ArrayList<LessonOrder> list = new LessonRelatedDao().selectOrderList(con, scheduleCode);
+		
+		if(list != null) {
+			commit(con);
 		} else {
 			rollback(con);
 		}
 		
-		return myList;
+		return list;
 	}
 
 }

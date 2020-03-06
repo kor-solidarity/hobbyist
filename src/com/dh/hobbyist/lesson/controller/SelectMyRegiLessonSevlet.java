@@ -36,11 +36,12 @@ public class SelectMyRegiLessonSevlet extends HttpServlet {
 		int memberCode = ((Member) request.getSession().getAttribute("loginMember")).getMemberCode();
 		
 		
-		ArrayList lessonCodeList = new LessonRelatedService().selectLessonCodeList(memberCode);
-		ArrayList<MyRegiLesson> myList = new LessonRelatedService().selectRegisteredLesson(memberCode, lessonCodeList);
+		ArrayList scheduleCodeList = new LessonRelatedService().selectScheduleCodeList(memberCode);
+		
+		ArrayList<MyRegiLesson> myList = new LessonRelatedService().selectRegisteredLesson(memberCode, scheduleCodeList);
 		
 		String page = "";
-		if(myList.size() == lessonCodeList.size()) {
+		if(myList.size() == scheduleCodeList.size()) {
 			page = "views/member/myPage/myLesson/registeredLesson.jsp";
 			request.setAttribute("myList", myList);
 		} else {

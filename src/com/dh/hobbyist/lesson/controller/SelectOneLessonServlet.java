@@ -2,6 +2,7 @@ package com.dh.hobbyist.lesson.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.dh.hobbyist.lesson.model.service.LessonRelatedService;
 import com.dh.hobbyist.lesson.model.vo.Image;
 import com.dh.hobbyist.lesson.model.vo.Lesson;
+import com.dh.hobbyist.lesson.model.vo.LessonOrder;
 import com.dh.hobbyist.lesson.model.vo.LessonSchedule;
 import com.dh.hobbyist.member.model.vo.Member;
 
@@ -47,10 +49,21 @@ public class SelectOneLessonServlet extends HttpServlet {
 		Member artist = new LessonRelatedService().selectOneArtist(artistCode);
 		
 		ArrayList<LessonSchedule> scheduleList = new LessonRelatedService().selectScheduleList(lessonCode);
-		
 		ArrayList<Image> lessonImageList = new LessonRelatedService().selectLessonImageList(lessonCode);
+	
+		ArrayList<LessonOrder> orderList = null;
+		HashMap orderPerSchedule = new HashMap();
 		
-		System.out.println("lessonImageList : " + lessonImageList);
+		for(int i = 0; i < scheduleList.size(); i++) {
+			int scheduleCode = ((LessonSchedule) scheduleList.get(i)).getScheduleCode();
+			System.out.println("scheduleCode : " + scheduleCode);
+			
+			orderList = new LessonRelatedService().selectOrderList(scheduleCode);
+			
+			orderPerSchedule.put(scheduleCode, orderList);
+		}
+		
+		System.out.println("oderPerSchedule : " + orderPerSchedule);
 		
 		String page = "";
 		if(lesson != null && profileImg != null && artist != null && scheduleList != null) {
@@ -60,6 +73,7 @@ public class SelectOneLessonServlet extends HttpServlet {
 			request.setAttribute("artist", artist);
 			request.setAttribute("scheduleList", scheduleList);
 			request.setAttribute("lessonImageList", lessonImageList);
+			request.setAttribute("orderPerSchedule", orderPerSchedule);
 		} else {
 			page = "views/common/errorPage.jsp";
 			request.setAttribute("msg", "수업 상세보기 실패");

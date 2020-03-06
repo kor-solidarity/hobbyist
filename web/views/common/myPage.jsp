@@ -306,7 +306,7 @@
 						<button class="Center_button2" onclick="notArtistMyCal();">나의 정산</button>
 					<%} %>
 				</td>
-				<td><button class="Center_button3">나의 결제</button></td>
+				<td><button class="Center_button3" onclick="goMyPay();">나의 결제</button></td>
 				<td><button class="Center_button3" onclick="goMyReviews();">나의 리뷰</button></td>
 				<td><button class="Center_button4" onclick="goMyComments();">나의 댓글</button></td>
 				<td><button class="Center_button5" onclick="goMyReports();">나의 문의/신고</button></td>
@@ -330,6 +330,10 @@
 		}
 		function notArtistMyCal() {
 			alert("나의 정산은 아티스트만 접근하실 수 있습니다.");
+		}
+		
+		function goMyPay() {
+			location.href = "<%= request.getContextPath() %>/paymentList.me";
 		}
 		
 		function goMyReviews() {

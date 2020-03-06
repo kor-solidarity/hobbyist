@@ -32,35 +32,44 @@ public class MyPageServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int memberCode = ((Member) request.getSession().getAttribute("loginMember")).getMemberCode();
-		String nick = ((Member) request.getSession().getAttribute("loginMember")).getArtistNick();
-		
-		String imageRoot = new MemberService().selectImageRoot(memberCode);
-		
-		ApplyArtist aa = new ApplyArtist();
-		if(nick != null) {
-			aa = new MemberService().selectOneApplyArtist(memberCode);
-		}
-		
-		
-		String page = "";
-		
-	
-		//page = "views/common/myPage.jsp";
-		/*request.setAttribute("imageRoot", imageRoot);
+		if(request.getSession().getAttribute("loginMember") != null) {
+			
+			int memberCode = ((Member) request.getSession().getAttribute("loginMember")).getMemberCode();
+			String nick = ((Member) request.getSession().getAttribute("loginMember")).getArtistNick();
+			
+			String imageRoot = new MemberService().selectImageRoot(memberCode);
+			
+			ApplyArtist aa = new ApplyArtist();
+			if(nick != null) {
+				aa = new MemberService().selectOneApplyArtist(memberCode);
+			}
+			
+			
+			String page = "";
+			
+			
+			//page = "views/common/myPage.jsp";
+			/*request.setAttribute("imageRoot", imageRoot);
 		request.setAttribute("applyArtist", aa);
 		
 		request.getRequestDispatcher(page).forward(request, response);*/
-		
-		page = "selectMyRegi.le";
-		
-		HttpSession session = request.getSession();
-		session.setAttribute("imageRoot", imageRoot);
-		session.setAttribute("applyArtist", aa);
-		
-		response.sendRedirect(page);
+			
+			page = "selectMyRegi.le";
+			
+			HttpSession session = request.getSession();
+			session.setAttribute("imageRoot", imageRoot);
+			session.setAttribute("applyArtist", aa);
+			response.sendRedirect(page);
+		} else {
+			//request.setAttribute("msg", "로그인이 필요합니다");
+			//request.getRequestDispatcher("/views/common/errorPage.jsp").forward(request, response);
+			String page = "views/common/successPage.jsp";
+			request.setAttribute("successCode", "withoutLogin");
+			request.getRequestDispatcher(page).forward(request, response);
+		}
 	}
 
+	
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
