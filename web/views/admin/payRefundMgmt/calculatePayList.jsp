@@ -218,7 +218,7 @@ section {
 			<!-- 정보 추가되는 본문 테이블 -->
 			<div id="sortDiv">
 				<select id="sortSelect">
-					<option value="none" selected>--선택--</option>
+					<option value="9" selected>--전체선택--</option>
 					<option value="0">확인 대기중</option>
 					<option value="1">수정 요청</option>
 					<option value="2">정산 대기중</option>
@@ -227,6 +227,7 @@ section {
 				</select>
 			</div>
 			<div id="infoArea">
+			<form id="chkForm" action="<%=request.getContextPath()%>/updateCompleteSettlement.cp" method="post">
 				<table id="calPayTab">
 					<!-- 테이블 첫번째 줄은 아이디, 비밀번호 등 조회할 내용 제목이다. background(#4E4E4E), font-color(white) 색 다르게 지정 -->
 					<tr>
@@ -283,13 +284,14 @@ section {
 								<%} %>
 							</td>
 							<td>
-								<input type="checkbox">
+								<input type="checkbox" name="chk" value="<%=ps.getSettleCode()%>">
 							</td>
 							<input type="hidden" value="<%=ps.getSettleCode() %>">
 						</tr>
 					
 					<%} %>
 				</table>
+			</form>
 			</div>
 			<div id="completeDiv">
 				<button type="button" id="completeSettlement">정산 완료</button>
@@ -392,19 +394,18 @@ section {
     	
     	$("#sortSelect").change(function(){
     		var val = $("#sortSelect").val();
-    		if(val != "none"){
-    			$.ajax({
-    				url: "/hobbyist/sortStatus.cp",
-    				data: {val:val},
-    				type: "post",
-    				success: function(data){
+    		$.ajax({
+    			url: "/hobbyist/sortStatus.cp",
+    			data: {val:val},
+    			type: "post",
+    			success: function(data){
     					
-    					$table = $("#calPayTab");
-    					$table.html('');
+    				$table = $("#calPayTab");
+    				$table.html('');
     					
-    					var $tr = $("<tr>");
+    				var $tr = $("<tr>");
     					
-    					$tr.append('<th style="width: 110px;">회차코드</th>' + 
+    				$tr.append('<th style="width: 110px;">회차코드</th>' + 
     					'<th style="width: 50px;">회차</th>' + 
     					'<th style="width: 150px;">아티스트 아이디</th>' + 
     					'<th style="width: 150px;">아티스트 이름</th>' +
@@ -417,66 +418,65 @@ section {
     					'<th style="width: 120px;">상태</th>' + 
     					'<th style="width:50px;"><input type="checkbox" id="allCheck"></th>');  
     					
-    					$table.append($tr);
+    				$table.append($tr);
     					
-    					for(var key in data) {
-    						$tr = $("<tr>");
-    						var $oCode = $("<td>").text(data[key].lessonOrderCode);
-    						var $oTime = $("<td>").text(data[key].lessonOrderTime);
-    						var $mId = $("<td>").text(data[key].memberId);
-    						var $mName = $("<td>").text(data[key].memberName);
-    						var $pOrder = $("<td>").text(data[key].costPerOrder +"원");
-    						var $listeners = $("<td>").text(data[key].listeners);
-    						var $tCost = $("<td>").text(data[key].totalCost +"원");
-    						var $sfee = $("<td>").text(data[key].settleFee + "%");
-    						var $payGiven = $("<td>").text(data[key].totalPayGiven + "원");
-    						var bankName = "";
-    						switch(data[key].bankName) {
-    						case "SH" : bankName = "신한"; break;
-    						case "NH" : bankName = "농협"; break;
-    						case "KB" : bankName = "국민"; break;
-    						default: bankName = data[key].bankName; break;
-    						}
-    						var $bank = $("<td>").text(bankName + data[key].bankOwner + data[key].bankNum);
-    						var $status;
-    						if(data[key].status == 0) {
-    							$status = $("<td>").html("<label style='color:dimgrey'>확인 대기중</label>");
-    						} else if(data[key].status == 1) {
-    							$status = $("<td>").html("<label class='modalLab' style='color:red'>수정 요청</label>");
-    						} else if(data[key].status == 2) {
-    							$status = $("<td>").html("<label style='color:DodgerBlue'>정산 대기중</label>");
-    						} else if(data[key].status == 3) {
-    							$status = $("<td>").html("<label style='color:dimgrey'>정산 완료</label>");
-    						} else if(data[key].status == 4) {
-    							$status = $("<td>").html("<label style='color:steelBlue'>답변 완료</label>");
-    						}
-    						var $checkbox = $("<td>").html("<input type='checkbox'>");
-    						var hideIn = '<input type="hidden" value=' + data[key].settleCode + '>';
-    						
-    						$tr.append($oCode);
-    						$tr.append($oTime);
-    						$tr.append($mId);
-    						$tr.append($mName);
-    						$tr.append($pOrder);
-    						$tr.append($listeners);
-    						$tr.append($tCost);
-    						$tr.append($sfee);
-    						$tr.append($payGiven);
-    						$tr.append($bank);
-    						$tr.append($status);
-    						$tr.append($checkbox);
-    						$tr.append(hideIn);
-    						
-    						$table.append($tr);
+    				for(var key in data) {
+    					$tr = $("<tr>");
+    					var $oCode = $("<td>").text(data[key].lessonOrderCode);
+    					var $oTime = $("<td>").text(data[key].lessonOrderTime);
+    					var $mId = $("<td>").text(data[key].memberId);
+    					var $mName = $("<td>").text(data[key].memberName);
+    					var $pOrder = $("<td>").text(data[key].costPerOrder +"원");
+    					var $listeners = $("<td>").text(data[key].listeners);
+    					var $tCost = $("<td>").text(data[key].totalCost +"원");
+    					var $sfee = $("<td>").text(data[key].settleFee + "%");
+    					var $payGiven = $("<td>").text(data[key].totalPayGiven + "원");
+    					var bankName = "";
+    					switch(data[key].bankName) {
+    					case "SH" : bankName = "신한"; break;
+    					case "NH" : bankName = "농협"; break;
+    					case "KB" : bankName = "국민"; break;
+    					default: bankName = data[key].bankName; break;
     					}
+    					var $bank = $("<td>").text(bankName + data[key].bankOwner + data[key].bankNum);
+    					var $status;
+    					if(data[key].status == 0) {
+    						$status = $("<td>").html("<label style='color:dimgrey'>확인 대기중</label>");
+    					} else if(data[key].status == 1) {
+    						$status = $("<td>").html("<label class='modalLab' style='color:red'>수정 요청</label>");
+    					} else if(data[key].status == 2) {
+    						$status = $("<td>").html("<label style='color:DodgerBlue'>정산 대기중</label>");
+    					} else if(data[key].status == 3) {
+    						$status = $("<td>").html("<label style='color:dimgrey'>정산 완료</label>");
+    					} else if(data[key].status == 4) {
+    						$status = $("<td>").html("<label style='color:steelBlue'>답변 완료</label>");
+    					}
+    					var $checkbox = $("<td>").html("<input type='checkbox' name='chk' value='" + data[key].settleCode + "'>");
+    					var hideIn = '<input type="hidden" value=' + data[key].settleCode + '>';
+    						
+    					$tr.append($oCode);
+    					$tr.append($oTime);
+    					$tr.append($mId);
+    					$tr.append($mName);
+    					$tr.append($pOrder);
+    					$tr.append($listeners);
+    					$tr.append($tCost);
+    					$tr.append($sfee);
+    					$tr.append($payGiven);
+    					$tr.append($bank);
+    					$tr.append($status);
+    					$tr.append($checkbox);
+    					$tr.append(hideIn);
+    						
+    					$table.append($tr);
+    				}
     					
     				
-    				},
-    				error : function(error) {
-    					console.log(error);
-    				}
-    			});
-    		}
+    			},
+    			error : function(error) {
+    				console.log(error);
+    			}
+    		});
     	});
 	});
 	
@@ -543,6 +543,12 @@ section {
 			$("input[type=checkbox]").prop("checked", true);
 		} else {
 			$("input[type=checkbox]").prop("checked", false);
+		}
+	});
+	
+	$("#completeSettlement").click(function(){
+		if(confirm("정산 완료하시겠습니까?")){
+			$("#chkForm").submit();
 		}
 	});
 	</script>

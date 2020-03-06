@@ -557,4 +557,26 @@ public class CalculatePayDao {
 		return result;
 	}
 
+	//관리자 - 금액 정산 부분에서 "정산 완료" 클릭 시 상태 변경용 메소드
+	public int updateCompleteSettlement(Connection con, String settleCode) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("updateCompleteSettlement");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, Integer.parseInt(settleCode));
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+			
+		return result;
+	}
+
 }

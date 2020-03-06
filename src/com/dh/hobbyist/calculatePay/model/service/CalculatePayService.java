@@ -202,6 +202,26 @@ public class CalculatePayService {
 		
 		return result;
 	}
+
+	//관리자 - 금액 정산 부분에서 "정산 완료" 클릭 시 상태 변경용 메소드
+	public int updateCompleteSettlement(String[] checkArr) {
+		Connection con = getConnection();
+		int result = 0;
+		
+		for(int i = 0; i < checkArr.length; i++) {
+			result += new CalculatePayDao().updateCompleteSettlement(con, checkArr[i]);
+		}
+		
+		if(result == checkArr.length) {
+			commit(con);
+		} else {
+			rollback(con);
+		}
+		
+		close(con);
+		
+		return result;
+	}
 	
 	
 	
