@@ -41,7 +41,7 @@ public class SelectMyRegiLessonSevlet extends HttpServlet {
 		ArrayList<MyRegiLesson> myList = new LessonRelatedService().selectRegisteredLesson(memberCode, scheduleCodeList);
 		
 		String page = "";
-		if(myList.size() == scheduleCodeList.size()) {
+		if(scheduleCodeList != null && myList.size() == scheduleCodeList.size()) {
 			page = "views/member/myPage/myLesson/registeredLesson.jsp";
 			request.setAttribute("myList", myList);
 		} else {

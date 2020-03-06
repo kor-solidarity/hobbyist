@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Properties;
 
@@ -511,6 +512,36 @@ public class LessonRelatedDao {
 		//System.out.println("list : " + list);
 		
 		return list;
+	}
+
+	public Timestamp selectStartDate(Connection con, Integer scheduleCode) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		Timestamp t = null;
+		
+		System.out.println("scheduleCode : " + scheduleCode);
+		
+		String query = prop.getProperty("selectStartDate");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, scheduleCode);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				t = rset.getTimestamp("LESSON_ORDER_START");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		System.out.println("t : " + t);
+		return t;
 	}
 
 
