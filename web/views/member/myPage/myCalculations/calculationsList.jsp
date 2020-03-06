@@ -97,6 +97,9 @@
 	.adminAnswer {
 		cursor:pointer;
 	}
+	.completeCal {
+		cursor:pointer;
+	}
 	#artistResponse {
 		width:80%;
 		background-color:#F0F0F0;
@@ -114,6 +117,23 @@
 		height:100px;
 		border-radius:5%;
 		width:405px;
+	}
+	.borTr {
+		border:1px solid darkolivegreen;
+	}
+	.borTr td {
+		width:130px;
+		border:1px solid darkolivegreen;
+	}
+	.seaGreen {
+		background-color:#e1f0c2;
+		color:darkolivegreen;
+		font-weight:bold;
+	}
+	.oliveGreen {
+		background-color:darkolivegreen;
+		color:white;
+		font-weight:bold;
 	}
 </style>
 <link rel="stylesheet"
@@ -181,7 +201,7 @@
 					<%} else if(ps.getStatus() == 2) {%>
 						<p style="font-weight:bold; color:DodgerBlue">정산 대기중</p>
 					<%} else if(ps.getStatus() == 3) {%>
-						<p style="font-weight:bold; color:dimgrey">정산 완료</p>
+						<p class="completeCal" style="font-weight:bold; color:dimgrey">정산 완료</p>
 					<%} else if(ps.getStatus() == 4) {%>
 						<p class="adminAnswer" style="font-weight:bold; color:steelBlue">답변 완료</p>
 					<%} %>
@@ -353,6 +373,109 @@
 
 		</div>
 	</div>
+	
+	<!-- 정산 완료시 모달 -->
+	<div class="modal fade" id="comCalModal" role="dialog">
+    	<div class="modal-dialog">
+    
+      	<div class="modal-content">
+        	<div class="modal-header" style="background-color:darkolivegreen; height:42px;">
+          	<button type="button" class="close" data-dismiss="modal" style="color:white;">×</button>
+          	<h4 class="modal-title" style="color:white; font-family: Do Hyeon;">정산서 발급</h4>
+        	</div>
+        <div class="modal-body" id="idPrint">
+          	<div style="text-align:center; width:500px; margin:auto;">
+          		<h3 style="font-weight:bold;">(주) hobbyist 정산서</h3>
+          		<br>
+          		<table style="margin:auto; font-size:15px; border-collapse:collapse; text-align:center;">
+					<tr>
+						<td></td>
+						<td></td>
+						<td style="text-align:right">지급일 :</td>
+						<td id="setDate"></td>
+					</tr>
+					<tr class="borTr">
+						<td class="seaGreen">아이디</td>
+						<td id="payId"></td>
+						<td class="seaGreen">성명</td>
+						<td id="payName"></td>
+					</tr>
+					<tr class="borTr">
+						<td class="seaGreen">수업명</td>
+						<td colspan="3" id="payTitle"></td>
+					</tr>
+					<tr class="borTr">
+						<td class="seaGreen">회차</td>
+						<td id="payTime"></td>
+						<td class="seaGreen">수강인원</td>
+						<td id="payPeople"></td>
+					</tr>
+					<tr style="height:10px;">
+					</tr>
+					<tr>
+						<td style="text-align:left;">정산 계좌</td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr class="borTr">
+						<td class="seaGreen">은행</td>
+						<td id="payBank"></td>
+						<td class="seaGreen">계좌번호</td>
+						<td id="payNum"></td>
+					</tr>
+					<tr style="height:10px;">
+					</tr>
+					<tr>
+						<td style="text-align:left;">급여 내역</td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr class="borTr">
+						<td class="seaGreen" colspan="4">지급 및 차감 내역</td>
+					</tr>
+					<tr class="borTr">
+						<td class="seaGreen">수업료</td>
+						<td id="paylesson" style="text-align:right;"></td>
+						<td class="seaGreen">(기타입력2)</td>
+						<td>-</td>
+					</tr>
+					<tr class="borTr">
+						<td class="seaGreen">수수료</td>
+						<td id="payFee" style="text-align:right;"></td>
+						<td class="seaGreen">(기타입력3)</td>
+						<td>-</td>
+					</tr>
+					<tr class="borTr">
+						<td class="seaGreen">(기타입력1)</td>
+						<td>-</td>
+						<td class="seaGreen">(기타입력4)</td>
+						<td>-</td>
+					</tr>
+					<tr style="height:20px;">
+					</tr>
+					<tr class="borTr">
+						<td></td>
+						<td></td>
+						<td class="oliveGreen">실 수령액</td>
+						<td id="payGiven" style="text-align:right;"></td>
+					</tr>         
+          		</table>
+          		<br>
+          		<p style="font-weight:bold;" id="payThanks"></p>
+          		<br>
+          		<p style="text-align:right;">(주) hobbyist</p>
+          	</div>
+        </div>
+        <div class="modal-footer" style="text-align:center;">
+          <button type="button" class="btn btn-primary" style="background-color:darkolivegreen;" onclick="printArea();">인쇄</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+
 	<script>
 		$(document).ready(function(){
 	    	$(".notConfirm").click(function(){
@@ -477,7 +600,92 @@
 		    		location.href = "<%=request.getContextPath()%>/updateConfirmStatus.cp?code=" + code;
 				}
 	    	});
+	    	
+	    	$(".completeCal").click(function(){
+	    		var code = $(this).parent().parent().children("input").val();
+	    		
+	    		$.ajax({
+	    			url:"/hobbyist/issuePayment.cp",
+	    			data: {code:code},
+	    			type: "post",
+	    			success: function(data) {
+	    				
+	    				for(var key in data) {
+	    					
+		    				if(key == "paySettlement") {
+		    					$("#payId").text(data[key].memberId);
+		    					$("#payName").text(data[key].memberName);
+		    					$("#payTitle").text(data[key].lessonName);
+		    					$("#payTime").text(data[key].lessonOrderTime + "회차");
+		    					$("#payPeople").text(data[key].listeners + "명");
+		    					
+		    					var bankName = "";
+		    					switch(data[key].bankName) {
+		    					case "SH" : bankName = "신한"; break;
+		    					case "NH" : bankName = "농협"; break;
+		    					case "KB" : bankName = "국민"; break;
+		    					default: bankName = data[key].bankName; break;
+		    					}
+		    					
+		    					$("#payBank").text(bankName);
+		    					$("#payNum").text(data[key].bankNum);
+		    					
+		    					var payLesson = data[key].totalCost;
+		    					var payFee = payLesson * 0.1;
+		    					var payGiven = data[key].totalPayGiven;
+		    					
+		    					payLesson = payLesson.toString().replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
+		    					payFee = payFee.toString().replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
+		    					payGiven = payGiven.toString().replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
+		    					
+		    					
+		    					$("#paylesson").html(payLesson + "&nbsp;");
+		    					$("#payFee").html(payFee + "&nbsp;");
+		    					$("#payGiven").html(payGiven + "&nbsp;");
+		    					$("#payThanks").text(data[key].memberName +"님의 노고에 감사드립니다.");
+		    				}
+		    				
+		    				if(key == "settleDate") {
+		    					$("#setDate").text(data[key]);
+		    				}
+	    				}
+	    			},
+	    			error: function(error) {
+	    				console.log(error);
+	    			}
+	    		});
+	    		
+	    		$("#comCalModal").modal();
+	    	});
 		});
+		
+		var win = null;
+		
+		function printArea() 
+		{ 
+			/* var initBody;
+			window.onbeforeprint = function() {
+				initBody = document.body.innerHTML;
+				document.bodyinnerHTML = document.getElementById('idPrint').innerHTML;
+			};
+			window.onafterprint = function() {
+				document.body.innerHTML = initBody;
+			};
+			console.log(document.bodyinnerHTML);
+			window.print(); */
+			var printThis = document.getElementById('idPrint').innerHTML;
+			win = window.open();
+			self.focus();
+			win.document.open();
+			win.document.write('<'+'html'+'><'+'head'+'><'+'style'+'>');
+			win.document.write('.borTr { border:1px solid black; } .borTr td { width:130px; border:1px solid black; } .seaGreen {color:black; font-weight:bold; } .oliveGreen {color:black; font-weight:bold; }');
+			win.document.write('<'+'/'+'style'+'><'+'/'+'head'+'><'+'body'+'>');
+			win.document.write(printThis);
+			win.document.write('<'+'/'+'body'+'><'+'/'+'html'+'>');
+			win.document.close();
+			win.print();
+			win.close();
+		}
 	</script>
 
 	<br>
