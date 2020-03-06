@@ -19,6 +19,7 @@ public class MemberSelectPlaceServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        System.out.println("MemberSelectPlaceServlet");
         int currentPage = 1;
         String page = "/place/list.me";
         try {
@@ -43,6 +44,7 @@ public class MemberSelectPlaceServlet extends HttpServlet {
 
         request.setAttribute("company", company);
         request.setAttribute("images", images);
+        request.setAttribute("currentPage", currentPage);
 
         page = "/views/rental/info.jsp";
 

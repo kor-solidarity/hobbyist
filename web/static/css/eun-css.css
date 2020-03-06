@@ -313,3 +313,8 @@
     background-color: #4CAF50;
     color: white;
 }
+
+/* 사용자 공간대여목록 조회페이지에만 약간 안맞아서 조정하기 위함 */
+#category{
+    margin-top: 14px !important;
+}
