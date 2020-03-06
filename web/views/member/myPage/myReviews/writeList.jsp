@@ -38,7 +38,7 @@
         <%-- 첫 td는 --%>
         <tr>
             <td></td>
-            <td>
+            <td style="padding-bottom: 20px">
                 리뷰 작성 안내 <br>
                 - 리뷰 작성시, 포인트 500p이 지급됩니다.
             </td>
