@@ -1,11 +1,13 @@
 package com.dh.hobbyist.lesson.model.vo;
 
+import java.sql.Timestamp;
+
 public class MyRegiLesson implements java.io.Serializable {
 	private int scheduleCode;			//수업일정코드
 	private String lessonImgRoute;		//수업 이미지 경로
 	private String lessonImgName;		//수업 이미지 파일명	
 	private String lessonName;			//수업명
-										//수업시작일
+	private Timestamp startDate;		//수업시작일
 	private String region;				//지역
 										//결제일
 	private String profileImgRoute;		//프로필 이미지 경로
@@ -15,13 +17,15 @@ public class MyRegiLesson implements java.io.Serializable {
 	
 	public MyRegiLesson() {}
 
-	public MyRegiLesson(int scheduleCode, String lessonImgRoute, String lessonImgName, String lessonName, String region,
-			String profileImgRoute, String profileImgName, String artistNick, String artistName) {
+	public MyRegiLesson(int scheduleCode, String lessonImgRoute, String lessonImgName, String lessonName,
+			Timestamp startDate, String region, String profileImgRoute, String profileImgName, String artistNick,
+			String artistName) {
 		super();
 		this.scheduleCode = scheduleCode;
 		this.lessonImgRoute = lessonImgRoute;
 		this.lessonImgName = lessonImgName;
 		this.lessonName = lessonName;
+		this.startDate = startDate;
 		this.region = region;
 		this.profileImgRoute = profileImgRoute;
 		this.profileImgName = profileImgName;
@@ -65,6 +69,14 @@ public class MyRegiLesson implements java.io.Serializable {
 		return artistName;
 	}
 
+	public Timestamp getStartDate() {
+		return startDate;
+	}
+
+	public void setStartDate(Timestamp startDate) {
+		this.startDate = startDate;
+	}
+
 	public void setScheduleCode(int scheduleCode) {
 		this.scheduleCode = scheduleCode;
 	}
@@ -104,10 +116,9 @@ public class MyRegiLesson implements java.io.Serializable {
 	@Override
 	public String toString() {
 		return "MyRegiLesson [scheduleCode=" + scheduleCode + ", lessonImgRoute=" + lessonImgRoute + ", lessonImgName="
-				+ lessonImgName + ", lessonName=" + lessonName + ", region=" + region + ", profileImgRoute="
-				+ profileImgRoute + ", profileImgName=" + profileImgName + ", artistNick=" + artistNick
-				+ ", artistName=" + artistName + "]";
+				+ lessonImgName + ", lessonName=" + lessonName + ", startDate=" + startDate + ", region=" + region
+				+ ", profileImgRoute=" + profileImgRoute + ", profileImgName=" + profileImgName + ", artistNick="
+				+ artistNick + ", artistName=" + artistName + "]";
 	}
-	
-	
+
 }

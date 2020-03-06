@@ -15,7 +15,8 @@
 	ArrayList iList = (ArrayList) request.getAttribute("lessonImageList");
 	HashMap ops = (HashMap) request.getAttribute("orderPerSchedule");
 	
-	System.out.println("ops.get(39) : " + ((LessonOrder) (((ArrayList) (ops.get(((LessonSchedule) sList.get(0)).getScheduleCode()))).get(0))).getOrderStart());
+	//System.out.println("ops.get(39) : " + ((LessonOrder) (((ArrayList) (ops.get(((LessonSchedule) sList.get(0)).getScheduleCode()))).get(0))).getOrderStart());
+	//System.out.println("subString : " + (((LessonOrder) (((ArrayList) (ops.get(((LessonSchedule) sList.get(1)).getScheduleCode()))).get(0))).getOrderStart().toString()).substring(0, 16));
 %>
 <!DOCTYPE html>
 <html>
@@ -193,6 +194,9 @@
 		font-family: 'Nanum Gothic', sans-serif;
 	}
 	
+	.eachOrder {
+		margin-left: 121px;
+	}
 	
 </style>
 </head>
@@ -279,18 +283,40 @@
 					<tr style="height:45%;">
 						<td colspan="2" id="scheduleArea">
 							<% for(int i = 0; i < sList.size(); i++) { %>
-							<div>
-							<img src="<%= request.getContextPath() %>/static/images/map.png" id="mapImg">
-							<%= ((LessonSchedule) sList.get(i)).getRegion() %> | 1회차 | 
+							<div class="accordion">
+							
+								<img src="<%= request.getContextPath() %>/static/images/map.png" id="mapImg">
+								<%= ((LessonSchedule) sList.get(i)).getRegion() %> | 시작일  
+								<%= (((LessonOrder) (((ArrayList) (ops.get(((LessonSchedule) sList.get(i)).getScheduleCode()))).get(0))).getOrderStart().toString()).substring(0, 16) %>
+								<label id="arrow">▼</label>
 							</div>
-							<% } %>
-							<%-- <div><img src="<%= request.getContextPath() %>/static/images/map.png" id="mapImg">강남 | 1회차 | 02.03(월) 19:00-21:00▼</div>
-							<div><img src="<%= request.getContextPath() %>/static/images/map.png" id="mapImg">강남 | 1회차 | 02.10(월) 19:00-21:00▼</div>
-							<div><img src="<%= request.getContextPath() %>/static/images/map.png" id="mapImg">강남 | 1회차 | 02.17(월) 19:00-21:00▼</div> --%>			
+							<% 	if(lesson.getTotalOrders() > 1) { %>
+									<div class="myPanel">
+										<table class="eachOrder">
+								<% for(int j = 1; j < lesson.getTotalOrders(); j++) { %>
+									<!-- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -->
+											<tr>
+												<td><%= j + 1 %>회차</td>
+												<td>
+													<%= (((LessonOrder) (((ArrayList) (ops.get(((LessonSchedule) sList.get(i)).getScheduleCode()))).get(j))).getOrderStart().toString()).substring(0, 16) %>
+										 		</td>
+										 	</tr>
+									<!-- <br> -->
+									
+							<% 
+									}
+							%>
+										</table>
+									</div>
+							<%	
+								} 
+							}
+							%>
+							
 						</td>
 					</tr>
 					<tr style="height:20%;">
-						<td colspan="2" style="text-align:center;">+ 추가 일정 보기</td>
+						<td colspan="2" style="text-align:center;"><!-- + 추가 일정 보기 --></td>
 					</tr>
 					<tr style="height:20%; text-align:center;">
 						<td colspan="2" style="vertical-align:bottom;">원하시는 수업일정을 선택해주세요</td>
@@ -342,13 +368,10 @@
 								<option>수업 일정 선택</option>
 								<% for(int i = 0; i < sList.size(); i++) { %>
 								<option value="<%= ((LessonSchedule) sList.get(i)).getScheduleCode() %>">
-								<%= ((LessonSchedule) sList.get(i)).getRegion() %> |
+								<%= ((LessonSchedule) sList.get(i)).getRegion() %> | 시작일  
+								<%= (((LessonOrder) (((ArrayList) (ops.get(((LessonSchedule) sList.get(i)).getScheduleCode()))).get(0))).getOrderStart().toString()).substring(0, 16) %>
 								</option>
 								<% } %>
-								
-								<!-- <option>강남 | 1회차 | 02.03(월) 19:00-21:00</option>
-								<option>강남 | 1회차 | 02.10(월) 19:00-21:00</option>
-								<option>강남 | 1회차 | 02.17(월) 19:00-21:00</option> -->
 							</select>
 						</td>
 					</tr>

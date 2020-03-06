@@ -6,6 +6,7 @@ import static com.dh.hobbyist.common.JDBCTemplate.getConnection;
 import static com.dh.hobbyist.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -210,6 +211,8 @@ public class LessonRelatedService {
 
 			profileImg = new LessonRelatedDao().selectProfileImage(con, artistCode);
 			artist = new LessonRelatedDao().selectOneArtist(con, artistCode);
+			
+			Timestamp startDate = new LessonRelatedDao().selectStartDate(con, (Integer) scheduleCodeList.get(i));
 
 			myLesson.setScheduleCode((Integer) scheduleCodeList.get(i));
 			myLesson.setLessonImgRoute(lessonImg.getImageRoute());
@@ -220,6 +223,7 @@ public class LessonRelatedService {
 			myLesson.setProfileImgName(profileImg.getImageName());
 			myLesson.setArtistNick(artist.getArtistNick());
 			myLesson.setArtistName(artist.getMemberName());
+			myLesson.setStartDate(startDate);
 
 			myList.add(myLesson);
 		}
@@ -244,7 +248,7 @@ public class LessonRelatedService {
 		} else {
 			rollback(con);
 		}
-		
+				
 		return list;
 	}
 

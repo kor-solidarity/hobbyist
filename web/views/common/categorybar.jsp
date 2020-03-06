@@ -15,7 +15,7 @@
 		border-top:2px solid darkolivegreen;
 		border-bottom:2px solid darkolivegreen;
 		line-height:60px; 
-	}
+ 	} 
 	#category {
 		font-family: 'Do Hyeon', sans-serif;
         font-size:22px;
@@ -38,7 +38,7 @@
 	}
 	
 	.nav2 {
-		width:1024px;
+		width:512px;
 		margin:auto;
 		height:30px;
 		
@@ -72,6 +72,11 @@
 	}
 	
 	/* div position이 relative라 겹쳐져 margin-top을 -30px로 통일 */ 
+	
+	#musicWrap {
+		margin-left:0px;
+	}
+	
 	#danceWrap {
 		margin-left:70px;
 		margin-top:-30px;
