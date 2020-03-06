@@ -12,15 +12,18 @@
 <head>
     <title>Room info</title>
     <link rel="stylesheet" href="<%=request.getContextPath()%>/static/css/eun-css.css">
+    <style>
+
+    </style>
 </head>
 <body>
 <%@include file="/views/common/menubar.jsp" %>
-<%@include file="category.jsp" %>
+<%--<%@include file="category.jsp" %>--%>
+<%@include file="/views/common/categorybar.jsp" %>
 <%
-    PlaceCompany company = (PlaceCompany)request.getAttribute("company");
-    ArrayList<Image> images =(ArrayList<Image>)request.getAttribute("images");
-
-
+    PlaceCompany company = (PlaceCompany) request.getAttribute("company");
+    ArrayList<Image> images = (ArrayList<Image>) request.getAttribute("images");
+    int currentPage = (int) request.getAttribute("currentPage");
 %>
 <br clear="both">
 <div>
@@ -28,12 +31,30 @@
         <%--  --%>
         <tr>
             <td colspan="3">
-                <h1 class="do-hyun-font" style="float: left; margin: 0 30px">ABC스터디</h1>
-                <div class="room-card-tag" style="margin-top: 5px">일대일 공간</div>
-                <div class="room-card-tag" style="margin-top: 5px">소규모 공간</div>
+                <%--회사명--%>
+                <h1 class="do-hyun-font" style="float: left; margin: 0 30px"><%=company.getCompany_name()%>
+                </h1>
+                <%
+                    String[] tags = company.getRoom_size().split(",");
+                %>
+                <%--공간규모--%>
+                <% for (String t : tags) {%>
+                <% if (t.equals("1")) { %>
+                <div class="room-card-tag">일대일 공간</div>
+                <% }
+                    if (t.equals("2")) { %>
+                <div class="room-card-tag">소규모 공간</div>
+                <% }
+                    if (t.equals("3")) { %>
+                <div class="room-card-tag">대규모 공간</div>
+                <%
+                        }
+                    }
+                %>
             </td>
         </tr>
         <tr>
+            <%--사진 목록보기.  --%>
             <td rowspan="">◀</td>
             <td style="width: 90%; ">
                 <img src="<%=request.getContextPath()%>/static/images/studyRoom3.png"
@@ -49,23 +70,27 @@
                 <table class="room-info-summary" style="float: left">
                     <tr>
                         <th>주소:</th>
-                        <td>서울 서대문구 신촌로 59 하모니마트 3층</td>
+                        <td><%=company.getAddress()%>
+                        </td>
                     </tr>
                     <tr>
                         <th>전화:</th>
-                        <td></td>
+                        <td><%=company.getPhone()%>
+                        </td>
                     </tr>
                     <tr>
                         <th>사이트:</th>
-                        <td></td>
+                        <td><%=company.getPhone()%>
+                        </td>
                     </tr>
                     <tr>
                         <th>영업:</th>
-                        <td></td>
+                        <td><%=company.getService_time()%>
+                        </td>
                     </tr>
                     <tr>
-                        <th>가격:</th>
-                        <td></td>
+                        <%--                        <th>가격:</th>--%>
+                        <%--                        <td></td>--%>
                     </tr>
                 </table>
             </td>
@@ -79,12 +104,13 @@
         <tr>
             <td></td>
             <td style="padding-left: 20px">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque debitis eos illo nulla unde. Dolore
-                explicabo neque non rem sit, vel vitae. Accusamus minima molestiae nemo nihil numquam quam sint.
-                <br>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi cum, dignissimos, est et eum expedita
-                facere, hic illo libero molestias numquam perferendis quae veritatis. Cupiditate distinctio nulla
-                pariatur quo reprehenderit.
+                <%=company.getIntro()%>
+                <%--                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque debitis eos illo nulla unde. Dolore--%>
+                <%--                explicabo neque non rem sit, vel vitae. Accusamus minima molestiae nemo nihil numquam quam sint.--%>
+                <%--                <br>--%>
+                <%--                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi cum, dignissimos, est et eum expedita--%>
+                <%--                facere, hic illo libero molestias numquam perferendis quae veritatis. Cupiditate distinctio nulla--%>
+                <%--                pariatur quo reprehenderit.--%>
             </td>
             <td></td>
         </tr>
@@ -92,7 +118,9 @@
             <td></td>
             <td style="text-align: center">
                 <br>
-                <button style="width: 120px; height: 45px">목록보기</button>
+                <button style="width: 120px; height: 45px"
+                        onclick="location.href='<%=request.getContextPath()%>/place/list.me?page=<%=currentPage%>'">목록보기
+                </button>
             </td>
             <td></td>
         </tr>

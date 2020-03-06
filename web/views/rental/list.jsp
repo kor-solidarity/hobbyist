@@ -29,7 +29,8 @@
 </head>
 <body>
 <%@include file="/views/common/menubar.jsp" %>
-<%@include file="category.jsp" %>
+<%@include file="/views/common/categorybar.jsp" %>
+<%--<%@include file="category.jsp" %>--%>
 <div>
     <table border="0" class="do-hyun-font standard-width" style=" margin: 0 auto">
         <tr>
@@ -51,7 +52,7 @@
     <% for (PlaceCompany p : companyArrayList) {%>
     <% System.out.println(p); %>
     <div class="room-card"
-         onclick="location.href='<%=request.getContextPath()%>/place/info.me?pk<%=p.getCompany_pk()%>&page=<%=pi.getCurrentPage()%>'">
+         onclick="location.href='<%=request.getContextPath()%>/place/info.me?pk=<%=p.getCompany_pk()%>&page=<%=pi.getCurrentPage()%>'">
         <img src="<%=request.getContextPath()%>/static/upload/place/<%=p.getMain_image_name()%>"
              style="width: 100%; height: 150px;"
              alt="">
@@ -65,9 +66,11 @@
                 for (String t : tags) {%>
             <% if (t.equals("1")) { %>
             <div class="room-card-tag">일대일 공간</div>
-            <% } else if (t.equals("2")) { %>
+            <% }
+                if (t.equals("2")) { %>
             <div class="room-card-tag">소규모 공간</div>
-            <% } else if (t.equals("3")) { %>
+            <% }
+                if (t.equals("3")) { %>
             <div class="room-card-tag">대규모 공간</div>
             <%
                     }
