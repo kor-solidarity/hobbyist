@@ -8,16 +8,19 @@ public class LessonOrder implements java.io.Serializable {
 	private int orderTime;
 	private Timestamp orderStart;
 	private Timestamp orderEnd;
+	private int listeners;
 	
 	public LessonOrder() {}
 
-	public LessonOrder(int orderCode, int scheduleCode, int orderTime, Timestamp orderStart, Timestamp orderEnd) {
+	public LessonOrder(int orderCode, int scheduleCode, int orderTime, Timestamp orderStart, Timestamp orderEnd,
+			int listeners) {
 		super();
 		this.orderCode = orderCode;
 		this.scheduleCode = scheduleCode;
 		this.orderTime = orderTime;
 		this.orderStart = orderStart;
 		this.orderEnd = orderEnd;
+		this.listeners = listeners;
 	}
 
 	public int getOrderCode() {
@@ -39,6 +42,11 @@ public class LessonOrder implements java.io.Serializable {
 	public Timestamp getOrderEnd() {
 		return orderEnd;
 	}
+	
+	public int getListeners() {
+		return listeners;
+	}
+
 
 	public void setOrderCode(int orderCode) {
 		this.orderCode = orderCode;
@@ -60,12 +68,14 @@ public class LessonOrder implements java.io.Serializable {
 		this.orderEnd = orderEnd;
 	}
 
+	public void setListeners(int listeners) {
+		this.listeners = listeners;
+	}
+
 	@Override
 	public String toString() {
 		return "LessonOrder [orderCode=" + orderCode + ", scheduleCode=" + scheduleCode + ", orderTime=" + orderTime
-				+ ", orderStart=" + orderStart + ", orderEnd=" + orderEnd + "]";
+				+ ", orderStart=" + orderStart + ", orderEnd=" + orderEnd + ", listeners=" + listeners + "]";
 	}
-	
-	
 	
 }

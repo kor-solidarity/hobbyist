@@ -293,7 +293,7 @@ public class LessonRelatedDao {
 		ArrayList<LessonSchedule> list = null;
 		LessonSchedule s = null;
 		
-		String query = prop.getProperty("selectScheduleList");
+		String query = prop.getProperty("selectSchedule");
 		
 		try {
 			pstmt = con.prepareStatement(query);
@@ -329,7 +329,7 @@ public class LessonRelatedDao {
 		ArrayList<Image> list = null;
 		Image i = null;
 		
-		String query = prop.getProperty("selectLessonImageList");
+		String query = prop.getProperty("selectLessonImage");
 		
 		try {
 			pstmt = con.prepareStatement(query);
@@ -359,13 +359,13 @@ public class LessonRelatedDao {
 		return list;
 	}
 	
-	//등록한 수업의 수업코드 조회용 메소드
-	public ArrayList selectRegisteredLesson(Connection con, int memberCode) {
+	//등록한 수업의 수업일정코드 조회용 메소드
+	public ArrayList selectScheduleCodeList(Connection con, int memberCode) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		ArrayList list = null;
 		
-		String query = prop.getProperty("selectRegisteredLesson");
+		String query = prop.getProperty("selectScheduleCode");
 		
 		try {
 			pstmt = con.prepareStatement(query);
@@ -420,8 +420,97 @@ public class LessonRelatedDao {
 		return i;
 	}
 
-	public Image selectOneProfileImage(Connection con, int artistCode) {
-		return null;
+
+	public int selectLessonCode(Connection con, int scheduleCode) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int lessonCode = 0;
+		
+		String query = prop.getProperty("selectLessonCode");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, scheduleCode);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				lessonCode = rset.getInt("LESSON_PK");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return lessonCode;
+	}
+
+	public LessonSchedule selectOneSchedule(Connection con, Integer scheduleCode) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		LessonSchedule s = null;
+		
+		String query = prop.getProperty("selectOneSchedule");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, scheduleCode);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				s = new LessonSchedule();
+				s.setRegion(rset.getString("REGION"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return s;
+	}
+
+	public ArrayList<LessonOrder> selectOrderList(Connection con, Integer scheduleCode) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<LessonOrder> list = null;
+		LessonOrder o = null;
+		
+		String query = prop.getProperty("selectOrder");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, scheduleCode);
+			
+			rset = pstmt.executeQuery();
+			
+			list = new ArrayList<LessonOrder>();
+			
+			while(rset.next()) {
+				o = new LessonOrder();
+				o.setOrderCode(rset.getInt("LESSON_ORDER_PK"));
+				o.setScheduleCode(rset.getInt("SCHEDULE_PK"));
+				o.setOrderTime(rset.getInt("LESSON_ORDER_TIME"));
+				o.setOrderStart(rset.getTimestamp("LESSON_ORDER_START"));
+				o.setOrderEnd(rset.getTimestamp("LESSON_ORDER_END"));
+				o.setListeners(rset.getInt("LISTENERS"));
+				
+				list.add(o);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		//System.out.println("list : " + list);
+		
+		return list;
 	}
 
 

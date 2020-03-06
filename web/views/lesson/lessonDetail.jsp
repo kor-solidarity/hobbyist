@@ -1,9 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="java.util.HashMap" %>
 <%@ page import="com.dh.hobbyist.lesson.model.vo.Image" %>
 <%@ page import="com.dh.hobbyist.lesson.model.vo.Lesson" %>
 <%@ page import="com.dh.hobbyist.lesson.model.vo.LessonSchedule" %>
+<%@ page import="com.dh.hobbyist.lesson.model.vo.LessonOrder" %>
 <%
 	Image pImg = (Image) request.getAttribute("profileImg");
 	Lesson lesson = (Lesson) request.getAttribute("lesson");
@@ -11,8 +13,9 @@
 	Member artist = (Member) request.getAttribute("artist");
 	ArrayList sList = (ArrayList) request.getAttribute("scheduleList");
 	ArrayList iList = (ArrayList) request.getAttribute("lessonImageList");
+	HashMap ops = (HashMap) request.getAttribute("orderPerSchedule");
 	
-	System.out.println("ArrayList : " + sList.get(0));
+	System.out.println("ops.get(39) : " + ((LessonOrder) (((ArrayList) (ops.get(((LessonSchedule) sList.get(0)).getScheduleCode()))).get(0))).getOrderStart());
 %>
 <!DOCTYPE html>
 <html>
@@ -231,10 +234,6 @@
 							    		}
 							    	} 
 							    	%>
-							     <!--  <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-							      <li data-target="#myCarousel" data-slide-to="1"></li>
-							      <li data-target="#myCarousel" data-slide-to="2"></li>
-							      <li data-target="#myCarousel" data-slide-to="3"></li> -->
 							    </ol>
 							
 							    <!-- Wrapper for slides -->
@@ -258,23 +257,6 @@
 										}
 									}
 									%>
-							
-							      <%-- <div class="item active">
-							        <img src="<%=request.getContextPath() %>/static/images/beauty02.jpg" alt="Chania" width="460" height="345">
-							      </div>
-							
-							      <div class="item">
-							        <img src="<%=request.getContextPath() %>/static/images/beauty03.PNG" alt="Chania" width="460" height="345">
-							      </div>
-							    
-							      <div class="item">
-							        <img src="<%=request.getContextPath() %>/static/images/beauty04.PNG" alt="Flower" width="460" height="345">
-							      </div>
-							
-							      <div class="item">
-							        <img src="<%=request.getContextPath() %>/static/images/beauty05.PNG" alt="Flower" width="460" height="345">
-							      </div> --%>
-							  
 							    </div>
 							
 							    <!-- Left and right controls -->
@@ -299,7 +281,7 @@
 							<% for(int i = 0; i < sList.size(); i++) { %>
 							<div>
 							<img src="<%= request.getContextPath() %>/static/images/map.png" id="mapImg">
-							<%= ((LessonSchedule) sList.get(i)).getRegion() %> | 
+							<%= ((LessonSchedule) sList.get(i)).getRegion() %> | 1회차 | 
 							</div>
 							<% } %>
 							<%-- <div><img src="<%= request.getContextPath() %>/static/images/map.png" id="mapImg">강남 | 1회차 | 02.03(월) 19:00-21:00▼</div>

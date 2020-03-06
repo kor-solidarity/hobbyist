@@ -40,6 +40,10 @@
 					alertMessage = "수업 개설 신청이 완료되었습니다.\n수업 개설 승인은 5영업일 이내에 완료됩니다"
 					movePath = "/hobbyist/views/lesson/openLessonMain.jsp";
 					break;
+				case "withoutLogin" :
+					alertMessage = "로그인을 해주세요.";
+					movePath = "/hobbyist/index.jsp";
+					break;
 			}
 			
 			alert(alertMessage);
