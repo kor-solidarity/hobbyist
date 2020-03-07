@@ -324,7 +324,7 @@ color: #FFFFFF;
 	<div class="divcenter4">
 		
 		<!-- 회원정보수정 서블릿으로전송 -->
-		<form id="updateForm" action="<%=request.getContextPath() %>"/updateMemberM.me" method="post">
+		<form id="updateForm" action="<%=request.getContextPath() %>/UpdateMemberM.me" method="post">
 		
 			<table align="border" class="tablecenter4">
 		 	
