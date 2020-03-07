@@ -35,6 +35,7 @@
 	       		font-size:13px;
 	       		/* font-family: 'Roboto', sans-serif; */
 	       		font-family: 'Nanum Gothic', sans-serif;
+	       		cursor:pointer;
 	       }
 </style>
 </head>
@@ -48,12 +49,13 @@
    			<td>HOW TO USE</td>
    			<td>HOBBYIST CENTER</td>
    			<td>운영시간</td>
+   			
    		</tr>
    		<tr>
    			<td>상호 : (주)하비스트 | 주소 : 서울시 강남구 테헤란로14길</td>
    			<td>이용약관</td>
    			<td>이용안내</td>
-   			<td>공지사항</td>
+   			<td id="notice" onclick="goNotice();">공지사항</td>
    			<td>평일 9:00 ~ 21:00</td>
    		</tr>
    		<tr>
@@ -77,7 +79,20 @@
    			<td></td>
    			<td></td>
    		</tr>
+   		<tr>
+   			<td>연락처 : 02-920-5432</td>
+   			<td></td>
+   			<td></td>
+   			<td></td>
+   			<td></td>
+   		</tr>
    	</table>
    </div>
+   
+   <script>
+   		function goNotice() {
+   			location.href = "<%=request.getContextPath()%>/views/common/notice.jsp";
+   		}
+   </script>
 </body>
 </html>

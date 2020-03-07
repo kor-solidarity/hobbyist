@@ -12,28 +12,31 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.dh.hobbyist.common.model.vo.PageInfo;
 import com.dh.hobbyist.lesson.model.service.LessonService;
+import com.google.gson.Gson;
 
 
-@WebServlet("/selectSports.le")
-public class SelectCategorySportsServlet extends HttpServlet {
+@WebServlet("/selectSub.le")
+public class SelectSubListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-   
-    public SelectCategorySportsServlet() {
+    
+    public SelectSubListServlet() {
         super();
     }
 
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		int parentCode = 37;
+		int categoryCode = Integer.parseInt(request.getParameter("categoryCode"));
+
+		System.out.println("categoryCode : " + categoryCode);	
 		
 		int currentPage;
 		int limit;
 		int maxPage;
 		int startPage;
 		int endPage;
-		
+		 
 		currentPage = 1;
 		
 		if(request.getParameter("currentPage") != null) {
@@ -43,7 +46,7 @@ public class SelectCategorySportsServlet extends HttpServlet {
 		limit = 9;
 		
 		LessonService ls = new LessonService();
-		int listCount = ls.getListCount(parentCode);
+		int listCount = ls.getSubListCount(categoryCode);
 		
 		
 		maxPage = (int) ((double) listCount / limit + 0.9);
@@ -58,23 +61,16 @@ public class SelectCategorySportsServlet extends HttpServlet {
 		
 		PageInfo pi = new PageInfo(currentPage, listCount, limit, maxPage, startPage, endPage);
 		
-		ArrayList<HashMap<String, Object>> list = new LessonService().selectCategorySports(pi);
 		
-		System.out.println("sports list : " + list);
+		ArrayList<HashMap<String, Object>> list = new LessonService().selectSub(categoryCode, pi);
 		
-		String page = "";
-		if(list != null) {
-			page = "views/lesson/categorySportsPage.jsp";
-			request.setAttribute("list", list);
-			request.setAttribute("pi", pi);
-		} else {
-			page = "views/common/errorPage.jsp";
-			request.setAttribute("msg", "스포츠 카테고리 페이지 조회 실패");
-		}
+		System.out.println("sub list : " + list);
 		
-		request.getRequestDispatcher(page).forward(request, response);
+		response.setContentType("application/json");
+		response.setCharacterEncoding("UTF-8");
 		
-		
+		new Gson().toJson(list, response.getWriter());
+		new Gson().toJson(pi, response.getWriter());
 	}
 
 	

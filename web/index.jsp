@@ -10,7 +10,7 @@
 <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
 <style>
 	
-		
+		 
 	
         #contents {
         	/* margin:auto;
@@ -154,11 +154,9 @@
   
 	<div id="aside">
 	<div id="lTitle">인기수업</div>
-   	<div class="aside" id="liked">추천수업</div>
+   	<div class="aside" id="liked">신규수업</div>
    	<div class="aside"> | </div>
-   	<div class="aside" id="popular">인기수업</div>
-   	<div class="aside"> | </div>
-   	<div class="aside" id="interested">관심수업</div>
+   	<div class="aside" id="interested">인기수업</div>
 	</div>
 	</div>
 

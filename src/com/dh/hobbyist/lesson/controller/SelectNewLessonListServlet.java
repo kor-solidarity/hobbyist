@@ -1,4 +1,4 @@
-package com.dh.hobbyist.lesson;
+package com.dh.hobbyist.lesson.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -34,7 +34,7 @@ public class SelectNewLessonListServlet extends HttpServlet {
 				String key = mapEntry.getKey();
 				String value = (String) mapEntry.getValue();
 				
-			}*/
+			}*/ 
 				
 		System.out.println("new list : " + list);
 		

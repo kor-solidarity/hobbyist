@@ -606,8 +606,92 @@ public class LessonDao {
 			e.printStackTrace();
 		}
 		
+		 
+		return list;
+	}
+	
+	//카테고리별 페이지 서브 카테고리 리스트 메소드(유승)
+	public ArrayList<HashMap<String, Object>> selectSub(Connection con, int categoryCode, PageInfo pi) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<HashMap<String, Object>> list = null;
+		HashMap<String, Object> hmap = null;
+		
+		String query = prop.getProperty("selectSubList");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			
+			int startRow = (pi.getCurrentPage() - 1) * pi.getLimit() + 1;
+			int endRow = startRow + pi.getLimit() - 1;
+			
+			pstmt.setInt(1, categoryCode);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
+			
+			rset = pstmt.executeQuery();
+			
+			list = new ArrayList<HashMap<String, Object>>();
+			
+			while(rset.next()) {
+				hmap = new HashMap<String, Object>();
+				
+				hmap.put("lessonCode", rset.getInt("LESSON_PK"));
+				hmap.put("lessonName", rset.getString("LESSON_NAME"));
+				hmap.put("status", rset.getInt("STATUS"));
+				hmap.put("categoryCode", rset.getInt("CATEGORY_PK"));
+				hmap.put("artistNick", rset.getString("ARTIST_NICK"));
+				hmap.put("memberName", rset.getString("MEMBER_NAME"));
+				hmap.put("imageCode", rset.getInt("IMAGE_PK"));
+				hmap.put("imageRoute", rset.getString("IMAGE_ROUTE"));
+				hmap.put("imageName", rset.getString("IMAGE_NAME"));
+				hmap.put("imageType", rset.getString("IMAGE_TYPE"));
+				hmap.put("imageCode2", rset.getInt("img2_pk"));
+				hmap.put("imageRoute2", rset.getString("img2_route"));
+				hmap.put("imageName2", rset.getString("img2_name"));
+				hmap.put("imageType2", rset.getString("img2_type"));
+				hmap.put("region", rset.getString("REGION"));
+				
+				list.add(hmap);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+			close(rset);
+		}
 		
 		return list;
 	}
+	
+	//서브카테고리 리스트 카운트(유승)
+	public int getSubListCount(Connection con, int categoryCode) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		int listCount = 0;
+		
+		String query = prop.getProperty("subListCount");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, categoryCode);
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				listCount = rset.getInt(1);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+			close(rset);
+		}
+		
+		return listCount;
+	}
 
+	
 }
