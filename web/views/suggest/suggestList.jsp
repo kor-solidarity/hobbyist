@@ -66,7 +66,7 @@
 <link
 	href="https://fonts.googleapis.com/css?family=Do+Hyeon|ZCOOL+QingKe+HuangYou&display=swap"
 	rel="stylesheet">
-<title>Insert title here</title>
+<title>hobbyist</title>
 </head>
 <body>
 	<%@ include file="../common/menubar.jsp"%>
