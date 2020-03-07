@@ -22,7 +22,7 @@ public class MemberService {
 		Connection con = getConnection();
 		
 		int memberUpdate = new MemberDao().memberUpdate(con, member);
-		System.out.println("서비스쪽의" + memberUpdate);
+		System.out.println("DB에서 받아온의" + memberUpdate);
 		
 		if(memberUpdate > 0) {
 			commit(con);

@@ -40,13 +40,13 @@ public class memberUpdateServletM extends HttpServlet {
 	String bankName = request.getParameter("bankName");
 	String bankNum = request.getParameter("bankNum");
 
-	System.out.println("서블릿 userId" + userId);
-	System.out.println("서블릿 password1" + userPwd);
-	System.out.println("서블릿 ncikName" + nickName);
-	System.out.println("서블릿 email" + email);
-	System.out.println("서블릿 phone" + phone);
-	System.out.println("서블릿 bank" + bankName);
-	System.out.println("서블릿 bankText" + bankNum);
+	System.out.println("서블릿 userId:" + userId);
+	System.out.println("서블릿 password1:" + userPwd);
+	System.out.println("서블릿 nickName:" + nickName);
+	System.out.println("서블릿 email:" + email);
+	System.out.println("서블릿 phone:" + phone);
+	System.out.println("서블릿 bank:" + bankName);
+	System.out.println("서블릿 bankText:" + bankNum);
 	
 	Member member = new Member();
 	member.setMemberId(userId);
@@ -81,13 +81,13 @@ public class memberUpdateServletM extends HttpServlet {
 	}else {
 		page = "/views/common/errorPage.jsp";
 		request.setAttribute("msg", "회원정보 수정 실패!!");
-		System.out.println("실패시 userId" + userId);
-		System.out.println("실패시 password1" + userPwd);
-		System.out.println("실패시 ncikName" + nickName);
-		System.out.println("실패시 email" + email);
-		System.out.println("실패시 phone" + phone);
-		System.out.println("실패시 bank" + bankName);
-		System.out.println("실패시 bankText" + bankNum);
+		System.out.println("실패시 userId:" + userId);
+		System.out.println("실패시 password1:" + userPwd);
+		System.out.println("실패시 nickName:" + nickName);
+		System.out.println("실패시 email:" + email);
+		System.out.println("실패시 phone:" + phone);
+		System.out.println("실패시 bank:" + bankName);
+		System.out.println("실패시 bankText:" + bankNum);
 	}
 	request.getRequestDispatcher(page).forward(request, response);
 }

@@ -16,45 +16,45 @@ import java.util.Properties;
 import com.dh.hobbyist.memberUpdate.model.vo.*;
 
 public class MemberDao {
-	
+
 	private Properties prop = new Properties();
-	
+
 	public MemberDao() {
 		String fileName = MemberDao.class.getResource("/sql/memberUpdate/memberUpdate-query.properties").getPath();
-	
+
 		System.out.println(fileName);
 		try {
 			prop.load(new FileReader(fileName));
-			
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 
-	
-	
-	
-	
-	
-	
-		//회원 정보수정
-	   public int memberUpdate(Connection con, Member member) {
-		   PreparedStatement pstmt = null;
-		   ResultSet rset = null;
-		   
-		   int memberUpdate = 0;
-		   
-		   String query = prop.getProperty("memberUpdate");
-		   
-		   System.out.println(member.getMemberId());
-		   System.out.println(member.getMemberPwd());
-		   System.out.println(member.getMemberName());
-		   System.out.println(member.getEmail());
-		   System.out.println(member.getPhone());
-		   System.out.println(member.getBankName());
-		   System.out.println(member.getBankNum());
-		   
-		   try {
+
+
+
+
+
+
+	//회원 정보수정
+	public int memberUpdate(Connection con, Member member) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		int memberUpdate = 0;
+
+		String query = prop.getProperty("memberUpdate");
+
+		System.out.println("dao값:"+ member.getMemberId());
+		System.out.println("dao값:"+member.getMemberPwd());
+		System.out.println("dao값:"+member.getMemberName());
+		System.out.println("dao값:"+member.getEmail());
+		System.out.println("dao값:"+member.getPhone());
+		System.out.println("dao값:"+member.getBankName());
+		System.out.println("dao값:"+member.getBankNum());
+
+		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, member.getMemberPwd());
 			pstmt.setString(2, member.getMemberName());
@@ -62,13 +62,20 @@ public class MemberDao {
 			pstmt.setString(4, member.getPhone());
 			pstmt.setString(5, member.getBankName());
 			pstmt.setString(6, member.getBankNum());
-			pstmt.setString(7, member.getMemberId());
-			
-			
+			/*pstmt.setString(7, member.getMemberId());*/
+
+
 			memberUpdate = pstmt.executeUpdate();
-			
-				
-			
+
+			System.out.println("db에서 받은 dao값:"+ member.getMemberId());
+			System.out.println("db에서 받은 dao값:"+member.getMemberPwd());
+			System.out.println("db에서 받은 dao값:"+member.getMemberName());
+			System.out.println("db에서 받은 dao값:"+member.getEmail());
+			System.out.println("db에서 받은 dao값:"+member.getPhone());
+			System.out.println("db에서 받은 dao값:"+member.getBankName());
+			System.out.println("db에서 받은 dao값:"+member.getBankNum());
+
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -76,35 +83,35 @@ public class MemberDao {
 			close(rset);
 			close(pstmt);
 		}  
-		   return memberUpdate;  
-	   }
+		return memberUpdate;  
+	}
 
-	   
-	   //패스워드 확인
+
+	//패스워드 확인
 	public int pwConfirm(Connection con, String member) {
 		int result =0;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		
+
 		String query = prop.getProperty("pwConfirm");
-		
+
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, member);
-						
+
 			rset = pstmt.executeQuery();
-		
+
 			if(rset.next()) {
 				result =rset.getInt(1);
-				}
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
-		close(rset);
-		close(pstmt);
+			close(rset);
+			close(pstmt);
 		}
 		return result;
-		
+
 	}
 
 
@@ -114,27 +121,27 @@ public class MemberDao {
 		int result = 0;
 		PreparedStatement pstmt =null;
 		ResultSet rset =null;
-		
+
 		String query = prop.getProperty("pwCheck");
-		
-	
-			try {
-				pstmt =con.prepareStatement(query);
-				pstmt.setString(1, userPw);
-				rset = pstmt.executeQuery();
-				
-			
-				
-				if(rset.next()) {
-					result = rset.getInt(1);
-				}	
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}finally {
-				close(rset);
-				close(pstmt);
-			}
+
+
+		try {
+			pstmt =con.prepareStatement(query);
+			pstmt.setString(1, userPw);
+			rset = pstmt.executeQuery();
+
+
+
+			if(rset.next()) {
+				result = rset.getInt(1);
+			}	
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
 		return result;
 	}
 
@@ -148,15 +155,15 @@ public class MemberDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset =null;
 		int result =0;
-		
+
 		String query= prop.getProperty("userTel");
-		
+
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, userTel);
-			
+
 			rset = pstmt.executeQuery();
-			
+
 			if(rset.next()) {
 				result = rset.getInt(1);
 			}
@@ -168,7 +175,7 @@ public class MemberDao {
 			close(pstmt);
 		}
 		return result;
-		
+
 
 	}
 
@@ -184,5 +191,5 @@ public class MemberDao {
 
 
 
-	   
+
 }
