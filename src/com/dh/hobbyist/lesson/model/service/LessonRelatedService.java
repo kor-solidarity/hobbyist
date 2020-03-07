@@ -19,6 +19,7 @@ import com.dh.hobbyist.lesson.model.vo.LessonOrder;
 import com.dh.hobbyist.lesson.model.vo.LessonSchedule;
 import com.dh.hobbyist.lesson.model.vo.MyRegiLesson;
 import com.dh.hobbyist.member.model.vo.Member;
+import com.dh.hobbyist.payment.model.vo.Payment;
 
 public class LessonRelatedService {
 	
@@ -29,7 +30,9 @@ public class LessonRelatedService {
 		Lesson lesson = (Lesson) lessonRelated.get("lesson");
 		LessonSchedule schedule = (LessonSchedule) lessonRelated.get("schedule");
 		ArrayList orderList = (ArrayList) lessonRelated.get("orderList");
-		ArrayList<Image> fileList = (ArrayList) lessonRelated.get("fileList");		
+		ArrayList<Image> fileList = (ArrayList) lessonRelated.get("fileList");
+		ArrayList certsList = (ArrayList) lessonRelated.get("certsList");
+		ArrayList careerList = (ArrayList) lessonRelated.get("careerList");
 		
 		int totalOrder = lesson.getTotalOrders();
 		
@@ -37,6 +40,7 @@ public class LessonRelatedService {
 		int scheduleResult = 0;
 		int orderResult = 0;
 		int fileResult = 0;
+		int certsResult = 0;
 		
 		//LESSON 테이블에 성공적으로 삽입되었다면
 		if(lessonResult > 0) {
@@ -68,7 +72,17 @@ public class LessonRelatedService {
 					}
 					
 					if(fileResult == fileList.size()) {
-						commit(con);
+						
+						for(int i = 0; i < certsList.size(); i++) {
+							certsResult += new LessonRelatedDao().insertCert(con, (Integer) certsList.get(i), lessonCode);
+						}
+						
+						if(certsResult == certsList.size()) {
+							commit(con);
+						} else {
+							rollback(con);
+						}
+						
 					} else {
 						rollback(con);
 					}
@@ -213,6 +227,8 @@ public class LessonRelatedService {
 			artist = new LessonRelatedDao().selectOneArtist(con, artistCode);
 			
 			Timestamp startDate = new LessonRelatedDao().selectStartDate(con, (Integer) scheduleCodeList.get(i));
+			
+			Payment pay = new LessonRelatedDao().selectOnePayment(con, (Integer) scheduleCodeList.get(i));
 
 			myLesson.setScheduleCode((Integer) scheduleCodeList.get(i));
 			myLesson.setLessonImgRoute(lessonImg.getImageRoute());
@@ -224,6 +240,12 @@ public class LessonRelatedService {
 			myLesson.setArtistNick(artist.getArtistNick());
 			myLesson.setArtistName(artist.getMemberName());
 			myLesson.setStartDate(startDate);
+			
+			//결제까지 안된 샘플DB로 인한 NullPointerException 방지를 위한 조건문
+			if(pay != null) {
+				myLesson.setPaymentCode(pay.getPaymentCode());
+				myLesson.setPaymentDate(pay.getPayDate());
+			}
 
 			myList.add(myLesson);
 		}
@@ -233,7 +255,6 @@ public class LessonRelatedService {
 		} else {
 			rollback(con);
 		}
-
 		
 		return myList;
 	}

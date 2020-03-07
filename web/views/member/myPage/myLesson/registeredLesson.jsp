@@ -173,10 +173,10 @@
 								<td style="width:27%;"><img class="lessonImg" src="<%= request.getContextPath() %>/<%= ((MyRegiLesson) myList.get(i)).getLessonImgRoute() %>/<%= ((MyRegiLesson) myList.get(i)).getLessonImgName() %>"></td>
 								<td class="lessonText" style="width:58%;">
 												<p><%= ((MyRegiLesson) myList.get(i)).getLessonName() %></p>
-												<p>수업시작일 : <%= ((MyRegiLesson) myList.get(i)).getStartDate() %> / <%= ((MyRegiLesson) myList.get(i)).getRegion() %></p>
-												<p>결제일 : 2020-01-30 12:11:31</p> 
+												<p>수업시작일 : <%= (((MyRegiLesson) myList.get(i)).getStartDate().toString()).substring(0, 16) %> / <%= ((MyRegiLesson) myList.get(i)).getRegion() %></p>
+												<p>결제일 : <%= (((MyRegiLesson) myList.get(i)).getPaymentDate().toString()).substring(0, 16) %></p> 
 												<img class="refundImg" src="<%= request.getContextPath() %>/static/images/refund.png" onclick="refund(<%= ((MyRegiLesson) myList.get(i)).getScheduleCode() %>);">
-												<label class="refundBtn" onclick="refund(<%= ((MyRegiLesson) myList.get(i)).getScheduleCode() %>);">환불신청</label>
+												<label class="refundBtn" onclick="refund(<%= ((MyRegiLesson) myList.get(i)).getPaymentCode() %>);">환불신청</label>
 								</td>
 								<td class="profile" style="width:15%; padding:0;">
 									<div align="center"><img class="profileImg" src="<%= ((MyRegiLesson) myList.get(i)).getProfileImgRoute() %>/<%= ((MyRegiLesson) myList.get(i)).getProfileImgName() %>"></div>
@@ -201,9 +201,8 @@
 			<% } %>
 		</table>
 		<script>
-			function refund(scheduleCode){
-				console.log("scheduleCode : " + scheduleCode);
-				location.href = "<%= request.getContextPath() %>/applyRefund.me?scheduleCode=" + scheduleCode;
+			function refund(paymentCode){
+				location.href = "<%= request.getContextPath() %>/applyRefund.me?paymentCode=" + paymentCode;
 			}
 		</script>
 		

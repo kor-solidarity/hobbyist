@@ -18,6 +18,7 @@ import com.dh.hobbyist.lesson.model.vo.Lesson;
 import com.dh.hobbyist.lesson.model.vo.LessonOrder;
 import com.dh.hobbyist.lesson.model.vo.LessonSchedule;
 import com.dh.hobbyist.member.model.vo.Member;
+import com.dh.hobbyist.payment.model.vo.Payment;
 
 public class LessonRelatedDao {
 	private Properties prop = new Properties();
@@ -542,6 +543,55 @@ public class LessonRelatedDao {
 		
 		System.out.println("t : " + t);
 		return t;
+	}
+
+	public Payment selectOnePayment(Connection con, Integer scheduleCode) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		Payment p = null;
+		
+		String query = prop.getProperty("selectOnePayment");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, scheduleCode);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				p = new Payment();
+				p.setPaymentCode(rset.getInt("PAYMENT_PK"));
+				p.setPayDate(rset.getTimestamp("PAYMENT_DATE"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return p;
+	}
+
+	public int insertCert(Connection con, int certsCode, int lessonCode) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("insertCert");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, lessonCode);
+			pstmt.setInt(2, certsCode);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return result;
 	}
 
 

@@ -62,13 +62,13 @@ public class InsertLessonServlet extends HttpServlet {
 			
 			Enumeration<String> files = multiRequest.getFileNames();
 			
-			System.out.println("files : " + files);
+			//System.out.println("files : " + files);
 			
 			while(files.hasMoreElements()) {
 				String name = files.nextElement();
 				
-				System.out.println("name : " + name);
-				System.out.println("multiRequest.getFilesystemName(name) : " + multiRequest.getFilesystemName(name));
+				//System.out.println("name : " + name);
+				//System.out.println("multiRequest.getFilesystemName(name) : " + multiRequest.getFilesystemName(name));
 				
 				//사진 입력을 4개 모두 하지 않아도 에러가 나지 않도록 검사하는 조건문
 				if(multiRequest.getFilesystemName(name) != null) {
@@ -78,7 +78,7 @@ public class InsertLessonServlet extends HttpServlet {
 				
 			}
 			
-			System.out.println("saveFiles.size() : " + saveFiles.size());
+			//System.out.println("saveFiles.size() : " + saveFiles.size());
 			
 			ArrayList<Image> fileList = new ArrayList<Image>();
 			
@@ -123,7 +123,7 @@ public class InsertLessonServlet extends HttpServlet {
 			
 			//수업일정 관련 사항
 			int region = Integer.parseInt(multiRequest.getParameter("region"));
-			System.out.println("region :  " + region);
+			//System.out.println("region :  " + region);
 			
 			String[] cat_name = {"서울","부산","대구","인천","광주","대전","울산","강원","경기","경남","경북","전남","전북","제주","충남","충북"};
 			String koreanRegion = "";
@@ -136,7 +136,7 @@ public class InsertLessonServlet extends HttpServlet {
 				koreanRegion = "세종";
 				subRegion = "_";
 			}
-			System.out.println("subRegion :  " + subRegion);
+			//System.out.println("subRegion :  " + subRegion);
 			
 			String address = "상세주소는 파악중입니다";
 			
@@ -163,12 +163,51 @@ public class InsertLessonServlet extends HttpServlet {
 				orderList.add(order);
 			}
 			
+			//보유한 자격 관련 사항
+			String[] certs = multiRequest.getParameterValues("selectedCerts");
+			ArrayList certsList = new ArrayList();
+			
+			System.out.println("certs : " +certs);
+			
+			String test = multiRequest.getParameter("test");
+			
+			System.out.println("test : " + test);
+			
+			Enumeration check = multiRequest.getParameterNames();
+			
+			while(check.hasMoreElements()) {
+				System.out.println(check.nextElement());
+			}
+			
+			if(certs != null) {
+				for(int i = 0; i < certs.length; i++) {
+					int c = Integer.parseInt(certs[i]);
+					
+					certsList.add(c);
+				}
+			}
+			//보유한 경력 관련 사항
+			String[] career = multiRequest.getParameterValues("selectedCareer");
+			ArrayList careerList = new ArrayList();
+			
+			System.out.println("career : " + career);
+			
+			if(career != null) {
+				for(int i = 0; i < career.length; i++) {
+					int c = Integer.parseInt(career[i]);
+					
+					careerList.add(c);
+				}
+			}
+			
 			//각 vo들을 하나로 담을 HashMap 선언
 			HashMap lessonRelated = new HashMap();
 			lessonRelated.put("lesson", lesson);
 			lessonRelated.put("schedule", schedule);
 			lessonRelated.put("orderList", orderList);
 			lessonRelated.put("fileList", fileList);
+			lessonRelated.put("certsList", certsList);
+			lessonRelated.put("careerList", careerList);
 			
 			int result = new LessonRelatedService().insertLessonRelated(lessonRelated);
 			

@@ -9,7 +9,8 @@ public class MyRegiLesson implements java.io.Serializable {
 	private String lessonName;			//수업명
 	private Timestamp startDate;		//수업시작일
 	private String region;				//지역
-										//결제일
+	private int paymentCode;			//결제코드
+	private Timestamp paymentDate;		//결제일
 	private String profileImgRoute;		//프로필 이미지 경로
 	private String profileImgName;		//프로필 이미지 파일명
 	private String artistNick;			//아티스트 별명
@@ -18,8 +19,8 @@ public class MyRegiLesson implements java.io.Serializable {
 	public MyRegiLesson() {}
 
 	public MyRegiLesson(int scheduleCode, String lessonImgRoute, String lessonImgName, String lessonName,
-			Timestamp startDate, String region, String profileImgRoute, String profileImgName, String artistNick,
-			String artistName) {
+			Timestamp startDate, String region, int paymentCode, Timestamp paymentDate, String profileImgRoute,
+			String profileImgName, String artistNick, String artistName) {
 		super();
 		this.scheduleCode = scheduleCode;
 		this.lessonImgRoute = lessonImgRoute;
@@ -27,6 +28,8 @@ public class MyRegiLesson implements java.io.Serializable {
 		this.lessonName = lessonName;
 		this.startDate = startDate;
 		this.region = region;
+		this.paymentCode = paymentCode;
+		this.paymentDate = paymentDate;
 		this.profileImgRoute = profileImgRoute;
 		this.profileImgName = profileImgName;
 		this.artistNick = artistNick;
@@ -112,13 +115,30 @@ public class MyRegiLesson implements java.io.Serializable {
 	public void setArtistName(String artistName) {
 		this.artistName = artistName;
 	}
+	
+	public int getPaymentCode() {
+		return paymentCode;
+	}
+
+	public void setPaymentCode(int paymentCode) {
+		this.paymentCode = paymentCode;
+	}
+
+	public Timestamp getPaymentDate() {
+		return paymentDate;
+	}
+
+	public void setPaymentDate(Timestamp paymentDate) {
+		this.paymentDate = paymentDate;
+	}
 
 	@Override
 	public String toString() {
 		return "MyRegiLesson [scheduleCode=" + scheduleCode + ", lessonImgRoute=" + lessonImgRoute + ", lessonImgName="
 				+ lessonImgName + ", lessonName=" + lessonName + ", startDate=" + startDate + ", region=" + region
-				+ ", profileImgRoute=" + profileImgRoute + ", profileImgName=" + profileImgName + ", artistNick="
-				+ artistNick + ", artistName=" + artistName + "]";
+				+ ", paymentCode=" + paymentCode + ", paymentDate=" + paymentDate + ", profileImgRoute="
+				+ profileImgRoute + ", profileImgName=" + profileImgName + ", artistNick=" + artistNick
+				+ ", artistName=" + artistName + "]";
 	}
 
 }
