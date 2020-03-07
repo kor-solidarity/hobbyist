@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>hobbyist</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <link href="https://fonts.googleapis.com/css?family=Do+Hyeon|ZCOOL+QingKe+HuangYou&display=swap" rel="stylesheet">
 
@@ -46,6 +46,7 @@
        
         
         .btns {
+        	display:inline-block;
             width:95px;
             height: 40px;
             margin-top: 55px;
@@ -59,7 +60,14 @@
             background: darkolivegreen;
             color:white;
             border: 1px solid darkolivegreen;
+            margin-left:30px;
         }
+        
+        #reset {
+        	background: lightgray;
+        	
+        }
+        
         input {
             height:27px;
             font-family: 'Nanum Gothic', sans-serif; 
@@ -116,11 +124,16 @@
             		<td><div class="btns2" id="checkBtn">인증확인</div></td>
             	</tr>
             </table>
-           
+           	<div class="btns" id="reset" onclick="goBack();">이전으로</div>
             <div class="btns" id="submit" onclick="checkAll();">아이디 확인</div>
         </form>
     </div>
     <script>
+    	function goBack() {
+    		location.href = "<%=request.getContextPath()%>/views/member/loginForm.jsp";
+    	}
+    
+    
 	    function goHome() {
 			location.href = "<%= request.getContextPath()%>/index.jsp";
 		}

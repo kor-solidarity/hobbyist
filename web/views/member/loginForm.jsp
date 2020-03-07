@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>hobbyist</title>
 <link href="https://fonts.googleapis.com/css?family=Do+Hyeon|ZCOOL+QingKe+HuangYou&display=swap" rel="stylesheet">
     <style>
         body {
@@ -89,7 +89,7 @@
     </div>
 	<script>
 		function register() {
-			location.href = "<%=request.getContextPath()%>/views/member/registerForm.jsp";
+			location.href = "<%=request.getContextPath()%>/views/member/agreePage.jsp";
 		}
 		
 		function findId() {

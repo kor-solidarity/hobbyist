@@ -127,6 +127,17 @@ public class LessonService {
 		
 		return list;
 	}
+
+	//메인페이지 신규수업 메소드(유승)
+	public ArrayList<HashMap<String, Object>> selectNew() {
+		Connection con = getConnection();
+		
+		ArrayList<HashMap<String, Object>> list = new LessonDao().selectNew(con);
+		
+		close(con);
+		
+		return list;
+	}
 	
 	
 	

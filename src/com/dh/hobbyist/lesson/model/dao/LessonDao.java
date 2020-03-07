@@ -564,5 +564,50 @@ public class LessonDao {
 		
 		return list;
 	}
+	
+	//메인페이지 신규수업 메소드(유승)
+	public ArrayList<HashMap<String, Object>> selectNew(Connection con) {
+		Statement stmt = null;
+		ResultSet rset = null;
+		ArrayList<HashMap<String, Object>> list = null;
+		HashMap<String, Object> hmap = null;
+		
+		String query = prop.getProperty("selectNewList");
+		
+		try {
+			stmt = con.createStatement();
+			rset = stmt.executeQuery(query);
+			
+			list = new ArrayList<HashMap<String, Object>>();
+			
+			while(rset.next()) {
+				hmap = new HashMap<String, Object>();
+				
+				hmap.put("lessonCode", rset.getInt("LESSON_PK"));
+				hmap.put("lessonName", rset.getString("LESSON_NAME"));
+				hmap.put("status", rset.getInt("STATUS"));
+				hmap.put("categoryCode", rset.getInt("CATEGORY_PK"));
+				hmap.put("artistNick", rset.getString("ARTIST_NICK"));
+				hmap.put("memberName", rset.getString("MEMBER_NAME"));
+				hmap.put("imageCode", rset.getInt("IMAGE_PK"));
+				hmap.put("imageRoute", rset.getString("IMAGE_ROUTE"));
+				hmap.put("imageName", rset.getString("IMAGE_NAME"));
+				hmap.put("imageType", rset.getString("IMAGE_TYPE"));
+				hmap.put("imageCode2", rset.getInt("img2_pk"));
+				hmap.put("imageRoute2", rset.getString("img2_route"));
+				hmap.put("imageName2", rset.getString("img2_name"));
+				hmap.put("imageType2", rset.getString("img2_type"));
+				hmap.put("region", rset.getString("REGION"));
+				
+				list.add(hmap);
+				
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		
+		return list;
+	}
 
 }

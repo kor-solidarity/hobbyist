@@ -66,7 +66,7 @@
        
        #section {
        		width:1024px;
-       		height:1270px;
+       		height:1300px;
        		margin:auto;
        		margin-top:40px;
        }
@@ -102,7 +102,7 @@
        		
        }
        
-       #liked, #popular, #interested {
+       #new, #popular, #interested {
      	cursor:pointer;
        }
        
@@ -244,6 +244,10 @@
 	    .pagingArea {
 	    	margin-bottom: 30px;
 	    }
+	    
+	    #lessonTable:eq(4) #lessonImgArea {
+	    	margin-top: -10px;
+	    }
      
      
      
@@ -298,7 +302,7 @@
   <% if(loginMember != null) { %>
 	<div id="aside">
 	<div id="lTitle">인기수업</div>
-   	<div class="aside" id="liked">추천수업</div>
+   	<div class="aside" id="new">신규수업</div>
    	<div class="aside"> | </div>
    	<div class="aside" id="interested">관심수업</div>
    	<div class="aside"> | </div>
@@ -307,7 +311,7 @@
 	<% }else { %>
 	<div id="aside">
 	<div id="lTitle">인기수업</div>
-   	<div class="aside" id="liked">추천수업</div>
+   	<div class="aside" id="new">신규수업</div>
    	<div class="aside"> | </div>
    	<div class="aside" id="popular">인기수업</div>
 	</div>
@@ -469,6 +473,62 @@
 					
 					
 				}); 
+				 
+				 
+				 
+				 $("#new").click(function() {
+						
+						
+						$.ajax({
+							url: "/hobbyist/selectNew.le",
+							type: "get", 
+							success: function(data) {
+									$("#lTitle").text("신규수업");
+									
+										
+									if(data[0] != null) {
+										
+										var $list = $(".lesson-list");
+										$list.remove();
+										
+										for(var key in data) {
+											
+											
+											var str = "";
+											
+											str += '<tr><td colspan="2"><div id="lessonImgArea"><img src="' + data[key].imageRoute + '/' + data[key].imageName + '"' + 'id="lessonImg" /></div></td></tr>';
+											str += '<tr><td colspan="2" rowspan="3"><div id="lessonName">' + data[key].lessonName + '</div></td></tr>';
+											str += '<tr><td><br></td><td><input type="hidden" name="lessonCode" value="' + data[key].lessonCode + '"</td></tr>';
+											str += '<tr><td></td><td><div id="artistImgArea" style="width:75px;"><img src="' + data[key].imageRoute2 + '/' + data[key].imageName2 + '"' + 'id="artistImg" /><div></td></tr>';
+											str += '<tr><td style="word-break:break-all"><div id="star">★★★★☆</div></td>';
+											str += '<td style="word-break:break-all"><div id="artistNick">' + data[key].artistNick + '</div></td></tr>';
+											str += '<tr><td style="word-break:break-all"><div id="lessonArea">' + data[key].region + '</div></td>';
+											str += '<td style="word-break:break-all"><div id="artistName">' + data[key].memberName + '</div></td></tr>';
+								
+											
+											$(".lesson-area").append('<div class="lesson-list"><form action="/hobbyist/selectOne.le" method="get"><table id="lessonTable">' + str + '</table></form></div>');
+											
+											console.log($("#artistImg"));
+											
+											$(".lesson-list").click(function() {
+												$(this).find($('form')).submit(); 
+											 });
+										}
+									}
+								
+								
+							},
+							error: function(error) {
+								conosole.log(error);
+							}
+						});
+					
+						
+					
+					
+				}); 
+				 
+				 
 				 
 				 $("#popular").click(function() {
 					 location.href = "<%= request.getContextPath()%>/selectPopular.le";
