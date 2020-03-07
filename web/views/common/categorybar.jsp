@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
  <link href="https://fonts.googleapis.com/css?family=Do+Hyeon|Nanum+Gothic|ZCOOL+QingKe+HuangYou&display=swap" rel="stylesheet">
-<title>Insert title here</title>
+<title>hobbyist</title>
 <style>
 	#nav {
 		margin-top: 20px;
@@ -131,13 +131,13 @@
 		<div id="musicWrap" class="nav2" style="position: relative;">
 			<table class="category2" id="music">
 				<tr>
-					<td>보컬</td>
-					<td>랩</td>
-					<td>국악</td>
-					<td>작사/작곡</td>
-					<td>기타연주</td>
-					<td>피아노</td>
-					<td>기타</td>
+					<td id="vocal">보컬</td>
+					<td id="rap">랩</td>
+					<td id="koreanMusic">국악</td>
+					<td id="songwrite">작사/작곡</td>
+					<td id="guitar">기타연주</td>
+					<td id="piano">피아노</td>
+					<td id="etc1">기타</td>
 				</tr>
 			</table>
 		</div>

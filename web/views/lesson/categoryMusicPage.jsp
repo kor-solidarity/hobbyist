@@ -390,6 +390,54 @@
 			$(".lesson-list").click(function() {
 				$(this).find($('form')).submit();
 			});
+			
+			/* $("#vocal").click(function() {
+				
+				var categoryCode = 2
+				
+				$.ajax({
+					url: "/hobbyist/selectSub.le",
+					type: "get", 
+					data: {categoryCode: categoryCode},
+					success: function(data) {
+							if(data[0] != null) {
+								
+								var $list = $(".lesson-list");
+								$list.remove();
+								
+								for(var key in data) {
+									
+									
+									var str = "";
+									
+									str += '<tr><td colspan="2"><div id="lessonImgArea"><img src="' + data[key].imageRoute + '/' + data[key].imageName + '"' + 'id="lessonImg" /></div></td></tr>';
+									str += '<tr><td colspan="2" rowspan="3"><div id="lessonName">' + data[key].lessonName + '</div></td></tr>';
+									str += '<tr><td><br></td><td><input type="hidden" name="lessonCode" value="' + data[key].lessonCode + '"</td></tr>';
+									str += '<tr><td></td><td><div id="artistImgArea" style="width:75px;"><img src="' + data[key].imageRoute2 + '/' + data[key].imageName2 + '"' + 'id="artistImg" /><div></td></tr>';
+									str += '<tr><td style="word-break:break-all"><div id="star">★★★★☆</div></td>';
+									str += '<td style="word-break:break-all"><div id="artistNick">' + data[key].artistNick + '</div></td></tr>';
+									str += '<tr><td style="word-break:break-all"><div id="lessonArea">' + data[key].region + '</div></td>';
+									str += '<td style="word-break:break-all"><div id="artistName">' + data[key].memberName + '</div></td></tr>';
+						
+									
+									$(".lesson-area").append('<div class="lesson-list"><form action="/hobbyist/selectOne.le" method="get"><table id="lessonTable">' + str + '</table></form></div>');
+									
+									console.log($("#artistImg"));
+									
+									$(".lesson-list").click(function() {
+										$(this).find($('form')).submit(); 
+									 });
+								}
+							}
+						
+						
+					},
+					error: function(error) {
+						conosole.log(error);
+					}
+				});
+			}); */
+			
 		});
 		
 		
