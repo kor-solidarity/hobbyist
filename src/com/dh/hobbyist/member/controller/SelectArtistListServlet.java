@@ -14,7 +14,7 @@ import com.dh.hobbyist.member.model.service.MemberService;
 import com.dh.hobbyist.member.model.vo.Member;
 import com.google.gson.Gson;
 
-@WebServlet("/selectList.ar")
+@WebServlet("/selectArtistList.ad")
 public class SelectArtistListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -25,15 +25,6 @@ public class SelectArtistListServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		List<Member> artistList = new MemberService().selectArtistList();
 		
-//		HashMap hmp = null;
-//		for(Member artist : artistList) {
-//			hmp.put("pk", artist.getMemberCode());
-//			hmp.put("id", artist.getMemberId());
-//			hmp.put("name", artist.getMemberName());
-//			hmp.put("nick", artist.getArtistNick());
-//			hmp.put("phone", artist.getPhone());
-//			
-//		}
 		response.setContentType("application/json");
 		response.setCharacterEncoding("UTF-8");
 		new Gson().toJson(artistList, response.getWriter());

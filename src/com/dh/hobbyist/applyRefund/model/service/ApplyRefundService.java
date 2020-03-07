@@ -33,10 +33,38 @@ public class ApplyRefundService {
 		
 	}
 
+	//최종 반려버튼 클릭 시
 	public int refuseRefund(int num, String reasonDetail) {
 		Connection con = getConnection();
 		
 		int result = new ApplyRefundDao().refuseRefund(con, num, reasonDetail);
+		
+		if(result > 0) {
+			commit(con);
+		} else {
+			rollback(con);
+		}
+		
+		close(con);
+		
+		return result;
+	}
+
+	public List<ApplyRefund> selectRefuseList() {
+		Connection con = getConnection();
+		
+		List<ApplyRefund> applyList = new ApplyRefundDao().selectRefuseList(con);
+		
+		close(con);
+		
+		return applyList;
+	}
+
+	//반려 취소버튼 클릭 시
+	public int cancelRefund(int num) {
+		Connection con = getConnection();
+		
+		int result = new ApplyRefundDao().cancelRefund(con, num);
 		
 		if(result > 0) {
 			commit(con);

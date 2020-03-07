@@ -292,7 +292,7 @@
 	<script>
 	$(function() {
 		$.ajax({
-			url: "/hobbyist/selectApplyList.re",
+			url: "/hobbyist/selectApplyList.ad",
 			type: 'post',
 			success: function(data) {
 				$table = $("#infoT");
@@ -347,7 +347,7 @@
 		    	console.log(num);
 		    	
 		    	$.ajax({
-		    		url: "/hobbyist/selectApplyDetail.re",
+		    		url: "/hobbyist/selectApplyDetail.ad",
 					data: {num : num},
 					type: "post",
 					success: function(data) {
@@ -370,19 +370,20 @@
 		    	});
 		    	
 	   	    	$("#myModal").modal();
-						//최종 반려 버튼 클릭시
-						$(document).on("click", '#realRefuse', function() {
-							var refundCode = Number($('.Btn').parent().parent().children("td:nth-child(1)").text());
-							var reasonDetail = $("#refuseArea").val();
-							console.log(refundCode);
-							console.log(reasonDetail);
-							var result = confirm("반려 처리 하시겠습니까?");
-							
-							if(result) {
-								location.href = "<%=request.getContextPath()%>/refuseRefund.re?refundCode=" + refundCode + "&reasonDetail=" + reasonDetail;
-								
-							}
-						});
+	   	    	
+				//최종 반려 버튼 클릭시
+				$(document).on("click", '#realRefuse', function() {
+					var refundCode = Number($('.Btn').parent().parent().children("td:nth-child(1)").text());
+					var reasonDetail = $("#refuseArea").val();
+					console.log(refundCode);
+					console.log(reasonDetail);
+					var result = confirm("반려 처리 하시겠습니까?");
+						
+					if(result) {
+						location.href = "<%=request.getContextPath()%>/refuseRefund.ad?refundCode=" + refundCode + "&reasonDetail=" + reasonDetail;
+						
+					}
+				});
 		});
 		
 	});

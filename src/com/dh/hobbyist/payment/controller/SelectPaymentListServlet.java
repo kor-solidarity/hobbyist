@@ -13,7 +13,7 @@ import com.dh.hobbyist.payment.model.service.PaymentService;
 import com.dh.hobbyist.payment.model.vo.Payment;
 import com.google.gson.Gson;
 
-@WebServlet("/selectPaymentList.pa")
+@WebServlet("/selectPaymentList.ad")
 public class SelectPaymentListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

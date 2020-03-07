@@ -314,7 +314,7 @@
 	<script>
 		$(function() {
 			$.ajax({
-				url: "/hobbyist/selectList.me",
+				url: "/hobbyist/selectList.ad",
 				type: 'post',
 				success: function(data) {
 					console.log(data);
@@ -366,7 +366,7 @@
 				$("#memberListL").css("color", "black");
 				
 				$.ajax({
-					url: "/hobbyist/selectList.me",
+					url: "/hobbyist/selectList.ad",
 					type: 'post',
 					success: function(data) {
 						console.log(data);
@@ -421,7 +421,7 @@
 				$("#memberListL").css("color", "gray");
 				
 				$.ajax({
-					url: "/hobbyist/selectList.ar",
+					url: "/hobbyist/selectArtistList.ad",
 					method: "post",
 					success: function(data) {
 						$table = $("#infoT");

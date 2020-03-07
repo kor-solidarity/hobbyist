@@ -23,6 +23,7 @@ public class ApplyRefund implements java.io.Serializable{
 	private int resultCost;			//환불금액
 	private String reason;			//환불 사유
 	private String reasonDetail;	//환불 상세사유
+	private String refuseReason;	//반려사유
 	private String impNum;			//결제고유번호
 	
 	public ApplyRefund() {}
@@ -30,7 +31,7 @@ public class ApplyRefund implements java.io.Serializable{
 	public ApplyRefund(int refundCode, int paymentCode, String lessonName, int memberCode, String memberName,
 			String phone, String email, int artistCode, int refundCost, Timestamp applyDate, int totalOrder,
 			int finishOrder, int leftOrder, int usingPoint, int givePoint, int payCost, int resultCost, String reason,
-			String reasonDetail, String impNum) {
+			String reasonDetail, String refuseReason, String impNum) {
 		super();
 		this.refundCode = refundCode;
 		this.paymentCode = paymentCode;
@@ -51,6 +52,7 @@ public class ApplyRefund implements java.io.Serializable{
 		this.resultCost = resultCost;
 		this.reason = reason;
 		this.reasonDetail = reasonDetail;
+		this.refuseReason = refuseReason;
 		this.impNum = impNum;
 	}
 
@@ -206,6 +208,14 @@ public class ApplyRefund implements java.io.Serializable{
 		this.reasonDetail = reasonDetail;
 	}
 
+	public String getRefuseReason() {
+		return refuseReason;
+	}
+
+	public void setRefuseReason(String refuseReason) {
+		this.refuseReason = refuseReason;
+	}
+
 	public String getImpNum() {
 		return impNum;
 	}
@@ -221,6 +231,7 @@ public class ApplyRefund implements java.io.Serializable{
 				+ ", artistCode=" + artistCode + ", refundCost=" + refundCost + ", applyDate=" + applyDate
 				+ ", totalOrder=" + totalOrder + ", finishOrder=" + finishOrder + ", leftOrder=" + leftOrder
 				+ ", usingPoint=" + usingPoint + ", givePoint=" + givePoint + ", payCost=" + payCost + ", resultCost="
-				+ resultCost + ", reason=" + reason + ", reasonDetail=" + reasonDetail + ", impNum=" + impNum + "]";
+				+ resultCost + ", reason=" + reason + ", reasonDetail=" + reasonDetail + ", refuseReason="
+				+ refuseReason + ", impNum=" + impNum + "]";
 	}
 }

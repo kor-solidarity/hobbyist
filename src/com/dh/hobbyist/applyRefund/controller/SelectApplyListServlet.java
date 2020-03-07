@@ -13,7 +13,7 @@ import com.dh.hobbyist.applyRefund.model.service.ApplyRefundService;
 import com.dh.hobbyist.applyRefund.model.vo.ApplyRefund;
 import com.google.gson.Gson;
 
-@WebServlet("/selectApplyList.re")
+@WebServlet("/selectApplyList.ad")
 public class SelectApplyListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
