@@ -24,7 +24,7 @@ import com.dh.hobbyist.payment.model.vo.Payment;
 public class LessonRelatedService {
 	
 	//수업 개설시 입력 처리를 위한 메소드
-	public int insertLessonRelated(HashMap lessonRelated) {
+	public boolean insertLessonRelated(HashMap lessonRelated) {
 		Connection con = getConnection();
 		
 		Lesson lesson = (Lesson) lessonRelated.get("lesson");
@@ -34,6 +34,8 @@ public class LessonRelatedService {
 		ArrayList certsList = (ArrayList) lessonRelated.get("certsList");
 		ArrayList careerList = (ArrayList) lessonRelated.get("careerList");
 		
+		System.out.println("careerList : " + careerList);
+		
 		int totalOrder = lesson.getTotalOrders();
 		
 		int lessonResult = new LessonRelatedDao().insertLesson(con, lesson);
@@ -41,6 +43,9 @@ public class LessonRelatedService {
 		int orderResult = 0;
 		int fileResult = 0;
 		int certsResult = 0;
+		int careerResult = 0;
+		
+		boolean result = false;
 		
 		//LESSON 테이블에 성공적으로 삽입되었다면
 		if(lessonResult > 0) {
@@ -73,12 +78,21 @@ public class LessonRelatedService {
 					
 					if(fileResult == fileList.size()) {
 						
-						for(int i = 0; i < certsList.size(); i++) {
-							certsResult += new LessonRelatedDao().insertCert(con, (Integer) certsList.get(i), lessonCode);
+						if(certsList.size() != 0) {
+							for(int i = 0; i < certsList.size(); i++) {
+								certsResult += new LessonRelatedDao().insertCert(con, lessonCode, (Integer) certsList.get(i));
+							}
 						}
 						
-						if(certsResult == certsList.size()) {
+						if(careerList.size() != 0) {
+							for(int i = 0; i < careerList.size(); i++) {
+								careerResult += new LessonRelatedDao().insertCareer(con, lessonCode, (Integer) careerList.get(i));
+							}
+						}
+						
+						if(certsResult == certsList.size() && careerResult == careerList.size()) {
 							commit(con);
+							result = true;
 						} else {
 							rollback(con);
 						}
@@ -102,7 +116,7 @@ public class LessonRelatedService {
 		close(con);
 
 		System.out.println("fileResult : " + fileResult);
-		return fileResult;
+		return result;
 	}
 
 	public Image selectProfileImage(int memberCode) {

@@ -574,16 +574,38 @@ public class LessonRelatedDao {
 		return p;
 	}
 
-	public int insertCert(Connection con, int certsCode, int lessonCode) {
+	public int insertCert(Connection con, int lessonCode, int certsCode) {
 		PreparedStatement pstmt = null;
 		int result = 0;
 		
 		String query = prop.getProperty("insertCert");
 		
+		System.out.println("certsCode : " + certsCode);
+		
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.setInt(1, lessonCode);
 			pstmt.setInt(2, certsCode);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+
+	public int insertCareer(Connection con, int lessonCode, Integer careerCode) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+				
+		String query = prop.getProperty("insertCareer");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, lessonCode);
+			pstmt.setInt(2, careerCode);
 			
 			result = pstmt.executeUpdate();
 			
