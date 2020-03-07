@@ -17,7 +17,7 @@ import org.json.simple.JSONObject;
 import com.dh.hobbyist.member.model.service.MemberService;
 import com.dh.hobbyist.member.model.vo.Member;
 
-@WebServlet("/selectList.me")
+@WebServlet("/selectList.ad")
 public class SelectMemberListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

@@ -20,6 +20,11 @@
 					alertMessage = "반려처리가 성공적으로 이루어 졌습니다.";
 					movePath = "/hobbyist/views/admin/payRefundMgmt/applyRefundList.jsp";
 					break;
+				
+				case "cancelRefuse" :
+					alertMessage = "반려취소 처리가 성공적으로 이루어 졌습니다.";
+					movePath = "/hobbyist/views/admin/payRefundMgmt/payList.jsp";
+					break;
 			
 			}
 			

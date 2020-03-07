@@ -93,6 +93,7 @@ public class ApplyRefundDao {
 				arf.setArtistCode(rset.getInt("ARTIST_PK"));
 				arf.setReason(rset.getString("REASON"));
 				arf.setReasonDetail(rset.getString("REASON_DETAIL"));
+				arf.setRefuseReason(rset.getString("REFUSE_REASON"));
 			}
 			
 		} catch (SQLException e) {
@@ -101,6 +102,7 @@ public class ApplyRefundDao {
 			close(pstmt);
 			close(rset);
 		}
+		System.out.println(arf);
 		return arf;
 	}
 
@@ -117,6 +119,70 @@ public class ApplyRefundDao {
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, reasonDetail);
 			pstmt.setInt(2, num);
+
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+
+
+
+	public List<ApplyRefund> selectRefuseList(Connection con) {
+		Statement stmt = null;
+		ResultSet rset = null;
+		List<ApplyRefund> applyList = null;
+		
+		String query = prop.getProperty("selectRefuseList");
+		
+		try {
+			stmt = con.createStatement();
+			rset = stmt.executeQuery(query);
+			
+			applyList = new ArrayList<ApplyRefund>();
+			
+			while(rset.next()) {
+				ApplyRefund arf = new ApplyRefund();
+				arf.setRefundCode(rset.getInt("REFUND_PK"));
+				arf.setPaymentCode(rset.getInt("PAYMENT_PK"));
+				arf.setMemberCode(rset.getInt("MEMBER_PK"));
+				arf.setMemberName(rset.getString("MEMBER_NAME"));
+				arf.setPhone(rset.getString("MEMBER_PHONE"));
+				arf.setEmail(rset.getString("MEMBER_EMAIL"));
+				arf.setArtistCode(rset.getInt("ARTIST_PK"));
+				arf.setApplyDate(rset.getTimestamp("REQUESTED_TIME"));
+				
+				applyList.add(arf);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(stmt);
+			close(rset);
+		}
+		
+		return applyList;
+	}
+
+
+
+
+	public int cancelRefund(Connection con, int num) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("cancelRefund");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, num);
 
 			result = pstmt.executeUpdate();
 			

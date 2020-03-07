@@ -5,7 +5,13 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<link href="https://fonts.googleapis.com/css?family=ZCOOL+QingKe+HuangYou&display=swap" rel="stylesheet">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
  <style>
  
  	section {
@@ -87,12 +93,63 @@
  	
  	th {
  		background: #4E4E4E;
+ 		text-align: center;
  		color: white;
  		height: 30px;
  	}
  	
  	#infoArea td {
  		border: 1px solid black;
+ 		height: 45px;
+ 	}
+ 	
+ 	 	#modalT {
+  		width: 420px;
+  		margin: 0 auto;
+ 		
+ 	}
+ 	#modalT tr td:nth-child(1){
+ 		font-size: 20px;
+ 		font-weight: bold;
+ 		line-height: 40px;
+ 	}
+ 	
+ 	#modalT tr td:nth-child(2){
+		text-align: right; 	
+		font-size: 15px;
+ 	}
+ 	
+ 	#reasonDetail {
+ 		height: 80px;
+ 		border: 1px solid black;
+ 		overflow-x: hidden;
+        overflow-y: auto;
+        font-weight: normal;
+        font-size: 15px;
+        line-height: 20px;
+ 	}
+ 	
+ 	#refuseArea {
+ 		width: 465px;
+ 		height: 80px;
+ 		border: 1px solid black;
+ 		overflow-x: hidden;
+        overflow-y: auto;
+        resize: none;
+ 	}
+ 	
+ 	#refuseReason {
+ 		height: 80px;
+ 		border: 1px solid black;
+ 		overflow-x: hidden;
+        overflow-y: auto;
+        font-weight: normal;
+        font-size: 15px;
+        line-height: 20px;
+ 	}
+ 	
+ 	#infoT {
+ 		width:100%;
  	}
 </style>
 </head>
@@ -128,8 +185,8 @@
 					<tr>
 						<td style="text-align: left; vertical-align: bottom;">
 							<label id="paymentListL" style="font-weight: bold;">결제 내역</label> &nbsp; &nbsp; 
-							<label style="font-weight: bold; color: gray;">환불 내역</label>&nbsp; &nbsp; 
-							<label style="font-weight: bold; color: gray;">반려 내역</label>
+							<label id="refundListL" style="font-weight: bold; color: gray;">환불 내역</label>&nbsp; &nbsp; 
+							<label id="refuseListL" style="font-weight: bold; color: gray;">반려 내역</label>
 						</td>
 						<td style="padding-right: 20px;">
 							<input style="text" id="searchMember"><button id="searchBtn">검색</button>
@@ -161,10 +218,84 @@
 			</div>
 		</article>
 	</section>
+	
+		 <div class="modal fade" id="myModal" role="dialog">
+   	 <div class="modal-dialog">
+    
+   	   <!-- Modal content-->
+   	   <div class="modal-content">
+   	     <div class="modal-header" style="background: #4E4E4E; color: white; height: 80px;">
+   	       <button type="button" class="close" data-dismiss="modal" style="color: white;">x</button>
+   	       <h4 class="modal-title" style="font-family: 'ZCOOL QingKe HuangYou', cursive; font-size: 30px;">hobbyist</h4>
+   	     </div>
+   	     <div class="modal-body">
+   	       <table id="modalT">
+   	       		<tr>
+   	       			<td>결제 고유번호</td>
+   	       			<td id="impNum"></td>
+   	       		</tr>
+   	       		<tr>
+   	       			<td>수업 제목</td>
+   	       			<td id="lessonName"></td>
+   	       		</tr>
+   	       		<tr>
+   	       			<td>결제 금액</td>
+   	       			<td id="payCost"></td>
+   	       		</tr>
+   	       		<tr>
+   	       			<td>사용 포인트</td>
+   	       			<td id="usingPoint"></td>
+   	       		</tr>
+   	       		<tr>
+   	       			<td>환불 금액</td>
+   	       			<td id="refundCost"></td>
+   	       		</tr>
+   	       		<tr>
+   	       			<td>수업 회차</td>
+   	       			<td id="totalOrder"></td>
+   	       		</tr>
+   	       		<tr>
+   	       			<td>진행 회차</td>
+   	       			<td id="finishOrder"></td>
+   	       		</tr>
+   	       		<tr>
+   	       			<td>잔여 회차</td>
+   	       			<td id="leftOrder"></td>
+   	       		</tr>
+   	       		<tr>
+   	       			<td>환불 사유</td>
+   	       			<td id="reason"></td>
+   	       		</tr>
+   	       		<tr>
+   	       			<td colspan="2" style="padding-top: 20px;">
+   	       				<div id="reasonDetail">
+   	       				</div>
+   	       			</td>
+   	       		</tr>
+   	       		<tr>
+   	       			<td>반려 사유</td>
+   	       		</tr>
+   	       		<tr>
+   	       			<td colspan="2" style="padding-top: 20px;">
+   	       				<div id="refuseReason">
+   	       				</div>
+   	       			</td>
+   	       		</tr>
+   	       </table>
+   	     </div>
+   	     <div class="modal-footer">
+   	       <button type="button" class="btn btn-default" onclick="cancelRefuse();">반려 취소</button>
+   	     </div>
+     		</div>
+   	   
+   		 </div>
+  		</div>
+  	
+  		
 	<script>
 		$(function() {
 			$.ajax({
-				url: "/hobbyist/selectPaymentList.pa",
+				url: "/hobbyist/selectPaymentList.ad",
 				type: 'post',
 				success: function(data) {
 					$table = $("#infoT");
@@ -214,8 +345,12 @@
 			});
 			
 			$("#paymentListL").click(function() {
+				$("#paymentListL").css("color", "black");
+				$("#refundListL").css("color", "gray");
+				$("#refuseListL").css("color", "gray");
+				
 				$.ajax({
-					url: "/hobbyist/selectPaymentList.pa",
+					url: "/hobbyist/selectPaymentList.ad",
 					type: 'post',
 					success: function(data) {
 						$table = $("#infoT");
@@ -264,8 +399,107 @@
 					}
 				});
 			});
-		})
+			
+			$("#refuseListL").click(function() {
+				$("#paymentListL").css("color", "gray");
+				$("#refundListL").css("color", "gray");
+				$("#refuseListL").css("color", "black");
+				
+				
+				$.ajax({
+					url: "/hobbyist/selectRefuseList.ad",
+					type: 'post',
+					success: function(data) {
+						$table = $("#infoT");
+						$table.html("");
+						console.log(data);
+						var $tr = $("<tr>");
+						
+						$tr.append('<th style="width: 8%;">신청코드</th>' +
+								'<th style="width: 10%;">결제코드</th>' +
+								'<th style="width: 10%;">회원코드</th>' +
+								'<th style="width: 7%;">이름</th>' +
+								'<th style="width: 12%;">전화번호</th>' +
+								'<th style="width: 17%;">이메일</th>' +
+								'<th style="width: 11%;">환불 금액</th>' +
+								'<th style="width: 17%;">신청일</th>' +
+								'<th style="width: 14%;">상세보기</th>');
+					
+						$table.append($tr);
+					
+						for(key in data) {
+							$tr= $("<tr>");
+							var $rcode = $("<td>").text(data[key].refundCode);
+							var $pcode = $("<td>").text(data[key].paymentCode);
+							var $mCode = $("<td>").text(data[key].memberCode);
+							var $mName = $("<td>").text(data[key].memberName);
+							var $phone = $("<td>").text(data[key].phone);
+							var $email = $("<td>").text(data[key].email);
+							var $acode = $("<td>").text(data[key].artistCode);
+							var $rDate = $("<td>").text(data[key].applyDate);
+							var $btn = $("<td>").html("<button class='Btn'>조회</button>");
+						
+							$tr.append($rcode);
+							$tr.append($pcode);
+							$tr.append($mCode);
+							$tr.append($mName);
+							$tr.append($phone);
+							$tr.append($email);
+							$tr.append($acode);
+							$tr.append($rDate);
+							$tr.append($btn);
+							$table.append($tr);
+							}
+						},
+						error: function(status) {
+							console.log(status);
+						}
+				});
+			});
+			
+			$(document).on("click", '.Btn', function() {
+		    	var num = Number($(this).parent().parent().children("td:nth-child(2)").text());
+		    	console.log(num);
+		    	
+		    	$.ajax({
+		    		url: "/hobbyist/selectApplyDetail.ad",
+					data: {num : num},
+					type: "post",
+					success: function(data) {
+						$("#impNum").text(data.impNum);
+						$("#lessonName").text(data.lessonName);
+						$("#payCost").text(data.payCost);
+						$("#usingPoint").text(data.usingPoint);
+						$("#refundCost").text(Math.floor(data.payCost * (data.finishOrder / data.totalOrder)));
+						$("#totalOrder").text(data.totalOrder);
+						$("#finishOrder").text(data.finishOrder);
+						$("#leftOrder").text(data.leftOrder);
+						$("#reason").text(data.reason);
+						$("#reasonDetail").text(data.reasonDetail);
+						$("#refuseReason").text(data.refuseReason);
+						
+					},
+					error: function(error) {
+						console.log(error);
+					}
+		    		
+		    	});
+		    	
+	   	    	$("#myModal").modal();
+	   	    	
+			});
+		});
 		
+		//반려 취소 버튼 클릭 시
+		function cancelRefuse() {
+			
+			var result = confirm("반려 취소 하시겠습니까?");
+			
+			if(result) {
+				location.href = "<%=request.getContextPath()%>/cancelRefuse.ad?refundCode=" + refundCode;
+			}
+		}
+			
 		//환불 신청
 		function goRefundList() {
 			location.href = "<%=request.getContextPath()%>/views/admin/payRefundMgmt/applyRefundList.jsp";

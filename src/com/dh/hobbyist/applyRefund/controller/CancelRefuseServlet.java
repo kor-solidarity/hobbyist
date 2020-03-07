@@ -9,30 +9,28 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.dh.hobbyist.applyRefund.model.service.ApplyRefundService;
 
-@WebServlet("/refuseRefund.ad")
-public class refuseRefundServlet extends HttpServlet {
+@WebServlet("/cancelRefuse.ad")
+public class CancelRefuseServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public refuseRefundServlet() {
+    public CancelRefuseServlet() {
         super();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int num = Integer.parseInt(request.getParameter("refundCode"));
-		String reasonDetail = request.getParameter("reasonDetail");
 		
 		System.out.println(num);
-		System.out.println(reasonDetail);
 		
-		int result = new ApplyRefundService().refuseRefund(num, reasonDetail);
+		int result = new ApplyRefundService().cancelRefund(num);
 		
 		String page = "";
 		if(result > 0) {
 			page = "views/common/adminSuccessPage.jsp";
-			request.setAttribute("successCode", "refuseRefund");
+			request.setAttribute("successCode", "cancelRefuse");
 		}else {
 			page = "views/common/adminErrorPage.jsp";
-			request.setAttribute("msg", "반려가 정상적으로 이루어지지 않았습니다.");
+			request.setAttribute("msg", "반려취소가 정상적으로 이루어지지 않았습니다.");
 		}
 		
 		request.getRequestDispatcher(page).forward(request, response);
