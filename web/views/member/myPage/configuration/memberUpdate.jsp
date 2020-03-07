@@ -364,7 +364,7 @@ color: #FFFFFF;
 					<td colspan="1" style="width: 100px; text-align: left;"><label
 						id="labelName">이름</label></td>
 					<td colspan="5" class="nm" style="text-align: left;"><input
-						style="width: 260px;" type="name" name="ncikName" id="ncikName" max-length=5 placeholder="이름을 입력하세요." value="<%=loginMember.getMemberName()%>"></td>
+						style="width: 260px;" type="name" name="nickName" id="nickName" max-length=5 placeholder="이름을 입력하세요." value="<%=loginMember.getMemberName()%>"></td>
 					<td></td>
 				</tr>
 
@@ -522,7 +522,7 @@ $(document).on('click','#button4', function(){
 	function updateMember()  {
 		console.log("아이디" + userId);
 		console.log("아이디" + userPwd);
-		console.log("아이디" + ncikName);
+		console.log("아이디" + nickName);
 		console.log("아이디" + email);
 		console.log("아이디" + tel1);
 		console.log("아이디" + tel2);
