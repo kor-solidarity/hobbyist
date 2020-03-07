@@ -138,7 +138,7 @@ public class InsertLessonServlet extends HttpServlet {
 			}
 			//System.out.println("subRegion :  " + subRegion);
 			
-			String address = "상세주소는 파악중입니다";
+			String address = multiRequest.getParameter("address");
 			
 			LessonSchedule schedule = new LessonSchedule();
 			schedule.setRegion(koreanRegion);
@@ -167,21 +167,12 @@ public class InsertLessonServlet extends HttpServlet {
 			String[] certs = multiRequest.getParameterValues("selectedCerts");
 			ArrayList certsList = new ArrayList();
 			
-			System.out.println("certs : " +certs);
-			
-			String test = multiRequest.getParameter("test");
-			
-			System.out.println("test : " + test);
-			
-			Enumeration check = multiRequest.getParameterNames();
-			
-			while(check.hasMoreElements()) {
-				System.out.println(check.nextElement());
-			}
-			
 			if(certs != null) {
+				
 				for(int i = 0; i < certs.length; i++) {
 					int c = Integer.parseInt(certs[i]);
+					
+					System.out.println("c : " + c);
 					
 					certsList.add(c);
 				}
@@ -190,9 +181,8 @@ public class InsertLessonServlet extends HttpServlet {
 			String[] career = multiRequest.getParameterValues("selectedCareer");
 			ArrayList careerList = new ArrayList();
 			
-			System.out.println("career : " + career);
-			
 			if(career != null) {
+				
 				for(int i = 0; i < career.length; i++) {
 					int c = Integer.parseInt(career[i]);
 					
@@ -209,10 +199,10 @@ public class InsertLessonServlet extends HttpServlet {
 			lessonRelated.put("certsList", certsList);
 			lessonRelated.put("careerList", careerList);
 			
-			int result = new LessonRelatedService().insertLessonRelated(lessonRelated);
+			boolean result = new LessonRelatedService().insertLessonRelated(lessonRelated);
 			
 			String page = "";
-			if(result == saveFiles.size()) {
+			if(result == true) {
 				page = "views/common/successPage.jsp";
 				request.setAttribute("successCode", "insertLesson");
 			} else {

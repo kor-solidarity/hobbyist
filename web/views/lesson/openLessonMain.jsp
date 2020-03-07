@@ -14,6 +14,7 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=fa120e8648138856b30621abf3ebb591"></script>
 <title>hobbyist</title>
 <style>
 body {
@@ -202,7 +203,7 @@ body {
 .item2 {
 	border-radius: 8px;
     background-color: darkolivegreen;
-    width: 85%;
+    width: 95%;
     color: white;
     padding: 5px;
     font-size: 15px;
@@ -780,12 +781,12 @@ body {
 									<td>05. 일정등록</td>
 								</tr>
 							</table>
-							<table id="LessonTable10" style="width:100%; height:450px;">
+							<table id="LessonTable10" style="width:100%; height:500px;">
 								<tr>
 									<td style="width: 80px;">지역</td>
-									<td style="width: 130px;">상세지역</td>
+									<td style="width: 140px;">상세지역</td>
 									<td colspan="2"><label class="currOrder">1</label>회차 시작시간</td>
-									<td style="width: 165px;"><label class="currOrder">1</label>회차 종료시간</td>
+									<td style="width: 170px;"><label class="currOrder">1</label>회차 종료시간</td>
 								</tr>
 								<tr>
 									<td>
@@ -820,22 +821,23 @@ body {
 								</tr>
 								<tr>
 									<td colspan="2">상세주소</td>
-									<td style="width:160px;"></td>
+									<td style="width:210px;"></td>
 									<td colspan="2">등록된 회차 목록 / 총 <label id="showOrder">4</label>회차</td>
 								</tr>
-								<tr style="height: 65%;">
-									<td colspan="2" style="border: 1px solid darkolivegreen;"></td>
-									<td></td>
+								<tr style="height: 250px;">
+									<td colspan="3" style="border: 1px solid darkolivegreen;"><div id="map" style="width:448px;height:240px;"></div></td>
 									<td id= "orderListArea" colspan="2" style="border: 1px solid darkolivegreen;"></td>
 								</tr>
-								<tr style="height: 15%;">
-									<td colspan="2" style="border: 1px solid darkolivegreen;">강남구 테헤란로
-										14길 남도빌딩 5F</td>
-									<td></td>
-									<td style="width: 100px;"></td>
-									<td></td>
+								<tr>
+									<td colspan="5">
+									전체 주소 입력 : <input type="text" class="nanum" name="address" placeholder="전체 주소를 복사 또는 입력해주세요." style="width:400px">
+									</td>
 								</tr>
 							</table>
+							<script>
+								
+								
+							</script>
 						</div>
 						<!-- 등록된 수업일정 목록 화면 -->
 						<div id="show6" style="display: none;">
@@ -870,6 +872,16 @@ body {
 		</div>
 	</div>
 	<script>
+		//카카오 맵 관련 사항
+		var container = document.getElementById('map');
+		var options = {
+			center : new kakao.maps.LatLng(37.4989972, 127.0307203),
+			level : 4
+		};
+	
+		var map = new kakao.maps.Map(container, options);
+		//카카오 맵 관련 사항 끝
+	
 		$(function(){
 			var num = 1;
 		
@@ -956,7 +968,8 @@ body {
 							for(var i = 0; i < data.length; i++) {
 								var certName = decodeURIComponent(data[i].certName);
 								
-								$certsArea.append("<span class='item-certs' name='test' data-clicks='false' value='" + data[i].certCode + "'>" + certName + "</span>");
+								$certsArea.append("<span class='item-certs' data-clicks='false'>" + certName + "</span>");
+								$certsArea.append("<input type='hidden' class='item-certs-input' data-clicks='false' value='" + data[i].certCode + "'>");
 							}
 						},
 						error: function(error) {
@@ -979,7 +992,8 @@ body {
 								var rank = decodeURIComponent(data[i].rank);
 								var term = decodeURIComponent(data[i].occupationTerm);
 								
-								$careerArea.append("<span class='item-career' data-clicks='false' value='" + data[i].recCode + "'>" + orgName + " " + rank + " / " + term + "</span>");
+								$careerArea.append("<span class='item-career' data-clicks='false'>" + orgName + " / " + rank + " / " + term + "</span>");
+								$careerArea.append("<input type='hidden' class='item-career-input' data-clicks='false' value='" + data[i].recCode + "'>")
 							}
 						},
 						error: function(error) {
@@ -988,6 +1002,12 @@ body {
 						
 					});
 				}
+				
+				if(num == 5) {
+					//카카오맵 크기 재설정
+					map.relayout(); 
+				}
+				
 				
 				if(num == 6) {
 					$("#nextModalBtn").hide();
@@ -1018,21 +1038,20 @@ body {
 	
 			});
 			// 모달 안의 저장 버튼에 전송 기능을 건다.
-			/* $('#saveModalBtn').on('click', function() {
+			$('#saveModalBtn').on('click', function() {
 				$("#LessonForm").submit();
-			}); */
-			$(document).on("click", '#saveModalBtn', function() {
-				$('#LessonForm').submit();
-			})
+			});
 			
 			//보유한 자격 클릭할 때마다 번갈아가며 css 다르게 적용하는 함수
 			$(document).on("click", '.item-certs', function(){
 					var clicks = $(this).data('clicks');
 					
 					if(clicks) {
-						$(this).css({'background':'lightgrey', 'color':'black'}).removeAttr('name');
+						$(this).css({'background':'lightgrey', 'color':'black'});
+						$(this).next().removeAttr('name');
 					} else {
-						$(this).css({'background':'darkolivegreen', 'color':'white'}).attr('name', 'selectedCerts');
+						$(this).css({'background':'darkolivegreen', 'color':'white'});
+						$(this).next().attr('name', 'selectedCerts');
 					}
 					
 					$(this).data("clicks", !clicks);
@@ -1043,9 +1062,11 @@ body {
 					var clicks = $(this).data('clicks');
 					
 					if(clicks) {
-						$(this).css({'background':'lightgrey', 'color':'black'}).removeAttr('name');
+						$(this).css({'background':'lightgrey', 'color':'black'});
+						$(this).next().removeAttr('name');
 					} else {
-						$(this).css({'background':'darkolivegreen', 'color':'white'}).attr('name', 'selectedCareer');
+						$(this).css({'background':'darkolivegreen', 'color':'white'});
+						$(this).next().attr('name', 'selectedCareer');
 					}
 					
 					$(this).data("clicks", !clicks);
@@ -1058,9 +1079,11 @@ body {
 			var clicks = $(this).data('clicks');
 			
 			if(clicks) {
-				$("#certsArea").find('span').css({'background':'lightgrey', "color":'black'}).removeAttr('name');
+				$("#certsArea").find('span').css({'background':'lightgrey', "color":'black'});
+				$('.item-certs-input').removeAttr('name');
 			} else {
-				$("#certsArea").find('span').css({'background':'darkolivegreen', 'color':'white'}).attr('name', 'selectedCerts');
+				$("#certsArea").find('span').css({'background':'darkolivegreen', 'color':'white'});
+				$('.item-certs-input').attr('name', 'selectedCerts');
 			}
 			
 			$(this).data("clicks", !clicks);
@@ -1071,9 +1094,11 @@ body {
 			var clicks = $(this).data('clicks');
 			
 			if(clicks) {
-				$("#careerArea").find('span').css({'background':'lightgrey', 'color':'black'}).removeAttr('name');
+				$("#careerArea").find('span').css({'background':'lightgrey', 'color':'black'});
+				$('.item-career-input').removeAttr('name');
 			} else {
-				$("#careerArea").find('span').css({'background':'darkolivegreen', 'color':'white'}).attr('name', 'selectedCareer');
+				$("#careerArea").find('span').css({'background':'darkolivegreen', 'color':'white'});
+				$('.item-career-input').attr('name', 'selectedCareer');
 			}
 			
 			$(this).data("clicks", !clicks);
