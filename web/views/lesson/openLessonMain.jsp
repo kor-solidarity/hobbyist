@@ -182,7 +182,7 @@ body {
 	border-collapse: separate;
 }
 
-.item {
+.item-certs {
     border-radius: 8px;
     background-color: lightgray;
     color: black;
@@ -191,6 +191,14 @@ body {
     margin-right: 15px;
 }
 
+.item-career {
+    border-radius: 8px;
+    background-color: lightgray;
+    color: black;
+    padding: 5px;
+    font-size: 15px;
+    margin-right: 15px;
+}
 .item2 {
 	border-radius: 8px;
     background-color: darkolivegreen;
@@ -948,7 +956,7 @@ body {
 							for(var i = 0; i < data.length; i++) {
 								var certName = decodeURIComponent(data[i].certName);
 								
-								$certsArea.append("<span class='item' data-clicks='false' value='" + data[i].certCode + "'>" + certName + "</span>");
+								$certsArea.append("<span class='item-certs' name='test' data-clicks='false' value='" + data[i].certCode + "'>" + certName + "</span>");
 							}
 						},
 						error: function(error) {
@@ -971,7 +979,7 @@ body {
 								var rank = decodeURIComponent(data[i].rank);
 								var term = decodeURIComponent(data[i].occupationTerm);
 								
-								$careerArea.append("<span class='item' data-clicks='false' value='" + data[i].recCode + "'>" + orgName + " " + rank + " / " + term + "</span>");
+								$careerArea.append("<span class='item-career' data-clicks='false' value='" + data[i].recCode + "'>" + orgName + " " + rank + " / " + term + "</span>");
 							}
 						},
 						error: function(error) {
@@ -992,7 +1000,6 @@ body {
 					console.log("regionVal : " + regionVal);
 					console.log("cat1_name[regionVal] : " + cat1_name[regionVal]);
 					
-					//selected 속성이 true인 것을 고르면 되려나
 					var region = cat1_name[regionVal];
 					
 					$scheduleListArea = $("#scheduleListArea");
@@ -1011,18 +1018,34 @@ body {
 	
 			});
 			// 모달 안의 저장 버튼에 전송 기능을 건다.
-			$('#saveModalBtn').on('click', function() {
+			/* $('#saveModalBtn').on('click', function() {
 				$("#LessonForm").submit();
-			});
+			}); */
+			$(document).on("click", '#saveModalBtn', function() {
+				$('#LessonForm').submit();
+			})
 			
-			//클릭할 때마다 번갈아가며 css 다르게 적용하는 함수
-			$(document).on("click", '.item', function(){
+			//보유한 자격 클릭할 때마다 번갈아가며 css 다르게 적용하는 함수
+			$(document).on("click", '.item-certs', function(){
 					var clicks = $(this).data('clicks');
 					
 					if(clicks) {
-						$(this).css({'background':'lightgrey', 'color':'black'});
+						$(this).css({'background':'lightgrey', 'color':'black'}).removeAttr('name');
 					} else {
-						$(this).css({'background':'darkolivegreen', 'color':'white'});
+						$(this).css({'background':'darkolivegreen', 'color':'white'}).attr('name', 'selectedCerts');
+					}
+					
+					$(this).data("clicks", !clicks);
+			});
+			
+			//등록한 경력 클릭할 때마다 번갈아가며 css 다르게 적용하는 함수
+			$(document).on("click", '.item-career', function(){
+					var clicks = $(this).data('clicks');
+					
+					if(clicks) {
+						$(this).css({'background':'lightgrey', 'color':'black'}).removeAttr('name');
+					} else {
+						$(this).css({'background':'darkolivegreen', 'color':'white'}).attr('name', 'selectedCareer');
 					}
 					
 					$(this).data("clicks", !clicks);
@@ -1035,9 +1058,9 @@ body {
 			var clicks = $(this).data('clicks');
 			
 			if(clicks) {
-				$("#certsArea").find('span').css({'background':'lightgrey', "color":'black'});
+				$("#certsArea").find('span').css({'background':'lightgrey', "color":'black'}).removeAttr('name');
 			} else {
-				$("#certsArea").find('span').css({'background':'darkolivegreen', 'color':'white'});
+				$("#certsArea").find('span').css({'background':'darkolivegreen', 'color':'white'}).attr('name', 'selectedCerts');
 			}
 			
 			$(this).data("clicks", !clicks);
@@ -1048,9 +1071,9 @@ body {
 			var clicks = $(this).data('clicks');
 			
 			if(clicks) {
-				$("#careerArea").find('span').css({'background':'lightgrey', 'color':'black'});
+				$("#careerArea").find('span').css({'background':'lightgrey', 'color':'black'}).removeAttr('name');
 			} else {
-				$("#careerArea").find('span').css({'background':'darkolivegreen', 'color':'white'});
+				$("#careerArea").find('span').css({'background':'darkolivegreen', 'color':'white'}).attr('name', 'selectedCareer');
 			}
 			
 			$(this).data("clicks", !clicks);
