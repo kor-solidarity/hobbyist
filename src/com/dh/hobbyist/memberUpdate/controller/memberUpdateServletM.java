@@ -59,35 +59,35 @@ public class memberUpdateServletM extends HttpServlet {
 	
 	int result = new MemberService().memberUpdate(member);
 	
-	/*System.out.println("set에 담고 userId" + userId);
+	System.out.println("set에 담고 userId" + userId);
 	System.out.println("set에 담고 password1" + userPwd);
-	System.out.println("set에 담고 ncikName" + ncikName);
+	System.out.println("set에 담고 ncikName" + nickName);
 	System.out.println("set에 담고 email" + email);
 	System.out.println("set에 담고 phone" + phone);
 	System.out.println("set에 담고 bank" + bankName);
-	System.out.println("set에 담고 bankText" + bankNum);*/
+	System.out.println("set에 담고 bankText" + bankNum);
 	
 	String page="";
 	if(result >0) {
 		page = "/views/common/successPage.jsp";
 		request.setAttribute("successCode", "updateMember");
-	/*	System.out.println("성공시 userId" + userId);
+		System.out.println("성공시 userId" + userId);
 		System.out.println("성공시 password1" + userPwd);
-		System.out.println("성공시 ncikName" + ncikName);
+		System.out.println("성공시 ncikName" + nickName);
 		System.out.println("성공시 email" + email);
 		System.out.println("성공시 phone" + phone);
 		System.out.println("성공시 bank" + bankName);
-		System.out.println("성공시 bankText" + bankNum);*/
+		System.out.println("성공시 bankText" + bankNum);
 	}else {
 		page = "/views/common/errorPage.jsp";
 		request.setAttribute("msg", "회원정보 수정 실패!!");
-		/*System.out.println("실패시 userId" + userId);
+		System.out.println("실패시 userId" + userId);
 		System.out.println("실패시 password1" + userPwd);
-		System.out.println("실패시 ncikName" + ncikName);
+		System.out.println("실패시 ncikName" + nickName);
 		System.out.println("실패시 email" + email);
 		System.out.println("실패시 phone" + phone);
 		System.out.println("실패시 bank" + bankName);
-		System.out.println("실패시 bankText" + bankNum);*/
+		System.out.println("실패시 bankText" + bankNum);
 	}
 	request.getRequestDispatcher(page).forward(request, response);
 }
