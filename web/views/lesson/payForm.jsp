@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8" import="com.dh.hobbyist.payment.model.vo.Payment"%>
+<%
+	Payment p = (Payment) request.getAttribute("p");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -141,7 +144,7 @@ input[type="button"], input[type="reset"] {
 		<div id="contentDiv" style="overflow-y: auto; overflow-x: hidden;">
 			<table id="content">
 				<tr>
-					<td colspan="4" style="font-weight: bold; font-size: 24px;">수업제목입력 수업제목을 아무거나 입력하세요.</td>
+					<td colspan="4" style="font-weight: bold; font-size: 24px;"><%=p.getLessonName() %></td>
 				</tr>
 				<tr></tr>
 				<tr></tr>
@@ -164,26 +167,26 @@ input[type="button"], input[type="reset"] {
 				
 				<tr>
 					<td colspan="3">아티스트명</td>
-					<td>송삼동</td>
+					<td><%=p.getArtistName() %></td>
 				</tr>
 				<tr>
 					<td colspan="3">회차당 수업료</td>
-					<td>10000원</td>
+					<td><%=p.getCostPerOrder()%>원</td>
 				</tr>
 				<tr>
 					<td colspan="3">총 회차</td>
-					<td>3회차</td>
+					<td><%=p.getTotalOrder() %>회</td>
 				</tr>
 				<tr>
 					<td colspan="3">전체 수업료</td>
-					<td>30000원</td>
+					<td><%=p.getTotalCost() %>원</td>
 				</tr>
 				<tr>
 					<td colspan="4">수업 장소</td>
 				</tr>
 				<tr>
 					<td colspan="4" style="font-size: medium; font-weight: normal;">
-						경기도 성남시 수정구 고등동 호반써밋 아파트
+						<%=p.getRegion() %>  <%=p.getSubRegion() %>  <%=p.getAddress() %>
 					</td>
 				</tr>
 				<tr>
@@ -215,7 +218,7 @@ input[type="button"], input[type="reset"] {
 				</tr>
 				<tr>
 					<td colspan="2">보유 포인트 :</td>
-					<td style="font-weight: bold;"><label id="myPoint">3000</label> point</td>
+					<td style="font-weight: bold;"><label id="myPoint"><%=p.getTotalPoint() %></label> point</td>
 				</tr>
 				<tr>
 					<td colspan="2">사용 포인트 :</td>
@@ -227,11 +230,11 @@ input[type="button"], input[type="reset"] {
 				</tr>
 				<tr>
 					<td colspan="2">적립 예정 포인트 :</td>
-					<td style="color: blue; font-weight: bold;"><label id="givePoint"></label> point</td>
+					<td style="color: blue; font-weight: bold;"><label id="givePoint"><%=(int) (p.getTotalCost() * 0.01) %></label> point</td>
 				</tr>
 				<tr>
 					<td colspan="2">결제 후 잔여 포인트 :</td>
-					<td style="font-weight: bold;"><label id="afterPoint">3000</label> point</td>
+					<td style="font-weight: bold;"><label id="afterPoint"></label> point</td>
 				</tr>
 			</table>
 			<table id="howToPay">
@@ -312,16 +315,16 @@ input[type="button"], input[type="reset"] {
 		<table id="checkPay">
 			<tr>
 				<td style="color: gray; font-size: 20px;">전체 수업료</td>
-				<td style="color: gray; font-size: 20px;"><label id="lessonMoney">3100</label> 원</td>
+				<td style="color: gray; font-size: 20px;"><label id="lessonMoney"><%=p.getTotalCost() %></label> 원</td>
 			</tr>
 			<tr>
 				<td style="color: gray; font-size: 20px;">사용 포인트</td>
-				<td style="color: gray; font-size: 20px;">(-)<label id="usingPointResult"></label>원</td>
+				<td style="color: gray; font-size: 20px;">(-)<label id="usingPointResult"></label>point</td>
 			</tr>
 
 			<tr style="line-height: 50px;">
 				<td style="font-size: 25px; font-weight: bold;">결제 금액</td>
-				<td style="font-size: 25px; font-weight: bold;"><label id="moneyResult">3100</label> 원</td>
+				<td style="font-size: 25px; font-weight: bold;"><label id="moneyResult"><%=p.getTotalCost() %></label> 원</td>
 			</tr>
 		</table>
 
@@ -334,16 +337,19 @@ input[type="button"], input[type="reset"] {
 	<%@ include file="../common/footer.jsp"%>
 
 	<script>
+	$(function() {
+			
 	   	$("#usingPoint").keyup(function(){
 			var lessonMoney = Number($("#lessonMoney").text());	//수업료
+			console.log(lessonMoney);
 	 	  	var myPoint = Number($("#myPoint").text());			//보유 포인트
 	    	var usingPoint = Number($("#usingPoint").val());	//사용 포인트
 	    	var givePoint = Number($("#givePoint").text());
   		  
 	    	$("#givePoint").text(Math.round((lessonMoney - usingPoint) * 0.01));	//적립예정 포인트
-    			$("#afterPoint").text(myPoint - usingPoint);		//잔여포인트
-    			$("#usingPointResult").text(usingPoint);			//최종 사용 포인트
-    			$("#moneyResult").text(lessonMoney - usingPoint);	//최종 결제 금액
+    		$("#afterPoint").text(myPoint - usingPoint);		//잔여포인트
+    		$("#usingPointResult").text(usingPoint);			//최종 사용 포인트
+    		$("#moneyResult").text(lessonMoney - usingPoint);	//최종 결제 금액
     	
     			if(Number($("#afterPoint").text()) < 0) {
     				alert("안됩니다.");
@@ -354,6 +360,14 @@ input[type="button"], input[type="reset"] {
   	 	 			$("#moneyResult").text(lessonMoney);
     			
   		  		}
+    			if(Number($("#givePoint").text()) < 0) {
+    				alert("수업료보다 사용하실 포인트가 많습니다.");
+    				$("#usingPoint").val("");
+    				$("#givePoint").text(lessonMoney * 0.01);
+    				$("#usingPointResult").text("");
+    				$("#afterPoint").text(myPoint);
+  	 	 			$("#moneyResult").text(lessonMoney);
+    			}
     	
 		});
 	
@@ -365,7 +379,7 @@ input[type="button"], input[type="reset"] {
     	
    	  	if($("#payTermsBox").prop("checked") && $("#refundTermsBox").prop("checked")/*  && loginUser != null */) {		//로그인 유저가 널이 아닐때 추가하기!!
     	  
-	    	if(usingPoint < 100) {
+	    	if(usingPoint < 100 && usingPoint != 0) {
 	    		alert("100포인트 이상 사용 가능합니다.");
 	    	}else {
 	  			var IMP = window.IMP; // 생략가능
@@ -375,15 +389,13 @@ input[type="button"], input[type="reset"] {
  		 		pg: 'inicis',
  		 		pay_method : 'card',
  	 	 		merchant_uid: 'merchant_' + new Date().getTime(),	/*	merchant_uid에 경우	https://docs.iamport.kr/implementation/payment	*/
- 		 		name : '수업제목',
+ 		 		name : '<%=p.getLessonName()%>',
  		 		usingPoint: usingPoint,	//사용포인트
  		 		givePoint: givePoint,	//지금 포인트
  		  		amount: moneyResult,	//가격
-		  		buyer_email: 'iamport@siot.do',	
-		  		buyer_name: '이지호',
- 		  		buyer_tel: '010-1234-5678',
- 		  		buyer_addr: '서울특별시 강남구 삼성동',
-  	  			buyer_postcode: '123-456',
+		  		buyer_email: '<%=loginMember.getEmail()%>',	
+		  		buyer_name: '<%=loginMember.getMemberName()%>',
+ 		  		buyer_tel: '<%=loginMember.getPhone()%>',
  	 	 
   	  			/* 모바일 결제시, 결제가 끝나고 랜딩되는 URL을 지정
  	  			(카카오페이, 페이코, 다날의 경우는 필요없음. PC와 마찬가지로 callback함수로 결과가 떨어짐 */
@@ -397,21 +409,22 @@ input[type="button"], input[type="reset"] {
 		    			msg += '고유ID : ' + rsp.imp_uid;	
 		    			msg += '결제 금액 : ' + rsp.paid_amount;
 	    			
-		    			console.log(rsp.imp_uid);
-		    			console.log(rsp.name);
+		    			console.log(usingPoint);
+		    			console.log(givePoint);
 	    				$.ajax({
 	   	 	  	    	  	url: "<%= request.getContextPath()%>/payment.pa", // 가맹점 서버
 	        		    	method: "POST",
 	            			data: {
+	            				scheduleCode : <%=p.getScheduleCode()%>,		//일정코드
 			    				memberCode : <%=loginMember.getMemberCode()%>,		//회원코드
-			    				aritistCode : "dd",
-	         	  	 			impUid : rsp.imp_uid,				//고유번호
-			    				merchantUid : rsp.merchant_uid,		//머천트 임의 고유번호
-			    				productName : rsp.name,				//상품명
-			    				price : rsp.paid_amount,			//가격
-			    				usingPoint: usingPoint,
-			  		  			givePoint : givePoint,				//적립예정 포인트
-			  		  			payDate : rsp.paid_at				//결제 일시
+			    				artistCode : <%=p.getArtistCode()%>,	//아티스트 코드
+	         	  	 			impUid : rsp.imp_uid,					//고유번호
+			    				merchantUid : rsp.merchant_uid,			//머천트 임의 고유번호
+			    				productName : rsp.name,					//상품명
+			    				price : rsp.paid_amount,				//가격
+			    				usingPoint: usingPoint,					//사용포인트
+			  		  			givePoint : givePoint,					//적립예정 포인트
+			  		  			payDate : rsp.paid_at					//결제 일시
 			  		  			
 	            			}
 	        			});
@@ -431,6 +444,8 @@ input[type="button"], input[type="reset"] {
     	  alert("약관에 모두 동의하여 주세요.");
 		}
   	});
+	
+	});
     </script>
 
 </body>

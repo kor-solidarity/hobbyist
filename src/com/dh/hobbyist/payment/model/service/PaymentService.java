@@ -13,17 +13,31 @@ public class PaymentService {
 	public int insertPayment(Payment p) {
 		Connection con = getConnection();
 		
+		System.out.println("p : " + p);
+		
 		int result = new PaymentDao().insertPayment(con, p);
 		
+		System.out.println("1 " + result);
 		if(result > 0) {
 			
+			commit(con);
 			//결제시 회원수 증가용 메소드
 			result = new PaymentDao().updateMemberCtn(con, p);
+			System.out.println("2 " + result);
 			if(result > 0) {
 				
+				commit(con);
+				
 				result = new PaymentDao().insertRegister(con, p);
+				System.out.println("3 " + result);
 				if(result > 0) {
-					commit(con);
+//					result = new PaymentDao().insertUsingPoint(con, p);
+//					if(result > 0) {
+						commit(con);
+						
+//					}else {
+//						rollback(con);
+//					}
 					
 				} else {
 					rollback(con);
@@ -49,6 +63,16 @@ public class PaymentService {
 		close(con);
 		
 		return payList;
+	}
+
+	public Payment showPayView(int scheduleCode, int memberCode) {
+		Connection con = getConnection();
+		
+		Payment p = new PaymentDao().showPayView(con, scheduleCode, memberCode);
+		
+		close(con);
+		
+		return p;
 	}
 
 }

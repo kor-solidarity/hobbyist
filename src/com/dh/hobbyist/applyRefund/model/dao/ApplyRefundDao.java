@@ -170,15 +170,13 @@ public class ApplyRefundDao {
 		
 		return applyList;
 	}
-
-
-
-
-	public int cancelRefund(Connection con, int num) {
+	
+	//환불반려 취소시 메소드
+	public int cancelRefuse(Connection con, int num) {
 		PreparedStatement pstmt = null;
 		int result = 0;
 		
-		String query = prop.getProperty("cancelRefund");
+		String query = prop.getProperty("cancelRefuse");
 		
 		try {
 			pstmt = con.prepareStatement(query);

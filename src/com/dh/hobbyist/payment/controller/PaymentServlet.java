@@ -22,20 +22,13 @@ public class PaymentServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int scheduleCode = Integer.parseInt(request.getParameter("scheduleCode"));
 		int mCode = Integer.parseInt(request.getParameter("memberCode"));
 		String impUid = request.getParameter("impUid");
 		int price = Integer.parseInt(request.getParameter("price"));
 		int usingPoint = Integer.parseInt(request.getParameter("usingPoint"));
 		int givePoint = Integer.parseInt(request.getParameter("givePoint"));
-		int artistCode = 3;
-		
-		
-		System.out.println("mCode : " + mCode);
-		System.out.println("impUid : " + impUid);
-		System.out.println("price : " + price);
-		System.out.println("usingPoint : " + usingPoint);
-		System.out.println("givePoint: " + givePoint);
-		System.out.println(" : " + new Timestamp(System.currentTimeMillis()));
+		int artistCode = Integer.parseInt(request.getParameter("artistCode"));
 		
 		Payment p = new Payment();
 		
@@ -43,11 +36,12 @@ public class PaymentServlet extends HttpServlet {
 		p.setImpNum(impUid);
 		p.setPayCost(price);
 		p.setArtistCode(artistCode);
-		p.setScheduleCode(1);
+		p.setScheduleCode(scheduleCode);
 		p.setUsingPoint(usingPoint);
 		p.setGivePoint(givePoint);
 		p.setPayDate(new Timestamp(System.currentTimeMillis()));
 		
+		System.out.println(p);
 		int result = new PaymentService().insertPayment(p);
 		
 		String page = "";

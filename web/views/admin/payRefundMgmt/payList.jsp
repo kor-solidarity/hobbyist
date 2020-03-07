@@ -284,7 +284,7 @@
    	       </table>
    	     </div>
    	     <div class="modal-footer">
-   	       <button type="button" class="btn btn-default" onclick="cancelRefuse();">반려 취소</button>
+   	       <button id="cancelRefuse" type="button" class="btn btn-default">반려 취소</button>
    	     </div>
      		</div>
    	   
@@ -487,18 +487,18 @@
 		    	
 	   	    	$("#myModal").modal();
 	   	    	
+	   	 		//최종 반려 버튼 클릭시
+				$(document).on("click", '#cancelRefuse', function() {
+					var refundCode = Number($('.Btn').parent().parent().children("td:nth-child(1)").text());
+					var result = confirm("반려 취소 하시겠습니까?");
+					
+					if(result) {
+						location.href = "<%=request.getContextPath()%>/cancelRefuse.ad?refundCode=" + refundCode;
+					}
+				});
+	   	    	
 			});
 		});
-		
-		//반려 취소 버튼 클릭 시
-		function cancelRefuse() {
-			
-			var result = confirm("반려 취소 하시겠습니까?");
-			
-			if(result) {
-				location.href = "<%=request.getContextPath()%>/cancelRefuse.ad?refundCode=" + refundCode;
-			}
-		}
 			
 		//환불 신청
 		function goRefundList() {
