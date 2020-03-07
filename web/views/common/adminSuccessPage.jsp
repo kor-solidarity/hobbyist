@@ -16,7 +16,7 @@
 			var movePath = "";
 			
 			switch(successCode) {
-				case "refuseRequest" :
+				case "refuseRefund" :
 					alertMessage = "반려처리가 성공적으로 이루어 졌습니다.";
 					movePath = "/hobbyist/views/admin/payRefundMgmt/applyRefundList.jsp";
 					break;
