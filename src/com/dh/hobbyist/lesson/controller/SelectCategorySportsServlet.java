@@ -60,6 +60,7 @@ public class SelectCategorySportsServlet extends HttpServlet {
 		
 		ArrayList<HashMap<String, Object>> list = new LessonService().selectCategorySports(pi);
 		
+		System.out.println("sports list : " + list);
 		
 		String page = "";
 		if(list != null) {

@@ -12,7 +12,7 @@
 <style>
         #header {
            height:75px;
-            
+              
         }
         #headerInfo {
             margin:auto;

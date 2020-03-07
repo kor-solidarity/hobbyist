@@ -8,7 +8,7 @@
  <link href="https://fonts.googleapis.com/css?family=Do+Hyeon|Nanum+Gothic|ZCOOL+QingKe+HuangYou&display=swap" rel="stylesheet">
 <title>hobbyist</title>
 <style>
-	#nav {
+	#nav { 
 		margin-top: 20px;
 		width:100%;
 		height:60px;

@@ -55,7 +55,7 @@ public class SelectCategoryLifeServlet extends HttpServlet {
 		if(maxPage < endPage) {
 			endPage = maxPage;
 		}
-		
+		 
 		PageInfo pi = new PageInfo(currentPage, listCount, limit, maxPage, startPage, endPage);
 		
 		ArrayList<HashMap<String, Object>> list = new LessonService().selectCategoryLife(pi);

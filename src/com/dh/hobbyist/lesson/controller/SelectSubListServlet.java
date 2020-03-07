@@ -36,7 +36,7 @@ public class SelectSubListServlet extends HttpServlet {
 		int maxPage;
 		int startPage;
 		int endPage;
-		
+		 
 		currentPage = 1;
 		
 		if(request.getParameter("currentPage") != null) {

@@ -137,7 +137,7 @@ public class LessonService {
 		close(con);
 		
 		return list;
-	}
+	} 
 
 	//카테고리별 페이지 서브 카테고리 리스트 메소드(유승)
 	public ArrayList<HashMap<String, Object>> selectSub(int categoryCode, PageInfo pi) {

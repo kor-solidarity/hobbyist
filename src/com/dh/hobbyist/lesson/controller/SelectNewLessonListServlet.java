@@ -34,7 +34,7 @@ public class SelectNewLessonListServlet extends HttpServlet {
 				String key = mapEntry.getKey();
 				String value = (String) mapEntry.getValue();
 				
-			}*/
+			}*/ 
 				
 		System.out.println("new list : " + list);
 		
