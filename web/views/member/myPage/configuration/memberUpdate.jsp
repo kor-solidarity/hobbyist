@@ -313,8 +313,8 @@ color: #FFFFFF;
 
 
 	<div class="divcenter3">
-		<img id="show"
-			src="<%=request.getContextPath()%>/static/images/memberUpdate1.png">
+		<%-- <img id="show"
+			src="<%=request.getContextPath()%>/static/images/memberUpdate1.png"> --%>
 	</div>
 
 	<div class="divcenter5">
