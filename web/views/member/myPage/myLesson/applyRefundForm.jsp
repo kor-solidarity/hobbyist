@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="com.dh.hobbyist.applyRefund.model.vo.ApplyRefund, com.dh.hobbyist.lesson.model.vo.MyRegiLesson"%>
+<%
+	ApplyRefund ap = (ApplyRefund) request.getAttribute("ap");
+	MyRegiLesson myReg = (MyRegiLesson) request.getAttribute("myReg");
+	
+%>    
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -152,73 +158,77 @@
 					<div class="eachWrap">
 						<table class="eachLesson" style="width:100%; height:100%;">
 							<tr style="height:100%">
-								<td style="width:27%;"><img class="lessonImg" src="<%= request.getContextPath() %>/static/upload/lesson/beauty/beauty02.jpg"></td>
+								<td style="width:27%;"><img class="lessonImg" src="<%= request.getContextPath() %>/<%=myReg.getLessonImgRoute()%>/<%=myReg.getLessonImgName()%>"></td>
 								<td class="lessonText" style="width:50%;">
-												<p style="font-weight: bold;">[1:1_청담샵 경력] #선.착.순.이.벤.트 #자존감이 두배 올라가는 메이크업 배우기!</p><br>
-												<p>수업시작일 : 2020-02-03 19:00 / 당산</p>
-												<p>결제일 : 2020-01-30 12:11:31</p> 
+												<p style="font-weight: bold; font-size: 20px;"><%=myReg.getLessonName() %></p><br>
+												<p><%=myReg.getStartDate() %> / <%=myReg.getRegion() %></p>
+												<p><%=myReg.getPaymentDate() %></p> 
 								</td>
 								<td class="profile" style="width:15%; padding:0;">
-									<div align="center"><img class="profileImg" src="<%= request.getContextPath() %>/static/images/iu.jpg"></div>
+									<div align="center"><img class="profileImg" src="<%=request.getContextPath() %>/<%=myReg.getProfileImgRoute()%>/<%=myReg.getProfileImgName()%>"></div>
 									<table class="profileTable">
 										<tr>
 											<td>
-												<div class="nickName">피치핑크</div>
+												<div class="nickName"><%=myReg.getArtistNick()%></div>
 											</td>
 										</tr>
 										<tr>
 											<td>
-												<div class="realName">아이유</div>
+												<div class="realName"><%=myReg.getArtistName() %></div>
 											</td>
 										</tr>
 									</table>							
-								</td>
-							</tr>
 						</table>
 					</div>
 				</td>
 			</tr>
 		</table>
  
- <form name="goRefund" action="/hobbyist/index.jsp" method="post" style="margin-bottom: 200px;">
+ <form name="goRefund" action="<%=request.getContextPath()%>/insertApplyRefund.me" method="post" style="margin-bottom: 200px;">
  <div id="refundArea">
  	<table id="payInfoT1">
  		<tr>
  			<td>결제 금액 : </td>
- 			<td>원</td>
+ 			<td><%=ap.getPayCost() %>원</td>
+ 			<td>
+ 				<input type="hidden" name="paymentCode" value="<%=ap.getPaymentCode() %>">
+ 				<input type="hidden" name="refundCost" value="<%=(int) (ap.getPayCost() - (ap.getPayCost() * (ap.getFinishOrder() / (double) ap.getTotalOrder())))%>">
+ 			</td>
  		</tr>
  		<tr>
  			<td>포인트 사용 : </td>
- 			<td> point</td>
+ 			<td><%=ap.getUsingPoint() %> point</td>
  		</tr>
  		<tr>
  			<td>진행회차 / 총회차 : </td>
- 			<td> / 회</td>
+ 			<td><%=ap.getFinishOrder() %> / <%=ap.getTotalOrder() %> 회</td>
  		</tr>
  	</table>
  	<table id="payInfoT2">
  		<tr>
- 			<td>환불예정 금액 : </td><td>원</td>
+ 			<td>환불예정 금액 : </td>
+ 			<td><%=(int) (ap.getPayCost() - (ap.getPayCost() * (ap.getFinishOrder() / (double) ap.getTotalOrder())))%> 원</td>
  		</tr>
  		<tr>
- 			<td>환불예정 포인트 : </td><td>point</td>
+ 			<td>환불예정 포인트 : </td>
+ 			<td><%= (int) (ap.getUsingPoint() - (ap.getUsingPoint() * (ap.getFinishOrder() / (double) ap.getTotalOrder())))%> point</td>
  		</tr>
  		<tr>
  			<td>환불 사유 : </td>
  			<td>
- 				<select id="selectReason">
+ 				<select id="selectReason" name="selectReason">
  					<option>선택</option>
- 					<option value="reason">개인 사유</option>
- 					<option value="reason">신청 실수</option>
- 					<option value="reason">수업 불만족</option>
- 					<option value="reason">수업 폐강</option>
- 					<option value="reason">기타</option>
+ 					<option value="개인 사유">개인 사유</option>
+ 					<option value="신청 실수">신청 실수</option>
+ 					<option value="수업 불만족">수업 불만족</option>
+ 					<option value="수업 폐강">수업 폐강</option>
+ 					<option value="기타">기타</option>
  				</select>
  			</td>
  		</tr>
  	</table><br><br>
  	<div id="refundDetailDiv" style="text-align: center; display: none;">
-	 	<textarea id="refundDetail" rows="7" cols="20" style="width: 40%; height: 80px; text-align: center; font-size: 17px;" placeholder="상세사유를 입력하세요 (선택)";></textarea>
+	 	<textarea id="refundDetail" name="refundDetail" rows="7" cols="20" style="width: 40%; height: 80px; text-align: center; font-size: 17px;" placeholder="상세사유를 입력하세요 (선택)";></textarea>
 	 	<div><span id="refundDetailCtn">0</span>/100</div>
  	</div>
  	
@@ -237,6 +247,7 @@
 	<%@ include file="/views/common/footer.jsp" %>
 <script>
 	$(function(){
+		
 		$("#refundDetail").keyup(function(){
 			var inputLength = $(this).val().length;
 			$("#refundDetailCtn").html(inputLength);
@@ -253,7 +264,6 @@
 		var submit = confirm('정말로 환불신청 하시겠습니까?');
 		
 		if(submit == true) {
-			alert("환불신청이 완료되었습니다.");
 			goRefund.submit();
 		}
 	}
@@ -261,7 +271,7 @@
 	$("#selectReason").change(function() {
 		var state = $("#selectReason option:selected").val();
 		
-		if(state == "reason") {
+		if(state != null) {
 			
 			$("#refundDetailDiv").show();
 		}else {

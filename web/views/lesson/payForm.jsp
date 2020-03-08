@@ -190,7 +190,7 @@ input[type="button"], input[type="reset"] {
 					</td>
 				</tr>
 				<tr>
-					<td colspan="3">수업일정</td>
+					<td colspan="3">수업회차</td>
 				</tr>
 				<tr>
 					<td></td>
@@ -368,7 +368,7 @@ input[type="button"], input[type="reset"] {
     				$("#afterPoint").text(myPoint);
   	 	 			$("#moneyResult").text(lessonMoney);
     			}
-    	
+    			
 		});
 	
     $("#check_module").click(function() {
