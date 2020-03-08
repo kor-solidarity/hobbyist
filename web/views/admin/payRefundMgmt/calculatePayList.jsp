@@ -163,7 +163,7 @@ section {
 	border: 1px solid #4E4E4E;
 }
 </style>
-<title>Insert title here</title>
+<title>hobbyist</title>
 </head>
 <body>
 	<%@ include file="/views/common/adminMenubar.jsp"%>
