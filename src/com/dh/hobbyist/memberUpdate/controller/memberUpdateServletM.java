@@ -6,6 +6,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import javax.swing.plaf.metal.MetalComboBoxUI.MetalComboBoxLayoutManager;
 import javax.websocket.Session;
 
 import com.dh.hobbyist.memberUpdate.model.service.MemberService;
@@ -30,6 +32,8 @@ public class memberUpdateServletM extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	HttpSession HttpSession =request.getSession(true);
+		
 	String userId = request.getParameter("userId");
 	String userPwd = request.getParameter("userPwd");
 	String nickName = request.getParameter("nickName");
@@ -40,8 +44,16 @@ public class memberUpdateServletM extends HttpServlet {
 	String phone = tel1 + "-" + tel2 + "-" + tel3;
 	String bankName = request.getParameter("bankName");
 	String bankNum = request.getParameter("bankNum");
-	int memberCode = ((member)request.getSession().getAttribute("loginMember")).getMemberCode();
-
+	int memberCode = ((Member) request.getSession().getAttribute("loginMember")).getMemberCode();
+	
+	if(memberCode != null) {
+	httpSession.setAttribute("user", );
+		
+	}
+	
+	
+	
+	
 	System.out.println("서블릿 userId:" + userId);
 	System.out.println("서블릿 password1:" + userPwd);
 	System.out.println("서블릿 nickName:" + nickName);
@@ -49,9 +61,10 @@ public class memberUpdateServletM extends HttpServlet {
 	System.out.println("서블릿 phone:" + phone);
 	System.out.println("서블릿 bank:" + bankName);
 	System.out.println("서블릿 bankText:" + bankNum);
+	/*System.out.println("서블릿 PK값은" + memberCode);*/
 	
 	Member member = new Member();
-	member.setMemberCode(memberCode);
+	/*member.setMemberCode(memberCode);*/
 	member.setMemberId(userId);
 	member.setMemberPwd(userPwd);
 	member.setMemberName(nickName);
@@ -62,6 +75,8 @@ public class memberUpdateServletM extends HttpServlet {
 	
 	int result = new MemberService().memberUpdate(member);
 	
+	
+	
 	System.out.println("set에 담고 userId" + userId);
 	System.out.println("set에 담고 password1" + userPwd);
 	System.out.println("set에 담고 ncikName" + nickName);
@@ -69,9 +84,14 @@ public class memberUpdateServletM extends HttpServlet {
 	System.out.println("set에 담고 phone" + phone);
 	System.out.println("set에 담고 bank" + bankName);
 	System.out.println("set에 담고 bankText" + bankNum);
+	/*System.out.println("set에 담고 PK값은" + memberCode);*/
 	
 	String page="";
 	if(result >0) {
+		HttpSession session = request.getSession();
+		session.setAttribute("loginUser", result);
+		
+		
 		page = "/views/common/successPage.jsp";
 		request.setAttribute("successCode", "updateMember");
 		System.out.println("성공시 userId" + userId);
@@ -81,7 +101,9 @@ public class memberUpdateServletM extends HttpServlet {
 		System.out.println("성공시 phone" + phone);
 		System.out.println("성공시 bank" + bankName);
 		System.out.println("성공시 bankText" + bankNum);
+		/*System.out.println("성공시 담고 PK값은" + memberCode);*/
 	}else {
+		
 		page = "/views/common/errorPage.jsp";
 		request.setAttribute("msg", "회원정보 수정 실패!!");
 		System.out.println("실패시 userId:" + userId);
@@ -91,6 +113,7 @@ public class memberUpdateServletM extends HttpServlet {
 		System.out.println("실패시 phone:" + phone);
 		System.out.println("실패시 bank:" + bankName);
 		System.out.println("실패시 bankText:" + bankNum);
+		/*System.out.println("실패시 PK값은 " + memberCode);*/
 	}
 	request.getRequestDispatcher(page).forward(request, response);
 }

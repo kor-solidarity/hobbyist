@@ -3,7 +3,7 @@ package com.dh.hobbyist.memberUpdate.model.vo;
 import java.sql.Date;
 
 public class Member implements java.io.Serializable{
-	private int memberCode;
+	private static int memberCode;
 	private String memberId;
 	private String memberPwd;
 	private String memberName;
@@ -51,7 +51,7 @@ public class Member implements java.io.Serializable{
 	}
 
 
-	public int getMemberCode() {
+	public static int getMemberCode() {
 		return memberCode;
 	}
 

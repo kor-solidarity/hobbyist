@@ -53,6 +53,7 @@ public class MemberDao {
 		System.out.println("dao값:"+member.getPhone());
 		System.out.println("dao값:"+member.getBankName());
 		System.out.println("dao값:"+member.getBankNum());
+		System.out.println("dao값:"+member.getMemberCode());
 
 		try {
 			pstmt = con.prepareStatement(query);
