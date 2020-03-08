@@ -141,6 +141,11 @@
 	}
 	
 	#detailMenu span {
+		padding:5px;
+		border-radius:15px;
+	}
+	
+	#detailMenu span {
 		margin-left: 10px;
 		cursor: pointer;
 	}
@@ -350,10 +355,10 @@
 						<td colspan="2">
 							<table id="detailMenu">
 								<tr>
-									<td><span id="dMenu1">아티스트</span></td>
+									<td><span id="dMenu1" style="background:#DAB554">아티스트</span></td>
 									<td><span id="dMenu2">수업소개</span></td>
 									<td><span id="dMenu3">리뷰</span></td>
-									<td><span id="dMenu4">문의</span></td>
+									<td><!-- <span id="dMenu4">문의</span> --></td>
 								</tr>
 								<script>
 									$(function(){
@@ -365,6 +370,8 @@
 											$("#certsCareer").show();
 											$("#artistIntroArea").show();
 											$("#lessonIntroArea").hide();
+											$(this).css("background", "#DAB554");
+											$("#dMenu2").css("background", "white");
 										});
 																				
 										$("#dMenu2").click(function(){
@@ -373,6 +380,8 @@
 											$("#certsCareer").hide();
 											$("#artistIntroArea").hide();
 											$("#lessonIntroArea").show();
+											$("#dMenu1").css("background", "white");
+											$("#dMenu2").css("background", "#DAB554");
 										});
 									});
 								</script>
@@ -512,8 +521,16 @@
 							<% } %>
 							<% for(int i = 0; i < careerList.size(); i++) { %>
 							<image src="<%= request.getContextPath() %>/static/images/work2.png">
-								<%= ((ArtistCareer) careerList.get(i)).getOrgName() %>&nbsp;
-								<%= ((ArtistCareer) careerList.get(i)).getRank() %>&nbsp;
+								<% System.out.println(((ArtistCareer) careerList.get(i)).getOrgName());
+								if(((ArtistCareer) careerList.get(i)).getOrgName() != "없음") { 
+								%>
+									<%= ((ArtistCareer) careerList.get(i)).getOrgName() %>&nbsp;
+								<% }
+								if(((ArtistCareer) careerList.get(i)).getRank() != "없음") { %>
+									<%= ((ArtistCareer) careerList.get(i)).getRank() %>&nbsp;
+								<% } else { %>
+									프리랜서&nbsp;
+								<% } %>
 								<%= ((ArtistCareer) careerList.get(i)).getOccupation() %>&nbsp;
 								<%= ((ArtistCareer) careerList.get(i)).getOccupationTerm() %>&nbsp;경력<br>
 							<% } %>

@@ -502,4 +502,32 @@ public class MemberDao {
 
         return null;
     }
+
+    // 마이페이지 클릭 시 사용자의 포인트 새로 조회 (종현)
+	public int selectPoint(Connection con, int memberCode) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int point = 0;
+		
+		String query = prop.getProperty("selectPoint");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, memberCode);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				point = rset.getInt("MEMBER_POINT");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return point;
+	}
 }
