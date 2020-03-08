@@ -70,9 +70,9 @@ public class SelectOneLessonServlet extends HttpServlet {
 		//System.out.println("oderPerSchedule : " + orderPerSchedule);
 		
 		//아티스트 자격 & 학력 & 경력
-		ArrayList<ArtistCerts> certList = new LessonRelatedService().selectCertList(artistCode);
+		ArrayList<ArtistCerts> certList = new LessonRelatedService().selectCertList(lessonCode);
 		ArrayList<ArtistEducation> eduList = new LessonRelatedService().selectEdu(artistCode);
-		ArrayList<ArtistCareer> careerList = new LessonRelatedService().selectCareer(artistCode);
+		ArrayList<ArtistCareer> careerList = new LessonRelatedService().selectCareer(lessonCode);
 		
 		String page = "";
 		if(lesson != null && profileImg != null && artist != null && scheduleList != null) {

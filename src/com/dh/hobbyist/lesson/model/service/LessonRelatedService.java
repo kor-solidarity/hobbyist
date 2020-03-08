@@ -290,10 +290,10 @@ public class LessonRelatedService {
 		return list;
 	}
 
-	public ArrayList<ArtistCerts> selectCertList(int artistCode) {
+	public ArrayList<ArtistCerts> selectCertList(int lessonCode) {
 		Connection con = getConnection();
 		
-		ArrayList<ArtistCerts> list = new LessonRelatedDao().selectCertList(con, artistCode);
+		ArrayList<ArtistCerts> list = new LessonRelatedDao().selectCertList(con, lessonCode);
 		
 		if(list != null) {
 			commit(con);

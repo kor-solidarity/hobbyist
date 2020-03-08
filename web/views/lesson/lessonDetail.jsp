@@ -511,7 +511,7 @@
 							<% } %><br>
 							<% } %>
 							<% for(int i = 0; i < careerList.size(); i++) { %>
-							<image src="<%= request.getContextPath() %>/static/images/work.png">
+							<image src="<%= request.getContextPath() %>/static/images/work2.png">
 								<%= ((ArtistCareer) careerList.get(i)).getOrgName() %>&nbsp;
 								<%= ((ArtistCareer) careerList.get(i)).getRank() %>&nbsp;
 								<%= ((ArtistCareer) careerList.get(i)).getOccupation() %>&nbsp;
