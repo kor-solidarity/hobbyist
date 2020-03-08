@@ -5,6 +5,9 @@
 	ApplyArtist applyArtist = (ApplyArtist) request.getAttribute("applyArtist"); */
 	String imageRoot = (String) session.getAttribute("imageRoot");
 	ApplyArtist applyArtist = (ApplyArtist) session.getAttribute("applyArtist");
+	int point = (Integer) session.getAttribute("point");
+	
+	System.out.println("point : " + point);
 %>
 <!DOCTYPE html>
 <html>
@@ -286,7 +289,7 @@
 						}
 					}%>
 				</td>
-				<td colspan="4" class="pointArea">보유 포인트&nbsp; :&nbsp; <%=loginMember.getPoint() %>p&nbsp;&nbsp;&nbsp;</td>
+				<td colspan="4" class="pointArea">보유 포인트&nbsp; :&nbsp; <%= point %>p&nbsp;&nbsp;&nbsp;</td>
 			</tr>
 		</table>
 	</div>

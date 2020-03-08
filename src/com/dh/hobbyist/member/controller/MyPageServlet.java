@@ -44,25 +44,18 @@ public class MyPageServlet extends HttpServlet {
 				aa = new MemberService().selectOneApplyArtist(memberCode);
 			}
 			
+			int point = new MemberService().selectPoint(memberCode);
 			
 			String page = "";
-			
-			
-			//page = "views/common/myPage.jsp";
-			/*request.setAttribute("imageRoot", imageRoot);
-		request.setAttribute("applyArtist", aa);
-		
-		request.getRequestDispatcher(page).forward(request, response);*/
 			
 			page = "selectMyRegi.le";
 			
 			HttpSession session = request.getSession();
 			session.setAttribute("imageRoot", imageRoot);
 			session.setAttribute("applyArtist", aa);
+			session.setAttribute("point", point);
 			response.sendRedirect(page);
 		} else {
-			//request.setAttribute("msg", "로그인이 필요합니다");
-			//request.getRequestDispatcher("/views/common/errorPage.jsp").forward(request, response);
 			String page = "views/common/successPage.jsp";
 			request.setAttribute("successCode", "withoutLogin");
 			request.getRequestDispatcher(page).forward(request, response);

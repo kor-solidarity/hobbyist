@@ -548,7 +548,7 @@ public class LessonRelatedDao {
 		return t;
 	}
 
-	public Payment selectOnePayment(Connection con, Integer scheduleCode) {
+	public Payment selectOnePayment(Connection con, Integer scheduleCode, int memberCode) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		Payment p = null;
@@ -558,6 +558,7 @@ public class LessonRelatedDao {
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.setInt(1, scheduleCode);
+			pstmt.setInt(2, memberCode);
 			
 			rset = pstmt.executeQuery();
 			

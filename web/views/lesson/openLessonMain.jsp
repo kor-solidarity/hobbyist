@@ -305,7 +305,7 @@ body {
 #LessonTable10 td {
  	font-family: 'Do Hyeon', sans-serif;
 	font-size: 17px;
-	padding: 5px;
+	padding: 3px;
 }
 
 #LessonTable11 {
@@ -784,9 +784,9 @@ body {
 							<table id="LessonTable10" style="width:100%; height:500px;">
 								<tr>
 									<td style="width: 80px;">지역</td>
-									<td style="width: 140px;">상세지역</td>
-									<td colspan="2"><label class="currOrder">1</label>회차 시작시간</td>
-									<td style="width: 170px;"><label class="currOrder">1</label>회차 종료시간</td>
+									<td style="width: 135px;">상세지역</td>
+ 									<td colspan="2"><label class="currOrder">1</label>회차 시작시간</td>
+									<td style="width: 130px;"><label class="currOrder">1</label>회차 종료시간</td>
 								</tr>
 								<tr>
 									<td>
@@ -817,16 +817,16 @@ body {
 										</select>
 									</td>
 									<td colspan="2"><input id="startTime" class="nanum" type="datetime-local"></td>
-									<td><input id="endTime" class="nanum" type="time"><button id="insertOrderBtn" type="button" class="btn btn-primary btnAll" style="padding: 6px 10px"onclick="insertOrder();">▼</button></td>
+									<td><input id="endTime" class="nanum" type="time"></td>
 								</tr>
 								<tr>
 									<td colspan="2">상세주소</td>
-									<td style="width:210px;"></td>
-									<td colspan="2">등록된 회차 목록 / 총 <label id="showOrder">4</label>회차</td>
+									<td style="width:240px;"></td>
+									<td colspan="2">등록된 회차목록 / 총 <label id="showOrder"></label>회차&nbsp;<button id="insertOrderBtn" type="button" class="btn btn-primary btnAll" style="padding: 5px 8px"onclick="insertOrder();">▼</button></td>
 								</tr>
 								<tr style="height: 250px;">
-									<td colspan="3" style="border: 1px solid darkolivegreen;"><div id="map" style="width:448px;height:240px;"></div></td>
-									<td id= "orderListArea" colspan="2" style="border: 1px solid darkolivegreen;"></td>
+									<td colspan="3" style="border: 1px solid darkolivegreen; padding:0px;"><div id="map" style="width:485px;height:264px;"></div></td>
+									<td id= "orderListArea" colspan="2" style="border: 1px solid darkolivegreen; padding:4px; font-size:15px"></td>
 								</tr>
 								<tr>
 									<td colspan="5">
@@ -1011,6 +1011,13 @@ body {
 				if(num == 5) {
 					//카카오맵 크기 재설정
 					map.relayout(); 
+					
+					//"01기본정보" 화면에서 사용자가 입력한 총 회차
+					var inputOrder = $("#inputOrder").val();
+						
+					//"05일정등록" 화면에서 보여지는 총 회차
+					var showOrder = $("#showOrder");
+					showOrder.text(inputOrder);
 				}
 				
 				
@@ -1258,13 +1265,13 @@ body {
 			} else {
 				if(orderNum < inputOrder) {
 					$orderListArea = $("#orderListArea");
-					$orderListArea.append("<div id='order" + orderNum + "' class='item2'>" + orderNum + "회차 | " + startTime.substring(0, 10) + " | " + startTime.substring(11, 16) + "~" + endTime + "</div>");
+					$orderListArea.append("<div id='order" + orderNum + "' class='item2'>#" + orderNum + " | " + startTime.substring(2, 10) + " | " + startTime.substring(11, 16) + "~" + endTime + "</div>");
 					$orderListArea.append("<input type='hidden' name='start" + orderNum + "' value='" + sl + "'>");
 					$orderListArea.append("<input type='hidden' name='end" + orderNum + "' value='" + el + "'>");
 					orderNum++;
 				} else {
 					$orderListArea = $("#orderListArea");
-					$orderListArea.append("<div id='order" + orderNum + "' class='item2'>" + orderNum + "회차 | " + startTime.substring(0, 10) + " | " + startTime.substring(11, 16) + "~" + endTime + "</div>");
+					$orderListArea.append("<div id='order" + orderNum + "' class='item2'>#" + orderNum + " | " + startTime.substring(2, 10) + " | " + startTime.substring(11, 16) + "~" + endTime + "</div>");
 					$orderListArea.append("<input type='hidden' name='start" + orderNum + "' value='" + sl + "'>");
 					$orderListArea.append("<input type='hidden' name='end" + orderNum + "' value='" + el + "'>");
 					alert("모든 회차를 입력하셨습니다");

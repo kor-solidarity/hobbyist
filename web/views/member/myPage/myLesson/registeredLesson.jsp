@@ -146,7 +146,7 @@
 		</div>
 		<script>
 			function goRegisteredLesson() {
-				location.href = "<%=request.getContextPath()%>/views/member/myPage/myLesson/registeredLesson.jsp";
+				location.href = "<%=request.getContextPath()%>/selectMyRegi.le";
 			}
 			function goLikedLesson() {
 				location.href = "<%=request.getContextPath()%>/views/member/myPage/myLesson/likedLesson.jsp";

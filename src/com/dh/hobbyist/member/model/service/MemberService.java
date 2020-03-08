@@ -198,4 +198,15 @@ public class MemberService {
 
 	    return paymentArrayList;
     }
+    
+    // 마이페이지 클릭 시 사용자의 포인트 새로 조회 (종현)
+	public int selectPoint(int memberCode) {
+		Connection con = getConnection();
+		
+		int point = new MemberDao().selectPoint(con, memberCode);
+		
+		close(con);
+		
+		return point;
+	}
 }

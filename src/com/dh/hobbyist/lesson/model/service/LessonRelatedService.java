@@ -245,7 +245,7 @@ public class LessonRelatedService {
 			
 			Timestamp startDate = new LessonRelatedDao().selectStartDate(con, (Integer) scheduleCodeList.get(i));
 			
-			Payment pay = new LessonRelatedDao().selectOnePayment(con, (Integer) scheduleCodeList.get(i));
+			Payment pay = new LessonRelatedDao().selectOnePayment(con, (Integer) scheduleCodeList.get(i), memberCode);
 
 			myLesson.setScheduleCode((Integer) scheduleCodeList.get(i));
 			myLesson.setLessonImgRoute(lessonImg.getImageRoute());
