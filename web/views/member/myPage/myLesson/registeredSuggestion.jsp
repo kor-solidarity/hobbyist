@@ -57,7 +57,7 @@
 	<div id="regSugDiv1">
 		<table id="regSugTab1">
 			<tr>
-				<td style="text-align: center;"><label class="regSugLab">수강한 수업</label></td>
+				<td style="text-align: center;"><label class="regSugLab" onclick="goRegLes();">수강한 수업</label></td>
 				<td style="text-align: center;"><label class="regSugLab">찜한 수업</label></td>
 				<td style="text-align: center; color:darkolivegreen;" onclick="goRegSug();"><label class="regSugLab">등록한 건의</label></td>
 				<td style="text-align: center;" onclick="goLikedSug();"><label class="regSugLab">찜한 건의</label></td>
@@ -69,6 +69,9 @@
 			</tr>
 		</table>
 		<script>
+			function goRegLes() {
+				location.href = "<%=request.getContextPath()%>/selectMyRegi.le";
+			}
 			function goLikedSug() {
 				location.href = "<%=request.getContextPath()%>/selectMyWishList.sg";
 			}
