@@ -33,6 +33,7 @@
 <%--<%@include file="category.jsp" %>--%>
 <div>
     <table border="0" class="do-hyun-font standard-width" style=" margin: 0 auto">
+        <tr><td>&nbsp;</td></tr>
         <tr>
             <td class="float-left">
                 <select name="location" id="" style="font-family: 'Do Hyeon', sans-serif; font-size: 20px">

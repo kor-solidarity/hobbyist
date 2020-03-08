@@ -5,7 +5,7 @@
   Time: 오후 4:18
   To change this template use File | Settings | File Templates.
 
-  마이페이지 - 나의 리뷰 목록 조회/작성 페이지
+  마이페이지 - 나의 수강 수업 목록 조회 및 리뷰 작성 페이지
 --%>
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
 <html>
