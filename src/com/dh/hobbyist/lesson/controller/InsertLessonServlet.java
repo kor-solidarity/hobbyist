@@ -190,6 +190,7 @@ public class InsertLessonServlet extends HttpServlet {
 				}
 			}
 			
+			
 			//각 vo들을 하나로 담을 HashMap 선언
 			HashMap lessonRelated = new HashMap();
 			lessonRelated.put("lesson", lesson);

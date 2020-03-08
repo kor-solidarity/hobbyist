@@ -6,6 +6,9 @@
 <%@ page import="com.dh.hobbyist.lesson.model.vo.Lesson" %>
 <%@ page import="com.dh.hobbyist.lesson.model.vo.LessonSchedule" %>
 <%@ page import="com.dh.hobbyist.lesson.model.vo.LessonOrder" %>
+<%@ page import="com.dh.hobbyist.artist.model.vo.ArtistCerts" %>
+<%@ page import="com.dh.hobbyist.artist.model.vo.ArtistEducation" %>
+<%@ page import="com.dh.hobbyist.artist.model.vo.ArtistCareer" %>
 <%
 	Image pImg = (Image) request.getAttribute("profileImg");
 	Lesson lesson = (Lesson) request.getAttribute("lesson");
@@ -14,6 +17,16 @@
 	ArrayList sList = (ArrayList) request.getAttribute("scheduleList");
 	ArrayList iList = (ArrayList) request.getAttribute("lessonImageList");
 	HashMap ops = (HashMap) request.getAttribute("orderPerSchedule");
+	ArrayList<ArtistCerts> certList = (ArrayList) request.getAttribute("certList");
+	ArrayList<ArtistEducation> eduList = (ArrayList) request.getAttribute("eduList");
+	ArrayList<ArtistCareer> careerList = (ArrayList) request.getAttribute("careerList");
+	
+	//로그인 후에만 수업 신청 가능하도록 구현하는데 필요한 변수
+	int memberCode = 0;
+	
+	if(session.getAttribute("loginMember") != null) {
+		memberCode = ((Member) session.getAttribute("loginMember")).getMemberCode();
+	}
 	
 	//System.out.println("ops.get(39) : " + ((LessonOrder) (((ArrayList) (ops.get(((LessonSchedule) sList.get(0)).getScheduleCode()))).get(0))).getOrderStart());
 	//System.out.println("subString : " + (((LessonOrder) (((ArrayList) (ops.get(((LessonSchedule) sList.get(1)).getScheduleCode()))).get(0))).getOrderStart().toString()).substring(0, 16));
@@ -195,7 +208,7 @@
 	}
 	
 	.eachOrder {
-		margin-left: 121px;
+		margin-left: 115px;
 	}
 	
 </style>
@@ -296,9 +309,12 @@
 								<% for(int j = 1; j < lesson.getTotalOrders(); j++) { %>
 									<!-- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -->
 											<tr>
-												<td><%= j + 1 %>회차</td>
-												<td>
-													<%= (((LessonOrder) (((ArrayList) (ops.get(((LessonSchedule) sList.get(i)).getScheduleCode()))).get(j))).getOrderStart().toString()).substring(0, 16) %>
+												<td style="width:48px;"><%= j + 1 %>회차</td>
+												<td style="text-align:center; width:124px;">
+													<%= (((LessonOrder) (((ArrayList) (ops.get(((LessonSchedule) sList.get(i)).getScheduleCode()))).get(j))).getOrderStart().toString()).substring(0, 10) %>
+										 		</td>
+												<td style="text-align:right;">
+													<%= (((LessonOrder) (((ArrayList) (ops.get(((LessonSchedule) sList.get(i)).getScheduleCode()))).get(j))).getOrderStart().toString()).substring(11, 16) %>
 										 		</td>
 										 	</tr>
 									<!-- <br> -->
@@ -319,7 +335,7 @@
 						<td colspan="2" style="text-align:center;"><!-- + 추가 일정 보기 --></td>
 					</tr>
 					<tr style="height:20%; text-align:center;">
-						<td colspan="2" style="vertical-align:bottom;">원하시는 수업일정을 선택해주세요</td>
+						<td colspan="2" style="vertical-align:bottom; color:grey;">원하시는 수업일정을 선택해주세요</td>
 					</tr>
 				</table>
 						
@@ -365,7 +381,7 @@
 						<td></td>
 						<td colspan="2" style="width:37.5%; text-align:center;">
 							<select id="scheduleSelect" >
-								<option>수업 일정 선택</option>
+								<option value="">수업 일정 선택</option>
 								<% for(int i = 0; i < sList.size(); i++) { %>
 								<option value="<%= ((LessonSchedule) sList.get(i)).getScheduleCode() %>">
 								<%= ((LessonSchedule) sList.get(i)).getRegion() %> | 시작일  
@@ -383,8 +399,16 @@
 						<td colspan="2" style="text-align:center;"><button id="registerBtn" type="button" onclick="openLesson();">수업 신청</button></td>
 						<script>
 							function openLesson() {
-								console.log("$('#scheduleSelect').val() : " + $("#scheduleSelect").val());
-								location.href = "<%= request.getContextPath() %>/readyToInsert.pa?scheduleCode=" + $("#scheduleSelect").val();
+								
+								//console.log("$('#scheduleSelect').val() : " + $("#scheduleSelect").val());
+								
+								if(<%= memberCode %> == 0) {
+									alert("로그인 후에 이용가능합니다.");	
+								} else if( $("#scheduleSelect").val() == "") {
+									alert("수업일정을 선택해주세요.");
+								} else { 
+									location.href = "<%= request.getContextPath() %>/readyToInsert.pa?scheduleCode=" + $("#scheduleSelect").val();
+								}
 							}
 						</script>
 					<tr>
@@ -420,7 +444,7 @@
 						<td></td>
 						<td></td>
 						<td colspan="2" style="text-align:right;">
-							<img id="heartImg" src="<%= request.getContextPath() %>/static/images/emptyheart.png">&nbsp;수업 찜하기
+							<%-- <img id="heartImg" src="<%= request.getContextPath() %>/static/images/emptyheart.png">&nbsp;수업 찜하기 --%>
 						</td>
 					</tr>
 					<tr>
@@ -428,7 +452,7 @@
 						<td></td>
 						<td></td>
 						<td colspan="2" style="text-align:right;">
-							<img id="reportImg" src="<%= request.getContextPath() %>/static/images/report.jpg">&nbsp;신고하기
+							<%-- <img id="reportImg" src="<%= request.getContextPath() %>/static/images/report.jpg">&nbsp;신고하기 --%>
 						</td>
 					</tr>
 					<tr>
@@ -475,8 +499,24 @@
 					<tr>
 						<td id="certsCareer" colspan="2"><br>
 							[자격 & 경력 사항]<br>
-							커피 바리스타 자격증 1급 보유<br>
-							스타벅스 매니저 3년 2개월 경력
+							<% for(int i = 0; i < certList.size(); i++) { %>
+							<image src="<%= request.getContextPath() %>/static/images/certificate.ico">
+								<%= ((ArtistCerts) certList.get(i)).getCertName() %> 보유<br>
+							<% } %>
+							<% for(int i = 0; i < eduList.size(); i++) { %>
+							<image src="<%= request.getContextPath() %>/static/images/university2.png">
+								<%= ((ArtistEducation) eduList.get(i)).getEduInsitituteName() %>&nbsp;
+								<%= ((ArtistEducation) eduList.get(i)).getEduMajor() %>&nbsp;
+								<% if(((ArtistEducation) eduList.get(i)).getStatus() == 0) {%>&nbsp;(재학)	
+							<% } %><br>
+							<% } %>
+							<% for(int i = 0; i < careerList.size(); i++) { %>
+							<image src="<%= request.getContextPath() %>/static/images/work.png">
+								<%= ((ArtistCareer) careerList.get(i)).getOrgName() %>&nbsp;
+								<%= ((ArtistCareer) careerList.get(i)).getRank() %>&nbsp;
+								<%= ((ArtistCareer) careerList.get(i)).getOccupation() %>&nbsp;
+								<%= ((ArtistCareer) careerList.get(i)).getOccupationTerm() %>&nbsp;경력<br>
+							<% } %>
 						</td>
 						<td></td>
 					</tr>

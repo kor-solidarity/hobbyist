@@ -598,7 +598,7 @@ body {
 									</td>
 								</tr>
 								<tr>
-									<td><div align="left" style="color:#A7A1A1; margin-left:39px;">대표사진</div></td>
+									<td><div align="left" style="color:#A7A1A1; margin-left:39px;">대표사진<div style="margin-left:8px;">(필수)</div></div></td>
 								</tr>
 							</table>
 							<div id="fileArea">
@@ -830,7 +830,7 @@ body {
 								</tr>
 								<tr>
 									<td colspan="5">
-									전체 주소 입력 : <input type="text" class="nanum" name="address" placeholder="전체 주소를 복사 또는 입력해주세요." style="width:400px">
+									전체 주소 입력 : <input type="text" class="nanum" name="address" placeholder="전체 주소를 복사 또는 직접 입력해주세요." style="width:450px">
 									</td>
 								</tr>
 							</table>
@@ -931,10 +931,15 @@ body {
 				//"04. 수업소개" 항목
 				var lessonIntro = document.getElementById("lessonIntro").value;
 				
-				console.log("subCategory : " + subCategory);
+				var mainFile = $("#contentImg3").attr("src");
+				var iphoneImg = "<%= request.getContextPath() %>/static/images/iphoneCameraW.png";
+				
+				console.log("1 : " + mainFile);
+				console.log("2 : " + "<%= request.getContextPath() %>/static/images/iphoneCameraW.png");
+				<%--  --%>
 				
 				//"01.기본정보"에서 모든 항목을 입력해야 다음으로 넘어갈 수 있는 메소드
-				if(lessonTitle == "" || min == "" || max == "" || inputOrder == "" || cost == "" || subCategory == "") {
+				if(lessonTitle == "" || min == "" || max == "" || inputOrder == "" || cost == "" || subCategory == "" || mainFile == iphoneImg) {
 					alert("모든 항목을 입력해주세요");
 				} else {
 					

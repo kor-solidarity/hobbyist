@@ -10,6 +10,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.dh.hobbyist.artist.model.vo.ArtistCareer;
+import com.dh.hobbyist.artist.model.vo.ArtistCerts;
+import com.dh.hobbyist.artist.model.vo.ArtistEducation;
 import com.dh.hobbyist.lesson.model.service.LessonRelatedService;
 import com.dh.hobbyist.lesson.model.vo.Image;
 import com.dh.hobbyist.lesson.model.vo.Lesson;
@@ -51,6 +54,7 @@ public class SelectOneLessonServlet extends HttpServlet {
 		ArrayList<LessonSchedule> scheduleList = new LessonRelatedService().selectScheduleList(lessonCode);
 		ArrayList<Image> lessonImageList = new LessonRelatedService().selectLessonImageList(lessonCode);
 	
+		//수업 회차 정보를 조회
 		ArrayList<LessonOrder> orderList = null;
 		HashMap orderPerSchedule = new HashMap();
 		
@@ -63,7 +67,12 @@ public class SelectOneLessonServlet extends HttpServlet {
 			orderPerSchedule.put(scheduleCode, orderList);
 		}
 		
-		System.out.println("oderPerSchedule : " + orderPerSchedule);
+		//System.out.println("oderPerSchedule : " + orderPerSchedule);
+		
+		//아티스트 자격 & 학력 & 경력
+		ArrayList<ArtistCerts> certList = new LessonRelatedService().selectCertList(artistCode);
+		ArrayList<ArtistEducation> eduList = new LessonRelatedService().selectEdu(artistCode);
+		ArrayList<ArtistCareer> careerList = new LessonRelatedService().selectCareer(artistCode);
 		
 		String page = "";
 		if(lesson != null && profileImg != null && artist != null && scheduleList != null) {
@@ -74,6 +83,9 @@ public class SelectOneLessonServlet extends HttpServlet {
 			request.setAttribute("scheduleList", scheduleList);
 			request.setAttribute("lessonImageList", lessonImageList);
 			request.setAttribute("orderPerSchedule", orderPerSchedule);
+			request.setAttribute("certList", certList);
+			request.setAttribute("eduList", eduList);
+			request.setAttribute("careerList", careerList);
 		} else {
 			page = "views/common/errorPage.jsp";
 			request.setAttribute("msg", "수업 상세보기 실패");
