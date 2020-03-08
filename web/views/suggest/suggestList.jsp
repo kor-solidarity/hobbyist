@@ -54,6 +54,7 @@
 	border: 1px solid white;
 	display: inline-block;
 	margin: 10px;
+	cursor:pointer;
 }
 
 #suggestListTable {
