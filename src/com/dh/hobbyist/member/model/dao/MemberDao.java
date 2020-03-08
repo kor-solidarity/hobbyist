@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Properties;
 
 import com.dh.hobbyist.artist.model.vo.ApplyArtist;
+import com.dh.hobbyist.lesson.model.vo.LessonPayment;
 import com.dh.hobbyist.member.model.vo.Member;
 import com.dh.hobbyist.suggest.model.vo.PetitionWishList;
 
@@ -487,7 +488,16 @@ public class MemberDao {
 	      return list;
 
 	}
-	
 
 
+    // 사용자(Member)의 수업 결재 목록 조회 (은석)
+    public ArrayList<LessonPayment> selectLessonPaymentList(Connection con, int member_pk) {
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        ArrayList<LessonPayment> paymentArrayList = null;
+
+        String query = prop.getProperty("");
+
+        return null;
+    }
 }
