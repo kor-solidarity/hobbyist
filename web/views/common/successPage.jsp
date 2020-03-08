@@ -17,7 +17,7 @@
 			
 			switch(successCode) {
 				case "insertMember" :
-					alertMessage = "회원 가입이 완료되었습니다.";
+					alertMessage = "회원 가입이 완료되었습니다.\n신규 가입 축하 포인트 10000 point가 적립되었습니다.";
 					movePath = "/hobbyist/views/member/loginForm.jsp";
 					break;
 				case "applyArtist" :

@@ -199,7 +199,7 @@
 	        			if(ckPhone == true) {
 	        				if(ckNum == true) {
 	        					if(ckEmail == true) {
-		        					$("#memberForm").submit();        				
+		        					$("#memberForm").submit();
 	        					} else {
 	        						alert("이메일을 다시 확인해주세요");
 	        					}	        					
