@@ -619,7 +619,7 @@ public class LessonRelatedDao {
 		return result;
 	}
 
-	public ArrayList<ArtistCerts> selectCertList(Connection con, int artistCode) {
+	public ArrayList<ArtistCerts> selectCertList(Connection con, int lessonCode) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		ArrayList<ArtistCerts> list = null;
@@ -629,7 +629,7 @@ public class LessonRelatedDao {
 		
 		try {
 			pstmt = con.prepareStatement(query);
-			pstmt.setInt(1, artistCode);
+			pstmt.setInt(1, lessonCode);
 			
 			rset = pstmt.executeQuery();
 			
@@ -691,7 +691,7 @@ public class LessonRelatedDao {
 		return list;
 	}
 
-	public ArrayList<ArtistCareer> selectCareer(Connection con, int artistCode) {
+	public ArrayList<ArtistCareer> selectCareer(Connection con, int lessonCode) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		ArrayList<ArtistCareer> list = null;
@@ -701,7 +701,7 @@ public class LessonRelatedDao {
 		
 		try {
 			pstmt = con.prepareStatement(query);
-			pstmt.setInt(1, artistCode);
+			pstmt.setInt(1, lessonCode);
 			
 			rset = pstmt.executeQuery();
 			
