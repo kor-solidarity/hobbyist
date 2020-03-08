@@ -13,32 +13,37 @@ public class PaymentService {
 	public int insertPayment(Payment p) {
 		Connection con = getConnection();
 		
-		System.out.println("p : " + p);
-		
 		int result = new PaymentDao().insertPayment(con, p);
 		
 		System.out.println("1 " + result);
 		if(result > 0) {
 			
-			commit(con);
+		
 			//결제시 회원수 증가용 메소드
 			result = new PaymentDao().updateMemberCtn(con, p);
 			System.out.println("2 " + result);
+			
 			if(result > 0) {
-				
-				commit(con);
 				
 				result = new PaymentDao().insertRegister(con, p);
 				System.out.println("3 " + result);
+				
 				if(result > 0) {
-//					result = new PaymentDao().insertUsingPoint(con, p);
-//					if(result > 0) {
-						commit(con);
+					result = new PaymentDao().insertUsingPoint(con, p);
+					System.out.println("4 " + result);
 						
-//					}else {
-//						rollback(con);
-//					}
-					
+					if(result > 0) {
+						result = new PaymentDao().updateUsingPoint(con, p);
+						System.out.println("5 " + result);
+						
+						if(result > 0) {
+							commit(con);
+						}else {
+							rollback(con);
+						}
+					}else {
+						rollback(con);
+					}
 				} else {
 					rollback(con);
 				}

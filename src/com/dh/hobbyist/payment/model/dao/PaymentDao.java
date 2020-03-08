@@ -105,7 +105,6 @@ public class PaymentDao {
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, p.getImpNum());
-			pstmt.setString(2, p.getImpNum());
 			
 			result = pstmt.executeUpdate();
 			
@@ -175,6 +174,7 @@ public class PaymentDao {
 			e.printStackTrace();
 		}
 		
+		System.out.println(p);
 		return p;
 	}
 	
@@ -189,8 +189,9 @@ public class PaymentDao {
 			pstmt = con.prepareStatement(query);
 			pstmt.setTimestamp(1, p.getPayDate());
 			pstmt.setInt(2, p.getUsingPoint());
-//			pstmt.setInt(3, p.());
-			pstmt.setInt(4, p.getPaymentCode());
+			pstmt.setInt(3, p.getMemberCode());
+			pstmt.setString(4, "결제");
+			pstmt.setString(5, p.getImpNum());
 			
 			result = pstmt.executeUpdate();
 			
@@ -202,5 +203,28 @@ public class PaymentDao {
 		
 		return result;
 		
+	}
+
+	public int updateUsingPoint(Connection con, Payment p) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("updateUsingPoint");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, p.getUsingPoint());
+			pstmt.setInt(2, p.getMemberCode());
+			
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
 	}
 }
