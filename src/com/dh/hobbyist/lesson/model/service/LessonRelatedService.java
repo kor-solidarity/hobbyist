@@ -12,6 +12,9 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 
+import com.dh.hobbyist.artist.model.vo.ArtistCareer;
+import com.dh.hobbyist.artist.model.vo.ArtistCerts;
+import com.dh.hobbyist.artist.model.vo.ArtistEducation;
 import com.dh.hobbyist.lesson.model.dao.LessonRelatedDao;
 import com.dh.hobbyist.lesson.model.vo.Image;
 import com.dh.hobbyist.lesson.model.vo.Lesson;
@@ -284,6 +287,48 @@ public class LessonRelatedService {
 			rollback(con);
 		}
 				
+		return list;
+	}
+
+	public ArrayList<ArtistCerts> selectCertList(int artistCode) {
+		Connection con = getConnection();
+		
+		ArrayList<ArtistCerts> list = new LessonRelatedDao().selectCertList(con, artistCode);
+		
+		if(list != null) {
+			commit(con);
+		} else {
+			rollback(con);
+		}
+		
+		return list;
+	}
+
+	public ArrayList<ArtistEducation> selectEdu(int artistCode) {
+		Connection con = getConnection();
+		
+		ArrayList<ArtistEducation> list = new LessonRelatedDao().selectEduList(con, artistCode);
+		
+		if(list != null) {
+			commit(con);
+		} else {
+			rollback(con);
+		}
+		
+		return list;
+	}
+
+	public ArrayList<ArtistCareer> selectCareer(int artistCode) {
+		Connection con = getConnection();
+		
+		ArrayList<ArtistCareer> list = new LessonRelatedDao().selectCareer(con, artistCode);
+		
+		if(list != null) {
+			commit(con);
+		} else {
+			rollback(con);
+		}
+		
 		return list;
 	}
 

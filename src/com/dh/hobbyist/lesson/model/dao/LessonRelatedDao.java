@@ -13,6 +13,9 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Properties;
 
+import com.dh.hobbyist.artist.model.vo.ArtistCareer;
+import com.dh.hobbyist.artist.model.vo.ArtistCerts;
+import com.dh.hobbyist.artist.model.vo.ArtistEducation;
 import com.dh.hobbyist.lesson.model.vo.Image;
 import com.dh.hobbyist.lesson.model.vo.Lesson;
 import com.dh.hobbyist.lesson.model.vo.LessonOrder;
@@ -614,6 +617,114 @@ public class LessonRelatedDao {
 		}
 		
 		return result;
+	}
+
+	public ArrayList<ArtistCerts> selectCertList(Connection con, int artistCode) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<ArtistCerts> list = null;
+		ArtistCerts a = null;
+		
+		String query = prop.getProperty("selectCert");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, artistCode);
+			
+			rset = pstmt.executeQuery();
+			
+			list = new ArrayList<ArtistCerts>();
+			
+			while(rset.next()) {
+				a = new ArtistCerts();
+				a.setCertCode(rset.getInt("CERT_PK"));
+				a.setCertName(rset.getString("CERT_NAME"));
+				a.setCertDate(rset.getDate("CERT_DATE"));
+				a.setCertOrg(rset.getString("CERT_ORG"));
+				
+				list.add(a);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+	}
+
+	public ArrayList<ArtistEducation> selectEduList(Connection con, int artistCode) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<ArtistEducation> list = null;
+		ArtistEducation e = null;
+		
+		String query = prop.getProperty("selectEdu");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, artistCode);
+			
+			rset = pstmt.executeQuery();
+			
+			list = new ArrayList<ArtistEducation>();
+			
+			while(rset.next()) {
+				e = new ArtistEducation();
+				e.setEduCode(rset.getInt("EDU_PK"));
+				e.setEduInsitituteName(rset.getString("EDU_INSTITUTE_NAME"));
+				e.setEduMajor(rset.getString("EDU_MAJOR"));
+				e.setStatus(rset.getInt("STATUS"));
+				
+				list.add(e);
+			}
+			
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+	}
+
+	public ArrayList<ArtistCareer> selectCareer(Connection con, int artistCode) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<ArtistCareer> list = null;
+		ArtistCareer a = null;
+		
+		String query = prop.getProperty("selectCareer");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, artistCode);
+			
+			rset = pstmt.executeQuery();
+			
+			list = new ArrayList<ArtistCareer>();
+			
+			while(rset.next()) {
+				a = new ArtistCareer();
+				a.setOrgName(rset.getString("ORG_NAME"));
+				a.setRank(rset.getString("RANK"));
+				a.setOccupation(rset.getString("OCCUPATION"));
+				a.setOccupationTerm(rset.getString("OCCUPATION_TERM"));
+				
+				list.add(a);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
 	}
 
 
