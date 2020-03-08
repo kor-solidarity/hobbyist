@@ -229,6 +229,10 @@
    	       			<td id="refundCost"></td>
    	       		</tr>
    	       		<tr>
+	   	       		<td>환불 포인트</td>
+	   	       		<td id="refundPoint"></td>
+   	       		</tr>
+   	       		<tr>
    	       			<td>수업 회차</td>
    	       			<td id="totalOrder"></td>
    	       		</tr>
@@ -237,8 +241,8 @@
    	       			<td id="finishOrder"></td>
    	       		</tr>
    	       		<tr>
-   	       			<td>잔여 회차</td>
-   	       			<td id="leftOrder"></td>
+   	       			<td>진행률</td>
+   	       			<td id="orderPercent"></td>
    	       		</tr>
    	       		<tr>
    	       			<td>환불 사유</td>
@@ -306,7 +310,7 @@
 							'<th style="width: 7%;">이름</th>' +
 							'<th style="width: 12%;">전화번호</th>' +
 							'<th style="width: 17%;">이메일</th>' +
-							'<th style="width: 11%;">환불 금액</th>' +
+							'<th style="width: 11%;">아티스트 코드</th>' +
 							'<th style="width: 17%;">신청일</th>' +
 							'<th style="width: 14%;">상세보기</th>');
 				
@@ -344,21 +348,27 @@
 		
 		$(document).on("click", '.Btn', function() {
 		    	var num = Number($(this).parent().parent().children("td:nth-child(2)").text());
+		    	var refundCode = Number($(this).parent().parent().children("td:nth-child(1)").text());
 		    	console.log(num);
+		    	console.log(refundCode);
 		    	
 		    	$.ajax({
 		    		url: "/hobbyist/selectApplyDetail.ad",
 					data: {num : num},
 					type: "post",
 					success: function(data) {
+						var orderPercent = Math.round(100 - ((data.finishOrder / data.totalOrder) * 100));
+						var refundPoint = Math.round(data.usingPoint - ((data.finishOrder / data.totalOrder) * data.usingPoint));
+						
 						$("#impNum").text(data.impNum);
 						$("#lessonName").text(data.lessonName);
-						$("#payCost").text(data.payCost);
-						$("#usingPoint").text(data.usingPoint);
-						$("#refundCost").text(Math.floor(data.payCost * (data.finishOrder / data.totalOrder)));
-						$("#totalOrder").text(data.totalOrder);
-						$("#finishOrder").text(data.finishOrder);
-						$("#leftOrder").text(data.leftOrder);
+						$("#payCost").text(data.payCost + "원");
+						$("#usingPoint").text(data.usingPoint + " point");
+						$("#refundCost").text(data.refundCost +"원");
+						$("#refundPoint").text(refundPoint + " point");
+						$("#totalOrder").text(data.totalOrder + "회");
+						$("#finishOrder").text(data.finishOrder + "회");
+						$("#orderPercent").text(orderPercent + "%");
 						$("#reason").text(data.reason);
 						$("#reasonDetail").text(data.reasonDetail);
 						
@@ -373,9 +383,8 @@
 	   	    	
 				//최종 반려 버튼 클릭시
 				$(document).on("click", '#realRefuse', function() {
-					var refundCode = Number($('.Btn').parent().parent().children("td:nth-child(1)").text());
+					
 					var reasonDetail = $("#refuseArea").val();
-					console.log(refundCode);
 					console.log(reasonDetail);
 					var result = confirm("반려 처리 하시겠습니까?");
 						
