@@ -31,11 +31,10 @@ public class PhoneCertificationServlet extends HttpServlet {
 			
 			String phone = tel1 + tel2 + tel3;
 			
-			System.out.println(phone);
 			
-			//String randomVal = new Coolsms().sms(phone);
+			String randomVal = new Coolsms().sms(phone);
 			
-			String randomVal = phone;
+			//String randomVal = phone;
 			
 			System.out.println("인증번호 : " + randomVal);
 			
