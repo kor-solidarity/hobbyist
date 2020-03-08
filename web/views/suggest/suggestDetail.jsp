@@ -59,6 +59,7 @@
 	}
 	#replySelectArea {
 		width:850px;
+		margin:auto;
 	}
 	#replySelectTable {
 		width:100%;
