@@ -62,25 +62,25 @@ public class MemberDao {
 			pstmt.setString(4, member.getPhone());
 			pstmt.setString(5, member.getBankName());
 			pstmt.setString(6, member.getBankNum());
-			/*pstmt.setString(7, member.getMemberId());*/
-
+			pstmt.setInt(7, member.getMemberCode());
+			// MEMEBER_PK(프라이머리키 ) = ? 값에 대한 정보를  dao에서 써줘야한다
 
 			memberUpdate = pstmt.executeUpdate();
 
-			System.out.println("db에서 받은 dao값:"+ member.getMemberId());
+			System.out.println("db에서 받은 dao값:"+member.getMemberId());
 			System.out.println("db에서 받은 dao값:"+member.getMemberPwd());
 			System.out.println("db에서 받은 dao값:"+member.getMemberName());
 			System.out.println("db에서 받은 dao값:"+member.getEmail());
 			System.out.println("db에서 받은 dao값:"+member.getPhone());
 			System.out.println("db에서 받은 dao값:"+member.getBankName());
 			System.out.println("db에서 받은 dao값:"+member.getBankNum());
-
+			System.out.println("db에서 받은 dao값:"+member.getMemberCode());
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}finally {
-			close(rset);
+			
 			close(pstmt);
 		}  
 		return memberUpdate;  

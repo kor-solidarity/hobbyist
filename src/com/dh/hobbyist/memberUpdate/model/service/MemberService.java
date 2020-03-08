@@ -25,7 +25,9 @@ public class MemberService {
 		System.out.println("DB에서 받아온의" + memberUpdate);
 		
 		if(memberUpdate > 0) {
-			commit(con);
+			/*commit(con); 자동 컴밋
+			 * 
+			 */
 		}else {
 			rollback(con);
 		}
