@@ -6,6 +6,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.websocket.Session;
 
 import com.dh.hobbyist.memberUpdate.model.service.MemberService;
 import com.dh.hobbyist.memberUpdate.model.vo.Member;
@@ -39,6 +40,7 @@ public class memberUpdateServletM extends HttpServlet {
 	String phone = tel1 + "-" + tel2 + "-" + tel3;
 	String bankName = request.getParameter("bankName");
 	String bankNum = request.getParameter("bankNum");
+	int memberCode = ((member)request.getSession().getAttribute("loginMember")).getMemberCode();
 
 	System.out.println("서블릿 userId:" + userId);
 	System.out.println("서블릿 password1:" + userPwd);
@@ -49,6 +51,7 @@ public class memberUpdateServletM extends HttpServlet {
 	System.out.println("서블릿 bankText:" + bankNum);
 	
 	Member member = new Member();
+	member.setMemberCode(memberCode);
 	member.setMemberId(userId);
 	member.setMemberPwd(userPwd);
 	member.setMemberName(nickName);
