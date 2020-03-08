@@ -61,10 +61,10 @@ public class ApplyRefundService {
 	}
 
 	//반려 취소버튼 클릭 시
-	public int cancelRefund(int num) {
+	public int cancelRefuse(int num) {
 		Connection con = getConnection();
 		
-		int result = new ApplyRefundDao().cancelRefund(con, num);
+		int result = new ApplyRefundDao().cancelRefuse(con, num);
 		
 		if(result > 0) {
 			commit(con);

@@ -22,7 +22,7 @@ public class CancelRefuseServlet extends HttpServlet {
 		
 		System.out.println(num);
 		
-		int result = new ApplyRefundService().cancelRefund(num);
+		int result = new ApplyRefundService().cancelRefuse(num);
 		
 		String page = "";
 		if(result > 0) {

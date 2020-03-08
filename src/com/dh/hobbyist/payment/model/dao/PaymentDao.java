@@ -53,7 +53,6 @@ public class PaymentDao {
 		} finally {
 			close(pstmt);
 		}
-		System.out.println("result : " + result);
 		return result;
 	}
 
@@ -93,7 +92,6 @@ public class PaymentDao {
 			close(stmt);
 			close(rset);
 		}
-		System.out.println(payList);
 		return payList;
 	}
 
@@ -106,8 +104,8 @@ public class PaymentDao {
 		
 		try {
 			pstmt = con.prepareStatement(query);
-			pstmt.setInt(1, p.getPaymentCode());
-			pstmt.setInt(2, p.getPaymentCode());
+			pstmt.setString(1, p.getImpNum());
+			pstmt.setString(2, p.getImpNum());
 			
 			result = pstmt.executeUpdate();
 			
@@ -129,8 +127,8 @@ public class PaymentDao {
 		
 		try {
 			pstmt = con.prepareStatement(query);
-			pstmt.setInt(1, p.getPaymentCode());
-			pstmt.setInt(2, p.getPaymentCode());
+			pstmt.setString(1, p.getImpNum());
+			pstmt.setString(2, p.getImpNum());
 			
 			result = pstmt.executeUpdate();
 			
@@ -141,5 +139,68 @@ public class PaymentDao {
 		}
 		
 		return result;
+	}
+
+	public Payment showPayView(Connection con, int scheduleCode, int memberCode) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		Payment p = null;
+		
+		String query = prop.getProperty("showPayView");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, memberCode);
+			pstmt.setInt(2, scheduleCode);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				p = new Payment();
+				p.setScheduleCode(rset.getInt("SCHEDULE_PK"));
+				p.setLessonName(rset.getString("LESSON_NAME"));
+				p.setArtistCode(rset.getInt("MEMBER_PK"));
+				p.setArtistName(rset.getString("ARTIST_NICK"));
+				p.setTotalOrder(rset.getInt("TOTAL_ORDERS"));
+				p.setCostPerOrder(rset.getInt("COST_PER_ORDER"));
+				p.setTotalCost(rset.getInt("TOTAL_COSTS"));
+				p.setRegion(rset.getString("REGION"));
+				p.setSubRegion(rset.getString("SUB_REGION"));
+				p.setAddress(rset.getString("ADDRESS"));
+				p.setTotalPoint(rset.getInt("MEMBER_POINT"));
+				
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return p;
+	}
+	
+	//결제할때 포인트 사용 시 포인트 변동
+	public int insertUsingPoint(Connection con, Payment p) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("insertUsingPoint");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setTimestamp(1, p.getPayDate());
+			pstmt.setInt(2, p.getUsingPoint());
+//			pstmt.setInt(3, p.());
+			pstmt.setInt(4, p.getPaymentCode());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+		
 	}
 }
