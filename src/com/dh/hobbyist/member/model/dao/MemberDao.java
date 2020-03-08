@@ -496,7 +496,9 @@ public class MemberDao {
         ResultSet resultSet = null;
         ArrayList<LessonPayment> paymentArrayList = null;
 
-        String query = prop.getProperty("");
+        // 멤버리뷰 목록조회 1단계: 멤버 PK 에 따른 LESSON_PAYMENT, LESSON_SCHEDULE 불러오기.
+        String query = prop.getProperty("selectLessonPaymentListByMember");
+
 
         return null;
     }
