@@ -1,6 +1,6 @@
 package com.dh.hobbyist.payment.model.dao;
 
-import static com.dh.hobbyist.common.JDBCTemplate.*;
+import static com.dh.hobbyist.common.JDBCTemplate.close;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import com.dh.hobbyist.lesson.model.vo.MyRegiLesson;
 import com.dh.hobbyist.payment.model.vo.Payment;
 
 public class PaymentDao {
@@ -226,6 +227,37 @@ public class PaymentDao {
 		}
 		
 		return result;
+	}
+
+	//마이페이지 결제 내역
+	public ArrayList<MyRegiLesson> payList(Connection con, int memberCode) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<MyRegiLesson> pList = null;
+		
+		String query = prop.getProperty("payList");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, memberCode);
+			
+			
+			while(rset.next()) {
+				MyRegiLesson p = new MyRegiLesson();
+				p.setLessonImgRoute(rset.getString("LESSON_IMG_ROUTE"));
+				p.setLessonImgName(rset.getString("LESSON_IMG_NAME"));
+				p.setLessonName(rset.getString("LESSON_NAME"));
+				p.setArtistName(rset.getString("ARTIST_NAME"));
+				p.setRegion(rset.getString("REGION"));
+				p.setPaymentDate(rset.getTimestamp("PAYMENT_DATE"));
+			}
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return pList;
 	}
 
 }
