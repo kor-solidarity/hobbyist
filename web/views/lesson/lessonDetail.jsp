@@ -521,16 +521,14 @@
 							<% } %>
 							<% for(int i = 0; i < careerList.size(); i++) { %>
 							<image src="<%= request.getContextPath() %>/static/images/work2.png">
-								<% System.out.println(((ArtistCareer) careerList.get(i)).getOrgName());
-								if(((ArtistCareer) careerList.get(i)).getOrgName() != "없음") { 
+								<% 
+								if(!((ArtistCareer) careerList.get(i)).getOrgName().equals("없음")) { 
 								%>
 									<%= ((ArtistCareer) careerList.get(i)).getOrgName() %>&nbsp;
 								<% }
-								if(((ArtistCareer) careerList.get(i)).getRank() != "없음") { %>
+								if(!((ArtistCareer) careerList.get(i)).getRank().equals("없음")) { %>
 									<%= ((ArtistCareer) careerList.get(i)).getRank() %>&nbsp;
-								<% } else { %>
-									프리랜서&nbsp;
-								<% } %>
+								<% } else { %>프리랜서&nbsp;<% } %>
 								<%= ((ArtistCareer) careerList.get(i)).getOccupation() %>&nbsp;
 								<%= ((ArtistCareer) careerList.get(i)).getOccupationTerm() %>&nbsp;경력<br>
 							<% } %>
