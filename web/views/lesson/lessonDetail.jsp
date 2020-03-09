@@ -355,7 +355,7 @@
 						<td colspan="2">
 							<table id="detailMenu">
 								<tr>
-									<td><span id="dMenu1" style="background:#DAB554">아티스트</span></td>
+									<td><span id="dMenu1" style="background:#DAB554; color:white">아티스트</span></td>
 									<td><span id="dMenu2">수업소개</span></td>
 									<td><span id="dMenu3">리뷰</span></td>
 									<td><!-- <span id="dMenu4">문의</span> --></td>
@@ -370,8 +370,8 @@
 											$("#certsCareer").show();
 											$("#artistIntroArea").show();
 											$("#lessonIntroArea").hide();
-											$(this).css("background", "#DAB554");
-											$("#dMenu2").css("background", "white");
+											$(this).css({"background":"#DAB554", "color":"white"});
+											$("#dMenu2").css({"background":"white", "color":"darkolivegreen"});
 										});
 																				
 										$("#dMenu2").click(function(){
@@ -380,8 +380,8 @@
 											$("#certsCareer").hide();
 											$("#artistIntroArea").hide();
 											$("#lessonIntroArea").show();
-											$("#dMenu1").css("background", "white");
-											$("#dMenu2").css("background", "#DAB554");
+											$("#dMenu1").css({"background":"white", "color":"darkolivegreen"});
+											$("#dMenu2").css({"background":"#DAB554", "color":"white"});
 										});
 									});
 								</script>
