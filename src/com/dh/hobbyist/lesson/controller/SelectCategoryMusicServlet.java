@@ -62,7 +62,8 @@ public class SelectCategoryMusicServlet extends HttpServlet {
 		
 		ArrayList<HashMap<String, Object>> list = new LessonService().selectCategoryMusic(pi);
 		
-		
+		System.out.println("music list : " + list);
+				
 		String page = "";
 		if(list != null) {
 			page = "views/lesson/categoryMusicPage.jsp";

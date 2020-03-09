@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map.Entry;
 import java.util.Properties;
 
 import com.dh.hobbyist.common.model.vo.PageInfo;
@@ -148,6 +149,7 @@ public class LessonDao {
 				hmap.put("status", rset.getInt("STATUS"));
 				hmap.put("categoryCode", rset.getInt("CATEGORY_PK"));
 				/*hmap.put("parentCode", rset.getInt("PARENT_PK"));*/
+				hmap.put("artistCode", rset.getInt("ARTIST_PK"));
 				hmap.put("artistNick", rset.getString("ARTIST_NICK"));
 				hmap.put("memberName", rset.getString("MEMBER_NAME"));
 				hmap.put("imageCode", rset.getInt("IMAGE_PK"));
@@ -159,6 +161,7 @@ public class LessonDao {
 				hmap.put("imageName2", rset.getString("img2_name"));
 				hmap.put("imageType2", rset.getString("img2_type"));
 				hmap.put("region", rset.getString("REGION"));
+				hmap.put("isNew", 1);
 				
 				list.add(hmap);
 			}
@@ -205,6 +208,7 @@ public class LessonDao {
 				hmap.put("lessonName", rset.getString("LESSON_NAME"));
 				hmap.put("status", rset.getInt("STATUS"));
 				hmap.put("categoryCode", rset.getInt("CATEGORY_PK"));
+				hmap.put("artistCode", rset.getInt("ARTIST_PK"));
 				hmap.put("artistNick", rset.getString("ARTIST_NICK"));
 				hmap.put("memberName", rset.getString("MEMBER_NAME"));
 				hmap.put("imageCode", rset.getInt("IMAGE_PK"));
@@ -262,6 +266,7 @@ public class LessonDao {
 				hmap.put("lessonName", rset.getString("LESSON_NAME"));
 				hmap.put("status", rset.getInt("STATUS"));
 				hmap.put("categoryCode", rset.getInt("CATEGORY_PK"));
+				hmap.put("artistCode", rset.getInt("ARTIST_PK"));
 				hmap.put("artistNick", rset.getString("ARTIST_NICK"));
 				hmap.put("memberName", rset.getString("MEMBER_NAME"));
 				hmap.put("imageCode", rset.getInt("IMAGE_PK"));
@@ -319,6 +324,7 @@ public class LessonDao {
 				hmap.put("lessonName", rset.getString("LESSON_NAME"));
 				hmap.put("status", rset.getInt("STATUS"));
 				hmap.put("categoryCode", rset.getInt("CATEGORY_PK"));
+				hmap.put("artistCode", rset.getInt("ARTIST_PK"));
 				hmap.put("artistNick", rset.getString("ARTIST_NICK"));
 				hmap.put("memberName", rset.getString("MEMBER_NAME"));
 				hmap.put("imageCode", rset.getInt("IMAGE_PK"));
@@ -376,6 +382,7 @@ public class LessonDao {
 				hmap.put("lessonName", rset.getString("LESSON_NAME"));
 				hmap.put("status", rset.getInt("STATUS"));
 				hmap.put("categoryCode", rset.getInt("CATEGORY_PK"));
+				hmap.put("artistCode", rset.getInt("ARTIST_PK"));
 				hmap.put("artistNick", rset.getString("ARTIST_NICK"));
 				hmap.put("memberName", rset.getString("MEMBER_NAME"));
 				hmap.put("imageCode", rset.getInt("IMAGE_PK"));
@@ -432,6 +439,7 @@ public class LessonDao {
 				hmap.put("lessonName", rset.getString("LESSON_NAME"));
 				hmap.put("status", rset.getInt("STATUS"));
 				hmap.put("categoryCode", rset.getInt("CATEGORY_PK"));
+				hmap.put("artistCode", rset.getInt("ARTIST_PK"));
 				hmap.put("artistNick", rset.getString("ARTIST_NICK"));
 				hmap.put("memberName", rset.getString("MEMBER_NAME"));
 				hmap.put("imageCode", rset.getInt("IMAGE_PK"));
@@ -488,6 +496,7 @@ public class LessonDao {
 				hmap.put("lessonName", rset.getString("LESSON_NAME"));
 				hmap.put("status", rset.getInt("STATUS"));
 				hmap.put("categoryCode", rset.getInt("CATEGORY_PK"));
+				hmap.put("artistCode", rset.getInt("ARTIST_PK"));
 				hmap.put("artistNick", rset.getString("ARTIST_NICK"));
 				hmap.put("memberName", rset.getString("MEMBER_NAME"));
 				hmap.put("imageCode", rset.getInt("IMAGE_PK"));
@@ -692,6 +701,48 @@ public class LessonDao {
 		
 		return listCount;
 	}
+	
+	//신규 수업 new 붙이기 메소드(유승)
+	public ArrayList<HashMap<String, Object>> selectNewLesson(Connection con, ArrayList<HashMap<String, Object>> list) {
+		Statement stmt = null;
+		ResultSet rset = null;
+		
+		
+		String query = prop.getProperty("selectNewLesson");
+		
+		try {
+			stmt = con.createStatement();
+			rset = stmt.executeQuery(query);
+			
+		
+			while(rset.next()) {
+				for(HashMap<String, Object> hmap : list)
+					for(Entry<String, Object> mapEntry : hmap.entrySet()) {
+						String key = mapEntry.getKey();
+						String value = (String) mapEntry.getValue().toString();
+						
+						if(key.equals("artistCode")) {
+							if(Integer.parseInt(value) == rset.getInt("ARTIST_PK")) {
+								hmap.put("isNew", 0);
+								
+								System.out.println(value);
+							}
+						}
+						
+					}
+			}
 
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(stmt);
+			close(rset);
+		}
+		
+		
+		
+		return list;
+	  }
+	
 	
 }
