@@ -12,6 +12,7 @@ public class ApplyRefund implements java.io.Serializable{
 	private String phone;			//전화번호
 	private String email;			//이메일
 	private int artistCode;			//아티스트 코드
+	private String artistName;		//아티스트 이름
 	private int refundCost;			//환불금액
 	private Timestamp applyDate;	//신청일
 	private int totalOrder;			//총 수업회차
@@ -20,6 +21,7 @@ public class ApplyRefund implements java.io.Serializable{
 	private int usingPoint;			//사용포인트
 	private int givePoint; 			//지금예정포인트
 	private int payCost;			//결제금액
+	private Timestamp payDate;		//결제일
 	private int resultCost;			//환불금액
 	private String reason;			//환불 사유
 	private String reasonDetail;	//환불 상세사유
@@ -30,9 +32,10 @@ public class ApplyRefund implements java.io.Serializable{
 	public ApplyRefund() {}
 
 	public ApplyRefund(int refundCode, int paymentCode, String lessonName, int memberCode, String memberName,
-			String phone, String email, int artistCode, int refundCost, Timestamp applyDate, int totalOrder,
-			int finishOrder, int leftOrder, int usingPoint, int givePoint, int payCost, int resultCost, String reason,
-			String reasonDetail, String refuseReason, int scheduleCode, String impNum) {
+			String phone, String email, int artistCode, String artistName, int refundCost, Timestamp applyDate,
+			int totalOrder, int finishOrder, int leftOrder, int usingPoint, int givePoint, int payCost,
+			Timestamp payDate, int resultCost, String reason, String reasonDetail, String refuseReason,
+			int scheduleCode, String impNum) {
 		super();
 		this.refundCode = refundCode;
 		this.paymentCode = paymentCode;
@@ -42,6 +45,7 @@ public class ApplyRefund implements java.io.Serializable{
 		this.phone = phone;
 		this.email = email;
 		this.artistCode = artistCode;
+		this.artistName = artistName;
 		this.refundCost = refundCost;
 		this.applyDate = applyDate;
 		this.totalOrder = totalOrder;
@@ -50,6 +54,7 @@ public class ApplyRefund implements java.io.Serializable{
 		this.usingPoint = usingPoint;
 		this.givePoint = givePoint;
 		this.payCost = payCost;
+		this.payDate = payDate;
 		this.resultCost = resultCost;
 		this.reason = reason;
 		this.reasonDetail = reasonDetail;
@@ -122,6 +127,14 @@ public class ApplyRefund implements java.io.Serializable{
 		this.artistCode = artistCode;
 	}
 
+	public String getArtistName() {
+		return artistName;
+	}
+
+	public void setArtistName(String artistName) {
+		this.artistName = artistName;
+	}
+
 	public int getRefundCost() {
 		return refundCost;
 	}
@@ -186,6 +199,14 @@ public class ApplyRefund implements java.io.Serializable{
 		this.payCost = payCost;
 	}
 
+	public Timestamp getPayDate() {
+		return payDate;
+	}
+
+	public void setPayDate(Timestamp payDate) {
+		this.payDate = payDate;
+	}
+
 	public int getResultCost() {
 		return resultCost;
 	}
@@ -238,10 +259,11 @@ public class ApplyRefund implements java.io.Serializable{
 	public String toString() {
 		return "ApplyRefund [refundCode=" + refundCode + ", paymentCode=" + paymentCode + ", lessonName=" + lessonName
 				+ ", memberCode=" + memberCode + ", memberName=" + memberName + ", phone=" + phone + ", email=" + email
-				+ ", artistCode=" + artistCode + ", refundCost=" + refundCost + ", applyDate=" + applyDate
-				+ ", totalOrder=" + totalOrder + ", finishOrder=" + finishOrder + ", leftOrder=" + leftOrder
-				+ ", usingPoint=" + usingPoint + ", givePoint=" + givePoint + ", payCost=" + payCost + ", resultCost="
-				+ resultCost + ", reason=" + reason + ", reasonDetail=" + reasonDetail + ", refuseReason="
-				+ refuseReason + ", scheduleCode=" + scheduleCode + ", impNum=" + impNum + "]";
+				+ ", artistCode=" + artistCode + ", artistName=" + artistName + ", refundCost=" + refundCost
+				+ ", applyDate=" + applyDate + ", totalOrder=" + totalOrder + ", finishOrder=" + finishOrder
+				+ ", leftOrder=" + leftOrder + ", usingPoint=" + usingPoint + ", givePoint=" + givePoint + ", payCost="
+				+ payCost + ", payDate=" + payDate + ", resultCost=" + resultCost + ", reason=" + reason
+				+ ", reasonDetail=" + reasonDetail + ", refuseReason=" + refuseReason + ", scheduleCode=" + scheduleCode
+				+ ", impNum=" + impNum + "]";
 	}
 }

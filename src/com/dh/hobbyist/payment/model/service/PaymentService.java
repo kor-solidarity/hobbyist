@@ -9,9 +9,9 @@ import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.dh.hobbyist.lesson.model.vo.MyRegiLesson;
 import com.dh.hobbyist.payment.model.dao.PaymentDao;
 import com.dh.hobbyist.payment.model.vo.Payment;
+import com.dh.hobbyist.payment.model.vo.RegisterPayment;
 
 public class PaymentService {
 
@@ -87,10 +87,10 @@ public class PaymentService {
 	}
 
 	//마이페이지 결제 리스트
-	public ArrayList<MyRegiLesson> payList(int memberCode) {
+	public ArrayList<RegisterPayment> payList(int memberCode) {
 		Connection con = getConnection();
 		
-		ArrayList<MyRegiLesson> pList = new PaymentDao().payList(con, memberCode);
+		ArrayList<RegisterPayment> pList = new PaymentDao().payList(con, memberCode);
 		
 		close(con);
 		

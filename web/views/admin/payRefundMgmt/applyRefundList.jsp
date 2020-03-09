@@ -304,13 +304,12 @@
 				console.log(data);
 				var $tr = $("<tr>");
 				
-				$tr.append('<th style="width: 8%;">신청코드</th>' +
-							'<th style="width: 10%;">결제코드</th>' +
-							'<th style="width: 10%;">회원코드</th>' +
-							'<th style="width: 7%;">이름</th>' +
-							'<th style="width: 12%;">전화번호</th>' +
-							'<th style="width: 17%;">이메일</th>' +
-							'<th style="width: 11%;">아티스트 코드</th>' +
+				$tr.append('<th style="width: 9%;">신청코드</th>' +
+							'<th style="width: 9%;">결제코드</th>' +
+							'<th style="width: 12%;">회원명</th>' +
+							'<th style="width: 12%;">아티스트명</th>' +
+							'<th style="width: 13%;">전화번호</th>' +
+							'<th style="width: 17%;">결제일</th>' +
 							'<th style="width: 17%;">신청일</th>' +
 							'<th style="width: 14%;">상세보기</th>');
 				
@@ -320,22 +319,20 @@
 					$tr= $("<tr>");
 					var $rcode = $("<td>").text(data[key].refundCode);
 					var $pcode = $("<td>").text(data[key].paymentCode);
-					var $mCode = $("<td>").text(data[key].memberCode);
 					var $mName = $("<td>").text(data[key].memberName);
+					var $arName = $("<td>").text(data[key].artistName);
 					var $phone = $("<td>").text(data[key].phone);
-					var $email = $("<td>").text(data[key].email);
-					var $acode = $("<td>").text(data[key].artistCode);
-					var $rDate = $("<td>").text(data[key].applyDate);
+					var $pDate = $("<td>").text(data[key].payDate);
+					var $arDate = $("<td>").text(data[key].applyDate);
 					var $btn = $("<td>").html("<button class='Btn'>조회</button>");
 					
 					$tr.append($rcode);
 					$tr.append($pcode);
-					$tr.append($mCode);
 					$tr.append($mName);
+					$tr.append($arName);
 					$tr.append($phone);
-					$tr.append($email);
-					$tr.append($acode);
-					$tr.append($rDate);
+					$tr.append($pDate);
+					$tr.append($arDate);
 					$tr.append($btn);
 					$table.append($tr);
 					

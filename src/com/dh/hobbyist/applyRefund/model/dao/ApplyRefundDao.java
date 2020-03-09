@@ -50,14 +50,15 @@ public class ApplyRefundDao {
 				ApplyRefund arf = new ApplyRefund();
 				arf.setRefundCode(rset.getInt("REFUND_PK"));
 				arf.setPaymentCode(rset.getInt("PAYMENT_PK"));
-				arf.setMemberCode(rset.getInt("MEMBER_PK"));
 				arf.setMemberName(rset.getString("MEMBER_NAME"));
+				arf.setArtistName(rset.getString("ARTIST_NAME"));
 				arf.setPhone(rset.getString("MEMBER_PHONE"));
-				arf.setEmail(rset.getString("MEMBER_EMAIL"));
-				arf.setArtistCode(rset.getInt("ARTIST_PK"));
+				arf.setPayDate(rset.getTimestamp("PAYMENT_DATE"));
 				arf.setApplyDate(rset.getTimestamp("REQUESTED_TIME"));
 				
 				applyList.add(arf);
+				
+				System.out.println(arf);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -154,11 +155,11 @@ public class ApplyRefundDao {
 				ApplyRefund arf = new ApplyRefund();
 				arf.setRefundCode(rset.getInt("REFUND_PK"));
 				arf.setPaymentCode(rset.getInt("PAYMENT_PK"));
-				arf.setMemberCode(rset.getInt("MEMBER_PK"));
 				arf.setMemberName(rset.getString("MEMBER_NAME"));
+				arf.setArtistName(rset.getString("ARTIST_NAME"));
 				arf.setPhone(rset.getString("MEMBER_PHONE"));
 				arf.setEmail(rset.getString("MEMBER_EMAIL"));
-				arf.setArtistCode(rset.getInt("ARTIST_PK"));
+				arf.setPayDate(rset.getTimestamp("PAYMENT_DATE"));
 				arf.setApplyDate(rset.getTimestamp("REQUESTED_TIME"));
 				
 				applyList.add(arf);

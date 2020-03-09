@@ -15,6 +15,7 @@ import java.util.Properties;
 
 import com.dh.hobbyist.lesson.model.vo.MyRegiLesson;
 import com.dh.hobbyist.payment.model.vo.Payment;
+import com.dh.hobbyist.payment.model.vo.RegisterPayment;
 
 public class PaymentDao {
 	private Properties prop = new Properties();
@@ -73,17 +74,14 @@ public class PaymentDao {
 			while(rset.next()) {
 				Payment p = new Payment();
 				p.setPaymentCode(rset.getInt("PAYMENT_PK"));
-				p.setUsingPoint(rset.getInt("POINTS_USED"));
-				p.setGivePoint(rset.getInt("POINTS_GIVEN"));
-				p.setPayCost(rset.getInt("PAYMENT_COSTS"));
+				p.setLessonName(rset.getString("LESSON_NAME"));
 				p.setMemberName(rset.getString("MEMBER_NAME"));
 				p.setPhone(rset.getString("MEMBER_PHONE"));
-				p.setPayMethod(rset.getString("PAYMENT_METHOD"));
+				p.setTotalCost(rset.getInt("TOTAL_COSTS"));
+				p.setPayCost(rset.getInt("PAYMENT_COSTS"));
+				p.setUsingPoint(rset.getInt("POINTS_USED"));
 				p.setImpNum(rset.getString("PAYMENT_IMP_NUM"));
 				p.setPayDate(rset.getTimestamp("PAYMENT_DATE"));
-				p.setScheduleCode(rset.getInt("LESSON_SCHEDULE_PK"));
-				p.setArtistCode(rset.getInt("ARTIST_PK"));
-				p.setMemberCode(rset.getInt("MEMBER_PK"));
 				
 				payList.add(p);
 			}
@@ -230,33 +228,42 @@ public class PaymentDao {
 	}
 
 	//마이페이지 결제 내역
-	public ArrayList<MyRegiLesson> payList(Connection con, int memberCode) {
+	public ArrayList<RegisterPayment> payList(Connection con, int memberCode) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		ArrayList<MyRegiLesson> pList = null;
+		ArrayList<RegisterPayment> pList = null;
 		
 		String query = prop.getProperty("payList");
 		
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.setInt(1, memberCode);
+			rset = pstmt.executeQuery();
 			
+			pList = new ArrayList<RegisterPayment>();
 			
 			while(rset.next()) {
-				MyRegiLesson p = new MyRegiLesson();
+				
+				RegisterPayment p = new RegisterPayment();
 				p.setLessonImgRoute(rset.getString("LESSON_IMG_ROUTE"));
 				p.setLessonImgName(rset.getString("LESSON_IMG_NAME"));
 				p.setLessonName(rset.getString("LESSON_NAME"));
 				p.setArtistName(rset.getString("ARTIST_NAME"));
 				p.setRegion(rset.getString("REGION"));
 				p.setPaymentDate(rset.getTimestamp("PAYMENT_DATE"));
+				p.setPayCost(rset.getInt("PAYMENT_COSTS"));
+				p.setStatus(rset.getInt("STATUS"));
+				
+				pList.add(p);
 			}
 			
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
 		}
-		
 		return pList;
 	}
 
