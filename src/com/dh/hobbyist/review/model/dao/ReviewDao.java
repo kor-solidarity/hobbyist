@@ -2,15 +2,14 @@ package com.dh.hobbyist.review.model.dao;
 
 import com.dh.hobbyist.common.model.vo.Image;
 import com.dh.hobbyist.lesson.model.vo.Lesson;
+import com.dh.hobbyist.lesson.model.vo.LessonOrder;
 import com.dh.hobbyist.lesson.model.vo.LessonPayment;
 import com.dh.hobbyist.lesson.model.vo.LessonSchedule;
+import com.dh.hobbyist.member.model.vo.Member;
 
 import java.io.FileReader;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.Properties;
 
@@ -172,7 +171,12 @@ public class ReviewDao {
 			
 			preparedStatement.setString(1, img_type);
 			preparedStatement.setInt(2, pk);
-			preparedStatement.setInt(3, img_main);
+			// 음수가 나오면 NULL 로 간주
+			if (img_main >= 0) {
+				preparedStatement.setInt(3, img_main);
+			} else {
+				preparedStatement.setInt(3, Types.NULL);
+			}
 			
 			resultSet = preparedStatement.executeQuery();
 			
@@ -196,5 +200,69 @@ public class ReviewDao {
 		}
 		
 		return image;
+	}
+	
+	public Member selectMember(Connection con, int pk) {
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		Member member = null;
+		
+		String query = prop.getProperty("selectMember");
+		
+		try {
+			preparedStatement = con.prepareStatement(query);
+			
+			resultSet = preparedStatement.executeQuery();
+			
+			if (resultSet.next()) {
+				member = new Member();
+				
+				// 당장은 닉네임, 이름/별명만 필요하기 때문에 나머지 셋은 생략.
+				member.setMemberCode(resultSet.getInt(1));
+				member.setMemberId(resultSet.getString(2));
+				member.setArtistNick(resultSet.getString("ARTIST_NICK"));
+				
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(resultSet);
+			close(preparedStatement);
+		}
+		return member;
+	}
+	
+	public LessonOrder selectLessonOrder(Connection con, int schedulePk, int lessonOrderTime) {
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		LessonOrder lessonOrder = null;
+		
+		String query = prop.getProperty("selectMember");
+		
+		try {
+			preparedStatement = con.prepareStatement(query);
+			
+			resultSet = preparedStatement.executeQuery();
+			
+			if (resultSet.next()) {
+				lessonOrder = new LessonOrder();
+				
+				lessonOrder.setOrderCode(resultSet.getInt("LESSON_ORDER_PK"));
+				lessonOrder.setScheduleCode(resultSet.getInt("SCHEDULE_PK"));
+				lessonOrder.setOrderTime(resultSet.getInt("LESSON_ORDER_TIME"));
+				lessonOrder.setOrderStart(resultSet.getTimestamp(4));
+				lessonOrder.setOrderEnd(resultSet.getTimestamp(5));
+				lessonOrder.setListeners(resultSet.getInt(6));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(resultSet);
+			close(preparedStatement);
+		}
+		
+		return lessonOrder;
 	}
 }

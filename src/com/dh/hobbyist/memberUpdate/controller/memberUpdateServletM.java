@@ -46,10 +46,10 @@ public class memberUpdateServletM extends HttpServlet {
 	String bankNum = request.getParameter("bankNum");
 	int memberCode = ((Member) request.getSession().getAttribute("loginMember")).getMemberCode();
 	
-	if(memberCode != null) {
-	httpSession.setAttribute("user", );
-		
-	}
+	// if(memberCode != null) {
+	// httpSession.setAttribute("user", );
+	//
+	// }
 	
 	
 	
