@@ -12,7 +12,9 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import com.dh.hobbyist.artist.model.vo.ArtistCareer;
+import com.dh.hobbyist.artist.model.vo.ArtistCategory;
 import com.dh.hobbyist.artist.model.vo.ArtistCerts;
+import com.dh.hobbyist.artist.model.vo.ArtistEducation;
 
 public class ArtistInfoDao {
 	private Properties prop = new Properties();
@@ -99,6 +101,77 @@ public class ArtistInfoDao {
 				list.add(ac);
 			}
 			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+	}
+
+	public ArrayList<ArtistEducation> selectEducation(Connection con, int artistCode) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<ArtistEducation> list = null;
+		ArtistEducation ae = null;
+				
+		String query = prop.getProperty("selectEducation");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, artistCode);
+			
+			rset = pstmt.executeQuery();
+			
+			list = new ArrayList<ArtistEducation>();
+			
+			while(rset.next()) {
+				ae = new ArtistEducation();
+				ae.setEduCode(rset.getInt("EDU_PK"));
+				ae.setEduInsitituteName(rset.getString("EDU_INSTITUTE_NAME"));
+				ae.setEduMajor(rset.getString("EDU_MAJOR"));
+				ae.setStatus(rset.getInt("STATUS"));
+				ae.setMemberPk(rset.getInt("MEMBER_PK"));
+				
+				list.add(ae);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+	}
+
+	public ArrayList<ArtistCategory> selectCategory(Connection con, int artistCode) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<ArtistCategory> list = null;
+		ArtistCategory ac = null;
+		
+		String query = prop.getProperty("selectCategory");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, artistCode);
+			
+			rset = pstmt.executeQuery();
+			
+			list = new ArrayList<ArtistCategory>();
+			
+			while(rset.next()) {
+				ac = new ArtistCategory();
+				ac.setCategoryCode(rset.getInt("CATEGORY_PK"));
+				ac.setCategoryName(rset.getString("NODE_NAME"));
+				ac.setCategoryParentCode(rset.getInt("PARENT_PK"));
+				
+				list.add(ac);
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {

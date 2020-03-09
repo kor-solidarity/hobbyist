@@ -1950,8 +1950,115 @@
 					$("#reNextModalBtn").hide();
 					$("#reSaveModalBtn").show();
 				}
+				
+				if (reNum == 2) {
+					$.ajax({
+						url: "/hobbyist/selectCategory.ar",
+						type: "get",
+						success: function(data) {
+							for(var i = 0; i < data.length; i++) {
+								var categoryCode = data[i].categoryCode;
+								var categoryName = decodeURIComponent(data[i].categoryName);
+								var parentCode = data[i].parentCode;
+								$("#reCategoryName" + (i+1)).val(parentCode).prop("selected", true);
+								$("#reDetailCategory" + (i+1)).append("<option value='" + categoryCode +"' selected>" + categoryName + "</option>");
+								}
+						},
+						error: function(data) {
+							console.log(error);
+						}
+					});
+				}
+				if(reNum == 3) {
+					//아티스트 자격 조회
+					$("#reCertiDiv").children('div.inDiv').remove();
+					$("#reCertiDiv").children('br').remove();
+					$div = $("#reCertiDiv");
+					
+					$.ajax({
+						url: "/hobbyist/selectCerts.ar",
+						type: "get",
+						success: function(data) {
+							
+						var $div = $("#reCertiDiv");
+						for(var i = 0; i < data.length; i++) {
+							var certName = decodeURIComponent(data[i].certName);
+							var certDate = decodeURIComponent(data[i].certDate);
+							var certOrg = decodeURIComponent(data[i].certOrg);
+							var $inDiv = $("<div class='inDiv'>").text(certName + "/" + certDate + "/" + certOrg);
+							$div.append($inDiv);
+							$div.append("<br>");
+							}
+						},
+						error: function(error) {
+							console.log(error);
+						}
+					});
+				}
+				
+				if(reNum == 4) {
+					//아티스트 학력 조회
+					$("#reSchoolDiv").children('div.inDiv').remove();
+					$("#reSchoolDiv").children('br').remove();
+					$div = $("#reCertiDiv");
+					
+					$.ajax({
+						url: "/hobbyist/selectEducation.ar",
+						type: "get",
+						success: function(data) {
+							
+						var $div = $("#reSchoolDiv");
+						for(var i = 0; i < data.length; i++) {
+							var eduInsitituteName = decodeURIComponent(data[i].eduInsitituteName);
+							var eduMajor = decodeURIComponent(data[i].eduMajor);
+							var status = data[i].status;
+							var val = "";
+							if(status == 1) {
+								val = "졸업";
+							} else {
+								val = "재학";
+							} 
+							var $inDiv = $("<div class='inDiv'>").text(eduInsitituteName + "/" + eduMajor + "/" + val);
+							$div.append($inDiv);
+							$div.append("<br>");
+							}
+						},
+						error: function(error) {
+							console.log(error);
+						}
+					});
+				}
+				
+				if(reNum == 5) {
+					$("#reCareerDiv").children('div.inDiv').remove();
+					$("#reCareerDiv").children('br').remove();
+					$div = $("#reCareerDiv");
+					
+					$.ajax({
+						url: "/hobbyist/selectCareer.ar",
+						type: "get",
+						success: function(data) {
+							
+							var $div = $("#reCareerDiv");
+							for(var i = 0; i < data.length; i++) {
+								var orgName = decodeURIComponent(data[i].orgName);
+								var rank = decodeURIComponent(data[i].rank);
+								var term = decodeURIComponent(data[i].occupationTerm);
+								
+								var $inDiv = $("<div class='inDiv'>").text(orgName + "/" + rank + "/" + term);
+								$div.append($inDiv);
+								$div.append("<br>");
+								
+							}
+						},
+						error: function(error) {
+							console.log(error);
+						}
+						
+					});
+				}
 
-			});
+			});		
 			$('#reSaveModalBtn').on('click', function() {
 				if(reCkNick == true){
 					if(reCkBank == true){
@@ -1969,6 +2076,8 @@
 				}
 				
 			});
+			
+			
 		});
 	</script>
 	<div style="height: 30px;"></div>

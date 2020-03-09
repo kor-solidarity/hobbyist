@@ -337,7 +337,11 @@ public class ArtistService {
 		int result = 0;
 		
 		for(int i = 0; i < fileList.size(); i++) {
-			result += new ArtistDao().updateImage(con, fileList.get(i));
+			if(fileList.get(i).getImageType() == "profile") {
+				result += new ArtistDao().updateImage(con, fileList.get(i));
+			} else if(fileList.get(i).getImageType() == "artistproof") {
+				result += new ArtistDao().insertImage(con, fileList.get(i));
+			}
 		}
 		
 		if(result == fileList.size()) {
