@@ -161,7 +161,7 @@ public class LessonDao {
 				hmap.put("imageName2", rset.getString("img2_name"));
 				hmap.put("imageType2", rset.getString("img2_type"));
 				hmap.put("region", rset.getString("REGION"));
-				hmap.put("isNew", 0);
+				hmap.put("isNew", 1);
 				
 				list.add(hmap);
 			}
@@ -722,8 +722,8 @@ public class LessonDao {
 						String value = (String) mapEntry.getValue().toString();
 						
 						if(key.equals("artistCode")) {
-							if(Integer.parseInt(value) != rset.getInt("ARTIST_PK")) {
-								hmap.put("isNew", 1);
+							if(Integer.parseInt(value) == rset.getInt("ARTIST_PK")) {
+								hmap.put("isNew", 0);
 								
 								System.out.println(value);
 							}
