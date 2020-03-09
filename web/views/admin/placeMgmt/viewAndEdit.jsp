@@ -240,7 +240,7 @@
                 <button type="reset" id="reset">수정취소</button>
                 <button type="submit" id="submitBtn" disabled>등록</button>
                 <%-- 목록으로 돌아가게끔 조정. --%>
-                <button onclick="">목록으로 돌아가기</button>
+                <button type="button" onclick="location.href='<%=request.getContextPath()%>/adminPlaceList.ad?currentPage=<%=currentPage%>'">목록으로 돌아가기</button>
             </div>
         </form>
     </article>
