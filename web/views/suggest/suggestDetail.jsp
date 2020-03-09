@@ -86,6 +86,12 @@
 		border: 1px solid #BE9524;
 		background-color: #BE9524;
 	}
+	button {
+		cursor:pointer;
+	}
+	img[id$=heartImg] {
+		cursor:pointer;
+	}
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <title>hobbyist</title>
@@ -312,12 +318,16 @@
    		<div style="text-align:center;">
    			<button id="goListBtn" onclick="goList();">목록보기</button>
    			<% if(loginMember != null && loginMember.getIsArtist() == 1) { %>
-   				<button id="goLessonBtn">수업 개설하기</button>
+   				<button id="goLessonBtn" onclick="goLessonBtn();">수업 개설하기</button>
    			<%} %>
    		</div>
    		<script>
    			function goList() {
    				location.href = "<%=request.getContextPath()%>/selectList.sg";
+   			}
+   			
+   			function goLessonBtn() {
+   				location.href = "<%=request.getContextPath()%>/selectSugFor.le?petitionCode=" + <%= petition.getPetitionCode() %>;
    			}
    			
    			function noneLogin() {

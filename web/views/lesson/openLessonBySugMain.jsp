@@ -1,5 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page import="com.dh.hobbyist.suggest.model.vo.Petition" %>
+<%@ page import="java.util.List" %>
+<%
+	Petition petition = (Petition) request.getAttribute("petition");
+	List subCategoryList = (List) request.getAttribute("subCategoryList");
+	
+	System.out.println("list : " + subCategoryList);
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -433,15 +441,51 @@ body {
 										<div>
 											<select id="category" class="nanum" style="color:black;">
 												<option value="">선택</option>
-												<option value="1">음악</option>
-												<option value="9">댄스</option>
-												<option value="15">영상/사진</option>
-												<option value="20">라이프스타일</option>
-												<option value="25">뷰티</option>
-												<option value="33">디자인</option>
-												<option value="37">스포츠</option>
+												<option id="c1" value="1">음악</option>
+												<option id="c2" value="9">댄스</option>
+												<option id="c3" value="15">영상/사진</option>
+												<option id="c4" value="20">라이프스타일</option>
+												<option id="c5" value="25">뷰티</option>
+												<option id="c6" value="33">디자인</option>
+												<option id="c7" value="37">스포츠</option>
 											</select>
 										</div>
+										<script>
+											$(function(){
+												console.log("카데고리코드 : " + <%= petition.getCategoryCode() %>);
+												
+												//건의내용으로 카데고리 선택을 위한 처리
+												if(<%= petition.getCategoryCode() %> < 9) {
+													$("#c1").attr("selected", "true");
+												}
+												
+												//건의내용으로 서브카데고리 선택을 위한 처리
+												var categoryName = <%= petition.getCategoryCode() %>;
+												
+												$.ajax({
+													url: "/hobbyist/category.su",
+													type: "get",
+													data: {categoryName : categoryName},
+													success: function(data) {
+														
+														$select = $("#subCategory");
+														$select.find("option").remove();
+														
+														for(var i = 0; i < data.length; i++) {
+															var $option = $("<option>");
+															$option.val(data[i].categoryCode);
+															$option.text(data[i].nodeName);
+															$select.append($option);
+														}
+														
+													},
+													error: function(error) {
+														console.log(error);
+													}
+												});
+												
+											});
+										</script>
 									</td>
 									<td colspan="2">
 										<div>수업제목</div>
@@ -884,19 +928,26 @@ body {
 		$(function(){
 			var num = 1;
 		
+			//이 페이지에 도착하자마자 Popup을 띄운다
+			<% if(request.getSession().getAttribute("loginMember")  == null ) { %>
+			alert("로그인 후 진행해주세요.");
+			<% } else if (((Member) (request.getSession().getAttribute("loginMember"))).getArtistAccepted() == null) { %>
+			alert("아티스트 승인 이후에 가능합니다.")
+			<% } else { %>
+			$('#modalBox').modal('show');
+			<% } %>
+			
 			// 모달 버튼에 이벤트를 건다.
 			$('#openModalBtn').on('click', function() {
-				
+					
 				<% if(request.getSession().getAttribute("loginMember")  == null ) { %>
 				alert("로그인 후 진행해주세요.");
 				<% } else if (((Member) (request.getSession().getAttribute("loginMember"))).getArtistAccepted() == null) { %>
 				alert("아티스트 승인 이후에 가능합니다.")
 				<% } else { %>
-				$("#subCategory").hide();
 				$('#modalBox').modal('show');
 				<% } %>
 			});
-			
 			
 			// 모달 안의 취소 버튼에 이벤트를 건다.
 			$('#closeModalBtn').on('click', function() {
@@ -1293,16 +1344,3 @@ body {
 	<%@ include file="../common/footer.jsp"%>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
