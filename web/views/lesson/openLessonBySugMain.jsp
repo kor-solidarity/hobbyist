@@ -1,12 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="com.dh.hobbyist.suggest.model.vo.Petition" %>
+<%@ page import="com.dh.hobbyist.suggest.model.vo.Category" %>
 <%@ page import="java.util.List" %>
 <%
 	Petition petition = (Petition) request.getAttribute("petition");
-	List subCategoryList = (List) request.getAttribute("subCategoryList");
+	//List<Category> subCategoryList = (List) request.getAttribute("subCategoryList");
+	int parentCategoryCode = (Integer) request.getAttribute("parentCategoryCode");
 	
-	System.out.println("list : " + subCategoryList);
+	//System.out.println("list : " + subCategoryList.size());
 %>
 <!DOCTYPE html>
 <html>
@@ -419,7 +421,7 @@ body {
 						aria-label="Close">
 						<span aria-hidden="true">×</span>
 					</button>
-					<h4 class="modal-title" id="myModalLabel">수업개설하기</h4>
+					<h4 class="modal-title" id="myModalLabel">건의 받아 수업개설하기</h4>
 				</div>
 				<div class="modal-body">
 					<form id="LessonForm"
@@ -456,11 +458,21 @@ body {
 												
 												//건의내용으로 카데고리 선택을 위한 처리
 												if(<%= petition.getCategoryCode() %> < 9) {
-													$("#c1").attr("selected", "true");
+													
+												}
+												switch(<%= parentCategoryCode %>) {
+												case 1 : $("#c1").attr("selected", "true"); break;
+												case 9 : $("#c2").attr("selected", "true"); break;
+												case 15 : $("#c3").attr("selected", "true"); break;
+												case 20 : $("#c4").attr("selected", "true"); break;
+												case 25 : $("#c5").attr("selected", "true"); break;
+												case 33 : $("#c6").attr("selected", "true"); break;
+												case 37 : $("#c7").attr("selected", "true"); break;
 												}
 												
 												//건의내용으로 서브카데고리 선택을 위한 처리
-												var categoryName = <%= petition.getCategoryCode() %>;
+												var categoryName = <%= parentCategoryCode %>;
+												var defaultCode = <%= petition.getCategoryCode() %>
 												
 												$.ajax({
 													url: "/hobbyist/category.su",
@@ -475,6 +487,11 @@ body {
 															var $option = $("<option>");
 															$option.val(data[i].categoryCode);
 															$option.text(data[i].nodeName);
+															
+															if(data[i].categoryCode == defaultCode) {
+																$option.attr("selected", true);
+															}
+															
 															$select.append($option);
 														}
 														

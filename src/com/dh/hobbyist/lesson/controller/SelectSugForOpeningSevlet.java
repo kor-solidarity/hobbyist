@@ -42,11 +42,27 @@ public class SelectSugForOpeningSevlet extends HttpServlet {
 		System.out.println("p.getCategoryCode() : " + p.getCategoryCode());
 		
 		//카데고리의 코드를 넘겨야 하는데 상세카데고리의 코드를 넘겨서 return이 안됨
-		List<Category> subCategoryList = new CategoryService().selectDetailCategory(p.getCategoryCode());
 		
-		for(int i = 0; i < subCategoryList.size(); i++) {
-			System.out.println(" for문 : " + subCategoryList.get(i));
+		//상세카데고리 코드로 부모 카데고리 코드를 구하기 위한 처리
+		int parentCategoryCode = 0;
+		
+		if(p.getCategoryCode() < 9) {
+			parentCategoryCode = 1;
+		} else if(p.getCategoryCode() < 15) {
+			parentCategoryCode = 9;
+		} else if(p.getCategoryCode() < 20) {
+			parentCategoryCode = 15;
+		} else if(p.getCategoryCode() < 25) {
+			parentCategoryCode = 20;
+		} else if(p.getCategoryCode() < 33) {
+			parentCategoryCode = 25;
+		} else if(p.getCategoryCode() < 37) {
+			parentCategoryCode = 33;
+		} else {
+			parentCategoryCode = 37;
 		}
+		
+		List<Category> subCategoryList = new CategoryService().selectDetailCategory(parentCategoryCode);
 		
 		System.out.println("subCategoryList : " + subCategoryList);
 		
@@ -55,7 +71,8 @@ public class SelectSugForOpeningSevlet extends HttpServlet {
 		if(p != null) {
 			page = "views/lesson/openLessonBySugMain.jsp";
 			request.setAttribute("petition", p);
-			request.setAttribute("subCategoryList", subCategoryList);
+			//request.setAttribute("subCategoryList", subCategoryList);
+			request.setAttribute("parentCategoryCode", parentCategoryCode);
 		} else {
 			page = "views/common/errorPage.jsp";
 			request.setAttribute("msg", "건의 받아 수업 개설 실패");

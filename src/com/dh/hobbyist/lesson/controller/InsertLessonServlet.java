@@ -121,6 +121,12 @@ public class InsertLessonServlet extends HttpServlet {
 			lesson.setCategoryCode(categoryCode);
 			lesson.setArtistCode(artistCode);
 			
+			int petitionCode = 0;
+			
+			if(petitionCode != 0) {
+				lesson.setPetitionCode(petitionCode);
+			}
+			
 			//수업일정 관련 사항
 			int region = Integer.parseInt(multiRequest.getParameter("region"));
 			//System.out.println("region :  " + region);
