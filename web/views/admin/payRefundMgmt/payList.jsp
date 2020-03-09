@@ -203,17 +203,6 @@
 			<div id="infoArea">
 				<table id="infoT" style="width: 100%; border-collapse: collapse;">
 					<!-- 테이블 첫번째 줄은 아이디, 비밀번호 등 조회할 내용 제목이다. background(#4E4E4E), font-color(white) 색 다르게 지정 -->
-					<tr>
-						<th style="width: 7%;">결제코드</th>
-						<th style="width: 10%;">수업일정 코드</th>
-						<th style="width: 8%;">회원코드</th>
-						<th style="width: 9%;">이름</th>
-						<th style="width: 11%;">전화번호</th>
-						<th style="width: 11%;">결제 금액</th>
-						<th style="width: 9%;">사용 포인트</th>
-						<th style="width: 15%;">주문번호</th>
-						<th style="width: 15%;">결제일</th>
-					</tr>
 				</table>
 			</div>
 		</article>
@@ -308,13 +297,13 @@
 					var $tr = $("<tr>");
 					
 					$tr.append('<th style="width: 7%;">결제코드</th>' +
-								'<th style="width: 10%;">수업일정 코드</th>' +
-								'<th style="width: 8%;">회원코드</th>' +
+								'<th style="width: 19%;">수업제목</th>' +
 								'<th style="width: 9%;">이름</th>' +
 								'<th style="width: 11%;">전화번호</th>' +
-								'<th style="width: 11%;">결제 금액</th>' +
+								'<th style="width: 10%;">수업료</th>' +
+								'<th style="width: 10%;">결제금액</th>' +
 								'<th style="width: 9%;">사용 포인트</th>' +
-								'<th style="width: 15%;">주문번호</th>' +
+								'<th style="width: 14%;">주문번호</th>' +
 								'<th style="width: 15%;">결제일</th>');
 					
 					$table.append($tr);
@@ -322,20 +311,20 @@
 					for(key in data) {
 						$tr= $("<tr>");
 						var $pcode = $("<td>").text(data[key].paymentCode);
-						var $scheduleCode = $("<td>").text(data[key].scheduleCode);
-						var $mCode = $("<td>").text(data[key].memberCode);
+						var $lessonName = $("<td>").text(data[key].lessonName);
 						var $mName = $("<td>").text(data[key].memberName);
 						var $phone = $("<td>").text(data[key].phone);
+						var $tcost = $("<td>").text(data[key].totalCost);
 						var $cost = $("<td>").text(data[key].payCost);
 						var $uPoint = $("<td>").text(data[key].usingPoint);
 						var $impNum = $("<td>").text(data[key].impNum);
 						var $patDate = $("<td>").text(data[key].payDate);
 						
 						$tr.append($pcode);
-						$tr.append($scheduleCode);
-						$tr.append($mCode);
+						$tr.append($lessonName);
 						$tr.append($mName);
 						$tr.append($phone);
+						$tr.append($tcost);
 						$tr.append($cost);
 						$tr.append($uPoint);
 						$tr.append($impNum);
@@ -363,34 +352,34 @@
 						var $tr = $("<tr>");
 						
 						$tr.append('<th style="width: 7%;">결제코드</th>' +
-									'<th style="width: 10%;">수업일정 코드</th>' +
-									'<th style="width: 8%;">회원코드</th>' +
-									'<th style="width: 9%;">이름</th>' +
-									'<th style="width: 11%;">전화번호</th>' +
-									'<th style="width: 11%;">결제 금액</th>' +
-									'<th style="width: 9%;">사용 포인트</th>' +
-									'<th style="width: 15%;">주문번호</th>' +
-									'<th style="width: 15%;">결제일</th>');
-						
+								'<th style="width: 10%;">수업제목</th>' +
+								'<th style="width: 9%;">이름</th>' +
+								'<th style="width: 11%;">전화번호</th>' +
+								'<th style="width: 10%;">수업료</th>' +
+								'<th style="width: 11%;">결제금액</th>' +
+								'<th style="width: 9%;">사용 포인트</th>' +
+								'<th style="width: 15%;">주문번호</th>' +
+								'<th style="width: 15%;">결제일</th>');
+					
 						$table.append($tr);
-						
+					
 						for(key in data) {
 							$tr= $("<tr>");
 							var $pcode = $("<td>").text(data[key].paymentCode);
-							var $scheduleCode = $("<td>").text(data[key].scheduleCode);
-							var $mCode = $("<td>").text(data[key].memberCode);
+							var $lessonName = $("<td>").text(data[key].lessonName);
 							var $mName = $("<td>").text(data[key].memberName);
 							var $phone = $("<td>").text(data[key].phone);
+							var $tcost = $("<td>").text(data[key].totalCost);
 							var $cost = $("<td>").text(data[key].payCost);
 							var $uPoint = $("<td>").text(data[key].usingPoint);
 							var $impNum = $("<td>").text(data[key].impNum);
 							var $patDate = $("<td>").text(data[key].payDate);
 							
 							$tr.append($pcode);
-							$tr.append($scheduleCode);
-							$tr.append($mCode);
+							$tr.append($lessonName);
 							$tr.append($mName);
 							$tr.append($phone);
+							$tr.append($tcost);
 							$tr.append($cost);
 							$tr.append($uPoint);
 							$tr.append($impNum);
@@ -419,14 +408,14 @@
 						console.log(data);
 						var $tr = $("<tr>");
 						
-						$tr.append('<th style="width: 8%;">신청코드</th>' +
-								'<th style="width: 10%;">결제코드</th>' +
-								'<th style="width: 10%;">회원코드</th>' +
-								'<th style="width: 7%;">이름</th>' +
-								'<th style="width: 12%;">전화번호</th>' +
-								'<th style="width: 17%;">이메일</th>' +
-								'<th style="width: 11%;">환불 금액</th>' +
-								'<th style="width: 17%;">신청일</th>' +
+						$tr.append('<th style="width: 7%;">신청코드</th>' +
+								'<th style="width: 7%;">결제코드</th>' +
+								'<th style="width: 10%;">이름</th>' +
+								'<th style="width: 10%;">아티스트명</th>' +
+								'<th style="width: 11%;">전화번호</th>' +
+								'<th style="width: 16%;">이메일</th>' +
+								'<th style="width: 16%;">결제일</th>' +
+								'<th style="width: 16%;">신청일</th>' +
 								'<th style="width: 14%;">상세보기</th>');
 					
 						$table.append($tr);
@@ -435,21 +424,21 @@
 							$tr= $("<tr>");
 							var $rcode = $("<td>").text(data[key].refundCode);
 							var $pcode = $("<td>").text(data[key].paymentCode);
-							var $mCode = $("<td>").text(data[key].memberCode);
 							var $mName = $("<td>").text(data[key].memberName);
+							var $arName = $("<td>").text(data[key].artistName);
 							var $phone = $("<td>").text(data[key].phone);
 							var $email = $("<td>").text(data[key].email);
-							var $acode = $("<td>").text(data[key].artistCode);
+							var $pDate = $("<td>").text(data[key].payDate);
 							var $rDate = $("<td>").text(data[key].applyDate);
 							var $btn = $("<td>").html("<button class='Btn'>조회</button>");
 						
 							$tr.append($rcode);
 							$tr.append($pcode);
-							$tr.append($mCode);
 							$tr.append($mName);
+							$tr.append($arName);
 							$tr.append($phone);
 							$tr.append($email);
-							$tr.append($acode);
+							$tr.append($pDate);
 							$tr.append($rDate);
 							$tr.append($btn);
 							$table.append($tr);
