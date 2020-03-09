@@ -43,6 +43,8 @@ public class LessonService {
 		
 		ArrayList<HashMap<String, Object>> list = new LessonDao().selectCategoryMusic(con, pi);
 		
+		list = new LessonDao().selectNewLesson(con, list);
+		
 		close(con);
 		
 		return list;
@@ -160,9 +162,7 @@ public class LessonService {
 		
 		return listCount;
 	}
-	
-	
-	
+		
 	
 
 }

@@ -36,7 +36,7 @@ public class SelectNewLessonListServlet extends HttpServlet {
 				
 			}*/ 
 				
-		System.out.println("new list : " + list);
+		/*System.out.println("new list : " + list);*/
 		
 		response.setContentType("application/json");
 		response.setCharacterEncoding("UTF-8");

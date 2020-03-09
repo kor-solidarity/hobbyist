@@ -1,8 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="java.util.ArrayList, java.util.HashMap, com.dh.hobbyist.common.model.vo.PageInfo"%>
 <%
-	ArrayList<HashMap<String, Object>> list
-			= (ArrayList<HashMap<String, Object>>) request.getAttribute("list");
+		ArrayList<HashMap<String, Object>> list
+				= (ArrayList<HashMap<String, Object>>) request.getAttribute("list"); 
+			
+	 
 	
 	PageInfo pi = (PageInfo) request.getAttribute("pi");
 	int listCount = pi.getListCount();
@@ -306,7 +308,8 @@
 		<div class="lesson-area">
 		<% for(int i = 0; i < list.size(); i++) {
 				HashMap<String, Object> hmap = list.get(i);
-		%>
+		%> 
+		
 				<div class="lesson-list">
 				<form action="<%=request.getContextPath()%>/selectOne.le" method="get">
 					<table id="lessonTable" align="center">
