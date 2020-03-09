@@ -1,11 +1,17 @@
 package com.dh.hobbyist.payment.model.service;
 
+import static com.dh.hobbyist.common.JDBCTemplate.close;
+import static com.dh.hobbyist.common.JDBCTemplate.commit;
+import static com.dh.hobbyist.common.JDBCTemplate.getConnection;
+import static com.dh.hobbyist.common.JDBCTemplate.rollback;
+
 import java.sql.Connection;
+import java.util.ArrayList;
 import java.util.List;
 
+import com.dh.hobbyist.lesson.model.vo.MyRegiLesson;
 import com.dh.hobbyist.payment.model.dao.PaymentDao;
 import com.dh.hobbyist.payment.model.vo.Payment;
-import static com.dh.hobbyist.common.JDBCTemplate.*;
 
 public class PaymentService {
 
@@ -78,6 +84,17 @@ public class PaymentService {
 		close(con);
 		
 		return p;
+	}
+
+	//마이페이지 결제 리스트
+	public ArrayList<MyRegiLesson> payList(int memberCode) {
+		Connection con = getConnection();
+		
+		ArrayList<MyRegiLesson> pList = new PaymentDao().payList(con, memberCode);
+		
+		close(con);
+		
+		return pList;
 	}
 
 }
