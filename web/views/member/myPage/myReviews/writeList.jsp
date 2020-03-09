@@ -1,4 +1,8 @@
-<%--
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="com.dh.hobbyist.lesson.model.vo.LessonPayment" %>
+<%@ page import="com.dh.hobbyist.lesson.model.vo.LessonSchedule" %>
+<%@ page import="com.dh.hobbyist.lesson.model.vo.Lesson" %>
+<%@ page import="com.dh.hobbyist.common.model.vo.Image" %><%--
   Created by IntelliJ IDEA.
   User: SOY
   Date: 2020-02-16
@@ -17,7 +21,15 @@
 </head>
 <body>
 <%@include file="/views/common/myPage.jsp" %>
+<%
 
+    ArrayList<LessonPayment> lessonPaymentArrayList = (ArrayList<LessonPayment>) request.getAttribute("lessonPaymentArrayList");
+    ArrayList<LessonSchedule> scheduleArrayList = (ArrayList<LessonSchedule>) request.getAttribute("scheduleArrayList");
+    ArrayList<Lesson> lessonArrayList = (ArrayList<Lesson>) request.getAttribute("lessonArrayList");
+    ArrayList<Image> lessonImageArrayList = (ArrayList<Image>) request.getAttribute("lessonImageArrayList");
+    ArrayList<Member> artistList = (ArrayList<Member>) request.getAttribute("artistList");
+    ArrayList<Image> artistImageList = (ArrayList<Image>) request.getAttribute("artistImageList");
+%>
 
 <div class="">
     <table class="standard-width centralise" style="border-bottom: 1px solid black;">
@@ -45,13 +57,18 @@
         </tr>
         <tr>
             <td></td>
+            <% for (int i = 0; i < lessonPaymentArrayList.size(); i++) {%>
             <td class="write-list-main">
                 <table class="write-list-contents" border="0">
                     <tr>
                         <td rowspan="2"><img src="<%=request.getContextPath()%>/static/images/coffee.jpg"
                                              style="width: 100%"></td>
-                        <td>[1:1_청담샵 경력] #선.착.순.이.벤.트 #자존감이 두배 올라가는 메이크업 배우기!
+                        <td>
+                            <%--강의제목--%>
+                            <%=lessonArrayList.get(i).getLessonName()%>
                             <br>
+                            <%--수업 시작일 / 위치 --%>
+                                <%=scheduleArrayList.get(i).%>
                             수업 시작일 : 2020-02-03 19:00 / 당산
                             <br><br>
                             결제일 : 2020-01-30 12:11:31
@@ -71,10 +88,41 @@
                             <button class="write-review-btn" data-toggle="modal" data-target="#exampleModal">리뷰작성하기
                             </button>
                         </td>
-                        <%--                        <td></td>--%>
                     </tr>
                 </table>
             </td>
+        </tr>
+        <% } %>
+        <td class="write-list-main">
+            <table class="write-list-contents" border="0">
+                <tr>
+                    <td rowspan="2"><img src="<%=request.getContextPath()%>/static/images/coffee.jpg"
+                                         style="width: 100%"></td>
+                    <td>[1:1_청담샵 경력] #선.착.순.이.벤.트 #자존감이 두배 올라가는 메이크업 배우기!
+                        <br>
+                        수업 시작일 : 2020-02-03 19:00 / 당산
+                        <br><br>
+                        결제일 : 2020-01-30 12:11:31
+                    </td>
+                    <td rowspan="2" style="text-align: center"><img
+                            src="<%=request.getContextPath()%>/static/images/iu.jpg"
+                            style="width: 100%">
+                        <br>
+                        피치핑크
+                        <br>
+                        오지호
+                    </td>
+                </tr>
+                <tr>
+                    <td><img src="<%=request.getContextPath()%>/static/images/pen-and-notepad-clipart-6.jpg"
+                             style="width: 30px; float: left" alt="">
+                        <button class="write-review-btn" data-toggle="modal" data-target="#exampleModal">리뷰작성하기
+                        </button>
+                    </td>
+                    <%--                        <td></td>--%>
+                </tr>
+            </table>
+        </td>
         </tr>
         <%-- 상하 간격주기 위한 용도 --%>
         <tr>
@@ -139,7 +187,7 @@
 <script>
     function regRev () {
         console.log('$("#review-modal-words").val().length: ' + $("#review-modal-words").val().length)
-        if ($("#review-modal-words").val().length < 100){
+        if ($("#review-modal-words").val().length < 100) {
             alert("100자 이상 쓰세요.")
             return;
         }

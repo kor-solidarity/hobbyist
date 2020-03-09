@@ -2,6 +2,7 @@ package com.dh.hobbyist.review.model.service;
 
 import com.dh.hobbyist.common.model.vo.Image;
 import com.dh.hobbyist.lesson.model.vo.Lesson;
+import com.dh.hobbyist.lesson.model.vo.LessonOrder;
 import com.dh.hobbyist.lesson.model.vo.LessonPayment;
 import com.dh.hobbyist.lesson.model.vo.LessonSchedule;
 import com.dh.hobbyist.member.model.vo.Member;
@@ -49,16 +50,33 @@ public class ReviewService {
 	public Image selectImage(String img_type, int pk, int image_main) {
 		Connection con = getConnection();
 		
-		Image image = new ReviewDao().selectImage(con, img_type,pk, image_main);
+		Image image = new ReviewDao().selectImage(con, img_type, pk, image_main);
 		
 		close(con);
 		
 		return image;
 	}
 	
-	// 회원 뽑아오기.
-	// TODO: 2020-03-09 여기까지 함. 리뷰 3단계 계속할것. - 은석 
+	// 회원 뽑아오기. (은석)
 	public Member selectMember(int pk) {
-		return null;
+		Connection con = getConnection();
+		
+		Member member = new ReviewDao().selectMember(con,  pk);
+		
+		close(con);
+		
+		return member;
+	}
+	
+	//
+	public LessonOrder selectLessonOrder(int schedulePk, int lessonOrderTime) {
+		Connection con = getConnection();
+		
+		LessonOrder lessonOrder =
+				new ReviewDao().selectLessonOrder(con, schedulePk, lessonOrderTime);
+		
+		close(con);
+		
+		return lessonOrder;
 	}
 }

@@ -2,6 +2,7 @@ package com.dh.hobbyist.review.controller;
 
 import com.dh.hobbyist.common.model.vo.Image;
 import com.dh.hobbyist.lesson.model.vo.Lesson;
+import com.dh.hobbyist.lesson.model.vo.LessonOrder;
 import com.dh.hobbyist.lesson.model.vo.LessonPayment;
 import com.dh.hobbyist.lesson.model.vo.LessonSchedule;
 import com.dh.hobbyist.member.model.vo.Member;
@@ -24,6 +25,7 @@ public class MemberReviewTodoListViewServlet extends HttpServlet {
 	}
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("MemberReviewTodoListViewServlet");
 		// 정확히 가져와야 하는 사안:
 		// 0. 대상 회원정보(PK 확인용도)      - MEMBER
 		// 1. 등록한 레슨과 그 정보.          - LESSON 테이블
@@ -59,19 +61,22 @@ public class MemberReviewTodoListViewServlet extends HttpServlet {
 			
 		}
 		
-		// 2단계, 레슨정보와 관련이미지 불러온다.
+		// 2단계, 레슨정보와 해당 레슨의 첫 수업정보, 그리고 관련이미지(수업 대표사진) 불러온다.
 		ArrayList<Lesson> lessonArrayList = new ArrayList<>();
 		
-		for (int i = 0; i < lessonPkList.length; i++) {
-			Lesson lesson = reviewService.selectLesson(lessonPkList[i]);
-			lessonArrayList.add(lesson);
-		}
-		
 		// 대표사진만 부르면 됨
-		ArrayList<Image> imageArrayList = new ArrayList<>();
-		for (int pk : lessonPkList) {
+		ArrayList<Image> lessonImageArrayList = new ArrayList<>();
+		ArrayList<LessonOrder> lessonOrderArrayList = new ArrayList<>();
+		for (int i = 0; i < lessonPkList.length; i++) {
+			int pk = lessonPkList[i];
+			// 레슨정보 추가
+			Lesson lesson = reviewService.selectLesson(pk);
+			lessonArrayList.add(lesson);
+			// 대표사진 추가
 			Image image = reviewService.selectImage("lesson", pk, 0);
-			imageArrayList.add(image);
+			lessonImageArrayList.add(image);
+			// 레슨의 첫 수업시간정보 추가
+			LessonOrder lessonOrder = reviewService.selectLessonOrder(scheduleArrayList.get(i).getScheduleCode(), 1);
 		}
 		
 		// 3단계, 아티스트 이름과 이미지 불러온다.
@@ -81,7 +86,35 @@ public class MemberReviewTodoListViewServlet extends HttpServlet {
 		ArrayList<Member> artistList = new ArrayList<>();
 		for (int pk : artistPkList) {
 			Member artist = reviewService.selectMember(pk);
+			artistList.add(artist);
 		}
+		
+		// 아티스트 이미지
+		ArrayList<Image> artistImageList = new ArrayList<>();
+		for (int pk : artistPkList) {
+			Image image = reviewService.selectImage("profile", pk, -1);
+			artistImageList.add(image);
+		}
+		
+		System.out.println("lessonPaymentArrayList: " + lessonPaymentArrayList.size());
+		System.out.println("scheduleArrayList: " + scheduleArrayList.size());
+		System.out.println("lessonArrayList: " + lessonArrayList.size());
+		System.out.println("lessonImageArrayList: " + lessonImageArrayList.size());
+		System.out.println("artistList: " + artistList.size());
+		System.out.println("artistImageList: " + artistImageList.size());
+		
+		// 이제 이거 들고 위에 목록 뽑아온다.
+		request.setAttribute("lessonPaymentArrayList", lessonPaymentArrayList);
+		request.setAttribute("scheduleArrayList", scheduleArrayList);
+		request.setAttribute("lessonArrayList", lessonArrayList);
+		request.setAttribute("lessonImageArrayList", lessonImageArrayList);
+		request.setAttribute("artistList", artistList);
+		request.setAttribute("artistImageList", artistImageList);
+		
+		String page = "/views/member/myPage/myReviews/writeList.jsp";
+		
+		request.getRequestDispatcher(page).forward(request, response);
+		
 		
 	}
 }
