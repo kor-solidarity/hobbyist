@@ -707,6 +707,105 @@ public class ArtistDao {
 		return result;
 	}
 
+	public int deleteImage(Connection con, Image image) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("deleteImage");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, image.getImageFkPk());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int insertCertsOne(Connection con, String memberPk, String certiName, String certiDay, String certiSpace) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("insertCerts");
+		
+		Date certsDate = Date.valueOf(certiDay);
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, certiName);
+			pstmt.setDate(2, certsDate);
+			pstmt.setString(3, certiSpace);
+			pstmt.setInt(4, Integer.parseInt(memberPk));
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int insertEduOne(Connection con, String memberPk, String	schoolName, String major, String status) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("insertEdu");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, schoolName);
+			pstmt.setString(2, major);
+			if(status.equals("inSchool")) {
+				pstmt.setInt(3, 0);
+			} else if(status.equals("graduate")) {
+				pstmt.setInt(3, 1);
+			}
+			pstmt.setInt(4, Integer.parseInt(memberPk));
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public int insertCareerOne(Connection con, String memberPk, String officeName, String position, String workContent,
+			String workYear, String workMonth) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("insertCareer");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			String term = workYear + "년 " + workMonth +"개월"; 
+			
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, officeName);
+			pstmt.setString(2, position);
+			pstmt.setString(3, workContent);
+			pstmt.setString(4, term);
+			pstmt.setInt(5, Integer.parseInt(memberPk));
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
 	
 
 }
