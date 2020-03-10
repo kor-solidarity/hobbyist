@@ -25,6 +25,11 @@
     <link rel="stylesheet" href="<%=request.getContextPath()%>/static/css/eun-css.css">
     <%@include file="/views/common/boot4-script.jsp" %>
     <%@include file="/views/common/boot4.jsp" %>
+    <style>
+        #modal_star-1:hover {
+
+        }
+    </style>
 </head>
 <body>
 <%@include file="/views/common/myPage.jsp" %>
@@ -73,7 +78,7 @@
         %>
         <% for (int i = 0; i < lessonPaymentArrayList.size(); i++) {%>
         <%
-            long lessonOrderArrayTimeFormat =lessonOrderArrayList.get(i).getOrderStart().getTime();
+            long lessonOrderArrayTimeFormat = lessonOrderArrayList.get(i).getOrderStart().getTime();
             System.out.println(lessonOrderArrayTimeFormat);
             Date date = new Date(lessonOrderArrayTimeFormat);
             Calendar calendar = new GregorianCalendar();
@@ -88,7 +93,11 @@
                     <tr>
                         <%--수업 대표사진--%>
                         <td rowspan="2">
-                            <img src="<%=lessonImageArrayList.get(i).getImageRoute()%>/<%=lessonImageArrayList.get(i).getImageName()%>"
+                            <%
+                                System.out.println(lessonImageArrayList.get(i).getImageRoute());
+                                System.out.println(lessonImageArrayList.get(i).getImageName());
+                            %>
+                            <img src="<%=request.getContextPath()%>/<%=lessonImageArrayList.get(i).getImageRoute()%>/<%=lessonImageArrayList.get(i).getImageName()%>"
                                  style="width: 100%">
                         </td>
                         <td>
@@ -98,22 +107,29 @@
                             <br>
                             <%--수업 시작일 / 위치 --%>
                             수업 시작일 :
-                            <%=calendar.get(Calendar.YEAR)%>년 <%=calendar.get(Calendar.MONTH)%>월 <%=calendar.get(Calendar.DAY_OF_MONTH)%>일
+                            <%=calendar.get(Calendar.YEAR)%>년 <%=calendar.get(Calendar.MONTH)%>
+                            월 <%=calendar.get(Calendar.DAY_OF_MONTH)%>일
                             <%=calendar.get(Calendar.HOUR)%>:<%=calendar.get(Calendar.MINUTE)%> /
                             <%--                                <%=lessonOrderArrayList.get(i).%>--%>
                             <%=scheduleArrayList.get(i).getRegion()%>
                             <%=scheduleArrayList.get(i).getSubRegion()%>
                             <br><br>
-                            결제일 : 2020-01-30 12:11:31
+                            결제일 : <%=lessonPaymentArrayList.get(i).getPayment_date()%>
+                            <%--                            2020-01-30 12:11:31--%>
                         </td>
                         <%--artist's pic--%>
-                        <td rowspan="2" style="text-align: center"><img
-                                src="<%=request.getContextPath()%>/static/images/iu.jpg"
-                                style="width: 100%">
+                        <td rowspan="2" style="text-align: center">
+                            <%if (artistImageList.get(i) != null) {%>
+                            <img
+                                    src="<%=request.getContextPath()%>/<%=artistImageList.get(i).getImageRoute()%>/<%=artistImageList.get(i).getImageName()%>"
+                                    style="width: 100%">
                             <br>
-                            피치핑크
+                            <%}%>
+                            <%--아티스트 별명 and name--%>
+
+                            <%=artistList.get(i).getArtistNick()%>
                             <br>
-                            오지호
+                            <%=artistList.get(i).getMemberName()%>
                         </td>
                     </tr>
                     <tr>
@@ -131,37 +147,6 @@
             <td> &nbsp;</td>
         </tr>
         <% } %>
-        <%--        <td class="write-list-main">--%>
-        <%--            <table class="write-list-contents" border="0">--%>
-        <%--                <tr>--%>
-        <%--                    <td rowspan="2"><img src="<%=request.getContextPath()%>/static/images/coffee.jpg"--%>
-        <%--                                         style="width: 100%"></td>--%>
-        <%--                    <td>[1:1_청담샵 경력] #선.착.순.이.벤.트 #자존감이 두배 올라가는 메이크업 배우기!--%>
-        <%--                        <br>--%>
-        <%--                        수업 시작일 : 2020-02-03 19:00 / 당산--%>
-        <%--                        <br><br>--%>
-        <%--                        결제일 : 2020-01-30 12:11:31--%>
-        <%--                    </td>--%>
-        <%--                    <td rowspan="2" style="text-align: center"><img--%>
-        <%--                            src="<%=request.getContextPath()%>/static/images/iu.jpg"--%>
-        <%--                            style="width: 100%">--%>
-        <%--                        <br>--%>
-        <%--                        피치핑크--%>
-        <%--                        <br>--%>
-        <%--                        오지호--%>
-        <%--                    </td>--%>
-        <%--                </tr>--%>
-        <%--                <tr>--%>
-        <%--                    <td><img src="<%=request.getContextPath()%>/static/images/pen-and-notepad-clipart-6.jpg"--%>
-        <%--                             style="width: 30px; float: left" alt="">--%>
-        <%--                        <button class="write-review-btn" data-toggle="modal" data-target="#exampleModal">리뷰작성하기--%>
-        <%--                        </button>--%>
-        <%--                    </td>--%>
-        <%--                    &lt;%&ndash;                        <td></td>&ndash;%&gt;--%>
-        <%--                </tr>--%>
-        <%--            </table>--%>
-        <%--        </td>--%>
-        <%--        </tr>--%>
         <%-- 상하 간격주기 위한 용도 --%>
         <tr>
             <td> &nbsp;</td>
@@ -188,12 +173,13 @@
             <div class="modal-body">
 
                 <div class="review-modal-stars">
-                    <span id="modal_star-1">★</span>
-                    <span id="modal_star-2">★</span>
-                    <span id="modal_star-3">★</span>
-                    <span id="modal_star-4">★</span>
-                    <span id="modal_star-5">★</span>
+                    <span class="rating_star" id="modal_star-1">★</span>
+                    <span class="rating_star" id="modal_star-2">★</span>
+                    <span class="rating_star" id="modal_star-3">★</span>
+                    <span class="rating_star" id="modal_star-4">★</span>
+                    <span class="rating_star" id="modal_star-5">★</span>
                 </div>
+                <input type="text" name="stars" id="stars" value="0" style="display: none;">
                 <div class="col-12 review-modal-star-text">
                     별점을 매겨주세요.
                 </div>
@@ -203,7 +189,7 @@
                 </div>
                 <div class="col-12 review-modal-content">
                     <textarea name="" style="width: 100%; height: 100%;" id="" cols="30" rows="5"
-                              placeholder="상품에 대한 평가를 100자 이하로 작성해 주세요." onkeyup="onWriteChange(this)"></textarea>
+                              placeholder="수업에 대한 평가를 100자 이하로 작성해 주세요." onkeyup="onWriteChange(this)"></textarea>
                 </div>
                 <div class="col-12" style="text-align: right">
                     <span id="review-modal-words">0</span>자 / 100자 이하로 작성 해 주세요.
@@ -223,14 +209,35 @@
     </div>
 </div>
 <script>
+    // 별주기.
+    $(".rating_star").each(function () {
+        this.hover(function () {
+            // 몇번째 별인지 확인
+            var this_num = this.attr('id')[this.attr('id')-1];
+
+            for (let i = this_num; i <0; i--) {
+                // let star_id = "#st"
+            }
+
+        }, function () {
+
+        })
+    });
+
+    $("#modal_star-1").hover(function () {
+        var this_num = $(this).
+    }, function () {
+
+    });
+
     function regRev () {
         console.log('$("#review-modal-words").val().length: ' + $("#review-modal-words").val().length)
         if ($("#review-modal-words").val().length < 100) {
-            alert("100자 이상 쓰세요.")
+            alert("100자 이상 쓰세요.");
             return;
         }
 
-        alert("리뷰 작성으로 500포인트가 작성되었습니다.")
+        alert("리뷰 작성으로 500포인트가 작성되었습니다.");
         $("#exampleModal").modal('toggle');
     }
 
