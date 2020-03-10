@@ -4,11 +4,42 @@
 <%@ page import="com.dh.hobbyist.suggest.model.vo.Category" %>
 <%@ page import="java.util.List" %>
 <%
-	Petition petition = (Petition) request.getAttribute("petition");
-	//List<Category> subCategoryList = (List) request.getAttribute("subCategoryList");
 	int parentCategoryCode = (Integer) request.getAttribute("parentCategoryCode");
-	
+	Petition petition = (Petition) request.getAttribute("petition");
 	//System.out.println("list : " + subCategoryList.size());
+	
+	//건의 최소, 최대 인원 출력을 위한 변수 설정
+	int min = 0;
+	String max = "";
+	
+	if(petition.getNumOfStudents().equals("일대일")) {
+		min = 1;
+		max = "1";
+	} else if(petition.getNumOfStudents().equals("소규모")) {
+		min = 2;
+		max = "8";
+	} else {
+		min = 9;
+		max = "9(+ α)";
+	}
+	
+	//총 회차 출력을 위한 변수 설정
+	int nol = petition.getNumOfLessons();
+	String nolString = "";
+	
+	if(nol == 0) {
+		nolString = "일회차";
+	} else {
+		nolString = "다회차";
+	}
+	
+	//지역, 상세지역 출력을 위한 변수 설정
+	int region = (Integer) request.getAttribute("region");
+	String subRegion = (String) request.getAttribute("subRegion");
+	
+	//선호요일, 선호시간 출력을 위한 변수 설정
+	String requestedDays = (String) request.getAttribute("requestedDays");
+	String requestedTime = (String) request.getAttribute("requestedTime");
 %>
 <!DOCTYPE html>
 <html>
@@ -507,7 +538,7 @@ body {
 									<td colspan="2">
 										<div>수업제목</div>
 										<div>
-											<textarea id="lessonTitle" name="lessonTitle" rows="2" cols="45" placeholder="수업제목을 입력하세요" 
+											<textarea id="lessonTitle" name="lessonTitle" rows="2" cols="45" placeholder="[건의제목] <%= petition.getTitle() %>" 
 												style="text-align: left; font-family: 'Nanum Gothic', sans-serif; font-size: 16px; resize:none;"></textarea>
 										</div>
 										<div align="right" style="margin-right:50px;"><span id="titleCounter">0</span><span>/55</span></div>
@@ -564,7 +595,7 @@ body {
 									</td>
 									<td>
 										<div>수업 최소인원</div> 
-										<input id="min" class="nanum" name="min" type="number" style="width:100px">
+										<input id="min" class="nanum" name="min" type="number" style="width:115px" placeholder="[건의] <%= min %>">
 										<label style="font-weight:normal; color:black;">&nbsp;명</label>
 										<script>
 											$(function() {
@@ -585,7 +616,7 @@ body {
 									</td>
 									<td>
 										<div>수업 최대인원</div> 
-										<input id="max" class="nanum" name="max" type="number" style="width:100px">
+										<input id="max" class="nanum" name="max" type="number" style="width:115px" placeholder="[건의] <%= max %>">
 										<label style="font-weight:normal; color:black;">&nbsp;명</label>
 										<script>
 											$(function() {
@@ -609,7 +640,7 @@ body {
 									<td style="vertical-align: bottom;">이미지 업로드</td>
 									<td>
 										<div>총 회차</div> 
-										<input id="inputOrder" class="nanum" name="inputOrder" type="number" style="width:100px">
+										<input id="inputOrder" class="nanum" name="inputOrder" type="number" style="width:115px" placeholder="[건의] <%= nolString %>">
 										<label style="font-weight:normal; color:black;">&nbsp;회</label>
 										<script>
 											$(function() {
@@ -625,7 +656,7 @@ body {
 									</td>
 									<td>
 										<div>회차당 수업료<label style="font-weight:normal; color:#A7A1A1;">&nbsp;(최소 1만원 이상)</label></div> 
-										<input id="cost" class="nanum" name="cost" type="number" style="width:100px">
+										<input id="cost" class="nanum" name="cost" type="number" style="width:130px" placeholder="[건의] <%= petition.getCost() %>">
 										<label style="font-weight:normal; color:black;">&nbsp;원</label>
 										<script>
 											$(function() {
@@ -812,7 +843,7 @@ body {
 									<td>
 										<textarea id="lessonIntro" name="lessonIntro" rows="5" cols="40"
 												style="width: 600px; height: 300px; text-align: left; font-family: 'Nanum Gothic', sans-serif; font-size: 18px; 
-												color: rgb(49, 49, 49); resize:none;"></textarea>
+												color: rgb(49, 49, 49); resize:none;"  placeholder="[건의내용] <%= petition.getContents() %>"></textarea>
 										<div><span id="lessonIntroCtn">0</span>/400</div>
 										<script>
 											$(function(){
@@ -851,7 +882,7 @@ body {
 								<tr>
 									<td>
 										<select id="region" class='nanum' name="region" onChange="regionChange(this.value, subRegion);" style="color: black;">
-											<option>-선택-</option>
+											<option value="">-선택-</option>
 											<option value='1'>서울</option>
 											<option value='2'>부산</option>
 											<option value='3'>대구</option>
@@ -869,15 +900,24 @@ body {
 											<option value='14'>제주</option>
 											<option value='15'>충남</option>
 											<option value='16'>충북</option>
-											</select>
-										</td>
-									<td>
-										<select id="subRegion" class='nanum' name="subRegion" style="color: black;">
-											<option>-선택-</option>
 										</select>
 									</td>
+									<td>
+										<select id="subRegion" class='nanum' name="subRegion" style="color: black;">
+											<option><%= subRegion %></option>
+										</select>
+									</td>
+									<script>
+										$(function(){
+											$("#region").find("option[value=<%= region %>]").prop("selected", true);
+										});
+									</script>
 									<td colspan="2"><input id="startTime" class="nanum" type="datetime-local"></td>
 									<td><input id="endTime" class="nanum" type="time"></td>
+								</tr>
+								<tr>
+									<td colspan="2"></td>
+									<td colspan="3" style="color:grey;">[건의] <%= petition.getRequestedDate().toString().substring(0, 10) %>까지 개설 희망 / 선호요일 : <%= requestedDays %> / 선호요일 : <%= requestedTime %></td>
 								</tr>
 								<tr>
 									<td colspan="2">상세주소</td>
@@ -890,7 +930,7 @@ body {
 								</tr>
 								<tr>
 									<td colspan="5">
-									전체 주소 입력 : <input type="text" class="nanum" name="address" placeholder="전체 주소를 복사 또는 직접 입력해주세요." style="width:450px">
+									전체 주소 입력 : <input id="address" type="text" class="nanum" name="address" placeholder="전체 주소를 복사 또는 직접 입력해주세요." style="width:450px">
 									</td>
 								</tr>
 							</table>
@@ -983,6 +1023,9 @@ body {
 				}
 			});
 			
+			//n회차 수를 나타내는 변수. insertOrder() 안에서는 계속 +되어야 하여 전역변수로 바깥에 선언.
+			orderNum = 1;
+			
 			// 모달 안의 다음 버튼에 이벤트를 건다.
 			$('#nextModalBtn').on('click', function() {
 				
@@ -993,18 +1036,17 @@ body {
 				var inputOrder = document.getElementById("inputOrder").value;
 				var cost = document.getElementById("cost").value;
 				var subCategory = document.getElementById("subCategory").value;
+				var mainFile = $("#contentImg3").attr("src");
+				var iphoneImg = "<%= request.getContextPath() %>/static/images/iphoneCameraW.png";
 				//"03. 아티스트소개" 항목
 				var artIntro = document.getElementById("artIntro").value;
 				//"04. 수업소개" 항목
 				var lessonIntro = document.getElementById("lessonIntro").value;
+				//"05. 일정추가" 항목
+				var reg = document.getElementById("region").value;
+				var addr = document.getElementById("address").value;
 				
-				var mainFile = $("#contentImg3").attr("src");
-				var iphoneImg = "<%= request.getContextPath() %>/static/images/iphoneCameraW.png";
-				
-				console.log("1 : " + mainFile);
-				console.log("2 : " + "<%= request.getContextPath() %>/static/images/iphoneCameraW.png");
-				<%--  --%>
-				
+
 				//"01.기본정보"에서 모든 항목을 입력해야 다음으로 넘어갈 수 있는 메소드
 				if(lessonTitle == "" || min == "" || max == "" || inputOrder == "" || cost == "" || subCategory == "" || mainFile == iphoneImg) {
 					alert("모든 항목을 입력해주세요");
@@ -1016,6 +1058,10 @@ body {
 						alert("수업소개를 입력해주세요");
 					} else if (num == 5 && orderNum != inputOrder) {
 						alert("모든 회차 일정을 입력해주세요");
+					} else if (num == 5 && reg == "") {
+						alert("지역 카데고리를 설정해주세요");
+					} else if (num == 5 && addr == "") {
+						alert("상세주소를 입력해주세요");
 					} else {
 						$("#show"+ num).hide();
 						console.log(num);
@@ -1280,6 +1326,7 @@ body {
 		cat2_name[16] = new Array('제천시', '청주시 상당구', '청주시 흥덕구', '충주시', '괴산군',
 				'단양군', '보은군', '영동군', '옥천군', '음성군', '진천군', '청원군');
 		
+		//지역 select를 선택했을 경우 상세지역 처리
 		function regionChange(key, sel) {
 			if(key=='') return;
 			
@@ -1297,13 +1344,13 @@ body {
 			}
 			
 			sel.options[0] = new Option('-선택-', '', '', 'true');
-			for(i=0; i < name.length; i++) {
+			
+			for(i = 0; i < name.length; i++) {
 				sel.options[i+1] = new Option(name[i], name[i]);
 			}
 		}
 		
-		//n회차 수를 나타내는 변수. insertOrder() 안에서는 계속 +되어야 하여 전역변수로 바깥에 선언.
-		orderNum = 1;
+		
 		
 		//수업 회차 등록 메소드
 		function insertOrder() {
@@ -1351,7 +1398,6 @@ body {
 			}
 			
 			currOrder.text(orderNum);
-			
 		};
 		
 	</script>
