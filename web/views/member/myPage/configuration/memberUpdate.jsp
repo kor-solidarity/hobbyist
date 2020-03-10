@@ -267,7 +267,6 @@ background: #C4C4C4;
 background: #C4C4C4;
 }
 #updateBtn {
-
 width: 110px;
 height: 40px;
 left: 426px;
@@ -279,17 +278,19 @@ font-size: 25px;
 line-height: 31px;
 margin:auto;
 color: #FFFFFF;
-
 }
 
 #bankName {
 	width: 100px;
 }
+
 </style>
+
 <link
 	href="https://fonts.googleapis.com/css?family=Do+Hyeon|ZCOOL+QingKe+HuangYou&display=swap"
 	rel="stylesheet">
 </head>
+
 <body>
 	<%@ include file="/views/common/myPage.jsp"%>
 	<!--dao에있는 전화번호 값을 배열로 -빼고 담아준다 -->
@@ -313,8 +314,7 @@ color: #FFFFFF;
 
 
 	<div class="divcenter3">
-		<%-- <img id="show"
-			src="<%=request.getContextPath()%>/static/images/memberUpdate1.png"> --%>
+	 <img id="show" src="<%=request.getContextPath()%>/static/images/memberUpdate1.png"> 
 	</div>
 
 	<div class="divcenter5">
