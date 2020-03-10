@@ -85,57 +85,57 @@
 		
 		font-family: Do Hyeon;
 		font-size: 25px;
-		background: #black;
+		/*background: #black;*/
 	}
-	
+
 	.Center_button2{
 		border: 0;
 		outline: 0;
-		background-color: #ffffff; 
-		
+		background-color: #ffffff;
+
 		font-family: Do Hyeon;
 		font-size: 25px;
-		background: #black;
+		/*background: #black;*/
 	}
-	
+
 	.Center_button3{
 		border: 0;
 		outline: 0;
-		background-color: #ffffff; 
-		
+		background-color: #ffffff;
+
 		font-family: Do Hyeon;
 		font-size: 25px;
-		background: #black;
+		/*background: #black;*/
 	}
-	
+
 	.Center_button4{
 		border: 0;
 		outline: 0;
-		background-color: #ffffff; 
-		
+		background-color: #ffffff;
+
 		font-family: Do Hyeon;
 		font-size: 25px;
-		background: #black;
+		/*background: #black;*/
 	}
-	
+
 	.Center_button5{
 		border: 0;
 		outline: 0;
-		background-color: #ffffff; 
-		
+		background-color: #ffffff;
+
 		font-family: Do Hyeon;
 		font-size: 25px;
-		background: #black;	
+		/*background: #black;*/
 	}
 
 	.Center_button6 {
 		border: 0;
 		outline: 0;
-		background-color: #ffffff; 
-		
+		background-color: #ffffff;
+
 		font-family: Do Hyeon;
 		font-size: 25px;
-		background: #black;
+		/*background: #black;*/
 	}
 	
 	button[class^=Center_button] {
@@ -340,7 +340,7 @@
 		}
 		
 		function goMyReviews() {
-			location.href = "<%= request.getContextPath()%>/views/member/myPage/myReviews/writeList.jsp";
+			location.href = "<%= request.getContextPath()%>/mypage/writeReviews.me";
 		}
 		
 		function goMyComments() {

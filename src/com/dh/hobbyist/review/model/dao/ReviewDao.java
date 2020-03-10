@@ -147,6 +147,7 @@ public class ReviewDao {
 				lesson.setStatus(resultSet.getInt("status"));
 				lesson.setCategoryCode(resultSet.getInt("category_pk"));
 				lesson.setArtistCode(resultSet.getInt("artist_pk"));
+				
 			}
 			
 		} catch (SQLException e) {
@@ -156,7 +157,7 @@ public class ReviewDao {
 			close(preparedStatement);
 		}
 		
-		return null;
+		return lesson;
 	}
 	
 	public Image selectImage(Connection con, String img_type, int pk, int img_main) {
@@ -212,6 +213,8 @@ public class ReviewDao {
 		try {
 			preparedStatement = con.prepareStatement(query);
 			
+			preparedStatement.setInt(1, pk);
+			
 			resultSet = preparedStatement.executeQuery();
 			
 			if (resultSet.next()) {
@@ -238,10 +241,13 @@ public class ReviewDao {
 		ResultSet resultSet = null;
 		LessonOrder lessonOrder = null;
 		
-		String query = prop.getProperty("selectMember");
+		String query = prop.getProperty("selectLessonOrder");
 		
 		try {
 			preparedStatement = con.prepareStatement(query);
+			
+			preparedStatement.setInt(1, schedulePk);
+			preparedStatement.setInt(2, lessonOrderTime);
 			
 			resultSet = preparedStatement.executeQuery();
 			

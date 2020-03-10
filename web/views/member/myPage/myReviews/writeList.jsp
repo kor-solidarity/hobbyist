@@ -2,7 +2,10 @@
 <%@ page import="com.dh.hobbyist.lesson.model.vo.LessonPayment" %>
 <%@ page import="com.dh.hobbyist.lesson.model.vo.LessonSchedule" %>
 <%@ page import="com.dh.hobbyist.lesson.model.vo.Lesson" %>
-<%@ page import="com.dh.hobbyist.common.model.vo.Image" %><%--
+<%@ page import="com.dh.hobbyist.common.model.vo.Image" %>
+<%@ page import="com.dh.hobbyist.lesson.model.vo.LessonOrder" %>
+<%@ page import="com.dh.hobbyist.member.model.vo.Member" %>
+<%--
   Created by IntelliJ IDEA.
   User: SOY
   Date: 2020-02-16
@@ -20,15 +23,16 @@
     <%@include file="/views/common/boot4.jsp" %>
 </head>
 <body>
-<%@include file="/views/common/myPage.jsp" %>
+<%--<%@include file="/views/common/myPage.jsp" %>--%>
 <%
-
+    System.out.println("entered writeList.jsp");
     ArrayList<LessonPayment> lessonPaymentArrayList = (ArrayList<LessonPayment>) request.getAttribute("lessonPaymentArrayList");
     ArrayList<LessonSchedule> scheduleArrayList = (ArrayList<LessonSchedule>) request.getAttribute("scheduleArrayList");
     ArrayList<Lesson> lessonArrayList = (ArrayList<Lesson>) request.getAttribute("lessonArrayList");
     ArrayList<Image> lessonImageArrayList = (ArrayList<Image>) request.getAttribute("lessonImageArrayList");
     ArrayList<Member> artistList = (ArrayList<Member>) request.getAttribute("artistList");
     ArrayList<Image> artistImageList = (ArrayList<Image>) request.getAttribute("artistImageList");
+    ArrayList<LessonOrder> lessonOrderArrayList = (ArrayList<LessonOrder>) request.getAttribute("lessonOrderArrayList");
 %>
 
 <div class="">
@@ -55,24 +59,45 @@
                 - 리뷰 작성시, 포인트 500p이 지급됩니다.
             </td>
         </tr>
+        <%
+            System.out.println("lessonPaymentArrayList: " + lessonPaymentArrayList.size());
+            System.out.println("scheduleArrayList: " + scheduleArrayList.size());
+            System.out.println("lessonArrayList: " + lessonArrayList.size());
+            System.out.println("lessonImageArrayList: " + lessonImageArrayList.size());
+            System.out.println("artistList: " + artistList.size());
+            System.out.println("artistImageList: " + artistImageList.size());
+        %>
+        <% for (int i = 0; i < lessonPaymentArrayList.size(); i++) {%>
+        <%
+            String lessonOrderArrayTimeFormat =
+                    String.format("%1$TD %1$TT", lessonOrderArrayList.get(i).getOrderStart());
+            System.out.println("lessonArrayList.get(" + i + "): " + lessonArrayList.get(i));
+        %>
         <tr>
             <td></td>
-            <% for (int i = 0; i < lessonPaymentArrayList.size(); i++) {%>
             <td class="write-list-main">
                 <table class="write-list-contents" border="0">
                     <tr>
-                        <td rowspan="2"><img src="<%=request.getContextPath()%>/static/images/coffee.jpg"
-                                             style="width: 100%"></td>
+                        <%--수업 대표사진--%>
+                        <td rowspan="2">
+                            <img src="<%=lessonImageArrayList.get(i).getImageRoute()%>/<%=lessonImageArrayList.get(i).getImageName()%>"
+                                 style="width: 100%">
+                        </td>
                         <td>
                             <%--강의제목--%>
                             <%=lessonArrayList.get(i).getLessonName()%>
                             <br>
                             <%--수업 시작일 / 위치 --%>
-                                <%=scheduleArrayList.get(i).%>
-                            수업 시작일 : 2020-02-03 19:00 / 당산
+                            수업 시작일 :
+                            <%--                            <%=lessonOrderArrayList.get(i).getOrderStart()%> /--%>
+                            <%=lessonOrderArrayTimeFormat%>
+                            /
+                            <%--                                <%=lessonOrderArrayList.get(i).%>--%>
+                            당산
                             <br><br>
                             결제일 : 2020-01-30 12:11:31
                         </td>
+                        <%--artist's pic--%>
                         <td rowspan="2" style="text-align: center"><img
                                 src="<%=request.getContextPath()%>/static/images/iu.jpg"
                                 style="width: 100%">
@@ -92,38 +117,42 @@
                 </table>
             </td>
         </tr>
-        <% } %>
-        <td class="write-list-main">
-            <table class="write-list-contents" border="0">
-                <tr>
-                    <td rowspan="2"><img src="<%=request.getContextPath()%>/static/images/coffee.jpg"
-                                         style="width: 100%"></td>
-                    <td>[1:1_청담샵 경력] #선.착.순.이.벤.트 #자존감이 두배 올라가는 메이크업 배우기!
-                        <br>
-                        수업 시작일 : 2020-02-03 19:00 / 당산
-                        <br><br>
-                        결제일 : 2020-01-30 12:11:31
-                    </td>
-                    <td rowspan="2" style="text-align: center"><img
-                            src="<%=request.getContextPath()%>/static/images/iu.jpg"
-                            style="width: 100%">
-                        <br>
-                        피치핑크
-                        <br>
-                        오지호
-                    </td>
-                </tr>
-                <tr>
-                    <td><img src="<%=request.getContextPath()%>/static/images/pen-and-notepad-clipart-6.jpg"
-                             style="width: 30px; float: left" alt="">
-                        <button class="write-review-btn" data-toggle="modal" data-target="#exampleModal">리뷰작성하기
-                        </button>
-                    </td>
-                    <%--                        <td></td>--%>
-                </tr>
-            </table>
-        </td>
+        <%-- 상하 간격주기 위한 용도 --%>
+        <tr>
+            <td> &nbsp;</td>
         </tr>
+        <% } %>
+        <%--        <td class="write-list-main">--%>
+        <%--            <table class="write-list-contents" border="0">--%>
+        <%--                <tr>--%>
+        <%--                    <td rowspan="2"><img src="<%=request.getContextPath()%>/static/images/coffee.jpg"--%>
+        <%--                                         style="width: 100%"></td>--%>
+        <%--                    <td>[1:1_청담샵 경력] #선.착.순.이.벤.트 #자존감이 두배 올라가는 메이크업 배우기!--%>
+        <%--                        <br>--%>
+        <%--                        수업 시작일 : 2020-02-03 19:00 / 당산--%>
+        <%--                        <br><br>--%>
+        <%--                        결제일 : 2020-01-30 12:11:31--%>
+        <%--                    </td>--%>
+        <%--                    <td rowspan="2" style="text-align: center"><img--%>
+        <%--                            src="<%=request.getContextPath()%>/static/images/iu.jpg"--%>
+        <%--                            style="width: 100%">--%>
+        <%--                        <br>--%>
+        <%--                        피치핑크--%>
+        <%--                        <br>--%>
+        <%--                        오지호--%>
+        <%--                    </td>--%>
+        <%--                </tr>--%>
+        <%--                <tr>--%>
+        <%--                    <td><img src="<%=request.getContextPath()%>/static/images/pen-and-notepad-clipart-6.jpg"--%>
+        <%--                             style="width: 30px; float: left" alt="">--%>
+        <%--                        <button class="write-review-btn" data-toggle="modal" data-target="#exampleModal">리뷰작성하기--%>
+        <%--                        </button>--%>
+        <%--                    </td>--%>
+        <%--                    &lt;%&ndash;                        <td></td>&ndash;%&gt;--%>
+        <%--                </tr>--%>
+        <%--            </table>--%>
+        <%--        </td>--%>
+        <%--        </tr>--%>
         <%-- 상하 간격주기 위한 용도 --%>
         <tr>
             <td> &nbsp;</td>
@@ -150,11 +179,11 @@
             <div class="modal-body">
 
                 <div class="review-modal-stars">
-                    <span>★</span>
-                    <span>★</span>
-                    <span>★</span>
-                    <span>★</span>
-                    <span>★</span>
+                    <span id="modal_star-1">★</span>
+                    <span id="modal_star-2">★</span>
+                    <span id="modal_star-3">★</span>
+                    <span id="modal_star-4">★</span>
+                    <span id="modal_star-5">★</span>
                 </div>
                 <div class="col-12 review-modal-star-text">
                     별점을 매겨주세요.
