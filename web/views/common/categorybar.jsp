@@ -1189,6 +1189,73 @@
 		 	
 		 	
 		 	
+		 	
+		 	
+		 	 $("#etc2").click(function() {
+					
+					var categoryCode = 14
+					
+					$.ajax({
+						url: "/hobbyist/selectSub.le",
+						type: "get", 
+						data: {categoryCode: categoryCode},
+						success: function(data) {
+							var $list = $(".lesson-list");
+							$list.remove();
+							$(".pagingArea").remove();
+							
+							$("#lessonCount").text("등록된 수업 " + data.length + "개");
+							
+								if(data[0] != null) {
+									
+									for(var key in data) {
+										
+										var str = "";
+										
+										str += '<tr><td colspan="2"><div id="lessonImgArea"><img src="' + data[key].imageRoute + '/' + data[key].imageName + '"' + 'id="lessonImg" />';
+										if(data[key].isNew == 0) {
+											str += '<div id="newImgArea"><img src="static/images/newIcon.png" id="newImg"></div></div></td></tr>';
+										}else {
+											str += '</div></div></td></tr>';
+										}
+										str += '<tr><td colspan="2" rowspan="3"><div id="lessonName">' + data[key].lessonName + '</div></td></tr>';
+										str += '<tr><td><br></td><td><input type="hidden" name="lessonCode" value="' + data[key].lessonCode + '"</td></tr>';
+										str += '<tr><td></td><td><div id="artistImgArea" style="width:75px;"><img src="' + data[key].imageRoute2 + '/' + data[key].imageName2 + '"' + 'id="artistImg" /><div></td></tr>';
+										str += '<tr><td style="word-break:break-all"><div id="star">★★★★☆</div></td>';
+										str += '<td style="word-break:break-all"><div id="artistNick">' + data[key].artistNick + '</div></td></tr>';
+										str += '<tr><td style="word-break:break-all"><div id="lessonArea">' + data[key].region + '</div></td>';
+										str += '<td style="word-break:break-all"><div id="artistName">' + data[key].memberName + '</div></td></tr>';
+							
+										
+										$(".lesson-area").append('<div class="lesson-list"><form action="/hobbyist/selectOne.le" method="get"><table id="lessonTable">' + str + '</table></form></div>');
+										
+									
+										
+										$(".lesson-list").click(function() {
+											$(this).find($('form')).submit(); 
+										 });
+									}
+									
+						}else {
+							$("#suggestContents").css({'display' : 'block'});
+							$("#suggestImgArea").css({'display' : 'block'});
+						}
+						
+					},
+					
+					error: function(error) {
+						conosole.log(error);
+					}
+					
+				}); 
+				
+			});
+		 	
+		 	
+		 	
+		 	
+		 	
+		 	
 	}); 
 	</script>
 </body>
