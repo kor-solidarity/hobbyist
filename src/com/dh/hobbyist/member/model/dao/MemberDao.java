@@ -10,7 +10,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
 
@@ -497,7 +496,7 @@ public class MemberDao {
         ArrayList<LessonPayment> paymentArrayList = null;
 
         // 멤버리뷰 목록조회 1단계: 멤버 PK 에 따른 LESSON_PAYMENT, LESSON_SCHEDULE 불러오기.
-        String query = prop.getProperty("selectLessonPaymentListByMember");
+        String query = prop.getProperty("selectPassedLessonPaymentListByMember");
 
 
         return null;
