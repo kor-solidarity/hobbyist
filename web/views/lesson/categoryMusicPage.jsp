@@ -451,6 +451,10 @@
 			
 			$(".lesson-list").click(function() {
 				$(this).find($('form')).submit();
+				
+				$("#suggestImgArea").click(function() {
+					location.href = "<%=request.getContextPath()%>/selectList.sg";
+				});
 			});
 
 		});

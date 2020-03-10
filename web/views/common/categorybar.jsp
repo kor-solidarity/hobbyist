@@ -1142,71 +1142,8 @@
 							
 								if(data[0] != null) {
 									
-									for(var key in data) {
-										
-										var str = "";
-										
-										str += '<tr><td colspan="2"><div id="lessonImgArea"><img src="' + data[key].imageRoute + '/' + data[key].imageName + '"' + 'id="lessonImg" />';
-										if(data[key].isNew == 0) {
-											str += '<div id="newImgArea"><img src="static/images/newIcon.png" id="newImg"></div></div></td></tr>';
-										}else {
-											str += '</div></div></td></tr>';
-										}
-										str += '<tr><td colspan="2" rowspan="3"><div id="lessonName">' + data[key].lessonName + '</div></td></tr>';
-										str += '<tr><td><br></td><td><input type="hidden" name="lessonCode" value="' + data[key].lessonCode + '"</td></tr>';
-										str += '<tr><td></td><td><div id="artistImgArea" style="width:75px;"><img src="' + data[key].imageRoute2 + '/' + data[key].imageName2 + '"' + 'id="artistImg" /><div></td></tr>';
-										str += '<tr><td style="word-break:break-all"><div id="star">★★★★☆</div></td>';
-										str += '<td style="word-break:break-all"><div id="artistNick">' + data[key].artistNick + '</div></td></tr>';
-										str += '<tr><td style="word-break:break-all"><div id="lessonArea">' + data[key].region + '</div></td>';
-										str += '<td style="word-break:break-all"><div id="artistName">' + data[key].memberName + '</div></td></tr>';
-							
-										
-										$(".lesson-area").append('<div class="lesson-list"><form action="/hobbyist/selectOne.le" method="get"><table id="lessonTable">' + str + '</table></form></div>');
-										
-									
-										
-										$(".lesson-list").click(function() {
-											$(this).find($('form')).submit(); 
-										 });
-									}
-									
-						}else {
-							$(".lesson-area").append('<div>등록된 수업이 없습니다.\n 저희 hobbyist 수업 건의 서비스를 제공합니다.\n 수업 건의 게시판에서 듣고 싶은 수업을 건의해주세요! </div>')
-						}
-						
-					},
-					
-					error: function(error) {
-						conosole.log(error);
-					}
-					
-				}); 
-				
-			});
-		 	
-		 	
-		 	
-		 	
-		 	
-		 	
-		 	
-		 	
-		 	 $("#etc2").click(function() {
-					
-					var categoryCode = 14
-					
-					$.ajax({
-						url: "/hobbyist/selectSub.le",
-						type: "get", 
-						data: {categoryCode: categoryCode},
-						success: function(data) {
-							var $list = $(".lesson-list");
-							$list.remove();
-							$(".pagingArea").remove();
-							
-							$("#lessonCount").text("등록된 수업 " + data.length + "개");
-							
-								if(data[0] != null) {
+									$("#suggestContents").css({'display' : 'none'});
+									$("#suggestImgArea").css({'display' : 'none'});
 									
 									for(var key in data) {
 										
@@ -1251,6 +1188,2256 @@
 				
 			});
 		 	
+		 	
+		 	 $("#rap").click(function() {
+					
+					var categoryCode = 3
+					
+					$.ajax({
+						url: "/hobbyist/selectSub.le",
+						type: "get", 
+						data: {categoryCode: categoryCode},
+						success: function(data) {
+							var $list = $(".lesson-list");
+							$list.remove();
+							$(".pagingArea").remove();
+							
+							$("#lessonCount").text("등록된 수업 " + data.length + "개");
+							
+								if(data[0] != null) {
+									
+									$("#suggestContents").css({'display' : 'none'});
+									$("#suggestImgArea").css({'display' : 'none'});
+									
+									for(var key in data) {
+										
+										var str = "";
+										
+										str += '<tr><td colspan="2"><div id="lessonImgArea"><img src="' + data[key].imageRoute + '/' + data[key].imageName + '"' + 'id="lessonImg" />';
+										if(data[key].isNew == 0) {
+											str += '<div id="newImgArea"><img src="static/images/newIcon.png" id="newImg"></div></div></td></tr>';
+										}else {
+											str += '</div></div></td></tr>';
+										}
+										str += '<tr><td colspan="2" rowspan="3"><div id="lessonName">' + data[key].lessonName + '</div></td></tr>';
+										str += '<tr><td><br></td><td><input type="hidden" name="lessonCode" value="' + data[key].lessonCode + '"</td></tr>';
+										str += '<tr><td></td><td><div id="artistImgArea" style="width:75px;"><img src="' + data[key].imageRoute2 + '/' + data[key].imageName2 + '"' + 'id="artistImg" /><div></td></tr>';
+										str += '<tr><td style="word-break:break-all"><div id="star">★★★★☆</div></td>';
+										str += '<td style="word-break:break-all"><div id="artistNick">' + data[key].artistNick + '</div></td></tr>';
+										str += '<tr><td style="word-break:break-all"><div id="lessonArea">' + data[key].region + '</div></td>';
+										str += '<td style="word-break:break-all"><div id="artistName">' + data[key].memberName + '</div></td></tr>';
+							
+										
+										$(".lesson-area").append('<div class="lesson-list"><form action="/hobbyist/selectOne.le" method="get"><table id="lessonTable">' + str + '</table></form></div>');
+										
+									
+										
+										$(".lesson-list").click(function() {
+											$(this).find($('form')).submit(); 
+										 });
+									}
+									
+						}else {
+							$("#suggestContents").css({'display' : 'block'});
+							$("#suggestImgArea").css({'display' : 'block'});
+						}
+						
+					},
+					
+					error: function(error) {
+						conosole.log(error);
+					}
+					
+				}); 
+				
+			});
+		 	 
+		 	 
+		 	 
+		 	 $("#koreanMusic").click(function() {
+					
+					var categoryCode = 4
+					
+					$.ajax({
+						url: "/hobbyist/selectSub.le",
+						type: "get", 
+						data: {categoryCode: categoryCode},
+						success: function(data) {
+							var $list = $(".lesson-list");
+							$list.remove();
+							$(".pagingArea").remove();
+							
+							$("#lessonCount").text("등록된 수업 " + data.length + "개");
+							
+								if(data[0] != null) {
+									
+									$("#suggestContents").css({'display' : 'none'});
+									$("#suggestImgArea").css({'display' : 'none'});
+									
+									for(var key in data) {
+										
+										var str = "";
+										
+										str += '<tr><td colspan="2"><div id="lessonImgArea"><img src="' + data[key].imageRoute + '/' + data[key].imageName + '"' + 'id="lessonImg" />';
+										if(data[key].isNew == 0) {
+											str += '<div id="newImgArea"><img src="static/images/newIcon.png" id="newImg"></div></div></td></tr>';
+										}else {
+											str += '</div></div></td></tr>';
+										}
+										str += '<tr><td colspan="2" rowspan="3"><div id="lessonName">' + data[key].lessonName + '</div></td></tr>';
+										str += '<tr><td><br></td><td><input type="hidden" name="lessonCode" value="' + data[key].lessonCode + '"</td></tr>';
+										str += '<tr><td></td><td><div id="artistImgArea" style="width:75px;"><img src="' + data[key].imageRoute2 + '/' + data[key].imageName2 + '"' + 'id="artistImg" /><div></td></tr>';
+										str += '<tr><td style="word-break:break-all"><div id="star">★★★★☆</div></td>';
+										str += '<td style="word-break:break-all"><div id="artistNick">' + data[key].artistNick + '</div></td></tr>';
+										str += '<tr><td style="word-break:break-all"><div id="lessonArea">' + data[key].region + '</div></td>';
+										str += '<td style="word-break:break-all"><div id="artistName">' + data[key].memberName + '</div></td></tr>';
+							
+										
+										$(".lesson-area").append('<div class="lesson-list"><form action="/hobbyist/selectOne.le" method="get"><table id="lessonTable">' + str + '</table></form></div>');
+										
+									
+										
+										$(".lesson-list").click(function() {
+											$(this).find($('form')).submit(); 
+										 });
+									}
+									
+						}else {
+							$("#suggestContents").css({'display' : 'block'});
+							$("#suggestImgArea").css({'display' : 'block'});
+						}
+						
+					},
+					
+					error: function(error) {
+						conosole.log(error);
+					}
+					
+				}); 
+				
+			});
+		 	
+		 	 
+		 	 
+		 	 
+		 	 $("#songwrite").click(function() {
+					
+					var categoryCode = 5
+					
+					$.ajax({
+						url: "/hobbyist/selectSub.le",
+						type: "get", 
+						data: {categoryCode: categoryCode},
+						success: function(data) {
+							var $list = $(".lesson-list");
+							$list.remove();
+							$(".pagingArea").remove();
+							
+							$("#lessonCount").text("등록된 수업 " + data.length + "개");
+							
+								if(data[0] != null) {
+									
+									$("#suggestContents").css({'display' : 'none'});
+									$("#suggestImgArea").css({'display' : 'none'});
+									
+									for(var key in data) {
+										
+										var str = "";
+										
+										str += '<tr><td colspan="2"><div id="lessonImgArea"><img src="' + data[key].imageRoute + '/' + data[key].imageName + '"' + 'id="lessonImg" />';
+										if(data[key].isNew == 0) {
+											str += '<div id="newImgArea"><img src="static/images/newIcon.png" id="newImg"></div></div></td></tr>';
+										}else {
+											str += '</div></div></td></tr>';
+										}
+										str += '<tr><td colspan="2" rowspan="3"><div id="lessonName">' + data[key].lessonName + '</div></td></tr>';
+										str += '<tr><td><br></td><td><input type="hidden" name="lessonCode" value="' + data[key].lessonCode + '"</td></tr>';
+										str += '<tr><td></td><td><div id="artistImgArea" style="width:75px;"><img src="' + data[key].imageRoute2 + '/' + data[key].imageName2 + '"' + 'id="artistImg" /><div></td></tr>';
+										str += '<tr><td style="word-break:break-all"><div id="star">★★★★☆</div></td>';
+										str += '<td style="word-break:break-all"><div id="artistNick">' + data[key].artistNick + '</div></td></tr>';
+										str += '<tr><td style="word-break:break-all"><div id="lessonArea">' + data[key].region + '</div></td>';
+										str += '<td style="word-break:break-all"><div id="artistName">' + data[key].memberName + '</div></td></tr>';
+							
+										
+										$(".lesson-area").append('<div class="lesson-list"><form action="/hobbyist/selectOne.le" method="get"><table id="lessonTable">' + str + '</table></form></div>');
+										
+									
+										
+										$(".lesson-list").click(function() {
+											$(this).find($('form')).submit(); 
+										 });
+									}
+									
+						}else {
+							$("#suggestContents").css({'display' : 'block'});
+							$("#suggestImgArea").css({'display' : 'block'});
+						}
+						
+					},
+					
+					error: function(error) {
+						conosole.log(error);
+					}
+					
+				}); 
+				
+			});
+		 	
+		 	
+		 	 $("#guitar").click(function() {
+					
+					var categoryCode = 6
+					
+					$.ajax({
+						url: "/hobbyist/selectSub.le",
+						type: "get", 
+						data: {categoryCode: categoryCode},
+						success: function(data) {
+							var $list = $(".lesson-list");
+							$list.remove();
+							$(".pagingArea").remove();
+							
+							$("#lessonCount").text("등록된 수업 " + data.length + "개");
+							
+								if(data[0] != null) {
+									
+									$("#suggestContents").css({'display' : 'none'});
+									$("#suggestImgArea").css({'display' : 'none'});
+									
+									for(var key in data) {
+										
+										var str = "";
+										
+										str += '<tr><td colspan="2"><div id="lessonImgArea"><img src="' + data[key].imageRoute + '/' + data[key].imageName + '"' + 'id="lessonImg" />';
+										if(data[key].isNew == 0) {
+											str += '<div id="newImgArea"><img src="static/images/newIcon.png" id="newImg"></div></div></td></tr>';
+										}else {
+											str += '</div></div></td></tr>';
+										}
+										str += '<tr><td colspan="2" rowspan="3"><div id="lessonName">' + data[key].lessonName + '</div></td></tr>';
+										str += '<tr><td><br></td><td><input type="hidden" name="lessonCode" value="' + data[key].lessonCode + '"</td></tr>';
+										str += '<tr><td></td><td><div id="artistImgArea" style="width:75px;"><img src="' + data[key].imageRoute2 + '/' + data[key].imageName2 + '"' + 'id="artistImg" /><div></td></tr>';
+										str += '<tr><td style="word-break:break-all"><div id="star">★★★★☆</div></td>';
+										str += '<td style="word-break:break-all"><div id="artistNick">' + data[key].artistNick + '</div></td></tr>';
+										str += '<tr><td style="word-break:break-all"><div id="lessonArea">' + data[key].region + '</div></td>';
+										str += '<td style="word-break:break-all"><div id="artistName">' + data[key].memberName + '</div></td></tr>';
+							
+										
+										$(".lesson-area").append('<div class="lesson-list"><form action="/hobbyist/selectOne.le" method="get"><table id="lessonTable">' + str + '</table></form></div>');
+										
+									
+										
+										$(".lesson-list").click(function() {
+											$(this).find($('form')).submit(); 
+										 });
+									}
+									
+						}else {
+							$("#suggestContents").css({'display' : 'block'});
+							$("#suggestImgArea").css({'display' : 'block'});
+						}
+						
+					},
+					
+					error: function(error) {
+						conosole.log(error);
+					}
+					
+				}); 
+				
+			});
+		 	 
+		 	 
+		 	 $("#piano").click(function() {
+					
+					var categoryCode = 7
+					
+					$.ajax({
+						url: "/hobbyist/selectSub.le",
+						type: "get", 
+						data: {categoryCode: categoryCode},
+						success: function(data) {
+							var $list = $(".lesson-list");
+							$list.remove();
+							$(".pagingArea").remove();
+							
+							$("#lessonCount").text("등록된 수업 " + data.length + "개");
+							
+								if(data[0] != null) {
+									
+									$("#suggestContents").css({'display' : 'none'});
+									$("#suggestImgArea").css({'display' : 'none'});
+									
+									for(var key in data) {
+										
+										var str = "";
+										
+										str += '<tr><td colspan="2"><div id="lessonImgArea"><img src="' + data[key].imageRoute + '/' + data[key].imageName + '"' + 'id="lessonImg" />';
+										if(data[key].isNew == 0) {
+											str += '<div id="newImgArea"><img src="static/images/newIcon.png" id="newImg"></div></div></td></tr>';
+										}else {
+											str += '</div></div></td></tr>';
+										}
+										str += '<tr><td colspan="2" rowspan="3"><div id="lessonName">' + data[key].lessonName + '</div></td></tr>';
+										str += '<tr><td><br></td><td><input type="hidden" name="lessonCode" value="' + data[key].lessonCode + '"</td></tr>';
+										str += '<tr><td></td><td><div id="artistImgArea" style="width:75px;"><img src="' + data[key].imageRoute2 + '/' + data[key].imageName2 + '"' + 'id="artistImg" /><div></td></tr>';
+										str += '<tr><td style="word-break:break-all"><div id="star">★★★★☆</div></td>';
+										str += '<td style="word-break:break-all"><div id="artistNick">' + data[key].artistNick + '</div></td></tr>';
+										str += '<tr><td style="word-break:break-all"><div id="lessonArea">' + data[key].region + '</div></td>';
+										str += '<td style="word-break:break-all"><div id="artistName">' + data[key].memberName + '</div></td></tr>';
+							
+										
+										$(".lesson-area").append('<div class="lesson-list"><form action="/hobbyist/selectOne.le" method="get"><table id="lessonTable">' + str + '</table></form></div>');
+										
+									
+										
+										$(".lesson-list").click(function() {
+											$(this).find($('form')).submit(); 
+										 });
+									}
+									
+						}else {
+							$("#suggestContents").css({'display' : 'block'});
+							$("#suggestImgArea").css({'display' : 'block'});
+						}
+						
+					},
+					
+					error: function(error) {
+						conosole.log(error);
+					}
+					
+				}); 
+				
+			});
+		 	 
+		 	 
+		 	 $("#etc1").click(function() {
+					
+					var categoryCode = 8
+					
+					$.ajax({
+						url: "/hobbyist/selectSub.le",
+						type: "get", 
+						data: {categoryCode: categoryCode},
+						success: function(data) {
+							var $list = $(".lesson-list");
+							$list.remove();
+							$(".pagingArea").remove();
+							
+							$("#lessonCount").text("등록된 수업 " + data.length + "개");
+							
+								if(data[0] != null) {
+									
+									$("#suggestContents").css({'display' : 'none'});
+									$("#suggestImgArea").css({'display' : 'none'});
+									
+									for(var key in data) {
+										
+										var str = "";
+										
+										str += '<tr><td colspan="2"><div id="lessonImgArea"><img src="' + data[key].imageRoute + '/' + data[key].imageName + '"' + 'id="lessonImg" />';
+										if(data[key].isNew == 0) {
+											str += '<div id="newImgArea"><img src="static/images/newIcon.png" id="newImg"></div></div></td></tr>';
+										}else {
+											str += '</div></div></td></tr>';
+										}
+										str += '<tr><td colspan="2" rowspan="3"><div id="lessonName">' + data[key].lessonName + '</div></td></tr>';
+										str += '<tr><td><br></td><td><input type="hidden" name="lessonCode" value="' + data[key].lessonCode + '"</td></tr>';
+										str += '<tr><td></td><td><div id="artistImgArea" style="width:75px;"><img src="' + data[key].imageRoute2 + '/' + data[key].imageName2 + '"' + 'id="artistImg" /><div></td></tr>';
+										str += '<tr><td style="word-break:break-all"><div id="star">★★★★☆</div></td>';
+										str += '<td style="word-break:break-all"><div id="artistNick">' + data[key].artistNick + '</div></td></tr>';
+										str += '<tr><td style="word-break:break-all"><div id="lessonArea">' + data[key].region + '</div></td>';
+										str += '<td style="word-break:break-all"><div id="artistName">' + data[key].memberName + '</div></td></tr>';
+							
+										
+										$(".lesson-area").append('<div class="lesson-list"><form action="/hobbyist/selectOne.le" method="get"><table id="lessonTable">' + str + '</table></form></div>');
+										
+									
+										
+										$(".lesson-list").click(function() {
+											$(this).find($('form')).submit(); 
+										 });
+									}
+									
+						}else {
+							$("#suggestContents").css({'display' : 'block'});
+							$("#suggestImgArea").css({'display' : 'block'});
+						}
+						
+					},
+					
+					error: function(error) {
+						conosole.log(error);
+					}
+					
+				}); 
+				
+			});
+		 	 
+		 	 $("#kpopDance").click(function() {
+					
+					var categoryCode = 10
+					
+					$.ajax({
+						url: "/hobbyist/selectSub.le",
+						type: "get", 
+						data: {categoryCode: categoryCode},
+						success: function(data) {
+							var $list = $(".lesson-list");
+							$list.remove();
+							$(".pagingArea").remove();
+							
+							$("#lessonCount").text("등록된 수업 " + data.length + "개");
+							
+								if(data[0] != null) {
+									
+									$("#suggestContents").css({'display' : 'none'});
+									$("#suggestImgArea").css({'display' : 'none'});
+									
+									for(var key in data) {
+										
+										var str = "";
+										
+										str += '<tr><td colspan="2"><div id="lessonImgArea"><img src="' + data[key].imageRoute + '/' + data[key].imageName + '"' + 'id="lessonImg" />';
+										if(data[key].isNew == 0) {
+											str += '<div id="newImgArea"><img src="static/images/newIcon.png" id="newImg"></div></div></td></tr>';
+										}else {
+											str += '</div></div></td></tr>';
+										}
+										str += '<tr><td colspan="2" rowspan="3"><div id="lessonName">' + data[key].lessonName + '</div></td></tr>';
+										str += '<tr><td><br></td><td><input type="hidden" name="lessonCode" value="' + data[key].lessonCode + '"</td></tr>';
+										str += '<tr><td></td><td><div id="artistImgArea" style="width:75px;"><img src="' + data[key].imageRoute2 + '/' + data[key].imageName2 + '"' + 'id="artistImg" /><div></td></tr>';
+										str += '<tr><td style="word-break:break-all"><div id="star">★★★★☆</div></td>';
+										str += '<td style="word-break:break-all"><div id="artistNick">' + data[key].artistNick + '</div></td></tr>';
+										str += '<tr><td style="word-break:break-all"><div id="lessonArea">' + data[key].region + '</div></td>';
+										str += '<td style="word-break:break-all"><div id="artistName">' + data[key].memberName + '</div></td></tr>';
+							
+										
+										$(".lesson-area").append('<div class="lesson-list"><form action="/hobbyist/selectOne.le" method="get"><table id="lessonTable">' + str + '</table></form></div>');
+										
+									
+										
+										$(".lesson-list").click(function() {
+											$(this).find($('form')).submit(); 
+										 });
+									}
+									
+						}else {
+							$("#suggestContents").css({'display' : 'block'});
+							$("#suggestImgArea").css({'display' : 'block'});
+						}
+						
+					},
+					
+					error: function(error) {
+						conosole.log(error);
+					}
+					
+				}); 
+				
+			});
+		 	 
+		 	 
+		 	 
+		 	 $("#street").click(function() {
+					
+					var categoryCode = 11
+					
+					$.ajax({
+						url: "/hobbyist/selectSub.le",
+						type: "get", 
+						data: {categoryCode: categoryCode},
+						success: function(data) {
+							var $list = $(".lesson-list");
+							$list.remove();
+							$(".pagingArea").remove();
+							
+							$("#lessonCount").text("등록된 수업 " + data.length + "개");
+							
+								if(data[0] != null) {
+									
+									$("#suggestContents").css({'display' : 'none'});
+									$("#suggestImgArea").css({'display' : 'none'});
+									
+									for(var key in data) {
+										
+										var str = "";
+										
+										str += '<tr><td colspan="2"><div id="lessonImgArea"><img src="' + data[key].imageRoute + '/' + data[key].imageName + '"' + 'id="lessonImg" />';
+										if(data[key].isNew == 0) {
+											str += '<div id="newImgArea"><img src="static/images/newIcon.png" id="newImg"></div></div></td></tr>';
+										}else {
+											str += '</div></div></td></tr>';
+										}
+										str += '<tr><td colspan="2" rowspan="3"><div id="lessonName">' + data[key].lessonName + '</div></td></tr>';
+										str += '<tr><td><br></td><td><input type="hidden" name="lessonCode" value="' + data[key].lessonCode + '"</td></tr>';
+										str += '<tr><td></td><td><div id="artistImgArea" style="width:75px;"><img src="' + data[key].imageRoute2 + '/' + data[key].imageName2 + '"' + 'id="artistImg" /><div></td></tr>';
+										str += '<tr><td style="word-break:break-all"><div id="star">★★★★☆</div></td>';
+										str += '<td style="word-break:break-all"><div id="artistNick">' + data[key].artistNick + '</div></td></tr>';
+										str += '<tr><td style="word-break:break-all"><div id="lessonArea">' + data[key].region + '</div></td>';
+										str += '<td style="word-break:break-all"><div id="artistName">' + data[key].memberName + '</div></td></tr>';
+							
+										
+										$(".lesson-area").append('<div class="lesson-list"><form action="/hobbyist/selectOne.le" method="get"><table id="lessonTable">' + str + '</table></form></div>');
+										
+									
+										
+										$(".lesson-list").click(function() {
+											$(this).find($('form')).submit(); 
+										 });
+									}
+									
+						}else {
+							$("#suggestContents").css({'display' : 'block'});
+							$("#suggestImgArea").css({'display' : 'block'});
+						}
+						
+					},
+					
+					error: function(error) {
+						conosole.log(error);
+					}
+					
+				}); 
+				
+			});
+		 	 
+		 	 
+		 	 
+		 	 $("#modernDance").click(function() {
+					
+					var categoryCode = 12
+					
+					$.ajax({
+						url: "/hobbyist/selectSub.le",
+						type: "get", 
+						data: {categoryCode: categoryCode},
+						success: function(data) {
+							var $list = $(".lesson-list");
+							$list.remove();
+							$(".pagingArea").remove();
+							
+							$("#lessonCount").text("등록된 수업 " + data.length + "개");
+							
+								if(data[0] != null) {
+									
+									$("#suggestContents").css({'display' : 'none'});
+									$("#suggestImgArea").css({'display' : 'none'});
+									
+									for(var key in data) {
+										
+										var str = "";
+										
+										str += '<tr><td colspan="2"><div id="lessonImgArea"><img src="' + data[key].imageRoute + '/' + data[key].imageName + '"' + 'id="lessonImg" />';
+										if(data[key].isNew == 0) {
+											str += '<div id="newImgArea"><img src="static/images/newIcon.png" id="newImg"></div></div></td></tr>';
+										}else {
+											str += '</div></div></td></tr>';
+										}
+										str += '<tr><td colspan="2" rowspan="3"><div id="lessonName">' + data[key].lessonName + '</div></td></tr>';
+										str += '<tr><td><br></td><td><input type="hidden" name="lessonCode" value="' + data[key].lessonCode + '"</td></tr>';
+										str += '<tr><td></td><td><div id="artistImgArea" style="width:75px;"><img src="' + data[key].imageRoute2 + '/' + data[key].imageName2 + '"' + 'id="artistImg" /><div></td></tr>';
+										str += '<tr><td style="word-break:break-all"><div id="star">★★★★☆</div></td>';
+										str += '<td style="word-break:break-all"><div id="artistNick">' + data[key].artistNick + '</div></td></tr>';
+										str += '<tr><td style="word-break:break-all"><div id="lessonArea">' + data[key].region + '</div></td>';
+										str += '<td style="word-break:break-all"><div id="artistName">' + data[key].memberName + '</div></td></tr>';
+							
+										
+										$(".lesson-area").append('<div class="lesson-list"><form action="/hobbyist/selectOne.le" method="get"><table id="lessonTable">' + str + '</table></form></div>');
+										
+									
+										
+										$(".lesson-list").click(function() {
+											$(this).find($('form')).submit(); 
+										 });
+									}
+									
+						}else {
+							$("#suggestContents").css({'display' : 'block'});
+							$("#suggestImgArea").css({'display' : 'block'});
+						}
+						
+					},
+					
+					error: function(error) {
+						conosole.log(error);
+					}
+					
+				}); 
+				
+			});
+		 	 
+		 	 
+		 	 $("#koreanDance").click(function() {
+					
+					var categoryCode = 13
+					
+					$.ajax({
+						url: "/hobbyist/selectSub.le",
+						type: "get", 
+						data: {categoryCode: categoryCode},
+						success: function(data) {
+							var $list = $(".lesson-list");
+							$list.remove();
+							$(".pagingArea").remove();
+							
+							$("#lessonCount").text("등록된 수업 " + data.length + "개");
+							
+								if(data[0] != null) {
+									
+									$("#suggestContents").css({'display' : 'none'});
+									$("#suggestImgArea").css({'display' : 'none'});
+									
+									for(var key in data) {
+										
+										var str = "";
+										
+										str += '<tr><td colspan="2"><div id="lessonImgArea"><img src="' + data[key].imageRoute + '/' + data[key].imageName + '"' + 'id="lessonImg" />';
+										if(data[key].isNew == 0) {
+											str += '<div id="newImgArea"><img src="static/images/newIcon.png" id="newImg"></div></div></td></tr>';
+										}else {
+											str += '</div></div></td></tr>';
+										}
+										str += '<tr><td colspan="2" rowspan="3"><div id="lessonName">' + data[key].lessonName + '</div></td></tr>';
+										str += '<tr><td><br></td><td><input type="hidden" name="lessonCode" value="' + data[key].lessonCode + '"</td></tr>';
+										str += '<tr><td></td><td><div id="artistImgArea" style="width:75px;"><img src="' + data[key].imageRoute2 + '/' + data[key].imageName2 + '"' + 'id="artistImg" /><div></td></tr>';
+										str += '<tr><td style="word-break:break-all"><div id="star">★★★★☆</div></td>';
+										str += '<td style="word-break:break-all"><div id="artistNick">' + data[key].artistNick + '</div></td></tr>';
+										str += '<tr><td style="word-break:break-all"><div id="lessonArea">' + data[key].region + '</div></td>';
+										str += '<td style="word-break:break-all"><div id="artistName">' + data[key].memberName + '</div></td></tr>';
+							
+										
+										$(".lesson-area").append('<div class="lesson-list"><form action="/hobbyist/selectOne.le" method="get"><table id="lessonTable">' + str + '</table></form></div>');
+										
+									
+										
+										$(".lesson-list").click(function() {
+											$(this).find($('form')).submit(); 
+										 });
+									}
+									
+						}else {
+							$("#suggestContents").css({'display' : 'block'});
+							$("#suggestImgArea").css({'display' : 'block'});
+						}
+						
+					},
+					
+					error: function(error) {
+						conosole.log(error);
+					}
+					
+				}); 
+				
+			});
+		 	
+		 	 
+		 	
+		 	
+		 	 $("#etc2").click(function() {
+					
+					var categoryCode = 14
+					
+					$.ajax({
+						url: "/hobbyist/selectSub.le",
+						type: "get", 
+						data: {categoryCode: categoryCode},
+						success: function(data) {
+							var $list = $(".lesson-list");
+							$list.remove();
+							$(".pagingArea").remove();
+							
+							$("#lessonCount").text("등록된 수업 " + data.length + "개");
+							
+								if(data[0] != null) {
+									
+									$("#suggestContents").css({'display' : 'none'});
+									$("#suggestImgArea").css({'display' : 'none'});
+									
+									for(var key in data) {
+										
+										var str = "";
+										
+										str += '<tr><td colspan="2"><div id="lessonImgArea"><img src="' + data[key].imageRoute + '/' + data[key].imageName + '"' + 'id="lessonImg" />';
+										if(data[key].isNew == 0) {
+											str += '<div id="newImgArea"><img src="static/images/newIcon.png" id="newImg"></div></div></td></tr>';
+										}else {
+											str += '</div></div></td></tr>';
+										}
+										str += '<tr><td colspan="2" rowspan="3"><div id="lessonName">' + data[key].lessonName + '</div></td></tr>';
+										str += '<tr><td><br></td><td><input type="hidden" name="lessonCode" value="' + data[key].lessonCode + '"</td></tr>';
+										str += '<tr><td></td><td><div id="artistImgArea" style="width:75px;"><img src="' + data[key].imageRoute2 + '/' + data[key].imageName2 + '"' + 'id="artistImg" /><div></td></tr>';
+										str += '<tr><td style="word-break:break-all"><div id="star">★★★★☆</div></td>';
+										str += '<td style="word-break:break-all"><div id="artistNick">' + data[key].artistNick + '</div></td></tr>';
+										str += '<tr><td style="word-break:break-all"><div id="lessonArea">' + data[key].region + '</div></td>';
+										str += '<td style="word-break:break-all"><div id="artistName">' + data[key].memberName + '</div></td></tr>';
+							
+										
+										$(".lesson-area").append('<div class="lesson-list"><form action="/hobbyist/selectOne.le" method="get"><table id="lessonTable">' + str + '</table></form></div>');
+										
+									
+										
+										$(".lesson-list").click(function() {
+											$(this).find($('form')).submit(); 
+										 });
+									}
+									
+						}else {
+							$("#suggestContents").css({'display' : 'block'});
+							$("#suggestImgArea").css({'display' : 'block'});
+						}
+						
+					},
+					
+					error: function(error) {
+						conosole.log(error);
+					}
+					
+				}); 
+				
+			});
+		 	 
+		 	 
+		 	 
+		 	 $("#editVideo").click(function() {
+					
+					var categoryCode = 16
+					
+					$.ajax({
+						url: "/hobbyist/selectSub.le",
+						type: "get", 
+						data: {categoryCode: categoryCode},
+						success: function(data) {
+							var $list = $(".lesson-list");
+							$list.remove();
+							$(".pagingArea").remove();
+							
+							$("#lessonCount").text("등록된 수업 " + data.length + "개");
+							
+								if(data[0] != null) {
+									
+									$("#suggestContents").css({'display' : 'none'});
+									$("#suggestImgArea").css({'display' : 'none'});
+									
+									for(var key in data) {
+										
+										var str = "";
+										
+										str += '<tr><td colspan="2"><div id="lessonImgArea"><img src="' + data[key].imageRoute + '/' + data[key].imageName + '"' + 'id="lessonImg" />';
+										if(data[key].isNew == 0) {
+											str += '<div id="newImgArea"><img src="static/images/newIcon.png" id="newImg"></div></div></td></tr>';
+										}else {
+											str += '</div></div></td></tr>';
+										}
+										str += '<tr><td colspan="2" rowspan="3"><div id="lessonName">' + data[key].lessonName + '</div></td></tr>';
+										str += '<tr><td><br></td><td><input type="hidden" name="lessonCode" value="' + data[key].lessonCode + '"</td></tr>';
+										str += '<tr><td></td><td><div id="artistImgArea" style="width:75px;"><img src="' + data[key].imageRoute2 + '/' + data[key].imageName2 + '"' + 'id="artistImg" /><div></td></tr>';
+										str += '<tr><td style="word-break:break-all"><div id="star">★★★★☆</div></td>';
+										str += '<td style="word-break:break-all"><div id="artistNick">' + data[key].artistNick + '</div></td></tr>';
+										str += '<tr><td style="word-break:break-all"><div id="lessonArea">' + data[key].region + '</div></td>';
+										str += '<td style="word-break:break-all"><div id="artistName">' + data[key].memberName + '</div></td></tr>';
+							
+										
+										$(".lesson-area").append('<div class="lesson-list"><form action="/hobbyist/selectOne.le" method="get"><table id="lessonTable">' + str + '</table></form></div>');
+										
+									
+										
+										$(".lesson-list").click(function() {
+											$(this).find($('form')).submit(); 
+										 });
+									}
+									
+						}else {
+							$("#suggestContents").css({'display' : 'block'});
+							$("#suggestImgArea").css({'display' : 'block'});
+						}
+						
+					},
+					
+					error: function(error) {
+						conosole.log(error);
+					}
+					
+				}); 
+				
+			});
+		 	 
+		 	 
+		 	 $("#takeVideo").click(function() {
+					
+					var categoryCode = 17
+					
+					$.ajax({
+						url: "/hobbyist/selectSub.le",
+						type: "get", 
+						data: {categoryCode: categoryCode},
+						success: function(data) {
+							var $list = $(".lesson-list");
+							$list.remove();
+							$(".pagingArea").remove();
+							
+							$("#lessonCount").text("등록된 수업 " + data.length + "개");
+							
+								if(data[0] != null) {
+									
+									$("#suggestContents").css({'display' : 'none'});
+									$("#suggestImgArea").css({'display' : 'none'});
+									
+									for(var key in data) {
+										
+										var str = "";
+										
+										str += '<tr><td colspan="2"><div id="lessonImgArea"><img src="' + data[key].imageRoute + '/' + data[key].imageName + '"' + 'id="lessonImg" />';
+										if(data[key].isNew == 0) {
+											str += '<div id="newImgArea"><img src="static/images/newIcon.png" id="newImg"></div></div></td></tr>';
+										}else {
+											str += '</div></div></td></tr>';
+										}
+										str += '<tr><td colspan="2" rowspan="3"><div id="lessonName">' + data[key].lessonName + '</div></td></tr>';
+										str += '<tr><td><br></td><td><input type="hidden" name="lessonCode" value="' + data[key].lessonCode + '"</td></tr>';
+										str += '<tr><td></td><td><div id="artistImgArea" style="width:75px;"><img src="' + data[key].imageRoute2 + '/' + data[key].imageName2 + '"' + 'id="artistImg" /><div></td></tr>';
+										str += '<tr><td style="word-break:break-all"><div id="star">★★★★☆</div></td>';
+										str += '<td style="word-break:break-all"><div id="artistNick">' + data[key].artistNick + '</div></td></tr>';
+										str += '<tr><td style="word-break:break-all"><div id="lessonArea">' + data[key].region + '</div></td>';
+										str += '<td style="word-break:break-all"><div id="artistName">' + data[key].memberName + '</div></td></tr>';
+							
+										
+										$(".lesson-area").append('<div class="lesson-list"><form action="/hobbyist/selectOne.le" method="get"><table id="lessonTable">' + str + '</table></form></div>');
+										
+									
+										
+										$(".lesson-list").click(function() {
+											$(this).find($('form')).submit(); 
+										 });
+									}
+									
+						}else {
+							$("#suggestContents").css({'display' : 'block'});
+							$("#suggestImgArea").css({'display' : 'block'});
+						}
+						
+					},
+					
+					error: function(error) {
+						conosole.log(error);
+					}
+					
+				}); 
+				
+			});
+		 	 
+		 	 
+		 	 $("#takePicture").click(function() {
+					
+					var categoryCode = 18
+					
+					$.ajax({
+						url: "/hobbyist/selectSub.le",
+						type: "get", 
+						data: {categoryCode: categoryCode},
+						success: function(data) {
+							var $list = $(".lesson-list");
+							$list.remove();
+							$(".pagingArea").remove();
+							
+							$("#lessonCount").text("등록된 수업 " + data.length + "개");
+							
+								if(data[0] != null) {
+									
+									$("#suggestContents").css({'display' : 'none'});
+									$("#suggestImgArea").css({'display' : 'none'});
+									
+									for(var key in data) {
+										
+										var str = "";
+										
+										str += '<tr><td colspan="2"><div id="lessonImgArea"><img src="' + data[key].imageRoute + '/' + data[key].imageName + '"' + 'id="lessonImg" />';
+										if(data[key].isNew == 0) {
+											str += '<div id="newImgArea"><img src="static/images/newIcon.png" id="newImg"></div></div></td></tr>';
+										}else {
+											str += '</div></div></td></tr>';
+										}
+										str += '<tr><td colspan="2" rowspan="3"><div id="lessonName">' + data[key].lessonName + '</div></td></tr>';
+										str += '<tr><td><br></td><td><input type="hidden" name="lessonCode" value="' + data[key].lessonCode + '"</td></tr>';
+										str += '<tr><td></td><td><div id="artistImgArea" style="width:75px;"><img src="' + data[key].imageRoute2 + '/' + data[key].imageName2 + '"' + 'id="artistImg" /><div></td></tr>';
+										str += '<tr><td style="word-break:break-all"><div id="star">★★★★☆</div></td>';
+										str += '<td style="word-break:break-all"><div id="artistNick">' + data[key].artistNick + '</div></td></tr>';
+										str += '<tr><td style="word-break:break-all"><div id="lessonArea">' + data[key].region + '</div></td>';
+										str += '<td style="word-break:break-all"><div id="artistName">' + data[key].memberName + '</div></td></tr>';
+							
+										
+										$(".lesson-area").append('<div class="lesson-list"><form action="/hobbyist/selectOne.le" method="get"><table id="lessonTable">' + str + '</table></form></div>');
+										
+									
+										
+										$(".lesson-list").click(function() {
+											$(this).find($('form')).submit(); 
+										 });
+									}
+									
+						}else {
+							$("#suggestContents").css({'display' : 'block'});
+							$("#suggestImgArea").css({'display' : 'block'});
+						}
+						
+					},
+					
+					error: function(error) {
+						conosole.log(error);
+					}
+					
+				}); 
+				
+			});
+		 	
+		 	 
+		 	 
+		 	 
+		 	 $("#etc3").click(function() {
+					
+					var categoryCode = 19
+					
+					$.ajax({
+						url: "/hobbyist/selectSub.le",
+						type: "get", 
+						data: {categoryCode: categoryCode},
+						success: function(data) {
+							var $list = $(".lesson-list");
+							$list.remove();
+							$(".pagingArea").remove();
+							
+							$("#lessonCount").text("등록된 수업 " + data.length + "개");
+							
+								if(data[0] != null) {
+									
+									$("#suggestContents").css({'display' : 'none'});
+									$("#suggestImgArea").css({'display' : 'none'});
+									
+									for(var key in data) {
+										
+										var str = "";
+										
+										str += '<tr><td colspan="2"><div id="lessonImgArea"><img src="' + data[key].imageRoute + '/' + data[key].imageName + '"' + 'id="lessonImg" />';
+										if(data[key].isNew == 0) {
+											str += '<div id="newImgArea"><img src="static/images/newIcon.png" id="newImg"></div></div></td></tr>';
+										}else {
+											str += '</div></div></td></tr>';
+										}
+										str += '<tr><td colspan="2" rowspan="3"><div id="lessonName">' + data[key].lessonName + '</div></td></tr>';
+										str += '<tr><td><br></td><td><input type="hidden" name="lessonCode" value="' + data[key].lessonCode + '"</td></tr>';
+										str += '<tr><td></td><td><div id="artistImgArea" style="width:75px;"><img src="' + data[key].imageRoute2 + '/' + data[key].imageName2 + '"' + 'id="artistImg" /><div></td></tr>';
+										str += '<tr><td style="word-break:break-all"><div id="star">★★★★☆</div></td>';
+										str += '<td style="word-break:break-all"><div id="artistNick">' + data[key].artistNick + '</div></td></tr>';
+										str += '<tr><td style="word-break:break-all"><div id="lessonArea">' + data[key].region + '</div></td>';
+										str += '<td style="word-break:break-all"><div id="artistName">' + data[key].memberName + '</div></td></tr>';
+							
+										
+										$(".lesson-area").append('<div class="lesson-list"><form action="/hobbyist/selectOne.le" method="get"><table id="lessonTable">' + str + '</table></form></div>');
+										
+									
+										
+										$(".lesson-list").click(function() {
+											$(this).find($('form')).submit(); 
+										 });
+									}
+									
+						}else {
+							$("#suggestContents").css({'display' : 'block'});
+							$("#suggestImgArea").css({'display' : 'block'});
+						}
+						
+					},
+					
+					error: function(error) {
+						conosole.log(error);
+					}
+					
+				}); 
+				
+			});
+		 	 
+		 	 
+		 	 $("#handmade").click(function() {
+					
+					var categoryCode = 21
+					
+					$.ajax({
+						url: "/hobbyist/selectSub.le",
+						type: "get", 
+						data: {categoryCode: categoryCode},
+						success: function(data) {
+							var $list = $(".lesson-list");
+							$list.remove();
+							$(".pagingArea").remove();
+							
+							$("#lessonCount").text("등록된 수업 " + data.length + "개");
+							
+								if(data[0] != null) {
+									
+									$("#suggestContents").css({'display' : 'none'});
+									$("#suggestImgArea").css({'display' : 'none'});
+									
+									for(var key in data) {
+										
+										var str = "";
+										
+										str += '<tr><td colspan="2"><div id="lessonImgArea"><img src="' + data[key].imageRoute + '/' + data[key].imageName + '"' + 'id="lessonImg" />';
+										if(data[key].isNew == 0) {
+											str += '<div id="newImgArea"><img src="static/images/newIcon.png" id="newImg"></div></div></td></tr>';
+										}else {
+											str += '</div></div></td></tr>';
+										}
+										str += '<tr><td colspan="2" rowspan="3"><div id="lessonName">' + data[key].lessonName + '</div></td></tr>';
+										str += '<tr><td><br></td><td><input type="hidden" name="lessonCode" value="' + data[key].lessonCode + '"</td></tr>';
+										str += '<tr><td></td><td><div id="artistImgArea" style="width:75px;"><img src="' + data[key].imageRoute2 + '/' + data[key].imageName2 + '"' + 'id="artistImg" /><div></td></tr>';
+										str += '<tr><td style="word-break:break-all"><div id="star">★★★★☆</div></td>';
+										str += '<td style="word-break:break-all"><div id="artistNick">' + data[key].artistNick + '</div></td></tr>';
+										str += '<tr><td style="word-break:break-all"><div id="lessonArea">' + data[key].region + '</div></td>';
+										str += '<td style="word-break:break-all"><div id="artistName">' + data[key].memberName + '</div></td></tr>';
+							
+										
+										$(".lesson-area").append('<div class="lesson-list"><form action="/hobbyist/selectOne.le" method="get"><table id="lessonTable">' + str + '</table></form></div>');
+										
+									
+										
+										$(".lesson-list").click(function() {
+											$(this).find($('form')).submit(); 
+										 });
+									}
+									
+						}else {
+							$("#suggestContents").css({'display' : 'block'});
+							$("#suggestImgArea").css({'display' : 'block'});
+						}
+						
+					},
+					
+					error: function(error) {
+						conosole.log(error);
+					}
+					
+				}); 
+				
+			});
+		 	 
+		 	 $("#coffee").click(function() {
+					
+					var categoryCode = 22
+					
+					$.ajax({
+						url: "/hobbyist/selectSub.le",
+						type: "get", 
+						data: {categoryCode: categoryCode},
+						success: function(data) {
+							var $list = $(".lesson-list");
+							$list.remove();
+							$(".pagingArea").remove();
+							
+							$("#lessonCount").text("등록된 수업 " + data.length + "개");
+							
+								if(data[0] != null) {
+									
+									$("#suggestContents").css({'display' : 'none'});
+									$("#suggestImgArea").css({'display' : 'none'});
+									
+									for(var key in data) {
+										
+										var str = "";
+										
+										str += '<tr><td colspan="2"><div id="lessonImgArea"><img src="' + data[key].imageRoute + '/' + data[key].imageName + '"' + 'id="lessonImg" />';
+										if(data[key].isNew == 0) {
+											str += '<div id="newImgArea"><img src="static/images/newIcon.png" id="newImg"></div></div></td></tr>';
+										}else {
+											str += '</div></div></td></tr>';
+										}
+										str += '<tr><td colspan="2" rowspan="3"><div id="lessonName">' + data[key].lessonName + '</div></td></tr>';
+										str += '<tr><td><br></td><td><input type="hidden" name="lessonCode" value="' + data[key].lessonCode + '"</td></tr>';
+										str += '<tr><td></td><td><div id="artistImgArea" style="width:75px;"><img src="' + data[key].imageRoute2 + '/' + data[key].imageName2 + '"' + 'id="artistImg" /><div></td></tr>';
+										str += '<tr><td style="word-break:break-all"><div id="star">★★★★☆</div></td>';
+										str += '<td style="word-break:break-all"><div id="artistNick">' + data[key].artistNick + '</div></td></tr>';
+										str += '<tr><td style="word-break:break-all"><div id="lessonArea">' + data[key].region + '</div></td>';
+										str += '<td style="word-break:break-all"><div id="artistName">' + data[key].memberName + '</div></td></tr>';
+							
+										
+										$(".lesson-area").append('<div class="lesson-list"><form action="/hobbyist/selectOne.le" method="get"><table id="lessonTable">' + str + '</table></form></div>');
+										
+									
+										
+										$(".lesson-list").click(function() {
+											$(this).find($('form')).submit(); 
+										 });
+									}
+									
+						}else {
+							$("#suggestContents").css({'display' : 'block'});
+							$("#suggestImgArea").css({'display' : 'block'});
+						}
+						
+					},
+					
+					error: function(error) {
+						conosole.log(error);
+					}
+					
+				}); 
+				
+			});
+		 	 
+		 	 
+		 	 $("#baking").click(function() {
+					
+					var categoryCode = 23
+					
+					$.ajax({
+						url: "/hobbyist/selectSub.le",
+						type: "get", 
+						data: {categoryCode: categoryCode},
+						success: function(data) {
+							var $list = $(".lesson-list");
+							$list.remove();
+							$(".pagingArea").remove();
+							
+							$("#lessonCount").text("등록된 수업 " + data.length + "개");
+							
+								if(data[0] != null) {
+									
+									$("#suggestContents").css({'display' : 'none'});
+									$("#suggestImgArea").css({'display' : 'none'});
+									
+									for(var key in data) {
+										
+										var str = "";
+										
+										str += '<tr><td colspan="2"><div id="lessonImgArea"><img src="' + data[key].imageRoute + '/' + data[key].imageName + '"' + 'id="lessonImg" />';
+										if(data[key].isNew == 0) {
+											str += '<div id="newImgArea"><img src="static/images/newIcon.png" id="newImg"></div></div></td></tr>';
+										}else {
+											str += '</div></div></td></tr>';
+										}
+										str += '<tr><td colspan="2" rowspan="3"><div id="lessonName">' + data[key].lessonName + '</div></td></tr>';
+										str += '<tr><td><br></td><td><input type="hidden" name="lessonCode" value="' + data[key].lessonCode + '"</td></tr>';
+										str += '<tr><td></td><td><div id="artistImgArea" style="width:75px;"><img src="' + data[key].imageRoute2 + '/' + data[key].imageName2 + '"' + 'id="artistImg" /><div></td></tr>';
+										str += '<tr><td style="word-break:break-all"><div id="star">★★★★☆</div></td>';
+										str += '<td style="word-break:break-all"><div id="artistNick">' + data[key].artistNick + '</div></td></tr>';
+										str += '<tr><td style="word-break:break-all"><div id="lessonArea">' + data[key].region + '</div></td>';
+										str += '<td style="word-break:break-all"><div id="artistName">' + data[key].memberName + '</div></td></tr>';
+							
+										
+										$(".lesson-area").append('<div class="lesson-list"><form action="/hobbyist/selectOne.le" method="get"><table id="lessonTable">' + str + '</table></form></div>');
+										
+									
+										
+										$(".lesson-list").click(function() {
+											$(this).find($('form')).submit(); 
+										 });
+									}
+									
+						}else {
+							$("#suggestContents").css({'display' : 'block'});
+							$("#suggestImgArea").css({'display' : 'block'});
+						}
+						
+					},
+					
+					error: function(error) {
+						conosole.log(error);
+					}
+					
+				}); 
+				
+			});
+		 	 
+		 	 
+		 	 $("#etc4").click(function() {
+					
+					var categoryCode = 24
+					
+					$.ajax({
+						url: "/hobbyist/selectSub.le",
+						type: "get", 
+						data: {categoryCode: categoryCode},
+						success: function(data) {
+							var $list = $(".lesson-list");
+							$list.remove();
+							$(".pagingArea").remove();
+							
+							$("#lessonCount").text("등록된 수업 " + data.length + "개");
+							
+								if(data[0] != null) {
+									
+									$("#suggestContents").css({'display' : 'none'});
+									$("#suggestImgArea").css({'display' : 'none'});
+									
+									for(var key in data) {
+										
+										var str = "";
+										
+										str += '<tr><td colspan="2"><div id="lessonImgArea"><img src="' + data[key].imageRoute + '/' + data[key].imageName + '"' + 'id="lessonImg" />';
+										if(data[key].isNew == 0) {
+											str += '<div id="newImgArea"><img src="static/images/newIcon.png" id="newImg"></div></div></td></tr>';
+										}else {
+											str += '</div></div></td></tr>';
+										}
+										str += '<tr><td colspan="2" rowspan="3"><div id="lessonName">' + data[key].lessonName + '</div></td></tr>';
+										str += '<tr><td><br></td><td><input type="hidden" name="lessonCode" value="' + data[key].lessonCode + '"</td></tr>';
+										str += '<tr><td></td><td><div id="artistImgArea" style="width:75px;"><img src="' + data[key].imageRoute2 + '/' + data[key].imageName2 + '"' + 'id="artistImg" /><div></td></tr>';
+										str += '<tr><td style="word-break:break-all"><div id="star">★★★★☆</div></td>';
+										str += '<td style="word-break:break-all"><div id="artistNick">' + data[key].artistNick + '</div></td></tr>';
+										str += '<tr><td style="word-break:break-all"><div id="lessonArea">' + data[key].region + '</div></td>';
+										str += '<td style="word-break:break-all"><div id="artistName">' + data[key].memberName + '</div></td></tr>';
+							
+										
+										$(".lesson-area").append('<div class="lesson-list"><form action="/hobbyist/selectOne.le" method="get"><table id="lessonTable">' + str + '</table></form></div>');
+										
+									
+										
+										$(".lesson-list").click(function() {
+											$(this).find($('form')).submit(); 
+										 });
+									}
+									
+						}else {
+							$("#suggestContents").css({'display' : 'block'});
+							$("#suggestImgArea").css({'display' : 'block'});
+						}
+						
+					},
+					
+					error: function(error) {
+						conosole.log(error);
+					}
+					
+				}); 
+				
+			});
+		 	 
+		 	 
+		 	 $("#makeup").click(function() {
+					
+					var categoryCode = 26
+					
+					$.ajax({
+						url: "/hobbyist/selectSub.le",
+						type: "get", 
+						data: {categoryCode: categoryCode},
+						success: function(data) {
+							var $list = $(".lesson-list");
+							$list.remove();
+							$(".pagingArea").remove();
+							
+							$("#lessonCount").text("등록된 수업 " + data.length + "개");
+							
+								if(data[0] != null) {
+									
+									$("#suggestContents").css({'display' : 'none'});
+									$("#suggestImgArea").css({'display' : 'none'});
+									
+									for(var key in data) {
+										
+										var str = "";
+										
+										str += '<tr><td colspan="2"><div id="lessonImgArea"><img src="' + data[key].imageRoute + '/' + data[key].imageName + '"' + 'id="lessonImg" />';
+										if(data[key].isNew == 0) {
+											str += '<div id="newImgArea"><img src="static/images/newIcon.png" id="newImg"></div></div></td></tr>';
+										}else {
+											str += '</div></div></td></tr>';
+										}
+										str += '<tr><td colspan="2" rowspan="3"><div id="lessonName">' + data[key].lessonName + '</div></td></tr>';
+										str += '<tr><td><br></td><td><input type="hidden" name="lessonCode" value="' + data[key].lessonCode + '"</td></tr>';
+										str += '<tr><td></td><td><div id="artistImgArea" style="width:75px;"><img src="' + data[key].imageRoute2 + '/' + data[key].imageName2 + '"' + 'id="artistImg" /><div></td></tr>';
+										str += '<tr><td style="word-break:break-all"><div id="star">★★★★☆</div></td>';
+										str += '<td style="word-break:break-all"><div id="artistNick">' + data[key].artistNick + '</div></td></tr>';
+										str += '<tr><td style="word-break:break-all"><div id="lessonArea">' + data[key].region + '</div></td>';
+										str += '<td style="word-break:break-all"><div id="artistName">' + data[key].memberName + '</div></td></tr>';
+							
+										
+										$(".lesson-area").append('<div class="lesson-list"><form action="/hobbyist/selectOne.le" method="get"><table id="lessonTable">' + str + '</table></form></div>');
+										
+									
+										
+										$(".lesson-list").click(function() {
+											$(this).find($('form')).submit(); 
+										 });
+									}
+									
+						}else {
+							$("#suggestContents").css({'display' : 'block'});
+							$("#suggestImgArea").css({'display' : 'block'});
+						}
+						
+					},
+					
+					error: function(error) {
+						conosole.log(error);
+					}
+					
+				}); 
+				
+			});
+		 	 
+		 	 
+		 	 $("#nail").click(function() {
+					
+					var categoryCode = 27
+					
+					$.ajax({
+						url: "/hobbyist/selectSub.le",
+						type: "get", 
+						data: {categoryCode: categoryCode},
+						success: function(data) {
+							var $list = $(".lesson-list");
+							$list.remove();
+							$(".pagingArea").remove();
+							
+							$("#lessonCount").text("등록된 수업 " + data.length + "개");
+							
+								if(data[0] != null) {
+									
+									$("#suggestContents").css({'display' : 'none'});
+									$("#suggestImgArea").css({'display' : 'none'});
+									
+									for(var key in data) {
+										
+										var str = "";
+										
+										str += '<tr><td colspan="2"><div id="lessonImgArea"><img src="' + data[key].imageRoute + '/' + data[key].imageName + '"' + 'id="lessonImg" />';
+										if(data[key].isNew == 0) {
+											str += '<div id="newImgArea"><img src="static/images/newIcon.png" id="newImg"></div></div></td></tr>';
+										}else {
+											str += '</div></div></td></tr>';
+										}
+										str += '<tr><td colspan="2" rowspan="3"><div id="lessonName">' + data[key].lessonName + '</div></td></tr>';
+										str += '<tr><td><br></td><td><input type="hidden" name="lessonCode" value="' + data[key].lessonCode + '"</td></tr>';
+										str += '<tr><td></td><td><div id="artistImgArea" style="width:75px;"><img src="' + data[key].imageRoute2 + '/' + data[key].imageName2 + '"' + 'id="artistImg" /><div></td></tr>';
+										str += '<tr><td style="word-break:break-all"><div id="star">★★★★☆</div></td>';
+										str += '<td style="word-break:break-all"><div id="artistNick">' + data[key].artistNick + '</div></td></tr>';
+										str += '<tr><td style="word-break:break-all"><div id="lessonArea">' + data[key].region + '</div></td>';
+										str += '<td style="word-break:break-all"><div id="artistName">' + data[key].memberName + '</div></td></tr>';
+							
+										
+										$(".lesson-area").append('<div class="lesson-list"><form action="/hobbyist/selectOne.le" method="get"><table id="lessonTable">' + str + '</table></form></div>');
+										
+									
+										
+										$(".lesson-list").click(function() {
+											$(this).find($('form')).submit(); 
+										 });
+									}
+									
+						}else {
+							$("#suggestContents").css({'display' : 'block'});
+							$("#suggestImgArea").css({'display' : 'block'});
+						}
+						
+					},
+					
+					error: function(error) {
+						conosole.log(error);
+					}
+					
+				}); 
+				
+			});
+		 	 
+		 	 
+		 	 $("#fashion").click(function() {
+					
+					var categoryCode = 28
+					
+					$.ajax({
+						url: "/hobbyist/selectSub.le",
+						type: "get", 
+						data: {categoryCode: categoryCode},
+						success: function(data) {
+							var $list = $(".lesson-list");
+							$list.remove();
+							$(".pagingArea").remove();
+							
+							$("#lessonCount").text("등록된 수업 " + data.length + "개");
+							
+								if(data[0] != null) {
+									
+									$("#suggestContents").css({'display' : 'none'});
+									$("#suggestImgArea").css({'display' : 'none'});
+									
+									for(var key in data) {
+										
+										var str = "";
+										
+										str += '<tr><td colspan="2"><div id="lessonImgArea"><img src="' + data[key].imageRoute + '/' + data[key].imageName + '"' + 'id="lessonImg" />';
+										if(data[key].isNew == 0) {
+											str += '<div id="newImgArea"><img src="static/images/newIcon.png" id="newImg"></div></div></td></tr>';
+										}else {
+											str += '</div></div></td></tr>';
+										}
+										str += '<tr><td colspan="2" rowspan="3"><div id="lessonName">' + data[key].lessonName + '</div></td></tr>';
+										str += '<tr><td><br></td><td><input type="hidden" name="lessonCode" value="' + data[key].lessonCode + '"</td></tr>';
+										str += '<tr><td></td><td><div id="artistImgArea" style="width:75px;"><img src="' + data[key].imageRoute2 + '/' + data[key].imageName2 + '"' + 'id="artistImg" /><div></td></tr>';
+										str += '<tr><td style="word-break:break-all"><div id="star">★★★★☆</div></td>';
+										str += '<td style="word-break:break-all"><div id="artistNick">' + data[key].artistNick + '</div></td></tr>';
+										str += '<tr><td style="word-break:break-all"><div id="lessonArea">' + data[key].region + '</div></td>';
+										str += '<td style="word-break:break-all"><div id="artistName">' + data[key].memberName + '</div></td></tr>';
+							
+										
+										$(".lesson-area").append('<div class="lesson-list"><form action="/hobbyist/selectOne.le" method="get"><table id="lessonTable">' + str + '</table></form></div>');
+										
+									
+										
+										$(".lesson-list").click(function() {
+											$(this).find($('form')).submit(); 
+										 });
+									}
+									
+						}else {
+							$("#suggestContents").css({'display' : 'block'});
+							$("#suggestImgArea").css({'display' : 'block'});
+						}
+						
+					},
+					
+					error: function(error) {
+						conosole.log(error);
+					}
+					
+				}); 
+				
+			});
+		 	 
+		 	 
+		 	 $("#personalcolor").click(function() {
+					
+					var categoryCode = 29
+					
+					$.ajax({
+						url: "/hobbyist/selectSub.le",
+						type: "get", 
+						data: {categoryCode: categoryCode},
+						success: function(data) {
+							var $list = $(".lesson-list");
+							$list.remove();
+							$(".pagingArea").remove();
+							
+							$("#lessonCount").text("등록된 수업 " + data.length + "개");
+							
+								if(data[0] != null) {
+									
+									$("#suggestContents").css({'display' : 'none'});
+									$("#suggestImgArea").css({'display' : 'none'});
+									
+									for(var key in data) {
+										
+										var str = "";
+										
+										str += '<tr><td colspan="2"><div id="lessonImgArea"><img src="' + data[key].imageRoute + '/' + data[key].imageName + '"' + 'id="lessonImg" />';
+										if(data[key].isNew == 0) {
+											str += '<div id="newImgArea"><img src="static/images/newIcon.png" id="newImg"></div></div></td></tr>';
+										}else {
+											str += '</div></div></td></tr>';
+										}
+										str += '<tr><td colspan="2" rowspan="3"><div id="lessonName">' + data[key].lessonName + '</div></td></tr>';
+										str += '<tr><td><br></td><td><input type="hidden" name="lessonCode" value="' + data[key].lessonCode + '"</td></tr>';
+										str += '<tr><td></td><td><div id="artistImgArea" style="width:75px;"><img src="' + data[key].imageRoute2 + '/' + data[key].imageName2 + '"' + 'id="artistImg" /><div></td></tr>';
+										str += '<tr><td style="word-break:break-all"><div id="star">★★★★☆</div></td>';
+										str += '<td style="word-break:break-all"><div id="artistNick">' + data[key].artistNick + '</div></td></tr>';
+										str += '<tr><td style="word-break:break-all"><div id="lessonArea">' + data[key].region + '</div></td>';
+										str += '<td style="word-break:break-all"><div id="artistName">' + data[key].memberName + '</div></td></tr>';
+							
+										
+										$(".lesson-area").append('<div class="lesson-list"><form action="/hobbyist/selectOne.le" method="get"><table id="lessonTable">' + str + '</table></form></div>');
+										
+									
+										
+										$(".lesson-list").click(function() {
+											$(this).find($('form')).submit(); 
+										 });
+									}
+									
+						}else {
+							$("#suggestContents").css({'display' : 'block'});
+							$("#suggestImgArea").css({'display' : 'block'});
+						}
+						
+					},
+					
+					error: function(error) {
+						conosole.log(error);
+					}
+					
+				}); 
+				
+			});
+		 	 
+		 	 
+		 	 
+		 	 $("#skincare").click(function() {
+					
+					var categoryCode = 30
+					
+					$.ajax({
+						url: "/hobbyist/selectSub.le",
+						type: "get", 
+						data: {categoryCode: categoryCode},
+						success: function(data) {
+							var $list = $(".lesson-list");
+							$list.remove();
+							$(".pagingArea").remove();
+							
+							$("#lessonCount").text("등록된 수업 " + data.length + "개");
+							
+								if(data[0] != null) {
+									
+									$("#suggestContents").css({'display' : 'none'});
+									$("#suggestImgArea").css({'display' : 'none'});
+									
+									for(var key in data) {
+										
+										var str = "";
+										
+										str += '<tr><td colspan="2"><div id="lessonImgArea"><img src="' + data[key].imageRoute + '/' + data[key].imageName + '"' + 'id="lessonImg" />';
+										if(data[key].isNew == 0) {
+											str += '<div id="newImgArea"><img src="static/images/newIcon.png" id="newImg"></div></div></td></tr>';
+										}else {
+											str += '</div></div></td></tr>';
+										}
+										str += '<tr><td colspan="2" rowspan="3"><div id="lessonName">' + data[key].lessonName + '</div></td></tr>';
+										str += '<tr><td><br></td><td><input type="hidden" name="lessonCode" value="' + data[key].lessonCode + '"</td></tr>';
+										str += '<tr><td></td><td><div id="artistImgArea" style="width:75px;"><img src="' + data[key].imageRoute2 + '/' + data[key].imageName2 + '"' + 'id="artistImg" /><div></td></tr>';
+										str += '<tr><td style="word-break:break-all"><div id="star">★★★★☆</div></td>';
+										str += '<td style="word-break:break-all"><div id="artistNick">' + data[key].artistNick + '</div></td></tr>';
+										str += '<tr><td style="word-break:break-all"><div id="lessonArea">' + data[key].region + '</div></td>';
+										str += '<td style="word-break:break-all"><div id="artistName">' + data[key].memberName + '</div></td></tr>';
+							
+										
+										$(".lesson-area").append('<div class="lesson-list"><form action="/hobbyist/selectOne.le" method="get"><table id="lessonTable">' + str + '</table></form></div>');
+										
+									
+										
+										$(".lesson-list").click(function() {
+											$(this).find($('form')).submit(); 
+										 });
+									}
+									
+						}else {
+							$("#suggestContents").css({'display' : 'block'});
+							$("#suggestImgArea").css({'display' : 'block'});
+						}
+						
+					},
+					
+					error: function(error) {
+						conosole.log(error);
+					}
+					
+				}); 
+				
+			});
+		 	 
+		 	 
+		 	 $("#hair").click(function() {
+					
+					var categoryCode = 31
+					
+					$.ajax({
+						url: "/hobbyist/selectSub.le",
+						type: "get", 
+						data: {categoryCode: categoryCode},
+						success: function(data) {
+							var $list = $(".lesson-list");
+							$list.remove();
+							$(".pagingArea").remove();
+							
+							$("#lessonCount").text("등록된 수업 " + data.length + "개");
+							
+								if(data[0] != null) {
+									
+									$("#suggestContents").css({'display' : 'none'});
+									$("#suggestImgArea").css({'display' : 'none'});
+									
+									for(var key in data) {
+										
+										var str = "";
+										
+										str += '<tr><td colspan="2"><div id="lessonImgArea"><img src="' + data[key].imageRoute + '/' + data[key].imageName + '"' + 'id="lessonImg" />';
+										if(data[key].isNew == 0) {
+											str += '<div id="newImgArea"><img src="static/images/newIcon.png" id="newImg"></div></div></td></tr>';
+										}else {
+											str += '</div></div></td></tr>';
+										}
+										str += '<tr><td colspan="2" rowspan="3"><div id="lessonName">' + data[key].lessonName + '</div></td></tr>';
+										str += '<tr><td><br></td><td><input type="hidden" name="lessonCode" value="' + data[key].lessonCode + '"</td></tr>';
+										str += '<tr><td></td><td><div id="artistImgArea" style="width:75px;"><img src="' + data[key].imageRoute2 + '/' + data[key].imageName2 + '"' + 'id="artistImg" /><div></td></tr>';
+										str += '<tr><td style="word-break:break-all"><div id="star">★★★★☆</div></td>';
+										str += '<td style="word-break:break-all"><div id="artistNick">' + data[key].artistNick + '</div></td></tr>';
+										str += '<tr><td style="word-break:break-all"><div id="lessonArea">' + data[key].region + '</div></td>';
+										str += '<td style="word-break:break-all"><div id="artistName">' + data[key].memberName + '</div></td></tr>';
+							
+										
+										$(".lesson-area").append('<div class="lesson-list"><form action="/hobbyist/selectOne.le" method="get"><table id="lessonTable">' + str + '</table></form></div>');
+										
+									
+										
+										$(".lesson-list").click(function() {
+											$(this).find($('form')).submit(); 
+										 });
+									}
+									
+						}else {
+							$("#suggestContents").css({'display' : 'block'});
+							$("#suggestImgArea").css({'display' : 'block'});
+						}
+						
+					},
+					
+					error: function(error) {
+						conosole.log(error);
+					}
+					
+				}); 
+				
+			});
+		 	 
+		 	 
+		 	 $("#etc5").click(function() {
+					
+					var categoryCode = 32
+					
+					$.ajax({
+						url: "/hobbyist/selectSub.le",
+						type: "get", 
+						data: {categoryCode: categoryCode},
+						success: function(data) {
+							var $list = $(".lesson-list");
+							$list.remove();
+							$(".pagingArea").remove();
+							
+							$("#lessonCount").text("등록된 수업 " + data.length + "개");
+							
+								if(data[0] != null) {
+									
+									$("#suggestContents").css({'display' : 'none'});
+									$("#suggestImgArea").css({'display' : 'none'});
+									
+									for(var key in data) {
+										
+										var str = "";
+										
+										str += '<tr><td colspan="2"><div id="lessonImgArea"><img src="' + data[key].imageRoute + '/' + data[key].imageName + '"' + 'id="lessonImg" />';
+										if(data[key].isNew == 0) {
+											str += '<div id="newImgArea"><img src="static/images/newIcon.png" id="newImg"></div></div></td></tr>';
+										}else {
+											str += '</div></div></td></tr>';
+										}
+										str += '<tr><td colspan="2" rowspan="3"><div id="lessonName">' + data[key].lessonName + '</div></td></tr>';
+										str += '<tr><td><br></td><td><input type="hidden" name="lessonCode" value="' + data[key].lessonCode + '"</td></tr>';
+										str += '<tr><td></td><td><div id="artistImgArea" style="width:75px;"><img src="' + data[key].imageRoute2 + '/' + data[key].imageName2 + '"' + 'id="artistImg" /><div></td></tr>';
+										str += '<tr><td style="word-break:break-all"><div id="star">★★★★☆</div></td>';
+										str += '<td style="word-break:break-all"><div id="artistNick">' + data[key].artistNick + '</div></td></tr>';
+										str += '<tr><td style="word-break:break-all"><div id="lessonArea">' + data[key].region + '</div></td>';
+										str += '<td style="word-break:break-all"><div id="artistName">' + data[key].memberName + '</div></td></tr>';
+							
+										
+										$(".lesson-area").append('<div class="lesson-list"><form action="/hobbyist/selectOne.le" method="get"><table id="lessonTable">' + str + '</table></form></div>');
+										
+									
+										
+										$(".lesson-list").click(function() {
+											$(this).find($('form')).submit(); 
+										 });
+									}
+									
+						}else {
+							$("#suggestContents").css({'display' : 'block'});
+							$("#suggestImgArea").css({'display' : 'block'});
+						}
+						
+					},
+					
+					error: function(error) {
+						conosole.log(error);
+					}
+					
+				}); 
+				
+			});
+		 	 
+		 	 
+		 	 
+		 	 $("#photoshop").click(function() {
+					
+					var categoryCode = 34
+					
+					$.ajax({
+						url: "/hobbyist/selectSub.le",
+						type: "get", 
+						data: {categoryCode: categoryCode},
+						success: function(data) {
+							var $list = $(".lesson-list");
+							$list.remove();
+							$(".pagingArea").remove();
+							
+							$("#lessonCount").text("등록된 수업 " + data.length + "개");
+							
+								if(data[0] != null) {
+									
+									$("#suggestContents").css({'display' : 'none'});
+									$("#suggestImgArea").css({'display' : 'none'});
+									
+									for(var key in data) {
+										
+										var str = "";
+										
+										str += '<tr><td colspan="2"><div id="lessonImgArea"><img src="' + data[key].imageRoute + '/' + data[key].imageName + '"' + 'id="lessonImg" />';
+										if(data[key].isNew == 0) {
+											str += '<div id="newImgArea"><img src="static/images/newIcon.png" id="newImg"></div></div></td></tr>';
+										}else {
+											str += '</div></div></td></tr>';
+										}
+										str += '<tr><td colspan="2" rowspan="3"><div id="lessonName">' + data[key].lessonName + '</div></td></tr>';
+										str += '<tr><td><br></td><td><input type="hidden" name="lessonCode" value="' + data[key].lessonCode + '"</td></tr>';
+										str += '<tr><td></td><td><div id="artistImgArea" style="width:75px;"><img src="' + data[key].imageRoute2 + '/' + data[key].imageName2 + '"' + 'id="artistImg" /><div></td></tr>';
+										str += '<tr><td style="word-break:break-all"><div id="star">★★★★☆</div></td>';
+										str += '<td style="word-break:break-all"><div id="artistNick">' + data[key].artistNick + '</div></td></tr>';
+										str += '<tr><td style="word-break:break-all"><div id="lessonArea">' + data[key].region + '</div></td>';
+										str += '<td style="word-break:break-all"><div id="artistName">' + data[key].memberName + '</div></td></tr>';
+							
+										
+										$(".lesson-area").append('<div class="lesson-list"><form action="/hobbyist/selectOne.le" method="get"><table id="lessonTable">' + str + '</table></form></div>');
+										
+									
+										
+										$(".lesson-list").click(function() {
+											$(this).find($('form')).submit(); 
+										 });
+									}
+									
+						}else {
+							$("#suggestContents").css({'display' : 'block'});
+							$("#suggestImgArea").css({'display' : 'block'});
+						}
+						
+					},
+					
+					error: function(error) {
+						conosole.log(error);
+					}
+					
+				}); 
+				
+			});
+		 	 
+		 	 
+		 	 
+		 	 $("#indesign").click(function() {
+					
+					var categoryCode = 35
+					
+					$.ajax({
+						url: "/hobbyist/selectSub.le",
+						type: "get", 
+						data: {categoryCode: categoryCode},
+						success: function(data) {
+							var $list = $(".lesson-list");
+							$list.remove();
+							$(".pagingArea").remove();
+							
+							$("#lessonCount").text("등록된 수업 " + data.length + "개");
+							
+								if(data[0] != null) {
+									
+									$("#suggestContents").css({'display' : 'none'});
+									$("#suggestImgArea").css({'display' : 'none'});
+									
+									for(var key in data) {
+										
+										var str = "";
+										
+										str += '<tr><td colspan="2"><div id="lessonImgArea"><img src="' + data[key].imageRoute + '/' + data[key].imageName + '"' + 'id="lessonImg" />';
+										if(data[key].isNew == 0) {
+											str += '<div id="newImgArea"><img src="static/images/newIcon.png" id="newImg"></div></div></td></tr>';
+										}else {
+											str += '</div></div></td></tr>';
+										}
+										str += '<tr><td colspan="2" rowspan="3"><div id="lessonName">' + data[key].lessonName + '</div></td></tr>';
+										str += '<tr><td><br></td><td><input type="hidden" name="lessonCode" value="' + data[key].lessonCode + '"</td></tr>';
+										str += '<tr><td></td><td><div id="artistImgArea" style="width:75px;"><img src="' + data[key].imageRoute2 + '/' + data[key].imageName2 + '"' + 'id="artistImg" /><div></td></tr>';
+										str += '<tr><td style="word-break:break-all"><div id="star">★★★★☆</div></td>';
+										str += '<td style="word-break:break-all"><div id="artistNick">' + data[key].artistNick + '</div></td></tr>';
+										str += '<tr><td style="word-break:break-all"><div id="lessonArea">' + data[key].region + '</div></td>';
+										str += '<td style="word-break:break-all"><div id="artistName">' + data[key].memberName + '</div></td></tr>';
+							
+										
+										$(".lesson-area").append('<div class="lesson-list"><form action="/hobbyist/selectOne.le" method="get"><table id="lessonTable">' + str + '</table></form></div>');
+										
+									
+										
+										$(".lesson-list").click(function() {
+											$(this).find($('form')).submit(); 
+										 });
+									}
+									
+						}else {
+							$("#suggestContents").css({'display' : 'block'});
+							$("#suggestImgArea").css({'display' : 'block'});
+						}
+						
+					},
+					
+					error: function(error) {
+						conosole.log(error);
+					}
+					
+				}); 
+				
+			});
+		 	 
+		 	 
+		 	 $("#etc6").click(function() {
+					
+					var categoryCode = 36
+					
+					$.ajax({
+						url: "/hobbyist/selectSub.le",
+						type: "get", 
+						data: {categoryCode: categoryCode},
+						success: function(data) {
+							var $list = $(".lesson-list");
+							$list.remove();
+							$(".pagingArea").remove();
+							
+							$("#lessonCount").text("등록된 수업 " + data.length + "개");
+							
+								if(data[0] != null) {
+									
+									$("#suggestContents").css({'display' : 'none'});
+									$("#suggestImgArea").css({'display' : 'none'});
+									
+									for(var key in data) {
+										
+										var str = "";
+										
+										str += '<tr><td colspan="2"><div id="lessonImgArea"><img src="' + data[key].imageRoute + '/' + data[key].imageName + '"' + 'id="lessonImg" />';
+										if(data[key].isNew == 0) {
+											str += '<div id="newImgArea"><img src="static/images/newIcon.png" id="newImg"></div></div></td></tr>';
+										}else {
+											str += '</div></div></td></tr>';
+										}
+										str += '<tr><td colspan="2" rowspan="3"><div id="lessonName">' + data[key].lessonName + '</div></td></tr>';
+										str += '<tr><td><br></td><td><input type="hidden" name="lessonCode" value="' + data[key].lessonCode + '"</td></tr>';
+										str += '<tr><td></td><td><div id="artistImgArea" style="width:75px;"><img src="' + data[key].imageRoute2 + '/' + data[key].imageName2 + '"' + 'id="artistImg" /><div></td></tr>';
+										str += '<tr><td style="word-break:break-all"><div id="star">★★★★☆</div></td>';
+										str += '<td style="word-break:break-all"><div id="artistNick">' + data[key].artistNick + '</div></td></tr>';
+										str += '<tr><td style="word-break:break-all"><div id="lessonArea">' + data[key].region + '</div></td>';
+										str += '<td style="word-break:break-all"><div id="artistName">' + data[key].memberName + '</div></td></tr>';
+							
+										
+										$(".lesson-area").append('<div class="lesson-list"><form action="/hobbyist/selectOne.le" method="get"><table id="lessonTable">' + str + '</table></form></div>');
+										
+									
+										
+										$(".lesson-list").click(function() {
+											$(this).find($('form')).submit(); 
+										 });
+									}
+									
+						}else {
+							$("#suggestContents").css({'display' : 'block'});
+							$("#suggestImgArea").css({'display' : 'block'});
+						}
+						
+					},
+					
+					error: function(error) {
+						conosole.log(error);
+					}
+					
+				}); 
+				
+			});
+		 	 
+		 	 
+		 	 $("#soccer").click(function() {
+					
+					var categoryCode = 38
+					
+					$.ajax({
+						url: "/hobbyist/selectSub.le",
+						type: "get", 
+						data: {categoryCode: categoryCode},
+						success: function(data) {
+							var $list = $(".lesson-list");
+							$list.remove();
+							$(".pagingArea").remove();
+							
+							$("#lessonCount").text("등록된 수업 " + data.length + "개");
+							
+								if(data[0] != null) {
+									
+									$("#suggestContents").css({'display' : 'none'});
+									$("#suggestImgArea").css({'display' : 'none'});
+									
+									for(var key in data) {
+										
+										var str = "";
+										
+										str += '<tr><td colspan="2"><div id="lessonImgArea"><img src="' + data[key].imageRoute + '/' + data[key].imageName + '"' + 'id="lessonImg" />';
+										if(data[key].isNew == 0) {
+											str += '<div id="newImgArea"><img src="static/images/newIcon.png" id="newImg"></div></div></td></tr>';
+										}else {
+											str += '</div></div></td></tr>';
+										}
+										str += '<tr><td colspan="2" rowspan="3"><div id="lessonName">' + data[key].lessonName + '</div></td></tr>';
+										str += '<tr><td><br></td><td><input type="hidden" name="lessonCode" value="' + data[key].lessonCode + '"</td></tr>';
+										str += '<tr><td></td><td><div id="artistImgArea" style="width:75px;"><img src="' + data[key].imageRoute2 + '/' + data[key].imageName2 + '"' + 'id="artistImg" /><div></td></tr>';
+										str += '<tr><td style="word-break:break-all"><div id="star">★★★★☆</div></td>';
+										str += '<td style="word-break:break-all"><div id="artistNick">' + data[key].artistNick + '</div></td></tr>';
+										str += '<tr><td style="word-break:break-all"><div id="lessonArea">' + data[key].region + '</div></td>';
+										str += '<td style="word-break:break-all"><div id="artistName">' + data[key].memberName + '</div></td></tr>';
+							
+										
+										$(".lesson-area").append('<div class="lesson-list"><form action="/hobbyist/selectOne.le" method="get"><table id="lessonTable">' + str + '</table></form></div>');
+										
+									
+										
+										$(".lesson-list").click(function() {
+											$(this).find($('form')).submit(); 
+										 });
+									}
+									
+						}else {
+							$("#suggestContents").css({'display' : 'block'});
+							$("#suggestImgArea").css({'display' : 'block'});
+						}
+						
+					},
+					
+					error: function(error) {
+						conosole.log(error);
+					}
+					
+				}); 
+				
+			});
+		 	 
+		 	 
+		 	 $("#basketball").click(function() {
+					
+					var categoryCode = 39
+					
+					$.ajax({
+						url: "/hobbyist/selectSub.le",
+						type: "get", 
+						data: {categoryCode: categoryCode},
+						success: function(data) {
+							var $list = $(".lesson-list");
+							$list.remove();
+							$(".pagingArea").remove();
+							
+							$("#lessonCount").text("등록된 수업 " + data.length + "개");
+							
+								if(data[0] != null) {
+									
+									$("#suggestContents").css({'display' : 'none'});
+									$("#suggestImgArea").css({'display' : 'none'});
+									
+									for(var key in data) {
+										
+										var str = "";
+										
+										str += '<tr><td colspan="2"><div id="lessonImgArea"><img src="' + data[key].imageRoute + '/' + data[key].imageName + '"' + 'id="lessonImg" />';
+										if(data[key].isNew == 0) {
+											str += '<div id="newImgArea"><img src="static/images/newIcon.png" id="newImg"></div></div></td></tr>';
+										}else {
+											str += '</div></div></td></tr>';
+										}
+										str += '<tr><td colspan="2" rowspan="3"><div id="lessonName">' + data[key].lessonName + '</div></td></tr>';
+										str += '<tr><td><br></td><td><input type="hidden" name="lessonCode" value="' + data[key].lessonCode + '"</td></tr>';
+										str += '<tr><td></td><td><div id="artistImgArea" style="width:75px;"><img src="' + data[key].imageRoute2 + '/' + data[key].imageName2 + '"' + 'id="artistImg" /><div></td></tr>';
+										str += '<tr><td style="word-break:break-all"><div id="star">★★★★☆</div></td>';
+										str += '<td style="word-break:break-all"><div id="artistNick">' + data[key].artistNick + '</div></td></tr>';
+										str += '<tr><td style="word-break:break-all"><div id="lessonArea">' + data[key].region + '</div></td>';
+										str += '<td style="word-break:break-all"><div id="artistName">' + data[key].memberName + '</div></td></tr>';
+							
+										
+										$(".lesson-area").append('<div class="lesson-list"><form action="/hobbyist/selectOne.le" method="get"><table id="lessonTable">' + str + '</table></form></div>');
+										
+									
+										
+										$(".lesson-list").click(function() {
+											$(this).find($('form')).submit(); 
+										 });
+									}
+									
+						}else {
+							$("#suggestContents").css({'display' : 'block'});
+							$("#suggestImgArea").css({'display' : 'block'});
+						}
+						
+					},
+					
+					error: function(error) {
+						conosole.log(error);
+					}
+					
+				}); 
+				
+			});
+		 	 
+		 	 
+		 	 $("#baseball").click(function() {
+					
+					var categoryCode = 40
+					
+					$.ajax({
+						url: "/hobbyist/selectSub.le",
+						type: "get", 
+						data: {categoryCode: categoryCode},
+						success: function(data) {
+							var $list = $(".lesson-list");
+							$list.remove();
+							$(".pagingArea").remove();
+							
+							$("#lessonCount").text("등록된 수업 " + data.length + "개");
+							
+								if(data[0] != null) {
+									
+									$("#suggestContents").css({'display' : 'none'});
+									$("#suggestImgArea").css({'display' : 'none'});
+									
+									for(var key in data) {
+										
+										var str = "";
+										
+										str += '<tr><td colspan="2"><div id="lessonImgArea"><img src="' + data[key].imageRoute + '/' + data[key].imageName + '"' + 'id="lessonImg" />';
+										if(data[key].isNew == 0) {
+											str += '<div id="newImgArea"><img src="static/images/newIcon.png" id="newImg"></div></div></td></tr>';
+										}else {
+											str += '</div></div></td></tr>';
+										}
+										str += '<tr><td colspan="2" rowspan="3"><div id="lessonName">' + data[key].lessonName + '</div></td></tr>';
+										str += '<tr><td><br></td><td><input type="hidden" name="lessonCode" value="' + data[key].lessonCode + '"</td></tr>';
+										str += '<tr><td></td><td><div id="artistImgArea" style="width:75px;"><img src="' + data[key].imageRoute2 + '/' + data[key].imageName2 + '"' + 'id="artistImg" /><div></td></tr>';
+										str += '<tr><td style="word-break:break-all"><div id="star">★★★★☆</div></td>';
+										str += '<td style="word-break:break-all"><div id="artistNick">' + data[key].artistNick + '</div></td></tr>';
+										str += '<tr><td style="word-break:break-all"><div id="lessonArea">' + data[key].region + '</div></td>';
+										str += '<td style="word-break:break-all"><div id="artistName">' + data[key].memberName + '</div></td></tr>';
+							
+										
+										$(".lesson-area").append('<div class="lesson-list"><form action="/hobbyist/selectOne.le" method="get"><table id="lessonTable">' + str + '</table></form></div>');
+										
+									
+										
+										$(".lesson-list").click(function() {
+											$(this).find($('form')).submit(); 
+										 });
+									}
+									
+						}else {
+							$("#suggestContents").css({'display' : 'block'});
+							$("#suggestImgArea").css({'display' : 'block'});
+						}
+						
+					},
+					
+					error: function(error) {
+						conosole.log(error);
+					}
+					
+				}); 
+				
+			});
+		 	 
+		 	 
+		 	 $("#leisure").click(function() {
+					
+					var categoryCode = 41
+					
+					$.ajax({
+						url: "/hobbyist/selectSub.le",
+						type: "get", 
+						data: {categoryCode: categoryCode},
+						success: function(data) {
+							var $list = $(".lesson-list");
+							$list.remove();
+							$(".pagingArea").remove();
+							
+							$("#lessonCount").text("등록된 수업 " + data.length + "개");
+							
+								if(data[0] != null) {
+									
+									$("#suggestContents").css({'display' : 'none'});
+									$("#suggestImgArea").css({'display' : 'none'});
+									
+									for(var key in data) {
+										
+										var str = "";
+										
+										str += '<tr><td colspan="2"><div id="lessonImgArea"><img src="' + data[key].imageRoute + '/' + data[key].imageName + '"' + 'id="lessonImg" />';
+										if(data[key].isNew == 0) {
+											str += '<div id="newImgArea"><img src="static/images/newIcon.png" id="newImg"></div></div></td></tr>';
+										}else {
+											str += '</div></div></td></tr>';
+										}
+										str += '<tr><td colspan="2" rowspan="3"><div id="lessonName">' + data[key].lessonName + '</div></td></tr>';
+										str += '<tr><td><br></td><td><input type="hidden" name="lessonCode" value="' + data[key].lessonCode + '"</td></tr>';
+										str += '<tr><td></td><td><div id="artistImgArea" style="width:75px;"><img src="' + data[key].imageRoute2 + '/' + data[key].imageName2 + '"' + 'id="artistImg" /><div></td></tr>';
+										str += '<tr><td style="word-break:break-all"><div id="star">★★★★☆</div></td>';
+										str += '<td style="word-break:break-all"><div id="artistNick">' + data[key].artistNick + '</div></td></tr>';
+										str += '<tr><td style="word-break:break-all"><div id="lessonArea">' + data[key].region + '</div></td>';
+										str += '<td style="word-break:break-all"><div id="artistName">' + data[key].memberName + '</div></td></tr>';
+							
+										
+										$(".lesson-area").append('<div class="lesson-list"><form action="/hobbyist/selectOne.le" method="get"><table id="lessonTable">' + str + '</table></form></div>');
+										
+									
+										
+										$(".lesson-list").click(function() {
+											$(this).find($('form')).submit(); 
+										 });
+									}
+									
+						}else {
+							$("#suggestContents").css({'display' : 'block'});
+							$("#suggestImgArea").css({'display' : 'block'});
+						}
+						
+					},
+					
+					error: function(error) {
+						conosole.log(error);
+					}
+					
+				}); 
+				
+			});
+		 	 
+		 	 
+		 	 
+		 	 $("#ski").click(function() {
+					
+					var categoryCode = 42
+					
+					$.ajax({
+						url: "/hobbyist/selectSub.le",
+						type: "get", 
+						data: {categoryCode: categoryCode},
+						success: function(data) {
+							var $list = $(".lesson-list");
+							$list.remove();
+							$(".pagingArea").remove();
+							$("#lessonCount").text("등록된 수업 " + data.length + "개");
+							
+								if(data[0] != null) {
+									
+									$("#suggestContents").css({'display' : 'none'});
+									$("#suggestImgArea").css({'display' : 'none'});
+									
+									for(var key in data) {
+										
+										var str = "";
+										
+										str += '<tr><td colspan="2"><div id="lessonImgArea"><img src="' + data[key].imageRoute + '/' + data[key].imageName + '"' + 'id="lessonImg" />';
+										if(data[key].isNew == 0) {
+											str += '<div id="newImgArea"><img src="static/images/newIcon.png" id="newImg"></div></div></td></tr>';
+										}else {
+											str += '</div></div></td></tr>';
+										}
+										str += '<tr><td colspan="2" rowspan="3"><div id="lessonName">' + data[key].lessonName + '</div></td></tr>';
+										str += '<tr><td><br></td><td><input type="hidden" name="lessonCode" value="' + data[key].lessonCode + '"</td></tr>';
+										str += '<tr><td></td><td><div id="artistImgArea" style="width:75px;"><img src="' + data[key].imageRoute2 + '/' + data[key].imageName2 + '"' + 'id="artistImg" /><div></td></tr>';
+										str += '<tr><td style="word-break:break-all"><div id="star">★★★★☆</div></td>';
+										str += '<td style="word-break:break-all"><div id="artistNick">' + data[key].artistNick + '</div></td></tr>';
+										str += '<tr><td style="word-break:break-all"><div id="lessonArea">' + data[key].region + '</div></td>';
+										str += '<td style="word-break:break-all"><div id="artistName">' + data[key].memberName + '</div></td></tr>';
+							
+										
+										$(".lesson-area").append('<div class="lesson-list"><form action="/hobbyist/selectOne.le" method="get"><table id="lessonTable">' + str + '</table></form></div>');
+										
+									
+										
+										$(".lesson-list").click(function() {
+											$(this).find($('form')).submit(); 
+										 });
+									}
+									
+						}else {
+							$("#suggestContents").css({'display' : 'block'});
+							$("#suggestImgArea").css({'display' : 'block'});
+						}
+						
+					},
+					
+					error: function(error) {
+						conosole.log(error);
+					}
+					
+				}); 
+				
+			});
+		 	 
+		 	 
+		 	 $("#etc7").click(function() {
+					
+					var categoryCode = 43
+					
+					$.ajax({
+						url: "/hobbyist/selectSub.le",
+						type: "get", 
+						data: {categoryCode: categoryCode},
+						success: function(data) {
+							var $list = $(".lesson-list");
+							$list.remove();
+							$(".pagingArea").remove();
+							
+							$("#lessonCount").text("등록된 수업 " + data.length + "개");
+							
+								if(data[0] != null) {
+									
+									$("#suggestContents").css({'display' : 'none'});
+									$("#suggestImgArea").css({'display' : 'none'});
+									
+									for(var key in data) {
+										
+										var str = "";
+										
+										str += '<tr><td colspan="2"><div id="lessonImgArea"><img src="' + data[key].imageRoute + '/' + data[key].imageName + '"' + 'id="lessonImg" />';
+										if(data[key].isNew == 0) {
+											str += '<div id="newImgArea"><img src="static/images/newIcon.png" id="newImg"></div></div></td></tr>';
+										}else {
+											str += '</div></div></td></tr>';
+										}
+										str += '<tr><td colspan="2" rowspan="3"><div id="lessonName">' + data[key].lessonName + '</div></td></tr>';
+										str += '<tr><td><br></td><td><input type="hidden" name="lessonCode" value="' + data[key].lessonCode + '"</td></tr>';
+										str += '<tr><td></td><td><div id="artistImgArea" style="width:75px;"><img src="' + data[key].imageRoute2 + '/' + data[key].imageName2 + '"' + 'id="artistImg" /><div></td></tr>';
+										str += '<tr><td style="word-break:break-all"><div id="star">★★★★☆</div></td>';
+										str += '<td style="word-break:break-all"><div id="artistNick">' + data[key].artistNick + '</div></td></tr>';
+										str += '<tr><td style="word-break:break-all"><div id="lessonArea">' + data[key].region + '</div></td>';
+										str += '<td style="word-break:break-all"><div id="artistName">' + data[key].memberName + '</div></td></tr>';
+							
+										
+										$(".lesson-area").append('<div class="lesson-list"><form action="/hobbyist/selectOne.le" method="get"><table id="lessonTable">' + str + '</table></form></div>');
+										
+									
+										
+										$(".lesson-list").click(function() {
+											$(this).find($('form')).submit(); 
+										 });
+									}
+									
+						}else {
+							$("#suggestContents").css({'display' : 'block'});
+							$("#suggestImgArea").css({'display' : 'block'});
+						}
+						
+					},
+					
+					error: function(error) {
+						conosole.log(error);
+					}
+					
+				}); 
+				
+			});
 		 	
 		 	
 		 	
