@@ -225,8 +225,6 @@ margin : auto;
 	
 	
 	<script>
-		
-		
 		console.log("passCheck타입은"+ typeof(passCheck));
 		console.log("memberPwd타입은"+ typeof(passValue));
 		
@@ -237,9 +235,9 @@ margin : auto;
 				$("#pwConfirm").submit();
 				}else{
 				$("#pwdResult").html("비밀번호가 정확하지 않습니다.").css("color","gray");
-				}  
+		}  
 
-				}  
+}  
 /* 		$("#memberPwd").change(function pwConfirmbt(){
 			if($("passCheck").val() != $(this).val()) {
 				$("#pwdResult").html("비밀번호가 일치하지 않습니다.").css("color","gray");

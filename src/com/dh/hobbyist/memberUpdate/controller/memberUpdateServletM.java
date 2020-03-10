@@ -10,8 +10,11 @@ import javax.servlet.http.HttpSession;
 import javax.swing.plaf.metal.MetalComboBoxUI.MetalComboBoxLayoutManager;
 import javax.websocket.Session;
 
+import com.dh.hobbyist.memberUpdate.*;
 import com.dh.hobbyist.memberUpdate.model.service.MemberService;
 import com.dh.hobbyist.memberUpdate.model.vo.Member;
+
+
 
 /**
  * Servlet implementation class memberUpdateServletM
@@ -32,7 +35,7 @@ public class memberUpdateServletM extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	HttpSession HttpSession =request.getSession(true);
+	
 		
 	String userId = request.getParameter("userId");
 	String userPwd = request.getParameter("userPwd");
@@ -44,15 +47,18 @@ public class memberUpdateServletM extends HttpServlet {
 	String phone = tel1 + "-" + tel2 + "-" + tel3;
 	String bankName = request.getParameter("bankName");
 	String bankNum = request.getParameter("bankNum");
-	int memberCode = ((Member) request.getSession().getAttribute("loginMember")).getMemberCode();
 	
-	// if(memberCode != null) {
-	// httpSession.setAttribute("user", );
-	//
-	// }
+	HttpSession session =request.getSession(true);
+	/*int memberCode = ((Member) request.getSession().getAttribute("loginMember")).getMemberCode();*/
 	
-	
-	
+	String s="";
+	if(s != null) {
+		System.out.println("loginMember의 타입은"+ loginMember);
+		s = (String)session.getAttribute("loginMember");
+	 }else {
+		 System.out.println("Attribute id 값:" + s);
+	 }
+		    int sl = Integer.parseInt(s);
 	
 	System.out.println("서블릿 userId:" + userId);
 	System.out.println("서블릿 password1:" + userPwd);
@@ -64,7 +70,7 @@ public class memberUpdateServletM extends HttpServlet {
 	/*System.out.println("서블릿 PK값은" + memberCode);*/
 	
 	Member member = new Member();
-	/*member.setMemberCode(memberCode);*/
+	member.setMemberCode(sl);
 	member.setMemberId(userId);
 	member.setMemberPwd(userPwd);
 	member.setMemberName(nickName);
@@ -88,7 +94,7 @@ public class memberUpdateServletM extends HttpServlet {
 	
 	String page="";
 	if(result >0) {
-		HttpSession session = request.getSession();
+		HttpSession session2 = request.getSession();
 		session.setAttribute("loginUser", result);
 		
 		
@@ -118,6 +124,11 @@ public class memberUpdateServletM extends HttpServlet {
 	request.getRequestDispatcher(page).forward(request, response);
 }
 	
+
+	private int parseInt(int s) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
