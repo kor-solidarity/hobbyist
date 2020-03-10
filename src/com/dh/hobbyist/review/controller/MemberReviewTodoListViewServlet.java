@@ -77,6 +77,7 @@ public class MemberReviewTodoListViewServlet extends HttpServlet {
 			lessonImageArrayList.add(image);
 			// 레슨의 첫 수업시간정보 추가
 			LessonOrder lessonOrder = reviewService.selectLessonOrder(scheduleArrayList.get(i).getScheduleCode(), 1);
+			lessonOrderArrayList.add(lessonOrder);
 		}
 		
 		// 3단계, 아티스트 이름과 이미지 불러온다.
@@ -102,7 +103,10 @@ public class MemberReviewTodoListViewServlet extends HttpServlet {
 		System.out.println("lessonImageArrayList: " + lessonImageArrayList.size());
 		System.out.println("artistList: " + artistList.size());
 		System.out.println("artistImageList: " + artistImageList.size());
-		
+		for (int i = 0; i < lessonArrayList.size(); i++) {
+			
+			System.out.println("lessonArrayList.get(" + i + "): " + lessonArrayList.get(i));
+		}
 		// 이제 이거 들고 위에 목록 뽑아온다.
 		request.setAttribute("lessonPaymentArrayList", lessonPaymentArrayList);
 		request.setAttribute("scheduleArrayList", scheduleArrayList);
@@ -110,6 +114,7 @@ public class MemberReviewTodoListViewServlet extends HttpServlet {
 		request.setAttribute("lessonImageArrayList", lessonImageArrayList);
 		request.setAttribute("artistList", artistList);
 		request.setAttribute("artistImageList", artistImageList);
+		request.setAttribute("lessonOrderArrayList", lessonOrderArrayList);
 		
 		String page = "/views/member/myPage/myReviews/writeList.jsp";
 		

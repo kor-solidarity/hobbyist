@@ -194,6 +194,7 @@ public class AddPlaceServlet extends HttpServlet {
                     page = "/views/common/errorPage.jsp";
                 }
                 // request.getRequestDispatcher(page).forward(request, response);
+				System.out.println("page : " + page);
                 response.sendRedirect(request.getContextPath() + page);
 
             }

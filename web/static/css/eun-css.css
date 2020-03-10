@@ -88,6 +88,10 @@
 }
 
 
+.write-list-contents td:nth-of-type(2) {
+    width: 569px;
+}
+
 .write-list-contents td:nth-of-type(3) {
     width: 120px;
     padding-left: 20px;
