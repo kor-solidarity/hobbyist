@@ -19,6 +19,8 @@ import com.dh.hobbyist.lesson.model.vo.Lesson;
 import com.dh.hobbyist.lesson.model.vo.LessonOrder;
 import com.dh.hobbyist.lesson.model.vo.LessonSchedule;
 import com.dh.hobbyist.member.model.vo.Member;
+import com.dh.hobbyist.suggest.model.service.SuggestService;
+import com.dh.hobbyist.suggest.model.vo.Petition;
 
 /**
  * Servlet implementation class SelectOneLessonServlet
@@ -74,6 +76,9 @@ public class SelectOneLessonServlet extends HttpServlet {
 		ArrayList<ArtistEducation> eduList = new LessonRelatedService().selectEdu(artistCode);
 		ArrayList<ArtistCareer> careerList = new LessonRelatedService().selectCareer(lessonCode);
 		
+		//건의 정보
+		Petition petition = new SuggestService().selectOne(lesson.getPetitionCode());
+		
 		String page = "";
 		if(lesson != null && profileImg != null && artist != null && scheduleList != null) {
 			page = "views/lesson/lessonDetail.jsp";
@@ -86,6 +91,7 @@ public class SelectOneLessonServlet extends HttpServlet {
 			request.setAttribute("certList", certList);
 			request.setAttribute("eduList", eduList);
 			request.setAttribute("careerList", careerList);
+			request.setAttribute("petition", petition);
 		} else {
 			page = "views/common/errorPage.jsp";
 			request.setAttribute("msg", "수업 상세보기 실패");

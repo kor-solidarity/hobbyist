@@ -109,6 +109,13 @@ public class InsertLessonServlet extends HttpServlet {
 			int categoryCode = Integer.parseInt(multiRequest.getParameter("subCategory"));
 			int artistCode = ((Member) (request.getSession().getAttribute("loginMember"))).getMemberCode();
 			
+			int petitionCode = 0;
+			
+			//일반 수강수업일 경우 paring 과정에서 nullPointerException 발생할 수 있어 관련 처리함
+			if(multiRequest.getParameter("petitionCode") != null) {
+				petitionCode = Integer.parseInt(multiRequest.getParameter("petitionCode"));
+			}
+			
 			Lesson lesson = new Lesson();
 			lesson.setLessonName(lessonName);
 			lesson.setMinStudents(minStudents);
@@ -120,12 +127,7 @@ public class InsertLessonServlet extends HttpServlet {
 			lesson.setLessonIntro(lessonIntro);
 			lesson.setCategoryCode(categoryCode);
 			lesson.setArtistCode(artistCode);
-			
-			int petitionCode = 0;
-			
-			if(petitionCode != 0) {
-				lesson.setPetitionCode(petitionCode);
-			}
+			lesson.setPetitionCode(petitionCode);
 			
 			//수업일정 관련 사항
 			int region = Integer.parseInt(multiRequest.getParameter("region"));

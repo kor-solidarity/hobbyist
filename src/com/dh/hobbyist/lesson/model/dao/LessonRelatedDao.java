@@ -53,8 +53,9 @@ public class LessonRelatedDao {
 			pstmt.setInt(6, lesson.getTotalCosts());
 			pstmt.setString(7, lesson.getArtistIntro());
 			pstmt.setString(8, lesson.getLessonIntro());
-			pstmt.setInt(9, lesson.getCategoryCode());
-			pstmt.setInt(10, lesson.getArtistCode());
+			pstmt.setInt(9, lesson.getPetitionCode());
+			pstmt.setInt(10, lesson.getCategoryCode());
+			pstmt.setInt(11, lesson.getArtistCode());
 			
 			result = pstmt.executeUpdate();
 			
