@@ -25,11 +25,6 @@
     <link rel="stylesheet" href="<%=request.getContextPath()%>/static/css/eun-css.css">
     <%@include file="/views/common/boot4-script.jsp" %>
     <%@include file="/views/common/boot4.jsp" %>
-    <style>
-        #modal_star-1:hover {
-
-        }
-    </style>
 </head>
 <body>
 <%@include file="/views/common/myPage.jsp" %>
@@ -135,7 +130,8 @@
                     <tr>
                         <td><img src="<%=request.getContextPath()%>/static/images/pen-and-notepad-clipart-6.jpg"
                                  style="width: 30px; float: left" alt="">
-                            <button class="write-review-btn" data-toggle="modal" data-target="#exampleModal">리뷰작성하기
+                            <button class="write-review-btn" data-toggle="modal" data-target="#exampleModal"
+                                    onclick="setModal(<%=lessonArrayList.get(i).getLessonCode()%>)">리뷰작성하기
                             </button>
                         </td>
                     </tr>
@@ -144,7 +140,7 @@
         </tr>
         <%-- 상하 간격주기 위한 용도 --%>
         <tr>
-            <td> &nbsp;</td>
+            <td></td>
         </tr>
         <% } %>
         <%-- 상하 간격주기 위한 용도 --%>
@@ -171,15 +167,17 @@
                 </button>
             </div>
             <div class="modal-body">
-
                 <div class="review-modal-stars">
-                    <span class="rating_star" id="modal_star-1">★</span>
-                    <span class="rating_star" id="modal_star-2">★</span>
-                    <span class="rating_star" id="modal_star-3">★</span>
-                    <span class="rating_star" id="modal_star-4">★</span>
-                    <span class="rating_star" id="modal_star-5">★</span>
+                    <span class="rating_star" id="modal_star-1" onclick="put_star(1)">★</span>
+                    <span class="rating_star" id="modal_star-2" onclick="put_star(2)">★</span>
+                    <span class="rating_star" id="modal_star-3" onclick="put_star(3)">★</span>
+                    <span class="rating_star" id="modal_star-4" onclick="put_star(4)">★</span>
+                    <span class="rating_star" id="modal_star-5" onclick="put_star(5)">★</span>
                 </div>
-                <input type="text" name="stars" id="stars" value="0" style="display: none;">
+                <%--num of stars--%>
+                <input type="number" name="stars" id="stars" value="5" style="display: none;">
+                <input type="number" name="review_pk" id="review_pk" value="5" style="display: none;">
+                <%--pk--%>
                 <div class="col-12 review-modal-star-text">
                     별점을 매겨주세요.
                 </div>
@@ -188,7 +186,7 @@
                     <div class="col-12 report-modal-line"></div>
                 </div>
                 <div class="col-12 review-modal-content">
-                    <textarea name="" style="width: 100%; height: 100%;" id="" cols="30" rows="5"
+                    <textarea name="review_content" style="width: 100%; height: 100%;" id="review_content" cols="30" rows="5"
                               placeholder="수업에 대한 평가를 100자 이하로 작성해 주세요." onkeyup="onWriteChange(this)"></textarea>
                 </div>
                 <div class="col-12" style="text-align: right">
@@ -201,7 +199,7 @@
             </div>
             <div class="modal-footer report-modal-footer" style="justify-content: center;">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
-                <button type="button" class="btn btn-success" onclick="regRev()">등록</button>
+                <button type="button" class="btn btn-success" id="rev_apply" onclick="regRev()" >등록</button>
                 <%-- 답변이 나오면 또 다르게 떠야함 --%>
                 <%--                <div class="report-modal-end">답변 대기중입니다</div>--%>
             </div>
@@ -209,40 +207,117 @@
     </div>
 </div>
 <script>
+    let rated_color = 'red';
+    let hover_color = 'yellowgreen';
+    let star_input = $("#stars");
+    let star_list = $(".rating_star");
+
+    let review_content = $("#review_content");
+    let review_pk = $("#review_pk");
     // 별주기.
-    $(".rating_star").each(function () {
-        this.hover(function () {
+    star_list.each(function () {
+        $(this).hover(function () {
             // 몇번째 별인지 확인
-            var this_num = this.attr('id')[this.attr('id')-1];
-
-            for (let i = this_num; i <0; i--) {
-                // let star_id = "#st"
+            let this_num = parseInt($(this).attr('id')[$(this).attr('id').length - 1]);
+            console.log("this_num is " + this_num);
+            for (let i = this_num; i > 0; i--) {
+                let star_id = "#modal_star-" + i;
+                $(star_id).css('color', hover_color);
             }
-
         }, function () {
+            console.log('$("#stars").val(num); ' + star_input.val());
+            let this_num = parseInt($(this).attr('id')[$(this).attr('id').length - 1]);
+            for (let i = this_num; i > 0; i--) {
+                let star_id = "#modal_star-" + i;
+                $(star_id).css('color', 'gray');
+            }
+            console.log('star_input.val(): ' + star_input.val());
+            // 별 평점 확정한대로 넣기
+            for (let i = 5; i >= 1; i--) {
+                console.log("i: " + i);
+                let star_id = "#modal_star-" + i;
+                // 5번별부터 시작해서 하나하나 맞는지 확인
+                if (i <= parseInt(star_input.val())){
+                    console.log("star on " + (i));
+                    $(star_id).css('color', rated_color);
+                }else {
+                    $(star_id).css('color', "gray");
+                }
+            }
 
         })
     });
 
-    $("#modal_star-1").hover(function () {
-        var this_num = $(this).
-    }, function () {
+    function put_star (num) {
+        console.log("num: " + num);
 
-    });
+        for (let i = 0; i < num; i++) {
+            star_list.eq(i).css('color', rated_color);
+        }
+        star_input.val(num);
+        console.log('$("#stars").val(): ' + star_input.val());
+    }
+
+    // 모든 모달값 초기화
+    function setModal (pk) {
+        star_input.val(0);
+        review_content.val("");
+        $("#review-modal-words").html("0");
+        star_list.css('color', 'gray');
+        review_pk.val(pk);
+        // $("#rev_apply").click(regRev(pk));
+    }
 
     function regRev () {
-        console.log('$("#review-modal-words").val().length: ' + $("#review-modal-words").val().length)
-        if ($("#review-modal-words").val().length < 100) {
+        console.log('$("#review_content").val().length: ' + $("#review_content").val().length);
+        if ($("#review_content").val().length < 100) {
             alert("100자 이상 쓰세요.");
+            return;
+        } else if (star_input.val() == 0){
+            alert("별점을 주세요");
             return;
         }
 
         alert("리뷰 작성으로 500포인트가 작성되었습니다.");
         $("#exampleModal").modal('toggle');
+
+        $.ajax({
+            url: "hobbyist/mypage/insertReview.me",
+            // 들어가야 하는 내용: 글쓴이(자동), 점수, 내용, 대상수업번호
+            data: {
+                stars: $("#stars").val(),
+                rv_content: review_content.val(),
+                lesson_pk: review_pk.val(),
+            },
+            type: "POST",
+            success: function(data) {
+
+                // var $replySelectTable = $("#replySelectTable");
+                // $replySelectTable.html('');
+                //
+                // for(var key in data) {
+                //     var $tr = $("<tr>");
+                //     var $writerTd = $("<td>").text(data[key].nickName).css("width", "100px");
+                //     var $contentTd = $("<td>").text(data[key].bContent).css("width", "400px");
+                //     var $dateTd = $("<td>").text(data[key].bDate).css("width", "200px");
+                //
+                //     $tr.append($writerTd);
+                //     $tr.append($contentTd);
+                //     $tr.append($dateTd);
+                //
+                //     $replySelectTable.append($tr);
+                // }
+
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        });
+
     }
 
     function onWriteChange (val) {
-        var len = val.value.length;
+        let len = val.value.length;
         $("#review-modal-words").text(len);
 
     }
