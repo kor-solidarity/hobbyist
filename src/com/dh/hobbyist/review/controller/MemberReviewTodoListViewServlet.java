@@ -84,6 +84,9 @@ public class MemberReviewTodoListViewServlet extends HttpServlet {
 		
 		// 먼저 아티스트 명단부터.
 		int[] artistPkList = new int[lessonArrayList.size()];
+		for (int i = 0; i < lessonArrayList.size(); i++) {
+			artistPkList[i] = lessonArrayList.get(i).getArtistCode();
+		}
 		ArrayList<Member> artistList = new ArrayList<>();
 		for (int pk : artistPkList) {
 			Member artist = reviewService.selectMember(pk);
@@ -103,6 +106,7 @@ public class MemberReviewTodoListViewServlet extends HttpServlet {
 		System.out.println("lessonImageArrayList: " + lessonImageArrayList.size());
 		System.out.println("artistList: " + artistList.size());
 		System.out.println("artistImageList: " + artistImageList.size());
+		
 		for (int i = 0; i < lessonArrayList.size(); i++) {
 			
 			System.out.println("lessonArrayList.get(" + i + "): " + lessonArrayList.get(i));

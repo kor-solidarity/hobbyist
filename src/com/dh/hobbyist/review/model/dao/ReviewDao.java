@@ -224,6 +224,7 @@ public class ReviewDao {
 				member.setMemberCode(resultSet.getInt(1));
 				member.setMemberId(resultSet.getString(2));
 				member.setArtistNick(resultSet.getString("ARTIST_NICK"));
+				member.setMemberName(resultSet.getString("member_name"));
 				
 			}
 			
