@@ -144,11 +144,11 @@
 		<div id="danceWrap" class="nav2" style="position: relative;">
 			<table class="category2" id="dance" >
 				<tr>
-					<td>방송댄스</td>
-					<td>스트릿</td>
-					<td>현대무용</td>
-					<td>한국무용</td>
-					<td>기타</td>
+					<td id="kpopDance">방송댄스</td>
+					<td id="street">스트릿</td>
+					<td id="modernDance">현대무용</td>
+					<td id="koreanDance">한국무용</td>
+					<td id="etc2">기타</td>
 				</tr>
 			</table>
 		</div>
@@ -156,54 +156,54 @@
 		<div id="videoWrap" class="nav2" style="position: relative;">
 			<table class="category2" id="video">
 				<tr>
-					<td>영상편집</td>
-					<td>영상촬영</td>
-					<td>사진촬영</td>
-					<td>기타</td>
+					<td id="editVideo">영상편집</td>
+					<td id="takeVideo">영상촬영</td>
+					<td id="takePicture">사진촬영</td>
+					<td id="etc3">기타</td>
 				</tr>
 			</table>
 		</div>
 		<div id="lifeWrap" class="nav2" style="position: relative;">
 			<table class="category2" id="life">
 				<tr>
-					<td>핸드메이드</td>
-					<td>커피/차</td>
-					<td>요리/베이킹</td>
-					<td>기타</td>
+					<td id="handmade">핸드메이드</td>
+					<td id="coffee">커피/차</td>
+					<td id="baking">요리/베이킹</td>
+					<td id="etc4">기타</td>
 				</tr>
 			</table>
 		</div>
 		<div id="beautyWrap" class="nav2" style="position: relative;">
 			<table class="category2" id="beauty">
 				<tr>
-					<td>메이크업</td>
-					<td>네일</td>
-					<td>패션</td>
-					<td>퍼스널컬러</td>
-					<td>스킨케어/마사지</td>
-					<td>헤어</td>
-					<td>기타</td>
+					<td id="makeup">메이크업</td>
+					<td id="nail">네일</td>
+					<td id="fashion">패션</td>
+					<td id="personalcolor">퍼스널컬러</td>
+					<td id="skincare">스킨케어/마사지</td>
+					<td id="hair">헤어</td>
+					<td id="etc5">기타</td>
 				</tr>
 			</table>
 		</div>
 		<div id="designWrap" class="nav2" style="position: relative;">
 			<table class="category2" id="design">
 				<tr>
-					<td>포토샵/일러스트레이터</td>
-					<td>인디자인</td>
-					<td>기타</td>
+					<td id="photoshop">포토샵/일러스트레이터</td>
+					<td id="indesign">인디자인</td>
+					<td id="etc6">기타</td>
 				</tr>
 			</table>
 		</div>
 		<div id="sportsWrap" class="nav2" style="position: relative;">
 			<table class="category2" id="sports">
 				<tr>
-					<td>축구</td>
-					<td>농구</td>
-					<td>야구</td>
-					<td>수상 레저</td>
-					<td>스키/보드</td>
-					<td>기타</td>
+					<td id="soccer">축구</td>
+					<td id="basketball">농구</td>
+					<td id="baseball">야구</td>
+					<td id="leisure">수상 레저</td>
+					<td id="ski">스키/보드</td>
+					<td id="etc7">기타</td>
 				</tr>
 			</table>
 		</div>
@@ -1119,6 +1119,76 @@
 		 		$(this).css({'color':'darkolivegreen'});
 		 		location.href = "<%= request.getContextPath()%>/place/list.me";
 		 	});
+		 	
+		 	
+		 	
+		 	//서브 카테고리 페이지 이동
+		 	//음악 
+		 	
+		 	 $("#vocal").click(function() {
+					
+					var categoryCode = 2
+					
+					$.ajax({
+						url: "/hobbyist/selectSub.le",
+						type: "get", 
+						data: {categoryCode: categoryCode},
+						success: function(data) {
+							var $list = $(".lesson-list");
+							$list.remove();
+							$(".pagingArea").remove();
+							
+							$("#lessonCount").text("등록된 수업 " + data.length + "개");
+							
+								if(data[0] != null) {
+									
+									for(var key in data) {
+										
+										var str = "";
+										
+										str += '<tr><td colspan="2"><div id="lessonImgArea"><img src="' + data[key].imageRoute + '/' + data[key].imageName + '"' + 'id="lessonImg" />';
+										if(data[key].isNew == 0) {
+											str += '<div id="newImgArea"><img src="static/images/newIcon.png" id="newImg"></div></div></td></tr>';
+										}else {
+											str += '</div></div></td></tr>';
+										}
+										str += '<tr><td colspan="2" rowspan="3"><div id="lessonName">' + data[key].lessonName + '</div></td></tr>';
+										str += '<tr><td><br></td><td><input type="hidden" name="lessonCode" value="' + data[key].lessonCode + '"</td></tr>';
+										str += '<tr><td></td><td><div id="artistImgArea" style="width:75px;"><img src="' + data[key].imageRoute2 + '/' + data[key].imageName2 + '"' + 'id="artistImg" /><div></td></tr>';
+										str += '<tr><td style="word-break:break-all"><div id="star">★★★★☆</div></td>';
+										str += '<td style="word-break:break-all"><div id="artistNick">' + data[key].artistNick + '</div></td></tr>';
+										str += '<tr><td style="word-break:break-all"><div id="lessonArea">' + data[key].region + '</div></td>';
+										str += '<td style="word-break:break-all"><div id="artistName">' + data[key].memberName + '</div></td></tr>';
+							
+										
+										$(".lesson-area").append('<div class="lesson-list"><form action="/hobbyist/selectOne.le" method="get"><table id="lessonTable">' + str + '</table></form></div>');
+										
+									
+										
+										$(".lesson-list").click(function() {
+											$(this).find($('form')).submit(); 
+										 });
+									}
+									
+						}else {
+							$(".lesson-area").append('<div>등록된 수업이 없습니다.\n 저희 hobbyist 수업 건의 서비스를 제공합니다.\n 수업 건의 게시판에서 듣고 싶은 수업을 건의해주세요! </div>')
+						}
+						
+					},
+					
+					error: function(error) {
+						conosole.log(error);
+					}
+					
+				}); 
+				
+			});
+		 	
+		 	
+		 	
+		 	
+		 	
+		 	
 	}); 
 	</script>
 </body>

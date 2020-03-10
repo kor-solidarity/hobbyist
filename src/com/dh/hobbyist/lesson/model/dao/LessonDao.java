@@ -56,6 +56,8 @@ public class LessonDao {
 				hmap.put("lessonCode", rset.getInt("LESSON_PK"));
 				hmap.put("lessonName", rset.getString("LESSON_NAME"));
 				hmap.put("status", rset.getInt("STATUS"));
+				hmap.put("categoryCode", rset.getInt("CATEGORY_PK"));
+				hmap.put("artistCode", rset.getInt("ARTIST_PK"));
 				hmap.put("artistNick", rset.getString("ARTIST_NICK"));
 				hmap.put("memberName", rset.getString("MEMBER_NAME"));
 				hmap.put("imageCode", rset.getInt("IMAGE_PK"));
@@ -67,6 +69,7 @@ public class LessonDao {
 				hmap.put("imageName2", rset.getString("img2_name"));
 				hmap.put("imageType2", rset.getString("img2_type"));
 				hmap.put("region", rset.getString("REGION"));
+				hmap.put("isNew", 1);
 				
 				list.add(hmap);
 			}
@@ -220,6 +223,7 @@ public class LessonDao {
 				hmap.put("imageName2", rset.getString("img2_name"));
 				hmap.put("imageType2", rset.getString("img2_type"));
 				hmap.put("region", rset.getString("REGION"));
+				hmap.put("isNew", 1);
 				
 				list.add(hmap);
 			}
@@ -278,6 +282,7 @@ public class LessonDao {
 				hmap.put("imageName2", rset.getString("img2_name"));
 				hmap.put("imageType2", rset.getString("img2_type"));
 				hmap.put("region", rset.getString("REGION"));
+				hmap.put("isNew", 1);
 				
 				list.add(hmap);
 			}
@@ -336,6 +341,7 @@ public class LessonDao {
 				hmap.put("imageName2", rset.getString("img2_name"));
 				hmap.put("imageType2", rset.getString("img2_type"));
 				hmap.put("region", rset.getString("REGION"));
+				hmap.put("isNew", 1);
 				
 				list.add(hmap);
 			}
@@ -394,6 +400,7 @@ public class LessonDao {
 				hmap.put("imageName2", rset.getString("img2_name"));
 				hmap.put("imageType2", rset.getString("img2_type"));
 				hmap.put("region", rset.getString("REGION"));
+				hmap.put("isNew", 1);
 				
 				list.add(hmap);
 			}
@@ -451,6 +458,7 @@ public class LessonDao {
 				hmap.put("imageName2", rset.getString("img2_name"));
 				hmap.put("imageType2", rset.getString("img2_type"));
 				hmap.put("region", rset.getString("REGION"));
+				hmap.put("isNew", 1);
 				
 				list.add(hmap);
 			}
@@ -508,6 +516,7 @@ public class LessonDao {
 				hmap.put("imageName2", rset.getString("img2_name"));
 				hmap.put("imageType2", rset.getString("img2_type"));
 				hmap.put("region", rset.getString("REGION"));
+				hmap.put("isNew", 1);
 				
 				list.add(hmap);
 			}
@@ -548,6 +557,8 @@ public class LessonDao {
 				hmap.put("lessonCode", rset.getInt("LESSON_PK"));
 				hmap.put("lessonName", rset.getString("LESSON_NAME"));
 				hmap.put("status", rset.getInt("STATUS"));
+				hmap.put("categoryCode", rset.getInt("CATEGORY_PK"));
+				hmap.put("artistCode", rset.getInt("ARTIST_PK"));
 				hmap.put("artistNick", rset.getString("ARTIST_NICK"));
 				hmap.put("memberName", rset.getString("MEMBER_NAME"));
 				hmap.put("imageCode", rset.getInt("IMAGE_PK"));
@@ -559,6 +570,7 @@ public class LessonDao {
 				hmap.put("imageName2", rset.getString("img2_name"));
 				hmap.put("imageType2", rset.getString("img2_type"));
 				hmap.put("region", rset.getString("REGION"));
+				hmap.put("isNew", 1);
 				
 				list.add(hmap);
 			}
@@ -607,6 +619,7 @@ public class LessonDao {
 				hmap.put("imageName2", rset.getString("img2_name"));
 				hmap.put("imageType2", rset.getString("img2_type"));
 				hmap.put("region", rset.getString("REGION"));
+				hmap.put("isNew", 0);
 				
 				list.add(hmap);
 				
@@ -649,6 +662,7 @@ public class LessonDao {
 				hmap.put("lessonName", rset.getString("LESSON_NAME"));
 				hmap.put("status", rset.getInt("STATUS"));
 				hmap.put("categoryCode", rset.getInt("CATEGORY_PK"));
+				hmap.put("artistCode", rset.getInt("ARTIST_PK"));
 				hmap.put("artistNick", rset.getString("ARTIST_NICK"));
 				hmap.put("memberName", rset.getString("MEMBER_NAME"));
 				hmap.put("imageCode", rset.getInt("IMAGE_PK"));
@@ -660,6 +674,7 @@ public class LessonDao {
 				hmap.put("imageName2", rset.getString("img2_name"));
 				hmap.put("imageType2", rset.getString("img2_type"));
 				hmap.put("region", rset.getString("REGION"));
+				hmap.put("isNew", 1);
 				
 				list.add(hmap);
 			}
@@ -714,7 +729,7 @@ public class LessonDao {
 			stmt = con.createStatement();
 			rset = stmt.executeQuery(query);
 			
-		
+			
 			while(rset.next()) {
 				for(HashMap<String, Object> hmap : list)
 					for(Entry<String, Object> mapEntry : hmap.entrySet()) {
@@ -724,14 +739,13 @@ public class LessonDao {
 						if(key.equals("artistCode")) {
 							if(Integer.parseInt(value) == rset.getInt("ARTIST_PK")) {
 								hmap.put("isNew", 0);
-								
-								System.out.println(value);
+
 							}
 						}
 						
 					}
 			}
-
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {

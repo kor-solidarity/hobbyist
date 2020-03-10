@@ -116,6 +116,7 @@
 			border-radius:50px 50px 50px 50px;
 			float:right;
 			 margin-left: -300px; 
+			 z-index: 1;
 			
 			
 			
@@ -183,7 +184,18 @@
 	    .pagingArea {
 	    	margin-bottom: 30px;
 	    }
-	   
+	    
+	    #newImg {
+	    	z-index: 2;
+	    	width:45px;
+	    	height:45px;
+	    	
+	    }
+	   	#newImgArea {
+	   		margin-top:-143px;
+	    	margin-left:215px;
+	   	}
+	   	
 	   
 </style>
 </head>
@@ -316,10 +328,12 @@
 						<tr>
 							<td colspan="2">
 							<div id="lessonImgArea">
-							 <% if(hmap.get("imageType").equals("lesson")) { %>
 							<img src="<%=hmap.get("imageRoute") %>/<%=hmap.get("imageName") %>" id="lessonImg"> 
-							<% } %> 
-							<!-- <img src="/hobbyist/static/images/lessonImg1.jpg"  id="lessonImg"> -->
+							<div id="newImgArea">
+							<% if((int) (hmap.get("isNew")) == 0) { %>
+							<img src="static/images/newIcon.png" id="newImg">
+							<% } %>
+							</div>
 							</div>
 							</td>
 						</tr>
@@ -335,9 +349,7 @@
 							<td></td>
 							<td>
 							<div id="artistImgArea" style="width:75px;">
-							<% if(hmap.get("imageType2").equals("profile")) { %>
 							<img src="<%=hmap.get("imageRoute2") %>/<%=hmap.get("imageName2") %>" id="artistImg">
-							<% } %>
 							</div>
 							</td>
 						</tr>
@@ -383,7 +395,7 @@
 				<button onclick="location.href='<%= request.getContextPath()%>/selectMusic.le?currentPage=<%=currentPage + 1%>'">></button>
 			<% } %>
 			<button onclick="location.href='<%= request.getContextPath()%>/selectMusic.le?currentPage=<%=maxPage%>'">>></button>	
-		</div>
+		  </div>
 	<script>
 		$(function() {
 			$("#cMusic").css({'color':'darkolivegreen'});
@@ -393,57 +405,8 @@
 			$(".lesson-list").click(function() {
 				$(this).find($('form')).submit();
 			});
-			
-			/* $("#vocal").click(function() {
-				
-				var categoryCode = 2
-				
-				$.ajax({
-					url: "/hobbyist/selectSub.le",
-					type: "get", 
-					data: {categoryCode: categoryCode},
-					success: function(data) {
-							if(data[0] != null) {
-								
-								var $list = $(".lesson-list");
-								$list.remove();
-								
-								for(var key in data) {
-									
-									
-									var str = "";
-									
-									str += '<tr><td colspan="2"><div id="lessonImgArea"><img src="' + data[key].imageRoute + '/' + data[key].imageName + '"' + 'id="lessonImg" /></div></td></tr>';
-									str += '<tr><td colspan="2" rowspan="3"><div id="lessonName">' + data[key].lessonName + '</div></td></tr>';
-									str += '<tr><td><br></td><td><input type="hidden" name="lessonCode" value="' + data[key].lessonCode + '"</td></tr>';
-									str += '<tr><td></td><td><div id="artistImgArea" style="width:75px;"><img src="' + data[key].imageRoute2 + '/' + data[key].imageName2 + '"' + 'id="artistImg" /><div></td></tr>';
-									str += '<tr><td style="word-break:break-all"><div id="star">★★★★☆</div></td>';
-									str += '<td style="word-break:break-all"><div id="artistNick">' + data[key].artistNick + '</div></td></tr>';
-									str += '<tr><td style="word-break:break-all"><div id="lessonArea">' + data[key].region + '</div></td>';
-									str += '<td style="word-break:break-all"><div id="artistName">' + data[key].memberName + '</div></td></tr>';
-						
-									
-									$(".lesson-area").append('<div class="lesson-list"><form action="/hobbyist/selectOne.le" method="get"><table id="lessonTable">' + str + '</table></form></div>');
-									
-									console.log($("#artistImg"));
-									
-									$(".lesson-list").click(function() {
-										$(this).find($('form')).submit(); 
-									 });
-								}
-							}
-						
-						
-					},
-					error: function(error) {
-						conosole.log(error);
-					}
-				});
-			}); */
-			
+
 		});
-		
-		
 	</script>
 	<%@ include file="/views/common/footer.jsp" %>
 </body>

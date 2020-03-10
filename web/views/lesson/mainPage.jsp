@@ -52,8 +52,8 @@
       		align:center; 
        }
        #line {
-       		border-top:2.5px solid darkolivegreen;	
-    		height:3px;
+       		border-top:1.5px solid darkolivegreen;	
+    		/* height:1px; */
        }
        
        .nLabel {
@@ -240,14 +240,23 @@
 	    #lessonTable tr:eq(5) {
 	    	padding-top: -5px;
 	    }
-	    
-	    .pagingArea {
-	    	margin-bottom: 30px;
-	    }
+	   
 	    
 	    #lessonTable:eq(4) #lessonImgArea {
 	    	margin-top: -10px;
 	    }
+	    
+	    #newImg {
+	    	z-index: 2;
+	    	width:45px;
+	    	height:45px;
+	    	
+	    }
+	   	#newImgArea {
+	   		margin-top:-143px;
+	    	margin-left:220px;
+	   	}
+	   	
      
      
      
@@ -327,10 +336,12 @@
 						<tr>
 							<td colspan="2">
 							<div id="lessonImgArea">
-							 <% if(hmap.get("imageType").equals("lesson")) { %>
-							<img src="<%=hmap.get("imageRoute") %>/<%=hmap.get("imageName") %>" id="lessonImg"> 
-							<% } %> 
-							<!-- <img src="/hobbyist/static/images/lessonImg1.jpg"  id="lessonImg"> -->
+							<img src="<%=hmap.get("imageRoute") %>/<%=hmap.get("imageName") %>" id="lessonImg">
+							<div id="newImgArea">
+							<% if((int) (hmap.get("isNew")) == 0) { %>
+							<img src="static/images/newIcon.png" id="newImg">
+							<% } %>
+							</div> 
 							</div>
 							</td>
 						</tr>
@@ -346,9 +357,7 @@
 							<td></td>
 							<td>
 							<div id="artistImgArea" style="width:75px;">
-							<% if(hmap.get("imageType2").equals("profile")) { %>
 							<img src="<%=hmap.get("imageRoute2") %>/<%=hmap.get("imageName2") %>" id="artistImg">
-							<% } %>
 							</div>
 							</td>
 						</tr>
@@ -429,7 +438,12 @@
 											
 											var str = "";
 											
-											str += '<tr><td colspan="2"><div id="lessonImgArea"><img src="' + data[key].imageRoute + '/' + data[key].imageName + '"' + 'id="lessonImg" /></div></td></tr>';
+											str += '<tr><td colspan="2"><div id="lessonImgArea"><img src="' + data[key].imageRoute + '/' + data[key].imageName + '"' + 'id="lessonImg" />';
+											if(data[key].isNew == 0) {
+												str += '<div id="newImgArea"><img src="static/images/newIcon.png" id="newImg"></div></div></td></tr>';
+											}else {
+												str += '</div></div></td></tr>';
+											}
 											str += '<tr><td colspan="2" rowspan="3"><div id="lessonName">' + data[key].lessonName + '</div></td></tr>';
 											str += '<tr><td><br></td><td><input type="hidden" name="lessonCode" value="' + data[key].lessonCode + '"</td></tr>';
 											str += '<tr><td></td><td><div id="artistImgArea" style="width:75px;"><img src="' + data[key].imageRoute2 + '/' + data[key].imageName2 + '"' + 'id="artistImg" /><div></td></tr>';
@@ -437,20 +451,9 @@
 											str += '<td style="word-break:break-all"><div id="artistNick">' + data[key].artistNick + '</div></td></tr>';
 											str += '<tr><td style="word-break:break-all"><div id="lessonArea">' + data[key].region + '</div></td>';
 											str += '<td style="word-break:break-all"><div id="artistName">' + data[key].memberName + '</div></td></tr>';
-								
+											
 											
 											$(".lesson-area").append('<div class="lesson-list"><form action="/hobbyist/selectOne.le" method="get"><table id="lessonTable">' + str + '</table></form></div>');
-											
-										
-											
-											/* var lessonForm = $('<form></form>');
-											
-											lessonForm.attr("action", "/hobbyist/selectOne.le");
-											lessonForm.attr("method", "get");
-											
-											lessonForm.appendTo($(".lesson-list")); 
-											
-											console.log(lessonForm);*/
 											
 											
 											$(".lesson-list").click(function() {
@@ -496,7 +499,7 @@
 											
 											var str = "";
 											
-											str += '<tr><td colspan="2"><div id="lessonImgArea"><img src="' + data[key].imageRoute + '/' + data[key].imageName + '"' + 'id="lessonImg" /></div></td></tr>';
+											str += '<tr><td colspan="2"><div id="lessonImgArea"><img src="' + data[key].imageRoute + '/' + data[key].imageName + '"' + 'id="lessonImg" /><div id="newImgArea"><img src="static/images/newIcon.png" id="newImg"></div></div></td></tr>';
 											str += '<tr><td colspan="2" rowspan="3"><div id="lessonName">' + data[key].lessonName + '</div></td></tr>';
 											str += '<tr><td><br></td><td><input type="hidden" name="lessonCode" value="' + data[key].lessonCode + '"</td></tr>';
 											str += '<tr><td></td><td><div id="artistImgArea" style="width:75px;"><img src="' + data[key].imageRoute2 + '/' + data[key].imageName2 + '"' + 'id="artistImg" /><div></td></tr>';
