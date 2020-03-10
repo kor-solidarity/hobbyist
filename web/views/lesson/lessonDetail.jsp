@@ -9,6 +9,7 @@
 <%@ page import="com.dh.hobbyist.artist.model.vo.ArtistCerts" %>
 <%@ page import="com.dh.hobbyist.artist.model.vo.ArtistEducation" %>
 <%@ page import="com.dh.hobbyist.artist.model.vo.ArtistCareer" %>
+<%@ page import="com.dh.hobbyist.suggest.model.vo.Petition" %>
 <%
 	Image pImg = (Image) request.getAttribute("profileImg");
 	Lesson lesson = (Lesson) request.getAttribute("lesson");
@@ -20,6 +21,7 @@
 	ArrayList<ArtistCerts> certList = (ArrayList) request.getAttribute("certList");
 	ArrayList<ArtistEducation> eduList = (ArrayList) request.getAttribute("eduList");
 	ArrayList<ArtistCareer> careerList = (ArrayList) request.getAttribute("careerList");
+	Petition petition = (Petition) request.getAttribute("petition");
 	
 	//로그인 후에만 수업 신청 가능하도록 구현하는데 필요한 변수
 	int memberCode = 0;
@@ -30,6 +32,51 @@
 	
 	//System.out.println("ops.get(39) : " + ((LessonOrder) (((ArrayList) (ops.get(((LessonSchedule) sList.get(0)).getScheduleCode()))).get(0))).getOrderStart());
 	//System.out.println("subString : " + (((LessonOrder) (((ArrayList) (ops.get(((LessonSchedule) sList.get(1)).getScheduleCode()))).get(0))).getOrderStart().toString()).substring(0, 16));
+
+	//건의 관련 정보 변수 처리
+	String nolString = "";
+	String requestedDays = "";
+	String requestedTime = "";
+	
+	if(petition != null) {
+		//총 회차 출력을 위한 변수 설정
+		int nol = petition.getNumOfLessons();
+		
+		
+		if(nol == 0) {
+			nolString = "일회차";
+		} else {
+			nolString = "다회차";
+		}
+		
+		//선호 요일 변수 설정
+		String rd = petition.getRequestedDays();
+		
+	
+		if (rd.equals("weekday")) {
+			requestedDays = "평일";
+		} else if (rd.equals("weekend")) {
+			requestedDays = "주말";
+		} else {
+			requestedDays = "무관";
+		}
+	
+		//선호 시간 변수 설절
+		String rt = petition.getRequestTime();
+		
+	
+		if (rt.equals("dawn")) {
+			requestedTime = "새벽반";
+		} else if (rt.equals("am")) {
+			requestedTime = "오전반";
+		} else if (rt.equals("pm")) {
+			requestedTime = "오후반";
+		} else if (rt.equals("evening")) {
+			requestedTime = "저녁반";
+		} else {
+			requestedTime = "무관";
+		}
+	}
 %>
 <!DOCTYPE html>
 <html>
@@ -472,31 +519,40 @@
 							<% if(lesson.getPetitionCode() != 0) { %>
 							<table id="suggestTable" align="center">
 								<tr>
-									<td style="color:#DAB554">건의된 학생 정원</td>
-									<td class="nanum" style="width:130px; font-size:20px;">2~4명</td>
+									<td style="color:#DAB554">건의된 수업 인원</td>
+									<td class="nanum" style="width:130px; font-size:20px;"><%= petition.getNumOfStudents() %></td>
 								</tr>
 								<tr>
-									<td style="color:#DAB554">건의된 수업 비용</td>
-									<td class="nanum" style="font-size:20px;">30,000원</td>
+									<td style="color:#DAB554">건의된 수업료 </td>
+									<td class="nanum" style="font-size:20px;"><label id="requestedCost" style="font-weight:normal;"></label>원</td>
 								</tr>
 								<tr>
 									<td style="color:#DAB554">건의된 수업 장소</td>
-									<td class="nanum" style="font-size:20px;">강남</td>
+									<td class="nanum" style="font-size:20px;"><%= petition.getLocation() %></td>
 								</tr>
 								<tr>
 									<td style="color:#DAB554">건의된 수업 요일</td>
-									<td class="nanum" style="font-size:20px;">주말</td>
+									<td class="nanum" style="font-size:20px;"><%= requestedDays %></td>
 								</tr>
 								<tr>
 									<td style="color:#DAB554">건의된 수업 시간</td>
-									<td class="nanum" style="font-size:20px;">오후</td>
+									<td class="nanum" style="font-size:20px;"><%= requestedTime %></td>
 								</tr>
 								<tr>
 									<td style="color:#DAB554">건의된 수업 회차</td>
-									<td class="nanum" style="font-size:20px;">1회</td>
+									<td class="nanum" style="font-size:20px;"><%= nolString %></td>
 								</tr>
 								
 							</table>
+							<script>
+								//천 단위 , 표시 위한 메소드
+								$(function(){
+									var cost = <%= petition.getCost() %>;
+									var costM = cost.toLocaleString();								
+									
+									$("#requestedCost").text(costM);
+								});
+							</script>
 							<div align="center">건의 게시물 바로가기</div>
 							<% } %>
 						</td>

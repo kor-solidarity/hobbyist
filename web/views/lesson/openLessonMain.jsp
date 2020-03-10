@@ -790,7 +790,7 @@ body {
 								<tr>
 									<td>
 										<select id="region" class='nanum' name="region" onChange="regionChange(this.value, subRegion);" style="color: black;">
-											<option>-선택-</option>
+											<option value="">-선택-</option>
 											<option value='1'>서울</option>
 											<option value='2'>부산</option>
 											<option value='3'>대구</option>
@@ -812,7 +812,7 @@ body {
 										</td>
 									<td>
 										<select id="subRegion" class='nanum' name="subRegion" style="color: black;">
-											<option>-선택-</option>
+											<option value="">-선택-</option>
 										</select>
 									</td>
 									<td colspan="2"><input id="startTime" class="nanum" type="datetime-local"></td>
@@ -829,7 +829,7 @@ body {
 								</tr>
 								<tr>
 									<td colspan="5">
-									전체 주소 입력 : <input type="text" class="nanum" name="address" placeholder="전체 주소를 복사 또는 직접 입력해주세요." style="width:450px">
+									전체 주소 입력 : <input id="address" type="text" class="nanum" name="address" placeholder="전체 주소를 복사 또는 직접 입력해주세요." style="width:450px">
 									</td>
 								</tr>
 							</table>
@@ -914,6 +914,9 @@ body {
 					$("#saveModalBtn").hide();
 				}
 			});
+
+			//모든 회차를 입력했는지 확인하는 변수. 모든 회차를 입력하면 1로 변경되는 변수
+			orderCheck = 0;
 			
 			// 모달 안의 다음 버튼에 이벤트를 건다.
 			$('#nextModalBtn').on('click', function() {
@@ -925,29 +928,36 @@ body {
 				var inputOrder = document.getElementById("inputOrder").value;
 				var cost = document.getElementById("cost").value;
 				var subCategory = document.getElementById("subCategory").value;
+				var iphoneImg = "<%= request.getContextPath() %>/static/images/iphoneCameraW.png";
+				var mainFile = $("#contentImg3").attr("src");
 				//"03. 아티스트소개" 항목
 				var artIntro = document.getElementById("artIntro").value;
 				//"04. 수업소개" 항목
 				var lessonIntro = document.getElementById("lessonIntro").value;
+				//"05. 일정추가" 항목
+				var reg = document.getElementById("region").value;
+				var subReg = document.getElementById("subRegion").value;
+				var addr = document.getElementById("address").value;
 				
-				var mainFile = $("#contentImg3").attr("src");
-				var iphoneImg = "<%= request.getContextPath() %>/static/images/iphoneCameraW.png";
-				
-				console.log("1 : " + mainFile);
-				console.log("2 : " + "<%= request.getContextPath() %>/static/images/iphoneCameraW.png");
-				<%--  --%>
+				console.log("reg, subReg : " + reg + ", " + subReg);
 				
 				//"01.기본정보"에서 모든 항목을 입력해야 다음으로 넘어갈 수 있는 메소드
 				if(lessonTitle == "" || min == "" || max == "" || inputOrder == "" || cost == "" || subCategory == "" || mainFile == iphoneImg) {
 					alert("모든 항목을 입력해주세요");
 				} else {
 					
+					console.log("num : " + num);
+					
 					if(num == 3 && artIntro == "") {
 						alert("아티스트 소개를 입력해주세요");
 					} else if (num == 4 && lessonIntro == "") {
 						alert("수업소개를 입력해주세요");
-					} else if (num == 5 && orderNum != inputOrder) {
+					} else if (num == 5 && (reg == "" || subReg == "")) {
+						alert("지역 카데고리를 설정해주세요");
+					} else if (num == 5 && orderCheck == 0) {
 						alert("모든 회차 일정을 입력해주세요");
+					} else if (num == 5 && addr == "") {
+						alert("상세주소를 입력해주세요");
 					} else {
 						$("#show"+ num).hide();
 						console.log(num);
@@ -1278,6 +1288,7 @@ body {
 					$orderListArea.append("<input type='hidden' name='start" + orderNum + "' value='" + sl + "'>");
 					$orderListArea.append("<input type='hidden' name='end" + orderNum + "' value='" + el + "'>");
 					alert("모든 회차를 입력하셨습니다");
+					orderCheck = 1;
 					insertOrderBtn.disabled = 'disabled';
 				} 
 			}

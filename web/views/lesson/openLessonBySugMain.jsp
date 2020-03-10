@@ -470,6 +470,7 @@ body {
 							<table id="LessonTable2">
 								<tr>
 									<td style="width: 33%">
+										<input type="hidden" name="petitionCode" value=<%= petition.getPetitionCode() %>>
 										<div>카데고리</div>
 										<div>
 											<select id="category" class="nanum" style="color:black;">
@@ -1023,8 +1024,8 @@ body {
 				}
 			});
 			
-			//n회차 수를 나타내는 변수. insertOrder() 안에서는 계속 +되어야 하여 전역변수로 바깥에 선언.
-			orderNum = 1;
+			//모든 회차를 입력했는지 확인하는 변수. 모든 회차를 입력하면 1로 변경되는 변수
+			orderCheck = 0;
 			
 			// 모달 안의 다음 버튼에 이벤트를 건다.
 			$('#nextModalBtn').on('click', function() {
@@ -1044,7 +1045,9 @@ body {
 				var lessonIntro = document.getElementById("lessonIntro").value;
 				//"05. 일정추가" 항목
 				var reg = document.getElementById("region").value;
+				var subReg = document.getElementById("subRegion").value;
 				var addr = document.getElementById("address").value;
+				
 				
 
 				//"01.기본정보"에서 모든 항목을 입력해야 다음으로 넘어갈 수 있는 메소드
@@ -1056,10 +1059,10 @@ body {
 						alert("아티스트 소개를 입력해주세요");
 					} else if (num == 4 && lessonIntro == "") {
 						alert("수업소개를 입력해주세요");
-					} else if (num == 5 && orderNum != inputOrder) {
-						alert("모든 회차 일정을 입력해주세요");
-					} else if (num == 5 && reg == "") {
+					} else if (num == 5 && (reg == "" || subReg == "")) {
 						alert("지역 카데고리를 설정해주세요");
+					} else if (num == 5 && orderCheck == 0) {
+						alert("모든 회차 일정을 입력해주세요");
 					} else if (num == 5 && addr == "") {
 						alert("상세주소를 입력해주세요");
 					} else {
@@ -1350,7 +1353,8 @@ body {
 			}
 		}
 		
-		
+		//n회차 수를 나타내는 변수. insertOrder() 안에서는 계속 +되어야 하여 전역변수로 바깥에 선언.
+		orderNum = 1;
 		
 		//수업 회차 등록 메소드
 		function insertOrder() {
@@ -1393,6 +1397,7 @@ body {
 					$orderListArea.append("<input type='hidden' name='start" + orderNum + "' value='" + sl + "'>");
 					$orderListArea.append("<input type='hidden' name='end" + orderNum + "' value='" + el + "'>");
 					alert("모든 회차를 입력하셨습니다");
+					orderCheck = 1;
 					insertOrderBtn.disabled = 'disabled';
 				} 
 			}

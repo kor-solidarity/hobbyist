@@ -1,4 +1,4 @@
-package com.dh.hobbyist.lesson.controller;
+package com.dh.hobbyist.suggest.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
