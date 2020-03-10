@@ -21,29 +21,29 @@ public class PaymentService {
 		
 		int result = new PaymentDao().insertPayment(con, p);
 		
-		System.out.println("1 " + result);
 		if(result > 0) {
-			
 		
 			//결제시 회원수 증가용 메소드
 			result = new PaymentDao().updateMemberCtn(con, p);
-			System.out.println("2 " + result);
 			
 			if(result > 0) {
 				
 				result = new PaymentDao().insertRegister(con, p);
-				System.out.println("3 " + result);
 				
 				if(result > 0) {
 					result = new PaymentDao().insertUsingPoint(con, p);
-					System.out.println("4 " + result);
 						
 					if(result > 0) {
-						result = new PaymentDao().updateUsingPoint(con, p);
-						System.out.println("5 " + result);
+						result = new PaymentDao().insertGivePoint(con, p);
 						
 						if(result > 0) {
-							commit(con);
+								if(result > 0) {
+									result = new PaymentDao().updateUsingPoint(con, p);
+									commit(con);
+										
+								}else {
+									rollback(con);
+								}
 						}else {
 							rollback(con);
 						}

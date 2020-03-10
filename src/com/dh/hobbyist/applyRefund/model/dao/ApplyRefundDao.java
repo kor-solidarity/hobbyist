@@ -82,6 +82,7 @@ public class ApplyRefundDao {
 			pstmt.setInt(1, num);
 			pstmt.setInt(2, num);
 			pstmt.setInt(3, num);
+			pstmt.setInt(4, num);
 			
 			rset = pstmt.executeQuery();
 			
@@ -92,6 +93,7 @@ public class ApplyRefundDao {
 				arf.setPayCost(rset.getInt("PAYMENT_COSTS"));
 				arf.setUsingPoint(rset.getInt("POINTS_USED"));
 				arf.setRefundCost(rset.getInt("COSTS"));
+				arf.setGivePoint(rset.getInt("RECOLLECT_POINT"));
 				arf.setTotalOrder(rset.getInt("TOTAL_ORDER"));
 				arf.setFinishOrder(rset.getInt("FINISH_ORDER"));
 				arf.setReason(rset.getString("REASON"));

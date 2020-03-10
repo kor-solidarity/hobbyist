@@ -233,6 +233,10 @@
 	   	       		<td id="refundPoint"></td>
    	       		</tr>
    	       		<tr>
+   	       			<td>수거할 포인트</td>
+   	       			<td id="reCollectPoint"></td>
+   	       		</tr>
+   	       		<tr>
    	       			<td>수업 회차</td>
    	       			<td id="totalOrder"></td>
    	       		</tr>
@@ -258,7 +262,7 @@
    	     </div>
    	     <div class="modal-footer">
    	       <button type="button" class="btn btn-default" onclick="refuse();">반려</button>
-   	       <button type="button" class="btn btn-default" onclick="approve();">승인</button>
+   	       <button id="approve" type="button" class="btn btn-default">승인</button>
    	     </div>
      		</div>
    	   
@@ -344,6 +348,8 @@
 		});
 		
 		$(document).on("click", '.Btn', function() {
+	   	    	$("#myModal").modal();
+	   	    	
 		    	var num = Number($(this).parent().parent().children("td:nth-child(2)").text());
 		    	var refundCode = Number($(this).parent().parent().children("td:nth-child(1)").text());
 		    	console.log(num);
@@ -363,11 +369,49 @@
 						$("#usingPoint").text(data.usingPoint + " point");
 						$("#refundCost").text(data.refundCost +"원");
 						$("#refundPoint").text(refundPoint + " point");
+						$("#reCollectPoint").text(data.givePoint + " point");
 						$("#totalOrder").text(data.totalOrder + "회");
 						$("#finishOrder").text(data.finishOrder + "회");
 						$("#orderPercent").text(orderPercent + "%");
 						$("#reason").text(data.reason);
 						$("#reasonDetail").text(data.reasonDetail);
+						
+						//환불 승인 클릭 시
+						$("#approve").click(function() {
+							var result = confirm("환불 승인 하시겠습니까?");
+							
+							if(result) {
+								/*  $.ajax({
+								        url: "http://www.myservice.com/payments/cancel",
+								        type: "POST",
+								        contentType: "application/json",
+								        data: ({
+								          merchant_uid: data.impNum, // 주문번호
+								          cancel_request_amount: data.refundCost, // 환불금액
+								          reason: "테스트 결제 환불" // 환불사유
+								        }),
+								        dataType: "json"
+								      }); */
+								      
+								      $.ajax({
+								    	 url: "<%=request.getContextPath()%>/approveRefund.ad",
+								    	 type: "post",
+								    	 data: {
+								    		 num: num,
+								    		 refundCost: data.refundCost,
+								    		 refundPoint: refundPoint,
+								    		 reCollectPoint: data.givePoint
+								    	 },
+								    	 success: function(data) {
+								    		 alert("환불이 완료되었습니다.");
+								    	 },
+								    	 error: function(error){
+								    		 console.log(error);
+								    	 }
+								    	 
+								      });
+							}
+						});
 						
 					},
 					error: function(error) {
@@ -376,7 +420,6 @@
 		    		
 		    	});
 		    	
-	   	    	$("#myModal").modal();
 	   	    	
 				//최종 반려 버튼 클릭시
 				$(document).on("click", '#realRefuse', function() {
@@ -393,11 +436,6 @@
 		});
 		
 	});
-	
-	function approve() {
-			
-		confirm("환불 승인 하시겠습니까?");
-	}
 		
 	function refuse() {
 		$("#myModal1").modal();

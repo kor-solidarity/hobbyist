@@ -48,9 +48,9 @@
 	<%@include file="/views/common/myPage.jsp" %>
 	<table id="paySubMenu">
 			<tr>
-				<td style="padding-left: 30px;"><label style="color:darkolivegreen;">결제 내역</label></td>
-				<td><label>환불 내역</label></td>
-				<td><label>포인트 사용 내역</label></td>
+				<td style="padding-left: 30px;"><label id="showPayList" style="color:darkolivegreen;">결제 내역</label></td>
+				<td><label id="showRefundList">환불 내역</label></td>
+				<td><label id="showPointList">포인트 사용 내역</label></td>
 				<td style="width:470px;"></td>
 			</tr>
 			<tr>
@@ -88,5 +88,14 @@
 			<% } %> 
 		</table>
 	</div>
+	<script>
+		$("#showRefundList").click(function() {
+			location.href = "<%=request.getContextPath()%>/refundList.me";
+		});
+		
+		$("#showPointList").click(function() {
+			
+		});
+	</script>
 </body>
 </html>

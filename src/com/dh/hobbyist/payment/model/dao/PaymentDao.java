@@ -204,6 +204,30 @@ public class PaymentDao {
 		
 	}
 
+	public int insertGivePoint(Connection con, Payment p) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("insertGivePoint");
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setTimestamp(1, p.getPayDate());
+			pstmt.setInt(2, p.getGivePoint());
+			pstmt.setInt(3, p.getMemberCode());
+			pstmt.setString(4, "적립");
+			pstmt.setString(5, p.getImpNum());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
 	public int updateUsingPoint(Connection con, Payment p) {
 		PreparedStatement pstmt = null;
 		int result = 0;
@@ -213,7 +237,8 @@ public class PaymentDao {
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.setInt(1, p.getUsingPoint());
-			pstmt.setInt(2, p.getMemberCode());
+			pstmt.setInt(2, p.getGivePoint());
+			pstmt.setInt(3, p.getMemberCode());
 			
 			
 			result = pstmt.executeUpdate();

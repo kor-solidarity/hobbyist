@@ -226,7 +226,7 @@ input[type="button"], input[type="reset"] {
 				</tr>
 				<tr></tr>
 				<tr>
-					<td colspan="3" style="color: gray; font-size: 16px; line-height: 23px;">(!) 포인트를 제외한 결제금액의 1%가 적립되며 적립은 수업일정이 끝난 후 지급됩니다.</td>
+					<td colspan="3" style="color: gray; font-size: 16px; line-height: 23px;">(!) 포인트를 제외한 결제금액의 1%가 적립되며 적립은 결제완료 후 지급됩니다.</td>
 				</tr>
 				<tr>
 					<td colspan="2">적립 예정 포인트 :</td>
@@ -254,7 +254,7 @@ input[type="button"], input[type="reset"] {
 				</tr>
 				<tr>
 					<td colspan="3" style="color: red; font-size: 17px; text-decoration: underline;">
-						환불계좌 등록은 환불 신청하실 때 등록하실 수 있습니다.
+						적립 포인트는 환불 시 모두 적립 취소됩니다.
 					</td>
 				</tr>
 			</table>
@@ -397,8 +397,6 @@ input[type="button"], input[type="reset"] {
 		  		buyer_name: '<%=loginMember.getMemberName()%>',
  		  		buyer_tel: '<%=loginMember.getPhone()%>',
  	 	 
-  	  			/* 모바일 결제시, 결제가 끝나고 랜딩되는 URL을 지정
- 	  			(카카오페이, 페이코, 다날의 경우는 필요없음. PC와 마찬가지로 callback함수로 결과가 떨어짐 */
  	  			m_redirect_url: 'https://www.yourdomain.com/payments/complete'
 	    
 			  	}, function (rsp) {
