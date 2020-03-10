@@ -39,9 +39,7 @@ public class SelectSugForOpeningSevlet extends HttpServlet {
 		
 		Petition p = new SuggestService().selectOne(petitionCode);
 		
-		System.out.println("p.getCategoryCode() : " + p.getCategoryCode());
-		
-		//카데고리의 코드를 넘겨야 하는데 상세카데고리의 코드를 넘겨서 return이 안됨
+		//System.out.println("p.getCategoryCode() : " + p.getCategoryCode());
 		
 		//상세카데고리 코드로 부모 카데고리 코드를 구하기 위한 처리
 		int parentCategoryCode = 0;
@@ -64,15 +62,74 @@ public class SelectSugForOpeningSevlet extends HttpServlet {
 		
 		List<Category> subCategoryList = new CategoryService().selectDetailCategory(parentCategoryCode);
 		
-		System.out.println("subCategoryList : " + subCategoryList);
+		//System.out.println("subCategoryList : " + subCategoryList);
+		
+		//DB에 한글로 저장된 지역 정보대로 select-option의 default 설정을 위한 변수 설정
+		String location[] = p.getLocation().split("/");
+		int region = 0;
+		
+		switch(location[0]) {
+		case "서울": region = 1; break;
+		case "부산": region = 2; break;
+		case "대구": region = 3; break;
+		case "인천": region = 4; break;
+		case "광주": region = 5; break;
+		case "대전": region = 6; break;
+		case "울산": region = 7; break;
+		case "세종": region = 261; break;
+		case "강원": region = 8; break;
+		case "경기": region = 9; break;
+		case "경남": region = 10; break;
+		case "경북": region = 11; break;
+		case "전남": region = 12; break;
+		case "전북": region = 13; break;
+		case "제주": region = 14; break;
+		case "충남": region = 15; break;
+		case "충북": region = 16; break;
+		}
+		
+		System.out.println("region : " + region);
+		
+		//선호 요일 변수 설정
+		String rd = p.getRequestedDays();
+		String days = "";
+		
+		if(rd.equals("weekday")) {
+			days = "평일";
+		} else if(rd.equals("weekend")) {
+			days = "주말";
+		} else {
+			days = "무관";
+		}
+		
+		//System.out.println("선호 요일 : " + days);
+		
+		//선호 시간 변수 설절
+		String rt = p.getRequestTime();
+		String time = "";
+		
+		if(rt.equals("dawn")) {
+			time = "새벽반";
+		} else if(rt.equals("am")) {
+			time = "오전반";
+		} else if(rt.equals("pm")) {
+			time = "오후반";
+		} else if(rt.equals("evening")) {
+			time = "저녁반";
+		} else {
+			time = "무관";
+		}
 		
 		String page = "";
 		
 		if(p != null) {
 			page = "views/lesson/openLessonBySugMain.jsp";
 			request.setAttribute("petition", p);
-			//request.setAttribute("subCategoryList", subCategoryList);
 			request.setAttribute("parentCategoryCode", parentCategoryCode);
+			request.setAttribute("region", region);
+			request.setAttribute("subRegion", location[1]);
+			request.setAttribute("requestedDays", days);
+			request.setAttribute("requestedTime", time);
 		} else {
 			page = "views/common/errorPage.jsp";
 			request.setAttribute("msg", "건의 받아 수업 개설 실패");

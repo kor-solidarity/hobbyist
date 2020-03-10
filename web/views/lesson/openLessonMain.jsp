@@ -503,7 +503,7 @@ body {
 									</td>
 									<td>
 										<div>수업 최소인원</div> 
-										<input id="min" class="nanum" name="min" type="number" style="width:100px">
+										<input id="min" class="nanum" name="min" type="number" style="width:115px">
 										<label style="font-weight:normal; color:black;">&nbsp;명</label>
 										<script>
 											$(function() {
@@ -524,7 +524,7 @@ body {
 									</td>
 									<td>
 										<div>수업 최대인원</div> 
-										<input id="max" class="nanum" name="max" type="number" style="width:100px">
+										<input id="max" class="nanum" name="max" type="number" style="width:115px">
 										<label style="font-weight:normal; color:black;">&nbsp;명</label>
 										<script>
 											$(function() {
@@ -548,7 +548,7 @@ body {
 									<td style="vertical-align: bottom;">이미지 업로드</td>
 									<td>
 										<div>총 회차</div> 
-										<input id="inputOrder" class="nanum" name="inputOrder" type="number" style="width:100px">
+										<input id="inputOrder" class="nanum" name="inputOrder" type="number" style="width:115px">
 										<label style="font-weight:normal; color:black;">&nbsp;회</label>
 										<script>
 											$(function() {
@@ -564,7 +564,7 @@ body {
 									</td>
 									<td>
 										<div>회차당 수업료<label style="font-weight:normal; color:#A7A1A1;">&nbsp;(최소 1만원 이상)</label></div> 
-										<input id="cost" class="nanum" name="cost" type="number" style="width:100px">
+										<input id="cost" class="nanum" name="cost" type="number" style="width:130px">
 										<label style="font-weight:normal; color:black;">&nbsp;원</label>
 										<script>
 											$(function() {
