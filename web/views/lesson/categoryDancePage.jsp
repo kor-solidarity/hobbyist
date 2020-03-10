@@ -182,6 +182,17 @@
 	    .pagingArea {
 	    	margin-bottom: 30px;
 	    }
+	    
+	      #newImg {
+	    	z-index: 2;
+	    	width:45px;
+	    	height:45px;
+	    	
+	    }
+	   	#newImgArea {
+	   		margin-top:-143px;
+	    	margin-left:215px;
+	   	}
 	   
 	   
 </style>
@@ -314,10 +325,12 @@
 						<tr>
 							<td colspan="2">
 							<div id="lessonImgArea">
-							 <% if(hmap.get("imageType").equals("lesson")) { %>
 							<img src="<%=hmap.get("imageRoute") %>/<%=hmap.get("imageName") %>" id="lessonImg"> 
-							<% } %> 
-							<!-- <img src="/hobbyist/static/images/lessonImg1.jpg"  id="lessonImg"> -->
+							<div id="newImgArea">
+							<% if((int) (hmap.get("isNew")) == 0) { %>
+							<img src="static/images/newIcon.png" id="newImg">
+							<% } %>
+							</div>
 							</div>
 							</td>
 						</tr>
@@ -328,14 +341,12 @@
 							<td><br></td>
 							<td><input type="hidden" name="lessonCode" value="<%=hmap.get("lessonCode")%>"></td>
 						</tr>
-
+ 
 						<tr>
 							<td></td>
 							<td>
 							<div id="artistImgArea" style="width:75px;">
-							<% if(hmap.get("imageType2").equals("profile")) { %>
 							<img src="<%=hmap.get("imageRoute2") %>/<%=hmap.get("imageName2") %>" id="artistImg">
-							<% } %>
 							</div>
 							</td>
 						</tr>

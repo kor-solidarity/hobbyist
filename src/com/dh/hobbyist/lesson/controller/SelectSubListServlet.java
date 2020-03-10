@@ -66,11 +66,14 @@ public class SelectSubListServlet extends HttpServlet {
 		
 		System.out.println("sub list : " + list);
 		
+		/*HashMap smap = new HashMap();
+		smap.put("list", list);
+		smap.put("pi", pi);*/
+		
 		response.setContentType("application/json");
 		response.setCharacterEncoding("UTF-8");
 		
 		new Gson().toJson(list, response.getWriter());
-		new Gson().toJson(pi, response.getWriter());
 	}
 
 	

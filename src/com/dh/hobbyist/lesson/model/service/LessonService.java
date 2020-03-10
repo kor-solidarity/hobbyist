@@ -20,6 +20,8 @@ public class LessonService {
 		
 		ArrayList<HashMap<String, Object>> list = new LessonDao().selectInterest(con, memberCode);
 		
+		list = new LessonDao().selectNewLesson(con, list);
+		
 		close(con);
 		
 		return list;
@@ -56,6 +58,8 @@ public class LessonService {
 		
 		ArrayList<HashMap<String, Object>> list = new LessonDao().selectCategoryDance(con, pi);
 		
+		list = new LessonDao().selectNewLesson(con, list);
+		
 		close(con);
 		
 		return list;
@@ -66,6 +70,8 @@ public class LessonService {
 		Connection con = getConnection();
 		
 		ArrayList<HashMap<String, Object>> list = new LessonDao().selectCategoryVideo(con, pi);
+		
+		list = new LessonDao().selectNewLesson(con, list);
 		
 		close(con);
 		
@@ -78,6 +84,8 @@ public class LessonService {
 		
 		ArrayList<HashMap<String, Object>> list = new LessonDao().selectCategoryLife(con, pi);
 		
+		list = new LessonDao().selectNewLesson(con, list);
+		
 		close(con);
 		
 		return list;
@@ -88,6 +96,8 @@ public class LessonService {
 		Connection con = getConnection();
 		
 		ArrayList<HashMap<String, Object>> list = new LessonDao().selectCategoryBeauty(con, pi);
+		
+		list = new LessonDao().selectNewLesson(con, list);
 		
 		close(con);
 		
@@ -100,6 +110,8 @@ public class LessonService {
 		
 		ArrayList<HashMap<String, Object>> list = new LessonDao().selectCategoryDesign(con, pi);
 		
+		list = new LessonDao().selectNewLesson(con, list);
+		
 		close(con);
 		
 		return list;
@@ -110,6 +122,8 @@ public class LessonService {
 		Connection con = getConnection();
 		
 		ArrayList<HashMap<String, Object>> list = new LessonDao().selectCategorySports(con, pi);
+		
+		list = new LessonDao().selectNewLesson(con, list);
 		
 		close(con);
 		
@@ -124,6 +138,8 @@ public class LessonService {
 		Connection con = getConnection();
 		
 		ArrayList<HashMap<String, Object>> list = new LessonDao().selectMainPopular(con);
+		
+		list = new LessonDao().selectNewLesson(con, list);
 		
 		close(con);
 		
@@ -146,6 +162,8 @@ public class LessonService {
 		Connection con = getConnection();
 		
 		ArrayList<HashMap<String, Object>> list = new LessonDao().selectSub(con, categoryCode, pi);
+		
+		list = new LessonDao().selectNewLesson(con, list);
 		
 		close(con);
 		
