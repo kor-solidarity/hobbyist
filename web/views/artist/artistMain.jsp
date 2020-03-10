@@ -965,7 +965,7 @@
 									<td colspan="2"><button id="reSchoolBtn" type="button">확인</button></td>
 								</tr>
 								<tr>
-									<td colspan="2" style="font-size:14px;">자격증 취득확인서와 학력 증명서를 첨부해주세요.<label style="font-size: 12px;">(첨부파일은 새로 첨부해주세요.)</label>
+									<td colspan="2" style="font-size:14px;">자격증 취득확인서와 학력 증명서를 첨부해주세요.
 										<p style="color: red; font-size: 10px;">한개의 파일로 압축해서 첨부해주세요</p>
 									</td>
 								</tr>
@@ -1090,6 +1090,9 @@
 		var ckBank = false;
 		var reCkNick = false;
 		var reCkBank = false;
+		var reCertiIndex = 1;
+		var reSchoolIndex = 1;
+		var reCareerIndex = 1;
 		
 		$(function() {
 			//자기소개 부분 textarea에서 255자가 넘지 못하게
@@ -1459,14 +1462,13 @@
 			});
 		});
 		$(function() {
-			var certiIndex = 1;
 			
 			$("#reCertiBtn").click(function() {
 				var certiName = $("#reCertiName").val();
 				var certiDay = $("#reCertiDay").val();
 				var certiSpace = $("#reCertiSpace").val();
 	
-				if (certiIndex <= 3){
+				if (reCertiIndex <= 3){
 					
 					if (certiName != '' && certiDay != '' && certiSpace != '') {
 						
@@ -1476,10 +1478,10 @@
 								certiSpace : certiSpace
 						};
 							
-						$("#reCertiName" + certiIndex).val(certiName);
-						$("#reCertiDay" + certiIndex).val(certiDay);
-						$("#reCertiSpace" + certiIndex).val(certiSpace);
-						certiIndex++;
+						$("#reCertiName" + reCertiIndex).val(certiName);
+						$("#reCertiDay" + reCertiIndex).val(certiDay);
+						$("#reCertiSpace" + reCertiIndex).val(certiSpace);
+						reCertiIndex++;
 						
 						$.ajax({
 							url : "/hobbyist/certiAdd.ar",
@@ -1526,7 +1528,7 @@
 				$("#reCertiName3").val('');
 				$("#reCertiDay3").val('');
 				$("#reCertiSpace3").val('');
-				certiIndex = 1;
+				reCertiIndex = 1;
 			});
 		});
 		
@@ -1603,14 +1605,14 @@
 			});
 		});
 		$(function() {
-			var schoolIndex = 1;
+			reSchoolIndex = 1;
 			
 			$("#reSchoolBtn").click(function() {
 				var schoolName = $("#reSchoolName").val();
 				var major = $("#reMajor").val();
 				var status = $("#reStatus").val();
 	
-				if(schoolIndex <= 3) {
+				if(reSchoolIndex <= 3) {
 					
 					if (schoolName != '' && major != '' && status != '') {
 						
@@ -1620,10 +1622,10 @@
 							status : status
 						};
 						
-						$("#reSchoolName" + schoolIndex).val(schoolName);
-						$("#reMajor" + schoolIndex).val(major);
-						$("#reStatus" + schoolIndex).val(status);
-						schoolIndex++;
+						$("#reSchoolName" + reSchoolIndex).val(schoolName);
+						$("#reMajor" + reSchoolIndex).val(major);
+						$("#reStatus" + reSchoolIndex).val(status);
+						reSchoolIndex++;
 		
 						$.ajax({
 							url : "/hobbyist/schoolAdd.ar",
@@ -1670,7 +1672,7 @@
 				$("#reSchoolName3").val('');
 				$("#reMajor3").val('');
 				$("#reStatus3").val('');
-				schoolIndex = 1;
+				reSchoolIndex = 1;
 			});
 		});
 		
@@ -1759,7 +1761,7 @@
 			});
 		});
 		$(function() {
-			var careerIndex = 1;
+			reCareerIndex = 1;
 			
 			$("#reCareerBtn").click(function() {
 				var officeName = $("#reOfficeName").val();
@@ -1768,7 +1770,7 @@
 				var workYear = $("#reWorkYear").val();
 				var workMonth = $("#reWorkMonth").val();
 	
-				if(careerIndex <= 3) {
+				if(reCareerIndex <= 3) {
 					
 					if (officeName != '' && position != '' && workContent != '' && workMonth != '') {
 						
@@ -1780,12 +1782,12 @@
 								workMonth : workMonth
 						};
 						
-						$("#reOfficeName" + careerIndex).val(officeName);
-						$("#rePosition" + careerIndex).val(position);
-						$("#reWorkContent" + careerIndex).val(workContent);
-						$("#reWorkYear" + careerIndex).val(workYear);
-						$("#reWorkMonth" + careerIndex).val(workMonth);
-						careerIndex++;
+						$("#reOfficeName" + reCareerIndex).val(officeName);
+						$("#rePosition" + reCareerIndex).val(position);
+						$("#reWorkContent" + reCareerIndex).val(workContent);
+						$("#reWorkYear" + reCareerIndex).val(workYear);
+						$("#reWorkMonth" + reCareerIndex).val(workMonth);
+						reCareerIndex++;
 		
 						$.ajax({
 							url : "/hobbyist/careerAdd.ar",
@@ -1837,7 +1839,7 @@
 				$("#reWorkContent3").val('');
 				$("#reWorkYear3").val('');
 				$("#reWorkMonth3").val('');
-				careerIndex = 1;
+				reCareerIndex = 1;
 			});
 		});
 	
@@ -1944,7 +1946,25 @@
 			$('#reNextModalBtn').on('click', function() {
 
 				$("#reShow" + reNum).hide();
-				reNum++;
+				if(reNum == 1) {
+					if(reCkNick == true){
+						if(reCkBank == true){
+							if($("#reNickName").val() == "" || $("#reBankName").val() == "" || $("#reBankNum").val() == "" || $("#reIntroduce").val() == "") {
+								alert("필수사항을 모두 입력해주세요.");
+							} else {
+								reNum++;
+							}
+						}else {
+							alert("계좌 인증 후 진행해주세요.");
+						}
+						
+					}else {
+						alert("닉네임 중복확인 후 진행해주세요.");
+					}
+				} else {
+					reNum++;
+				}
+				
 				$("#reShow" + reNum).show();
 				if (reNum == 5) {
 					$("#reNextModalBtn").hide();
@@ -1958,10 +1978,38 @@
 						success: function(data) {
 							for(var i = 0; i < data.length; i++) {
 								var categoryCode = data[i].categoryCode;
-								var categoryName = decodeURIComponent(data[i].categoryName);
+								var categoryName = data[i].parentCode;
+								$("#reCategoryName" + (i+1)).val(categoryName).prop("selected", true);
+								$.ajax({
+									url: "/hobbyist/category.su",
+									type: "get",
+									data: {categoryName : categoryName},
+									async:false,
+									success: function(data) {
+										$select = $("#reDetailCategory" + (i+1));
+										$select.find("option").remove();
+										
+										for(var j = 0; j < data.length; j++) {
+											var $option = $("<option>");
+											$option.val(data[j].categoryCode);
+											$option.text(data[j].nodeName);
+											
+											if(data[j].categoryCode == categoryCode) {
+												$option.attr("selected", true);
+											}
+											
+											$select.append($option);
+										}
+										
+									},
+									error: function(error) {
+										console.log(error);
+									}
+								});
+								/* var categoryName = decodeURIComponent(data[i].categoryName);
 								var parentCode = data[i].parentCode;
 								$("#reCategoryName" + (i+1)).val(parentCode).prop("selected", true);
-								$("#reDetailCategory" + (i+1)).append("<option value='" + categoryCode +"' selected>" + categoryName + "</option>");
+								$("#reDetailCategory" + (i+1)).append("<option value='" + categoryCode +"' selected>" + categoryName + "</option>"); */
 								}
 						},
 						error: function(data) {
@@ -1970,6 +2018,7 @@
 					});
 				}
 				if(reNum == 3) {
+					reCertiIndex = 1;
 					//아티스트 자격 조회
 					$("#reCertiDiv").children('div.inDiv').remove();
 					$("#reCertiDiv").children('br').remove();
@@ -1988,6 +2037,8 @@
 							var $inDiv = $("<div class='inDiv'>").text(certName + "/" + certDate + "/" + certOrg);
 							$div.append($inDiv);
 							$div.append("<br>");
+							$("#reCertiName" + reCertiIndex).val("alreadyExist");
+							reCertiIndex++;
 							}
 						},
 						error: function(error) {
@@ -1997,6 +2048,8 @@
 				}
 				
 				if(reNum == 4) {
+					reSchoolIndex = 1;
+					
 					//아티스트 학력 조회
 					$("#reSchoolDiv").children('div.inDiv').remove();
 					$("#reSchoolDiv").children('br').remove();
@@ -2007,20 +2060,22 @@
 						type: "get",
 						success: function(data) {
 							
-						var $div = $("#reSchoolDiv");
-						for(var i = 0; i < data.length; i++) {
-							var eduInsitituteName = decodeURIComponent(data[i].eduInsitituteName);
-							var eduMajor = decodeURIComponent(data[i].eduMajor);
-							var status = data[i].status;
-							var val = "";
-							if(status == 1) {
-								val = "졸업";
-							} else {
-								val = "재학";
-							} 
-							var $inDiv = $("<div class='inDiv'>").text(eduInsitituteName + "/" + eduMajor + "/" + val);
-							$div.append($inDiv);
-							$div.append("<br>");
+							var $div = $("#reSchoolDiv");
+							for(var i = 0; i < data.length; i++) {
+								var eduInsitituteName = decodeURIComponent(data[i].eduInsitituteName);
+								var eduMajor = decodeURIComponent(data[i].eduMajor);
+								var status = data[i].status;
+								var val = "";
+								if(status == 1) {
+									val = "졸업";
+								} else {
+									val = "재학";
+								} 
+								var $inDiv = $("<div class='inDiv'>").text(eduInsitituteName + "/" + eduMajor + "/" + val);
+								$div.append($inDiv);
+								$div.append("<br>");
+								$("#reSchoolName" + reSchoolIndex).val("alreadyExist");
+								reSchoolIndex++;
 							}
 						},
 						error: function(error) {
@@ -2030,6 +2085,8 @@
 				}
 				
 				if(reNum == 5) {
+					reCareerIndex = 1;
+					
 					$("#reCareerDiv").children('div.inDiv').remove();
 					$("#reCareerDiv").children('br').remove();
 					$div = $("#reCareerDiv");
@@ -2048,7 +2105,8 @@
 								var $inDiv = $("<div class='inDiv'>").text(orgName + "/" + rank + "/" + term);
 								$div.append($inDiv);
 								$div.append("<br>");
-								
+								$("#reOfficeName" + reCareerIndex).val("alreadyExist");
+								reCareerIndex++;
 							}
 						},
 						error: function(error) {
@@ -2060,21 +2118,12 @@
 
 			});		
 			$('#reSaveModalBtn').on('click', function() {
-				if(reCkNick == true){
-					if(reCkBank == true){
-						if($("#reNickName").val() == "" || $("#reBankName").val() == "" || $("#reBankNum").val() == "" || $("#reIntroduce").val() == "" || $("#reDetailCategory1").val() == "") {
-							alert("필수사항을 모두 입력해주세요.");
-						} else {
-							$("#reartistForm").submit();
-						}
-					}else {
-						alert("계좌 인증 후 진행해주세요.");
-					}
-					
-				}else {
-					alert("닉네임 중복확인 후 진행해주세요.");
-				}
 				
+				if($("#reDetailCategory1").val() == "") {
+					alert("필수사항을 모두 입력해주세요.");
+				} else {
+					$("#reartistForm").submit();
+				}
 			});
 			
 			

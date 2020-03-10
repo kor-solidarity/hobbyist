@@ -286,9 +286,37 @@ public class ArtistService {
 	public int updateCerts(String memberPk, HashMap<String, String[]> certsMap) {
 		Connection con = getConnection();
 		
-		int result1 = new ArtistDao().deleteCerts(con, memberPk);
-		int result = new ArtistDao().insertCerts(con, memberPk, certsMap);
+		String[] certiNames = certsMap.get("certiNames");
+		String[] certiDays = certsMap.get("certiDays");
+		String[] certiSpaces = certsMap.get("certiSpaces");
+		int isExist = 0;
+		for(int i = 0; i < certiNames.length; i++) {
+			if(certiNames[i].equals("alreadyExist")) {
+				isExist = 1;
+				break;
+			} else {
+				isExist = 0;
+			}
+		}
 		
+		int result = 0;
+		if(isExist == 1) {
+			for(int i = 0; i < certiNames.length; i++) {
+				if(!certiNames[i].equals("alreadyExist") && !certiNames[i].equals("")) {
+					result += new ArtistDao().insertCertsOne(con, memberPk, certiNames[i], certiDays[i], certiSpaces[i]);
+				}
+			}
+		} else {
+			int result1 = new ArtistDao().deleteCerts(con, memberPk);
+			if(result1 > 0) {
+				commit(con);
+			} else {
+				rollback(con);
+			}
+			result = new ArtistDao().insertCerts(con, memberPk, certsMap);
+		}
+		
+	
 		if(result > 0) {
 			commit(con);
 		} else {
@@ -302,8 +330,37 @@ public class ArtistService {
 	public int updateEdu(String memberPk, HashMap<String, String[]> eduMap) {
 		Connection con = getConnection();
 		
-		int result1 = new ArtistDao().deleteEdu(con, memberPk);
-		int result = new ArtistDao().insertEdu(con, memberPk, eduMap);
+		String[] schoolNames = eduMap.get("schoolNames");
+		String[] majors = eduMap.get("majors");
+		String[] statuses = eduMap.get("statuses");
+		
+		int isExist = 0;
+		int result = 0;
+		
+		for(int i = 0; i < schoolNames.length; i++) {
+			if(schoolNames[i].equals("alreadyExist")) {
+				isExist = 1;
+				break;
+			}else {
+				isExist = 0;
+			}
+		}
+		
+		if(isExist == 1) {
+			for(int i = 0; i < schoolNames.length; i++) {
+				if(!schoolNames[i].equals("alreadyExist") && !schoolNames[i].equals("")) {
+					result += new ArtistDao().insertEduOne(con, memberPk, schoolNames[i], majors[i], statuses[i]);
+				}
+			}
+		} else {
+			int result1 = new ArtistDao().deleteEdu(con, memberPk);
+			if(result1 > 0) {
+				commit(con);
+			} else {
+				rollback(con);
+			}
+			result = new ArtistDao().insertEdu(con, memberPk, eduMap);
+		}
 		
 		if(result > 0) {
 			commit(con);
@@ -318,9 +375,40 @@ public class ArtistService {
 	public int updateCareer(String memberPk, HashMap<String, String[]> careerMap) {
 		Connection con = getConnection();
 		
-		int result1 = new ArtistDao().deleteCareer(con, memberPk);
-		int result = new ArtistDao().insertCareer(con, memberPk, careerMap);
+		String[] officeNames = careerMap.get("officeNames");
+		String[] positions = careerMap.get("positions");
+		String[] workContents = careerMap.get("workContents");
+		String[] workYears = careerMap.get("workYears");
+		String[] workMonths = careerMap.get("workMonths");
 		
+		int isExist = 0;
+		int result = 0;
+		
+		for(int i = 0; i < officeNames.length; i++) {
+			if(officeNames[i].equals("alreadyExist")) {
+				isExist = 1;
+				break;
+			} else {
+				isExist = 0;
+			}
+		}
+		
+		if(isExist == 1) {
+			for(int i = 0; i < officeNames.length; i++) {
+				if(!officeNames[i].equals("alreadyExist") && !officeNames[i].equals("")) {
+					result += new ArtistDao().insertCareerOne(con, memberPk, officeNames[i], positions[i], workContents[i], workYears[i], workMonths[i]);
+				}
+			}
+		} else {
+			int result1 = new ArtistDao().deleteCareer(con, memberPk);
+			if(result1 > 0) {
+				commit(con);
+			} else {
+				rollback(con);
+			}
+			result = new ArtistDao().insertCareer(con, memberPk, careerMap);
+		}
+
 		if(result > 0) {
 			commit(con);
 		} else {
@@ -340,6 +428,7 @@ public class ArtistService {
 			if(fileList.get(i).getImageType() == "profile") {
 				result += new ArtistDao().updateImage(con, fileList.get(i));
 			} else if(fileList.get(i).getImageType() == "artistproof") {
+				int result1 = new ArtistDao().deleteImage(con, fileList.get(i));
 				result += new ArtistDao().insertImage(con, fileList.get(i));
 			}
 		}
