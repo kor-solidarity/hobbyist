@@ -93,6 +93,9 @@
 	img[id$=heartImg] {
 		cursor:pointer;
 	}
+	.petitionLesson {
+		cursor:pointer;
+	}
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <title>hobbyist</title>
@@ -251,8 +254,10 @@
 			</tr>
 			<% for(PetitionWithLesson pl : lessonList) {%>
 				<tr>
-					<td colspan="4" style="font-family:initial; color:black;">
-						- 아티스트 : <%=pl.getArtistName() %> / 제목 : <%=pl.getLessonName() %>
+					<input type="hidden" value="<%=pl.getLessonCode() %>">
+					<td class="petitionLesson" colspan="4" style="font-family:initial; color:black;">
+					
+						<img src="/hobbyist/static/images/blackboard.png" style="width:35px;height:35px; vertical-align:middle;"> <span style="height:35px">아티스트 : <%=pl.getArtistName() %> / 제목 : <%=pl.getLessonName() %></span>
 					</td>
 				</tr>
 			<%} %> 
@@ -442,6 +447,12 @@
 	   				}
 	   				index++;
    				});
+   			});
+   			
+   			$(".petitionLesson").click(function(){
+   				var lessonCode = $(this).parent().children("input").val();
+   				console.log(lessonCode);
+   				location.href = "<%=request.getContextPath()%>/selectOne.le?lessonCode=" + lessonCode; 
    			});
    		</script>
 	</div>
