@@ -5,6 +5,9 @@
 <%@ page import="com.dh.hobbyist.common.model.vo.Image" %>
 <%@ page import="com.dh.hobbyist.lesson.model.vo.LessonOrder" %>
 <%@ page import="com.dh.hobbyist.member.model.vo.Member" %>
+<%@ page import="java.util.Calendar" %>
+<%@ page import="java.util.Date" %>
+<%@ page import="java.util.GregorianCalendar" %>
 <%--
   Created by IntelliJ IDEA.
   User: SOY
@@ -13,6 +16,7 @@
   To change this template use File | Settings | File Templates.
 
   마이페이지 - 나의 수강 수업 목록 조회 및 리뷰 작성 페이지
+  접속주소: /mypage/writeReviews.me
 --%>
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
 <html>
@@ -23,7 +27,7 @@
     <%@include file="/views/common/boot4.jsp" %>
 </head>
 <body>
-<%--<%@include file="/views/common/myPage.jsp" %>--%>
+<%@include file="/views/common/myPage.jsp" %>
 <%
     System.out.println("entered writeList.jsp");
     ArrayList<LessonPayment> lessonPaymentArrayList = (ArrayList<LessonPayment>) request.getAttribute("lessonPaymentArrayList");
@@ -69,8 +73,12 @@
         %>
         <% for (int i = 0; i < lessonPaymentArrayList.size(); i++) {%>
         <%
-            String lessonOrderArrayTimeFormat =
-                    String.format("%1$TD %1$TT", lessonOrderArrayList.get(i).getOrderStart());
+            long lessonOrderArrayTimeFormat =lessonOrderArrayList.get(i).getOrderStart().getTime();
+            System.out.println(lessonOrderArrayTimeFormat);
+            Date date = new Date(lessonOrderArrayTimeFormat);
+            Calendar calendar = new GregorianCalendar();
+            calendar.setTime(date);
+            //         String.format("%1$TD %1$TT", lessonOrderArrayList.get(i).getOrderStart());
             System.out.println("lessonArrayList.get(" + i + "): " + lessonArrayList.get(i));
         %>
         <tr>
@@ -84,16 +92,17 @@
                                  style="width: 100%">
                         </td>
                         <td>
+                            PK: <%=lessonArrayList.get(i).getLessonCode()%> /
                             <%--강의제목--%>
                             <%=lessonArrayList.get(i).getLessonName()%>
                             <br>
                             <%--수업 시작일 / 위치 --%>
                             수업 시작일 :
-                            <%--                            <%=lessonOrderArrayList.get(i).getOrderStart()%> /--%>
-                            <%=lessonOrderArrayTimeFormat%>
-                            /
+                            <%=calendar.get(Calendar.YEAR)%>년 <%=calendar.get(Calendar.MONTH)%>월 <%=calendar.get(Calendar.DAY_OF_MONTH)%>일
+                            <%=calendar.get(Calendar.HOUR)%>:<%=calendar.get(Calendar.MINUTE)%> /
                             <%--                                <%=lessonOrderArrayList.get(i).%>--%>
-                            당산
+                            <%=scheduleArrayList.get(i).getRegion()%>
+                            <%=scheduleArrayList.get(i).getSubRegion()%>
                             <br><br>
                             결제일 : 2020-01-30 12:11:31
                         </td>
