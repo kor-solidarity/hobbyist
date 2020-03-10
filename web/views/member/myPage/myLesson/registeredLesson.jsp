@@ -175,7 +175,8 @@
 												<p><%= ((MyRegiLesson) myList.get(i)).getLessonName() %></p>
 												<p>수업시작일 : <%= (((MyRegiLesson) myList.get(i)).getStartDate().toString()).substring(0, 16) %> / <%= ((MyRegiLesson) myList.get(i)).getRegion() %></p>
 												<p>결제일 : <%= (((MyRegiLesson) myList.get(i)).getPaymentDate().toString()).substring(0, 16) %></p> 
-												<img class="refundImg" src="<%= request.getContextPath() %>/static/images/refund.png" onclick="refund(<%= ((MyRegiLesson) myList.get(i)).getScheduleCode() %>);">
+												<img class="refundImg" src="<%= request.getContextPath() %>/static/images/refund.png" onclick="refund(<%= ((MyRegiLesson) myList.get(i)).getScheduleCode() %>);"
+													style="vertical-align:bottom;">
 												<label class="refundBtn" onclick="refund(<%= ((MyRegiLesson) myList.get(i)).getPaymentCode() %>);">환불신청</label>
 								</td>
 								<td class="profile" style="width:15%; padding:0;">
