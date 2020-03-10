@@ -192,6 +192,49 @@
 	   		margin-top:-143px;
 	    	margin-left:215px;
 	   	}
+	   	
+	   	 	#suggestContents {
+	   		display:none;
+	   		/* margin-left: 130px; */
+	   		text-align:center;
+	   		margin-top:210px;
+	   		font-family: 'Nanum Gothic', sans-serif;
+			font-size:18px;
+			font-weight:900;
+			margin-bottom:60px;
+	   	}
+	   	#suggestContents p {
+	   		padding-bottom: 10px;
+	   	}
+		
+		#suggestImgArea {
+			display:none;
+			margin:quto;
+			/* margin-left:220px;  */
+			text-align:center;
+			cursor: pointer;
+			
+			
+		}	  
+		
+		#suggestImg {
+			width:300px;
+			height:300px;
+			z-index: 1;
+		} 
+		
+		#goSuggestBoard {
+			margin-top:-260px;
+			z-index: 2;
+			text-align: center;
+			
+		}
+	   
+	   
+	   #goSuggestImg {
+	  		width:130px;
+			height:30px;
+	   }
 	   
 	   
 </style>
@@ -360,6 +403,10 @@
 					</table>
 				 </form>
 				</div>
+				
+					<div id="suggestContents" style="text-align:center;"><p>등록된 수업이 없습니다.</p><p>저희 hobbyist는 수업 건의 서비스를 제공합니다.</p><p>수업 건의 게시판에서 듣고 싶은 수업을 건의해주세요!</p></div>
+				<div id="suggestImgArea"><img src="static/images/suggestIcon.png" id="suggestImg"><div id="goSuggestBoard"><img src="static/images/goSuggest.png" id="goSuggestImg"></div></div>
+				
 		<% } %>
 		
 		</div>
