@@ -448,6 +448,10 @@
 			$(".lesson-list").click(function() {
 				$(this).find($('form')).submit();
 			});
+			
+			
+			
+			
 		});
 		
 		

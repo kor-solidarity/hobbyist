@@ -27,9 +27,7 @@ public class SelectSubListServlet extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		int categoryCode = Integer.parseInt(request.getParameter("categoryCode"));
-
-		System.out.println("categoryCode : " + categoryCode);	
+		int categoryCode = Integer.parseInt(request.getParameter("categoryCode"));	
 		
 		int currentPage;
 		int limit;
@@ -64,7 +62,6 @@ public class SelectSubListServlet extends HttpServlet {
 		
 		ArrayList<HashMap<String, Object>> list = new LessonService().selectSub(categoryCode, pi);
 		
-		System.out.println("sub list : " + list);
 		
 		/*HashMap smap = new HashMap();
 		smap.put("list", list);
