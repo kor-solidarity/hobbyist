@@ -14,6 +14,7 @@ import java.util.Properties;
 import com.dh.hobbyist.suggest.model.vo.PageInfo;
 import com.dh.hobbyist.suggest.model.vo.Petition;
 import com.dh.hobbyist.suggest.model.vo.PetitionWishList;
+import com.dh.hobbyist.suggest.model.vo.PetitionWithLesson;
 import com.dh.hobbyist.suggest.model.vo.Reply;
 
 import static com.dh.hobbyist.common.JDBCTemplate.*;
@@ -655,6 +656,41 @@ public class SuggestDao {
 			close(rset);
 		}
 		
+		
+		return list;
+	}
+	
+	// 이 건의로 개설된 수업
+	public ArrayList<PetitionWithLesson> selectPetitionWithList(Connection con, int num) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<PetitionWithLesson> list = null;
+		
+		String query = prop.getProperty("selectPetitionWithList");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, num);
+			
+			rset = pstmt.executeQuery();
+			
+			list = new ArrayList<PetitionWithLesson>();
+			
+			while(rset.next()) {
+				PetitionWithLesson pl = new PetitionWithLesson();
+				pl.setLessonCode(rset.getInt("LESSON_PK"));
+				pl.setLessonName(rset.getString("LESSON_NAME"));
+				pl.setArtistCode(rset.getInt("ARTIST_PK"));
+				pl.setArtistName(rset.getString("MEMBER_NAME"));
+				
+				list.add(pl);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
 		
 		return list;
 	}

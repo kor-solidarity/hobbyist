@@ -289,7 +289,7 @@
 						}
 					}%>
 				</td>
-				<td colspan="4" class="pointArea">보유 포인트&nbsp; :&nbsp; <%= point %>p&nbsp;&nbsp;&nbsp;</td>
+				<td colspan="4" class="pointArea" style="width:700px;">보유 포인트&nbsp; :&nbsp; <%= point %>p&nbsp;&nbsp;&nbsp;</td>
 			</tr>
 		</table>
 	</div>

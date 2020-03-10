@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.dh.hobbyist.member.model.vo.Member;
 import com.dh.hobbyist.suggest.model.service.SuggestService;
 import com.dh.hobbyist.suggest.model.vo.Petition;
+import com.dh.hobbyist.suggest.model.vo.PetitionWithLesson;
 import com.dh.hobbyist.suggest.model.vo.Reply;
 
 /**
@@ -40,12 +41,15 @@ public class SelectOneSuggestServlet extends HttpServlet {
 		//System.out.println("petition detail : " + p);
 		List<Reply> replyList = new SuggestService().selectReplyList(num);
 		
+		List<PetitionWithLesson> lessonList = new SuggestService().selectPetitionWithList(num);
+		
 		String page = "";
 		
 		if(p != null) {
 			page = "views/suggest/suggestDetail.jsp";
 			request.setAttribute("petition", p);
 			request.setAttribute("replyList", replyList);
+			request.setAttribute("lessonList", lessonList);
 		} else {
 			page = "views/common/errorPage.jsp";
 			request.setAttribute("msg", "건의 게시판 상세 조회 실패");

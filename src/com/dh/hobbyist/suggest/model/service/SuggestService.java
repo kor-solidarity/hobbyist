@@ -8,6 +8,7 @@ import com.dh.hobbyist.suggest.model.dao.SuggestDao;
 import com.dh.hobbyist.suggest.model.vo.PageInfo;
 import com.dh.hobbyist.suggest.model.vo.Petition;
 import com.dh.hobbyist.suggest.model.vo.PetitionWishList;
+import com.dh.hobbyist.suggest.model.vo.PetitionWithLesson;
 import com.dh.hobbyist.suggest.model.vo.Reply;
 
 import static com.dh.hobbyist.common.JDBCTemplate.*;
@@ -209,6 +210,17 @@ public class SuggestService {
 		Connection con = getConnection();
 		
 		ArrayList<Petition> list = new SuggestDao().selectMyWishList(con, memberCode, pi);
+		
+		close(con);
+		
+		return list;
+	}
+	
+	//이 건의로 개설된 수업
+	public List<PetitionWithLesson> selectPetitionWithList(int num) {
+		Connection con = getConnection();
+		
+		ArrayList<PetitionWithLesson> list = new SuggestDao().selectPetitionWithList(con, num);
 		
 		close(con);
 		

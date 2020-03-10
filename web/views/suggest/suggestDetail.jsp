@@ -4,6 +4,7 @@
 	Petition petition = (Petition) request.getAttribute("petition");
 	List<Reply> replyList = (List<Reply>) request.getAttribute("replyList");
 	ArrayList<PetitionWishList> wishList = (ArrayList<PetitionWishList>) session.getAttribute("petitionWishList");
+	ArrayList<PetitionWithLesson> lessonList = (ArrayList<PetitionWithLesson>) request.getAttribute("lessonList");
 %>
 <!DOCTYPE html>
 <html>
@@ -248,6 +249,13 @@
 			<tr>
 				<td colspan="4"></td>
 			</tr>
+			<% for(PetitionWithLesson pl : lessonList) {%>
+				<tr>
+					<td colspan="4" style="font-family:initial; color:black;">
+						- 아티스트 : <%=pl.getArtistName() %> / 제목 : <%=pl.getLessonName() %>
+					</td>
+				</tr>
+			<%} %> 
 			<!-- <tr>
 				<td colspan="4" style="font-family:initial; color:black;">
 					- 아티스트 : 김혜원 / 제목 : 진짜 야구를 알려줄께요
