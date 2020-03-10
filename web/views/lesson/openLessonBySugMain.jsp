@@ -623,15 +623,11 @@ body {
 											$(function() {
 												$("#max").change(function() {
 													var max = Number($(this).val());
-													var min = Number($("#min").val());
 													
 													if (max < 0) {
 														alert("음수는 입력하실 수 없습니다.");
 														$(this).val("");
-													} else if (max < min) {
-														alert("최대인원은 최소인원보다 같거나 많아야 합니다.");
-														$(this).val("");
-													}
+													} 
 												});
 											});
 										</script>
