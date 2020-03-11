@@ -403,7 +403,7 @@
 								    	 success: function(data) {
 								    		 alert("환불이 완료되었습니다.");
 
-								    		 $('#myModal').modal("hide");
+								    		 location.href = "<%=request.getContextPath()%>/applyRefund.jsp";
 								    	 },
 								    	 error: function(error){
 								    		 console.log(error);

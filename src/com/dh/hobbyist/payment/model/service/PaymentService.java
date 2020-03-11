@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.dh.hobbyist.payment.model.dao.PaymentDao;
+import com.dh.hobbyist.payment.model.vo.Order;
 import com.dh.hobbyist.payment.model.vo.Payment;
 import com.dh.hobbyist.payment.model.vo.RegisterPayment;
 
@@ -76,14 +77,14 @@ public class PaymentService {
 		return payList;
 	}
 
-	public Payment showPayView(int scheduleCode, int memberCode) {
+	public ArrayList<Payment> showPayView(int scheduleCode, int memberCode) {
 		Connection con = getConnection();
 		
-		Payment p = new PaymentDao().showPayView(con, scheduleCode, memberCode);
+		ArrayList<Payment> pList = new PaymentDao().showPayView(con, scheduleCode, memberCode);
 		
 		close(con);
 		
-		return p;
+		return pList;
 	}
 
 	//마이페이지 결제 리스트
@@ -95,6 +96,16 @@ public class PaymentService {
 		close(con);
 		
 		return pList;
+	}
+
+	public ArrayList<Order> orderList(int memberCode) {
+		Connection con = getConnection();
+		
+		ArrayList<Order> orderList = new PaymentDao().orderList(con, memberCode);
+		
+		close(con);
+		
+		return orderList;
 	}
 
 }

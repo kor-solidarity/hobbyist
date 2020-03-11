@@ -20,6 +20,8 @@ public class Payment implements java.io.Serializable{
 	private String phone;				// 전화번호
 	private String impNum;				// 결제 고유 번호
 	private Timestamp payDate;			// 결제일
+	private Timestamp firstTime;		// 수업시작시간
+	private Timestamp lastTime;			// 수업종료시간
 	private int scheduleCode;			// 수업일정 코드
 	private int artistCode;				// 아티스트 코드
 	private String artistName;			// 아티스트 이름
@@ -29,8 +31,8 @@ public class Payment implements java.io.Serializable{
 
 	public Payment(int paymentCode, String lessonName, String region, String subRegion, String address, int totalOrder,
 			int costPerOrder, int totalPoint, int usingPoint, int givePoint, int totalCost, int payCost,
-			String payMethod, String memberName, String phone, String impNum, Timestamp payDate, int scheduleCode,
-			int artistCode, String artistName, int memberCode) {
+			String payMethod, String memberName, String phone, String impNum, Timestamp payDate, Timestamp firstTime,
+			Timestamp lastTime, int scheduleCode, int artistCode, String artistName, int memberCode) {
 		super();
 		this.paymentCode = paymentCode;
 		this.lessonName = lessonName;
@@ -49,6 +51,8 @@ public class Payment implements java.io.Serializable{
 		this.phone = phone;
 		this.impNum = impNum;
 		this.payDate = payDate;
+		this.firstTime = firstTime;
+		this.lastTime = lastTime;
 		this.scheduleCode = scheduleCode;
 		this.artistCode = artistCode;
 		this.artistName = artistName;
@@ -191,6 +195,22 @@ public class Payment implements java.io.Serializable{
 		this.payDate = payDate;
 	}
 
+	public Timestamp getFirstTime() {
+		return firstTime;
+	}
+
+	public void setFirstTime(Timestamp firstTime) {
+		this.firstTime = firstTime;
+	}
+
+	public Timestamp getLastTime() {
+		return lastTime;
+	}
+
+	public void setLastTime(Timestamp lastTime) {
+		this.lastTime = lastTime;
+	}
+
 	public int getScheduleCode() {
 		return scheduleCode;
 	}
@@ -230,8 +250,9 @@ public class Payment implements java.io.Serializable{
 				+ costPerOrder + ", totalPoint=" + totalPoint + ", usingPoint=" + usingPoint + ", givePoint="
 				+ givePoint + ", totalCost=" + totalCost + ", payCost=" + payCost + ", payMethod=" + payMethod
 				+ ", memberName=" + memberName + ", phone=" + phone + ", impNum=" + impNum + ", payDate=" + payDate
-				+ ", scheduleCode=" + scheduleCode + ", artistCode=" + artistCode + ", artistName=" + artistName
-				+ ", memberCode=" + memberCode + "]";
+				+ ", firstTime=" + firstTime + ", lastTime=" + lastTime + ", scheduleCode=" + scheduleCode
+				+ ", artistCode=" + artistCode + ", artistName=" + artistName + ", memberCode=" + memberCode + "]";
 	}
+	
 }
 	

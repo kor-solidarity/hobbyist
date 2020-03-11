@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="com.dh.hobbyist.payment.model.vo.RegisterPayment"%>
+<%@ page import="com.dh.hobbyist.payment.model.vo.Order"%>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="java.sql.Timestamp" %>
 <%

@@ -1,6 +1,7 @@
 package com.dh.hobbyist.payment.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -24,12 +25,12 @@ public class ReadyToInsertServlet extends HttpServlet {
 		int scheduleCode = Integer.parseInt(request.getParameter("scheduleCode"));
 		int memberCode = ((Member) request.getSession().getAttribute("loginMember")).getMemberCode();
 		
-		Payment p = new PaymentService().showPayView(scheduleCode, memberCode);
+		ArrayList<Payment> pList = new PaymentService().showPayView(scheduleCode, memberCode);
 		
 		String page = "";
-		if(p != null) {
+		if(pList != null) {
 			page = "views/lesson/payForm.jsp";
-			request.setAttribute("p", p);
+			request.setAttribute("pList", pList);
 		}else {
 			page = "views/common/errorPage.jsp";
 			request.setAttribute("msg", "잘못된 경로로 접근 하셨습니다.");

@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8" import="com.dh.hobbyist.payment.model.vo.Payment"%>
+	pageEncoding="UTF-8" import="com.dh.hobbyist.payment.model.vo.Payment, java.util.ArrayList"%>
 <%
-	Payment p = (Payment) request.getAttribute("p");
+	ArrayList<Payment> pList = (ArrayList<Payment>) request.getAttribute("pList");
+	Payment p = pList.get(0);
 %>
 <!DOCTYPE html>
 <html>
@@ -195,14 +196,10 @@ input[type="button"], input[type="reset"] {
 				<tr>
 					<td></td>
 					<td colspan="4">
-						<div>1회차 | 02.03 (월) 19:00 - 21:00</div>
-						<div>2회차 | 02.03 (월) 19:00 - 21:00</div>
-						<div>3회차 | 02.03 (월) 19:00 - 21:00</div>
-						<div>4회차 | 02.03 (월) 19:00 - 21:00</div>
-						<div>5회차 | 02.03 (월) 19:00 - 21:00</div>
-						<div>6회차 | 02.03 (월) 19:00 - 21:00</div>
-						<div>7회차 | 02.03 (월) 19:00 - 21:00</div>
-						<div>8회차 | 02.03 (월) 19:00 - 21:00</div>
+					<%  int i = 1;
+						for(Payment pm : pList) { %>
+						<div><%=i++%>회차 | <%=(pm.getFirstTime().toString()).substring(0, 16)%>- <%=(pm.getLastTime().toString()).substring(11, 16) %></div>
+					<%} %>
 					</td>
 				</tr>
 			</table>

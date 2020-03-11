@@ -165,7 +165,6 @@
 												<p><%=myReg.getPaymentDate() %></p> 
 								</td>
 								<td class="profile" style="width:15%; padding:0;">
-									<div align="center"><img class="profileImg" src="<%=request.getContextPath() %>/<%=myReg.getProfileImgRoute()%>/<%=myReg.getProfileImgName()%>"></div>
 									<table class="profileTable">
 										<tr>
 											<td>

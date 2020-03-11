@@ -2,7 +2,7 @@ package com.dh.hobbyist.payment.model.vo;
 
 import java.sql.Timestamp;
 
-public class RegisterPayment {
+public class RegisterPayment implements java.io.Serializable{
 	private int scheduleCode;			//수업일정코드
 	private String lessonImgRoute;		//수업 이미지 경로
 	private String lessonImgName;		//수업 이미지 파일명	
