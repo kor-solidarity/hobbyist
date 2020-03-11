@@ -5,7 +5,7 @@
 <% 
 	ArrayList<MyRegiLesson> myList = (ArrayList) request.getAttribute("myList");
 
-	//System.out.println("regiList : " + myList.size());
+	//System.out.println("refundCode : " + ((MyRegiLesson) myList.get(0)).getRefundCode());
 %>
 <!DOCTYPE html>
 <html>
@@ -66,8 +66,8 @@
 		font-size: 14px;
 	}
 	.refundImg {
-		height: 30px;
-		widht: 30px;
+		height: 26px;
+		widht: 26px;
 		margin-top: 5px;
 		cursor:pointer;
 		/* display:table-cell;
@@ -75,9 +75,9 @@
 	}
 	.refundBtn {
 		font-family: Do Hyeon;
-		font-size: 20px;
+		font-size: 18px;
 		color:#DAB554;
-		cursor:pointer;
+		//cursor:pointer;
 		/* line-height: 30px; */
 	}
 	.lessonText {
@@ -165,6 +165,7 @@
 		<!-- 수업 목록 영역 -->
 		<table class="lessonArea" align="center">
 			<% for(int i = 0; i < myList.size(); i++) { %>
+			
 			<tr>
 				<td>
 					<div class="eachWrap">
@@ -175,9 +176,19 @@
 												<p><%= ((MyRegiLesson) myList.get(i)).getLessonName() %></p>
 												<p>수업시작일 : <%= (((MyRegiLesson) myList.get(i)).getStartDate().toString()).substring(0, 16) %> / <%= ((MyRegiLesson) myList.get(i)).getRegion() %></p>
 												<p>결제일 : <%= (((MyRegiLesson) myList.get(i)).getPaymentDate().toString()).substring(0, 16) %></p> 
+												<% if(((MyRegiLesson) myList.get(i)).getRefundCode() == 0) { %>
 												<img class="refundImg" src="<%= request.getContextPath() %>/static/images/refund.png" onclick="refund(<%= ((MyRegiLesson) myList.get(i)).getScheduleCode() %>);"
 													style="vertical-align:bottom;">
-												<label class="refundBtn" onclick="refund(<%= ((MyRegiLesson) myList.get(i)).getPaymentCode() %>);">환불신청</label>
+												<label class="refundBtn" onclick="refund(<%= ((MyRegiLesson) myList.get(i)).getPaymentCode() %>);" style="cursor:pointer;">환불신청</label>
+												<% } else if (((MyRegiLesson) myList.get(i)).getRefundAccepted() == 0){ %>
+												<label class="refundBtn" style="color:darkolivegreen">환불 대기중</label>
+												<% } else if (((MyRegiLesson) myList.get(i)).getRefundAccepted() == 1) { %>
+												<label class="refundBtn" style="color:dimgrey">환불 완료</label>
+												<% } else { %>
+												<img class="refundImg" src="<%= request.getContextPath() %>/static/images/refund.png" onclick="refund(<%= ((MyRegiLesson) myList.get(i)).getScheduleCode() %>);"
+													style="vertical-align:bottom;">
+												<label class="refundBtn" onclick="refund(<%= ((MyRegiLesson) myList.get(i)).getPaymentCode() %>);" style="cursor:pointer;">환불신청</label>
+												<% } %>
 								</td>
 								<td class="profile" style="width:15%; padding:0;">
 									<div align="center"><img class="profileImg" src="<%= ((MyRegiLesson) myList.get(i)).getProfileImgRoute() %>/<%= ((MyRegiLesson) myList.get(i)).getProfileImgName() %>"></div>
@@ -199,7 +210,10 @@
 					</div>
 				</td>
 			</tr>
-			<% } %>
+			
+			<%
+			}
+			%>
 		</table>
 		<script>
 			function refund(paymentCode){
@@ -215,5 +229,8 @@
 			<button>4</button> -->
 		</div>
 	</section>
+	
+<%@ include file="/views/common/footer.jsp" %>
+
 </body>
 </html>

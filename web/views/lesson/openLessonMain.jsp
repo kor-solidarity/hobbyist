@@ -209,6 +209,7 @@ body {
     margin-bottom: 5px;
     margin-left: auto;
     margin-right: auto;
+    text-align:center;
 }
 
 .item3 {
@@ -816,10 +817,9 @@ body {
 							</table>
 							<table id="LessonTable10" style="width:100%; height:500px;">
 								<tr>
-									<td style="width: 80px;">지역</td>
-									<td style="width: 135px;">상세지역</td>
- 									<td colspan="2"><label class="currOrder">1</label>회차 시작시간</td>
-									<td style="width: 130px;"><label class="currOrder">1</label>회차 종료시간</td>
+									<td style="width: 140px;">지역</td>
+									<td style="width: 150px;">상세지역</td>
+									<td></td>
 								</tr>
 								<tr>
 									<td>
@@ -849,18 +849,16 @@ body {
 											<option value="">-선택-</option>
 										</select>
 									</td>
-									<td colspan="2"><input id="startTime" class="nanum" type="datetime-local"></td>
-									<td><input id="endTime" class="nanum" type="time"></td>
+									<td></td>
 								</tr>
 								<tr>
-									<td colspan="2">상세주소</td>
-									<td style="width:240px;"></td>
-									<td colspan="2">등록된 회차목록 / 총 <label id="showOrder"></label>회차&nbsp;<button id="insertOrderBtn" type="button" class="btn btn-primary btnAll" style="padding: 5px 8px"onclick="insertOrder();">▼</button></td>
+									<td>상세주소</td>
+									<td colspan="2"></td>
 								</tr>
-								<tr style="height: 250px;">
+								<tr style="height: 300px;">
 									<td colspan="3" style="border: 1px solid darkolivegreen; padding:0px;">
-										<div class="map_wrap">
-											<div id="map" style="width:485px;height:264px;"></div>
+										<div class="map_wrap" style="height:100%">
+											<div id="map" style="width:100%;height:300px;"></div>
 											
 											<div id="menu_wrap" class="bg_white">
 												<div class="option">
@@ -878,11 +876,10 @@ body {
 											</div>
 										</div>
 									</td>
-									<td id= "orderListArea" colspan="2" style="border: 1px solid darkolivegreen; padding:4px; font-size:15px"></td>
 								</tr>
 								<tr>
-									<td colspan="5">
-									전체 주소 입력 : <input id="address" type="text" class="nanum" name="address" placeholder="전체 주소를 복사 또는 직접 입력해주세요." style="width:450px">
+									<td colspan="3">
+									전체 주소 입력 : <input id="address" type="text" class="nanum" name="address" placeholder="전체 주소를 복사 또는 직접 입력해주세요." style="width:600px">
 									</td>
 								</tr>
 							</table>
@@ -904,11 +901,23 @@ body {
 							</table>
 							<table id="LessonTable12" style="width:100%">
 								<tr>
-		                            <td style="width:100%;">등록된 수업일정 목록
+									<td style="width:275px;"><label class="currOrder">1</label>회차 시작시간</td>
+									<td style="width:145px;"><label class="currOrder">1</label>회차 종료시간
+									<button id="insertOrderBtn" type="button" class="btn btn-primary btnAll" style="padding: 5px 8px"onclick="insertOrder();">▼</button>
+									</td>
+									<td>등록된 회차목록 / 총 <label id="showOrder"></label>회차&nbsp;</td>
+								</tr>
+								<tr>
+									<td style="vertical-align:top;"><input id="startTime" class="nanum" type="datetime-local"></td>
+									<td style="vertical-align:top;"><input id="endTime" class="nanum" type="time"></td>
+									<td id= "orderListArea" colspan="2" style="height:270px; border: 1px solid darkolivegreen; padding:4px; vertical-align:top; font-size:15px"></td>
+								</tr>
+								<tr>
+		                            <td colspan="3">등록된 수업일정 목록
 		                            </td>
 								</tr>
 								<tr>
-									<td id="scheduleListArea"></td>
+									<td colspan="3" id="scheduleListArea"></td>
 								</tr>
 							</table>
 						</div>
@@ -1221,10 +1230,10 @@ function removeAllChildNods(el) {
 						alert("수업소개를 입력해주세요");
 					} else if (num == 5 && (reg == "" || subReg == "")) {
 						alert("지역 카데고리를 설정해주세요");
-					} else if (num == 5 && orderCheck == 0) {
-						alert("모든 회차 일정을 입력해주세요");
 					} else if (num == 5 && addr == "") {
 						alert("상세주소를 입력해주세요");
+					} else if (num == 6 && orderCheck == 0) {
+						alert("모든 회차 일정을 입력해주세요");
 					} else {
 						$("#show"+ num).hide();
 						console.log(num);
@@ -1303,29 +1312,7 @@ function removeAllChildNods(el) {
 					$("#nextModalBtn").hide();
 					$("#saveModalBtn").show();
 					
-					var order1 = $("#order1").text();
-					var regionVal = Number($("#region").val()) - 1;
-					var subRegion = $("#subRegion").val();
 					
-					console.log("regionVal : " + regionVal);
-					console.log("cat1_name[regionVal] : " + cat1_name[regionVal]);
-					
-					var region = cat1_name[regionVal];
-					
-					$scheduleListArea = $("#scheduleListArea");
-					//이전 버튼을 눌렀다 다음을 누렀을 때 remove를 하지 않으면 수얼 일정 추가에 대한 힌트를 얻을 수도 있다.
-					$scheduleListArea.find("span").remove();
-					
-					//추가로 넣은 세종시 처리를 별도로 해주기 위한 조건문
-					if(regionVal < 16) {
-						$scheduleListArea.append("<span class='item2'>" + region + " " + subRegion + " | " + order1 + "</span>");
-					} else {
-						$scheduleListArea.append("<span class='item2'> 세종 " + subRegion + " | " + order1 + "</span>");
-					}
-
-					console.log("orderNum : " + orderNum);
-					console.log("startTime : " + startTime);
-					console.log("endTime : " + endTime);
 				} 
 	
 			});
@@ -1545,18 +1532,42 @@ function removeAllChildNods(el) {
 			} else {
 				if(orderNum < inputOrder) {
 					$orderListArea = $("#orderListArea");
-					$orderListArea.append("<div id='order" + orderNum + "' class='item2'>#" + orderNum + " | " + startTime.substring(2, 10) + " | " + startTime.substring(11, 16) + "~" + endTime + "</div>");
+					$orderListArea.append("<div id='order" + orderNum + "' class='item2'>" + orderNum + "회차 | " + startTime.substring(0, 10) + " | " + startTime.substring(11, 16) + "~" + endTime + "</div>");
 					$orderListArea.append("<input type='hidden' name='start" + orderNum + "' value='" + sl + "'>");
 					$orderListArea.append("<input type='hidden' name='end" + orderNum + "' value='" + el + "'>");
 					orderNum++;
 				} else {
 					$orderListArea = $("#orderListArea");
-					$orderListArea.append("<div id='order" + orderNum + "' class='item2'>#" + orderNum + " | " + startTime.substring(2, 10) + " | " + startTime.substring(11, 16) + "~" + endTime + "</div>");
+					$orderListArea.append("<div id='order" + orderNum + "' class='item2'>" + orderNum + "회차 | " + startTime.substring(0, 10) + " | " + startTime.substring(11, 16) + "~" + endTime + "</div>");
 					$orderListArea.append("<input type='hidden' name='start" + orderNum + "' value='" + sl + "'>");
 					$orderListArea.append("<input type='hidden' name='end" + orderNum + "' value='" + el + "'>");
 					alert("모든 회차를 입력하셨습니다");
 					orderCheck = 1;
 					insertOrderBtn.disabled = 'disabled';
+					
+					var order1 = $("#order1").text();
+					var regionVal = Number($("#region").val()) - 1;
+					var subRegion = $("#subRegion").val();
+					
+					console.log("regionVal : " + regionVal);
+					console.log("cat1_name[regionVal] : " + cat1_name[regionVal]);
+					
+					var region = cat1_name[regionVal];
+					
+					$scheduleListArea = $("#scheduleListArea");
+					//이전 버튼을 눌렀다 다음을 누렀을 때 remove를 하지 않으면 수얼 일정 추가에 대한 힌트를 얻을 수도 있다.
+					$scheduleListArea.find("span").remove();
+					
+					//추가로 넣은 세종시 처리를 별도로 해주기 위한 조건문
+					if(regionVal < 16) {
+						$scheduleListArea.append("<span class='item2'>" + region + " " + subRegion + " | " + order1 + "</span>");
+					} else {
+						$scheduleListArea.append("<span class='item2'> 세종 " + subRegion + " | " + order1 + "</span>");
+					}
+
+					//console.log("orderNum : " + orderNum);
+					//console.log("startTime : " + startTime);
+					//console.log("endTime : " + endTime);
 				} 
 			}
 			
