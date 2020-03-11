@@ -314,7 +314,7 @@ color: #FFFFFF;
 
 
 	<div class="divcenter3">
-	 <img id="show" src="<%=request.getContextPath()%>/static/images/memberUpdate1.png"> 
+	<%--  <img id="show" src="<%=request.getContextPath()%>/static/images/memberUpdate1.png">  --%>
 	</div>
 
 	<div class="divcenter5">
@@ -411,11 +411,11 @@ color: #FFFFFF;
 				<tr>
 					<td colspan="1" style="width: 90px; text-align: left;"><label id="labelAccount">계좌번호</label></td>
 					<td colspan="1" style="width: 30px;"><select name="bankName" id="bankName" style="width: 75px; value="<%=loginMember.getBankName() %>">
-							<option value="">신한</option>
-							<option value="">국민</option>
-							<option value="">하나</option>
-							<option value="">카카오뱅크</option>
-							<option value="">케이뱅크</option>
+							<option value="신한">신한</option>
+							<option value="국민">국민</option>
+							<option value="하나">하나</option>
+							<option value="카카오뱅크">카카오뱅크</option>
+							<option value="케이뱅크">케이뱅크</option>
 					</select></td>
 					<td colspan="1" style="width: 10px;"></td>
 					<td colspan="3" style="text-align: center;"><input type="text" name="bankNum" id="bankNum" style="width: 165px;" value="<%=loginMember.getBankNum() %>"></td>
