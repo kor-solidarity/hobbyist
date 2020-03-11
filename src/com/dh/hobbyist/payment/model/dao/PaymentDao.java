@@ -9,11 +9,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-import com.dh.hobbyist.lesson.model.vo.MyRegiLesson;
+import com.dh.hobbyist.payment.model.vo.Order;
 import com.dh.hobbyist.payment.model.vo.Payment;
 import com.dh.hobbyist.payment.model.vo.RegisterPayment;
 
@@ -139,10 +140,10 @@ public class PaymentDao {
 		return result;
 	}
 
-	public Payment showPayView(Connection con, int scheduleCode, int memberCode) {
+	public ArrayList<Payment> showPayView(Connection con, int scheduleCode, int memberCode) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		Payment p = null;
+		ArrayList<Payment> pList = null;
 		
 		String query = prop.getProperty("showPayView");
 		
@@ -153,8 +154,9 @@ public class PaymentDao {
 			
 			rset = pstmt.executeQuery();
 			
+			pList = new ArrayList<Payment>();
 			while(rset.next()) {
-				p = new Payment();
+				Payment p = new Payment();
 				p.setScheduleCode(rset.getInt("SCHEDULE_PK"));
 				p.setLessonName(rset.getString("LESSON_NAME"));
 				p.setArtistCode(rset.getInt("MEMBER_PK"));
@@ -165,7 +167,11 @@ public class PaymentDao {
 				p.setRegion(rset.getString("REGION"));
 				p.setSubRegion(rset.getString("SUB_REGION"));
 				p.setAddress(rset.getString("ADDRESS"));
+				p.setFirstTime(rset.getTimestamp("LESSON_ORDER_START"));
+				p.setLastTime(rset.getTimestamp("LESSON_ORDER_END"));
 				p.setTotalPoint(rset.getInt("MEMBER_POINT"));
+				
+				pList.add(p);
 				
 			}
 			
@@ -173,8 +179,7 @@ public class PaymentDao {
 			e.printStackTrace();
 		}
 		
-		System.out.println(p);
-		return p;
+		return pList;
 	}
 	
 	//결제할때 포인트 사용 시 포인트 변동
@@ -278,8 +283,6 @@ public class PaymentDao {
 				p.setPaymentDate(rset.getTimestamp("PAYMENT_DATE"));
 				p.setPayCost(rset.getInt("PAYMENT_COSTS"));
 				p.setStatus(rset.getInt("STATUS"));
-				p.setStartDate(rset.getTimestamp("LESSON_ORDER_START"));
-				p.setEndDate(rset.getTimestamp("LESSON_ORDER_END"));
 				p.setNow(rset.getTimestamp("NOW"));
 				
 				pList.add(p);
@@ -293,6 +296,39 @@ public class PaymentDao {
 			close(rset);
 		}
 		return pList;
+	}
+
+	public ArrayList<Order> orderList(Connection con, int memberCode) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<Order> orderList = null;
+		
+		String query = prop.getProperty("orderList");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, memberCode);
+			rset = pstmt.executeQuery();
+			
+			orderList = new ArrayList<Order>();
+			
+			while(rset.next()) {
+				
+				Order o = new Order();
+				o.setFirstOrder(rset.getTimestamp("FIRST"));
+				o.setLastOrder(rset.getTimestamp("LAST"));
+				
+				orderList.add(o);
+			}
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+		return orderList;
 	}
 
 }

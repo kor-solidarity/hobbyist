@@ -2,7 +2,7 @@ package com.dh.hobbyist.point.model.vo;
 
 import java.sql.Timestamp;
 
-public class Point {
+public class Point implements java.io.Serializable{
 	private int type;
 	private int point;
 	private Timestamp pointDate;

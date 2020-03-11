@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.dh.hobbyist.member.model.vo.Member;
 import com.dh.hobbyist.payment.model.service.PaymentService;
+import com.dh.hobbyist.payment.model.vo.Order;
 import com.dh.hobbyist.payment.model.vo.RegisterPayment;
 
 @WebServlet("/paymentList.me")
@@ -25,7 +26,13 @@ public class PaymentListServlet extends HttpServlet {
 		int memberCode = ((Member) request.getSession().getAttribute("loginMember")).getMemberCode();
 		
 		ArrayList<RegisterPayment> pList = new PaymentService().payList(memberCode);
+		ArrayList<Order> orderList = new PaymentService().orderList(memberCode);
 		
+		for(int i = 0; i < pList.size(); i++) {
+			pList.get(i).setStartDate(orderList.get(i).getFirstOrder());
+			pList.get(i).setEndDate(orderList.get(i).getLastOrder());
+			
+		}
 		String page = "";
 		if(pList != null) {
 			page = "views/member/myPage/myPayment/payLesson.jsp";
