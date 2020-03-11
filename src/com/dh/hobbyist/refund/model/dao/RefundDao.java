@@ -53,7 +53,7 @@ public class RefundDao {
 				r.setUsingPoint(rset.getInt("POINTS_USED"));
 				r.setImpNum(rset.getString("PAYMENT_IMP_NUM"));
 				r.setPayDate(rset.getTimestamp("PAYMENT_DATE"));
-
+				
 				refundList.add(r);
 			}
 		} catch (SQLException e) {
