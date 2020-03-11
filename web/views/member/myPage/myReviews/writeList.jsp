@@ -185,10 +185,10 @@
                 <div class="col-12 review-modal-content">
                     <textarea name="review_content" style="width: 100%; height: 100%;" id="review_content" cols="30"
                               rows="5"
-                              placeholder="수업에 대한 평가를 100자 이하로 작성해 주세요." onkeyup="onWriteChange(this)"></textarea>
+                              placeholder="수업에 대한 평가를 100자 이상으로 작성해 주세요." onkeyup="onWriteChange(this)"></textarea>
                 </div>
                 <div class="col-12" style="text-align: right">
-                    <span id="review-modal-words">0</span>자 / 100자 이하로 작성 해 주세요.
+                    <span id="review-modal-words">0</span>자 / 100자 이상으로 작성 해 주세요.
                 </div>
             </div>
             <%--중간에 줄그으려고..--%>
