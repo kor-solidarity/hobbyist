@@ -5,7 +5,7 @@
 <% 
 	ArrayList<MyRegiLesson> myList = (ArrayList) request.getAttribute("myList");
 
-	//System.out.println("refundCode : " + ((MyRegiLesson) myList.get(0)).getRefundCode());
+	System.out.println("myList.size() : " + myList.size());
 %>
 <!DOCTYPE html>
 <html>
@@ -127,6 +127,12 @@
 	.subMenuTitle {
 		cursor:pointer;
 	}
+	
+	#emptyLesson {
+		font-size:22px;
+		font-family: Do Hyeon;
+		vertical-align:middle;
+	}
 </style>
 </head>
 <body>
@@ -164,6 +170,15 @@
 		
 		<!-- 수업 목록 영역 -->
 		<table class="lessonArea" align="center">
+			<% if(myList.size() == 0) { %>
+			<tr>
+				<td style="vertical-align:middle; text-align:center;">
+					<div class="eachWrap" id="emptyLesson">
+						<label>아직 등록하신 수업이 없습니다.</label>
+					</div>
+				</td>
+			</tr>
+			<% } %>
 			<% for(int i = 0; i < myList.size(); i++) { %>
 			
 			<tr>
