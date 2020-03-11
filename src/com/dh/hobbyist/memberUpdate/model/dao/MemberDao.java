@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-import com.dh.hobbyist.memberUpdate.model.vo.*;
+import com.dh.hobbyist.member.model.vo.*;
 
 public class MemberDao {
 
@@ -30,23 +30,17 @@ public class MemberDao {
 			e.printStackTrace();
 		}
 	}
-
-
-
-
-
-
-
 	//회원 정보수정
 	public int memberUpdate(Connection con, Member member) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-
+		String query = "";
 		int memberUpdate = 0;
 
-		String query = prop.getProperty("memberUpdate");
-
-		System.out.println("dao값:"+ member.getMemberId());
+		if(member.getBankName() != null) {
+			query = prop.getProperty("memberUpdate");
+		}else{
+		System.out.println("dao값:"+member.getMemberId());
 		System.out.println("dao값:"+member.getMemberPwd());
 		System.out.println("dao값:"+member.getMemberName());
 		System.out.println("dao값:"+member.getEmail());
@@ -54,7 +48,8 @@ public class MemberDao {
 		System.out.println("dao값:"+member.getBankName());
 		System.out.println("dao값:"+member.getBankNum());
 		System.out.println("dao값:"+member.getMemberCode());
-
+		}
+		if(member.getBankName() != null) {
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, member.getMemberPwd());
@@ -64,6 +59,7 @@ public class MemberDao {
 			pstmt.setString(5, member.getBankName());
 			pstmt.setString(6, member.getBankNum());
 			pstmt.setInt(7, member.getMemberCode());
+		
 			// MEMEBER_PK(프라이머리키 ) = ? 값에 대한 정보를  dao에서 써줘야한다
 
 			memberUpdate = pstmt.executeUpdate();
@@ -84,6 +80,10 @@ public class MemberDao {
 			
 			close(pstmt);
 		}  
+		
+		}else {
+			System.out.println("Null값으로 값이 저장되지않았습니다.");
+		}
 		return memberUpdate;  
 	}
 
@@ -130,9 +130,6 @@ public class MemberDao {
 			pstmt =con.prepareStatement(query);
 			pstmt.setString(1, userPw);
 			rset = pstmt.executeQuery();
-
-
-
 			if(rset.next()) {
 				result = rset.getInt(1);
 			}	
@@ -176,21 +173,6 @@ public class MemberDao {
 			close(pstmt);
 		}
 		return result;
-
-
 	}
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 }

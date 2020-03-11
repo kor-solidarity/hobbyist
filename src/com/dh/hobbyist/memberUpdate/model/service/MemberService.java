@@ -10,7 +10,7 @@ import java.sql.Connection;
 import javax.rmi.ssl.SslRMIClientSocketFactory;
 
 import com.dh.hobbyist.memberUpdate.model.dao.MemberDao;
-import com.dh.hobbyist.memberUpdate.model.vo.Member;
+import com.dh.hobbyist.member.model.vo.Member;
 
 public class MemberService {
 	
@@ -22,10 +22,12 @@ public class MemberService {
 		Connection con = getConnection();
 		
 		int memberUpdate = new MemberDao().memberUpdate(con, member);
-		System.out.println("DB에서 받아온의" + memberUpdate);
 		
+	/*	System.out.println("DB에서 받아온의" + memberUpdate);
+		*/
 		if(memberUpdate > 0) {
-			/*commit(con); 자동 컴밋
+			commit(con);
+			/* 자동 컴밋
 			 * 
 			 */
 		}else {

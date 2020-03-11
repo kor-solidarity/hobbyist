@@ -12,7 +12,7 @@ import javax.websocket.Session;
 
 import com.dh.hobbyist.memberUpdate.*;
 import com.dh.hobbyist.memberUpdate.model.service.MemberService;
-import com.dh.hobbyist.memberUpdate.model.vo.Member;
+import com.dh.hobbyist.member.model.vo.Member;
 
 
 
@@ -49,16 +49,18 @@ public class memberUpdateServletM extends HttpServlet {
 	String bankNum = request.getParameter("bankNum");
 	
 	HttpSession session =request.getSession(true);
-	/*int memberCode = ((Member) request.getSession().getAttribute("loginMember")).getMemberCode();*/
+	int memberCode = ((Member) request.getSession().getAttribute("loginMember")).getMemberCode();
 	
-	String s="";
+	System.out.println(memberCode);
+	
+	/*String s="";
 	if(s != null) {
-		System.out.println("loginMember의 타입은"+ loginMember);
+		System.out.println("loginMember의 타입은"+ memberCode);
 		s = (String)session.getAttribute("loginMember");
 	 }else {
 		 System.out.println("Attribute id 값:" + s);
 	 }
-		    int sl = Integer.parseInt(s);
+		    int sl = Integer.parseInt(s);*/
 	
 	System.out.println("서블릿 userId:" + userId);
 	System.out.println("서블릿 password1:" + userPwd);
@@ -67,10 +69,9 @@ public class memberUpdateServletM extends HttpServlet {
 	System.out.println("서블릿 phone:" + phone);
 	System.out.println("서블릿 bank:" + bankName);
 	System.out.println("서블릿 bankText:" + bankNum);
-	/*System.out.println("서블릿 PK값은" + memberCode);*/
+	System.out.println("서블릿 PK값은" + memberCode);
 	
 	Member member = new Member();
-	member.setMemberCode(sl);
 	member.setMemberId(userId);
 	member.setMemberPwd(userPwd);
 	member.setMemberName(nickName);
@@ -78,6 +79,7 @@ public class memberUpdateServletM extends HttpServlet {
 	member.setPhone(phone);
 	member.setBankName(bankName);
 	member.setBankNum(bankNum);
+	member.setMemberCode(memberCode);
 	
 	int result = new MemberService().memberUpdate(member);
 	
@@ -90,12 +92,12 @@ public class memberUpdateServletM extends HttpServlet {
 	System.out.println("set에 담고 phone" + phone);
 	System.out.println("set에 담고 bank" + bankName);
 	System.out.println("set에 담고 bankText" + bankNum);
-	/*System.out.println("set에 담고 PK값은" + memberCode);*/
+	System.out.println("set에 담고 PK값은" + memberCode);
 	
 	String page="";
 	if(result >0) {
 		HttpSession session2 = request.getSession();
-		session.setAttribute("loginUser", result);
+		session2.setAttribute("loginUser", result);
 		
 		
 		page = "/views/common/successPage.jsp";
@@ -107,7 +109,7 @@ public class memberUpdateServletM extends HttpServlet {
 		System.out.println("성공시 phone" + phone);
 		System.out.println("성공시 bank" + bankName);
 		System.out.println("성공시 bankText" + bankNum);
-		/*System.out.println("성공시 담고 PK값은" + memberCode);*/
+		System.out.println("성공시 담고 PK값은" + memberCode);
 	}else {
 		
 		page = "/views/common/errorPage.jsp";
@@ -125,10 +127,6 @@ public class memberUpdateServletM extends HttpServlet {
 }
 	
 
-	private int parseInt(int s) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
