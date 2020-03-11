@@ -6,6 +6,7 @@ import com.dh.hobbyist.lesson.model.vo.LessonOrder;
 import com.dh.hobbyist.lesson.model.vo.LessonPayment;
 import com.dh.hobbyist.lesson.model.vo.LessonSchedule;
 import com.dh.hobbyist.member.model.vo.Member;
+import com.dh.hobbyist.review.model.vo.LessonReview;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -265,11 +266,40 @@ public class ReviewDao {
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}finally {
+		} finally {
 			close(resultSet);
 			close(preparedStatement);
 		}
 		
 		return lessonOrder;
+	}
+	
+	public int insertReview(Connection con, LessonReview lessonReview) {
+		
+		PreparedStatement preparedStatement = null;
+		// ResultSet resultSet = null;
+		int result = 0;
+		
+		String query = prop.getProperty("insertReview");
+		
+		System.out.println(lessonReview.toString());
+		
+		try {
+			preparedStatement = con.prepareStatement(query);
+			
+			preparedStatement.setInt(1, lessonReview.getLessonPk());
+			preparedStatement.setInt(2, lessonReview.getStars());
+			preparedStatement.setString(3, lessonReview.getContent());
+			preparedStatement.setInt(4, lessonReview.getMemberPk());
+			System.out.println(preparedStatement.toString());
+			result = preparedStatement.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(preparedStatement);
+		}
+		
+		return result;
 	}
 }

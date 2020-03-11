@@ -7,8 +7,10 @@ import com.dh.hobbyist.lesson.model.vo.LessonPayment;
 import com.dh.hobbyist.lesson.model.vo.LessonSchedule;
 import com.dh.hobbyist.member.model.vo.Member;
 import com.dh.hobbyist.review.model.dao.ReviewDao;
+import com.dh.hobbyist.review.model.vo.LessonReview;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import static com.dh.hobbyist.common.JDBCTemplate.close;
@@ -61,7 +63,7 @@ public class ReviewService {
 	public Member selectMember(int pk) {
 		Connection con = getConnection();
 		
-		Member member = new ReviewDao().selectMember(con,  pk);
+		Member member = new ReviewDao().selectMember(con, pk);
 		
 		close(con);
 		
@@ -78,5 +80,26 @@ public class ReviewService {
 		close(con);
 		
 		return lessonOrder;
+	}
+	
+	public int insertReview(LessonReview lessonReview) {
+		Connection con = getConnection();
+		
+		int result =
+				new ReviewDao().insertReview(con, lessonReview);
+		
+		try {
+			// if (result == 0) {
+				con.rollback();
+			// } else {
+			// 	con.commit();
+			// }
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(con);
+		}
+		
+		return result;
 	}
 }

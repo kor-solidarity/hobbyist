@@ -1,21 +1,22 @@
 package com.dh.hobbyist.review.model.vo;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
+import java.sql.Date;
+import java.sql.Date;
 
 public class LessonReview implements Serializable {
 	int reviewPk;
 	int lessonPk;
 	int stars;
 	String content;
-	Timestamp reviewDate;
+	Date reviewDate;
 	int memberPk;
 	
 	public LessonReview() {
 	}
 	
 	public LessonReview(int reviewPk, int lessonPk, int stars, String content,
-						Timestamp reviewDate, int memberPk) {
+						Date reviewDate, int memberPk) {
 		this.reviewPk = reviewPk;
 		this.lessonPk = lessonPk;
 		this.stars = stars;
@@ -68,11 +69,11 @@ public class LessonReview implements Serializable {
 		this.content = content;
 	}
 	
-	public Timestamp getReviewDate() {
+	public Date getReviewDate() {
 		return reviewDate;
 	}
 	
-	public void setReviewDate(Timestamp reviewDate) {
+	public void setReviewDate(Date reviewDate) {
 		this.reviewDate = reviewDate;
 	}
 	
