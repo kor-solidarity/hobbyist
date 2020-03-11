@@ -6,14 +6,18 @@ public class Refund implements java.io.Serializable{
 	private int refundCode;
 	private int payCode;
 	private int schedulCode;
+	private String lessonName;
 	private String memberCode;
 	private String memberName;
 	private String phone;
 	private int artistCode;
+	private String artistName;
+	private int payCost;
 	private int refundCost;
 	private int refundPoint;
 	private int givePoint;
 	private int usingPoint;
+	private Timestamp payDate;
 	private Timestamp applyRefundDate;
 	private Timestamp refundDate;
 	private int status;
@@ -23,21 +27,26 @@ public class Refund implements java.io.Serializable{
 	
 	public Refund() {}
 
-	public Refund(int refundCode, int payCode, int schedulCode, String memberCode, String memberName, String phone,
-			int artistCode, int refundCost, int refundPoint, int givePoint, int usingPoint, Timestamp applyRefundDate,
-			Timestamp refundDate, int status, String reason, String refuseReason, String impNum) {
+	public Refund(int refundCode, int payCode, int schedulCode, String lessonName, String memberCode, String memberName,
+			String phone, int artistCode, String artistName, int payCost, int refundCost, int refundPoint,
+			int givePoint, int usingPoint, Timestamp payDate, Timestamp applyRefundDate, Timestamp refundDate,
+			int status, String reason, String refuseReason, String impNum) {
 		super();
 		this.refundCode = refundCode;
 		this.payCode = payCode;
 		this.schedulCode = schedulCode;
+		this.lessonName = lessonName;
 		this.memberCode = memberCode;
 		this.memberName = memberName;
 		this.phone = phone;
 		this.artistCode = artistCode;
+		this.artistName = artistName;
+		this.payCost = payCost;
 		this.refundCost = refundCost;
 		this.refundPoint = refundPoint;
 		this.givePoint = givePoint;
 		this.usingPoint = usingPoint;
+		this.payDate = payDate;
 		this.applyRefundDate = applyRefundDate;
 		this.refundDate = refundDate;
 		this.status = status;
@@ -68,6 +77,14 @@ public class Refund implements java.io.Serializable{
 
 	public void setSchedulCode(int schedulCode) {
 		this.schedulCode = schedulCode;
+	}
+
+	public String getLessonName() {
+		return lessonName;
+	}
+
+	public void setLessonName(String lessonName) {
+		this.lessonName = lessonName;
 	}
 
 	public String getMemberCode() {
@@ -102,6 +119,22 @@ public class Refund implements java.io.Serializable{
 		this.artistCode = artistCode;
 	}
 
+	public String getArtistName() {
+		return artistName;
+	}
+
+	public void setArtistName(String artistName) {
+		this.artistName = artistName;
+	}
+
+	public int getPayCost() {
+		return payCost;
+	}
+
+	public void setPayCost(int payCost) {
+		this.payCost = payCost;
+	}
+
 	public int getRefundCost() {
 		return refundCost;
 	}
@@ -132,6 +165,14 @@ public class Refund implements java.io.Serializable{
 
 	public void setUsingPoint(int usingPoint) {
 		this.usingPoint = usingPoint;
+	}
+
+	public Timestamp getPayDate() {
+		return payDate;
+	}
+
+	public void setPayDate(Timestamp payDate) {
+		this.payDate = payDate;
 	}
 
 	public Timestamp getApplyRefundDate() {
@@ -185,10 +226,11 @@ public class Refund implements java.io.Serializable{
 	@Override
 	public String toString() {
 		return "Refund [refundCode=" + refundCode + ", payCode=" + payCode + ", schedulCode=" + schedulCode
-				+ ", memberCode=" + memberCode + ", memberName=" + memberName + ", phone=" + phone + ", artistCode="
-				+ artistCode + ", refundCost=" + refundCost + ", refundPoint=" + refundPoint + ", givePoint="
-				+ givePoint + ", usingPoint=" + usingPoint + ", applyRefundDate=" + applyRefundDate + ", refundDate="
-				+ refundDate + ", status=" + status + ", reason=" + reason + ", refuseReason=" + refuseReason
-				+ ", impNum=" + impNum + "]";
+				+ ", lessonName=" + lessonName + ", memberCode=" + memberCode + ", memberName=" + memberName
+				+ ", phone=" + phone + ", artistCode=" + artistCode + ", artistName=" + artistName + ", payCost="
+				+ payCost + ", refundCost=" + refundCost + ", refundPoint=" + refundPoint + ", givePoint=" + givePoint
+				+ ", usingPoint=" + usingPoint + ", payDate=" + payDate + ", applyRefundDate=" + applyRefundDate
+				+ ", refundDate=" + refundDate + ", status=" + status + ", reason=" + reason + ", refuseReason="
+				+ refuseReason + ", impNum=" + impNum + "]";
 	}
 }

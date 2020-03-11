@@ -26,10 +26,10 @@ public class RefundService {
 		int result = new RefundDao().approveRefund(con, r);
 		
 		if(result > 0) {
-				result = new RefundDao().insertReturnUsingPoint();
+				result = new RefundDao().insertReturnUsingPoint(con, r);
 				
 				if(result > 0) {
-					result = new RefundDao().insertReCollectPoint();
+					result = new RefundDao().insertReCollectPoint(con, r);
 
 					if(result > 0) {
 						result = new RefundDao().updatePoint(con, r);
@@ -48,6 +48,17 @@ public class RefundService {
 		close(con);
 		
 		return result;
+	}
+	
+	//마이페이지 환불 내역
+	public ArrayList<Refund> refundList(int memberCode) {
+		Connection con = getConnection();
+		
+		ArrayList<Refund> rList = new RefundDao().refundList(con, memberCode);
+		
+		close(con);
+		
+		return rList;
 	}
 
 }

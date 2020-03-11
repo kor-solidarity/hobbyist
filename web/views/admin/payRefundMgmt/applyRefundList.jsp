@@ -270,8 +270,6 @@
   		</div>
   		
   		<!-- 반려시 뜨는 모달 -->
-  		
-  		
   		<div class="modal fade" id="myModal1" role="dialog" style="display: none;">
    	 <div class="modal-dialog">
     
@@ -404,6 +402,8 @@
 								    	 },
 								    	 success: function(data) {
 								    		 alert("환불이 완료되었습니다.");
+
+								    		 $('#myModal').modal("hide");
 								    	 },
 								    	 error: function(error){
 								    		 console.log(error);

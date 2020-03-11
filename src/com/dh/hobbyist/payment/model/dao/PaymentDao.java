@@ -204,11 +204,13 @@ public class PaymentDao {
 		
 	}
 
+	//결제 시 적입포인트 추가
 	public int insertGivePoint(Connection con, Payment p) {
 		PreparedStatement pstmt = null;
 		int result = 0;
 		
 		String query = prop.getProperty("insertGivePoint");
+	
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.setTimestamp(1, p.getPayDate());
@@ -270,14 +272,15 @@ public class PaymentDao {
 			while(rset.next()) {
 				
 				RegisterPayment p = new RegisterPayment();
-				p.setLessonImgRoute(rset.getString("LESSON_IMG_ROUTE"));
-				p.setLessonImgName(rset.getString("LESSON_IMG_NAME"));
 				p.setLessonName(rset.getString("LESSON_NAME"));
 				p.setArtistName(rset.getString("ARTIST_NAME"));
 				p.setRegion(rset.getString("REGION"));
 				p.setPaymentDate(rset.getTimestamp("PAYMENT_DATE"));
 				p.setPayCost(rset.getInt("PAYMENT_COSTS"));
 				p.setStatus(rset.getInt("STATUS"));
+				p.setStartDate(rset.getTimestamp("LESSON_ORDER_START"));
+				p.setEndDate(rset.getTimestamp("LESSON_ORDER_END"));
+				p.setNow(rset.getTimestamp("NOW"));
 				
 				pList.add(p);
 			}

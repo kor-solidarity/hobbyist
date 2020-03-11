@@ -8,6 +8,7 @@ public class RegisterPayment {
 	private String lessonImgName;		//수업 이미지 파일명	
 	private String lessonName;			//수업명
 	private Timestamp startDate;		//수업시작일
+	private Timestamp endDate;			//종료일
 	private String region;				//지역
 	private int paymentCode;			//결제코드
 	private Timestamp paymentDate;		//결제일
@@ -17,18 +18,21 @@ public class RegisterPayment {
 	private String artistName;			//아티스으 이름
 	private int payCost;				//결제비용
 	private int status;					//수업 상태
+	private Timestamp now;
 	
 	public RegisterPayment() {}
 
 	public RegisterPayment(int scheduleCode, String lessonImgRoute, String lessonImgName, String lessonName,
-			Timestamp startDate, String region, int paymentCode, Timestamp paymentDate, String profileImgRoute,
-			String profileImgName, String artistNick, String artistName, int payCost, int status) {
+			Timestamp startDate, Timestamp endDate, String region, int paymentCode, Timestamp paymentDate,
+			String profileImgRoute, String profileImgName, String artistNick, String artistName, int payCost,
+			int status, Timestamp now) {
 		super();
 		this.scheduleCode = scheduleCode;
 		this.lessonImgRoute = lessonImgRoute;
 		this.lessonImgName = lessonImgName;
 		this.lessonName = lessonName;
 		this.startDate = startDate;
+		this.endDate = endDate;
 		this.region = region;
 		this.paymentCode = paymentCode;
 		this.paymentDate = paymentDate;
@@ -38,6 +42,7 @@ public class RegisterPayment {
 		this.artistName = artistName;
 		this.payCost = payCost;
 		this.status = status;
+		this.now = now;
 	}
 
 	public int getScheduleCode() {
@@ -78,6 +83,14 @@ public class RegisterPayment {
 
 	public void setStartDate(Timestamp startDate) {
 		this.startDate = startDate;
+	}
+
+	public Timestamp getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(Timestamp endDate) {
+		this.endDate = endDate;
 	}
 
 	public String getRegion() {
@@ -152,12 +165,21 @@ public class RegisterPayment {
 		this.status = status;
 	}
 
+	public Timestamp getNow() {
+		return now;
+	}
+
+	public void setNow(Timestamp now) {
+		this.now = now;
+	}
+
 	@Override
 	public String toString() {
 		return "RegisterPayment [scheduleCode=" + scheduleCode + ", lessonImgRoute=" + lessonImgRoute
 				+ ", lessonImgName=" + lessonImgName + ", lessonName=" + lessonName + ", startDate=" + startDate
-				+ ", region=" + region + ", paymentCode=" + paymentCode + ", paymentDate=" + paymentDate
-				+ ", profileImgRoute=" + profileImgRoute + ", profileImgName=" + profileImgName + ", artistNick="
-				+ artistNick + ", artistName=" + artistName + ", payCost=" + payCost + ", status=" + status + "]";
+				+ ", endDate=" + endDate + ", region=" + region + ", paymentCode=" + paymentCode + ", paymentDate="
+				+ paymentDate + ", profileImgRoute=" + profileImgRoute + ", profileImgName=" + profileImgName
+				+ ", artistNick=" + artistNick + ", artistName=" + artistName + ", payCost=" + payCost + ", status="
+				+ status + ", now=" + now + "]";
 	}
 }

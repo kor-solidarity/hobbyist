@@ -1,4 +1,4 @@
-package com.dh.hobbyist.refund.controller;
+package com.dh.hobbyist.point.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -10,26 +10,26 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.dh.hobbyist.member.model.vo.Member;
-import com.dh.hobbyist.refund.model.service.RefundService;
-import com.dh.hobbyist.refund.model.vo.Refund;
+import com.dh.hobbyist.point.model.service.PointService;
+import com.dh.hobbyist.point.model.vo.Point;
 
-@WebServlet("/refundList.me")
-public class RefundListServlet extends HttpServlet {
+@WebServlet("/pointList.me")
+public class pointListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public RefundListServlet() {
+    public pointListServlet() {
         super();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int memberCode = ((Member) request.getSession().getAttribute("loginMember")).getMemberCode();
 		
-		ArrayList<Refund> rList = new RefundService().refundList(memberCode);
+		ArrayList<Point> pointList = new PointService().PointList(memberCode);
 		
 		String page = "";
-		if(rList != null) {
-			page = "views/member/myPage/myPayment/refundLesson.jsp";
-			request.setAttribute("rList", rList);
+		if(pointList != null) {
+			page = "views/member/myPage/myPayment/pointLesson.jsp";
+			request.setAttribute("pointList", pointList);
 			
 			request.getRequestDispatcher(page).forward(request, response);
 		}

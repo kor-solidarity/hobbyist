@@ -68,18 +68,18 @@
 <header>
 		<table id="topAreaT">
 			<tr style="text-align: right;">
-				<td style="text-align: left;">hobbyist</td>
-				<td id="adminMember">회원관리</td>
-				<td id="adminBoard">게시판관리</td>
-				<td>수업관리</td>
-				<td>신고/문의</td>
-				<td id="adminPayment">결제/환불</td>
-				<td style="width: 90px;">통계</td>
+				<td style="text-align: left; cursor:pointer">hobbyist</td>
+				<td id="adminMember" style="cursor:pointer">회원관리</td>
+				<td id="adminBoard" style="cursor:pointer">게시판관리</td>
+				<td style="cursor:pointer">수업관리</td>
+				<td style="cursor:pointer">신고/문의</td>
+				<td id="adminPayment" style="cursor:pointer">결제/환불</td>
+				<td style="width: 90px;" style="cursor:pointer">통계</td>
 			</tr>
 		</table>
 		<table id="logoutT">
 			<tr>
-				<td style="text-align: right; width: 30px;"><button id="logout">로그아웃</button></td>
+				<td style="text-align: right; width: 30px; cursor:pointer"><button id="logout">로그아웃</button></td>
 			</tr>
 		</table>
 	</header>

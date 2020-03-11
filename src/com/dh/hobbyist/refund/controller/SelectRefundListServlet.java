@@ -11,8 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.dh.hobbyist.refund.model.service.RefundService;
 import com.dh.hobbyist.refund.model.vo.Refund;
+import com.google.gson.Gson;
 
-@WebServlet("/selectList.re")
+@WebServlet("/selectRefundList.ad")
 public class SelectRefundListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -22,6 +23,10 @@ public class SelectRefundListServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ArrayList<Refund> refundList = new RefundService().selectList();
+		
+		response.setContentType("application/json");
+		response.setCharacterEncoding("UTF-8");
+		new Gson().toJson(refundList, response.getWriter());
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
