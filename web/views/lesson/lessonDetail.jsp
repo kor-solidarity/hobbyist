@@ -520,7 +520,7 @@
 							<table id="suggestTable" align="center">
 								<tr>
 									<td style="color:#DAB554">건의된 수업 인원</td>
-									<td class="nanum" style="width:130px; font-size:20px;"><%= petition.getNumOfStudents() %></td>
+									<td class="nanum" style="width:210px; font-size:20px;"><%= petition.getNumOfStudents() %></td>
 								</tr>
 								<tr>
 									<td style="color:#DAB554">건의된 수업료 </td>
@@ -553,7 +553,12 @@
 									$("#requestedCost").text(costM);
 								});
 							</script>
-							<div align="center">건의 게시물 바로가기</div>
+							<div align="center" style="cursor:pointer;" onclick="goSuggest();">건의 게시물 바로가기</div>
+							<script>
+								function goSuggest(){
+									location.href = "<%= request.getContextPath() %>/selectOne.sg?num=" + <%= petition.getPetitionCode() %>;
+								};
+							</script>
 							<% } %>
 						</td>
 					</tr>

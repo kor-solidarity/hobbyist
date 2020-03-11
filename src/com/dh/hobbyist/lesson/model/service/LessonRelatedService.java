@@ -21,6 +21,7 @@ import com.dh.hobbyist.lesson.model.vo.Lesson;
 import com.dh.hobbyist.lesson.model.vo.LessonOrder;
 import com.dh.hobbyist.lesson.model.vo.LessonSchedule;
 import com.dh.hobbyist.lesson.model.vo.MyRegiLesson;
+import com.dh.hobbyist.lesson.model.vo.RefundOnly;
 import com.dh.hobbyist.member.model.vo.Member;
 import com.dh.hobbyist.payment.model.vo.Payment;
 
@@ -246,6 +247,13 @@ public class LessonRelatedService {
 			Timestamp startDate = new LessonRelatedDao().selectStartDate(con, (Integer) scheduleCodeList.get(i));
 			
 			Payment pay = new LessonRelatedDao().selectOnePayment(con, (Integer) scheduleCodeList.get(i), memberCode);
+			
+			//환불 관련 처리
+			RefundOnly refund = null;
+			
+			if(pay != null) {
+				refund = new LessonRelatedDao().selectOneRefund(con, pay.getPaymentCode());
+			}
 
 			myLesson.setScheduleCode((Integer) scheduleCodeList.get(i));
 			myLesson.setLessonImgRoute(lessonImg.getImageRoute());
@@ -262,6 +270,11 @@ public class LessonRelatedService {
 			if(pay != null) {
 				myLesson.setPaymentCode(pay.getPaymentCode());
 				myLesson.setPaymentDate(pay.getPayDate());
+				
+				if(refund != null) {
+					myLesson.setRefundCode(refund.getRefundCode());
+					myLesson.setRefundAccepted(refund.getRefundAccepted());
+				}
 			}
 
 			myList.add(myLesson);

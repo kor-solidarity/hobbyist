@@ -20,6 +20,7 @@ import com.dh.hobbyist.lesson.model.vo.Image;
 import com.dh.hobbyist.lesson.model.vo.Lesson;
 import com.dh.hobbyist.lesson.model.vo.LessonOrder;
 import com.dh.hobbyist.lesson.model.vo.LessonSchedule;
+import com.dh.hobbyist.lesson.model.vo.RefundOnly;
 import com.dh.hobbyist.member.model.vo.Member;
 import com.dh.hobbyist.payment.model.vo.Payment;
 
@@ -727,6 +728,35 @@ public class LessonRelatedDao {
 		}
 		
 		return list;
+	}
+
+	public RefundOnly selectOneRefund(Connection con, int paymentCode) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		RefundOnly r = null;
+		
+		String query = prop.getProperty("selectOneRefund");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, paymentCode);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				r = new RefundOnly();
+				r.setRefundCode(rset.getInt("REFUND_PK"));
+				r.setRefundAccepted(rset.getInt("REFUND_ACCEPTED"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return r;
 	}
 
 

@@ -54,7 +54,7 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=fa120e8648138856b30621abf3ebb591"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=fa120e8648138856b30621abf3ebb591&libraries=services"></script>
 <title>hobbyist</title>
 <style>
 body {
@@ -250,6 +250,7 @@ body {
     margin-bottom: 5px;
     margin-left: auto;
     margin-right: auto;
+    text-align:center;
 }
 
 .item3 {
@@ -378,6 +379,44 @@ body {
 .nanum {
 	font-family: 'Nanum Gothic', sans-serif;
 }
+
+/* 카카오맵 관련 style */
+.map_wrap, .map_wrap * {margin:0;padding:0;font-family:'Malgun Gothic',dotum,'돋움',sans-serif;font-size:12px;}
+.map_wrap a, .map_wrap a:hover, .map_wrap a:active{color:#000;text-decoration: none;}
+.map_wrap {position:relative;width:100%;height:264px;}
+#menu_wrap {position:absolute;top:0;left:0;bottom:0;width:250px;margin:10px 0 30px 10px;padding:5px;overflow-y:auto;background:rgba(255, 255, 255, 0.7);z-index: 1;font-size:12px;border-radius: 10px;}
+.bg_white {background:#fff;}
+#menu_wrap hr {display: block; height: 1px;border: 0; border-top: 2px solid #5F5F5F;margin:3px 0;}
+#menu_wrap .option{text-align: center;}
+#menu_wrap .option p {margin:10px 0;}  
+#menu_wrap .option button {margin-left:5px;}
+#placesList li {list-style: none;}
+#placesList .item {position:relative;border-bottom:1px solid #888;overflow: hidden;cursor: pointer;min-height: 65px;}
+#placesList .item span {display: block;margin-top:4px;}
+#placesList .item h5, #placesList .item .info {text-overflow: ellipsis;overflow: hidden;white-space: nowrap;}
+#placesList .item .info{padding:10px 0 10px 55px;}
+#placesList .info .gray {color:#8a8a8a;}
+#placesList .info .jibun {padding-left:26px;background:url(http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/places_jibun.png) no-repeat;}
+#placesList .info .tel {color:#009900;}
+#placesList .item .markerbg {float:left;position:absolute;width:36px; height:37px;margin:10px 0 0 10px;background:url(http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_number_blue.png) no-repeat;}
+#placesList .item .marker_1 {background-position: 0 -10px;}
+#placesList .item .marker_2 {background-position: 0 -56px;}
+#placesList .item .marker_3 {background-position: 0 -102px}
+#placesList .item .marker_4 {background-position: 0 -148px;}
+#placesList .item .marker_5 {background-position: 0 -194px;}
+#placesList .item .marker_6 {background-position: 0 -240px;}
+#placesList .item .marker_7 {background-position: 0 -286px;}
+#placesList .item .marker_8 {background-position: 0 -332px;}
+#placesList .item .marker_9 {background-position: 0 -378px;}
+#placesList .item .marker_10 {background-position: 0 -423px;}
+#placesList .item .marker_11 {background-position: 0 -470px;}
+#placesList .item .marker_12 {background-position: 0 -516px;}
+#placesList .item .marker_13 {background-position: 0 -562px;}
+#placesList .item .marker_14 {background-position: 0 -608px;}
+#placesList .item .marker_15 {background-position: 0 -654px;}
+#pagination {margin:10px auto;text-align: center;}
+#pagination a {display:inline-block;margin-right:10px;}
+#pagination .on {font-weight: bold; cursor: default;color:#777;}
 
 </style>
 </head>
@@ -873,8 +912,7 @@ body {
 								<tr>
 									<td style="width: 80px;">지역</td>
 									<td style="width: 135px;">상세지역</td>
- 									<td colspan="2"><label class="currOrder">1</label>회차 시작시간</td>
-									<td style="width: 130px;"><label class="currOrder">1</label>회차 종료시간</td>
+									<td></td>
 								</tr>
 								<tr>
 									<td>
@@ -909,32 +947,40 @@ body {
 											$("#region").find("option[value=<%= region %>]").prop("selected", true);
 										});
 									</script>
-									<td colspan="2"><input id="startTime" class="nanum" type="datetime-local"></td>
-									<td><input id="endTime" class="nanum" type="time"></td>
+									<td></td>
 								</tr>
 								<tr>
+									<td>상세주소</td>
 									<td colspan="2"></td>
-									<td colspan="3" style="color:grey;">[건의] <%= petition.getRequestedDate().toString().substring(0, 10) %>까지 개설 희망 / 선호요일 : <%= requestedDays %> / 선호요일 : <%= requestedTime %></td>
+								</tr>
+								<tr style="height: 300px;">
+									<td colspan="3" style="border: 1px solid darkolivegreen; padding:0px;">
+										<div class="map_wrap" style="height:100%">
+											<div id="map" style="width:100%;height:300px;"></div>
+											
+											<div id="menu_wrap" class="bg_white">
+												<div class="option">
+													<div>
+														<!-- form으로 전송할 경우 상위의 form이 전달되어 NumberFormatException 발생 -->
+														<!-- <form onsubmit="searchPlaces(); return false;"> -->
+															키워드 : <input type="text" id="keyword" size="15" placeholder="검색어">
+															<button type="button" onclick="searchPlaces(); return false;">검색하기</button>
+														<!-- </form> -->
+													</div>
+												</div>
+												<hr>
+												<ul id="placesList"></ul>
+												<div id="pagination"></div>
+											</div>
+										</div>
+									</td>
 								</tr>
 								<tr>
-									<td colspan="2">상세주소</td>
-									<td style="width:240px;"></td>
-									<td colspan="2">등록된 회차목록 / 총 <label id="showOrder"></label>회차&nbsp;<button id="insertOrderBtn" type="button" class="btn btn-primary btnAll" style="padding: 5px 8px"onclick="insertOrder();">▼</button></td>
-								</tr>
-								<tr style="height: 250px;">
-									<td colspan="3" style="border: 1px solid darkolivegreen; padding:0px;"><div id="map" style="width:485px;height:264px;"></div></td>
-									<td id= "orderListArea" colspan="2" style="border: 1px solid darkolivegreen; padding:4px; font-size:15px"></td>
-								</tr>
-								<tr>
-									<td colspan="5">
-									전체 주소 입력 : <input id="address" type="text" class="nanum" name="address" placeholder="전체 주소를 복사 또는 직접 입력해주세요." style="width:450px">
+									<td colspan="3">
+									전체 주소 입력 : <input id="address" type="text" class="nanum" name="address" placeholder="전체 주소를 복사 또는 직접 입력해주세요." style="width:600px">
 									</td>
 								</tr>
 							</table>
-							<script>
-								
-								
-							</script>
 						</div>
 						<!-- 등록된 수업일정 목록 화면 -->
 						<div id="show6" style="display: none;">
@@ -949,11 +995,28 @@ body {
 							</table>
 							<table id="LessonTable12" style="width:100%">
 								<tr>
-		                            <td style="width:100%;">등록된 수업일정 목록
+									<td style="width:275px;"><label class="currOrder">1</label>회차 시작시간</td>
+									<td style="width:145px;"><label class="currOrder">1</label>회차 종료시간
+									<button id="insertOrderBtn" type="button" class="btn btn-primary btnAll" style="padding: 5px 8px"onclick="insertOrder();">▼</button>
+									</td>
+									<td>등록된 회차목록 / 총 <label id="showOrder"></label>회차&nbsp;</td>
+								</tr>
+								<tr height="10px">
+									<td style="vertical-align:top;"><input id="startTime" class="nanum" type="datetime-local"></td>
+									<td style="vertical-align:top;"><input id="endTime" class="nanum" type="time"></td>
+									<td id= "orderListArea" rowspan="2" colspan="2" style="height:270px; border: 1px solid darkolivegreen; padding:4px; vertical-align:top; font-size:15px"></td>
+								</tr>
+								<tr height="10px">
+									<td colspan="2" style="color:grey; vertical-align:middle;">[건의] <%= petition.getRequestedDate().toString().substring(0, 10) %>까지 개설 희망<br>
+										<label style="font-weight:normal; margin-left: 42px;">선호요일 : <%= requestedDays %> / 선호시간 : <%= requestedTime %></label>
+									</td>
+								</tr>
+								<tr>
+		                            <td colspan="3">등록된 수업일정 목록
 		                            </td>
 								</tr>
 								<tr>
-									<td id="scheduleListArea"></td>
+									<td colspan="3" id="scheduleListArea"></td>
 								</tr>
 							</table>
 						</div>
@@ -968,17 +1031,229 @@ body {
 			</div>
 		</div>
 	</div>
+	
+<!-- 카카오맵 관련 처리 -->
+<script>
+// 마커를 담을 배열입니다
+var markers = [];
+
+var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+    mapOption = {
+        center: new kakao.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
+        level: 3 // 지도의 확대 레벨
+    };  
+
+// 지도를 생성합니다    
+var map = new kakao.maps.Map(mapContainer, mapOption); 
+
+// 장소 검색 객체를 생성합니다
+var ps = new kakao.maps.services.Places();  
+
+// 검색 결과 목록이나 마커를 클릭했을 때 장소명을 표출할 인포윈도우를 생성합니다
+var infowindow = new kakao.maps.InfoWindow({zIndex:1});
+
+// 기존 키워드로 장소를 검색합니다8
+//searchPlaces();
+
+// 키워드 검색을 요청하는 함수입니다
+function searchPlaces() {
+
+    var keyword = document.getElementById('keyword').value;
+
+    if (!keyword.replace(/^\s+|\s+$/g, '')) {
+        alert('키워드를 입력해주세요!');
+        return false;
+    }
+
+    // 장소검색 객체를 통해 키워드로 장소검색을 요청합니다
+    ps.keywordSearch( keyword, placesSearchCB); 
+}
+
+// 장소검색이 완료됐을 때 호출되는 콜백함수 입니다
+function placesSearchCB(data, status, pagination) {
+    if (status === kakao.maps.services.Status.OK) {
+
+        // 정상적으로 검색이 완료됐으면
+        // 검색 목록과 마커를 표출합니다
+        displayPlaces(data);
+
+        // 페이지 번호를 표출합니다
+        displayPagination(pagination);
+
+    } else if (status === kakao.maps.services.Status.ZERO_RESULT) {
+
+        alert('검색 결과가 존재하지 않습니다.');
+        return;
+
+    } else if (status === kakao.maps.services.Status.ERROR) {
+
+        alert('검색 결과 중 오류가 발생했습니다.');
+        return;
+
+    }
+}
+
+// 검색 결과 목록과 마커를 표출하는 함수입니다
+function displayPlaces(places) {
+
+    var listEl = document.getElementById('placesList'), 
+    menuEl = document.getElementById('menu_wrap'),
+    fragment = document.createDocumentFragment(), 
+    bounds = new kakao.maps.LatLngBounds(), 
+    listStr = '';
+    
+    // 검색 결과 목록에 추가된 항목들을 제거합니다
+    removeAllChildNods(listEl);
+
+    // 지도에 표시되고 있는 마커를 제거합니다
+    removeMarker();
+    
+    for ( var i=0; i<places.length; i++ ) {
+
+        // 마커를 생성하고 지도에 표시합니다
+        var placePosition = new kakao.maps.LatLng(places[i].y, places[i].x),
+            marker = addMarker(placePosition, i), 
+            itemEl = getListItem(i, places[i]); // 검색 결과 항목 Element를 생성합니다
+
+        // 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
+        // LatLngBounds 객체에 좌표를 추가합니다
+        bounds.extend(placePosition);
+
+        // 마커와 검색결과 항목에 mouseover 했을때
+        // 해당 장소에 인포윈도우에 장소명을 표시합니다
+        // mouseout 했을 때는 인포윈도우를 닫습니다
+        (function(marker, title) {
+            kakao.maps.event.addListener(marker, 'mouseover', function() {
+                displayInfowindow(marker, title);
+            });
+
+            kakao.maps.event.addListener(marker, 'mouseout', function() {
+                infowindow.close();
+            });
+
+            itemEl.onmouseover =  function () {
+                displayInfowindow(marker, title);
+            };
+
+            itemEl.onmouseout =  function () {
+                infowindow.close();
+            };
+        })(marker, places[i].place_name);
+
+        fragment.appendChild(itemEl);
+    }
+
+    // 검색결과 항목들을 검색결과 목록 Elemnet에 추가합니다
+    listEl.appendChild(fragment);
+    menuEl.scrollTop = 0;
+
+    // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
+    map.setBounds(bounds);
+}
+
+// 검색결과 항목을 Element로 반환하는 함수입니다
+function getListItem(index, places) {
+
+    var el = document.createElement('li'),
+    itemStr = '<span class="markerbg marker_' + (index+1) + '"></span>' +
+                '<div class="info">' +
+                '   <h5>' + places.place_name + '</h5>';
+
+    if (places.road_address_name) {
+        itemStr += '    <span>' + places.road_address_name + '</span>' +
+                    '   <span class="jibun gray">' +  places.address_name  + '</span>';
+    } else {
+        itemStr += '    <span>' +  places.address_name  + '</span>'; 
+    }
+                 
+      itemStr += '  <span class="tel">' + places.phone  + '</span>' +
+                '</div>';           
+
+    el.innerHTML = itemStr;
+    el.className = 'item';
+
+    return el;
+}
+
+// 마커를 생성하고 지도 위에 마커를 표시하는 함수입니다
+function addMarker(position, idx, title) {
+    var imageSrc = 'http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_number_blue.png', // 마커 이미지 url, 스프라이트 이미지를 씁니다
+        imageSize = new kakao.maps.Size(36, 37),  // 마커 이미지의 크기
+        imgOptions =  {
+            spriteSize : new kakao.maps.Size(36, 691), // 스프라이트 이미지의 크기
+            spriteOrigin : new kakao.maps.Point(0, (idx*46)+10), // 스프라이트 이미지 중 사용할 영역의 좌상단 좌표
+            offset: new kakao.maps.Point(13, 37) // 마커 좌표에 일치시킬 이미지 내에서의 좌표
+        },
+        markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imgOptions),
+            marker = new kakao.maps.Marker({
+            position: position, // 마커의 위치
+            image: markerImage 
+        });
+
+    marker.setMap(map); // 지도 위에 마커를 표출합니다
+    markers.push(marker);  // 배열에 생성된 마커를 추가합니다
+
+    return marker;
+}
+
+// 지도 위에 표시되고 있는 마커를 모두 제거합니다
+function removeMarker() {
+    for ( var i = 0; i < markers.length; i++ ) {
+        markers[i].setMap(null);
+    }   
+    markers = [];
+}
+
+// 검색결과 목록 하단에 페이지번호를 표시는 함수입니다
+function displayPagination(pagination) {
+    var paginationEl = document.getElementById('pagination'),
+        fragment = document.createDocumentFragment(),
+        i; 
+
+    // 기존에 추가된 페이지번호를 삭제합니다
+    while (paginationEl.hasChildNodes()) {
+        paginationEl.removeChild (paginationEl.lastChild);
+    }
+
+    for (i=1; i<=pagination.last; i++) {
+        var el = document.createElement('a');
+        el.href = "#";
+        el.innerHTML = i;
+
+        if (i===pagination.current) {
+            el.className = 'on';
+        } else {
+            el.onclick = (function(i) {
+                return function() {
+                    pagination.gotoPage(i);
+                }
+            })(i);
+        }
+
+        fragment.appendChild(el);
+    }
+    paginationEl.appendChild(fragment);
+}
+
+// 검색결과 목록 또는 마커를 클릭했을 때 호출되는 함수입니다
+// 인포윈도우에 장소명을 표시합니다
+function displayInfowindow(marker, title) {
+    var content = '<div style="padding:5px;z-index:1;">' + title + '</div>';
+
+    infowindow.setContent(content);
+    infowindow.open(map, marker);
+}
+
+ // 검색결과 목록의 자식 Element를 제거하는 함수입니다
+function removeAllChildNods(el) {   
+    while (el.hasChildNodes()) {
+        el.removeChild (el.lastChild);
+    }
+}
+</script>
+
+	
 	<script>
-		//카카오 맵 관련 사항
-		var container = document.getElementById('map');
-		var options = {
-			center : new kakao.maps.LatLng(37.4989972, 127.0307203),
-			level : 4
-		};
-	
-		var map = new kakao.maps.Map(container, options);
-		//카카오 맵 관련 사항 끝
-	
 		$(function(){
 			var num = 1;
 		
@@ -1049,6 +1324,9 @@ body {
 				//"01.기본정보"에서 모든 항목을 입력해야 다음으로 넘어갈 수 있는 메소드
 				if(lessonTitle == "" || min == "" || max == "" || inputOrder == "" || cost == "" || subCategory == "" || mainFile == iphoneImg) {
 					alert("모든 항목을 입력해주세요");
+				} else if (max < min) {
+					alert("최대인원은 최소인원보다 같거나 많아야 합니다.");
+					$(this).val("");
 				} else {
 					
 					if(num == 3 && artIntro == "") {
@@ -1057,10 +1335,10 @@ body {
 						alert("수업소개를 입력해주세요");
 					} else if (num == 5 && (reg == "" || subReg == "")) {
 						alert("지역 카데고리를 설정해주세요");
-					} else if (num == 5 && orderCheck == 0) {
-						alert("모든 회차 일정을 입력해주세요");
 					} else if (num == 5 && addr == "") {
 						alert("상세주소를 입력해주세요");
+					} else if (num == 6 && orderCheck == 0) {
+						alert("모든 회차 일정을 입력해주세요");
 					} else {
 						$("#show"+ num).hide();
 						console.log(num);
@@ -1138,30 +1416,6 @@ body {
 				if(num == 6) {
 					$("#nextModalBtn").hide();
 					$("#saveModalBtn").show();
-					
-					var order1 = $("#order1").text();
-					var regionVal = Number($("#region").val()) - 1;
-					var subRegion = $("#subRegion").val();
-					
-					console.log("regionVal : " + regionVal);
-					console.log("cat1_name[regionVal] : " + cat1_name[regionVal]);
-					
-					var region = cat1_name[regionVal];
-					
-					$scheduleListArea = $("#scheduleListArea");
-					//이전 버튼을 눌렀다 다음을 누렀을 때 remove를 하지 않으면 수얼 일정 추가에 대한 힌트를 얻을 수도 있다.
-					$scheduleListArea.find("span").remove();
-					
-					//추가로 넣은 세종시 처리를 별도로 해주기 위한 조건문
-					if(regionVal < 16) {
-						$scheduleListArea.append("<span class='item2'>" + region + " " + subRegion + " | " + order1 + "</span>");
-					} else {
-						$scheduleListArea.append("<span class='item2'> 세종 " + subRegion + " | " + order1 + "</span>");
-					}
-
-					console.log("orderNum : " + orderNum);
-					console.log("startTime : " + startTime);
-					console.log("endTime : " + endTime);
 				} 
 	
 			});
@@ -1383,18 +1637,42 @@ body {
 			} else {
 				if(orderNum < inputOrder) {
 					$orderListArea = $("#orderListArea");
-					$orderListArea.append("<div id='order" + orderNum + "' class='item2'>#" + orderNum + " | " + startTime.substring(2, 10) + " | " + startTime.substring(11, 16) + "~" + endTime + "</div>");
+					$orderListArea.append("<div id='order" + orderNum + "' class='item2'>" + orderNum + "회차 | " + startTime.substring(2, 10) + " | " + startTime.substring(11, 16) + "~" + endTime + "</div>");
 					$orderListArea.append("<input type='hidden' name='start" + orderNum + "' value='" + sl + "'>");
 					$orderListArea.append("<input type='hidden' name='end" + orderNum + "' value='" + el + "'>");
 					orderNum++;
 				} else {
 					$orderListArea = $("#orderListArea");
-					$orderListArea.append("<div id='order" + orderNum + "' class='item2'>#" + orderNum + " | " + startTime.substring(2, 10) + " | " + startTime.substring(11, 16) + "~" + endTime + "</div>");
+					$orderListArea.append("<div id='order" + orderNum + "' class='item2'>" + orderNum + "회차 | " + startTime.substring(2, 10) + " | " + startTime.substring(11, 16) + "~" + endTime + "</div>");
 					$orderListArea.append("<input type='hidden' name='start" + orderNum + "' value='" + sl + "'>");
 					$orderListArea.append("<input type='hidden' name='end" + orderNum + "' value='" + el + "'>");
 					alert("모든 회차를 입력하셨습니다");
 					orderCheck = 1;
 					insertOrderBtn.disabled = 'disabled';
+					
+					var order1 = $("#order1").text();
+					var regionVal = Number($("#region").val()) - 1;
+					var subRegion = $("#subRegion").val();
+					
+					console.log("regionVal : " + regionVal);
+					console.log("cat1_name[regionVal] : " + cat1_name[regionVal]);
+					
+					var region = cat1_name[regionVal];
+					
+					$scheduleListArea = $("#scheduleListArea");
+					//이전 버튼을 눌렀다 다음을 누렀을 때 remove를 하지 않으면 수얼 일정 추가에 대한 힌트를 얻을 수도 있다.
+					$scheduleListArea.find("span").remove();
+					
+					//추가로 넣은 세종시 처리를 별도로 해주기 위한 조건문
+					if(regionVal < 16) {
+						$scheduleListArea.append("<span class='item2'>" + region + " " + subRegion + " | " + order1 + "</span>");
+					} else {
+						$scheduleListArea.append("<span class='item2'> 세종 " + subRegion + " | " + order1 + "</span>");
+					}
+
+					//console.log("orderNum : " + orderNum);
+					//console.log("startTime : " + startTime);
+					//console.log("endTime : " + endTime);
 				} 
 			}
 			
