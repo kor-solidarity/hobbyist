@@ -44,16 +44,16 @@ public class RefundDao {
 			
 			while(rset.next()) {
 				Refund r = new Refund();
-				r.setPaymentCode(rset.getInt("PAYMENT_PK"));
-				r.setLessonName(rset.getString("LESSON_NAME"));
-				r.setMemberName(rset.getString("MEMBER_NAME"));
-				r.setPhone(rset.getString("MEMBER_PHONE"));
-				r.setTotalCost(rset.getInt("TOTAL_COSTS"));
-				r.setPayCost(rset.getInt("PAYMENT_COSTS"));
-				r.setUsingPoint(rset.getInt("POINTS_USED"));
-				r.setImpNum(rset.getString("PAYMENT_IMP_NUM"));
-				r.setPayDate(rset.getTimestamp("PAYMENT_DATE"));
-				
+				// r.setPaymentCode(rset.getInt("PAYMENT_PK"));
+				// r.setLessonName(rset.getString("LESSON_NAME"));
+				// r.setMemberName(rset.getString("MEMBER_NAME"));
+				// r.setPhone(rset.getString("MEMBER_PHONE"));
+				// r.setTotalCost(rset.getInt("TOTAL_COSTS"));
+				// r.setPayCost(rset.getInt("PAYMENT_COSTS"));
+				// r.setUsingPoint(rset.getInt("POINTS_USED"));
+				// r.setImpNum(rset.getString("PAYMENT_IMP_NUM"));
+				// r.setPayDate(rset.getTimestamp("PAYMENT_DATE"));
+				//
 				refundList.add(r);
 			}
 		} catch (SQLException e) {

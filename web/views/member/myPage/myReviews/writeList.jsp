@@ -81,7 +81,8 @@
             //         String.format("%1$TD %1$TT", lessonOrderArrayList.get(i).getOrderStart());
             System.out.println("lessonArrayList.get(" + i + "): " + lessonArrayList.get(i));
         %>
-        <tr>
+            <%-- 작업완료시 필요함. --%>
+        <tr id="pk<%=lessonArrayList.get(i).getLessonCode()%>">
             <td></td>
             <td class="write-list-main">
                 <table class="write-list-contents" border="0">
@@ -143,10 +144,6 @@
             <td></td>
         </tr>
         <% } %>
-        <%-- 상하 간격주기 위한 용도 --%>
-        <tr>
-            <td> &nbsp;</td>
-        </tr>
     </table>
 </div>
 
@@ -186,7 +183,8 @@
                     <div class="col-12 report-modal-line"></div>
                 </div>
                 <div class="col-12 review-modal-content">
-                    <textarea name="review_content" style="width: 100%; height: 100%;" id="review_content" cols="30" rows="5"
+                    <textarea name="review_content" style="width: 100%; height: 100%;" id="review_content" cols="30"
+                              rows="5"
                               placeholder="수업에 대한 평가를 100자 이하로 작성해 주세요." onkeyup="onWriteChange(this)"></textarea>
                 </div>
                 <div class="col-12" style="text-align: right">
@@ -199,7 +197,7 @@
             </div>
             <div class="modal-footer report-modal-footer" style="justify-content: center;">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
-                <button type="button" class="btn btn-success" id="rev_apply" onclick="regRev()" >등록</button>
+                <button type="button" class="btn btn-success" id="rev_apply" onclick="regRev()">등록</button>
                 <%-- 답변이 나오면 또 다르게 떠야함 --%>
                 <%--                <div class="report-modal-end">답변 대기중입니다</div>--%>
             </div>
@@ -214,6 +212,10 @@
 
     let review_content = $("#review_content");
     let review_pk = $("#review_pk");
+
+    // ajax 건들때 필요함.
+    let last_pk;
+
     // 별주기.
     star_list.each(function () {
         $(this).hover(function () {
@@ -237,10 +239,10 @@
                 console.log("i: " + i);
                 let star_id = "#modal_star-" + i;
                 // 5번별부터 시작해서 하나하나 맞는지 확인
-                if (i <= parseInt(star_input.val())){
+                if (i <= parseInt(star_input.val())) {
                     console.log("star on " + (i));
                     $(star_id).css('color', rated_color);
-                }else {
+                } else {
                     $(star_id).css('color', "gray");
                 }
             }
@@ -265,6 +267,7 @@
         $("#review-modal-words").html("0");
         star_list.css('color', 'gray');
         review_pk.val(pk);
+        last_pk = pk;
         // $("#rev_apply").click(regRev(pk));
     }
 
@@ -273,7 +276,7 @@
         if ($("#review_content").val().length < 100) {
             alert("100자 이상 쓰세요.");
             return;
-        } else if (star_input.val() == 0){
+        } else if (star_input.val() == 0) {
             alert("별점을 주세요");
             return;
         }
@@ -282,7 +285,7 @@
         $("#exampleModal").modal('toggle');
 
         $.ajax({
-            url: "hobbyist/mypage/insertReview.me",
+            url: "insertReview.me",
             // 들어가야 하는 내용: 글쓴이(자동), 점수, 내용, 대상수업번호
             data: {
                 stars: $("#stars").val(),
@@ -290,8 +293,17 @@
                 lesson_pk: review_pk.val(),
             },
             type: "POST",
-            success: function(data) {
+            success: function (data) {
 
+                // if data's 0? that means the insert failed.
+                if (data==1){
+                    alert("리뷰가 등록됐습니다. ");
+                    let lessonId = "#pk" + last_pk;
+                    $(lessonId).hide();
+                }else {
+                    alert("오류가 발생했습니다. 나중에 다시 써주세요.");
+
+                }
                 // var $replySelectTable = $("#replySelectTable");
                 // $replySelectTable.html('');
                 //
@@ -309,7 +321,7 @@
                 // }
 
             },
-            error: function(error) {
+            error: function (error) {
                 console.log(error);
             }
         });

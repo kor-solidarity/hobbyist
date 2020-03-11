@@ -179,6 +179,7 @@
                                     <% } %>
                                     <%--카운터가 5 이하면 빈칸 마저 채운다--%>
                                     <%
+                                        System.out.println("counter: " + counter);
                                         if (counter < 5) {
                                             for (int i = counter; i <= 5; i++) {
                                     %>
@@ -202,7 +203,7 @@
                         <td style="width: 40%">
                             <bold>게제시작일:</bold>
                             <%
-                                System.out.println(companyAds.getStartDate());
+                                System.out.println("getStartDate : " + companyAds.getStartDate());
                             %>
                             <input type="date" name="startDate" id="startDate"
                                 <% if (companyAds.getStartDate() != null) { %>
