@@ -21,9 +21,6 @@ public class refuseRefundServlet extends HttpServlet {
 		int num = Integer.parseInt(request.getParameter("refundCode"));
 		String reasonDetail = request.getParameter("reasonDetail");
 		
-		System.out.println(num);
-		System.out.println(reasonDetail);
-		
 		int result = new ApplyRefundService().refuseRefund(num, reasonDetail);
 		
 		String page = "";

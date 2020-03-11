@@ -58,7 +58,6 @@ public class ApplyRefundDao {
 				
 				applyList.add(arf);
 				
-				System.out.println(arf);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -107,7 +106,6 @@ public class ApplyRefundDao {
 			close(pstmt);
 			close(rset);
 		}
-		System.out.println(arf);
 		return arf;
 	}
 

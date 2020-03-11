@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="com.dh.hobbyist.payment.model.vo.RegisterPayment"%>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="java.sql.Timestamp" %>
 <%
 	ArrayList<RegisterPayment> pList = (ArrayList<RegisterPayment>) request.getAttribute("pList");
 %>
@@ -9,6 +10,7 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="<%=request.getContextPath()%>/static/css/eun-css.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <title>Insert title here</title>
 <style>
 	#payListDiv {
@@ -16,6 +18,7 @@
 		height: 400px;
 		text-align: center;
 		margin: 0 auto;
+		margin-bottom: 150px;
 		overflow-x: hidden;
         overflow-y: auto;
 	}
@@ -76,25 +79,28 @@
 				<td style="width: 150px;"><%=(p.getPaymentDate().toString()).substring(0, 16) %></td>
 				<td style="width: 150px;"><%=p.getPayCost() %></td>
 			
-				<%if(p.getStatus() == 0) {%>
-				<td style="color: green">수강대기</td>
-				<%}else if(p.getStatus() == 1) {%>
-				<td style="color: gray">모집종료</td>
-				<%}else { %>
-				<td style="color: red">수업삭제</td>
+				<%if(p.getStartDate().getTime() > p.getNow().getTime()) {%>
+				<td style="color: gray">수강대기</td>
+				<%}else if(p.getStartDate().getTime() < p.getNow().getTime() && p.getNow().getTime() < p.getEndDate().getTime()) {%>
+				<td style="color: green">수강 중</td>
+				<%}else if(p.getNow().getTime() > p.getEndDate().getTime()){ %>
+				<td style="color: red">종료</td>
+				<%} else if(p.getStatus() == 3){ %>
+				<td style="color: red">일정 삭제</td>
 				<%} %>
 			
 			</tr>
 			<% } %> 
 		</table>
 	</div>
+	<%@ include file="/views/common/footer.jsp"%>
 	<script>
 		$("#showRefundList").click(function() {
 			location.href = "<%=request.getContextPath()%>/refundList.me";
 		});
 		
 		$("#showPointList").click(function() {
-			
+			location.href = "<%=request.getContextPath()%>/pointList.me";
 		});
 	</script>
 </body>

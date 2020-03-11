@@ -1,14 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="com.dh.hobbyist.payment.model.vo.RegisterPayment"%>
+    pageEncoding="UTF-8" import="com.dh.hobbyist.refund.model.vo.Refund"%>
 <%@ page import="java.util.ArrayList" %>
 <%
-	ArrayList<RegisterPayment> pList = (ArrayList<RegisterPayment>) request.getAttribute("pList");
+	ArrayList<Refund> rList = (ArrayList<Refund>) request.getAttribute("rList");
 %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="<%=request.getContextPath()%>/static/css/eun-css.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <title>Insert title here</title>
 <style>
 	#payListDiv {
@@ -16,9 +17,10 @@
 		height: 400px;
 		text-align: center;
 		margin: 0 auto;
+		margin-bottom: 150px;
 		overflow-x: hidden;
         overflow-y: auto;
-	}
+    }
 	
 	#payListTable, #payListTable1 {
 		width: 1024px;;
@@ -63,38 +65,39 @@
 			<tr>
 				<th style="width: 400px;">수업정보</th>
 				<th style="width: 140px;">아티스트 닉네임</th>
-				<th style="width: 150px;">결제일자</th>
 				<th style="width: 150px;">결제금액</th>
-				<th>수강상태</th>
+				<th style="width: 150px;">환불금액</th>
+				<th style="width: 150px;">환불일자</th>
 			</tr>
 		</table>
 		<table id="payListTable">
-			<% for(RegisterPayment p : pList) { %>
+			<% for(Refund r : rList) { %>
 			<tr>
-				<td style="font-weight: bold; font-size: 17px; width: 400px;"><%=p.getLessonName() %></td>
-				<td style="width: 140px;"><%=p.getArtistName() %></td>
-				<td style="width: 150px;"><%=(p.getPaymentDate().toString()).substring(0, 16) %></td>
-				<td style="width: 150px;"><%=p.getPayCost() %></td>
+				<td style="font-weight: bold; font-size: 17px; width: 400px;"><%=r.getLessonName() %></td>
+				<td style="width: 140px;"><%=r.getArtistName() %></td>
+				<td style="width: 150px;"><%=r.getPayCost() %></td>
+				<td style="width: 150px;"><%=r.getRefundCost() %></td>
 			
-				<%if(p.getStatus() == 0) {%>
-				<td style="color: green">수강대기</td>
-				<%}else if(p.getStatus() == 1) {%>
-				<td style="color: gray">모집종료</td>
+				<%if(r.getStatus() == 1) {%>
+				<td style="width: 150px;"><%=(r.getRefundDate().toString()).substring(0, 16) %></td>
+				<%}else if(r.getStatus() == 0) {%>
+				<td style="color: green">환불대기</td>
 				<%}else { %>
-				<td style="color: red">수업삭제</td>
+				<td style="color: red">반려</td>
 				<%} %>
 			
 			</tr>
 			<% } %> 
 		</table>
 	</div>
+	<%@ include file="/views/common/footer.jsp"%>
 	<script>
 		$("#showPayList").click(function() {
 			location.href = "<%=request.getContextPath()%>/paymentList.me";
 		});
 		
 		$("#showPointList").click(function() {
-			
+			location.href = "<%=request.getContextPath()%>/pointList.me";
 		});
 	</script>
 </body>

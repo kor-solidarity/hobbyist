@@ -148,6 +148,35 @@
         line-height: 20px;
  	}
  	
+ 	#reasonDetail2 {
+ 		height: 80px;
+ 		border: 1px solid black;
+ 		overflow-x: hidden;
+        overflow-y: auto;
+        font-weight: normal;
+        font-size: 15px;
+        line-height: 20px;
+ 	}
+ 	
+ 	#refuseArea2 {
+ 		width: 465px;
+ 		height: 80px;
+ 		border: 1px solid black;
+ 		overflow-x: hidden;
+        overflow-y: auto;
+        resize: none;
+ 	}
+ 	
+ 	#refuseReason2 {
+ 		height: 80px;
+ 		border: 1px solid black;
+ 		overflow-x: hidden;
+        overflow-y: auto;
+        font-weight: normal;
+        font-size: 15px;
+        line-height: 20px;
+ 	}
+ 	
  	#infoT {
  		width:100%;
  	}
@@ -208,7 +237,8 @@
 		</article>
 	</section>
 	
-		 <div class="modal fade" id="myModal" role="dialog">
+	<!-- 환불내역 모달 -->
+	<div class="modal fade" id="myModal1" role="dialog">
    	 <div class="modal-dialog">
     
    	   <!-- Modal content-->
@@ -244,7 +274,7 @@
 	   	       		<td id="refundPoint"></td>
    	       		</tr>
    	       		<tr>
-   	       			<td>수거할 포인트</td>
+   	       			<td>수거 포인트</td>
    	       			<td id="reCollectPoint"></td>
    	       		</tr>
    	       		<tr>
@@ -269,12 +299,84 @@
    	       				</div>
    	       			</td>
    	       		</tr>
+   	       </table>
+   	     </div>
+   	     <div class="modal-footer">
+   	       <button type="button" class="btn btn-default" data-dismiss="modal">확인</button>
+   	     </div>
+     		</div>
+   		 </div>
+  		</div>
+	
+	
+	<!-- 반려내역 모달 -->
+	<div class="modal fade" id="myModal" role="dialog">
+   	 <div class="modal-dialog">
+    
+   	   <!-- Modal content-->
+   	   <div class="modal-content">
+   	     <div class="modal-header" style="background: #4E4E4E; color: white; height: 80px;">
+   	       <button type="button" class="close" data-dismiss="modal" style="color: white;">x</button>
+   	       <h4 class="modal-title" style="font-family: 'ZCOOL QingKe HuangYou', cursive; font-size: 30px;">hobbyist</h4>
+   	     </div>
+   	     <div class="modal-body">
+   	       <table id="modalT">
+   	       		<tr>
+   	       			<td>결제 고유번호</td>
+   	       			<td id="impNum2"></td>
+   	       		</tr>
+   	       		<tr>
+   	       			<td>수업 제목</td>
+   	       			<td id="lessonName2"></td>
+   	       		</tr>
+   	       		<tr>
+   	       			<td>결제 금액</td>
+   	       			<td id="payCost2"></td>
+   	       		</tr>
+   	       		<tr>
+   	       			<td>사용 포인트</td>
+   	       			<td id="usingPoint2"></td>
+   	       		</tr>
+   	       		<tr>
+   	       			<td>환불 금액</td>
+   	       			<td id="refundCost2"></td>
+   	       		</tr>
+   	       		<tr>
+	   	       		<td>환불 포인트</td>
+	   	       		<td id="refundPoint2"></td>
+   	       		</tr>
+   	       		<tr>
+   	       			<td>수거할 포인트</td>
+   	       			<td id="reCollectPoint2"></td>
+   	       		</tr>
+   	       		<tr>
+   	       			<td>수업 회차</td>
+   	       			<td id="totalOrder2"></td>
+   	       		</tr>
+   	       		<tr>
+   	       			<td>진행 회차</td>
+   	       			<td id="finishOrder2"></td>
+   	       		</tr>
+   	       		<tr>
+   	       			<td>진행률</td>
+   	       			<td id="orderPercent2"></td>
+   	       		</tr>
+   	       		<tr>
+   	       			<td>환불 사유</td>
+   	       			<td id="reason2"></td>
+   	       		</tr>
+   	       		<tr>
+   	       			<td colspan="2" style="padding-top: 20px;">
+   	       				<div id="reasonDetail2">
+   	       				</div>
+   	       			</td>
+   	       		</tr>
    	       		<tr>
    	       			<td>반려 사유</td>
    	       		</tr>
    	       		<tr>
    	       			<td colspan="2" style="padding-top: 20px;">
-   	       				<div id="refuseReason">
+   	       				<div id="refuseReason2">
    	       				</div>
    	       			</td>
    	       		</tr>
@@ -284,7 +386,6 @@
    	       <button id="cancelRefuse" type="button" class="btn btn-default">반려 취소</button>
    	     </div>
      		</div>
-   	   
    		 </div>
   		</div>
   	
@@ -357,7 +458,7 @@
 						var $tr = $("<tr>");
 						
 						$tr.append('<th style="width: 7%;">결제코드</th>' +
-								'<th style="width: 10%;">수업제목</th>' +
+								'<th style="width: 19%;">수업제목</th>' +
 								'<th style="width: 9%;">이름</th>' +
 								'<th style="width: 11%;">전화번호</th>' +
 								'<th style="width: 10%;">수업료</th>' +
@@ -405,7 +506,7 @@
 				$("#refuseListL").css("color", "gray");
 				
 				$.ajax({
-					url: "/hobbyist/selectApplyList.ad",
+					url: "/hobbyist/selectRefundList.ad",
 					type: 'post',
 					success: function(data) {
 						$table = $("#infoT");
@@ -419,7 +520,7 @@
 									'<th style="width: 12%;">아티스트명</th>' +
 									'<th style="width: 13%;">전화번호</th>' +
 									'<th style="width: 17%;">결제일</th>' +
-									'<th style="width: 17%;">신청일</th>' +
+									'<th style="width: 17%;">환불일</th>' +
 									'<th style="width: 14%;">상세보기</th>');
 						
 						$table.append($tr);
@@ -427,13 +528,13 @@
 						for(key in data) {
 							$tr= $("<tr>");
 							var $rcode = $("<td>").text(data[key].refundCode);
-							var $pcode = $("<td>").text(data[key].paymentCode);
+							var $pcode = $("<td>").text(data[key].payCode);
 							var $mName = $("<td>").text(data[key].memberName);
 							var $arName = $("<td>").text(data[key].artistName);
 							var $phone = $("<td>").text(data[key].phone);
 							var $pDate = $("<td>").text(data[key].payDate);
-							var $arDate = $("<td>").text(data[key].applyDate);
-							var $btn = $("<td>").html("<button class='Btn'>조회</button>");
+							var $arDate = $("<td>").text(data[key].refundDate);
+							var $btn = $("<td>").html("<button class='Btn1'>조회</button>");
 							
 							$tr.append($rcode);
 							$tr.append($pcode);
@@ -451,6 +552,43 @@
 						console.log(status);
 					}
 				});
+			});
+			
+			$(document).on("click", '.Btn1', function() {
+		    	var num = Number($(this).parent().parent().children("td:nth-child(2)").text());
+		    	var refundCode = Number($(this).parent().parent().children("td:nth-child(1)").text());
+		    	console.log(num);
+		    	
+		    	$.ajax({
+		    		url: "/hobbyist/selectApplyDetail.ad",
+					data: {num : num},
+					type: "post",
+					success: function(data) {
+						var orderPercent = Math.round(100 - ((data.finishOrder / data.totalOrder) * 100));
+						var refundPoint = Math.round(data.usingPoint - ((data.finishOrder / data.totalOrder) * data.usingPoint));
+						
+						console.log(refundPoint);
+						$("#impNum").text(data.impNum);
+						$("#lessonName").text(data.lessonName);
+						$("#payCost").text(data.payCost + "원");
+						$("#usingPoint").text(data.usingPoint + " point");
+						$("#refundCost").text(data.refundCost +"원");
+						$("#refundPoint").text(refundPoint + " point");
+						$("#reCollectPoint").text(data.givePoint + " point");
+						$("#totalOrder").text(data.totalOrder + "회");
+						$("#finishOrder").text(data.finishOrder + "회");
+						$("#orderPercent").text(orderPercent + "%");
+						$("#reason").text(data.reason);
+						$("#reasonDetail").text(data.reasonDetail);
+						
+					},
+					error: function(error) {
+						console.log(error);
+					}
+		    		
+		    	});
+		    	
+	   	    	$("#myModal1").modal();
 			});
 			
 			
@@ -526,19 +664,19 @@
 						var refundPoint = Math.round(data.usingPoint - ((data.finishOrder / data.totalOrder) * data.usingPoint));
 						
 						console.log(refundPoint);
-						$("#impNum").text(data.impNum);
-						$("#lessonName").text(data.lessonName);
-						$("#payCost").text(data.payCost + "원");
-						$("#usingPoint").text(data.usingPoint + " point");
-						$("#refundCost").text(data.refundCost +"원");
-						$("#refundPoint").text(refundPoint + " point");
-						$("#reCollectPoint").text(data.givePoint + " point");
-						$("#totalOrder").text(data.totalOrder + "회");
-						$("#finishOrder").text(data.finishOrder + "회");
-						$("#orderPercent").text(orderPercent + "%");
-						$("#reason").text(data.reason);
-						$("#reasonDetail").text(data.reasonDetail);
-						$("#refuseReason").text(data.refuseReason);
+						$("#impNum2").text(data.impNum);
+						$("#lessonName2").text(data.lessonName);
+						$("#payCost2").text(data.payCost + "원");
+						$("#usingPoint2").text(data.usingPoint + " point");
+						$("#refundCost2").text(data.refundCost +"원");
+						$("#refundPoint2").text(refundPoint + " point");
+						$("#reCollectPoint2").text(data.givePoint + " point");
+						$("#totalOrder2").text(data.totalOrder + "회");
+						$("#finishOrder2").text(data.finishOrder + "회");
+						$("#orderPercent2").text(orderPercent + "%");
+						$("#reason2").text(data.reason);
+						$("#reasonDetail2").text(data.reasonDetail);
+						$("#refuseReason2").text(data.refuseReason);
 						
 					},
 					error: function(error) {

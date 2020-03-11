@@ -44,15 +44,9 @@ public class PaymentServlet extends HttpServlet {
 		System.out.println(p);
 		int result = new PaymentService().insertPayment(p);
 		
-		String page = "";
-		if(result > 0) {
-			page = "views/common/successPage.jsp";
-		}else {
-			page = "views/common/errorPage.jsp";
-		}
 		response.setContentType("application/json");
 		response.setCharacterEncoding("UTF-8");
-		new Gson().toJson(page, response.getWriter());
+		new Gson().toJson(result, response.getWriter());
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
