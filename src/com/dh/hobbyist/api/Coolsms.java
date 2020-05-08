@@ -12,8 +12,8 @@ public class Coolsms {
 	public Coolsms() {}
 		
 		public String sms(String phone){
-	    String api_key = "NCSLAXVLUI7XQ6LO";
-	    String api_secret = "V9SU9KRVBLDE9H9IMHYEF1K7XULFQXQQ";
+	    String api_key = "";
+	    String api_secret = "";
 	    Message coolsms = new Message(api_key, api_secret);
 	    
 	    int random = new Random().nextInt(8998)+1001;
